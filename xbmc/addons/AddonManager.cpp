@@ -569,6 +569,9 @@ bool CAddonMgr::GetDefault(const TYPE &type, AddonPtr &addon)
   case ADDON_WEB_INTERFACE:
     setting = CSettings::GetInstance().GetString(CSettings::SETTING_SERVICES_WEBSKIN);
     break;
+  case ADDON_RESOURCE_KEYBOARD:
+    setting = CSettings::GetInstance().GetString(CSettings::SETTING_LOCALE_KEYBOARDLAYOUTS);
+    break;
   case ADDON_RESOURCE_LANGUAGE:
     setting = CSettings::GetInstance().GetString(CSettings::SETTING_LOCALE_LANGUAGE);
     break;
@@ -602,6 +605,9 @@ bool CAddonMgr::SetDefault(const TYPE &type, const std::string &addonID)
     break;
   case ADDON_SCRAPER_TVSHOWS:
     CSettings::GetInstance().SetString(CSettings::SETTING_SCRAPERS_TVSHOWSDEFAULT, addonID);
+    break;
+  case ADDON_RESOURCE_KEYBOARD:
+    CSettings::GetInstance().SetString(CSettings::SETTING_LOCALE_KEYBOARDLAYOUTS, addonID);
     break;
   case ADDON_RESOURCE_LANGUAGE:
     CSettings::GetInstance().SetString(CSettings::SETTING_LOCALE_LANGUAGE, addonID);
