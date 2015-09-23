@@ -126,14 +126,3 @@ bool CKeyboardLayoutManager::GetLayout(const std::string& name, CKeyboardLayout&
   layout = it->second;
   return true;
 }
-
-void CKeyboardLayoutManager::SettingOptionsKeyboardLayoutsFiller(const CSetting *setting, std::vector< std::pair<std::string, std::string> > &list, std::string &current, void* data)
-{
-  for (KeyboardLayouts::const_iterator it = CKeyboardLayoutManager::GetInstance().m_layouts.begin(); it != CKeyboardLayoutManager::GetInstance().m_layouts.end(); ++it)
-  {
-    std::string name = it->second.GetName();
-    list.push_back(make_pair(name, name));
-  }
-
-  std::sort(list.begin(), list.end());
-}
