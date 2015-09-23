@@ -25,6 +25,7 @@
 
 #include "Addon.h"
 #include "addons/ImageResource.h"
+#include "addons/KeyboardResource.h"
 #include "addons/LanguageResource.h"
 #include "addons/UISoundsResource.h"
 #include "addons/Webinterface.h"
@@ -180,6 +181,8 @@ AddonPtr CAddonMgr::Factory(const cp_extension_t *props)
       return AddonPtr(new CSkinInfo(props));
     case ADDON_RESOURCE_IMAGES:
       return AddonPtr(new CImageResource(props));
+    case ADDON_RESOURCE_KEYBOARD:
+      return AddonPtr(new CKeyboardResource(props));
     case ADDON_RESOURCE_LANGUAGE:
       return AddonPtr(new CLanguageResource(props));
     case ADDON_RESOURCE_UISOUNDS:
@@ -889,6 +892,8 @@ AddonPtr CAddonMgr::AddonFromProps(AddonProps& addonProps)
       return AddonPtr(new CAudioDecoder(addonProps));
     case ADDON_RESOURCE_IMAGES:
       return AddonPtr(new CImageResource(addonProps));
+    case ADDON_RESOURCE_KEYBOARD:
+      return AddonPtr(new CKeyboardResource(addonProps));
     case ADDON_RESOURCE_LANGUAGE:
       return AddonPtr(new CLanguageResource(addonProps));
     case ADDON_RESOURCE_UISOUNDS:
