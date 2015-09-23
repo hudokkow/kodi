@@ -28,7 +28,7 @@
 #include "utils/log.h"
 #include "utils/XBMCTinyXML.h"
 
-#define KEYBOARD_LAYOUTS_PATH   "special://xbmc/system/keyboardlayouts"
+static const std::string keyboardAddonPath = "resource://resource.keyboard.english";
 
 CKeyboardLayoutManager::~CKeyboardLayoutManager()
 {
@@ -45,7 +45,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
 {
   std::string layoutDirectory = path;
   if (layoutDirectory.empty())
-    layoutDirectory = KEYBOARD_LAYOUTS_PATH;
+    layoutDirectory = keyboardAddonPath;
 
   if (!XFILE::CDirectory::Exists(layoutDirectory))
   {
