@@ -26,9 +26,27 @@
 #include "filesystem/Directory.h"
 #include "URL.h"
 #include "utils/log.h"
+#include "utils/StringUtils.h"
 #include "utils/XBMCTinyXML.h"
 
-#define KEYBOARD_LAYOUTS_PATH   "special://xbmc/system/keyboardlayouts"
+#include "addons/AddonInstaller.h"
+#include "addons/AddonManager.h"
+#include "addons/KeyboardResource.h"
+
+static const std::string keyboardAddonPath = "resource://resource.keyboard.english";
+
+struct SortKeyboard
+{
+  bool operator()(const std::pair<std::string, std::string> &left, const std::pair<std::string, std::string> &right)
+  {
+    std::string strLeft = left.first;
+    std::string strRight = right.first;
+    StringUtils::ToLower(strLeft);
+    StringUtils::ToLower(strRight);
+
+    return strLeft.compare(strRight) < 0;
+  }
+};
 
 CKeyboardLayoutManager::~CKeyboardLayoutManager()
 {
@@ -45,7 +63,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
 {
   std::string layoutDirectory = path;
   if (layoutDirectory.empty())
-    layoutDirectory = KEYBOARD_LAYOUTS_PATH;
+    layoutDirectory = keyboardAddonPath;
 
   if (!XFILE::CDirectory::Exists(layoutDirectory))
   {
@@ -129,11 +147,13 @@ bool CKeyboardLayoutManager::GetLayout(const std::string& name, CKeyboardLayout&
 
 void CKeyboardLayoutManager::SettingOptionsKeyboardLayoutsFiller(const CSetting *setting, std::vector< std::pair<std::string, std::string> > &list, std::string &current, void* data)
 {
-  for (KeyboardLayouts::const_iterator it = CKeyboardLayoutManager::GetInstance().m_layouts.begin(); it != CKeyboardLayoutManager::GetInstance().m_layouts.end(); ++it)
-  {
-    std::string name = it->second.GetName();
-    list.push_back(make_pair(name, name));
-  }
+  // find keyboards...
+  ADDON::VECADDONS addons;
+  if (!ADDON::CAddonMgr::GetInstance().GetAddons(ADDON::ADDON_RESOURCE_KEYBOARD, addons, true))
+    return;
 
-  std::sort(list.begin(), list.end());
+  for (ADDON::VECADDONS::const_iterator addon = addons.begin(); addon != addons.end(); ++addon)
+    list.push_back(make_pair((*addon)->Name(), (*addon)->Name()));
+
+  std::sort(list.begin(), list.end(), SortKeyboard());
 }

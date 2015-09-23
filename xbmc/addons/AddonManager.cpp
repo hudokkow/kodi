@@ -25,6 +25,7 @@
 
 #include "Addon.h"
 #include "addons/ImageResource.h"
+#include "addons/KeyboardResource.h"
 #include "addons/LanguageResource.h"
 #include "addons/UISoundsResource.h"
 #include "addons/Webinterface.h"
@@ -180,6 +181,8 @@ AddonPtr CAddonMgr::Factory(const cp_extension_t *props)
       return AddonPtr(new CSkinInfo(props));
     case ADDON_RESOURCE_IMAGES:
       return AddonPtr(new CImageResource(props));
+    case ADDON_RESOURCE_KEYBOARD:
+      return AddonPtr(new CKeyboardResource(props));
     case ADDON_RESOURCE_LANGUAGE:
       return AddonPtr(new CLanguageResource(props));
     case ADDON_RESOURCE_UISOUNDS:
@@ -566,6 +569,9 @@ bool CAddonMgr::GetDefault(const TYPE &type, AddonPtr &addon)
   case ADDON_WEB_INTERFACE:
     setting = CSettings::GetInstance().GetString(CSettings::SETTING_SERVICES_WEBSKIN);
     break;
+  case ADDON_RESOURCE_KEYBOARD:
+    setting = CSettings::GetInstance().GetString(CSettings::SETTING_LOCALE_KEYBOARDLAYOUTS);
+    break;
   case ADDON_RESOURCE_LANGUAGE:
     setting = CSettings::GetInstance().GetString(CSettings::SETTING_LOCALE_LANGUAGE);
     break;
@@ -599,6 +605,9 @@ bool CAddonMgr::SetDefault(const TYPE &type, const std::string &addonID)
     break;
   case ADDON_SCRAPER_TVSHOWS:
     CSettings::GetInstance().SetString(CSettings::SETTING_SCRAPERS_TVSHOWSDEFAULT, addonID);
+    break;
+  case ADDON_RESOURCE_KEYBOARD:
+    CSettings::GetInstance().SetString(CSettings::SETTING_LOCALE_KEYBOARDLAYOUTS, addonID);
     break;
   case ADDON_RESOURCE_LANGUAGE:
     CSettings::GetInstance().SetString(CSettings::SETTING_LOCALE_LANGUAGE, addonID);
@@ -889,6 +898,8 @@ AddonPtr CAddonMgr::AddonFromProps(AddonProps& addonProps)
       return AddonPtr(new CAudioDecoder(addonProps));
     case ADDON_RESOURCE_IMAGES:
       return AddonPtr(new CImageResource(addonProps));
+    case ADDON_RESOURCE_KEYBOARD:
+      return AddonPtr(new CKeyboardResource(addonProps));
     case ADDON_RESOURCE_LANGUAGE:
       return AddonPtr(new CLanguageResource(addonProps));
     case ADDON_RESOURCE_UISOUNDS:

@@ -13193,7 +13193,11 @@ msgctxt "#24003"
 msgid "Add-on information"
 msgstr ""
 
-#empty string with id 24004
+#. Name of an add-on type
+#: xbmc/addons/Addon.cpp
+msgctxt "#24004"
+msgid "Keyboards"
+msgstr ""
 
 #: xbmc/addons/Addon.cpp
 msgctxt "#24005"

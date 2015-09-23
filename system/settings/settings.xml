@@ -162,17 +162,14 @@
           </dependencies>
           <control type="list" format="string" />
         </setting>
-        <setting id="locale.keyboardlayouts" type="list[string]" label="310" help="36432">
+        <setting id="locale.keyboardlayouts" type="addon" label="310" help="36432">
           <level>1</level>
-          <default>English QWERTY</default>
+          <default>resource.keyboard.english</default>
           <constraints>
-            <options>keyboardlayouts</options>
-            <delimiter>|</delimiter>
-            <minimumitems>1</minimumitems>
-            <maximumitems>3</maximumitems>
+            <addontype>kodi.resource.keyboard</addontype>
           </constraints>
-          <control type="list" format="string">
-            <multiselect>true</multiselect>
+          <control type="button" format="addon">
+            <show more="false" details="false">all</show>
           </control>
         </setting>
       </group>
