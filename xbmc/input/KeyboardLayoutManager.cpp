@@ -61,6 +61,7 @@ CKeyboardLayoutManager& CKeyboardLayoutManager::GetInstance()
 
 bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
 {
+  CLog::Log(LOGINFO, "HUDOTEMP load keyboard file: %s", path.c_str());
   std::string layoutDirectory = path;
   if (layoutDirectory.empty())
     layoutDirectory = keyboardAddonPath;
