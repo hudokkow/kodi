@@ -61,10 +61,12 @@ CKeyboardLayoutManager& CKeyboardLayoutManager::GetInstance()
 
 bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
 {
-  CLog::Log(LOGINFO, "HUDOTEMP load keyboard file: %s", path.c_str());
   std::string layoutDirectory = path;
   if (layoutDirectory.empty())
+  {
     layoutDirectory = keyboardAddonPath;
+    CLog::Log(LOGINFO, "HUDOTEMPlayoutDirectory load keyboard file: %s", layoutDirectory.c_str());
+  }
 
   if (!XFILE::CDirectory::Exists(layoutDirectory))
   {
@@ -73,7 +75,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
   }
 
   CFileItemList layouts;
-  if (!XFILE::CDirectory::GetDirectory(CURL(layoutDirectory), layouts, ".xml") || layouts.IsEmpty())
+  if (!XFILE::CDirectory::GetDirectory(CURL(layoutDirectory), layouts, "keyboard.xml") || layouts.IsEmpty())
   {
     CLog::Log(LOGWARNING, "CKeyboardLayoutManager: no keyboard layouts found in %s", layoutDirectory.c_str());
     return false;
@@ -84,6 +86,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
   for (int i = 0; i < layouts.Size(); i++)
   {
     std::string layoutPath = layouts[i]->GetPath();
+    CLog::Log(LOGINFO, "HUDOTEMPlayoutPath load keyboard file: %s", layoutPath.c_str());
     if (layoutPath.empty())
       continue;
 
@@ -126,6 +129,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
   }
 
   return m_layouts.size() > oldLayoutCount;
+  CLog::Log(LOGINFO, "HUDOTEMPm_layoutssize load keyboard file: %s", m_layouts.size());
 }
 
 void CKeyboardLayoutManager::Unload()
@@ -137,6 +141,8 @@ bool CKeyboardLayoutManager::GetLayout(const std::string& name, CKeyboardLayout&
 {
   if (name.empty())
     return false;
+
+  CLog::Log(LOGINFO, "HUDOTEMPnamegetlayout load keyboard file: %s", name.c_str());
 
   KeyboardLayouts::const_iterator it = m_layouts.find(name);
   if (it == m_layouts.end())

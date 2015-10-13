@@ -23,6 +23,7 @@
 #include "input/KeyboardLayoutManager.h"
 #include "filesystem/File.h"
 #include "settings/Settings.h"
+#include "utils/log.h"
 #include "utils/StringUtils.h"
 
 namespace ADDON
