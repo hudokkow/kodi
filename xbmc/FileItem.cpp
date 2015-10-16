@@ -237,9 +237,9 @@ CFileItem::CFileItem(const CGenre& genre)
 }
 
 CFileItem::CFileItem(const CFileItem& item)
-: m_musicInfoTag(NULL),
-  m_videoInfoTag(NULL),
-  m_pictureInfoTag(NULL)
+: m_musicInfoTag(nullptr),
+  m_videoInfoTag(nullptr),
+  m_pictureInfoTag(nullptr)
 {
   *this = item;
 }
@@ -321,9 +321,9 @@ CFileItem::~CFileItem(void)
   delete m_videoInfoTag;
   delete m_pictureInfoTag;
 
-  m_musicInfoTag = NULL;
-  m_videoInfoTag = NULL;
-  m_pictureInfoTag = NULL;
+  m_musicInfoTag = nullptr;
+  m_videoInfoTag = nullptr;
+  m_pictureInfoTag = nullptr;
 }
 
 const CFileItem& CFileItem::operator=(const CFileItem& item)
@@ -351,7 +351,7 @@ const CFileItem& CFileItem::operator=(const CFileItem& item)
   else
   {
     delete m_musicInfoTag;
-    m_musicInfoTag = NULL;
+    m_musicInfoTag = nullptr;
   }
 
   if (item.m_videoInfoTag)
@@ -364,7 +364,7 @@ const CFileItem& CFileItem::operator=(const CFileItem& item)
   else
   {
     delete m_videoInfoTag;
-    m_videoInfoTag = NULL;
+    m_videoInfoTag = nullptr;
   }
 
   if (item.m_pictureInfoTag)
@@ -377,7 +377,7 @@ const CFileItem& CFileItem::operator=(const CFileItem& item)
   else
   {
     delete m_pictureInfoTag;
-    m_pictureInfoTag = NULL;
+    m_pictureInfoTag = nullptr;
   }
 
   m_epgInfoTag = item.m_epgInfoTag;
@@ -407,9 +407,9 @@ const CFileItem& CFileItem::operator=(const CFileItem& item)
 
 void CFileItem::Initialize()
 {
-  m_musicInfoTag = NULL;
-  m_videoInfoTag = NULL;
-  m_pictureInfoTag = NULL;
+  m_musicInfoTag = nullptr;
+  m_videoInfoTag = nullptr;
+  m_pictureInfoTag = nullptr;
   m_bLabelPreformated = false;
   m_bIsAlbum = false;
   m_dwSize = 0;
@@ -446,16 +446,16 @@ void CFileItem::Reset()
   m_strLockCode.clear();
   m_mimetype.clear();
   delete m_musicInfoTag;
-  m_musicInfoTag=NULL;
+  m_musicInfoTag=nullptr;
   delete m_videoInfoTag;
-  m_videoInfoTag=NULL;
+  m_videoInfoTag=nullptr;
   m_epgInfoTag.reset();
   m_pvrChannelInfoTag.reset();
   m_pvrRecordingInfoTag.reset();
   m_pvrTimerInfoTag.reset();
   m_pvrRadioRDSInfoTag.reset();
   delete m_pictureInfoTag;
-  m_pictureInfoTag=NULL;
+  m_pictureInfoTag=nullptr;
   m_extrainfo.clear();
   ClearProperties();
 
@@ -3052,7 +3052,7 @@ bool CFileItem::LoadMusicTag()
   CLog::Log(LOGDEBUG, "%s: loading tag information for file: %s", __FUNCTION__, m_strPath.c_str());
   CMusicInfoTagLoaderFactory factory;
   std::unique_ptr<IMusicInfoTagLoader> pLoader (factory.CreateLoader(*this));
-  if (pLoader.get() != NULL)
+  if (pLoader.get() != nullptr)
   {
     if (pLoader->Load(m_strPath, *GetMusicInfoTag()))
       return true;

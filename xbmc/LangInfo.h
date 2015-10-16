@@ -75,7 +75,7 @@ public:
    \brief Returns the language addon for the given locale (or the current one).
 
    \param locale (optional) Locale of the language (current if empty)
-   \return Language addon for the given locale or NULL if the locale is invalid.
+   \return Language addon for the given locale or nullptr if the locale is invalid.
    */
   LanguageResourcePtr GetLanguageAddon(const std::string& locale = "") const;
 

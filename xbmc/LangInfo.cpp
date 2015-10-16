@@ -285,8 +285,8 @@ void CLangInfo::CRegion::SetGlobalLocale()
 #if defined(TARGET_FREEBSD) || defined(TARGET_DARWIN_OSX) || defined(__UCLIBC__)
   // on FreeBSD, darwin and uClibc-based systems libstdc++ is compiled with
   // "generic" locale support
-  if (setlocale(LC_COLLATE, strLocale.c_str()) == NULL
-  || setlocale(LC_CTYPE, strLocale.c_str()) == NULL)
+  if (setlocale(LC_COLLATE, strLocale.c_str()) == nullptr
+  || setlocale(LC_CTYPE, strLocale.c_str()) == nullptr)
   {
     strLocale = "C";
     setlocale(LC_COLLATE, strLocale.c_str());
@@ -332,7 +332,7 @@ CLangInfo::~CLangInfo()
 
 void CLangInfo::OnSettingChanged(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -392,7 +392,7 @@ bool CLangInfo::Load(const std::string& strLanguage)
 
   // get the matching language addon
   m_languageAddon = GetLanguageAddon(strLanguage);
-  if (m_languageAddon == NULL)
+  if (m_languageAddon == nullptr)
   {
     CLog::Log(LOGERROR, "Unknown language %s", strLanguage.c_str());
     return false;
@@ -576,7 +576,7 @@ void CLangInfo::SetDefaults()
 std::string CLangInfo::GetGuiCharSet() const
 {
   CSettingString* charsetSetting = static_cast<CSettingString*>(CSettings::GetInstance().GetSetting(CSettings::SETTING_LOCALE_CHARSET));
-  if (charsetSetting == NULL || charsetSetting->IsDefault())
+  if (charsetSetting == nullptr || charsetSetting->IsDefault())
     return m_strGuiCharSet;
 
   return charsetSetting->GetValue();
@@ -594,7 +594,7 @@ std::string CLangInfo::GetSubtitleCharSet() const
 LanguageResourcePtr CLangInfo::GetLanguageAddon(const std::string& locale /* = "" */) const
 {
   if (locale.empty() ||
-     (m_languageAddon != NULL && (locale.compare(m_languageAddon->ID()) == 0 || m_languageAddon->GetLocale().Equals(locale))))
+     (m_languageAddon != nullptr && (locale.compare(m_languageAddon->ID()) == 0 || m_languageAddon->GetLocale().Equals(locale))))
     return m_languageAddon;
 
   std::string addonId = ADDON::CLanguageResource::GetAddonId(locale);
@@ -602,16 +602,16 @@ LanguageResourcePtr CLangInfo::GetLanguageAddon(const std::string& locale /* = "
     addonId = CSettings::GetInstance().GetString(CSettings::SETTING_LOCALE_LANGUAGE);
 
   ADDON::AddonPtr addon;
-  if (ADDON::CAddonMgr::GetInstance().GetAddon(addonId, addon, ADDON::ADDON_RESOURCE_LANGUAGE, true) && addon != NULL)
+  if (ADDON::CAddonMgr::GetInstance().GetAddon(addonId, addon, ADDON::ADDON_RESOURCE_LANGUAGE, true) && addon != nullptr)
     return std::dynamic_pointer_cast<ADDON::CLanguageResource>(addon);
 
-  return NULL;
+  return nullptr;
 }
 
 std::string CLangInfo::GetEnglishLanguageName(const std::string& locale /* = "" */) const
 {
   LanguageResourcePtr addon = GetLanguageAddon(locale);
-  if (addon == NULL)
+  if (addon == nullptr)
     return "";
 
   return addon->Name();
@@ -640,7 +640,7 @@ bool CLangInfo::SetLanguage(bool& fallback, const std::string &strLanguage /* = 
   }
 
   LanguageResourcePtr languageAddon = GetLanguageAddon(language);
-  if (languageAddon == NULL)
+  if (languageAddon == nullptr)
   {
     CLog::Log(LOGWARNING, "CLangInfo: unable to load language \"%s\". Trying to determine matching language addon...", language.c_str());
 
@@ -794,7 +794,7 @@ const std::string CLangInfo::GetDVDSubtitleLanguage() const
 const CLocale& CLangInfo::GetLocale() const
 {
   LanguageResourcePtr language = GetLanguageAddon();
-  if (language != NULL)
+  if (language != nullptr)
     return language->GetLocale();
 
   return CLocale::Empty;
@@ -1409,8 +1409,8 @@ void CLangInfo::AddLanguages(std::vector< std::pair<std::string, std::string> > 
 {
   std::string dummy;
   std::vector<std::pair<std::string, std::string>> languages;
-  SettingOptionsISO6391LanguagesFiller(NULL, languages, dummy, NULL);
-  SettingOptionsLanguageNamesFiller(NULL, languages, dummy, NULL);
+  SettingOptionsISO6391LanguagesFiller(nullptr, languages, dummy, nullptr);
+  SettingOptionsLanguageNamesFiller(nullptr, languages, dummy, nullptr);
 
   // convert the vector to a set to remove duplicates
   std::set<std::pair<std::string, std::string>, SortLanguage> tmp(

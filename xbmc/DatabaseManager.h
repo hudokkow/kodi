@@ -73,7 +73,7 @@ private:
 
   enum DB_STATUS { DB_CLOSED, DB_UPDATING, DB_READY, DB_FAILED };
   void UpdateStatus(const std::string &name, DB_STATUS status);
-  void UpdateDatabase(CDatabase &db, DatabaseSettings *settings = NULL);
+  void UpdateDatabase(CDatabase &db, DatabaseSettings *settings = nullptr);
 
   CCriticalSection            m_section;     ///< Critical section protecting m_dbStatus.
   std::map<std::string, DB_STATUS> m_dbStatus;    ///< Our database status map.

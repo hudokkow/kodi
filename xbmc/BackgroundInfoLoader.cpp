@@ -23,12 +23,12 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 
-CBackgroundInfoLoader::CBackgroundInfoLoader() : m_thread (NULL)
+CBackgroundInfoLoader::CBackgroundInfoLoader() : m_thread (nullptr)
 {
   m_bStop = true;
-  m_pObserver=NULL;
-  m_pProgressCallback=NULL;
-  m_pVecItems = NULL;
+  m_pObserver=nullptr;
+  m_pProgressCallback=nullptr;
+  m_pVecItems = nullptr;
   m_bIsLoading = false;
 }
 
@@ -131,10 +131,10 @@ void CBackgroundInfoLoader::StopThread()
   {
     m_thread->StopThread();
     delete m_thread;
-    m_thread = NULL;
+    m_thread = nullptr;
   }
   m_vecItems.clear();
-  m_pVecItems = NULL;
+  m_pVecItems = nullptr;
   m_bIsLoading = false;
 }
 

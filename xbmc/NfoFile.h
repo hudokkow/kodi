@@ -46,7 +46,7 @@ public:
 
   NFOResult Create(const std::string&, const ADDON::ScraperPtr&, int episode=-1);
   template<class T>
-    bool GetDetails(T& details,const char* document=NULL, bool prioritise=false)
+    bool GetDetails(T& details,const char* document=nullptr, bool prioritise=false)
   {
 
     CXBMCTinyXML doc;

@@ -243,7 +243,7 @@ public:
 
   inline bool HasMusicInfoTag() const
   {
-    return m_musicInfoTag != NULL;
+    return m_musicInfoTag != nullptr;
   }
 
   MUSIC_INFO::CMusicInfoTag* GetMusicInfoTag();
@@ -255,7 +255,7 @@ public:
 
   inline bool HasVideoInfoTag() const
   {
-    return m_videoInfoTag != NULL;
+    return m_videoInfoTag != nullptr;
   }
 
   CVideoInfoTag* GetVideoInfoTag();
@@ -267,7 +267,7 @@ public:
 
   inline bool HasEPGInfoTag() const
   {
-    return m_epgInfoTag.get() != NULL;
+    return m_epgInfoTag.get() != nullptr;
   }
 
   inline const EPG::CEpgInfoTagPtr GetEPGInfoTag() const
@@ -282,7 +282,7 @@ public:
 
   inline bool HasPVRChannelInfoTag() const
   {
-    return m_pvrChannelInfoTag.get() != NULL;
+    return m_pvrChannelInfoTag.get() != nullptr;
   }
 
   inline const PVR::CPVRChannelPtr GetPVRChannelInfoTag() const
@@ -292,7 +292,7 @@ public:
 
   inline bool HasPVRRecordingInfoTag() const
   {
-    return m_pvrRecordingInfoTag.get() != NULL;
+    return m_pvrRecordingInfoTag.get() != nullptr;
   }
 
   inline const PVR::CPVRRecordingPtr GetPVRRecordingInfoTag() const
@@ -302,7 +302,7 @@ public:
 
   inline bool HasPVRTimerInfoTag() const
   {
-    return m_pvrTimerInfoTag != NULL;
+    return m_pvrTimerInfoTag != nullptr;
   }
 
   inline const PVR::CPVRTimerInfoTagPtr GetPVRTimerInfoTag() const
@@ -312,7 +312,7 @@ public:
 
   inline bool HasPVRRadioRDSInfoTag() const
   {
-    return m_pvrRadioRDSInfoTag.get() != NULL;
+    return m_pvrRadioRDSInfoTag.get() != nullptr;
   }
 
   inline const PVR::CPVRRadioRDSInfoTagPtr GetPVRRadioRDSInfoTag() const
@@ -339,7 +339,7 @@ public:
 
   inline bool HasPictureInfoTag() const
   {
-    return m_pictureInfoTag != NULL;
+    return m_pictureInfoTag != nullptr;
   }
 
   inline const CPictureInfoTag* GetPictureInfoTag() const

@@ -394,7 +394,7 @@ public: \
    m_dll->ResolveExport( #method , & m_##method##_ptr );
 
 #define RESOLVE_METHOD_OPTIONAL_FP(method) \
-   method##_ptr = NULL; \
+   method##_ptr = nullptr; \
    m_dll->ResolveExport( #method , & method##_ptr );
 
 
@@ -524,7 +524,7 @@ public:
   virtual ~DllDynamic();
   virtual bool Load();
   virtual void Unload();
-  virtual bool IsLoaded() const { return m_dll!=NULL; }
+  virtual bool IsLoaded() const { return m_dll != nullptr; }
   bool CanLoad();
   bool EnableDelayedUnload(bool bOnOff);
   bool SetFile(const std::string& strDllName);

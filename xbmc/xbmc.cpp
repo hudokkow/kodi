@@ -67,9 +67,9 @@ extern "C" int XBMC_Run(bool renderGUI)
   std::string tempPath = CSpecialProtocol::TranslatePath("special://temp/");
   google_breakpad::MinidumpDescriptor descriptor(tempPath.c_str());
   google_breakpad::ExceptionHandler eh(descriptor,
-                                       NULL,
-                                       NULL,
-                                       NULL,
+                                       nullptr,
+                                       nullptr,
+                                       nullptr,
                                        true,
                                        -1);
 #endif

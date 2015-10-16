@@ -252,9 +252,9 @@
 #define HAS_CDDA_RIPPER
 #endif
 
-#define SAFE_DELETE(p)       do { delete (p);     (p)=NULL; } while (0)
-#define SAFE_DELETE_ARRAY(p) do { delete[] (p);   (p)=NULL; } while (0)
-#define SAFE_RELEASE(p)      do { if(p) { (p)->Release(); (p)=NULL; } } while (0)
+#define SAFE_DELETE(p)       do { delete (p);     (p)=nullptr; } while (0)
+#define SAFE_DELETE_ARRAY(p) do { delete[] (p);   (p)=nullptr; } while (0)
+#define SAFE_RELEASE(p)      do { if(p) { (p)->Release(); (p)=nullptr; } } while (0)
 
 // Useful pixel colour manipulation macros
 #define GET_A(color)            ((color >> 24) & 0xFF)

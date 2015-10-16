@@ -213,7 +213,7 @@ public:
   bool IsMutedInternal() const { return m_muted; }
   void ToggleMute(void);
   void SetMute(bool mute);
-  void ShowVolumeBar(const CAction *action = NULL);
+  void ShowVolumeBar(const CAction *action = nullptr);
   int GetSubtitleDelay() const;
   int GetAudioDelay() const;
   void ResetSystemIdleTimer();
