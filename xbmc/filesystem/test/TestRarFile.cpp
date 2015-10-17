@@ -134,7 +134,7 @@ TEST(TestRarFile, CorruptedFile)
   int64_t count = 0;
 
   reffilepath = XBMC_REF_FILE_PATH("xbmc/filesystem/test/reffile.txt.rar");
-  ASSERT_TRUE((file = XBMC_CREATECORRUPTEDFILE(reffilepath, ".rar")) != NULL);
+  ASSERT_TRUE((file = XBMC_CREATECORRUPTEDFILE(reffilepath, ".rar")) != nullptr);
   std::cout << "Reference file generated at '" << XBMC_TEMPFILEPATH(file) << "'" << std::endl;
 
   CURL rarUrl = URIUtils::CreateArchivePath("rar", CURL(XBMC_TEMPFILEPATH(file)), "");

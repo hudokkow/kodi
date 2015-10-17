@@ -445,7 +445,7 @@ void CSAPSessions::Process()
     FD_SET(m_socket, &readfds);
     FD_SET(m_socket, &expfds);
 
-    count = select((int)m_socket+1, &readfds, NULL, &expfds, &timeout);
+    count = select((int)m_socket+1, &readfds, nullptr, &expfds, &timeout);
     if(count == SOCKET_ERROR) {
       CLog::Log(LOGERROR, "%s - select returned error", __FUNCTION__);
       break;

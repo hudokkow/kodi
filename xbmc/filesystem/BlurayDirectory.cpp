@@ -37,8 +37,8 @@ namespace XFILE
 #define MAIN_TITLE_LENGTH_PERCENT 70 /** Minumum length of main titles, based on longest title */
 
 CBlurayDirectory::CBlurayDirectory()
-  : m_dll(NULL)
-  , m_bd(NULL)
+  : m_dll(nullptr)
+  , m_bd(nullptr)
 {
 }
 
@@ -52,10 +52,10 @@ void CBlurayDirectory::Dispose()
   if(m_bd)
   {
     m_dll->bd_close(m_bd);
-    m_bd = NULL;
+    m_bd = nullptr;
   }
   delete m_dll;
-  m_dll = NULL;
+  m_dll = nullptr;
 }
 
 CFileItemPtr CBlurayDirectory::GetTitle(const BLURAY_TITLE_INFO* title, const std::string& label)
@@ -168,7 +168,7 @@ bool CBlurayDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   m_dll->bd_set_debug_handler(DllLibbluray::bluray_logger);
   m_dll->bd_set_debug_mask(DBG_CRIT | DBG_BLURAY | DBG_NAV);
 
-  m_bd = m_dll->bd_open(root.c_str(), NULL);
+  m_bd = m_dll->bd_open(root.c_str(), nullptr);
 
   if(!m_bd)
   {

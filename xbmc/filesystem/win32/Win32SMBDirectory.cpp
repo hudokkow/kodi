@@ -122,9 +122,9 @@ bool CWin32SMBDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   CURL authUrl(url); // ConnectAndAuthenticate may update url with username and password
 
   if (g_sysinfo.IsWindowsVersionAtLeast(CSysInfo::WindowsVersionWin7))
-    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, NULL, FIND_FIRST_EX_LARGE_FETCH);
+    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, nullptr, FIND_FIRST_EX_LARGE_FETCH);
   else
-    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, NULL, 0);
+    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, nullptr, 0);
 
   if (hSearch == INVALID_HANDLE_VALUE)
   {
@@ -135,9 +135,9 @@ bool CWin32SMBDirectory::GetDirectory(const CURL& url, CFileItemList &items)
     if (ConnectAndAuthenticate(authUrl, (m_flags & DIR_FLAG_ALLOW_PROMPT) != 0))
     {
       if (g_sysinfo.IsWindowsVersionAtLeast(CSysInfo::WindowsVersionWin7))
-        hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, NULL, FIND_FIRST_EX_LARGE_FETCH);
+        hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, nullptr, FIND_FIRST_EX_LARGE_FETCH);
       else
-        hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, NULL, 0);
+        hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, nullptr, 0);
       searchErr = GetLastError();
     }
     if (hSearch == INVALID_HANDLE_VALUE)
@@ -219,7 +219,7 @@ bool CWin32SMBDirectory::RealCreate(const CURL& url, bool tryToConnect)
   if (nameW.empty())
     return false;
 
-  if (!CreateDirectoryW(nameW.c_str(), NULL))
+  if (!CreateDirectoryW(nameW.c_str(), nullptr))
   {
     if (GetLastError() == ERROR_ALREADY_EXISTS)
       return RealExists(url, false); // is it file or directory?
@@ -270,7 +270,7 @@ bool CWin32SMBDirectory::RealExists(const CURL& url, bool tryToConnect)
     {
       std::wstring serverNameW;
       std::wstring shareNameW;
-      SHARE_INFO_1* info = NULL;
+      SHARE_INFO_1* info = nullptr;
       // try fast way
       if (g_charsetConverter.utf8ToW("\\\\" + url.GetHostName(), serverNameW, false, false, true) &&
           g_charsetConverter.utf8ToW(url.GetShareName(), shareNameW, false, false, true) &&
@@ -358,7 +358,7 @@ bool CWin32SMBDirectory::GetNetworkResources(const CURL& basePath, CFileItemList
 
   std::string hostName(basePath.GetHostName());
   if (hostName.empty())
-    return localGetNetworkResources(NULL, basePath.Get(), items, false); // get all servers from network
+    return localGetNetworkResources(nullptr, basePath.Get(), items, false); // get all servers from network
   
   // get all shares from server
   std::string basePathStr(basePath.Get());
@@ -396,7 +396,7 @@ static bool localGetNetworkResources(struct _NETRESOURCEW* basePathToScanPtr, co
 {
   assert(!basePathToScanPtr || (basePathToScanPtr->dwUsage & RESOURCEUSAGE_CONTAINER));
   assert(!basePathToScanPtr || basePathToScanPtr->dwScope == RESOURCE_GLOBALNET);
-  assert(!basePathToScanPtr || (basePathToScanPtr->lpRemoteName != NULL && basePathToScanPtr->lpRemoteName[0]));
+  assert(!basePathToScanPtr || (basePathToScanPtr->lpRemoteName != nullptr && basePathToScanPtr->lpRemoteName[0]));
   assert(!getShares || basePathToScanPtr); // can't get shares without host
   assert(urlPrefixForItems.compare(0, 6, "smb://", 6) == 0); // 'urlPrefixForItems' must be in form 'smb://[[user[:pass]@]ServerName]'
   assert(urlPrefixForItems.length() >= 6);
@@ -454,7 +454,7 @@ static bool localGetNetworkResources(struct _NETRESOURCEW* basePathToScanPtr, co
         /* check and collect servers */
         if (!getShares && curResource.dwDisplayType == RESOURCEDISPLAYTYPE_SERVER)
         {
-          if (curResource.lpRemoteName != NULL)
+          if (curResource.lpRemoteName != nullptr)
           {
             std::wstring remoteName(curResource.lpRemoteName);
             if (remoteName.length() > 2 && remoteName.compare(0, 2, L"\\\\", 2) == 0)
@@ -482,7 +482,7 @@ static bool localGetNetworkResources(struct _NETRESOURCEW* basePathToScanPtr, co
                           curResource.dwDisplayType == RESOURCEDISPLAYTYPE_SHAREADMIN) &&
                           curResource.dwType != RESOURCETYPE_PRINT)
         {
-          if (curResource.lpRemoteName != NULL)
+          if (curResource.lpRemoteName != nullptr)
           {
             std::wstring serverShareName(curResource.lpRemoteName);
             if (serverShareName.length() > 2 && serverShareName.compare(0, 2, L"\\\\", 2) == 0)
@@ -518,7 +518,7 @@ static bool localGetNetworkResources(struct _NETRESOURCEW* basePathToScanPtr, co
         if (!getShares && (curResource.dwUsage & RESOURCEUSAGE_CONTAINER) &&
             curResource.dwDisplayType != RESOURCEDISPLAYTYPE_SERVER) // don't scan servers for other servers
         {
-          if (curResource.lpRemoteName != NULL && curResource.lpRemoteName[0] != 0)
+          if (curResource.lpRemoteName != nullptr && curResource.lpRemoteName[0] != 0)
           {
             if (!localGetNetworkResources(&curResource, urlPrefixForItems, items, false))
               CLog::LogFW(LOGNOTICE, L"Can't get servers from \"%ls\", skipping", curResource.lpRemoteName);
@@ -571,7 +571,7 @@ static bool localGetShares(const std::wstring& serverNameToScan, const std::stri
   bool errorFlag = false;
   do
   {
-    SHARE_INFO_1* shareInfos = NULL;
+    SHARE_INFO_1* shareInfos = nullptr;
     DWORD count, totalCount;
     enumResult = NetShareEnum((LPWSTR)serverNameToScan.c_str(), 1, (LPBYTE*)&shareInfos, MAX_PREFERRED_LENGTH, &count, &totalCount, &hEnumResume);
     if (enumResult == NERR_Success || enumResult == ERROR_MORE_DATA)
@@ -678,8 +678,8 @@ bool CWin32SMBDirectory::ConnectAndAuthenticate(CURL& url, bool allowPromptForCr
   DWORD connRes;
   for (int i = 0; i < 3; i++) // make up to three attempts to connect
   {
-    connRes = WNetAddConnection2W(&connInfo, passwordW.empty() ? NULL : (LPWSTR)passwordW.c_str(),
-                                  usernameW.empty() ? NULL : (LPWSTR)usernameW.c_str(), CONNECT_TEMPORARY);
+    connRes = WNetAddConnection2W(&connInfo, passwordW.empty() ? nullptr : (LPWSTR)passwordW.c_str(),
+                                  usernameW.empty() ? nullptr : (LPWSTR)usernameW.c_str(), CONNECT_TEMPORARY);
     if (connRes == NO_ERROR)
     {
       CLog::LogF(LOGDEBUG, "Connected to \"%s\" %s", serverShareName.c_str(), loginDescr.c_str());

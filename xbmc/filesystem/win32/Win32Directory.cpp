@@ -76,9 +76,9 @@ bool CWin32Directory::GetDirectory(const CURL& url, CFileItemList &items)
   WIN32_FIND_DATAW findData = {};
 
   if (g_sysinfo.IsWindowsVersionAtLeast(CSysInfo::WindowsVersionWin7))
-    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, NULL, FIND_FIRST_EX_LARGE_FETCH);
+    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, nullptr, FIND_FIRST_EX_LARGE_FETCH);
   else
-    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, NULL, 0);
+    hSearch = FindFirstFileExW(searchMask.c_str(), FindExInfoStandard, &findData, FindExSearchNameMatch, nullptr, 0);
 
   if (hSearch == INVALID_HANDLE_VALUE)
     return GetLastError() == ERROR_FILE_NOT_FOUND ? Exists(url) : false; // return true if directory exist and empty
@@ -133,7 +133,7 @@ bool CWin32Directory::Create(const CURL& url)
   if (nameW.empty())
     return false;
 
-  if (!CreateDirectoryW(nameW.c_str(), NULL))
+  if (!CreateDirectoryW(nameW.c_str(), nullptr))
   {
     if (GetLastError() == ERROR_ALREADY_EXISTS)
       return Exists(url); // is it file or directory?

@@ -132,9 +132,9 @@ bool iso9660::IsRockRidge(struct iso9660_Directory& isodir)
 //******************************************************************************************************************
 struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const char *path )
 {
-  struct iso_dirtree* pDir = NULL;
-  struct iso_dirtree* pFile_Pointer = NULL;
-  char* pCurr_dir_cache = NULL;
+  struct iso_dirtree* pDir = nullptr;
+  struct iso_dirtree* pFile_Pointer = nullptr;
+  char* pCurr_dir_cache = nullptr;
   DWORD iso9660searchpointer;
   struct iso9660_Directory isodir;
   struct iso9660_Directory curr_dir;
@@ -146,7 +146,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
   {
     while ( point->next )
     {
-      if (strcmp(path, point->path) == 0) return NULL;
+      if (strcmp(path, point->path) == 0) return nullptr;
       point = point->next;
     }
   }
@@ -160,12 +160,12 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
 
   pDir = (struct iso_dirtree *)malloc(sizeof(struct iso_dirtree));
   if (!pDir)
-    return NULL;
+    return nullptr;
 
-  pDir->next = NULL;
-  pDir->path = NULL;
-  pDir->name = NULL;
-  pDir->dirpointer = NULL;
+  pDir->next = nullptr;
+  pDir->path = nullptr;
+  pDir->name = nullptr;
+  pDir->dirpointer = nullptr;
   pFile_Pointer = pDir;
   m_vecDirsAndFiles.push_back(pDir);
 
@@ -175,14 +175,14 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
 
   pCurr_dir_cache = (char*)malloc( 16*wSectorSize );
   if (!pCurr_dir_cache )
-    return NULL;
+    return nullptr;
 
-  BOOL bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache, wSectorSize, &lpNumberOfBytesRead, NULL );
+  BOOL bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache, wSectorSize, &lpNumberOfBytesRead, nullptr );
   if (!bResult || lpNumberOfBytesRead != wSectorSize)
   {
     CLog::Log(LOGERROR, "%s: unable to read", __FUNCTION__);
     free(pCurr_dir_cache);
-    return NULL;
+    return nullptr;
   }
   memcpy( &isodir, pCurr_dir_cache, sizeof(isodir) );
   memcpy( &curr_dir, pCurr_dir_cache, sizeof(isodir) );
@@ -193,15 +193,15 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
     free( pCurr_dir_cache );
     pCurr_dir_cache = (char*)malloc( 16 * from_733(isodir.size) );
     if (!pCurr_dir_cache )
-      return NULL;
+      return nullptr;
 
     ::SetFilePointer( m_info.ISO_HANDLE, wSectorSize * sector, 0, FILE_BEGIN );
-    bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache , curr_dirSize, &lpNumberOfBytesRead, NULL );
+    bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache , curr_dirSize, &lpNumberOfBytesRead, nullptr );
     if (!bResult || lpNumberOfBytesRead != curr_dirSize)
     {
       CLog::Log(LOGERROR, "%s: unable to read", __FUNCTION__);
       free(pCurr_dir_cache);
-      return NULL;
+      return nullptr;
     }
   }
   iso9660searchpointer = 0;
@@ -215,12 +215,12 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
       if (!m_paths )
       {
         free(pCurr_dir_cache);
-        return NULL;
+        return nullptr;
       }
 
-      m_paths->path = NULL;
-      m_paths->dir = NULL;
-      m_paths->next = NULL;
+      m_paths->path = nullptr;
+      m_paths->dir = nullptr;
+      m_paths->next = nullptr;
       m_lastpath = m_paths;
     }
     else
@@ -233,17 +233,17 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
   if (!m_lastpath->next )
   {
     free(pCurr_dir_cache);
-    return NULL;
+    return nullptr;
   }
 
   m_lastpath = m_lastpath->next;
-  m_lastpath->next = NULL;
+  m_lastpath->next = nullptr;
   m_lastpath->dir = pDir;
   m_lastpath->path = (char *)malloc(strlen(path) + 1);
   if (!m_lastpath->path )
   {
     free(pCurr_dir_cache);
-    return NULL;
+    return nullptr;
   }
 
   strcpy( m_lastpath->path, path );
@@ -298,12 +298,12 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
           m_vecDirsAndFiles.push_back(pFile_Pointer->next);
           pFile_Pointer = pFile_Pointer->next;
           pFile_Pointer->next = 0;
-          pFile_Pointer->dirpointer = NULL;
+          pFile_Pointer->dirpointer = nullptr;
           pFile_Pointer->path = (char *)malloc(strlen(path) + 1);
           if (!pFile_Pointer->path)
           {
             free(pCurr_dir_cache);
-            return NULL;
+            return nullptr;
           }
 
           strcpy( pFile_Pointer->path, path );
@@ -311,7 +311,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
           if (!pFile_Pointer->name)
           {
             free(pCurr_dir_cache);
-            return NULL;
+            return nullptr;
           }
 
           strcpy( pFile_Pointer->name , temp_text.c_str());
@@ -322,7 +322,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
 #endif
 
           pFile_Pointer->Location = from_733(isodir.extent);
-          pFile_Pointer->dirpointer = NULL;
+          pFile_Pointer->dirpointer = nullptr;
           pFile_Pointer ->Length = from_733(isodir.size);
 
           IsoDateTimeToFileTime(&isodir.DateTime, &pFile_Pointer->filetime);
@@ -348,7 +348,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
     if ( from_733(curr_dir.size) <= iso9660searchpointer )
     {
       free( pCurr_dir_cache );
-      pCurr_dir_cache = NULL;
+      pCurr_dir_cache = nullptr;
       return pDir;
     }
     memcpy( &isodir, pCurr_dir_cache + iso9660searchpointer, std::min(sizeof(isodir), sizeof(m_info.isodir)));
@@ -383,19 +383,19 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
           if (!pFile_Pointer->next)
           {
             free(pCurr_dir_cache);
-            return NULL;
+            return nullptr;
           }
 
           m_vecDirsAndFiles.push_back(pFile_Pointer->next);
           pFile_Pointer = pFile_Pointer->next;
           pFile_Pointer->next = 0;
-          pFile_Pointer->dirpointer = NULL;
+          pFile_Pointer->dirpointer = nullptr;
           pFile_Pointer->path = (char *)malloc(strlen(path) + 1);
 
           if (!pFile_Pointer->path)
           {
             free(pCurr_dir_cache);
-            return NULL;
+            return nullptr;
           }
 
           strcpy( pFile_Pointer->path, path );
@@ -404,7 +404,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
           if (!pFile_Pointer->name)
           {
             free(pCurr_dir_cache);
-            return NULL;
+            return nullptr;
           }
 
           strcpy( pFile_Pointer->name , temp_text.c_str());
@@ -417,7 +417,7 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
 #endif
 
           pFile_Pointer->Location = dwFileLocation;
-          pFile_Pointer->dirpointer = NULL;
+          pFile_Pointer->dirpointer = nullptr;
           pFile_Pointer->Length = from_733(isodir.size);
 
           IsoDateTimeToFileTime(&isodir.DateTime, &pFile_Pointer->filetime);
@@ -433,22 +433,22 @@ struct iso_dirtree *iso9660::ReadRecursiveDirFromSector( DWORD sector, const cha
       }
     }
   }
-  return NULL;
+  return nullptr;
 }
 //******************************************************************************************************************
 iso9660::iso9660( )
 {
   memset(m_isoFiles, 0, sizeof(m_isoFiles));
-  m_hCDROM = NULL;
-  m_lastpath = NULL;
-  m_searchpointer = NULL;
+  m_hCDROM = nullptr;
+  m_lastpath = nullptr;
+  m_searchpointer = nullptr;
   m_paths = 0;
   Reset();
 }
 
 void iso9660::Scan()
 {
-  if (m_hCDROM != NULL)
+  if (m_hCDROM != nullptr)
     return ;
 
   m_hCDROM = CIoSupport::OpenCDROM();
@@ -467,14 +467,14 @@ void iso9660::Scan()
   DWORD lpNumberOfBytesRead = 0;
   ::SetFilePointer( m_info.ISO_HANDLE, 0x8000, 0, FILE_BEGIN );
 
-  ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, NULL );
+  ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, nullptr );
 
   if (strncmp(m_info.iso.szSignature, "CD001", 5))
   {
     CIoSupport::CloseCDROM( m_info.ISO_HANDLE);
     CIoSupport::FreeReadBuffer();
-    m_info.ISO_HANDLE = NULL;
-    m_hCDROM = NULL;
+    m_info.ISO_HANDLE = nullptr;
+    m_hCDROM = nullptr;
     m_info.iso9660 = 0;
     return ;
   }
@@ -495,7 +495,7 @@ void iso9660::Scan()
     DWORD lpNumberOfBytesRead;
     char* pCurr_dir_cache = (char*)malloc( 16*wSectorSize );
     iso9660_Directory isodir;
-    BOOL bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache, wSectorSize, &lpNumberOfBytesRead, NULL );
+    BOOL bResult = ::ReadFile( m_info.ISO_HANDLE, pCurr_dir_cache, wSectorSize, &lpNumberOfBytesRead, nullptr );
     memcpy( &isodir, pCurr_dir_cache, sizeof(isodir));
 
     int iso9660searchpointer=0;
@@ -523,10 +523,10 @@ void iso9660::Scan()
       }
       current += 0x800;
       ::SetFilePointer( m_info.ISO_HANDLE, current, 0, FILE_BEGIN );
-      ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, NULL );
+      ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, nullptr );
     }
     ::SetFilePointer( m_info.ISO_HANDLE, m_info.HeaderPos, 0, FILE_BEGIN );
-    ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, NULL );
+    ::ReadFile( m_info.ISO_HANDLE, &m_info.iso, sizeof(m_info.iso), &lpNumberOfBytesRead, nullptr );
     memcpy( &m_info.isodir, m_info.iso.szRootDir, sizeof(m_info.isodir));
   }
 
@@ -545,11 +545,11 @@ void iso9660::Reset()
 
   if (m_info.Curr_dir)
     free(m_info.Curr_dir);
-  m_info.Curr_dir = NULL;
+  m_info.Curr_dir = nullptr;
 
   if (m_info.Curr_dir_cache)
     free(m_info.Curr_dir_cache);
-  m_info.Curr_dir_cache = NULL;
+  m_info.Curr_dir_cache = nullptr;
 
 
 
@@ -582,7 +582,7 @@ void iso9660::Reset()
     CIoSupport::CloseCDROM(m_hCDROM);
     CIoSupport::FreeReadBuffer();
   }
-  m_hCDROM = NULL;
+  m_hCDROM = nullptr;
 }
 
 //******************************************************************************************************************
@@ -593,7 +593,7 @@ struct iso_dirtree *iso9660::FindFolder( char *Folder )
   work = (char *)malloc(from_723(m_info.iso.logical_block_size));
 
   char *temp;
-  struct iso_directories *lastpath = NULL;
+  struct iso_directories *lastpath = nullptr;
 
   if ( strpbrk(Folder, ":") )
     strcpy(work, strpbrk(Folder, ":") + 1);
@@ -709,7 +709,7 @@ std::string iso9660::GetThinText(BYTE* strTxt, int iLen )
 //************************************************************************************
 HANDLE iso9660::OpenFile(const char *filename)
 {
-  if (m_info.ISO_HANDLE == NULL) return INVALID_HANDLE_VALUE;
+  if (m_info.ISO_HANDLE == nullptr) return INVALID_HANDLE_VALUE;
   HANDLE hContext = AllocFileContext();
   if (hContext == INVALID_HANDLE_VALUE) return hContext;
 
@@ -741,7 +741,7 @@ HANDLE iso9660::OpenFile(const char *filename)
     if ( !stricmp(fileinfo.cFileName, pointer ) )
       loop = -1;
     else
-      loop = FindNextFile( NULL, &fileinfo );
+      loop = FindNextFile( nullptr, &fileinfo );
   }
   if ( loop == 0 )
   {
@@ -784,7 +784,7 @@ void iso9660::CloseFile(HANDLE hFile)
     if (pContext->m_pBuffer)
     {
       delete [] pContext->m_pBuffer;
-      pContext->m_pBuffer = NULL;
+      pContext->m_pBuffer = nullptr;
     }
   }
   FreeFileContext(hFile);
@@ -999,7 +999,7 @@ void iso9660::FreeFileContext(HANDLE hFile)
   if (iFile >= 1 && iFile < MAX_ISO_FILES)
   {
     if (m_isoFiles[iFile ]) delete m_isoFiles[iFile ];
-    m_isoFiles[iFile ] = NULL;
+    m_isoFiles[iFile ] = nullptr;
   }
 }
 
@@ -1008,7 +1008,7 @@ HANDLE iso9660::AllocFileContext()
 {
   for (intptr_t i = 1; i < MAX_ISO_FILES; ++i)
   {
-    if (m_isoFiles[i] == NULL)
+    if (m_isoFiles[i] == nullptr)
     {
       m_isoFiles[i] = new isofile;
       return (HANDLE)i;
@@ -1025,13 +1025,13 @@ iso9660::isofile* iso9660::GetFileContext(HANDLE hFile)
   {
     return m_isoFiles[iFile];
   }
-  return NULL;
+  return nullptr;
 }
 
 //************************************************************************************
 bool iso9660::IsScanned()
 {
-  return (m_hCDROM != NULL);
+  return (m_hCDROM != nullptr);
 }
 
 //************************************************************************************

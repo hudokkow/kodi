@@ -49,9 +49,9 @@ CRarFileExtractThread::CRarFileExtractThread()
   , hQuit(true)
   , m_iSize(0)
 {
-  m_pArc = NULL;
-  m_pCmd = NULL;
-  m_pExtract = NULL;
+  m_pArc = nullptr;
+  m_pCmd = nullptr;
+  m_pExtract = nullptr;
   StopThread();
   Create();
 }
@@ -123,13 +123,13 @@ CRarFile::CRarFile()
   m_strPathInRar.clear();
   m_bFileOptions = 0;
 #ifdef HAS_FILESYSTEM_RAR
-  m_pArc = NULL;
-  m_pCmd = NULL;
-  m_pExtract = NULL;
-  m_pExtractThread = NULL;
+  m_pArc = nullptr;
+  m_pCmd = nullptr;
+  m_pExtract = nullptr;
+  m_pExtractThread = nullptr;
 #endif
-  m_szBuffer = NULL;
-  m_szStartOfBuffer = NULL;
+  m_szBuffer = nullptr;
+  m_szStartOfBuffer = nullptr;
   m_iDataInBuffer = 0;
   m_bUseFile = false;
   m_bOpen = false;
@@ -156,7 +156,7 @@ CRarFile::~CRarFile()
     if (m_pExtractThread)
     {
       delete m_pExtractThread;
-      m_pExtractThread = NULL;
+      m_pExtractThread = nullptr;
     }
   }
 #endif
@@ -385,7 +385,7 @@ void CRarFile::Close()
     if (m_pExtractThread)
     {
       delete m_pExtractThread;
-      m_pExtractThread = NULL;
+      m_pExtractThread = nullptr;
     }
     m_bOpen = false;
   }
@@ -596,23 +596,23 @@ void CRarFile::CleanUp()
     if (m_pExtract)
     {
       delete m_pExtract;
-      m_pExtract = NULL;
+      m_pExtract = nullptr;
     }
     if (m_pArc)
     {
       delete m_pArc;
-      m_pArc = NULL;
+      m_pArc = nullptr;
     }
     if (m_pCmd)
     {
       delete m_pCmd;
-      m_pCmd = NULL;
+      m_pCmd = nullptr;
     }
     if (m_szBuffer)
     {
       delete[] m_szBuffer;
-      m_szBuffer = NULL;
-      m_szStartOfBuffer = NULL;
+      m_szBuffer = nullptr;
+      m_szStartOfBuffer = nullptr;
     }
   }
   catch (int rarErrCode)
@@ -645,7 +645,7 @@ bool CRarFile::OpenInArchive()
     // Set the arguments for the extract command
     strcpy(m_pCmd->Command, "X");
 
-    m_pCmd->AddArcName(const_cast<char*>(m_strRarPath.c_str()),NULL);
+    m_pCmd->AddArcName(const_cast<char*>(m_strRarPath.c_str()),nullptr);
 
     strncpy(m_pCmd->ExtrPath, m_strCacheDir.c_str(), sizeof (m_pCmd->ExtrPath) - 2);
     m_pCmd->ExtrPath[sizeof (m_pCmd->ExtrPath) - 2] = 0;
@@ -666,7 +666,7 @@ bool CRarFile::OpenInArchive()
       CleanUp();
       return false;
     }
-    if (!m_pArc->WOpen(m_strRarPath.c_str(),NULL))
+    if (!m_pArc->WOpen(m_strRarPath.c_str(),nullptr))
     {
       CleanUp();
       return false;
@@ -686,7 +686,7 @@ bool CRarFile::OpenInArchive()
     m_pExtract->GetDataIO().SetUnpackToMemory(m_szBuffer,0);
     m_pExtract->GetDataIO().SetCurrentCommand(*(m_pCmd->Command));
     struct FindData FD;
-    if (FindFile::FastFind(m_strRarPath.c_str(),NULL,&FD))
+    if (FindFile::FastFind(m_strRarPath.c_str(),nullptr,&FD))
       m_pExtract->GetDataIO().TotalArcSize+=FD.Size;
     m_pExtract->ExtractArchiveInit(m_pCmd,*m_pArc);
 

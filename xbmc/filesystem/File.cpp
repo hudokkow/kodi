@@ -48,10 +48,10 @@ using namespace XFILE;
 //*********************************************************************************************
 CFile::CFile()
 {
-  m_pFile = NULL;
-  m_pBuffer = NULL;
+  m_pFile = nullptr;
+  m_pBuffer = nullptr;
   m_flags = 0;
-  m_bitStreamStats = NULL;
+  m_bitStreamStats = nullptr;
 }
 
 //*********************************************************************************************
@@ -498,7 +498,7 @@ ssize_t CFile::Read(void *lpBuf, size_t uiBufSize)
 {
   if (!m_pFile)
     return -1;
-  if (lpBuf == NULL && uiBufSize != 0)
+  if (lpBuf == nullptr && uiBufSize != 0)
     return -1;
 
   if (uiBufSize > SSIZE_MAX)
@@ -755,12 +755,12 @@ ssize_t CFile::Write(const void* lpBuf, size_t uiBufSize)
 {
   if (!m_pFile)
     return -1;
-  if (lpBuf == NULL && uiBufSize != 0)
+  if (lpBuf == nullptr && uiBufSize != 0)
     return -1;
 
   try
   {
-    if (uiBufSize == 0 && lpBuf == NULL)
+    if (uiBufSize == 0 && lpBuf == nullptr)
     { // "test" write with zero size
       // some VFSs don't handle correctly null buffer pointer
       // provide valid buffer pointer for them
@@ -873,7 +873,7 @@ bool CFile::SetHidden(const CURL& file, bool hidden)
 int CFile::IoControl(EIoControl request, void* param)
 {
   int result = -1;
-  if (m_pFile == NULL)
+  if (m_pFile == nullptr)
     return -1;
   result = m_pFile->IoControl(request, param);
 
@@ -990,8 +990,8 @@ CFileStreamBuffer::~CFileStreamBuffer()
 
 CFileStreamBuffer::CFileStreamBuffer(int backsize)
   : std::streambuf()
-  , m_file(NULL)
-  , m_buffer(NULL)
+  , m_file(nullptr)
+  , m_buffer(nullptr)
   , m_backsize(backsize)
   , m_frontsize(0)
 {
@@ -1013,7 +1013,7 @@ void CFileStreamBuffer::Detach()
   setg(0,0,0);
   setp(0,0);
   delete[] m_buffer;
-  m_buffer = NULL;
+  m_buffer = nullptr;
 }
 
 CFileStreamBuffer::int_type CFileStreamBuffer::underflow()
@@ -1109,7 +1109,7 @@ std::streamsize CFileStreamBuffer::showmanyc()
 CFileStream::CFileStream(int backsize /*= 0*/) :
     std::istream(&m_buffer),
     m_buffer(backsize),
-    m_file(NULL)
+    m_file(nullptr)
 {
 }
 
