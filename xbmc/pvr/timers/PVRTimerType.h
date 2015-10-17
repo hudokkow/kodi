@@ -43,7 +43,7 @@ namespace PVR
 
     /*!
      * @brief Return the first available timer type.
-     * @return A timer type or NULL if none available.
+     * @return A timer type or nullptr if none available.
      */
     static const CPVRTimerTypePtr GetFirstAvailableType();
 

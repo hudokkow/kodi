@@ -276,12 +276,12 @@ namespace PVR
     /*!
      * @brief Get a channel given it's EPG ID.
      * @param iEpgID The channel EPG ID.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetByChannelEpgID(int iEpgID) const;
 
     /*!
-     * @brief The channel that was played last that has a valid client or NULL if there was none.
+     * @brief The channel that was played last that has a valid client or nullptr if there was none.
      * @param iCurrentChannel The channelid of the current channel that is playing, or -1 if none
      * @return The requested channel.
      */
@@ -291,7 +291,7 @@ namespace PVR
      * @brief Get a channel given it's channel number.
      * @param iChannelNumber The channel number.
      * * @param iSubChannelNumber The sub channel number.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CFileItemPtr GetByChannelNumber(unsigned int iChannelNumber, unsigned int iSubChannelNumber = 0) const;
 
@@ -312,14 +312,14 @@ namespace PVR
     /*!
      * @brief Get the next channel in this group.
      * @param channel The current channel.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CFileItemPtr GetByChannelUp(const CPVRChannelPtr &channel) const;
 
     /*!
      * @brief Get the previous channel in this group.
      * @param channel The current channel.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CFileItemPtr GetByChannelDown(const CPVRChannelPtr &channel) const;
 
@@ -431,7 +431,7 @@ namespace PVR
      * @brief Get a channel given the channel number on the client.
      * @param iUniqueChannelId The unique channel id on the client.
      * @param iClientID The ID of the client.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetByUniqueID(int iUniqueChannelId, int iClientID) const;
     const PVRChannelGroupMember& GetByUniqueID(const std::pair<int, int>& id) const;
@@ -521,7 +521,7 @@ namespace PVR
     /*!
      * @brief Get a channel given it's channel ID.
      * @param iChannelID The channel ID.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetByChannelID(int iChannelID) const;
 

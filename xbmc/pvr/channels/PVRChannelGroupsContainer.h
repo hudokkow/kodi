@@ -98,21 +98,21 @@ namespace PVR
     /*!
      * @brief Get a group given it's ID.
      * @param iGroupId The ID of the group.
-     * @return The requested group or NULL if it wasn't found.
+     * @return The requested group or nullptr if it wasn't found.
      */
     CPVRChannelGroupPtr GetByIdFromAll(int iGroupId) const;
 
     /*!
      * @brief Get a channel given it's database ID.
      * @param iChannelId The ID of the channel.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetChannelById(int iChannelId) const;
 
     /*!
      * @brief Get a channel given it's EPG ID.
      * @param iEpgId The EPG ID of the channel.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetChannelByEpgId(int iEpgId) const;
 
@@ -128,7 +128,7 @@ namespace PVR
     /*!
      * @brief Get a channel given it's path.
      * @param strPath The path.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CFileItemPtr GetByPath(const std::string &strPath) const;
 
@@ -157,7 +157,7 @@ namespace PVR
      * @brief Get a channel given it's channel ID from all containers.
      * @param iUniqueChannelId The unique channel id on the client.
      * @param iClientID The ID of the client.
-     * @return The channel or NULL if it wasn't found.
+     * @return The channel or nullptr if it wasn't found.
      */
     CPVRChannelPtr GetByUniqueID(int iUniqueChannelId, int iClientID) const;
 
@@ -167,7 +167,7 @@ namespace PVR
     void SearchMissingChannelIcons(void) const;
 
     /*!
-     * @brief The channel that was played last that has a valid client or NULL if there was none.
+     * @brief The channel that was played last that has a valid client or nullptr if there was none.
      * @return The requested channel.
      */
     CFileItemPtr GetLastPlayedChannel(void) const;

@@ -610,7 +610,7 @@ void CGUIWindowPVRBase::ShowRecordingInfo(CFileItem *item)
 
 void CGUIWindowPVRBase::ShowEPGInfo(CFileItem *item)
 {
-  CFileItem *tag = NULL;
+  CFileItem *tag = nullptr;
   bool bHasChannel(false);
   CPVRChannelPtr channel;
   if (item->IsEPG())
@@ -768,7 +768,7 @@ bool CGUIWindowPVRBase::ActionRecord(CFileItem *item)
   if (!channel || !g_PVRManager.CheckParentalLock(channel))
     return bReturn;
 
-  if (epgTag->Timer() == NULL)
+  if (epgTag->Timer() == nullptr)
   {
     CPVRTimerInfoTagPtr newTimer = CPVRTimerInfoTag::CreateFromEpg(epgTag);
     if (newTimer)

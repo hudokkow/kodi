@@ -286,7 +286,7 @@ namespace PVR
 
     /*!
      * @brief Return the channel that is currently playing.
-     * @return The channel or NULL if none is playing.
+     * @return The channel or nullptr if none is playing.
      */
     CPVRChannelPtr GetCurrentChannel(void) const;
 
@@ -297,7 +297,7 @@ namespace PVR
 
     /*!
      * @brief Return the EPG for the channel that is currently playing.
-     * @param channel The EPG or NULL if no channel is playing.
+     * @param channel The EPG or nullptr if no channel is playing.
      * @return The amount of results that was added or -1 if none.
      */
     int GetCurrentEpg(CFileItemList &results) const;
@@ -468,13 +468,13 @@ namespace PVR
 
     /*!
      * @brief Get the total duration of the currently playing LiveTV item.
-     * @return The total duration in milliseconds or NULL if no channel is playing.
+     * @return The total duration in milliseconds or nullptr if no channel is playing.
      */
     int GetTotalTime(void) const;
 
     /*!
      * @brief Get the current position in milliseconds since the start of a LiveTV item.
-     * @return The position in milliseconds or NULL if no channel is playing.
+     * @return The position in milliseconds or nullptr if no channel is playing.
      */
     int GetStartTime(void) const;
 

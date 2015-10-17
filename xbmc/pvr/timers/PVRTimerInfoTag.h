@@ -133,11 +133,11 @@ namespace PVR
       * @brief Checks whether this timer has a timer type.
       * @return True if this timer has a timer type, false otherwise
       */
-    bool HasTimerType(void) const { return m_timerType.get() != NULL; }
+    bool HasTimerType(void) const { return m_timerType.get() != nullptr; }
 
     /*!
       * @brief Gets the type of this timer.
-      * @return the timer type or NULL if this tag has no timer type.
+      * @return the timer type or nullptr if this tag has no timer type.
       */
     const CPVRTimerTypePtr GetTimerType() const { return m_timerType; }
 

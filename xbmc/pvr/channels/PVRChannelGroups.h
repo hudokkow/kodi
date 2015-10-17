@@ -81,14 +81,14 @@ namespace PVR
     /*!
      * @brief Get a pointer to a channel group given it's ID.
      * @param iGroupId The ID of the group.
-     * @return The group or NULL if it wasn't found.
+     * @return The group or nullptr if it wasn't found.
      */
     CPVRChannelGroupPtr GetById(int iGroupId) const;
 
     /*!
      * @brief Get a group given it's name.
      * @param strName The name.
-     * @return The group or NULL if it wan't found.
+     * @return The group or nullptr if it wan't found.
      */
     CPVRChannelGroupPtr GetByName(const std::string &strName) const;
 

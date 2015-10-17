@@ -247,7 +247,7 @@ namespace PVR
 
     /*!
      * @brief Get the input format name of the current playing stream content.
-     * @return A pointer to the properties or NULL if no stream is playing.
+     * @return A pointer to the properties or nullptr if no stream is playing.
      */
     std::string GetCurrentInputFormat(void) const;
 
@@ -295,7 +295,7 @@ namespace PVR
 
     /*!
      * @brief Get the channel that is currently playing.
-     * @return the channel that is currently playing, NULL otherwise.
+     * @return the channel that is currently playing, nullptr otherwise.
      */
     CPVRChannelPtr GetPlayingChannel() const;
 
@@ -313,7 +313,7 @@ namespace PVR
 
     /*!
      * @brief Get the recordings that is currently playing.
-     * @return The recording that is currently playing, NULL otherwise.
+     * @return The recording that is currently playing, nullptr otherwise.
      */
     CPVRRecordingPtr GetPlayingRecording(void) const;
 

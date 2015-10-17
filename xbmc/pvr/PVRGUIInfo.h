@@ -57,13 +57,13 @@ namespace PVR
 
     /*!
      * @brief Get the total duration of the currently playing LiveTV item.
-     * @return The total duration in milliseconds or NULL if no channel is playing.
+     * @return The total duration in milliseconds or nullptr if no channel is playing.
      */
     int GetDuration(void) const;
 
     /*!
      * @brief Get the current position in milliseconds since the start of a LiveTV item.
-     * @return The position in milliseconds or NULL if no channel is playing.
+     * @return The position in milliseconds or nullptr if no channel is playing.
      */
     int GetStartTime(void) const;
 
@@ -81,13 +81,13 @@ namespace PVR
 
     /*!
      * @brief Get the currently playing EPG tag.
-     * @return The currently playing EPG tag or NULL if no EPG tag is playing.
+     * @return The currently playing EPG tag or nullptr if no EPG tag is playing.
      */
     EPG::CEpgInfoTagPtr GetPlayingTag() const;
 
     /*!
      * @brief Get playing TV group.
-     * @return The currently playing TV group or NULL if no TV group is playing.
+     * @return The currently playing TV group or nullptr if no TV group is playing.
      */
     std::string GetPlayingTVGroup();
 
