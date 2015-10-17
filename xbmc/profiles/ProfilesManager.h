@@ -73,13 +73,13 @@ public:
 
   /*! \brief Retreive the profile from an index
     \param unsigned index of the profile to retrieve
-    \return const pointer to the profile, NULL if the index is invalid
+    \return const pointer to the profile, nullptr if the index is invalid
     */
   const CProfile* GetProfile(size_t index) const;
 
   /*! \brief Retreive the profile from an index
     \param unsigned index of the profile to retrieve
-    \return pointer to the profile, NULL if the index is invalid
+    \return pointer to the profile, nullptr if the index is invalid
     */
   CProfile* GetProfile(size_t index);
 
