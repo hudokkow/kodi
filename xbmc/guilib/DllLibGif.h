@@ -177,7 +177,7 @@ public:
       Err = "Image EOF detected before image complete";
       break;
     default:
-      Err = NULL;
+      Err = nullptr;
       break;
     }
     return Err;

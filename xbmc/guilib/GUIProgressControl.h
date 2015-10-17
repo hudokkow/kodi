@@ -62,7 +62,7 @@ public:
 
   float GetPercentage() const;
   std::string GetDescription() const;
-  virtual void UpdateInfo(const CGUIListItem *item = NULL);
+  virtual void UpdateInfo(const CGUIListItem *item = nullptr);
   bool UpdateLayout(void);
 protected:
   virtual bool UpdateColors();

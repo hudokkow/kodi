@@ -103,14 +103,14 @@ void Release() { p = 0; }
 
 CTextureBundleXPR::CTextureBundleXPR(void)
 {
-  m_hFile = NULL;
+  m_hFile = nullptr;
   m_themeBundle = false;
   m_TimeStamp = 0;
 }
 
 CTextureBundleXPR::~CTextureBundleXPR(void)
 {
-  if (m_hFile != NULL)
+  if (m_hFile != nullptr)
     fclose(m_hFile);
 }
 
@@ -121,7 +121,7 @@ bool CTextureBundleXPR::OpenBundle()
   int Version;
   XPR_HEADER* pXPRHeader;
 
-  if (m_hFile != NULL)
+  if (m_hFile != nullptr)
     Cleanup();
 
   std::string strPath;
@@ -152,7 +152,7 @@ bool CTextureBundleXPR::OpenBundle()
 #else
   m_hFile = fopen(strPath.c_str(), "rb");
 #endif
-  if (m_hFile == NULL)
+  if (m_hFile == nullptr)
     return false;
 
   struct stat fileStat;
@@ -215,23 +215,23 @@ bool CTextureBundleXPR::OpenBundle()
 LoadError:
   CLog::Log(LOGERROR, "Unable to load file: %s: %s", strPath.c_str(), strerror(errno));
   fclose(m_hFile);
-  m_hFile = NULL;
+  m_hFile = nullptr;
 
   return false;
 }
 
 void CTextureBundleXPR::Cleanup()
 {
-  if (m_hFile != NULL)
+  if (m_hFile != nullptr)
     fclose(m_hFile);
-  m_hFile = NULL;
+  m_hFile = nullptr;
 
   m_FileHeaders.clear();
 }
 
 bool CTextureBundleXPR::HasFile(const std::string& Filename)
 {
-  if (m_hFile == NULL && !OpenBundle())
+  if (m_hFile == nullptr && !OpenBundle())
     return false;
 
   struct stat fileStat;
@@ -254,7 +254,7 @@ void CTextureBundleXPR::GetTexturesFromPath(const std::string &path, std::vector
   if (path.size() > 1 && path[1] == ':')
     return;
 
-  if (m_hFile == NULL && !OpenBundle())
+  if (m_hFile == nullptr && !OpenBundle())
     return;
 
   std::string testPath = Normalize(path);
@@ -322,7 +322,7 @@ bool CTextureBundleXPR::LoadFile(const std::string& Filename, CAutoTexBuffer& Un
   // allocate a buffer for our unpacked texture
   lzo_uint s = file->second.UnpackedSize;
   bool success = true;
-  if (lzo1x_decompress(buffer, file->second.PackedSize, UnpackedBuf, &s, NULL) != LZO_E_OK ||
+  if (lzo1x_decompress(buffer, file->second.PackedSize, UnpackedBuf, &s, nullptr) != LZO_E_OK ||
       s != file->second.UnpackedSize)
   {
     CLog::Log(LOGERROR, "Error loading texture: %s: Decompression error", Filename.c_str());
@@ -345,7 +345,7 @@ bool CTextureBundleXPR::LoadTexture(const std::string& Filename, CBaseTexture** 
                                      int &width, int &height)
 {
   DWORD ResDataOffset;
-  *ppTexture = NULL;
+  *ppTexture = nullptr;
 
   CAutoTexBuffer UnpackedBuf;
   if (!LoadFile(Filename, UnpackedBuf))
@@ -417,7 +417,7 @@ int CTextureBundleXPR::LoadAnim(const std::string& Filename, CBaseTexture*** ppT
   DWORD ResDataOffset;
   int nTextures = 0;
 
-  *ppTextures = NULL; *ppDelays = NULL;
+  *ppTextures = nullptr; *ppDelays = nullptr;
 
   CAutoTexBuffer UnpackedBuf;
   if (!LoadFile(Filename, UnpackedBuf))

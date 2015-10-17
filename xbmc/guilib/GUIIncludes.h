@@ -50,7 +50,7 @@ public:
    "bar" from the include file "foo".
    \param node an XML Element - all child elements are traversed.
    */
-  void ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = NULL);
+  void ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = nullptr);
   const INFO::CSkinVariableString* CreateSkinVariable(const std::string& name, int context);
 
 private:
@@ -61,7 +61,7 @@ private:
     SINGLE_UNDEFINED_PARAM_RESOLVED
   };
 
-  void ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = NULL);
+  void ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = nullptr);
   typedef std::map<std::string, std::string> Params;
   static bool GetParameters(const TiXmlElement *include, const char *valueAttribute, Params& params);
   static void ResolveParametersForNode(TiXmlElement *node, const Params& params);

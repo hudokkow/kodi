@@ -207,7 +207,7 @@ bool CGUIIncludes::HasIncludeFile(const std::string &file) const
   return false;
 }
 
-void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if (!node)
     return;
@@ -221,7 +221,7 @@ void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, b
   }
 }
 
-void CGUIIncludes::ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   // we have a node, find any <include file="fileName">tagName</include> tags and replace
   // recursively with their real includes
@@ -236,8 +236,8 @@ void CGUIIncludes::ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::Inf
     if (it != m_defaults.end())
     {
       // we don't insert <left> et. al. if <posx> or <posy> is specified
-      bool hasPosX(node->FirstChild("posx") != NULL);
-      bool hasPosY(node->FirstChild("posy") != NULL);
+      bool hasPosX(node->FirstChild("posx") != nullptr);
+      bool hasPosY(node->FirstChild("posy") != nullptr);
 
       const TiXmlElement &element = (*it).second;
       const TiXmlElement *tag = element.FirstChildElement();
@@ -362,7 +362,7 @@ bool CGUIIncludes::GetParameters(const TiXmlElement *include, const char *valueA
   if (include)
   {
     const TiXmlElement *param = include->FirstChildElement("param");
-    foundAny = param != NULL;  // doesn't matter if param isn't entirely valid
+    foundAny = param != nullptr;  // doesn't matter if param isn't entirely valid
     while (param)
     {
       std::string paramName = XMLUtils::GetAttribute(param, "name");
@@ -495,5 +495,5 @@ const INFO::CSkinVariableString* CGUIIncludes::CreateSkinVariable(const std::str
   std::map<std::string, TiXmlElement>::const_iterator it = m_skinvariables.find(name);
   if (it != m_skinvariables.end())
     return INFO::CSkinVariable::CreateFromXML(it->second, context);
-  return NULL;
+  return nullptr;
 }

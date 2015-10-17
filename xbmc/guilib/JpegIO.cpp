@@ -97,7 +97,7 @@ static void x_mem_src (j_decompress_ptr cinfo, unsigned char * inbuffer, unsigne
 {
   struct jpeg_source_mgr * src;
 
-  if (inbuffer == NULL || insize == 0)	/* Treat empty input as fatal error */
+  if (inbuffer == nullptr || insize == 0)	/* Treat empty input as fatal error */
   {
     (cinfo)->err->msg_code = 0;
     (*(cinfo)->err->error_exit) ((j_common_ptr) (cinfo));
@@ -107,7 +107,7 @@ static void x_mem_src (j_decompress_ptr cinfo, unsigned char * inbuffer, unsigne
    * can be read from the same buffer by calling jpeg_mem_src only before
    * the first one.
    */
-  if (cinfo->src == NULL) {	/* first time for this JPEG object? */
+  if (cinfo->src == nullptr) {	/* first time for this JPEG object? */
     cinfo->src = (struct jpeg_source_mgr *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
 				  sizeof(struct jpeg_source_mgr));
@@ -151,7 +151,7 @@ static boolean x_empty_mem_output_buffer (j_compress_ptr cinfo)
   nextsize = dest->bufsize * 2;
   nextbuffer = (JOCTET*) malloc(nextsize);
 
-  if (nextbuffer == NULL)
+  if (nextbuffer == nullptr)
   {
     (cinfo)->err->msg_code = 0;
     (cinfo)->err->msg_parm.i[0] = 10;
@@ -160,7 +160,7 @@ static boolean x_empty_mem_output_buffer (j_compress_ptr cinfo)
 
   memcpy(nextbuffer, dest->buffer, dest->bufsize);
 
-  if (dest->newbuffer != NULL)
+  if (dest->newbuffer != nullptr)
     free(dest->newbuffer);
 
   dest->newbuffer = nextbuffer;
@@ -187,7 +187,7 @@ static void x_jpeg_mem_dest (j_compress_ptr cinfo,
 {
   x_mem_dest_ptr dest;
 
-  if (outbuffer == NULL || outsize == NULL)     /* sanity check */
+  if (outbuffer == nullptr || outsize == nullptr)     /* sanity check */
   {
     (cinfo)->err->msg_code = 0;
     (*(cinfo)->err->error_exit) ((j_common_ptr) (cinfo));
@@ -196,7 +196,7 @@ static void x_jpeg_mem_dest (j_compress_ptr cinfo,
   /* The destination object is made permanent so that multiple JPEG images
    * can be written to the same buffer without re-executing jpeg_mem_dest.
    */
-  if (cinfo->dest == NULL) {    /* first time for this JPEG object? */
+  if (cinfo->dest == nullptr) {    /* first time for this JPEG object? */
     cinfo->dest = (struct jpeg_destination_mgr *)
       (*cinfo->mem->alloc_small) ((j_common_ptr) cinfo, JPOOL_PERMANENT,
                                   sizeof(x_mem_destination_mgr));
@@ -208,12 +208,12 @@ static void x_jpeg_mem_dest (j_compress_ptr cinfo,
   dest->pub.term_destination = x_term_mem_destination;
   dest->outbuffer = outbuffer;
   dest->outsize = outsize;
-  dest->newbuffer = NULL;
+  dest->newbuffer = nullptr;
 
-  if (*outbuffer == NULL || *outsize == 0) {
+  if (*outbuffer == nullptr || *outsize == 0) {
     /* Allocate initial buffer */
     dest->newbuffer = *outbuffer = (unsigned char*)malloc(OUTPUT_BUF_SIZE);
-    if (dest->newbuffer == NULL)
+    if (dest->newbuffer == nullptr)
     {
       (cinfo)->err->msg_code = 0;
       (cinfo)->err->msg_parm.i[0] = 10;
@@ -233,9 +233,9 @@ CJpegIO::CJpegIO()
   m_height = 0;
   m_orientation = 0;
   m_inputBuffSize = 0;
-  m_inputBuff = NULL;
+  m_inputBuff = nullptr;
   memset(&m_cinfo, 0, sizeof(m_cinfo));
-  m_thumbnailbuffer = NULL;
+  m_thumbnailbuffer = nullptr;
 }
 
 CJpegIO::~CJpegIO()
@@ -246,7 +246,7 @@ CJpegIO::~CJpegIO()
 void CJpegIO::Close()
 {
   free(m_inputBuff);
-  m_inputBuff = NULL;
+  m_inputBuff = nullptr;
   m_inputBuffSize = 0;
   ReleaseThumbnailBuffer();
 }
@@ -274,7 +274,7 @@ bool CJpegIO::Read(unsigned char* buffer, unsigned int bufSize, unsigned int min
   m_cinfo.err = jpeg_std_error(&jerr.pub);
   jerr.pub.error_exit = jpeg_error_exit;
 
-  if (buffer == NULL || !bufSize )
+  if (buffer == nullptr || !bufSize )
     return false;
 
   jpeg_create_decompress(&m_cinfo);
@@ -409,7 +409,7 @@ bool CJpegIO::CreateThumbnailFromMemory(unsigned char* buffer, unsigned int bufS
 {
   //Decode a jpeg residing in buffer, pass to CreateThumbnailFromSurface for re-encode
   unsigned int pitch = 0;
-  unsigned char *sourceBuf = NULL;
+  unsigned char *sourceBuf = nullptr;
 
   if (!Read(buffer, bufSize, minx, miny))
     return false;
@@ -441,14 +441,14 @@ bool CJpegIO::CreateThumbnailFromSurface(unsigned char* buffer, unsigned int wid
   unsigned char* src = buffer;
   unsigned char* rgbbuf;
 
-  if(buffer == NULL)
+  if(buffer == nullptr)
   {
     CLog::Log(LOGERROR, "JpegIO::CreateThumbnailFromSurface no buffer");
     return false;
   }
 
   result = (unsigned char*) malloc(outBufSize); //Initial buffer. Grows as-needed.
-  if (result == NULL)
+  if (result == nullptr)
   {
     CLog::Log(LOGERROR, "JpegIO::CreateThumbnailFromSurface error allocating memory for image buffer");
     return false;
@@ -684,14 +684,14 @@ bool CJpegIO::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned int w
   unsigned char* src = bufferin;
   unsigned char* rgbbuf;
 
-  if(bufferin == NULL)
+  if(bufferin == nullptr)
   {
     CLog::Log(LOGERROR, "JpegIO::CreateThumbnailFromSurface no buffer");
     return false;
   }
 
   m_thumbnailbuffer = (unsigned char*) malloc(outBufSize); //Initial buffer. Grows as-needed.
-  if (m_thumbnailbuffer == NULL)
+  if (m_thumbnailbuffer == nullptr)
   {
     CLog::Log(LOGERROR, "JpegIO::CreateThumbnailFromSurface error allocating memory for image buffer");
     return false;
@@ -775,9 +775,9 @@ bool CJpegIO::CreateThumbnailFromSurface(unsigned char* bufferin, unsigned int w
 
 void CJpegIO::ReleaseThumbnailBuffer()
 {
-  if(m_thumbnailbuffer != NULL)
+  if(m_thumbnailbuffer != nullptr)
   {
     free(m_thumbnailbuffer);
-    m_thumbnailbuffer = NULL;
+    m_thumbnailbuffer = nullptr;
   }
 }

@@ -55,7 +55,7 @@ public:
   virtual void SetFocus(bool bOnOff);
   virtual void AllocResources();
   virtual void FreeResources(bool immediately = false);
-  virtual void UpdateVisibility(const CGUIListItem *item = NULL);
+  virtual void UpdateVisibility(const CGUIListItem *item = nullptr);
 
   virtual unsigned int GetRows() const;
 
@@ -122,7 +122,7 @@ protected:
   virtual void CalculateLayout();
   virtual void SelectItem(int item) {};
   virtual bool SelectItemFromPoint(const CPoint &point) { return false; };
-  virtual int GetCursorFromPoint(const CPoint &point, CPoint *itemPoint = NULL) const { return -1; };
+  virtual int GetCursorFromPoint(const CPoint &point, CPoint *itemPoint = nullptr) const { return -1; };
   virtual void Reset();
   virtual unsigned int GetNumItems() const { return m_items.size(); };
   virtual int GetCurrentPage() const;

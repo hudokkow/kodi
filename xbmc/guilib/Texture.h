@@ -52,7 +52,7 @@ public:
    \param idealWidth the ideal width of the texture (defaults to 0, no ideal width).
    \param idealHeight the ideal height of the texture (defaults to 0, no ideal height).
    \param strMimeType mimetype of the given texture if available (defaults to empty)
-   \return a CBaseTexture pointer to the created texture - NULL if the texture failed to load.
+   \return a CBaseTexture pointer to the created texture - nullptr if the texture failed to load.
    */
   static CBaseTexture *LoadFromFile(const std::string& texturePath, unsigned int idealWidth = 0, unsigned int idealHeight = 0,
                                     bool requirePixels = false, const std::string& strMimeType = "");
@@ -65,7 +65,7 @@ public:
    \param mimeType the mime type of the file in buffer.
    \param idealWidth the ideal width of the texture (defaults to 0, no ideal width).
    \param idealHeight the ideal height of the texture (defaults to 0, no ideal height).
-   \return a CBaseTexture pointer to the created texture - NULL if the texture failed to load.
+   \return a CBaseTexture pointer to the created texture - nullptr if the texture failed to load.
    */
   static CBaseTexture *LoadFromFileInMemory(unsigned char* buffer, size_t bufferSize, const std::string& mimeType,
                                             unsigned int idealWidth = 0, unsigned int idealHeight = 0);

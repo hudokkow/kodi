@@ -49,8 +49,8 @@ CGUIShader::CGUIShader( const char *shader ) : CGLSLShaderProgram("guishader_ver
   m_hContrast = 0;
   m_hBrightness = 0;
 
-  m_proj   = NULL;
-  m_model  = NULL;
+  m_proj   = nullptr;
+  m_model  = nullptr;
   m_clipPossible = false;
 }
 

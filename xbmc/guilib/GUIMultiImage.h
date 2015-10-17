@@ -47,8 +47,8 @@ public:
 
   virtual void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions);
   virtual void Render();
-  virtual void UpdateVisibility(const CGUIListItem *item = NULL);
-  virtual void UpdateInfo(const CGUIListItem *item = NULL);
+  virtual void UpdateVisibility(const CGUIListItem *item = nullptr);
+  virtual void UpdateInfo(const CGUIListItem *item = nullptr);
   virtual bool OnAction(const CAction &action);
   virtual bool OnMessage(CGUIMessage &message);
   virtual void AllocResources();

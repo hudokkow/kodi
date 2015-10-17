@@ -70,9 +70,9 @@ public:
   void Scroll(unsigned int offset);
 
 protected:
-  virtual void UpdateVisibility(const CGUIListItem *item = NULL);
+  virtual void UpdateVisibility(const CGUIListItem *item = nullptr);
   virtual bool UpdateColors();
-  virtual void UpdateInfo(const CGUIListItem *item = NULL);
+  virtual void UpdateInfo(const CGUIListItem *item = nullptr);
   void UpdatePageControl();
   void ScrollToOffset(int offset, bool autoScroll = false);
   unsigned int GetRows() const;

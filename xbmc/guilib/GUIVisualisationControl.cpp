@@ -51,7 +51,7 @@ bool CGUIVisualisationControl::OnMessage(CGUIMessage &message)
   {
   case GUI_MSG_GET_VISUALISATION:
     message.SetPointer(m_addon.get());
-    return m_addon != NULL;
+    return m_addon != nullptr;
   case GUI_MSG_VISUALISATION_RELOAD:
     FreeResources(true);
     return true;

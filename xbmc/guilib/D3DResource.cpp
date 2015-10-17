@@ -234,7 +234,7 @@ bool CD3DTexture::CreateInternal(const void* pixels /* nullptr */, unsigned int 
   initData.SysMemPitch = srcPitch ? srcPitch : CD3DHelper::BitsPerPixel(m_format) * m_width / 8;
   initData.SysMemSlicePitch = 0;
 
-  return SUCCEEDED(pD3DDevice->CreateTexture2D(&textureDesc, (pixels ? &initData : NULL), &m_texture));
+  return SUCCEEDED(pD3DDevice->CreateTexture2D(&textureDesc, (pixels ? &initData : nullptr), &m_texture));
 }
 
 ID3D11ShaderResourceView* CD3DTexture::GetShaderResource()
@@ -337,7 +337,7 @@ void CD3DTexture::SaveTexture()
       stagingDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
       stagingDesc.BindFlags = 0;
 
-      if (FAILED(g_Windowing.Get3D11Device()->CreateTexture2D(&stagingDesc, NULL, &texture)))
+      if (FAILED(g_Windowing.Get3D11Device()->CreateTexture2D(&stagingDesc, nullptr, &texture)))
         return;
 
       // copy contents to new texture
@@ -387,7 +387,7 @@ void CD3DTexture::RestoreTexture()
     }
 
     delete[] m_data;
-    m_data = NULL;
+    m_data = nullptr;
     m_pitch = 0;
   }
 }
@@ -746,7 +746,7 @@ void CD3DBuffer::OnDestroyDevice()
     trgDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
     trgDesc.BindFlags = 0;
 
-    if (FAILED(pDevice->CreateBuffer(&trgDesc, NULL, &buffer)))
+    if (FAILED(pDevice->CreateBuffer(&trgDesc, nullptr, &buffer)))
       return;
 
     pContext->CopyResource(buffer, m_buffer);

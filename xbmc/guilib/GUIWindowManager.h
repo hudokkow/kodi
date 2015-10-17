@@ -235,7 +235,7 @@ private:
     {
       if (id == m_id)
         return m_window;
-      return NULL;
+      return nullptr;
     }
     void Set(int id, CGUIWindow *window)
     {

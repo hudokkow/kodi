@@ -84,7 +84,7 @@ bool CGLSLVertexShader::Compile()
   {
     GLchar log[LOG_SIZE];
     CLog::Log(LOGERROR, "GL: Error compiling vertex shader");
-    glGetShaderInfoLog(m_vertexShader, LOG_SIZE, NULL, log);
+    glGetShaderInfoLog(m_vertexShader, LOG_SIZE, nullptr, log);
     CLog::Log(LOGERROR, "%s", log);
     m_lastLog = log;
     m_compiled = false;
@@ -93,7 +93,7 @@ bool CGLSLVertexShader::Compile()
   {
     GLchar log[LOG_SIZE];
     CLog::Log(LOGDEBUG, "GL: Vertex Shader compilation log:");
-    glGetShaderInfoLog(m_vertexShader, LOG_SIZE, NULL, log);
+    glGetShaderInfoLog(m_vertexShader, LOG_SIZE, nullptr, log);
     CLog::Log(LOGDEBUG, "%s", log);
     m_lastLog = log;
     m_compiled = true;
@@ -193,7 +193,7 @@ bool CGLSLPixelShader::Compile()
   {
     GLchar log[LOG_SIZE];
     CLog::Log(LOGERROR, "GL: Error compiling pixel shader");
-    glGetShaderInfoLog(m_pixelShader, LOG_SIZE, NULL, log);
+    glGetShaderInfoLog(m_pixelShader, LOG_SIZE, nullptr, log);
     CLog::Log(LOGERROR, "%s", log);
     m_lastLog = log;
     m_compiled = false;
@@ -202,7 +202,7 @@ bool CGLSLPixelShader::Compile()
   {
     GLchar log[LOG_SIZE];
     CLog::Log(LOGDEBUG, "GL: Pixel Shader compilation log:");
-    glGetShaderInfoLog(m_pixelShader, LOG_SIZE, NULL, log);
+    glGetShaderInfoLog(m_pixelShader, LOG_SIZE, nullptr, log);
     CLog::Log(LOGDEBUG, "%s", log);
     m_lastLog = log;
     m_compiled = true;
@@ -251,7 +251,7 @@ bool CARBPixelShader::Compile()
   {
     const char* errStr = (const char*)glGetString(GL_PROGRAM_ERROR_STRING_ARB);
     if (!errStr)
-      errStr = "NULL";
+      errStr = "nullptr";
     CLog::Log(LOGERROR, "GL: Error compiling ARB pixel shader, GL_PROGRAM_ERROR_STRING_ARB = %s", errStr);
     m_compiled = false;
   }
@@ -353,7 +353,7 @@ bool CGLSLShaderProgram::CompileAndLink()
   {
     GLchar log[LOG_SIZE];
     CLog::Log(LOGERROR, "GL: Error linking shader");
-    glGetProgramInfoLog(m_shaderProgram, LOG_SIZE, NULL, log);
+    glGetProgramInfoLog(m_shaderProgram, LOG_SIZE, nullptr, log);
     CLog::Log(LOGERROR, "%s", log);
     goto error;
   }
@@ -393,7 +393,7 @@ bool CGLSLShaderProgram::Enable()
         {
           GLchar log[LOG_SIZE];
           CLog::Log(LOGERROR, "GL: Error validating shader");
-          glGetProgramInfoLog(m_shaderProgram, LOG_SIZE, NULL, log);
+          glGetProgramInfoLog(m_shaderProgram, LOG_SIZE, nullptr, log);
           CLog::Log(LOGERROR, "%s", log);
         }
         m_validated = true;

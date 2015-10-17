@@ -58,11 +58,11 @@ static const D3D_SHADER_DATA cbPSShaderCode[SHADER_METHOD_RENDER_COUNT] =
 };
 
 CGUIShaderDX::CGUIShaderDX() :
-    m_pSampLinear(NULL),
-    m_pSampPoint(NULL),
-    m_pVPBuffer(NULL),
-    m_pWVPBuffer(NULL),
-    m_pVertexBuffer(NULL),
+    m_pSampLinear(nullptr),
+    m_pSampPoint(nullptr),
+    m_pVPBuffer(nullptr),
+    m_pWVPBuffer(nullptr),
+    m_pVertexBuffer(nullptr),
     m_clipXFactor(0.0f),
     m_clipXOffset(0.0f),
     m_clipYFactor(0.0f),
@@ -127,7 +127,7 @@ bool CGUIShaderDX::CreateBuffers()
 
   // create vertex buffer
   CD3D11_BUFFER_DESC bufferDesc(sizeof(Vertex) * 4, D3D11_BIND_VERTEX_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE);
-  if (FAILED(pDevice->CreateBuffer(&bufferDesc, NULL, &m_pVertexBuffer)))
+  if (FAILED(pDevice->CreateBuffer(&bufferDesc, nullptr, &m_pVertexBuffer)))
   {
     CLog::Log(LOGERROR, __FUNCTION__ " - Failed to create GUI vertex buffer.");
     return false;
@@ -136,7 +136,7 @@ bool CGUIShaderDX::CreateBuffers()
   // Create the constant buffer for WVP
   size_t buffSize = (sizeof(cbWorld) + 15) & ~15;
   CD3D11_BUFFER_DESC cbbd(buffSize, D3D11_BIND_CONSTANT_BUFFER, D3D11_USAGE_DYNAMIC, D3D11_CPU_ACCESS_WRITE); // it can change very frequently
-  if (FAILED(pDevice->CreateBuffer(&cbbd, NULL, &m_pWVPBuffer)))
+  if (FAILED(pDevice->CreateBuffer(&cbbd, nullptr, &m_pWVPBuffer)))
   {
     CLog::Log(LOGERROR, __FUNCTION__ " - Failed to create the constant buffer.");
     return false;

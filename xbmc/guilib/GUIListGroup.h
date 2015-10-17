@@ -43,7 +43,7 @@ public:
 
   virtual void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions);
   virtual void ResetAnimation(ANIMATION_TYPE type);
-  virtual void UpdateVisibility(const CGUIListItem *item = NULL);
+  virtual void UpdateVisibility(const CGUIListItem *item = nullptr);
   virtual void UpdateInfo(const CGUIListItem *item);
   virtual void SetInvalid();
 

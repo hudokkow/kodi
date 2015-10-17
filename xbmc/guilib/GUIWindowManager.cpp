@@ -148,7 +148,7 @@ using namespace KODI::MESSAGING;
 
 CGUIWindowManager::CGUIWindowManager(void)
 {
-  m_pCallback = NULL;
+  m_pCallback = nullptr;
   m_iNested = 0;
   m_initialized = false;
 }
@@ -535,7 +535,7 @@ void CGUIWindowManager::Add(CGUIWindow* pWindow)
 {
   if (!pWindow)
   {
-    CLog::Log(LOGERROR, "Attempted to add a NULL window pointer to the window manager.");
+    CLog::Log(LOGERROR, "Attempted to add a nullptr window pointer to the window manager.");
     return;
   }
   // push back all the windows if there are more than one covered by this class
@@ -1140,7 +1140,7 @@ CGUIWindow* CGUIWindowManager::GetWindow(int id) const
 {
   CGUIWindow *window;
   if (id == 0 || id == WINDOW_INVALID)
-    return NULL;
+    return nullptr;
   window = m_idCache.Get(id);
   if (window)
     return window;
@@ -1150,7 +1150,7 @@ CGUIWindow* CGUIWindowManager::GetWindow(int id) const
   if (it != m_mapWindows.end())
     window = (*it).second;
   else
-    window = NULL;
+    window = nullptr;
   m_idCache.Set(id, window);
   return window;
 }
@@ -1507,7 +1507,7 @@ CGUIWindow *CGUIWindowManager::GetTopMostDialog() const
   stable_sort(renderList.begin(), renderList.end(), RenderOrderSortFunction);
 
   if (!renderList.size())
-    return NULL;
+    return nullptr;
 
   // return the last window in the list
   return *renderList.rbegin();

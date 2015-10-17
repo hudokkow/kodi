@@ -21,7 +21,7 @@
 #include "cximage.h"
 #include "utils/log.h"
 
-CXImage::CXImage(const std::string& strMimeType): m_strMimeType(strMimeType), m_thumbnailbuffer(NULL)
+CXImage::CXImage(const std::string& strMimeType): m_strMimeType(strMimeType), m_thumbnailbuffer(nullptr)
 {
   m_hasAlpha = false;
   memset(&m_image, 0, sizeof(m_image));
@@ -56,7 +56,7 @@ bool CXImage::LoadImageFromMemory(unsigned char* buffer, unsigned int bufSize, u
     return false;
   }
 
-  m_hasAlpha = NULL != m_image.alpha;
+  m_hasAlpha = nullptr != m_image.alpha;
   m_width = m_image.width;
   m_height = m_image.height;
   m_orientation = m_image.exifInfo.Orientation;
@@ -130,5 +130,5 @@ void CXImage::ReleaseThumbnailBuffer()
     return;
 
   m_dll.FreeMemory(m_thumbnailbuffer);
-  m_thumbnailbuffer = NULL;
+  m_thumbnailbuffer = nullptr;
 }

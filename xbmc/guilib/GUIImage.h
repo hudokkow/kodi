@@ -72,7 +72,7 @@ public:
 
   virtual void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions);
   virtual void Render();
-  virtual void UpdateVisibility(const CGUIListItem *item = NULL);
+  virtual void UpdateVisibility(const CGUIListItem *item = nullptr);
   virtual bool OnAction(const CAction &action) ;
   virtual bool OnMessage(CGUIMessage& message);
   virtual void AllocResources();
@@ -81,7 +81,7 @@ public:
   virtual bool IsDynamicallyAllocated() { return m_bDynamicResourceAlloc; };
   virtual void SetInvalid();
   virtual bool CanFocus() const;
-  virtual void UpdateInfo(const CGUIListItem *item = NULL);
+  virtual void UpdateInfo(const CGUIListItem *item = nullptr);
 
   virtual void SetInfo(const CGUIInfoLabel &info);
   virtual void SetFileName(const std::string& strFileName, bool setConstant = false, const bool useCache = true);

@@ -36,7 +36,7 @@
 CPiTexture::CPiTexture(unsigned int width, unsigned int height, unsigned int format)
 : CGLTexture(width, height, format)
 {
-  m_egl_image = NULL;
+  m_egl_image = nullptr;
 }
 
 CPiTexture::~CPiTexture()
@@ -44,7 +44,7 @@ CPiTexture::~CPiTexture()
   if (m_egl_image)
   {
     g_OMXImage.DestroyTexture(m_egl_image);
-    m_egl_image = NULL;
+    m_egl_image = nullptr;
   }
 }
 

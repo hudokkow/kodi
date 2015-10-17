@@ -47,7 +47,7 @@ protected:
   virtual bool GetOffsetRange(int &minOffset, int &maxOffset) const;
   virtual void ValidateOffset();
   virtual bool SelectItemFromPoint(const CPoint &point);
-  virtual int GetCursorFromPoint(const CPoint &point, CPoint *itemPoint = NULL) const;
+  virtual int GetCursorFromPoint(const CPoint &point, CPoint *itemPoint = nullptr) const;
   virtual void SelectItem(int item);
   virtual bool HasNextPage() const;
   virtual bool HasPreviousPage() const;

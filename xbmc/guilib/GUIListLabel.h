@@ -43,7 +43,7 @@ public:
   virtual void Process(unsigned int currentTime, CDirtyRegionList &dirtyregions);
   virtual void Render();
   virtual bool CanFocus() const { return false; };
-  virtual void UpdateInfo(const CGUIListItem *item = NULL);
+  virtual void UpdateInfo(const CGUIListItem *item = nullptr);
   virtual void SetFocus(bool focus);
   virtual void SetInvalid();
   virtual void SetWidth(float width);
