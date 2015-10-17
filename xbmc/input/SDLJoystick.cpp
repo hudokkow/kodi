@@ -424,7 +424,7 @@ void CJoystick::ApplyAxesConfigs()
   {
     std::string joyName(SDL_JoystickName(it->second));
     const AxesConfig* axesCfg = CButtonTranslator::GetInstance().GetAxesConfigFor(joyName);
-    if (axesCfg != NULL)
+    if (axesCfg != nullptr)
     {
       for (AxesConfig::const_iterator it = axesCfg->begin(); it != axesCfg->end(); ++it)
       {
@@ -486,7 +486,7 @@ void CJoystick::MapAxis(int axisIdx, SDL_Joystick *&joy, int &axisNum) const
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     axisNum = -1;
   }
 }
@@ -516,7 +516,7 @@ void CJoystick::MapButton(int buttonIdx, SDL_Joystick *&joy, int &buttonNum) con
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     buttonNum = -1;
   }
 }
@@ -546,7 +546,7 @@ void CJoystick::MapHat(int hatIdx, SDL_Joystick *&joy, int& hatNum) const
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     hatNum = -1;
   }
 }

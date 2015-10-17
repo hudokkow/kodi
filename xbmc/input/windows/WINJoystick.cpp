@@ -91,10 +91,10 @@ BOOL CALLBACK CJoystick::EnumJoysticksCallback( const DIDEVICEINSTANCE* pdidInst
 {
   HRESULT hr;
   CJoystick* p_this = (CJoystick*) pContext;
-  LPDIRECTINPUTDEVICE8    pJoystick = NULL;
+  LPDIRECTINPUTDEVICE8    pJoystick = nullptr;
 
   // Obtain an interface to the enumerated joystick.
-  hr = p_this->m_pDI->CreateDevice( pdidInstance->guidInstance, &pJoystick, NULL );
+  hr = p_this->m_pDI->CreateDevice( pdidInstance->guidInstance, &pJoystick, nullptr );
   if( SUCCEEDED( hr ) )
   {
     // Set the data format to "simple joystick" - a predefined data format
@@ -122,7 +122,7 @@ BOOL CALLBACK CJoystick::EnumJoysticksCallback( const DIDEVICEINSTANCE* pdidInst
 
           // load axes configuration from keymap
           const AxesConfig* axesCfg = CButtonTranslator::GetInstance().GetAxesConfigFor(joyName);
-          if (axesCfg != NULL)
+          if (axesCfg != nullptr)
           {
             for (AxesConfig::const_iterator it = axesCfg->begin(); it != axesCfg->end(); ++it)
             {
@@ -190,7 +190,7 @@ void CJoystick::Initialize()
   ReleaseJoysticks();
   CSingleLock lock(m_critSection);
 
-  if( FAILED( hr = DirectInput8Create( GetModuleHandle( NULL ), DIRECTINPUT_VERSION, IID_IDirectInput8, ( VOID** )&m_pDI, NULL ) ) )
+  if( FAILED( hr = DirectInput8Create( GetModuleHandle( nullptr ), DIRECTINPUT_VERSION, IID_IDirectInput8, ( VOID** )&m_pDI, nullptr ) ) )
   {
     CLog::Log(LOGDEBUG, __FUNCTION__" : Failed to create DirectInput");
     return;
@@ -567,7 +567,7 @@ void CJoystick::MapAxis(int axisIdx, LPDIRECTINPUTDEVICE8 &joy, int &axisNum) co
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     axisNum = -1;
   }
 }
@@ -597,7 +597,7 @@ void CJoystick::MapButton(int buttonIdx, LPDIRECTINPUTDEVICE8 &joy, int &buttonN
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     buttonNum = -1;
   }
 }
@@ -627,7 +627,7 @@ void CJoystick::MapHat(int hatIdx, LPDIRECTINPUTDEVICE8 &joy, int &hatNum) const
   }
   else
   {
-    joy = NULL;
+    joy = nullptr;
     hatNum = -1;
   }
 }

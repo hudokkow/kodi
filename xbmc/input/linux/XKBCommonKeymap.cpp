@@ -75,7 +75,7 @@ CXKBKeymap::CreateXKBContext(IDllXKBCommon &xkbCommonLibrary)
 struct xkb_keymap *
 CXKBKeymap::ReceiveXKBKeymapFromSharedMemory(IDllXKBCommon &xkbCommonLibrary, struct xkb_context *context, const int &fd, uint32_t size)
 {
-  const char *keymapString = static_cast<const char *>(mmap(NULL, size, PROT_READ, MAP_SHARED, fd, 0));
+  const char *keymapString = static_cast<const char *>(mmap(nullptr, size, PROT_READ, MAP_SHARED, fd, 0));
   if (keymapString == MAP_FAILED)
   {
     std::stringstream ss;

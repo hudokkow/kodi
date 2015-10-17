@@ -916,13 +916,13 @@ void CLinuxInputDevice::SetupKeyboardAutoRepeat(int fd)
     struct input_event event;
     memset(&event, 0, sizeof(event));
 
-    gettimeofday(&event.time, NULL);
+    gettimeofday(&event.time, nullptr);
     event.type  = EV_REP;
     event.code  = REP_DELAY;
     event.value = 0;
     write(fd, &event, sizeof(event));
 
-    gettimeofday(&event.time, NULL);
+    gettimeofday(&event.time, nullptr);
     event.type  = EV_REP;
     event.code  = REP_PERIOD;
     event.value = 0;
