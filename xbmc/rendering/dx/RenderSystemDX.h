@@ -200,7 +200,7 @@ protected:
   // improve get current mode
   DXGI_MODE_DESC              m_cachedMode;
 #ifdef _DEBUG
-  ID3D11Debug*                m_d3dDebug = NULL;
+  ID3D11Debug*                m_d3dDebug = nullptr;
 #endif
 };
 

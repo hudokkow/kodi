@@ -90,18 +90,18 @@ bool CRenderSystemGLES::InitRenderSystem()
   // Get our driver vendor and renderer
   const char *tmpVendor = (const char*) glGetString(GL_VENDOR);
   m_RenderVendor.clear();
-  if (tmpVendor != NULL)
+  if (tmpVendor != nullptr)
     m_RenderVendor = tmpVendor;
 
   const char *tmpRenderer = (const char*) glGetString(GL_RENDERER);
   m_RenderRenderer.clear();
-  if (tmpRenderer != NULL)
+  if (tmpRenderer != nullptr)
     m_RenderRenderer = tmpRenderer;
 
   m_RenderExtensions  = " ";
 
   const char *tmpExtensions = (const char*) glGetString(GL_EXTENSIONS);
-  if (tmpExtensions != NULL)
+  if (tmpExtensions != nullptr)
   {
     m_RenderExtensions += tmpExtensions;
   }
@@ -184,11 +184,11 @@ bool CRenderSystemGLES::DestroyRenderSystem()
       {
         m_pGUIshader[i]->Free();
         delete m_pGUIshader[i];
-        m_pGUIshader[i] = NULL;
+        m_pGUIshader[i] = nullptr;
       }
     }
     delete[] m_pGUIshader;
-    m_pGUIshader = NULL;
+    m_pGUIshader = nullptr;
   }
 
   ResetScissors();
@@ -590,7 +590,7 @@ void CRenderSystemGLES::InitialiseGUIShader()
       {
         if (!g_Windowing.IsExtSupported("GL_OES_EGL_image_external"))
         {
-          m_pGUIshader[i] = NULL;
+          m_pGUIshader[i] = nullptr;
           continue;
         }
       }
@@ -601,7 +601,7 @@ void CRenderSystemGLES::InitialiseGUIShader()
       {
         m_pGUIshader[i]->Free();
         delete m_pGUIshader[i];
-        m_pGUIshader[i] = NULL;
+        m_pGUIshader[i] = nullptr;
         CLog::Log(LOGERROR, "GUI Shader [%s] - Initialise failed", ShaderNames[i]);
       }
       else
