@@ -61,7 +61,7 @@ namespace PERIPHERALS
      * @brief Get the instance of the peripheral at the given location.
      * @param strLocation The location.
      * @param busType The bus to query. Default (PERIPHERAL_BUS_UNKNOWN) searches all busses.
-     * @return The peripheral or NULL if it wasn't found.
+     * @return The peripheral or nullptr if it wasn't found.
      */
     virtual CPeripheral *GetPeripheralAtLocation(const std::string &strLocation, PeripheralBusType busType = PERIPHERAL_BUS_UNKNOWN) const;
 
@@ -76,7 +76,7 @@ namespace PERIPHERALS
     /*!
      * @brief Get the bus that holds the device with the given location.
      * @param strLocation The location.
-     * @return The bus or NULL if no device was found.
+     * @return The bus or nullptr if no device was found.
      */
     virtual CPeripheralBus *GetBusWithDevice(const std::string &strLocation) const;
 
@@ -117,7 +117,7 @@ namespace PERIPHERALS
      * @brief Creates a new instance of a peripheral.
      * @param bus The bus on which this peripheral is present.
      * @param result The scan result from the device scanning code.
-     * @return The new peripheral or NULL if it could not be created.
+     * @return The new peripheral or nullptr if it could not be created.
      */
     CPeripheral *CreatePeripheral(CPeripheralBus &bus, const PeripheralScanResult& result);
 
@@ -135,7 +135,7 @@ namespace PERIPHERALS
     /*!
      * @brief Get the instance of a bus given it's type.
      * @param type The bus type.
-     * @return The bus or NULL if it wasn't found.
+     * @return The bus or nullptr if it wasn't found.
      */
     virtual CPeripheralBus *GetBusByType(const PeripheralBusType type) const;
 
@@ -149,7 +149,7 @@ namespace PERIPHERALS
     /*!
      * @brief Get the instance of a peripheral given it's path.
      * @param strPath The path to the peripheral.
-     * @return The peripheral or NULL if it wasn't found.
+     * @return The peripheral or nullptr if it wasn't found.
      */
     virtual CPeripheral *GetByPath(const std::string &strPath) const;
 

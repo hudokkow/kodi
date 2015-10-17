@@ -57,7 +57,7 @@ namespace PERIPHERALS
     /*!
      * @brief Get the instance of the peripheral at the given location.
      * @param strLocation The location.
-     * @return The peripheral or NULL if it wasn't found.
+     * @return The peripheral or nullptr if it wasn't found.
      */
     virtual CPeripheral *GetPeripheral(const std::string &strLocation) const;
 
@@ -135,7 +135,7 @@ namespace PERIPHERALS
     /*!
      * @brief Get the instance of a peripheral given it's path.
      * @param strPath The path to the peripheral.
-     * @return The peripheral or NULL if it wasn't found.
+     * @return The peripheral or nullptr if it wasn't found.
      */
     virtual CPeripheral *GetByPath(const std::string &strPath) const;
 
