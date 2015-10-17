@@ -44,7 +44,7 @@ static float zoomamount[10] = { 1.0f, 1.2f, 1.5f, 2.0f, 2.8f, 4.0f, 6.0f, 9.0f, 
 
 CSlideShowPic::CSlideShowPic()
 {
-  m_pImage = NULL;
+  m_pImage = nullptr;
   m_bIsLoaded = false;
   m_bIsFinished = false;
   m_bDrawNextImage = false;
@@ -53,7 +53,7 @@ CSlideShowPic::CSlideShowPic()
   m_bCanMoveHorizontally = false;
   m_bCanMoveVertically = false;
 #ifdef HAS_DX
-  m_vb = NULL;
+  m_vb = nullptr;
 #endif
 }
 
@@ -68,7 +68,7 @@ void CSlideShowPic::Close()
   if (m_pImage)
   {
     delete m_pImage;
-    m_pImage = NULL;
+    m_pImage = nullptr;
   }
   m_bIsLoaded = false;
   m_bIsFinished = false;
@@ -249,7 +249,7 @@ void CSlideShowPic::UpdateTexture(CBaseTexture* pTexture)
   if (m_pImage)
   {
     delete m_pImage;
-    m_pImage = NULL;
+    m_pImage = nullptr;
   }
   m_pImage = pTexture;
   m_fWidth = (float)pTexture->GetWidth();
@@ -741,9 +741,9 @@ void CSlideShowPic::Render()
   // now render the image in the top right corner if we're zooming
   if (m_fZoomAmount == 1.0f || m_bIsComic) return ;
 
-  Render(m_bx, m_by, NULL, PICTURE_VIEW_BOX_BACKGROUND);
+  Render(m_bx, m_by, nullptr, PICTURE_VIEW_BOX_BACKGROUND);
   Render(m_sx, m_sy, m_pImage, 0xFFFFFFFF);
-  Render(m_ox, m_oy, NULL, PICTURE_VIEW_BOX_COLOR);
+  Render(m_ox, m_oy, nullptr, PICTURE_VIEW_BOX_COLOR);
 }
 
 #ifdef HAS_DX
@@ -798,7 +798,7 @@ void CSlideShowPic::Render(float *x, float *y, CBaseTexture* pTexture, color_t c
     vertex[1].texCoord.x = vertex[2].texCoord.x = 1.0f;
     vertex[2].texCoord.y = vertex[3].texCoord.y = 1.0f;
   }
-  vertex[4] = vertex[0]; // Not used when pTexture != NULL
+  vertex[4] = vertex[0]; // Not used when pTexture != nullptr
 
   CGUIShaderDX* pGUIShader = g_Windowing.GetGUIShader();
   pGUIShader->Begin(SHADER_METHOD_RENDER_TEXTURE_BLEND);
@@ -980,6 +980,6 @@ void CSlideShowPic::Render(float *x, float *y, CBaseTexture* pTexture, color_t c
   g_graphicsContext.EndPaint();
 #else
 // SDL render
-  g_Windowing.BlitToScreen(m_pImage, NULL, NULL);
+  g_Windowing.BlitToScreen(m_pImage, nullptr, nullptr);
 #endif
 }
