@@ -44,8 +44,8 @@ char* strndup(char const *s, size_t n)
 {
   size_t len = strnlen(s, n);
   char *new_str = (char*)malloc(len + 1);
-  if (new_str == NULL)
-    return NULL;
+  if (new_str == nullptr)
+    return nullptr;
   new_str[len] = '\0';
   
   return (char*)memcpy(new_str, s, len);
@@ -70,8 +70,8 @@ int gethostbyname_r(const char *name, struct hostent *ret, char *buf,
 
   ph = gethostbyname(name);
   *h_errnop = h_errno; /* copy h_errno to *h_herrnop */
-  if (ph == NULL) {
-      *result = NULL;
+  if (ph == nullptr) {
+      *result = nullptr;
   } else {
     char **p, **q;
     char *pbuf;
@@ -98,7 +98,7 @@ int gethostbyname_r(const char *name, struct hostent *ret, char *buf,
     /* here nbytes is the number of bytes required in buffer */
     /* as a terminator must be there, the minimum value is ph->h_length */
     if (nbytes > (int)buflen) {
-      *result = NULL;
+      *result = nullptr;
       pthread_mutex_unlock(&gethostbyname_r_mutex); /* end critical area */
       return ERANGE; /* not enough space in buf!! */
     }
@@ -127,7 +127,7 @@ int gethostbyname_r(const char *name, struct hostent *ret, char *buf,
       *q++ = pbuf; /* the pointer is the one inside buf... */
       pbuf += ph->h_length; /* advance pbuf */
     }
-    *q++ = NULL; /* address list terminator */
+    *q++ = nullptr; /* address list terminator */
 
     /* copy aliases */
     ret->h_aliases = q; /* update pointer to aliases list */
@@ -137,7 +137,7 @@ int gethostbyname_r(const char *name, struct hostent *ret, char *buf,
       pbuf += strlen(*p); /* advance pbuf */
       *pbuf++ = 0; /* string terminator */
     }
-    *q++ = NULL; /* terminator */
+    *q++ = nullptr; /* terminator */
 
     strcpy(pbuf, ph->h_name); /* copy alias strings */
     ret->h_name = pbuf;
@@ -150,7 +150,7 @@ int gethostbyname_r(const char *name, struct hostent *ret, char *buf,
   h_errno = hsave;  /* restore h_errno */
   pthread_mutex_unlock(&gethostbyname_r_mutex); /* end critical area */
 
-  return (*result == NULL); /* return 0 on success, non-zero on error */
+  return (*result == nullptr); /* return 0 on success, non-zero on error */
 }
 
 /* Copyright (C) 1991, 1992, 1995, 1996, 1997 Free Software Foundation, Inc.
@@ -195,7 +195,7 @@ getdelim (lineptr, n, terminator, stream)
   char *line, *p;
   size_t size, copy;
 
-  if (stream == NULL || lineptr == NULL || n == NULL)
+  if (stream == nullptr || lineptr == nullptr || n == nullptr)
     {
       errno = EINVAL;
       return -1;
@@ -205,13 +205,13 @@ getdelim (lineptr, n, terminator, stream)
     return -1;
 
   /* Make sure we have a line buffer to start with.  */
-  if (*lineptr == NULL || *n < 2) /* !seen and no buf yet need 2 chars.  */
+  if (*lineptr == nullptr || *n < 2) /* !seen and no buf yet need 2 chars.  */
     {
 #ifndef	MAX_CANON
 #define	MAX_CANON	256
 #endif
       line = realloc (*lineptr, MAX_CANON);
-      if (line == NULL)
+      if (line == nullptr)
 	return -1;
       *lineptr = line;
       *n = MAX_CANON;
@@ -240,7 +240,7 @@ getdelim (lineptr, n, terminator, stream)
 	  len = p - line;
 	  size *= 2;
 	  line = realloc (line, size);
-	  if (line == NULL)
+	  if (line == nullptr)
 	    goto lose;
 	  *lineptr = line;
 	  *n = size;
