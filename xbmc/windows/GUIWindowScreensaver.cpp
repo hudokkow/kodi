@@ -58,7 +58,7 @@ void CGUIWindowScreensaver::Render()
       try
       {
         //some screensavers seem to be depending on xbmc clearing the screen
-        //       g_Windowing.Get3DDevice()->Clear( 0L, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, 0x00010001, 1.0f, 0L );
+        //       g_Windowing.Get3DDevice()->Clear( 0L, nullptr, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, 0x00010001, 1.0f, 0L );
         g_graphicsContext.CaptureStateBlock();
         m_addon->Render();
         g_graphicsContext.ApplyStateBlock();

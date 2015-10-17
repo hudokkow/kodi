@@ -330,7 +330,7 @@ void CGUIWindowFileManager::OnSort(int iList)
       if (pItem->IsHD())
       {
         ULARGE_INTEGER ulBytesFree;
-        if (GetDiskFreeSpaceEx(pItem->GetPath().c_str(), &ulBytesFree, NULL, NULL))
+        if (GetDiskFreeSpaceEx(pItem->GetPath().c_str(), &ulBytesFree, nullptr, nullptr))
         {
           pItem->m_dwSize = ulBytesFree.QuadPart;
           pItem->SetFileSizeLabel();
@@ -339,7 +339,7 @@ void CGUIWindowFileManager::OnSort(int iList)
       else if (pItem->IsDVD() && g_mediaManager.IsDiscInDrive())
       {
         ULARGE_INTEGER ulBytesTotal;
-        if (GetDiskFreeSpaceEx(pItem->GetPath().c_str(), NULL, &ulBytesTotal, NULL))
+        if (GetDiskFreeSpaceEx(pItem->GetPath().c_str(), nullptr, &ulBytesTotal, nullptr))
         {
           pItem->m_dwSize = ulBytesTotal.QuadPart;
           pItem->SetFileSizeLabel();
@@ -538,7 +538,7 @@ void CGUIWindowFileManager::OnClick(int iList, int iItem)
 
   if (!pItem->m_bIsFolder && pItem->IsFileFolder(EFILEFOLDER_MASK_ALL))
   {
-    XFILE::IFileDirectory *pFileDirectory = NULL;
+    XFILE::IFileDirectory *pFileDirectory = nullptr;
     pFileDirectory = XFILE::CFileDirectoryFactory::Create(pItem->GetURL(), pItem.get(), "");
     if(pFileDirectory)
       pItem->m_bIsFolder = true;
@@ -593,7 +593,7 @@ void CGUIWindowFileManager::OnStart(CFileItem *pItem)
   {
     std::string strPlayList = pItem->GetPath();
     std::unique_ptr<CPlayList> pPlayList (CPlayListFactory::Create(strPlayList));
-    if (NULL != pPlayList.get())
+    if (nullptr != pPlayList.get())
     {
       if (!pPlayList->Load(strPlayList))
       {

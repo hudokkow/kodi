@@ -42,7 +42,7 @@ public:
   virtual bool OnBack(int actionID);
   const CFileItem &CurrentDirectory(int indx) const;
 
-  static int64_t CalculateFolderSize(const std::string &strDirectory, CGUIDialogProgress *pProgress = NULL);
+  static int64_t CalculateFolderSize(const std::string &strDirectory, CGUIDialogProgress *pProgress = nullptr);
 
   virtual void OnJobComplete(unsigned int jobID, bool success, CJob *job);
 protected:
