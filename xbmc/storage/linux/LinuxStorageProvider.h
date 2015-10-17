@@ -29,7 +29,7 @@ class CLinuxStorageProvider : public IStorageProvider
 public:
   CLinuxStorageProvider()
   {
-    m_instance = NULL;
+    m_instance = nullptr;
 
 #ifdef HAS_DBUS
     if (CUDisksProvider::HasUDisks())
@@ -38,11 +38,11 @@ public:
       m_instance = new CDeviceKitDisksProvider();
 #endif
 #ifdef HAVE_LIBUDEV
-    if (m_instance == NULL)
+    if (m_instance == nullptr)
       m_instance = new CUDevProvider();
 #endif
 
-    if (m_instance == NULL)
+    if (m_instance == nullptr)
       m_instance = new CPosixMountProvider();
   }
 

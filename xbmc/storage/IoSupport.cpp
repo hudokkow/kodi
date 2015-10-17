@@ -81,13 +81,13 @@ HANDLE CIoSupport::OpenCDROM()
   hDevice->m_bCDROM = true;
 #elif defined(TARGET_WINDOWS)
   hDevice = CreateFile(g_mediaManager.TranslateDevicePath("",true).c_str(), GENERIC_READ, FILE_SHARE_READ,
-                       NULL, OPEN_EXISTING,
-                       FILE_FLAG_RANDOM_ACCESS, NULL );
+                       nullptr, OPEN_EXISTING,
+                       FILE_FLAG_RANDOM_ACCESS, nullptr );
 #else
 
   hDevice = CreateFile("\\\\.\\Cdrom0", GENERIC_READ, FILE_SHARE_READ,
-                       NULL, OPEN_EXISTING,
-                       FILE_FLAG_RANDOM_ACCESS, NULL );
+                       nullptr, OPEN_EXISTING,
+                       FILE_FLAG_RANDOM_ACCESS, nullptr );
 
 #endif
 #endif
@@ -171,7 +171,7 @@ INT CIoSupport::ReadSector(HANDLE hDevice, DWORD dwSector, LPSTR lpczBuffer)
   {
     if (SetFilePointer(hDevice, Displacement.u.LowPart, &Displacement.u.HighPart, FILE_BEGIN) != (DWORD)-1)
     {
-      if (ReadFile(hDevice, m_rawXferBuffer, dwSectorSize, &dwRead, NULL))
+      if (ReadFile(hDevice, m_rawXferBuffer, dwSectorSize, &dwRead, nullptr))
       {
         memcpy(lpczBuffer, m_rawXferBuffer, dwSectorSize);
         return dwRead;
@@ -261,7 +261,7 @@ INT CIoSupport::ReadSectorMode2(HANDLE hDevice, DWORD dwSector, LPSTR lpczBuffer
                           m_rawXferBuffer,
                           RAW_SECTOR_SIZE,
                           &dwBytesReturned,
-                          NULL ) != 0 )
+                          nullptr ) != 0 )
     {
       memcpy(lpczBuffer, (char*)m_rawXferBuffer+MODE2_DATA_START, MODE2_DATA_SIZE);
       return MODE2_DATA_SIZE;

@@ -56,7 +56,7 @@ static const char * deviceWL[] = {
 CAndroidStorageProvider::CAndroidStorageProvider()
 {
   m_removableLength = 0;
-  PumpDriveChangeEvents(NULL);
+  PumpDriveChangeEvents(nullptr);
 }
 
 std::string CAndroidStorageProvider::unescape(const std::string& str)
@@ -120,7 +120,7 @@ void CAndroidStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
 void CAndroidStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
 {
   // mounted usb disks
-  char*                               buf     = NULL;
+  char*                               buf     = nullptr;
   FILE*                               pipe;
   CRegExp                             reMount;
   reMount.RegComp("^(.+?)\\s+(.+?)\\s+(.+?)\\s+(.+?)\\s");
@@ -149,7 +149,7 @@ void CAndroidStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
       {
         buf[nread] = '\0';
         if (!feof(pipe))
-          new_buf = NULL;
+          new_buf = nullptr;
         break;
       }
     }
@@ -157,7 +157,7 @@ void CAndroidStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
     if (!new_buf)
     {
       free(buf);
-      buf = NULL;
+      buf = nullptr;
     }
     fclose(pipe);
   }
@@ -167,7 +167,7 @@ void CAndroidStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
   if (buf)
   {
     char* line;
-    char* saveptr = NULL;
+    char* saveptr = nullptr;
 
     line = strtok_r(buf, "\n", &saveptr);
 
@@ -222,7 +222,7 @@ void CAndroidStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
           }
         }
       }
-      line = strtok_r(NULL, "\n", &saveptr);
+      line = strtok_r(nullptr, "\n", &saveptr);
     }
     free(buf);
   }
