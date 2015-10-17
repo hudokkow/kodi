@@ -27,10 +27,10 @@ CAudioDecoder::CAudioDecoder(const cp_extension_t* ext)
  : AudioDecoderDll(ext),
    m_extension(CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@extension")),
    m_mimetype(CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@mimetype")),
-   m_context(NULL),
+   m_context(nullptr),
    m_tags(CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@tags") == "true"),
    m_tracks(CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@tracks") == "true"),
-   m_channel(NULL)
+   m_channel(nullptr)
 {
   m_CodecName = CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@name");
   m_strExt = CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@name")+"stream";
@@ -49,14 +49,14 @@ bool CAudioDecoder::Init(const std::string& strFile, unsigned int filecache)
 
   // for replaygain
   CTagLoaderTagLib tag;
-  tag.Load(strFile, XFILE::CMusicFileDirectory::m_tag, NULL);
+  tag.Load(strFile, XFILE::CMusicFileDirectory::m_tag, nullptr);
 
   m_context = m_pStruct->Init(strFile.c_str(), filecache,
                               &m_Channels, &m_SampleRate,
                               &m_BitsPerSample, &m_TotalTime,
                               &m_Bitrate, &m_DataFormat, &m_channel);
 
-  return (m_context != NULL);
+  return (m_context != nullptr);
 }
 
 int CAudioDecoder::ReadPCM(uint8_t* buffer, int size, int* actualsize)
@@ -111,7 +111,7 @@ int CAudioDecoder::GetTrackCount(const std::string& strPath)
 
   int result = m_pStruct->TrackCount(strPath.c_str());
 
-  if (result > 1 && !Load(strPath, XFILE::CMusicFileDirectory::m_tag, NULL))
+  if (result > 1 && !Load(strPath, XFILE::CMusicFileDirectory::m_tag, nullptr))
     return 0;
 
   XFILE::CMusicFileDirectory::m_tag.SetLoaded(true);

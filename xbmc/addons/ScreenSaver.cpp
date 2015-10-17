@@ -68,7 +68,7 @@ bool CScreenSaver::CreateScreenSaver()
 #ifdef HAS_DX
   m_pInfo->device     = g_Windowing.Get3D11Context();
 #else
-  m_pInfo->device     = NULL;
+  m_pInfo->device     = nullptr;
 #endif
   m_pInfo->x          = 0;
   m_pInfo->y          = 0;
@@ -120,7 +120,7 @@ void CScreenSaver::Destroy()
     free((void *) m_pInfo->profile);
 
     delete m_pInfo;
-    m_pInfo = NULL;
+    m_pInfo = nullptr;
   }
 
   CAddonDll<DllScreenSaver, ScreenSaver, SCR_PROPS>::Destroy();

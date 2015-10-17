@@ -76,7 +76,7 @@ CPVRClient *CAddonCallbacksPVR::GetPVRClient(void *addonData)
   if (!addon || !addon->GetHelperPVR())
   {
     CLog::Log(LOGERROR, "PVR - %s - called with a null pointer", __FUNCTION__);
-    return NULL;
+    return nullptr;
   }
 
   return dynamic_cast<CPVRClient *>(addon->GetHelperPVR()->m_addon);
@@ -213,7 +213,7 @@ void CAddonCallbacksPVR::PVRTransferTimerEntry(void *addonData, const ADDON_HAND
     return;
   }
 
-  /* Note: channel can be NULL here, for instance for epg-based repeating timers ("record on any channel" condition). */
+  /* Note: channel can be nullptr here, for instance for epg-based repeating timers ("record on any channel" condition). */
   CPVRChannelPtr channel = g_PVRChannelGroups->GetByUniqueID(timer->iClientChannelUid, client->GetID());
 
   /* transfer this entry to the timers container */

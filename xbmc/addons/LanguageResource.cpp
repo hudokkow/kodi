@@ -40,7 +40,7 @@ CLanguageResource::CLanguageResource(const cp_extension_t *ext)
   : CResource(ext),
   m_forceUnicodeFont(false)
 {
-  if (ext != NULL)
+  if (ext != nullptr)
   {
     // parse <extension> attributes
     std::string locale = CAddonMgr::GetInstance().GetExtValue(ext->configuration, "@locale");
@@ -48,7 +48,7 @@ CLanguageResource::CLanguageResource(const cp_extension_t *ext)
 
     // parse <charsets>
     cp_cfg_element_t *charsetsElement = CAddonMgr::GetInstance().GetExtElement(ext->configuration, "charsets");
-    if (charsetsElement != NULL)
+    if (charsetsElement != nullptr)
     {
       m_charsetGui = CAddonMgr::GetInstance().GetExtValue(charsetsElement, "gui");
       m_forceUnicodeFont = CAddonMgr::GetInstance().GetExtValue(charsetsElement, "gui@unicodefont") == "true";
@@ -57,7 +57,7 @@ CLanguageResource::CLanguageResource(const cp_extension_t *ext)
 
     // parse <dvd>
     cp_cfg_element_t *dvdElement = CAddonMgr::GetInstance().GetExtElement(ext->configuration, "dvd");
-    if (dvdElement != NULL)
+    if (dvdElement != nullptr)
     {
       m_dvdLanguageMenu = CAddonMgr::GetInstance().GetExtValue(dvdElement, "menu");
       m_dvdLanguageAudio = CAddonMgr::GetInstance().GetExtValue(dvdElement, "audio");
@@ -73,13 +73,13 @@ CLanguageResource::CLanguageResource(const cp_extension_t *ext)
 
     // parse <sorttokens>
     cp_cfg_element_t *sorttokensElement = CAddonMgr::GetInstance().GetExtElement(ext->configuration, "sorttokens");
-    if (sorttokensElement != NULL)
+    if (sorttokensElement != nullptr)
     {
       for (size_t i = 0; i < sorttokensElement->num_children; ++i)
       {
         cp_cfg_element_t &tokenElement = sorttokensElement->children[i];
-        if (tokenElement.name != NULL && strcmp(tokenElement.name, "token") == 0 &&
-            tokenElement.value != NULL)
+        if (tokenElement.name != nullptr && strcmp(tokenElement.name, "token") == 0 &&
+            tokenElement.value != nullptr)
         {
           std::string token(tokenElement.value);
           std::string separators = CAddonMgr::GetInstance().GetExtValue(&tokenElement, "@separators");

@@ -229,7 +229,7 @@ namespace ADDON
      Assumes that there is a single (non-trivial) extension point per addon.
      \param info the plugin descriptor
      \param type the extension point we want
-     \return an AddonPtr based on the descriptor.  May be NULL if no suitable extension point is found.
+     \return an AddonPtr based on the descriptor.  May be nullptr if no suitable extension point is found.
      */
     AddonPtr GetAddonFromDescriptor(const cp_plugin_info_t *info,
                                     const std::string& type="");

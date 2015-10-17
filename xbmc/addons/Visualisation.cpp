@@ -69,7 +69,7 @@ bool CVisualisation::Create(int x, int y, int w, int h, void *device)
 #ifdef HAS_DX
   m_pInfo->device     = g_Windowing.Get3D11Context();
 #else
-  m_pInfo->device     = NULL;
+  m_pInfo->device     = nullptr;
 #endif
   m_pInfo->x = x;
   m_pInfo->y = y;
@@ -80,7 +80,7 @@ bool CVisualisation::Create(int x, int y, int w, int h, void *device)
   m_pInfo->name = strdup(Name().c_str());
   m_pInfo->presets = strdup(CSpecialProtocol::TranslatePath(Path()).c_str());
   m_pInfo->profile = strdup(CSpecialProtocol::TranslatePath(Profile()).c_str());
-  m_pInfo->submodule = NULL;
+  m_pInfo->submodule = nullptr;
 
   if (CAddonDll<DllVisualisation, Visualisation, VIS_PROPS>::Create() == ADDON_STATUS_OK)
   {
@@ -102,7 +102,7 @@ bool CVisualisation::Create(int x, int y, int w, int h, void *device)
     if (GetSubModules())
       m_pInfo->submodule = strdup(CSpecialProtocol::TranslatePath(m_submodules.front()).c_str());
     else
-      m_pInfo->submodule = NULL;
+      m_pInfo->submodule = nullptr;
 
     CreateBuffers();
 
@@ -286,7 +286,7 @@ void CVisualisation::OnAudioData(const float* pAudioData, int iAudioDataLength)
   }
   else
   { // Transfer data to our visualisation
-    AudioData(ptrAudioBuffer->Get(), iAudioDataLength, NULL, 0);
+    AudioData(ptrAudioBuffer->Get(), iAudioDataLength, nullptr, 0);
   }
   return ;
 }
@@ -359,7 +359,7 @@ bool CVisualisation::GetPresetList(std::vector<std::string> &vecpresets)
 bool CVisualisation::GetPresets()
 {
   m_presets.clear();
-  char **presets = NULL;
+  char **presets = nullptr;
   unsigned int entries = 0;
   try
   {
@@ -392,7 +392,7 @@ bool CVisualisation::GetSubModuleList(std::vector<std::string> &vecmodules)
 bool CVisualisation::GetSubModules()
 {
   m_submodules.clear();
-  char **modules = NULL;
+  char **modules = nullptr;
   unsigned int entries = 0;
   try
   {
@@ -446,7 +446,7 @@ void CVisualisation::Destroy()
     free((void *) m_pInfo->submodule);
 
     delete m_pInfo;
-    m_pInfo = NULL;
+    m_pInfo = nullptr;
   }
 
   CAddonDll<DllVisualisation, Visualisation, VIS_PROPS>::Destroy();

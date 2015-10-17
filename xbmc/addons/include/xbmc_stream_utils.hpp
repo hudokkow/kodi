@@ -146,7 +146,7 @@ namespace ADDON
     XbmcPvrStream* GetStreamById(unsigned int iPhysicalId) const
     {
       int position = GetStreamId(iPhysicalId);
-      return position != -1 ? &m_streamVector->at(position) : NULL;
+      return position != -1 ? &m_streamVector->at(position) : nullptr;
     }
 
     /**

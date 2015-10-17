@@ -295,13 +295,13 @@ bool CAddonInstaller::InstallFromZip(const std::string &path)
   return false;
 }
 
-bool CAddonInstaller::CheckDependencies(const AddonPtr &addon, CAddonDatabase *database /* = NULL */)
+bool CAddonInstaller::CheckDependencies(const AddonPtr &addon, CAddonDatabase *database /* = nullptr */)
 {
   std::pair<std::string, std::string> failedDep;
   return CheckDependencies(addon, failedDep, database);
 }
 
-bool CAddonInstaller::CheckDependencies(const AddonPtr &addon, std::pair<std::string, std::string> &failedDep, CAddonDatabase *database /* = NULL */)
+bool CAddonInstaller::CheckDependencies(const AddonPtr &addon, std::pair<std::string, std::string> &failedDep, CAddonDatabase *database /* = nullptr */)
 {
   std::vector<std::string> preDeps;
   preDeps.push_back(addon->ID());
@@ -316,8 +316,8 @@ bool CAddonInstaller::CheckDependencies(const AddonPtr &addon,
                                         std::vector<std::string>& preDeps, CAddonDatabase &database,
                                         std::pair<std::string, std::string> &failedDep)
 {
-  if (addon == NULL)
-    return true; // a NULL addon has no dependencies
+  if (addon == nullptr)
+    return true; // a nullptr addon has no dependencies
 
   if (!database.Open())
     return false;
@@ -776,7 +776,7 @@ bool CAddonInstallJob::Install(const std::string &installFrom, const AddonPtr& r
   SetProgress(0);
 
   // now that we have all our dependencies, we can install our add-on
-  if (repo != NULL)
+  if (repo != nullptr)
   {
     CFileItemList dummy;
     std::string s = StringUtils::Format("plugin://%s/?action=install&package=%s&version=%s", repo->ID().c_str(),
@@ -830,12 +830,12 @@ void CAddonInstallJob::ReportInstallError(const std::string& addonID, const std:
 
   std::string msg = message;
   EventPtr activity;
-  if (addon != NULL)
+  if (addon != nullptr)
   {
     AddonPtr addon2;
     CAddonMgr::GetInstance().GetAddon(addonID, addon2);
     if (msg.empty())
-      msg = g_localizeStrings.Get(addon2 != NULL ? 113 : 114);
+      msg = g_localizeStrings.Get(addon2 != nullptr ? 113 : 114);
 
     activity = EventPtr(new CAddonManagementEvent(addon, EventLevelError, msg));
     if (IsModal())
@@ -866,7 +866,7 @@ bool CAddonUnInstallJob::DoWork()
   //TODO: looks broken. it just calls the repo with the most recent version, not the owner
   RepositoryPtr repoPtr;
   CAddonInstaller::GetRepoForAddon(m_addon->ID(), repoPtr);
-  if (repoPtr != NULL && !repoPtr->Props().libname.empty())
+  if (repoPtr != nullptr && !repoPtr->Props().libname.empty())
   {
     CFileItemList dummy;
     std::string s = StringUtils::Format("plugin://%s/?action=uninstall&package=%s", repoPtr->ID().c_str(), m_addon->ID().c_str());
@@ -892,7 +892,7 @@ bool CAddonUnInstallJob::DoWork()
   CAddonDatabase database;
   // try to get the addon object from the repository as the local one does not exist anymore
   // if that doesn't work fall back to the local one
-  if (!database.Open() || !database.GetAddon(m_addon->ID(), addon) || addon == NULL)
+  if (!database.Open() || !database.GetAddon(m_addon->ID(), addon) || addon == nullptr)
     addon = m_addon;
   CEventLog::GetInstance().Add(EventPtr(new CAddonManagementEvent(addon, 24144)));
 

@@ -34,8 +34,8 @@ public:
 
   DllSetting(SETTING_TYPE t, const char *n, const char *l)
   {
-    id = NULL;
-    label = NULL;
+    id = nullptr;
+    label = nullptr;
     if (n)
     {
       id = new char[strlen(n)+1];
@@ -52,8 +52,8 @@ public:
 
   DllSetting(const DllSetting &rhs) // copy constructor
   {
-    id = NULL;
-    label = NULL;
+    id = nullptr;
+    label = nullptr;
     if (rhs.id)
     {
       id = new char[strlen(rhs.id)+1];
@@ -104,7 +104,7 @@ public:
 
   static unsigned int VecToStruct(std::vector<DllSetting> &vecSet, ADDON_StructSetting*** sSet) 
   {
-    *sSet = NULL;
+    *sSet = nullptr;
     if(vecSet.size() == 0)
       return 0;
 
@@ -113,10 +113,10 @@ public:
     *sSet = (ADDON_StructSetting**)malloc(vecSet.size()*sizeof(ADDON_StructSetting*));
     for(unsigned int i=0;i<vecSet.size();i++)
     {
-      (*sSet)[i] = NULL;
+      (*sSet)[i] = nullptr;
       (*sSet)[i] = (ADDON_StructSetting*)malloc(sizeof(ADDON_StructSetting));
-      (*sSet)[i]->id = NULL;
-      (*sSet)[i]->label = NULL;
+      (*sSet)[i]->id = nullptr;
+      (*sSet)[i]->label = nullptr;
       uiElements++;
 
       if (vecSet[i].id && vecSet[i].label)
@@ -126,7 +126,7 @@ public:
         (*sSet)[i]->type = vecSet[i].type;
         (*sSet)[i]->current = vecSet[i].current;
         (*sSet)[i]->entry_elements = 0;
-        (*sSet)[i]->entry = NULL;
+        (*sSet)[i]->entry = nullptr;
         if(vecSet[i].type == DllSetting::SPIN && vecSet[i].entry.size() > 0)
         {
           (*sSet)[i]->entry = (char**)malloc(vecSet[i].entry.size()*sizeof(char**));

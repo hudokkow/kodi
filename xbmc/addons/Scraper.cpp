@@ -454,8 +454,8 @@ CScraperUrl CScraper::NfoUrl(const std::string &sNfoContent)
        with start and end-tags we're not able to use it.
        Check for the desired Elements instead.
       */
-      TiXmlElement* pxeUrl=NULL;
-      TiXmlElement* pId=NULL;
+      TiXmlElement* pxeUrl=nullptr;
+      TiXmlElement* pId=nullptr;
       if (!strcmp(doc.RootElement()->Value(),"details"))
       {
         pxeUrl = doc.RootElement()->FirstChildElement("url");
@@ -516,8 +516,8 @@ CScraperUrl CScraper::ResolveIDToUrl(const std::string& externalID)
        with start and end-tags we're not able to use it.
        Check for the desired Elements instead.
        */
-      TiXmlElement* pxeUrl=NULL;
-      TiXmlElement* pId=NULL;
+      TiXmlElement* pxeUrl=nullptr;
+      TiXmlElement* pId=nullptr;
       if (!strcmp(doc.RootElement()->Value(),"details"))
       {
         pxeUrl = doc.RootElement()->FirstChildElement("url");
@@ -618,7 +618,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl, const std:
     if (fSort)
     {
       const char *sorted = xhResults.Element()->Attribute("sorted");
-      if (sorted != NULL)
+      if (sorted != nullptr)
         fSort = !StringUtils::EqualsNoCase(sorted, "yes");
     }
 

@@ -460,7 +460,7 @@ extern "C"
    * Get the stream URL for a channel from the backend. Used by the MediaPortal add-on.
    * @param channel The channel to get the stream URL for.
    * @return The requested URL.
-   * @remarks Optional, and only used if bHandlesInputStream is set to true. Return NULL if this add-on won't provide this function.
+   * @remarks Optional, and only used if bHandlesInputStream is set to true. Return nullptr if this add-on won't provide this function.
    */
   const char* GetLiveStreamURL(const PVR_CHANNEL& channel);
 
@@ -553,8 +553,8 @@ extern "C"
    *         then, the add-on should call AllocateDemuxPacket(0) on the
    *         callback, and set the streamid to DMX_SPECIALID_STREAMCHANGE and
    *         return the value.
-   *         The add-on should return NULL if an error occured.
-   * @remarks Required if bHandlesDemuxing is set to true. Return NULL if this add-on won't provide this function.
+   *         The add-on should return nullptr if an error occured.
+   * @remarks Required if bHandlesDemuxing is set to true. Return nullptr if this add-on won't provide this function.
    */
   DemuxPacket* DemuxRead(void);
   //@}

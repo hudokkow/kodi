@@ -67,8 +67,8 @@ extern "C"
   public:
     VisTrack()
     {
-      title = artist = album = albumArtist = NULL;
-      genre = comment = lyrics = reserved1 = reserved2 = NULL;
+      title = artist = album = albumArtist = nullptr;
+      genre = comment = lyrics = reserved1 = reserved2 = nullptr;
       trackNumber = discNumber = duration = year = 0;
       rating = 0;
       reserved3 = reserved4 = 0;

@@ -68,7 +68,7 @@ namespace ADDON
     void Render();
     void Stop();
     void GetInfo(VIS_INFO *info);
-    bool OnAction(VIS_ACTION action, void *param = NULL);
+    bool OnAction(VIS_ACTION action, void *param = nullptr);
     bool UpdateTrack();
     bool HasPresets() { return m_hasPresets; };
     bool HasSubModules() { return !m_submodules.empty(); }

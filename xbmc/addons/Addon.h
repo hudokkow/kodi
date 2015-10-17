@@ -209,7 +209,7 @@ protected:
   friend class CAddonCallbacksAddon;
 
   CAddon(const CAddon &rhs); // protected as all copying is handled by Clone()
-  virtual void BuildLibName(const cp_extension_t *ext = NULL);
+  virtual void BuildLibName(const cp_extension_t *ext = nullptr);
 
   /*! \brief Load the default settings and override these with any previously configured user settings
    \param bForce force the load of settings even if they are already loaded (reload)

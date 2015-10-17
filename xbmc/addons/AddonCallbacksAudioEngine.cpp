@@ -69,8 +69,8 @@ AEStreamHandle* CAddonCallbacksAudioEngine::AudioEngine_MakeStream(AEDataFormat 
 {
   if (!Channels)
   {
-    CLog::Log(LOGERROR, "CAddonCallbacksAudioEngine - %s - Invalid input! Channels is a NULL pointer!", __FUNCTION__);
-    return NULL;
+    CLog::Log(LOGERROR, "CAddonCallbacksAudioEngine - %s - Invalid input! Channels is a nullptr pointer!", __FUNCTION__);
+    return nullptr;
   }
 
   CAEChannelInfo channelInfo(Channels);

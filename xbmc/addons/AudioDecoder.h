@@ -62,7 +62,7 @@ namespace ADDON
     void Destroy();
     bool Load(const std::string& strFileName,
               MUSIC_INFO::CMusicInfoTag& tag,
-              MUSIC_INFO::EmbeddedArt *art = NULL);
+              MUSIC_INFO::EmbeddedArt *art = nullptr);
     int GetTrackCount(const std::string& strPath);
     virtual CAEChannelInfo GetChannelInfo();
 

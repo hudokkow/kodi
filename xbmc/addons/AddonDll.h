@@ -94,11 +94,11 @@ CAddonDll<TheDll, TheStruct, TheProps>::CAddonDll(const cp_extension_t *ext)
   : CAddon(ext),
     m_bIsChild(false)
 {
-  m_pStruct     = NULL;
+  m_pStruct     = nullptr;
   m_initialized = false;
-  m_pDll        = NULL;
-  m_pInfo       = NULL;
-  m_pHelpers    = NULL;
+  m_pDll        = nullptr;
+  m_pInfo       = nullptr;
+  m_pHelpers    = nullptr;
   m_needsavedsettings = false;
 }
 
@@ -107,11 +107,11 @@ CAddonDll<TheDll, TheStruct, TheProps>::CAddonDll(const AddonProps &props)
   : CAddon(props),
     m_bIsChild(false)
 {
-  m_pStruct     = NULL;
+  m_pStruct     = nullptr;
   m_initialized = false;
-  m_pDll        = NULL;
-  m_pInfo       = NULL;
-  m_pHelpers    = NULL;
+  m_pDll        = nullptr;
+  m_pInfo       = nullptr;
+  m_pHelpers    = nullptr;
   m_needsavedsettings = false;
 }
 
@@ -194,7 +194,7 @@ bool CAddonDll<TheDll, TheStruct, TheProps>::LoadDll()
   if (!m_pDll->Load())
   {
     delete m_pDll;
-    m_pDll = NULL;
+    m_pDll = nullptr;
     new CAddonStatusHandler(ID(), ADDON_STATUS_UNKNOWN, "Can't load Dll", false);
     return false;
   }
@@ -314,15 +314,15 @@ void CAddonDll<TheDll, TheStruct, TheProps>::Destroy()
     HandleException(e, "m_pDll->Unload");
   }
   delete m_pHelpers;
-  m_pHelpers = NULL;
+  m_pHelpers = nullptr;
   free(m_pStruct);
-  m_pStruct = NULL;
+  m_pStruct = nullptr;
   if (m_pDll)
   {
     if (m_bIsChild)
       XFILE::CFile::Delete(m_pDll->GetFile());
     delete m_pDll;
-    m_pDll = NULL;
+    m_pDll = nullptr;
     CLog::Log(LOGINFO, "ADDON: Dll Destroyed - %s", Name().c_str());
   }
   m_initialized = false;
@@ -331,7 +331,7 @@ void CAddonDll<TheDll, TheStruct, TheProps>::Destroy()
 template<class TheDll, typename TheStruct, typename TheProps>
 bool CAddonDll<TheDll, TheStruct, TheProps>::DllLoaded(void) const
 {
-  return m_pDll != NULL;
+  return m_pDll != nullptr;
 }
 
 template<class TheDll, typename TheStruct, typename TheProps>
@@ -454,7 +454,7 @@ ADDON_STATUS CAddonDll<TheDll, TheStruct, TheProps>::TransferSettings()
 
   LoadSettings();
 
-  const TiXmlElement *category = m_addonXmlDoc.RootElement() ? m_addonXmlDoc.RootElement()->FirstChildElement("category") : NULL;
+  const TiXmlElement *category = m_addonXmlDoc.RootElement() ? m_addonXmlDoc.RootElement()->FirstChildElement("category") : nullptr;
   if (!category)
     category = m_addonXmlDoc.RootElement(); // no categories
 
