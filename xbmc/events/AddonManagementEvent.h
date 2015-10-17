@@ -35,6 +35,6 @@ public:
   virtual const char* GetType() const { return "AddonManagementEvent"; }
   virtual std::string GetExecutionLabel() const;
 
-  virtual bool CanExecute() const { return m_addon != NULL; }
+  virtual bool CanExecute() const { return m_addon != nullptr; }
   virtual bool Execute() const;
 };
