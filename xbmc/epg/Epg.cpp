@@ -826,7 +826,7 @@ void CEpg::SetChannel(const PVR::CPVRChannelPtr &channel)
 bool CEpg::HasPVRChannel(void) const
 {
   CSingleLock lock(m_critSection);
-  return m_pvrChannel != NULL;
+  return m_pvrChannel != nullptr;
 }
 
 bool CEpg::UpdatePending(void) const
@@ -851,7 +851,7 @@ bool CEpg::IsValid(void) const
 {
   CSingleLock lock(m_critSection);
   if (ScraperName() == "client")
-    return m_pvrChannel != NULL;
+    return m_pvrChannel != nullptr;
   return true;
 }
 

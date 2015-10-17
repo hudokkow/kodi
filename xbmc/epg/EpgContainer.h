@@ -155,7 +155,7 @@ namespace EPG
     /*!
      * @brief Get an EPG table given it's ID.
      * @param iEpgId The database ID of the table.
-     * @return The table or NULL if it wasn't found.
+     * @return The table or nullptr if it wasn't found.
      */
     virtual CEpgPtr GetById(int iEpgId) const;
 
@@ -169,7 +169,7 @@ namespace EPG
     /*!
      * @brief Get an EPG table given a PVR channel.
      * @param channel The channel to get the EPG table for.
-     * @return The table or NULL if it wasn't found.
+     * @return The table or nullptr if it wasn't found.
      */
     virtual CEpgPtr GetByChannel(const PVR::CPVRChannel &channel) const;
 

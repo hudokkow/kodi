@@ -169,20 +169,20 @@ namespace EPG
 
     /*!
      * @brief Get the event that is occurring now
-     * @return The current event or NULL if it wasn't found.
+     * @return The current event or nullptr if it wasn't found.
      */
     CEpgInfoTagPtr GetTagNow(bool bUpdateIfNeeded = true) const;
 
     /*!
      * @brief Get the event that will occur next
-     * @return The next event or NULL if it wasn't found.
+     * @return The next event or nullptr if it wasn't found.
      */
     CEpgInfoTagPtr GetTagNext() const;
 
     /*!
      * @brief Get the event that occurs at the given time.
      * @param time The time in UTC to find the event for.
-     * @return The found tag or NULL if it wasn't found.
+     * @return The found tag or nullptr if it wasn't found.
      */
     CEpgInfoTagPtr GetTagAround(const CDateTime &time) const;
 
@@ -190,7 +190,7 @@ namespace EPG
      * Get the event that occurs between the given begin and end time.
      * @param beginTime Minimum start time in UTC of the event.
      * @param endTime Maximum end time in UTC of the event.
-     * @return The found tag or NULL if it wasn't found.
+     * @return The found tag or nullptr if it wasn't found.
      */
     CEpgInfoTagPtr GetTagBetween(const CDateTime &beginTime, const CDateTime &endTime) const;
 

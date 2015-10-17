@@ -115,13 +115,13 @@ namespace EPG
 
     /*!
      * @brief Get a pointer to the next event. Set by CEpg in a call to Sort()
-     * @return A pointer to the next event or NULL if it's not set.
+     * @return A pointer to the next event or nullptr if it's not set.
      */
     CEpgInfoTagPtr GetNextEvent(void) const;
 
     /*!
      * @brief Get a pointer to the previous event. Set by CEpg in a call to Sort()
-     * @return A pointer to the previous event or NULL if it's not set.
+     * @return A pointer to the previous event or nullptr if it's not set.
      */
     CEpgInfoTagPtr GetPreviousEvent(void) const;
 
@@ -320,7 +320,7 @@ namespace EPG
     std::string Path(void) const;
 
     /*!
-     * @brief Set a timer for this event or NULL to clear it.
+     * @brief Set a timer for this event or nullptr to clear it.
      * @param newTimer The new timer value.
      */
     void SetTimer(PVR::CPVRTimerInfoTagPtr newTimer);
@@ -339,13 +339,13 @@ namespace EPG
     bool HasTimerSchedule(void) const;
 
     /*!
-     * @brief Get a pointer to the timer for event or NULL if there is none.
-     * @return A pointer to the timer for event or NULL if there is none.
+     * @brief Get a pointer to the timer for event or nullptr if there is none.
+     * @return A pointer to the timer for event or nullptr if there is none.
      */
     PVR::CPVRTimerInfoTagPtr Timer(void) const;
 
     /*!
-     * @brief Set a recording for this event or NULL to clear it.
+     * @brief Set a recording for this event or nullptr to clear it.
      * @param recording The recording value.
      */
     void SetRecording(PVR::CPVRRecordingPtr recording);
@@ -362,8 +362,8 @@ namespace EPG
     bool HasRecording(void) const;
 
     /*!
-     * @brief Get a pointer to the recording for event or NULL if there is none.
-     * @return A pointer to the recording for event or NULL if there is none.
+     * @brief Get a pointer to the recording for event or nullptr if there is none.
+     * @return A pointer to the recording for event or nullptr if there is none.
      */
     PVR::CPVRRecordingPtr Recording(void) const;
 
