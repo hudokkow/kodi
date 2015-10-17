@@ -63,7 +63,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT)
   if (GetLastError() == ERROR_ALREADY_EXISTS)
   {
     HWND hwnd = FindWindow(appName.c_str(), appName.c_str());
-    if (hwnd != NULL)
+    if (hwnd != nullptr)
     {
       // switch to the running instance
       ShowWindow(hwnd, SW_RESTORE);
@@ -74,7 +74,7 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR commandLine, INT)
 
   if ((g_cpuInfo.GetCPUFeatures() & CPU_FEATURE_SSE2) == 0)
   {
-    MessageBox(NULL, "No SSE2 support detected", (appName + ": Fatal Error").c_str(), MB_OK | MB_ICONERROR);
+    MessageBox(nullptr, "No SSE2 support detected", (appName + ": Fatal Error").c_str(), MB_OK | MB_ICONERROR);
     return 0;
   }
 

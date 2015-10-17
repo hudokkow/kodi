@@ -25,17 +25,17 @@
 
 void CMessagePrinter::DisplayMessage(const std::string& message)
 {
-  MessageBox(NULL, message.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONINFORMATION);
+  MessageBox(nullptr, message.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONINFORMATION);
 }
 
 void CMessagePrinter::DisplayWarning(const std::string& warning)
 {
-  MessageBox(NULL, warning.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONWARNING);
+  MessageBox(nullptr, warning.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONWARNING);
 }
 
 void CMessagePrinter::DisplayError(const std::string& error)
 {
-  MessageBox(NULL, error.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONERROR);
+  MessageBox(nullptr, error.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONERROR);
 }
 
 void CMessagePrinter::DisplayHelpMessage(const std::vector<std::pair<std::string, std::string>>& help)
@@ -47,5 +47,5 @@ void CMessagePrinter::DisplayHelpMessage(const std::vector<std::pair<std::string
     message.append(line.first + "\t" + line.second + "\r\n");
   }
 
-  MessageBox(NULL, message.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONINFORMATION);
+  MessageBox(nullptr, message.c_str(), CCompileInfo::GetAppName(), MB_OK | MB_ICONINFORMATION);
 }
