@@ -67,7 +67,7 @@ public:
   virtual void onVolumeChanged(int volume);
   virtual void onAudioFocusChange(int focusChange);
 
-  bool isValid() { return m_activity != NULL; }
+  bool isValid() { return m_activity != nullptr; }
 
   void onStart();
   void onResume();

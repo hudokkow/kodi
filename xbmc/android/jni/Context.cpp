@@ -126,7 +126,7 @@ CJNIIntent CJNIContext::registerReceiver(const CJNIIntentFilter &filter)
 {
   return call_method<jhobject>(m_context,
     "registerReceiver", "(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;)Landroid/content/Intent;",
-    (jobject)NULL, filter.get_raw());
+    (jobject)nullptr, filter.get_raw());
 }
 
 void CJNIContext::unregisterReceiver(const CJNIBroadcastReceiver &receiver)

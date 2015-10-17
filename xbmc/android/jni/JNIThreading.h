@@ -39,13 +39,13 @@ void xbmc_jni_on_unload();
 
 /*
  * Return pointer to application's Java VM.
- * Return NULL if there is no JVM (standalone executable)
+ * Return nullptr if there is no JVM (standalone executable)
  */
 JavaVM *xbmc_jvm();
 
 /*
  * Return thread-specific JNIEnv pointer.
- * Return NULL if there is no JVM (standalone executable)
+ * Return nullptr if there is no JVM (standalone executable)
  */
 JNIEnv *xbmc_jnienv();
 

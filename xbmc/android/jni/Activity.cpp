@@ -41,3 +41,4 @@ bool CJNIActivity::moveTaskToBack(bool nonRoot)
     "moveTaskToBack", "(Z)Z",
     nonRoot);
 }
+

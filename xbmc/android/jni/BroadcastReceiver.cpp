@@ -29,7 +29,7 @@
 
 using namespace jni;
 
-CJNIBroadcastReceiver *CJNIBroadcastReceiver::m_receiverInstance(NULL);
+CJNIBroadcastReceiver *CJNIBroadcastReceiver::m_receiverInstance(nullptr);
 CJNIBroadcastReceiver::CJNIBroadcastReceiver(const std::string &className) : CJNIBase(className)
 {
   CJNIMainActivity *appInstance = CJNIMainActivity::GetAppInstance();

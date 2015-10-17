@@ -104,7 +104,7 @@ int CJNIAudioTrack::write(char* audioData, int offsetInBytes, int sizeInBytes)
   // Write a buffer of audio data to Java AudioTrack.
   // Warning, no other JNI function can be called after
   // GetPrimitiveArrayCritical until ReleasePrimitiveArrayCritical.
-  if ((pArray = (char*)jenv->GetPrimitiveArrayCritical(m_buffer, NULL)))
+  if ((pArray = (char*)jenv->GetPrimitiveArrayCritical(m_buffer, nullptr)))
   {
     memcpy(pArray + offsetInBytes, audioData, sizeInBytes);
     jenv->ReleasePrimitiveArrayCritical(m_buffer, pArray, 0);

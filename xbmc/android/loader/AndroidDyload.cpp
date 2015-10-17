@@ -89,7 +89,7 @@ void* CAndroidDyload::Find(const string &filename)
 {
   CSingleLock lock(m_libLock);
   solibit i = m_libs.find(filename);
-  return i == m_libs.end() ? NULL : i->second.handle;
+  return i == m_libs.end() ? nullptr : i->second.handle;
 }
 
 string CAndroidDyload::Find(void *handle)
@@ -111,7 +111,7 @@ void *CAndroidDyload::FindInDeps(const string &filename)
     if (k->filename == filename)
       return k->handle;
   }
-  return NULL;
+  return nullptr;
 }
 
 int CAndroidDyload::AddRef(const string &filename)
@@ -133,7 +133,7 @@ int CAndroidDyload::DecRef(const string &filename)
 void CAndroidDyload::GetDeps(string filename, strings *results)
 {
   Elf32_Ehdr header;
-  char *data = NULL;
+  char *data = nullptr;
   int fd, i;
 
   fd = open(filename.c_str(), O_RDONLY);
@@ -209,7 +209,7 @@ void* CAndroidDyload::Open(const char * path)
 {
   string filename = path;
   filename = filename.substr(filename.find_last_of('/') +1);
-  void *handle = NULL;
+  void *handle = nullptr;
   m_lib.deps.clear();
   handle = Find(filename);
   if (handle)
@@ -219,7 +219,7 @@ void* CAndroidDyload::Open(const char * path)
   }
   bool checkSystem = IsSystemLib(path);
   handle = Open_Internal(std::string(path), checkSystem);
-  if (handle != NULL)
+  if (handle != nullptr)
   {
     CSingleLock lock(m_depsLock);
     m_lib.handle = handle;
@@ -238,11 +238,11 @@ void* CAndroidDyload::Open_Internal(string filename, bool checkSystem)
   strings deps;
   string deppath;
   libdata lib;
-  void *handle = NULL;
+  void *handle = nullptr;
 
   string path = FindLib(filename, checkSystem);
   if (!path.size())
-    return NULL;
+    return nullptr;
 
   GetDeps(path, &deps);
 

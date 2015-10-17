@@ -166,7 +166,7 @@ static KeyMap keyMap[] = {
 
 bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
 {
-  if (event == NULL)
+  if (event == nullptr)
     return false;
 
   int32_t flags   = AKeyEvent_getFlags(event);

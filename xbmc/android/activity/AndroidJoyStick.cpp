@@ -213,7 +213,7 @@ CAndroidJoyStick::~CAndroidJoyStick()
 
 bool CAndroidJoyStick::onJoyStickKeyEvent(AInputEvent *event)
 {
-  if (event == NULL)
+  if (event == nullptr)
     return false;
 
   int32_t keycode = AKeyEvent_getKeyCode(event);
@@ -267,12 +267,12 @@ bool CAndroidJoyStick::onJoyStickKeyEvent(AInputEvent *event)
 
 bool CAndroidJoyStick::onJoyStickMotionEvent(AInputEvent *event)
 {
-  if (event == NULL)
+  if (event == nullptr)
     return false;
 
   // match this device to a created device struct,
   // create it if we do not find it.
-  APP_InputDeviceAxes *device_axes = NULL;
+  APP_InputDeviceAxes *device_axes = nullptr;
   int32_t device = AInputEvent_getDeviceId(event);
   // look for device name in our inputdevice cache.
   for (size_t i = 0; i < m_input_devices.size(); i++)

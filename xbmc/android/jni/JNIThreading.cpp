@@ -42,7 +42,7 @@
 namespace xbmcjni
 {
 
-static JavaVM *s_jvm = NULL;
+static JavaVM *s_jvm = nullptr;
 static pthread_key_t s_jnienv_key;
 static pthread_once_t s_jnienv_key_once = PTHREAD_ONCE_INIT;
 
@@ -83,7 +83,7 @@ JNIEnv *jnienv()
     JNIEnv *env = reinterpret_cast<JNIEnv *>(::pthread_getspecific(s_jnienv_key));
     if (!env && jvm())
     {
-        jvm()->AttachCurrentThread(&env, NULL);
+        jvm()->AttachCurrentThread(&env, nullptr);
         if (!save_jnienv(env))
             ::abort();
     }
@@ -117,7 +117,7 @@ jint xbmc_jni_on_load(JavaVM *vm, JNIEnv *env)
     ::xbmcjni::s_jvm = vm;
 
     // The main thread hands us an env. Attach and store it.
-    ::xbmcjni::jvm()->AttachCurrentThread(&env, NULL);
+    ::xbmcjni::jvm()->AttachCurrentThread(&env, nullptr);
     if (!::xbmcjni::save_jnienv(env))
         return -1;
 
@@ -126,6 +126,6 @@ jint xbmc_jni_on_load(JavaVM *vm, JNIEnv *env)
 
 void xbmc_jni_on_unload()
 {
-  ::xbmcjni::jnienv_detach_thread(NULL);
-  ::xbmcjni::s_jvm = NULL;
+  ::xbmcjni::jnienv_detach_thread(nullptr);
+  ::xbmcjni::s_jvm = nullptr;
 }

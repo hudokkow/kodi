@@ -60,7 +60,7 @@ public:
   bool isClosed();
 
   static void PopulateStaticFields();
-  static int FIELD_TYPE_NULL;
+  static int FIELD_TYPE_nullptr;
   static int FIELD_TYPE_INTEGER;
   static int FIELD_TYPE_FLOAT;
   static int FIELD_TYPE_STRING;

@@ -24,7 +24,7 @@
 
 using namespace jni;
 
-int CJNICursor::FIELD_TYPE_NULL(0);
+int CJNICursor::FIELD_TYPE_nullptr(0);
 int CJNICursor::FIELD_TYPE_INTEGER(0);
 int CJNICursor::FIELD_TYPE_FLOAT(0);
 int CJNICursor::FIELD_TYPE_STRING(0);
@@ -33,7 +33,7 @@ int CJNICursor::FIELD_TYPE_BLOB(0);
 void CJNICursor::PopulateStaticFields()
 {
   jhclass clazz = find_class("android/database/Cursor");
-  FIELD_TYPE_NULL     = (get_static_field<int>(clazz, "FIELD_TYPE_NULL"));
+  FIELD_TYPE_nullptr     = (get_static_field<int>(clazz, "FIELD_TYPE_nullptr"));
   FIELD_TYPE_INTEGER  = (get_static_field<int>(clazz, "FIELD_TYPE_INTEGER"));
   FIELD_TYPE_FLOAT    = (get_static_field<int>(clazz, "FIELD_TYPE_FLOAT"));
   FIELD_TYPE_STRING   = (get_static_field<int>(clazz, "FIELD_TYPE_STRING"));

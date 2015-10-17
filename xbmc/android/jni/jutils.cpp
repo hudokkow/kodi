@@ -75,7 +75,7 @@ std::string jcast_helper<std::string, jstring>::cast(jstring const &v)
 jhstring jcast_helper<jhstring, std::string>::cast(const std::string &s)
 {
     JNIEnv *env = xbmc_jnienv();
-    jstring ret = NULL;
+    jstring ret = nullptr;
     if (!s.empty())
     {
       ret = env->NewStringUTF(s.c_str());
@@ -86,10 +86,10 @@ jhstring jcast_helper<jhstring, std::string>::cast(const std::string &s)
 jhobjectArray jcast_helper<jhobjectArray, std::vector<std::string> >::cast(const std::vector<std::string> &s)
 {
   JNIEnv *env = xbmc_jnienv();
-  jobjectArray ret = NULL;
+  jobjectArray ret = nullptr;
   if (!s.empty())
   {
-    ret = env->NewObjectArray(s.size(), env->FindClass("java/lang/String"), NULL);
+    ret = env->NewObjectArray(s.size(), env->FindClass("java/lang/String"), nullptr);
     for (unsigned int i = 0; i < s.size(); i++)
     env->SetObjectArrayElement(ret, i, env->NewStringUTF(s[i].c_str()));
   }
@@ -101,7 +101,7 @@ std::vector<std::string> jcast_helper<std::vector<std::string>, jobjectArray >::
   JNIEnv *env = xbmc_jnienv();
   std::vector<std::string> ret;
   jstring element;
-  const char* newString = NULL;
+  const char* newString = nullptr;
   if (!s)
     return ret;
 
