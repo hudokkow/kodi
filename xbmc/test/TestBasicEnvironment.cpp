@@ -75,14 +75,14 @@ void TestBasicEnvironment::SetUp()
   if (!GetTempFileName(xbmcTempPath.c_str(), "xbmctempdir", 0, lpTempPathBuffer))
     SetUpError();
   DeleteFile(lpTempPathBuffer);
-  if (!CreateDirectory(lpTempPathBuffer, NULL))
+  if (!CreateDirectory(lpTempPathBuffer, nullptr))
     SetUpError();
   CSpecialProtocol::SetTempPath(lpTempPathBuffer);
 #else
   char buf[MAX_PATH];
   char *tmp;
   strcpy(buf, "/tmp/xbmctempdirXXXXXX");
-  if ((tmp = mkdtemp(buf)) == NULL)
+  if ((tmp = mkdtemp(buf)) == nullptr)
     SetUpError();
   CSpecialProtocol::SetTempPath(tmp);
 #endif
