@@ -73,7 +73,7 @@ CGUIDialogVideoSettings::~CGUIDialogVideoSettings()
 
 void CGUIDialogVideoSettings::OnSettingChanged(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);
@@ -146,7 +146,7 @@ void CGUIDialogVideoSettings::OnSettingChanged(const CSetting *setting)
 
 void CGUIDialogVideoSettings::OnSettingAction(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);
@@ -199,7 +199,7 @@ void CGUIDialogVideoSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   CSettingCategory *category = AddCategory("audiosubtitlesettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogVideoSettings: unable to setup settings");
     return;
@@ -207,25 +207,25 @@ void CGUIDialogVideoSettings::InitializeSettings()
 
   // get all necessary setting groups
   CSettingGroup *groupVideo = AddGroup(category);
-  if (groupVideo == NULL)
+  if (groupVideo == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogVideoSettings: unable to setup settings");
     return;
   }
   CSettingGroup *groupVideoPlayback = AddGroup(category);
-  if (groupVideoPlayback == NULL)
+  if (groupVideoPlayback == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogVideoSettings: unable to setup settings");
     return;
   }
   CSettingGroup *groupStereoscopic = AddGroup(category);
-  if (groupStereoscopic == NULL)
+  if (groupStereoscopic == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogVideoSettings: unable to setup settings");
     return;
   }
   CSettingGroup *groupSaveAsDefault = AddGroup(category);
-  if (groupSaveAsDefault == NULL)
+  if (groupSaveAsDefault == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogVideoSettings: unable to setup settings");
     return;

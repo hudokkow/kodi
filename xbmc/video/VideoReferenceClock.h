@@ -34,7 +34,7 @@ class CVideoReferenceClock : public CThread
     int64_t GetFrequency();
     void    SetSpeed(double Speed);
     double  GetSpeed();
-    double  GetRefreshRate(double* interval = NULL);
+    double  GetRefreshRate(double* interval = nullptr);
     int64_t Wait(int64_t Target);
     bool    GetClockInfo(int& MissedVblanks, double& ClockSpeed, double& RefreshRate);
     void    SetFineAdjust(double fineadjust);

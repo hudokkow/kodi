@@ -462,7 +462,7 @@ public:
 
   bool LoadVideoInfo(const std::string& strFilenameAndPath, CVideoInfoTag& details);
   bool GetMovieInfo(const std::string& strFilenameAndPath, CVideoInfoTag& details, int idMovie = -1);
-  bool GetTvShowInfo(const std::string& strPath, CVideoInfoTag& details, int idTvShow = -1, CFileItem* item = NULL);
+  bool GetTvShowInfo(const std::string& strPath, CVideoInfoTag& details, int idTvShow = -1, CFileItem* item = nullptr);
   bool GetSeasonInfo(int idSeason, CVideoInfoTag& details);
   bool GetEpisodeInfo(const std::string& strFilenameAndPath, CVideoInfoTag& details, int idEpisode = -1);
   bool GetMusicVideoInfo(const std::string& strFilenameAndPath, CVideoInfoTag& details, int idMVideo=-1);
@@ -518,7 +518,7 @@ public:
   void DeleteMusicVideo(const std::string& strFilenameAndPath, bool bKeepId = false);
   void DeleteDetailsForTvShow(int idTvShow);
   void DeleteDetailsForTvShow(const std::string& strPath);
-  void RemoveContentForPath(const std::string& strPath,CGUIDialogProgress *progress = NULL);
+  void RemoveContentForPath(const std::string& strPath,CGUIDialogProgress *progress = nullptr);
   void UpdateFanart(const CFileItem &item, VIDEODB_CONTENT_TYPE type);
   void DeleteSet(int idSet);
   void DeleteTag(int idTag, VIDEODB_CONTENT_TYPE mediaType);
@@ -584,7 +584,7 @@ public:
    \param strPath path to start searching in.
    \param settings [out] scan settings for this folder.
    \param foundDirectly [out] true if a scraper was found directly for strPath, false if it was in a parent path.
-   \return A ScraperPtr containing the scraper information. Returns NULL if a trivial (Content == CONTENT_NONE)
+   \return A ScraperPtr containing the scraper information. Returns nullptr if a trivial (Content == CONTENT_NONE)
            scraper or no scraper is found.
    */
   ADDON::ScraperPtr GetScraperForPath(const std::string& strPath, VIDEO::SScanSettings& settings, bool& foundDirectly);
@@ -701,7 +701,7 @@ public:
   bool HasContent(VIDEODB_CONTENT_TYPE type);
   bool HasSets() const;
 
-  void CleanDatabase(CGUIDialogProgressBarHandle* handle = NULL, const std::set<int>& paths = std::set<int>(), bool showProgress = true);
+  void CleanDatabase(CGUIDialogProgressBarHandle* handle = nullptr, const std::set<int>& paths = std::set<int>(), bool showProgress = true);
 
   /*! \brief Add a file to the database, if necessary
    If the file is already in the database, we simply return its id.
@@ -849,8 +849,8 @@ protected:
 
   // link functions - these two do all the work
   void AddLinkToActor(int mediaId, const char *mediaType, int actorId, const std::string &role, int order);
-  void AddToLinkTable(int mediaId, const std::string& mediaType, const std::string& table, int valueId, const char *foreignKey = NULL);
-  void RemoveFromLinkTable(int mediaId, const std::string& mediaType, const std::string& table, int valueId, const char *foreignKey = NULL);
+  void AddToLinkTable(int mediaId, const std::string& mediaType, const std::string& table, int valueId, const char *foreignKey = nullptr);
+  void RemoveFromLinkTable(int mediaId, const std::string& mediaType, const std::string& table, int valueId, const char *foreignKey = nullptr);
 
   void AddLinksToItem(int mediaId, const std::string& mediaType, const std::string& field, const std::vector<std::string>& values);
   void UpdateLinksToItem(int mediaId, const std::string& mediaType, const std::string& field, const std::vector<std::string>& values);
@@ -863,8 +863,8 @@ protected:
   CVideoInfoTag GetDetailsByTypeAndId(VIDEODB_CONTENT_TYPE type, int id);
   CVideoInfoTag GetDetailsForMovie(std::unique_ptr<dbiplus::Dataset> &pDS, bool getDetails = false);
   CVideoInfoTag GetDetailsForMovie(const dbiplus::sql_record* const record, bool getDetails = false);
-  CVideoInfoTag GetDetailsForTvShow(std::unique_ptr<dbiplus::Dataset> &pDS, bool getDetails = false, CFileItem* item = NULL);
-  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* const record, bool getDetails = false, CFileItem* item = NULL);
+  CVideoInfoTag GetDetailsForTvShow(std::unique_ptr<dbiplus::Dataset> &pDS, bool getDetails = false, CFileItem* item = nullptr);
+  CVideoInfoTag GetDetailsForTvShow(const dbiplus::sql_record* const record, bool getDetails = false, CFileItem* item = nullptr);
   CVideoInfoTag GetDetailsForEpisode(std::unique_ptr<dbiplus::Dataset> &pDS, bool getDetails = false);
   CVideoInfoTag GetDetailsForEpisode(const dbiplus::sql_record* const record, bool getDetails = false);
   CVideoInfoTag GetDetailsForMusicVideo(std::unique_ptr<dbiplus::Dataset> &pDS, bool getDetails = false);

@@ -63,7 +63,7 @@ CVideoReferenceClock::CVideoReferenceClock() : CThread("RefClock")
   m_MissedVblanks = 0;
   m_VblankTime = 0;
 
-  m_pVideoSync = NULL;
+  m_pVideoSync = nullptr;
 }
 
 CVideoReferenceClock::~CVideoReferenceClock()
@@ -164,7 +164,7 @@ void CVideoReferenceClock::Process()
     {
       m_pVideoSync->Cleanup();
       delete m_pVideoSync;
-      m_pVideoSync = NULL;
+      m_pVideoSync = nullptr;
     }
 
     if (!SetupSuccess)
@@ -296,7 +296,7 @@ void CVideoReferenceClock::UpdateRefreshrate()
 }
 
 //dvdplayer needs to know the refreshrate for matching the fps of the video playing to it
-double CVideoReferenceClock::GetRefreshRate(double* interval /*= NULL*/)
+double CVideoReferenceClock::GetRefreshRate(double* interval /*= nullptr*/)
 {
   CSingleLock SingleLock(m_CritSection);
 

@@ -146,7 +146,7 @@ bool FFmpegVideoDecoder::open( const std::string& filename )
   close();
   
   // Open the video file
-  if ( avformat_open_input( &m_pFormatCtx, filename.c_str(), NULL, NULL ) < 0 )
+  if ( avformat_open_input( &m_pFormatCtx, filename.c_str(), nullptr, nullptr ) < 0 )
   {
     m_errorMsg = "Could not open the video file";
    close();
@@ -186,7 +186,7 @@ bool FFmpegVideoDecoder::open( const std::string& filename )
   // Find the decoder for the video stream
   m_pCodec = avcodec_find_decoder( m_pCodecCtx->codec_id );
 
-  if ( m_pCodec == NULL )
+  if ( m_pCodec == nullptr )
   {
     m_errorMsg = "Could not find a video decoder";
     close();
@@ -287,7 +287,7 @@ bool FFmpegVideoDecoder::nextFrame( CBaseTexture * texture )
 
   // We got the video frame, render it into the picture buffer
   struct SwsContext * context = sws_getContext( m_pCodecCtx->width, m_pCodecCtx->height, m_pCodecCtx->pix_fmt,
-                           m_frameRGBwidth, m_frameRGBheight, PIX_FMT_RGB32, SWS_FAST_BILINEAR, NULL, NULL, NULL );
+                           m_frameRGBwidth, m_frameRGBheight, PIX_FMT_RGB32, SWS_FAST_BILINEAR, nullptr, nullptr, nullptr );
 
   sws_scale( context, m_pFrame->data, m_pFrame->linesize, 0, m_pCodecCtx->height,
                                                                      m_pFrameRGB->data, m_pFrameRGB->linesize );
