@@ -55,11 +55,11 @@ using namespace ANNOUNCEMENT;
 XBPython::XBPython()
 {
   m_bInitialized      = false;
-  m_mainThreadState   = NULL;
+  m_mainThreadState   = nullptr;
   m_ThreadId          = CThread::GetCurrentThreadId();
   m_iDllScriptCounter = 0;
   m_endtime           = 0;
-  m_pDll              = NULL;
+  m_pDll              = nullptr;
   m_vecPlayerCallbackList.clear();
   m_vecMonitorCallbackList.clear();
 
@@ -458,7 +458,7 @@ void XBPython::Finalize()
     // Other methods that rely on this flag from an incorrect interpretation.
     m_bInitialized    = false;
     PyThreadState* curTs = (PyThreadState*)m_mainThreadState;
-    m_mainThreadState = NULL; // clear the main thread state before releasing the lock
+    m_mainThreadState = nullptr; // clear the main thread state before releasing the lock
     {
       CSingleExit exit(m_critSection);
       PyEval_AcquireLock();
@@ -534,7 +534,7 @@ void XBPython::Process()
 
 bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
 {
-  if (invoker == NULL)
+  if (invoker == nullptr)
     return false;
 
   XBMC_TRACE;
@@ -615,7 +615,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
     PySys_SetArgv(1, python_argv);
 
     if (!(m_mainThreadState = PyThreadState_Get()))
-      CLog::Log(LOGERROR, "Python threadstate is NULL.");
+      CLog::Log(LOGERROR, "Python threadstate is nullptr.");
     PyEval_ReleaseLock();
 
     m_bInitialized = true;
@@ -626,7 +626,7 @@ bool XBPython::OnScriptInitialized(ILanguageInvoker *invoker)
 
 void XBPython::OnScriptStarted(ILanguageInvoker *invoker)
 {
-  if (invoker == NULL)
+  if (invoker == nullptr)
     return;
 
   if (!m_bInitialized)
@@ -645,10 +645,10 @@ void XBPython::OnScriptAbortRequested(ILanguageInvoker *invoker)
   XBMC_TRACE;
 
   std::string addonId;
-  if (invoker != NULL)
+  if (invoker != nullptr)
   {
     const ADDON::AddonPtr& addon = invoker->GetAddon();
-    if (addon != NULL)
+    if (addon != nullptr)
       addonId = addon->ID();
   }
 
@@ -708,9 +708,9 @@ void XBPython::PulseGlobalEvent()
 bool XBPython::WaitForEvent(CEvent& hEvent, unsigned int milliseconds)
 {
   // wait for either this event our our global event
-  XbmcThreads::CEventGroup eventGroup(&hEvent, &m_globalEvent, NULL);
+  XbmcThreads::CEventGroup eventGroup(&hEvent, &m_globalEvent, nullptr);
   CEvent* ret = eventGroup.wait(milliseconds);
   if (ret)
     m_globalEvent.Reset();
-  return ret != NULL;
+  return ret != nullptr;
 }

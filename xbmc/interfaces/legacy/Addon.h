@@ -71,7 +71,7 @@ namespace XBMCAddon
        *  - self.Addon = xbmcaddon.Addon()
        *  - self.Addon = xbmcaddon.Addon('script.foo.bar')
        */
-      Addon(const char* id = NULL);
+      Addon(const char* id = nullptr);
 
       virtual ~Addon();
 

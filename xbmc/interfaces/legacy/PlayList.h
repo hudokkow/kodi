@@ -64,7 +64,7 @@ namespace XBMCAddon
        *   - listitem.setInfo('video', {'Title': 'Ironman', 'Genre': 'Science Fiction'})
        *   - playlist.add(url=video, listitem=listitem, index=7)n
        */
-      void add(const String& url, XBMCAddon::xbmcgui::ListItem* listitem = NULL, int index = -1);
+      void add(const String& url, XBMCAddon::xbmcgui::ListItem* listitem = nullptr, int index = -1);
 
       /**
        * load(filename) -- Load a playlist.

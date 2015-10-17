@@ -171,10 +171,10 @@ namespace XBMCAddon
      * example:
      *   - xbmcplugin.setPluginFanart(int(sys.argv[1]), 'special://home/addons/plugins/video/Apple movie trailers II/fanart.png', color2='0xFFFF3300')
      */
-    void setPluginFanart(int handle, const char* image = NULL, 
-                         const char* color1 = NULL,
-                         const char* color2 = NULL,
-                         const char* color3 = NULL);
+    void setPluginFanart(int handle, const char* image = nullptr, 
+                         const char* color1 = nullptr,
+                         const char* color2 = nullptr,
+                         const char* color3 = nullptr);
 
     /**
      * setProperty(handle, key, value) -- Sets a container property for this plugin.

@@ -48,13 +48,13 @@ public:
    This is called to update (if dirty) and fetch the value of the info bool
    \param item the item used to evaluate the bool
    */
-  inline bool Get(const CGUIListItem *item = NULL)
+  inline bool Get(const CGUIListItem *item = nullptr)
   {
     if (item && m_listItemDependent)
       Update(item);
     else if (m_dirty)
     {
-      Update(NULL);
+      Update(nullptr);
       m_dirty = false;
     }
     return m_value;

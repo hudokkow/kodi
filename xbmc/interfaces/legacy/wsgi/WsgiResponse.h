@@ -43,7 +43,7 @@ namespace XBMCAddon
        * Callable implementation to initialize the response with the given
        * HTTP status and the HTTP response headers.
        */
-      WsgiResponseBody* operator()(const String& status, const std::vector<WsgiHttpHeader>& response_headers, void* exc_info = NULL);
+      WsgiResponseBody* operator()(const String& status, const std::vector<WsgiHttpHeader>& response_headers, void* exc_info = nullptr);
 
 #ifndef SWIG
       void Append(const std::string& data);

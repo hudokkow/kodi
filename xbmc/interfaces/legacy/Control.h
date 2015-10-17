@@ -49,7 +49,7 @@ namespace XBMCAddon
     protected:
       Control() : iControlId(0), iParentId(0), dwPosX(0), dwPosY(0), dwWidth(0),
                   dwHeight(0), iControlUp(0), iControlDown(0), iControlLeft(0),
-                  iControlRight(0), pGUIControl(NULL) {}
+                  iControlRight(0), pGUIControl(nullptr) {}
 
     public:
       virtual ~Control();
@@ -373,8 +373,8 @@ namespace XBMCAddon
     {
     public:
       ControlLabel(long x, long y, long width, long height, const String& label,
-                  const char* font = NULL, const char* textColor = NULL, 
-                  const char* disabledColor = NULL,
+                  const char* font = nullptr, const char* textColor = nullptr, 
+                  const char* disabledColor = nullptr,
                   long alignment = XBFONT_LEFT, 
                   bool hasPath = false, long angle = 0);
 
@@ -397,11 +397,11 @@ namespace XBMCAddon
        *   - self.label.setLabel('Status')
        */
       virtual void setLabel(const String& label = emptyString, 
-                            const char* font = NULL,
-                            const char* textColor = NULL,
-                            const char* disabledColor = NULL,
-                            const char* shadowColor = NULL,
-                            const char* focusedColor = NULL,
+                            const char* font = nullptr,
+                            const char* textColor = nullptr,
+                            const char* disabledColor = nullptr,
+                            const char* shadowColor = nullptr,
+                            const char* focusedColor = nullptr,
                             const String& label2 = emptyString);
 #ifndef SWIG
       ControlLabel() : 
@@ -453,10 +453,10 @@ namespace XBMCAddon
     {
     public:
       ControlEdit(long x, long y, long width, long height, const String& label,
-                  const char* font = NULL, const char* textColor = NULL, 
-                  const char* disabledColor = NULL,
-                  long _alignment = XBFONT_LEFT, const char* focusTexture = NULL,
-                  const char* noFocusTexture = NULL, bool isPassword = false);
+                  const char* font = nullptr, const char* textColor = nullptr, 
+                  const char* disabledColor = nullptr,
+                  long _alignment = XBFONT_LEFT, const char* focusTexture = nullptr,
+                  const char* noFocusTexture = nullptr, bool isPassword = false);
 
 
       // setLabel() Method
@@ -469,11 +469,11 @@ namespace XBMCAddon
        *   - self.edit.setLabel('Status')
        */
       virtual void setLabel(const String& label = emptyString, 
-                            const char* font = NULL,
-                            const char* textColor = NULL,
-                            const char* disabledColor = NULL,
-                            const char* shadowColor = NULL,
-                            const char* focusedColor = NULL,
+                            const char* font = nullptr,
+                            const char* textColor = nullptr,
+                            const char* disabledColor = nullptr,
+                            const char* shadowColor = nullptr,
+                            const char* focusedColor = nullptr,
                             const String& label2 = emptyString);
 
       // getLabel() Method
@@ -560,10 +560,10 @@ namespace XBMCAddon
       void internAddListItem(AddonClass::Ref<ListItem> listitem, bool sendMessage);
 
     public:
-      ControlList(long x, long y, long width, long height, const char* font = NULL,
-                  const char* textColor = NULL, const char* buttonTexture = NULL,
-                  const char* buttonFocusTexture = NULL,
-                  const char* selectedColor = NULL,
+      ControlList(long x, long y, long width, long height, const char* font = nullptr,
+                  const char* textColor = nullptr, const char* buttonTexture = nullptr,
+                  const char* buttonFocusTexture = nullptr,
+                  const char* selectedColor = nullptr,
                   long _imageWidth=10, long _imageHeight=10, long _itemTextXOffset = CONTROL_TEXT_OFFSET_X,
                   long _itemTextYOffset = CONTROL_TEXT_OFFSET_Y, long _itemHeight = 27, long _space = 2, 
                   long _alignmentY = XBFONT_CENTER_Y);
@@ -820,8 +820,8 @@ namespace XBMCAddon
     {
     public:
       ControlFadeLabel(long x, long y, long width, long height, 
-                       const char* font = NULL, 
-                       const char* textColor = NULL, 
+                       const char* font = nullptr, 
+                       const char* textColor = nullptr, 
                        long _alignment = XBFONT_LEFT);
 
       // addLabel() Method
@@ -888,8 +888,8 @@ namespace XBMCAddon
     {
     public:
       ControlTextBox(long x, long y, long width, long height, 
-                     const char* font = NULL, 
-                     const char* textColor = NULL);
+                     const char* font = nullptr, 
+                     const char* textColor = nullptr);
 
       // SetText() Method
       /**
@@ -980,7 +980,7 @@ namespace XBMCAddon
     public:
       ControlImage(long x, long y, long width, long height, 
                    const char* filename, long aspectRatio = 0,
-                   const char* colorDiffuse = NULL);
+                   const char* colorDiffuse = nullptr);
 
       /**
        * setImage(filename[, useCache]) -- Changes the image.
@@ -1021,11 +1021,11 @@ namespace XBMCAddon
     {
     public:
       ControlProgress(long x, long y, long width, long height, 
-                      const char* texturebg = NULL,
-                      const char* textureleft = NULL,
-                      const char* texturemid = NULL,
-                      const char* textureright = NULL,
-                      const char* textureoverlay = NULL);
+                      const char* texturebg = nullptr,
+                      const char* textureleft = nullptr,
+                      const char* texturemid = nullptr,
+                      const char* textureright = nullptr,
+                      const char* textureoverlay = nullptr);
 
       /**
        * setPercent(percent) -- Sets the percentage of the progressbar to show.
@@ -1098,13 +1098,13 @@ namespace XBMCAddon
     {
     public:
       ControlButton(long x, long y, long width, long height, const String& label,
-                    const char* focusTexture = NULL, const char* noFocusTexture = NULL, 
+                    const char* focusTexture = nullptr, const char* noFocusTexture = nullptr, 
                     long textOffsetX = CONTROL_TEXT_OFFSET_X, 
                     long textOffsetY = CONTROL_TEXT_OFFSET_Y, 
                     long alignment = (XBFONT_LEFT | XBFONT_CENTER_Y), 
-                    const char* font = NULL, const char* textColor = NULL,
-                    const char* disabledColor = NULL, long angle = 0,
-                    const char* shadowColor = NULL, const char* focusedColor = NULL);
+                    const char* font = nullptr, const char* textColor = nullptr,
+                    const char* disabledColor = nullptr, long angle = 0,
+                    const char* shadowColor = nullptr, const char* focusedColor = nullptr);
 
       // setLabel() Method
       /**
@@ -1125,11 +1125,11 @@ namespace XBMCAddon
        *   - self.button.setLabel('Status', 'font14', '0xFFFFFFFF', '0xFFFF3300', '0xFF000000')
        */
       virtual void setLabel(const String& label = emptyString, 
-                            const char* font = NULL,
-                            const char* textColor = NULL,
-                            const char* disabledColor = NULL,
-                            const char* shadowColor = NULL,
-                            const char* focusedColor = NULL,
+                            const char* font = nullptr,
+                            const char* textColor = nullptr,
+                            const char* disabledColor = nullptr,
+                            const char* shadowColor = nullptr,
+                            const char* focusedColor = nullptr,
                             const String& label2 = emptyString);
 
       // setDisabledColor() Method
@@ -1222,10 +1222,10 @@ namespace XBMCAddon
     public:
 
       ControlCheckMark(long x, long y, long width, long height, const String& label,
-                       const char* focusTexture = NULL, const char* noFocusTexture = NULL, 
+                       const char* focusTexture = nullptr, const char* noFocusTexture = nullptr, 
                        long checkWidth = 30, long checkHeight = 30,
-                       long _alignment = XBFONT_RIGHT, const char* font = NULL, 
-                       const char* textColor = NULL, const char* disabledColor = NULL);
+                       long _alignment = XBFONT_RIGHT, const char* font = nullptr, 
+                       const char* textColor = nullptr, const char* disabledColor = nullptr);
 
       // getSelected() Method
       /**
@@ -1260,11 +1260,11 @@ namespace XBMCAddon
        *   - self.checkmark.setLabel('Status', 'font14', '0xFFFFFFFF', '0xFFFF3300')
        */
       virtual void setLabel(const String& label = emptyString, 
-                            const char* font = NULL,
-                            const char* textColor = NULL,
-                            const char* disabledColor = NULL,
-                            const char* shadowColor = NULL,
-                            const char* focusedColor = NULL,
+                            const char* font = nullptr,
+                            const char* textColor = nullptr,
+                            const char* disabledColor = nullptr,
+                            const char* shadowColor = nullptr,
+                            const char* focusedColor = nullptr,
                             const String& label2 = emptyString);
 
       // setDisabledColor() Method
@@ -1362,16 +1362,16 @@ namespace XBMCAddon
     {
     public:
       ControlRadioButton(long x, long y, long width, long height, const String& label,
-                         const char* focusOnTexture = NULL, const char* noFocusOnTexture = NULL,
-                         const char* focusOffTexture = NULL, const char* noFocusOffTexture = NULL,
-                         const char* focusTexture = NULL, const char* noFocusTexture = NULL,
+                         const char* focusOnTexture = nullptr, const char* noFocusOnTexture = nullptr,
+                         const char* focusOffTexture = nullptr, const char* noFocusOffTexture = nullptr,
+                         const char* focusTexture = nullptr, const char* noFocusTexture = nullptr,
                          long textOffsetX = CONTROL_TEXT_OFFSET_X, 
                          long textOffsetY = CONTROL_TEXT_OFFSET_Y, 
                          long _alignment = (XBFONT_LEFT | XBFONT_CENTER_Y), 
-                         const char* font = NULL, const char* textColor = NULL,
-                         const char* disabledColor = NULL, long angle = 0,
-                         const char* shadowColor = NULL, const char* focusedColor = NULL,
-                         const char* disabledOnTexture = NULL, const char* disabledOffTexture = NULL);
+                         const char* font = nullptr, const char* textColor = nullptr,
+                         const char* disabledColor = nullptr, long angle = 0,
+                         const char* shadowColor = nullptr, const char* focusedColor = nullptr,
+                         const char* disabledOnTexture = nullptr, const char* disabledOffTexture = nullptr);
 
       // setSelected() Method
       /**
@@ -1414,11 +1414,11 @@ namespace XBMCAddon
        *   - self.radiobutton.setLabel('Status', 'font14', '0xFFFFFFFF', '0xFFFF3300', '0xFF000000')
        */
       virtual void setLabel(const String& label = emptyString, 
-                            const char* font = NULL,
-                            const char* textColor = NULL,
-                            const char* disabledColor = NULL,
-                            const char* shadowColor = NULL,
-                            const char* focusedColor = NULL,
+                            const char* font = nullptr,
+                            const char* textColor = nullptr,
+                            const char* disabledColor = nullptr,
+                            const char* shadowColor = nullptr,
+                            const char* focusedColor = nullptr,
                             const String& label2 = emptyString);
 
       // setRadioDimension() Method
@@ -1494,9 +1494,9 @@ namespace XBMCAddon
     {
     public:
       ControlSlider(long x, long y, long width, long height, 
-                    const char* textureback = NULL, 
-                    const char* texture = NULL,
-                    const char* texturefocus = NULL);
+                    const char* textureback = nullptr, 
+                    const char* texture = nullptr,
+                    const char* texturefocus = nullptr);
 
       /**
        * getPercent() -- Returns a float of the percent of the slider.

@@ -326,7 +326,7 @@ namespace XBMCAddon
 
     public:
 
-      DialogProgress() : dlg(NULL), open(false) {}
+      DialogProgress() : dlg(nullptr), open(false) {}
       virtual ~DialogProgress();
 
 
@@ -398,7 +398,7 @@ namespace XBMCAddon
 
     public:
 
-      DialogProgressBG() : dlg(NULL), handle(NULL), open(false) {}
+      DialogProgressBG() : dlg(nullptr), handle(nullptr), open(false) {}
       virtual ~DialogProgressBG();
 
 

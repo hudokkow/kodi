@@ -74,7 +74,7 @@ namespace XBMCAddon
       inline const char* getImageFormat()
       {
         return m_capture->GetCaptureFormat() == CAPTUREFORMAT_BGRA ? "BGRA" :
-          (m_capture->GetCaptureFormat() == CAPTUREFORMAT_RGBA ? "RGBA" : NULL);
+          (m_capture->GetCaptureFormat() == CAPTUREFORMAT_RGBA ? "RGBA" : nullptr);
       }
 
       // RenderCapture_GetImage

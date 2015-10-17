@@ -58,8 +58,8 @@ namespace XBMCAddon
       int iPlayList;
       EPLAYERCORES playerCore;
 
-      void playStream(const String& item = emptyString, const XBMCAddon::xbmcgui::ListItem* listitem = NULL, bool windowed = false);
-      void playPlaylist(const PlayList* playlist = NULL,
+      void playStream(const String& item = emptyString, const XBMCAddon::xbmcgui::ListItem* listitem = nullptr, bool windowed = false);
+      void playPlaylist(const PlayList* playlist = nullptr,
                         bool windowed = false, int startpos=-1);
       void playCurrent(bool windowed = false);
 
@@ -95,7 +95,7 @@ namespace XBMCAddon
        *   - xbmc.Player().play(playlist, listitem, windowed, startpos)\n
        */
       void play(const PlayParameter& item = Player::defaultPlayParameter, 
-                const XBMCAddon::xbmcgui::ListItem* listitem = NULL, bool windowed = false, int startpos = -1);
+                const XBMCAddon::xbmcgui::ListItem* listitem = nullptr, bool windowed = false, int startpos = -1);
 
       /**
        * stop() -- Stop playing.
