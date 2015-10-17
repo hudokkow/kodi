@@ -182,7 +182,7 @@ public:
     : m_heading(-1),
       m_multiselect(false),
       m_hideValue(false),
-      m_formatter(NULL)
+      m_formatter(nullptr)
   { }
   virtual ~CSettingControlList() { }
 
@@ -221,7 +221,7 @@ public:
       m_popup(false),
       m_formatLabel(-1),
       m_formatString("%i"),
-      m_formatter(NULL)
+      m_formatter(nullptr)
   { }
   virtual ~CSettingControlSlider() { }
 

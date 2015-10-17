@@ -83,7 +83,7 @@ public:
 
   void SetValid(bool valid) { m_valid = valid; }
 
-  virtual CGUIControl* GetControl() { return NULL; }
+  virtual CGUIControl* GetControl() { return nullptr; }
   virtual bool OnClick() { return false; }
   virtual void Update(bool updateDisplayOnly = false);
   virtual void Clear() = 0;  ///< Clears the attached control
@@ -105,7 +105,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pRadioButton; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pRadioButton = NULL; }
+  virtual void Clear() { m_pRadioButton = nullptr; }
 private:
   CGUIRadioButtonControl *m_pRadioButton;
 };
@@ -119,7 +119,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pSpin; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pSpin = NULL; }
+  virtual void Clear() { m_pSpin = nullptr; }
 private:
   void FillControl();
   void FillIntegerSettingControl();
@@ -135,7 +135,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pButton; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pButton = NULL; }
+  virtual void Clear() { m_pButton = nullptr; }
 private:
   static bool GetItems(const CSetting *setting, CFileItemList &items);
   static bool GetIntegerItems(const CSetting *setting, CFileItemList &items);
@@ -153,7 +153,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pButton; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pButton = NULL; }
+  virtual void Clear() { m_pButton = nullptr; }
 
   static bool GetPath(CSettingPath *pathSetting);
 protected:
@@ -173,7 +173,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pEdit; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pEdit = NULL; }
+  virtual void Clear() { m_pEdit = nullptr; }
 private:
   static bool InputValidation(const std::string &input, void *data);
 
@@ -189,7 +189,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pSlider; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pSlider = NULL; }
+  virtual void Clear() { m_pSlider = nullptr; }
 
   static std::string GetText(const CSettingControlSlider *control, const CVariant &value, const CVariant &minimum, const CVariant &step, const CVariant &maximum);
 
@@ -206,7 +206,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pSlider; }
   virtual bool OnClick();
   virtual void Update(bool updateDisplayOnly = false);
-  virtual void Clear() { m_pSlider = NULL; }
+  virtual void Clear() { m_pSlider = nullptr; }
 
 private:
   CGUISettingsSliderControl *m_pSlider;
@@ -221,7 +221,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pImage; }
   virtual bool OnClick() { return false; }
   virtual void Update() {}
-  virtual void Clear() { m_pImage = NULL; }
+  virtual void Clear() { m_pImage = nullptr; }
 private:
   CGUIImage *m_pImage;
 };
@@ -235,7 +235,7 @@ public:
   virtual CGUIControl* GetControl() { return (CGUIControl*)m_pLabel; }
   virtual bool OnClick() { return false; }
   virtual void Update() {}
-  virtual void Clear() { m_pLabel = NULL; }
+  virtual void Clear() { m_pLabel = nullptr; }
 private:
   CGUILabelControl *m_pLabel;
 };

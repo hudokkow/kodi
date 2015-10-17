@@ -487,10 +487,10 @@ bool CSettings::Load(const std::string &file)
 
 bool CSettings::Load(const TiXmlElement *root, bool hide /* = false */)
 {
-  if (root == NULL)
+  if (root == nullptr)
     return false;
 
-  std::map<std::string, CSetting*> *loadedSettings = NULL;
+  std::map<std::string, CSetting*> *loadedSettings = nullptr;
   if (hide)
     loadedSettings = new std::map<std::string, CSetting*>();
 
@@ -498,7 +498,7 @@ bool CSettings::Load(const TiXmlElement *root, bool hide /* = false */)
   // only trigger settings events if hiding is disabled
   bool success = m_settingsManager->Load(root, updated, !hide, loadedSettings);
   // if necessary hide all the loaded settings
-  if (success && hide && loadedSettings != NULL)
+  if (success && hide && loadedSettings != nullptr)
   {
     for(std::map<std::string, CSetting*>::const_iterator setting = loadedSettings->begin(); setting != loadedSettings->end(); ++setting)
       setting->second->SetVisible(false);
@@ -523,7 +523,7 @@ bool CSettings::Save(const std::string &file)
   CXBMCTinyXML xmlDoc;
   TiXmlElement rootElement(SETTINGS_XML_ROOT);
   TiXmlNode *root = xmlDoc.InsertEndChild(rootElement);
-  if (root == NULL)
+  if (root == nullptr)
     return false;
 
   if (!m_settingsManager->Save(root))
@@ -662,7 +662,7 @@ CSetting* CSettings::GetSetting(const std::string &id) const
 {
   CSingleLock lock(m_critical);
   if (id.empty())
-    return NULL;
+    return nullptr;
 
   return m_settingsManager->GetSetting(id);
 }
@@ -677,7 +677,7 @@ CSettingSection* CSettings::GetSection(const std::string &section) const
 {
   CSingleLock lock(m_critical);
   if (section.empty())
-    return NULL;
+    return nullptr;
 
   return m_settingsManager->GetSection(section);
 }
@@ -734,7 +734,7 @@ bool CSettings::SetString(const std::string &id, const std::string &value)
 std::vector<CVariant> CSettings::GetList(const std::string &id) const
 {
   CSetting *setting = m_settingsManager->GetSetting(id);
-  if (setting == NULL || setting->GetType() != SettingTypeList)
+  if (setting == nullptr || setting->GetType() != SettingTypeList)
     return std::vector<CVariant>();
 
   return CSettingUtils::GetList(static_cast<CSettingList*>(setting));
@@ -743,7 +743,7 @@ std::vector<CVariant> CSettings::GetList(const std::string &id) const
 bool CSettings::SetList(const std::string &id, const std::vector<CVariant> &value)
 {
   CSetting *setting = m_settingsManager->GetSetting(id);
-  if (setting == NULL || setting->GetType() != SettingTypeList)
+  if (setting == nullptr || setting->GetType() != SettingTypeList)
     return false;
 
   return CSettingUtils::SetList(static_cast<CSettingList*>(setting), value);
@@ -766,7 +766,7 @@ bool CSettings::Initialize(const std::string &file)
   CLog::Log(LOGDEBUG, "CSettings: loaded settings definition from %s", file.c_str());
   
   TiXmlElement *root = xmlDoc.RootElement();
-  if (root == NULL)
+  if (root == nullptr)
     return false;
 
   return m_settingsManager->Initialize(root);

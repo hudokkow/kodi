@@ -57,7 +57,7 @@ public:
   virtual ~CSettingsManager();
 
   // implementation of ISettingCreator
-  virtual CSetting* CreateSetting(const std::string &settingType, const std::string &settingId, CSettingsManager *settingsManager = NULL) const override;
+  virtual CSetting* CreateSetting(const std::string &settingType, const std::string &settingId, CSettingsManager *settingsManager = nullptr) const override;
 
   // implementation of ISettingControlCreator
   virtual ISettingControl* CreateControl(const std::string &controlType) const override;
@@ -79,7 +79,7 @@ public:
    \param loadedSettings A list to fill with all the successfully loaded settings
    \return True if the setting values were successfully loaded, false otherwise
    */
-  bool Load(const TiXmlElement *root, bool &updated, bool triggerEvents = true, std::map<std::string, CSetting*> *loadedSettings = NULL);
+  bool Load(const TiXmlElement *root, bool &updated, bool triggerEvents = true, std::map<std::string, CSetting*> *loadedSettings = nullptr);
   /*!
    \brief Saves the setting values to the given XML node.
 
@@ -241,7 +241,7 @@ public:
    \brief Gets the setting with the given identifier.
 
    \param id Setting identifier
-   \return Setting object with the given identifier or NULL if the identifier is unknown
+   \return Setting object with the given identifier or nullptr if the identifier is unknown
    */
   CSetting* GetSetting(const std::string &id) const;
   /*!
@@ -254,7 +254,7 @@ public:
    \brief Gets the setting section with the given identifier.
 
    \param section Setting section identifier
-   \return Setting section with the given identifier or NULL if the identifier is unknown
+   \return Setting section with the given identifier or nullptr if the identifier is unknown
    */
   CSettingSection* GetSection(const std::string &section) const;
   /*!
@@ -392,7 +392,7 @@ public:
    \param condition Implementation of the dynamic condition
    \param data Opaque data pointer, will be passed back to SettingConditionCheck function
    */
-  void AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data = NULL);
+  void AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data = nullptr);
 
 private:
   // implementation of ISettingCallback
@@ -414,7 +414,7 @@ private:
   virtual bool Load(const TiXmlNode *settings) override;
 
   bool Serialize(TiXmlNode *parent) const;
-  bool Deserialize(const TiXmlNode *node, bool &updated, std::map<std::string, CSetting*> *loadedSettings = NULL);
+  bool Deserialize(const TiXmlNode *node, bool &updated, std::map<std::string, CSetting*> *loadedSettings = nullptr);
 
   bool LoadSetting(const TiXmlNode *node, CSetting *setting, bool &updated);
   bool UpdateSetting(const TiXmlNode *node, CSetting *setting, const CSettingUpdate& update);

@@ -43,7 +43,7 @@ public:
    \param id Identifier of the setting group
    \param settingsManager Reference to the settings manager
    */
-  CSettingGroup(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingGroup(const std::string &id, CSettingsManager *settingsManager = nullptr);
   ~CSettingGroup();
 
   // implementation of ISetting
@@ -94,7 +94,7 @@ public:
    \param id Identifier of the setting category
    \param settingsManager Reference to the settings manager
    */
-  CSettingCategory(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingCategory(const std::string &id, CSettingsManager *settingsManager = nullptr);
   ~CSettingCategory();
 
   // implementation of ISetting
@@ -149,7 +149,7 @@ public:
    \param id Identifier of the setting section
    \param settingsManager Reference to the settings manager
    */
-  CSettingSection(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingSection(const std::string &id, CSettingsManager *settingsManager = nullptr);
   ~CSettingSection();
 
   // implementation of ISetting

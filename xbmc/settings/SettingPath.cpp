@@ -28,12 +28,12 @@
 #define XML_ELM_DEFAULT     "default"
 #define XML_ELM_CONSTRAINTS "constraints"
 
-CSettingPath::CSettingPath(const std::string &id, CSettingsManager *settingsManager /* = NULL */)
+CSettingPath::CSettingPath(const std::string &id, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, settingsManager),
     m_writable(true)
 { }
 
-CSettingPath::CSettingPath(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = NULL */)
+CSettingPath::CSettingPath(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, label, value, settingsManager),
     m_writable(true)
 { }
@@ -56,7 +56,7 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (!CSettingString::Deserialize(node, update))
     return false;
     
-  if (m_control != NULL &&
+  if (m_control != nullptr &&
      (m_control->GetType() != "button" || m_control->GetFormat() != "path"))
   {
     CLog::Log(LOGERROR, "CSettingPath: invalid <control> of \"%s\"", m_id.c_str());
@@ -64,18 +64,18 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
   }
     
   const TiXmlNode *constraints = node->FirstChild(XML_ELM_CONSTRAINTS);
-  if (constraints != NULL)
+  if (constraints != nullptr)
   {
     // get writable
     XMLUtils::GetBoolean(constraints, "writable", m_writable);
 
     // get sources
     const TiXmlNode *sources = constraints->FirstChild("sources");
-    if (sources != NULL)
+    if (sources != nullptr)
     {
       m_sources.clear();
       const TiXmlNode *source = sources->FirstChild("source");
-      while (source != NULL)
+      while (source != nullptr)
       {
         std::string strSource = source->FirstChild()->ValueStr();
         if (!strSource.empty())

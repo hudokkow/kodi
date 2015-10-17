@@ -197,7 +197,7 @@ CSettingSection* CGUIWindowSettingsCategory::GetSection()
       return m_settings.GetSection(s_settingGroupMap[index].name);
   }
 
-  return NULL;
+  return nullptr;
 }
 
 void CGUIWindowSettingsCategory::Save()

@@ -75,7 +75,7 @@ class CSetting : public ISetting,
                  protected ISettingCallback
 {
 public:
-  CSetting(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSetting(const std::string &id, CSettingsManager *settingsManager = nullptr);
   CSetting(const std::string &id, const CSetting &setting);
   virtual ~CSetting();
 
@@ -149,8 +149,8 @@ typedef std::vector<SettingPtr> SettingPtrList;
 class CSettingList : public CSetting
 {
 public:
-  CSettingList(const std::string &id, CSetting *settingDefinition, CSettingsManager *settingsManager = NULL);
-  CSettingList(const std::string &id, CSetting *settingDefinition, int label, CSettingsManager *settingsManager = NULL);
+  CSettingList(const std::string &id, CSetting *settingDefinition, CSettingsManager *settingsManager = nullptr);
+  CSettingList(const std::string &id, CSetting *settingDefinition, int label, CSettingsManager *settingsManager = nullptr);
   CSettingList(const std::string &id, const CSettingList &setting);
   virtual ~CSettingList();
 
@@ -206,9 +206,9 @@ protected:
 class CSettingBool : public CSetting
 {
 public:
-  CSettingBool(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingBool(const std::string &id, CSettingsManager *settingsManager = nullptr);
   CSettingBool(const std::string &id, const CSettingBool &setting);
-  CSettingBool(const std::string &id, int label, bool value, CSettingsManager *settingsManager = NULL);
+  CSettingBool(const std::string &id, int label, bool value, CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingBool() { }
 
   virtual CSetting* Clone(const std::string &id) const override;
@@ -243,11 +243,11 @@ private:
 class CSettingInt : public CSetting
 {
 public:
-  CSettingInt(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingInt(const std::string &id, CSettingsManager *settingsManager = nullptr);
   CSettingInt(const std::string &id, const CSettingInt &setting);
-  CSettingInt(const std::string &id, int label, int value, CSettingsManager *settingsManager = NULL);
-  CSettingInt(const std::string &id, int label, int value, int minimum, int step, int maximum, CSettingsManager *settingsManager = NULL);
-  CSettingInt(const std::string &id, int label, int value, const StaticIntegerSettingOptions &options, CSettingsManager *settingsManager = NULL);
+  CSettingInt(const std::string &id, int label, int value, CSettingsManager *settingsManager = nullptr);
+  CSettingInt(const std::string &id, int label, int value, int minimum, int step, int maximum, CSettingsManager *settingsManager = nullptr);
+  CSettingInt(const std::string &id, int label, int value, const StaticIntegerSettingOptions &options, CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingInt() { }
 
   virtual CSetting* Clone(const std::string &id) const override;
@@ -278,12 +278,12 @@ public:
   const StaticIntegerSettingOptions& GetOptions() const { return m_options; }
   void SetOptions(const StaticIntegerSettingOptions &options) { m_options = options; }
   const std::string& GetOptionsFillerName() const { return m_optionsFillerName; }
-  void SetOptionsFillerName(const std::string &optionsFillerName, void *data = NULL)
+  void SetOptionsFillerName(const std::string &optionsFillerName, void *data = nullptr)
   {
     m_optionsFillerName = optionsFillerName;
     m_optionsFillerData = data;
   }
-  void SetOptionsFiller(IntegerSettingOptionsFiller optionsFiller, void *data = NULL)
+  void SetOptionsFiller(IntegerSettingOptionsFiller optionsFiller, void *data = nullptr)
   {
     m_optionsFiller = optionsFiller;
     m_optionsFillerData = data;
@@ -314,10 +314,10 @@ private:
 class CSettingNumber : public CSetting
 {
 public:
-  CSettingNumber(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingNumber(const std::string &id, CSettingsManager *settingsManager = nullptr);
   CSettingNumber(const std::string &id, const CSettingNumber &setting);
-  CSettingNumber(const std::string &id, int label, float value, CSettingsManager *settingsManager = NULL);
-  CSettingNumber(const std::string &id, int label, float value, float minimum, float step, float maximum, CSettingsManager *settingsManager = NULL);
+  CSettingNumber(const std::string &id, int label, float value, CSettingsManager *settingsManager = nullptr);
+  CSettingNumber(const std::string &id, int label, float value, float minimum, float step, float maximum, CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingNumber() { }
 
   virtual CSetting* Clone(const std::string &id) const override;
@@ -363,9 +363,9 @@ private:
 class CSettingString : public CSetting
 {
 public:
-  CSettingString(const std::string &id, CSettingsManager *settingsManager = NULL);
+  CSettingString(const std::string &id, CSettingsManager *settingsManager = nullptr);
   CSettingString(const std::string &id, const CSettingString &setting);
-  CSettingString(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = NULL);
+  CSettingString(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingString() { }
 
   virtual CSetting* Clone(const std::string &id) const override;
@@ -389,12 +389,12 @@ public:
 
   SettingOptionsType GetOptionsType() const;
   const std::string& GetOptionsFillerName() const { return m_optionsFillerName; }
-  void SetOptionsFillerName(const std::string &optionsFillerName, void *data = NULL)
+  void SetOptionsFillerName(const std::string &optionsFillerName, void *data = nullptr)
   {
     m_optionsFillerName = optionsFillerName;
     m_optionsFillerData = data;
   }
-  void SetOptionsFiller(StringSettingOptionsFiller optionsFiller, void *data = NULL)
+  void SetOptionsFiller(StringSettingOptionsFiller optionsFiller, void *data = nullptr)
   {
     m_optionsFiller = optionsFiller;
     m_optionsFillerData = data;
@@ -425,8 +425,8 @@ protected:
 class CSettingAction : public CSetting
 {
 public:
-  CSettingAction(const std::string &id, CSettingsManager *settingsManager = NULL);
-  CSettingAction(const std::string &id, int label, CSettingsManager *settingsManager = NULL);
+  CSettingAction(const std::string &id, CSettingsManager *settingsManager = nullptr);
+  CSettingAction(const std::string &id, int label, CSettingsManager *settingsManager = nullptr);
   CSettingAction(const std::string &id, const CSettingAction &setting);
   virtual ~CSettingAction() { }
 

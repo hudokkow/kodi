@@ -46,15 +46,15 @@
 
 bool AddonHasSettings(const std::string &condition, const std::string &value, const CSetting *setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   const CSettingAddon *settingAddon = dynamic_cast<const CSettingAddon*>(setting);
-  if (settingAddon == NULL)
+  if (settingAddon == nullptr)
     return false;
 
   ADDON::AddonPtr addon;
-  if (!ADDON::CAddonMgr::GetInstance().GetAddon(settingAddon->GetValue(), addon, settingAddon->GetAddonType()) || addon == NULL)
+  if (!ADDON::CAddonMgr::GetInstance().GetAddon(settingAddon->GetValue(), addon, settingAddon->GetAddonType()) || addon == nullptr)
     return false;
 
   if (addon->Type() == ADDON::ADDON_SKIN)
@@ -164,9 +164,9 @@ bool ProfileHasVideosLocked(const std::string &condition, const std::string &val
 
 bool ProfileLockMode(const std::string &condition, const std::string &value, const CSetting *setting, void *data)
 {
-  char *tmp = NULL;
+  char *tmp = nullptr;
   LockType lock = (LockType)strtol(value.c_str(), &tmp, 0);
-  if (tmp != NULL && *tmp != '\0')
+  if (tmp != nullptr && *tmp != '\0')
     return false;
 
   return CProfilesManager::GetInstance().GetCurrentProfile().getLockMode() == lock;
@@ -291,14 +291,14 @@ void CSettingConditions::Initialize()
   m_complexConditions.insert(std::pair<std::string, SettingConditionCheck>("codecoptionvisible",            CDVDVideoCodec::IsSettingVisible));
 }
 
-bool CSettingConditions::Check(const std::string &condition, const std::string &value /* = "" */, const CSetting *setting /* = NULL */)
+bool CSettingConditions::Check(const std::string &condition, const std::string &value /* = "" */, const CSetting *setting /* = nullptr */)
 {
   if (m_simpleConditions.find(condition) != m_simpleConditions.end())
     return true;
 
   std::map<std::string, SettingConditionCheck>::const_iterator itCondition = m_complexConditions.find(condition);
   if (itCondition != m_complexConditions.end())
-    return itCondition->second(condition, value, setting, NULL);
+    return itCondition->second(condition, value, setting, nullptr);
 
   return Check(condition);
 }

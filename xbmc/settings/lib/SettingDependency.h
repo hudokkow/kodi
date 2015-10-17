@@ -48,13 +48,13 @@ typedef enum {
 class CSettingDependencyCondition : public CSettingConditionItem
 {
 public:
-  explicit CSettingDependencyCondition(CSettingsManager *settingsManager = NULL);
+  explicit CSettingDependencyCondition(CSettingsManager *settingsManager = nullptr);
   CSettingDependencyCondition(const std::string &setting, const std::string &value,
                               SettingDependencyOperator op, bool negated = false,
-                              CSettingsManager *settingsManager = NULL);
+                              CSettingsManager *settingsManager = nullptr);
   CSettingDependencyCondition(const std::string &strProperty, const std::string &value,
                               const std::string &setting = "", bool negated = false,
-                              CSettingsManager *settingsManager = NULL);
+                              CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingDependencyCondition() { }
 
   virtual bool Deserialize(const TiXmlNode *node);
@@ -81,10 +81,10 @@ typedef std::shared_ptr<CSettingDependencyConditionCombination> CSettingDependen
 class CSettingDependencyConditionCombination : public CSettingConditionCombination
 {
 public:
-  explicit CSettingDependencyConditionCombination(CSettingsManager *settingsManager = NULL)
+  explicit CSettingDependencyConditionCombination(CSettingsManager *settingsManager = nullptr)
     : CSettingConditionCombination(settingsManager)
   { }
-  CSettingDependencyConditionCombination(BooleanLogicOperation op, CSettingsManager *settingsManager = NULL)
+  CSettingDependencyConditionCombination(BooleanLogicOperation op, CSettingsManager *settingsManager = nullptr)
     : CSettingConditionCombination(settingsManager)
   {
     SetOperation(op);
@@ -108,8 +108,8 @@ private:
 class CSettingDependency : public CSettingCondition
 {
 public:
-  explicit CSettingDependency(CSettingsManager *settingsManager = NULL);
-  CSettingDependency(SettingDependencyType type, CSettingsManager *settingsManager = NULL);
+  explicit CSettingDependency(CSettingsManager *settingsManager = nullptr);
+  CSettingDependency(SettingDependencyType type, CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingDependency() { }
 
   virtual bool Deserialize(const TiXmlNode *node);

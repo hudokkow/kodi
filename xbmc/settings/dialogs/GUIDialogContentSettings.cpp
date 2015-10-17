@@ -198,10 +198,10 @@ bool CGUIDialogContentSettings::Show(ADDON::ScraperPtr& scraper, CONTENT_TYPE co
 bool CGUIDialogContentSettings::Show(ADDON::ScraperPtr& scraper, VIDEO::SScanSettings& settings, CONTENT_TYPE content /* = CONTENT_NONE */)
 {
   CGUIDialogContentSettings *dialog = (CGUIDialogContentSettings *)g_windowManager.GetWindow(WINDOW_DIALOG_CONTENT_SETTINGS);
-  if (dialog == NULL)
+  if (dialog == nullptr)
     return false;
 
-  if (scraper != NULL)
+  if (scraper != nullptr)
   {
     dialog->SetContent(content != CONTENT_NONE ? content : scraper->Content());
     dialog->SetScraper(scraper);
@@ -219,7 +219,7 @@ bool CGUIDialogContentSettings::Show(ADDON::ScraperPtr& scraper, VIDEO::SScanSet
     scraper = dialog->GetScraper();
     content = dialog->GetContent();
 
-    if (scraper == NULL || content == CONTENT_NONE)
+    if (scraper == nullptr || content == CONTENT_NONE)
       settings.exclude = dialog->GetExclude();
     else
     {
@@ -267,7 +267,7 @@ void CGUIDialogContentSettings::OnInitWindow()
   m_lastSelected.clear();
 
   // save our current scraper (if any)
-  if (m_scraper != NULL)
+  if (m_scraper != nullptr)
     m_lastSelected[m_content] = m_scraper;
 
   FillContentTypes();
@@ -278,7 +278,7 @@ void CGUIDialogContentSettings::OnInitWindow()
 
 void CGUIDialogContentSettings::OnSettingChanged(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   CGUIDialogSettingsManualBase::OnSettingChanged(setting);
@@ -304,7 +304,7 @@ void CGUIDialogContentSettings::OnSettingChanged(const CSetting *setting)
 void CGUIDialogContentSettings::Save()
 {
   if (!m_needsSaving ||
-      m_scraper == NULL)
+      m_scraper == nullptr)
     return;
 
   if (m_content == CONTENT_NONE)
@@ -346,7 +346,7 @@ void CGUIDialogContentSettings::SetupView()
   {
     FillScraperList();
     SET_CONTROL_VISIBLE(CONTROL_SCRAPER_LIST);
-    if (m_scraper != NULL && m_scraper->Enabled())
+    if (m_scraper != nullptr && m_scraper->Enabled())
     {
       m_showScanSettings = true;
       if (m_scraper && m_scraper->Supports(m_content) && m_scraper->HasSettings())
@@ -366,14 +366,14 @@ void CGUIDialogContentSettings::InitializeSettings()
   CGUIDialogSettingsManualBase::InitializeSettings();
 
   CSettingCategory *category = AddCategory("contentsettings", -1);
-  if (category == NULL)
+  if (category == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogContentSettings: unable to setup settings");
     return;
   }
 
   CSettingGroup *group = AddGroup(category);
-  if (group == NULL)
+  if (group == nullptr)
   {
     CLog::Log(LOGERROR, "CGUIDialogContentSettings: unable to setup settings");
     return;
@@ -475,7 +475,7 @@ void CGUIDialogContentSettings::FillContentTypes(CONTENT_TYPE content)
 
     AddonPtr scraper = (*it)->Clone();
 
-    if (m_scraper != NULL && m_scraper->ID() == (*it)->ID())
+    if (m_scraper != nullptr && m_scraper->ID() == (*it)->ID())
     { // don't overwrite preconfigured scraper
       scraper = m_scraper;
     }

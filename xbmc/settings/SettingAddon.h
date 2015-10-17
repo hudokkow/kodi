@@ -25,8 +25,8 @@
 class CSettingAddon : public CSettingString
 {
 public:
-  CSettingAddon(const std::string &id, CSettingsManager *settingsManager = NULL);
-  CSettingAddon(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = NULL);
+  CSettingAddon(const std::string &id, CSettingsManager *settingsManager = nullptr);
+  CSettingAddon(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = nullptr);
   CSettingAddon(const std::string &id, const CSettingAddon &setting);
   virtual ~CSettingAddon() { }
 

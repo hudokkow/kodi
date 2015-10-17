@@ -26,8 +26,8 @@
 class CSettingPath : public CSettingString
 {
 public:
-  CSettingPath(const std::string &id, CSettingsManager *settingsManager = NULL);
-  CSettingPath(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = NULL);
+  CSettingPath(const std::string &id, CSettingsManager *settingsManager = nullptr);
+  CSettingPath(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager = nullptr);
   CSettingPath(const std::string &id, const CSettingPath &setting);
   virtual ~CSettingPath() { }
 

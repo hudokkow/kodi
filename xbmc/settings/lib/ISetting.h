@@ -39,7 +39,7 @@ public:
    \param id Identifier of the setting object
    \param settingsManager Reference to the settings manager
    */
-  ISetting(const std::string &id, CSettingsManager *settingsManager = NULL);
+  ISetting(const std::string &id, CSettingsManager *settingsManager = nullptr);
   virtual ~ISetting() { }
 
   /*!

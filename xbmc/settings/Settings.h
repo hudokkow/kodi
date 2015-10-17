@@ -465,7 +465,7 @@ public:
    \brief Gets the setting with the given identifier.
 
    \param id Setting identifier
-   \return Setting object with the given identifier or NULL if the identifier is unknown
+   \return Setting object with the given identifier or nullptr if the identifier is unknown
    */
   CSetting* GetSetting(const std::string &id) const;
   /*!
@@ -478,7 +478,7 @@ public:
    \brief Gets the setting section with the given identifier.
 
    \param section Setting section identifier
-   \return Setting section with the given identifier or NULL if the identifier is unknown
+   \return Setting section with the given identifier or nullptr if the identifier is unknown
    */
   CSettingSection* GetSection(const std::string &section) const;
 

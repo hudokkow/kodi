@@ -27,7 +27,7 @@
 class CSettingRequirementCondition : public CSettingConditionItem
 {
 public:
-  CSettingRequirementCondition(CSettingsManager *settingsManager = NULL)
+  CSettingRequirementCondition(CSettingsManager *settingsManager = nullptr)
     : CSettingConditionItem(settingsManager)
   { }
   virtual ~CSettingRequirementCondition() { }
@@ -38,7 +38,7 @@ public:
 class CSettingRequirementConditionCombination : public CSettingConditionCombination
 {
 public:
-  CSettingRequirementConditionCombination(CSettingsManager *settingsManager = NULL)
+  CSettingRequirementConditionCombination(CSettingsManager *settingsManager = nullptr)
     : CSettingConditionCombination(settingsManager)
   { }
   virtual ~CSettingRequirementConditionCombination() { }
@@ -53,6 +53,6 @@ private:
 class CSettingRequirement : public CSettingCondition
 {
 public:
-  CSettingRequirement(CSettingsManager *settingsManager = NULL);
+  CSettingRequirement(CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingRequirement() { }
 };

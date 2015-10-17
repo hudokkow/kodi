@@ -30,17 +30,17 @@ bool CSettingConditionItem::Deserialize(const TiXmlNode *node)
     return false;
 
   const TiXmlElement *elem = node->ToElement();
-  if (elem == NULL)
+  if (elem == nullptr)
     return false;
 
   // get the "name" attribute
   const char *strAttribute = elem->Attribute(SETTING_XML_ATTR_NAME);
-  if (strAttribute != NULL)
+  if (strAttribute != nullptr)
     m_name = strAttribute;
 
   // get the "setting" attribute
   strAttribute = elem->Attribute(SETTING_XML_ATTR_SETTING);
-  if (strAttribute != NULL)
+  if (strAttribute != nullptr)
     m_setting = strAttribute;
 
   return true;
@@ -48,7 +48,7 @@ bool CSettingConditionItem::Deserialize(const TiXmlNode *node)
 
 bool CSettingConditionItem::Check() const
 {
-  if (m_settingsManager == NULL)
+  if (m_settingsManager == nullptr)
     return false;
 
   return m_settingsManager->GetConditions().Check(m_name, m_value, m_settingsManager->GetSetting(m_setting)) == !m_negated;
@@ -60,11 +60,11 @@ bool CSettingConditionCombination::Check() const
   for (CBooleanLogicOperations::const_iterator operation = m_operations.begin();
        operation != m_operations.end(); ++operation)
   {
-    if (*operation == NULL)
+    if (*operation == nullptr)
       continue;
 
     CSettingConditionCombination *combination = static_cast<CSettingConditionCombination*>((*operation).get());
-    if (combination == NULL)
+    if (combination == nullptr)
       continue;
     
     if (combination->Check())
@@ -76,11 +76,11 @@ bool CSettingConditionCombination::Check() const
   for (CBooleanLogicValues::const_iterator value = m_values.begin();
        value != m_values.end(); ++value)
   {
-    if (*value == NULL)
+    if (*value == nullptr)
       continue;
 
     CSettingConditionItem *condition = static_cast<CSettingConditionItem*>((*value).get());
-    if (condition == NULL)
+    if (condition == nullptr)
       continue;
 
     if (condition->Check())
@@ -92,7 +92,7 @@ bool CSettingConditionCombination::Check() const
   return ok;
 }
 
-CSettingCondition::CSettingCondition(CSettingsManager *settingsManager /* = NULL */)
+CSettingCondition::CSettingCondition(CSettingsManager *settingsManager /* = nullptr */)
   : ISettingCondition(settingsManager)
 {
   m_operation = CBooleanLogicOperationPtr(new CSettingConditionCombination(settingsManager));
@@ -101,7 +101,7 @@ CSettingCondition::CSettingCondition(CSettingsManager *settingsManager /* = NULL
 bool CSettingCondition::Check() const
 {
   CSettingConditionCombination *combination = static_cast<CSettingConditionCombination*>(m_operation.get());
-  if (combination == NULL)
+  if (combination == nullptr)
     return false;
 
   return combination->Check();
@@ -118,9 +118,9 @@ void CSettingConditionsManager::AddCondition(const std::string &condition)
   m_defines.insert(tmpCondition);
 }
 
-void CSettingConditionsManager::AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data /*= NULL*/)
+void CSettingConditionsManager::AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data /*= nullptr*/)
 {
-  if (identifier.empty() || condition == NULL)
+  if (identifier.empty() || condition == nullptr)
     return;
 
   std::string tmpIdentifier = identifier;
@@ -129,7 +129,7 @@ void CSettingConditionsManager::AddCondition(const std::string &identifier, Sett
   m_conditions.insert(SettingConditionPair(tmpIdentifier, std::make_pair(condition, data)));
 }
 
-bool CSettingConditionsManager::Check(const std::string &condition, const std::string &value /* = "" */, const CSetting *setting /* = NULL */) const
+bool CSettingConditionsManager::Check(const std::string &condition, const std::string &value /* = "" */, const CSetting *setting /* = nullptr */) const
 {
   if (condition.empty())
     return false;

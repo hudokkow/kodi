@@ -49,7 +49,7 @@ protected:
 class CSettingConditionItem : public CBooleanLogicValue, public ISettingCondition
 {
 public:
-  CSettingConditionItem(CSettingsManager *settingsManager = NULL)
+  CSettingConditionItem(CSettingsManager *settingsManager = nullptr)
     : ISettingCondition(settingsManager)
   { }
   virtual ~CSettingConditionItem() { }
@@ -66,7 +66,7 @@ protected:
 class CSettingConditionCombination : public CBooleanLogicOperation, public ISettingCondition
 {
 public:
-  CSettingConditionCombination(CSettingsManager *settingsManager = NULL)
+  CSettingConditionCombination(CSettingsManager *settingsManager = nullptr)
     : ISettingCondition(settingsManager)
   { }
   virtual ~CSettingConditionCombination() { }
@@ -81,7 +81,7 @@ private:
 class CSettingCondition : public CBooleanLogic, public ISettingCondition
 {
 public:
-  CSettingCondition(CSettingsManager *settingsManager = NULL);
+  CSettingCondition(CSettingsManager *settingsManager = nullptr);
   virtual ~CSettingCondition() { }
 
   virtual bool Check() const;
@@ -94,9 +94,9 @@ public:
   virtual ~CSettingConditionsManager();
 
   void AddCondition(const std::string &condition);
-  void AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data = NULL);
+  void AddCondition(const std::string &identifier, SettingConditionCheck condition, void *data = nullptr);
 
-  bool Check(const std::string &condition, const std::string &value = "", const CSetting *setting = NULL) const;
+  bool Check(const std::string &condition, const std::string &value = "", const CSetting *setting = nullptr) const;
 
 private:
   CSettingConditionsManager(const CSettingConditionsManager&);
