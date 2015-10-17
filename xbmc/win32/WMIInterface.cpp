@@ -25,7 +25,7 @@
 CWIN32Wmi::CWIN32Wmi(void)
 {
   bconnected = false;
-  pclsObj = NULL;
+  pclsObj = nullptr;
   Connect();
 }
 
@@ -45,15 +45,15 @@ bool CWIN32Wmi::Connect()
   }
 
 	hres =  CoInitializeSecurity(
-        NULL,
+        nullptr,
         -1,                          // COM authentication
-        NULL,                        // Authentication services
-        NULL,                        // Reserved
+        nullptr,                        // Authentication services
+        nullptr,                        // Reserved
         RPC_C_AUTHN_LEVEL_DEFAULT,   // Default authentication
         RPC_C_IMP_LEVEL_IMPERSONATE, // Default Impersonation
-        NULL,                        // Authentication info
+        nullptr,                        // Authentication info
         EOAC_NONE,                   // Additional capabilities
-        NULL                         // Reserved
+        nullptr                         // Reserved
         );
 
 	if (FAILED(hres))
@@ -61,7 +61,7 @@ bool CWIN32Wmi::Connect()
       return false;                    // Program has failed.
   }
 
-	pLoc = NULL;
+	pLoc = nullptr;
 
   hres = CoCreateInstance(
       CLSID_WbemLocator,
@@ -74,17 +74,17 @@ bool CWIN32Wmi::Connect()
       return false;                 // Program has failed.
   }
 
-	pSvc = NULL;
+	pSvc = nullptr;
 
   // Connect to the root\cimv2 namespace with
   // the current user and obtain pointer pSvc
   // to make IWbemServices calls.
   hres = pLoc->ConnectServer(
        _bstr_t(L"ROOT\\CIMV2"), // Object path of WMI namespace
-       NULL,                    // User name. NULL = current user
-       NULL,                    // User password. NULL = current
-       0,                       // Locale. NULL indicates current
-       NULL,                    // Security flags.
+       nullptr,                    // User name. nullptr = current user
+       nullptr,                    // User password. nullptr = current
+       0,                       // Locale. nullptr indicates current
+       nullptr,                    // Security flags.
        0,                       // Authority (e.g. Kerberos)
        0,                       // Context object
        &pSvc                    // pointer to IWbemServices proxy
@@ -101,10 +101,10 @@ bool CWIN32Wmi::Connect()
        pSvc,                        // Indicates the proxy to set
        RPC_C_AUTHN_WINNT,           // RPC_C_AUTHN_xxx
        RPC_C_AUTHZ_NONE,            // RPC_C_AUTHZ_xxx
-       NULL,                        // Server principal name
+       nullptr,                        // Server principal name
        RPC_C_AUTHN_LEVEL_CALL,      // RPC_C_AUTHN_LEVEL_xxx
        RPC_C_IMP_LEVEL_IMPERSONATE, // RPC_C_IMP_LEVEL_xxx
-       NULL,                        // client identity
+       nullptr,                        // client identity
        EOAC_NONE                    // proxy capabilities
     );
 
@@ -116,7 +116,7 @@ bool CWIN32Wmi::Connect()
         return false;               // Program has failed.
     }
 
-		pEnumerator = NULL;
+		pEnumerator = nullptr;
 
     bconnected = true;
     return true;
@@ -124,22 +124,22 @@ bool CWIN32Wmi::Connect()
 
 void CWIN32Wmi::Release()
 {
-  if(pSvc != NULL)
+  if(pSvc != nullptr)
     pSvc->Release();
-  if(pLoc != NULL)
+  if(pLoc != nullptr)
     pLoc->Release();
-  if(pEnumerator != NULL)
+  if(pEnumerator != nullptr)
     pEnumerator->Release();
-  if(pclsObj != NULL)
+  if(pclsObj != nullptr)
     pclsObj->Release();
 
   CoUninitialize();
 
   bconnected = false;
-  pSvc = NULL;
-  pLoc = NULL;
-  pEnumerator = NULL;
-  pclsObj = NULL;
+  pSvc = nullptr;
+  pLoc = nullptr;
+  pEnumerator = nullptr;
+  pclsObj = nullptr;
 }
 
 void CWIN32Wmi::testquery()
@@ -150,7 +150,7 @@ void CWIN32Wmi::testquery()
       //bstr_t("SELECT * FROM Win32_NetworkAdapter WHERE PhysicalAdapter=TRUE"),
       bstr_t("SELECT * FROM Win32_NetworkAdapter WHERE Description='Atheros AR5008X Wireless Network Adapter'"),
       WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
-      NULL,
+      nullptr,
       &pEnumerator);
 
   if (FAILED(hres))
@@ -181,14 +181,14 @@ void CWIN32Wmi::testquery()
 			//iCpu++;
   }
 	pclsObj->Release();
-  pclsObj = NULL;
+  pclsObj = nullptr;
 }
 
 std::vector<std::string> CWIN32Wmi::GetWMIStrVector(std::string& strQuery, std::wstring& strProperty)
 {
   std::vector<std::string> strResult;
-  pEnumerator = NULL;
-  pclsObj = NULL;
+  pEnumerator = nullptr;
+  pclsObj = nullptr;
 
   if(!bconnected)
     return strResult;
@@ -197,7 +197,7 @@ std::vector<std::string> CWIN32Wmi::GetWMIStrVector(std::string& strQuery, std::
       bstr_t("WQL"),
       bstr_t(strQuery.c_str()),
       WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY,
-      NULL,
+      nullptr,
       &pEnumerator);
 
   if (FAILED(hres))
@@ -223,12 +223,12 @@ std::vector<std::string> CWIN32Wmi::GetWMIStrVector(std::string& strQuery, std::
       strResult.push_back(vtProp.bstrVal);
       VariantClear(&vtProp);
   }
-  if(pEnumerator != NULL)
+  if(pEnumerator != nullptr)
     pEnumerator->Release();
-  pEnumerator = NULL;
-  if(pclsObj != NULL)
+  pEnumerator = nullptr;
+  if(pclsObj != nullptr)
 	  pclsObj->Release();
-  pclsObj = NULL;
+  pclsObj = nullptr;
   return strResult;
 }
 

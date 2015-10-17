@@ -96,7 +96,7 @@ FARPROC WINAPI delayHookNotifyFunc (unsigned dliNotify, PDelayLoadInfo pdli)
       }
       break;
   }
-  return NULL;
+  return nullptr;
 }
 
 FARPROC WINAPI delayHookFailureFunc (unsigned dliNotify, PDelayLoadInfo pdli)
@@ -106,11 +106,11 @@ FARPROC WINAPI delayHookFailureFunc (unsigned dliNotify, PDelayLoadInfo pdli)
     case dliFailLoadLib:
       g_application.Stop(1);
       std::string strError = StringUtils::Format("Uh oh, can't load %s, exiting.", pdli->szDll);
-      MessageBox(NULL, strError.c_str(), "XBMC: Fatal Error", MB_OK|MB_ICONERROR);
+      MessageBox(nullptr, strError.c_str(), "XBMC: Fatal Error", MB_OK|MB_ICONERROR);
       exit(1);
       break;
   }
-  return NULL;
+  return nullptr;
 }
 
 // assign hook functions

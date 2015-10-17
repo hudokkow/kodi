@@ -46,7 +46,7 @@ public:
   {
     typedef ret_type(*ptr_type)(param_types...);
 
-    if (cur_fnc_ptr == NULL)
+    if (cur_fnc_ptr == nullptr)
       return (ret_type)0; // cur_fnc_ptr must point to process default CRT function
 
     crts_caller crts(func_name);
