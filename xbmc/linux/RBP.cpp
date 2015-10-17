@@ -135,7 +135,7 @@ unsigned char *CRBP::CaptureDisplay(int width, int height, int *pstride, bool sw
 {
   DISPMANX_RESOURCE_HANDLE_T resource;
   VC_RECT_T rect;
-  unsigned char *image = NULL;
+  unsigned char *image = nullptr;
   uint32_t vc_image_ptr;
   int stride;
   uint32_t flags = 0;
@@ -189,7 +189,7 @@ void CRBP::WaitVsync()
     m_vsync.WaitMSec(1000);
   }
   else assert(0);
-  s = vc_dispmanx_vsync_callback(m_display, NULL, NULL);
+  s = vc_dispmanx_vsync_callback(m_display, nullptr, nullptr);
   assert(s == 0);
   vc_dispmanx_display_close( m_display );
 }

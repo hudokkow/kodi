@@ -35,7 +35,7 @@
 struct CXHandle {
 
 public:
-  typedef enum { HND_NULL = 0, HND_FILE, HND_EVENT, HND_MUTEX, HND_FIND_FILE } HandleType;
+  typedef enum { HND_nullptr = 0, HND_FILE, HND_EVENT, HND_MUTEX, HND_FIND_FILE } HandleType;
 
   CXHandle();
   CXHandle(HandleType nType);
