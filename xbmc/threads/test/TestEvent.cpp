@@ -78,8 +78,8 @@ public:
   CEvent* result;
   bool waiting;
 
-  group_wait(CEventGroup& o) : event(o), timeout(-1), result(NULL), waiting(false) {}
-  group_wait(CEventGroup& o, int timeout_) : event(o), timeout(timeout_), result(NULL), waiting(false) {}
+  group_wait(CEventGroup& o) : event(o), timeout(-1), result(nullptr), waiting(false) {}
+  group_wait(CEventGroup& o, int timeout_) : event(o), timeout(timeout_), result(nullptr), waiting(false) {}
 
   void Run()
   {
@@ -176,7 +176,7 @@ TEST(TestEvent, Group)
   CEvent event1;
   CEvent event2;
 
-  CEventGroup group(&event1,&event2,NULL);
+  CEventGroup group(&event1,&event2,nullptr);
 
   bool result1 = false;
   bool result2 = false;
@@ -197,7 +197,7 @@ TEST(TestEvent, Group)
   EXPECT_TRUE(!result2);
 
   EXPECT_TRUE(w3.waiting);
-  EXPECT_TRUE(w3.result == NULL);
+  EXPECT_TRUE(w3.result == nullptr);
 
   event1.Set();
 
@@ -225,7 +225,7 @@ TEST(TestEvent, GroupLimitedGroupScope)
   CEvent event2;
 
   {
-    CEventGroup group(&event1,&event2,NULL);
+    CEventGroup group(&event1,&event2,nullptr);
 
     bool result1 = false;
     bool result2 = false;
@@ -246,7 +246,7 @@ TEST(TestEvent, GroupLimitedGroupScope)
     EXPECT_TRUE(!result2);
 
     EXPECT_TRUE(w3.waiting);
-    EXPECT_TRUE(w3.result == NULL);
+    EXPECT_TRUE(w3.result == nullptr);
 
     event1.Set();
 
@@ -273,7 +273,7 @@ TEST(TestEvent, TwoGroups)
   CEvent event2;
 
   CEventGroup group1(2, &event1,&event2);
-  CEventGroup group2(&event1,&event2,NULL);
+  CEventGroup group2(&event1,&event2,nullptr);
 
   bool result1 = false;
   bool result2 = false;
@@ -297,9 +297,9 @@ TEST(TestEvent, TwoGroups)
   EXPECT_TRUE(!result2);
 
   EXPECT_TRUE(w3.waiting);
-  EXPECT_EQ(w3.result,(void*)NULL);
+  EXPECT_EQ(w3.result,(void*)nullptr);
   EXPECT_TRUE(w4.waiting);
-  EXPECT_EQ(w4.result,(void*)NULL);
+  EXPECT_EQ(w4.result,(void*)nullptr);
 
   event1.Set();
 
@@ -376,7 +376,7 @@ TEST(TestEvent, GroupChildSet)
   CEvent event2;
 
   event1.Set();
-  CEventGroup group(&event1,&event2,NULL);
+  CEventGroup group(&event1,&event2,nullptr);
 
   bool result1 = false;
   bool result2 = false;
@@ -410,7 +410,7 @@ TEST(TestEvent, GroupChildSet2)
   CEvent event1(true,true);
   CEvent event2;
 
-  CEventGroup group(&event1,&event2,NULL);
+  CEventGroup group(&event1,&event2,nullptr);
 
   bool result1 = false;
   bool result2 = false;
@@ -444,7 +444,7 @@ TEST(TestEvent, GroupWaitResetsChild)
   CEvent event1;
   CEvent event2;
 
-  CEventGroup group(&event1,&event2,NULL);
+  CEventGroup group(&event1,&event2,nullptr);
 
   group_wait w3(group);
 
@@ -453,7 +453,7 @@ TEST(TestEvent, GroupWaitResetsChild)
   EXPECT_TRUE(waitForWaiters(group,1,10000));
 
   EXPECT_TRUE(w3.waiting);
-  EXPECT_TRUE(w3.result == NULL);
+  EXPECT_TRUE(w3.result == nullptr);
 
   event2.Set();
 
@@ -469,7 +469,7 @@ TEST(TestEvent, GroupTimedWait)
 {
   CEvent event1;
   CEvent event2;
-  CEventGroup group(&event1,&event2,NULL);
+  CEventGroup group(&event1,&event2,nullptr);
 
   bool result1 = false;
   bool result2 = false;
@@ -483,7 +483,7 @@ TEST(TestEvent, GroupTimedWait)
   EXPECT_TRUE(waitForWaiters(event1,1,10000));
   EXPECT_TRUE(waitForWaiters(event2,1,10000));
 
-  EXPECT_TRUE(group.wait(20) == NULL); // waited ... got nothing
+  EXPECT_TRUE(group.wait(20) == nullptr); // waited ... got nothing
 
   group_wait w3(group,50);
   thread waitThread3(w3);
@@ -494,13 +494,13 @@ TEST(TestEvent, GroupTimedWait)
   EXPECT_TRUE(!result2);
 
   EXPECT_TRUE(w3.waiting);
-  EXPECT_TRUE(w3.result == NULL);
+  EXPECT_TRUE(w3.result == nullptr);
 
   // this should end given the wait is for only 50 millis
   EXPECT_TRUE(waitThread3.timed_join(MILLIS(100)));
 
   EXPECT_TRUE(!w3.waiting);
-  EXPECT_TRUE(w3.result == NULL);
+  EXPECT_TRUE(w3.result == nullptr);
 
   group_wait w4(group,50);
   thread waitThread4(w4);
@@ -508,7 +508,7 @@ TEST(TestEvent, GroupTimedWait)
   EXPECT_TRUE(waitForWaiters(group,1,10000));
 
   EXPECT_TRUE(w4.waiting);
-  EXPECT_TRUE(w4.result == NULL);
+  EXPECT_TRUE(w4.result == nullptr);
 
   event1.Set();
 
@@ -530,7 +530,7 @@ TEST(TestEvent, GroupTimedWait)
 #define TESTNUM 100000l
 #define NUMTHREADS 100l
 
-CEvent* g_event = NULL;
+CEvent* g_event = nullptr;
 volatile long g_mutex;
 
 class mass_waiter : public IRunnable

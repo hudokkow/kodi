@@ -69,7 +69,7 @@ class CEvent : public XbmcThreads::NonCopyable
 
 public:
   inline CEvent(bool manual = false, bool signaled_ = false) : 
-    manualReset(manual), signaled(signaled_), numWaits(0), groups(NULL), condVar(actualCv,signaled) {}
+    manualReset(manual), signaled(signaled_), numWaits(0), groups(nullptr), condVar(actualCv,signaled) {}
 
   inline void Reset() { CSingleLock lock(mutex); signaled = false; }
   void Set();
@@ -135,9 +135,9 @@ namespace XbmcThreads
 
     /**
      * Create a CEventGroup from a number of CEvents. The parameters
-     *  should form a NULL terminated list of CEvent*'s
+     *  should form a nullptr terminated list of CEvent*'s
      *
-     *  CEventGroup g(event1, event2, event3, NULL);
+     *  CEventGroup g(event1, event2, event3, nullptr);
      */
     CEventGroup(CEvent* v1, ...);
     ~CEventGroup();
@@ -153,7 +153,7 @@ namespace XbmcThreads
      * This will block until any one of the CEvents in the group are
      * signaled or the timeout is reachec. If an event is signaled then
      * it will return a pointer to that CEvent, otherwise it will return
-     * NULL.
+     * nullptr.
      */
     CEvent* wait(unsigned int milliseconds);
 

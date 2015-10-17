@@ -38,7 +38,7 @@ public:
     static bool write_minidump(EXCEPTION_POINTERS* pEp);
     static bool write_stacktrace(EXCEPTION_POINTERS* pEp);
 protected:
-    win32_exception(EXCEPTION_POINTERS*, const char* classname = NULL);
+    win32_exception(EXCEPTION_POINTERS*, const char* classname = nullptr);
     static void translate(unsigned code, EXCEPTION_POINTERS* info);
 
     inline bool write_minidump() const { return write_minidump(mExceptionPointers); };
