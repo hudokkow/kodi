@@ -104,8 +104,8 @@ namespace JSONRPC
       virtual void PushBuffer(CTCPServer *host, const char *buffer, int length);
       virtual void Disconnect();
 
-      virtual bool IsNew() const { return m_websocket == NULL; }
-      virtual bool Closing() const { return m_websocket != NULL && m_websocket->GetState() == WebSocketStateClosed; }
+      virtual bool IsNew() const { return m_websocket == nullptr; }
+      virtual bool Closing() const { return m_websocket != nullptr && m_websocket->GetState() == WebSocketStateClosed; }
 
     private:
       CWebSocket *m_websocket;

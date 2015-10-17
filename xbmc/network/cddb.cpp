@@ -205,7 +205,7 @@ std::string Xcddb::Recv(bool wait4point)
 //-------------------------------------------------------------------------------------------------------------------
 bool Xcddb::queryCDinfo(CCdInfo* pInfo, int inexact_list_select)
 {
-  if ( pInfo == NULL )
+  if ( pInfo == nullptr )
   {
     m_lastError = E_PARAMETER_WRONG;
     return false;
@@ -231,7 +231,7 @@ bool Xcddb::queryCDinfo(CCdInfo* pInfo, int inexact_list_select)
   if ( !Send(read_buffer.c_str()) )
   {
     CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexaxt_list_select Error sending \"%s\"", read_buffer.c_str());
-    CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexaxt_list_select pInfo == NULL");
+    CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexaxt_list_select pInfo == nullptr");
     m_lastError = E_NETWORK_ERROR_SEND;
     return false;
   }
@@ -496,7 +496,7 @@ void Xcddb::parseData(const char *buffer)
     if (line[0] != '#')
     {
       char *s = strstr(line, "=");
-      if (s != NULL)
+      if (s != nullptr)
       {
         std::string strKeyword(line, s - line);
         StringUtils::TrimRight(strKeyword);
@@ -573,7 +573,7 @@ void Xcddb::parseData(const char *buffer)
           StringUtils::TrimLeft(strGenre);
           if (StringUtils::IsNaturalNumber(strGenre))
           {
-            int iGenre = strtol(strGenre.c_str(), NULL, 10);
+            int iGenre = strtol(strGenre.c_str(), nullptr, 10);
             m_strGenre = TagLib::ID3v1::genre(iGenre).to8Bit(true);
           }
         }
@@ -810,9 +810,9 @@ const std::string& Xcddb::getGenre() const
 //-------------------------------------------------------------------------------------------------------------------
 bool Xcddb::queryCDinfo(CCdInfo* pInfo)
 {
-  if ( pInfo == NULL )
+  if ( pInfo == nullptr )
   {
-    CLog::Log(LOGERROR, "Xcddb::queryCDinfo pInfo == NULL");
+    CLog::Log(LOGERROR, "Xcddb::queryCDinfo pInfo == nullptr");
     m_lastError = E_PARAMETER_WRONG;
     return false;
   }
@@ -968,7 +968,7 @@ bool Xcddb::queryCDinfo(CCdInfo* pInfo)
   {
   case 200: //Found exact match
     strtok((char *)recv_buffer.c_str(), " ");
-    read_buffer = StringUtils::Format("cddb read %s %08x", strtok(NULL, " "), discid);
+    read_buffer = StringUtils::Format("cddb read %s %08x", strtok(nullptr, " "), discid);
     break;
 
   case 210: //Found exact matches, list follows (until terminating marker)
@@ -1063,7 +1063,7 @@ bool Xcddb::isCDCached( CCdInfo* pInfo )
 {
   if (cCacheDir.size() == 0)
     return false;
-  if ( pInfo == NULL )
+  if ( pInfo == nullptr )
     return false;
 
   return XFILE::CFile::Exists(GetCacheFile(pInfo->GetCddbDiscId()));

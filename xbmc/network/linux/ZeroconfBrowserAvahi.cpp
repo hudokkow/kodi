@@ -93,7 +93,7 @@ CZeroconfBrowserAvahi::~CZeroconfBrowserAvahi()
 
     //now wait for the thread to stop
     assert(m_thread_id);
-    pthread_join(m_thread_id, NULL);
+    pthread_join(m_thread_id, nullptr);
     avahi_threaded_poll_get(mp_poll)->timeout_free(lp_timeout);
   }
   //free the client (frees all browsers, groups, ...)
@@ -315,14 +315,14 @@ void CZeroconfBrowserAvahi::browseCallback (
 
 CZeroconfBrowser::ZeroconfService::tTxtRecordMap GetTxtRecords(AvahiStringList *txt)
 {
-  AvahiStringList *i = NULL;
+  AvahiStringList *i = nullptr;
   CZeroconfBrowser::ZeroconfService::tTxtRecordMap recordMap;
   
   for( i = txt; i; i = i->next )
   {
     char *key, *value;
 
-    if( avahi_string_list_get_pair( i, &key, &value, NULL ) < 0 )
+    if( avahi_string_list_get_pair( i, &key, &value, nullptr ) < 0 )
       continue;
 
     recordMap.insert(
@@ -391,7 +391,7 @@ AvahiServiceBrowser* CZeroconfBrowserAvahi::createServiceBrowser ( const std::st
 {
   assert(fp_client);
   AvahiServiceBrowser* ret = avahi_service_browser_new ( fp_client, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, fcr_service_type.c_str(),
-                                                         NULL, ( AvahiLookupFlags ) 0, browseCallback, fp_userdata );
+                                                         nullptr, ( AvahiLookupFlags ) 0, browseCallback, fp_userdata );
   if ( !ret )
   {
     CLog::Log ( LOGERROR, "CZeroconfBrowserAvahi::createServiceBrowser Failed to create service (%s) browser: %s",

@@ -218,7 +218,7 @@ CNetworkInterface* CNetwork::GetFirstConnectedInterface()
       ++iter;
    }
 
-   return NULL;
+   return nullptr;
 }
 
 bool CNetwork::HasInterfaceForIP(unsigned long address)
@@ -251,7 +251,7 @@ bool CNetwork::IsAvailable(void)
 
 bool CNetwork::IsConnected()
 {
-   return GetFirstConnectedInterface() != NULL;
+   return GetFirstConnectedInterface() != nullptr;
 }
 
 CNetworkInterface* CNetwork::GetInterfaceByName(const std::string& name)
@@ -266,7 +266,7 @@ CNetworkInterface* CNetwork::GetInterfaceByName(const std::string& name)
       ++iter;
    }
 
-   return NULL;
+   return nullptr;
 }
 
 void CNetwork::NetworkMessage(EMESSAGE message, int param)

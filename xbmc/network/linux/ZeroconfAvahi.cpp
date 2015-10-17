@@ -116,7 +116,7 @@ CZeroconfAvahi::~CZeroconfAvahi()
 
     //now wait for the thread to stop
     assert(m_thread_id);
-    pthread_join(m_thread_id, NULL);
+    pthread_join(m_thread_id, nullptr);
     avahi_threaded_poll_get(mp_poll)->timeout_free(lp_timeout);
   }
 
@@ -144,7 +144,7 @@ bool CZeroconfAvahi::doPublishService(const std::string& fcr_identifier,
   }
 
   //txt records to AvahiStringList
-  AvahiStringList *txtList = NULL;
+  AvahiStringList *txtList = nullptr;
   for(std::vector<std::pair<std::string, std::string> >::const_iterator it=txt.begin(); it!=txt.end(); ++it)
   {
     txtList = avahi_string_list_add_pair(txtList, it->first.c_str(), it->second.c_str());
@@ -180,7 +180,7 @@ bool CZeroconfAvahi::doForceReAnnounceService(const std::string& fcr_identifier)
     // this will trigger the reannouncement
     if ((avahi_entry_group_update_service_txt_strlst(it->second->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, AvahiPublishFlags(0),
                                               it->second->m_name.c_str(),
-                                              it->second->m_type.c_str(), NULL, it->second->mp_txt)) >= 0)
+                                              it->second->m_type.c_str(), nullptr, it->second->mp_txt)) >= 0)
       ret = true;
   }
 
@@ -206,7 +206,7 @@ bool CZeroconfAvahi::doRemoveService(const std::string& fcr_ident)
   if(it->second->mp_txt)
   {
     avahi_string_list_free(it->second->mp_txt);
-    it->second->mp_txt = NULL;
+    it->second->mp_txt = nullptr;
   }
   
   m_services.erase(it);
@@ -227,7 +227,7 @@ void CZeroconfAvahi::doStop()
     if(it->second->mp_txt)
     {
       avahi_string_list_free(it->second->mp_txt);
-      it->second->mp_txt = NULL;
+      it->second->mp_txt = nullptr;
     }
   }
   m_services.clear();
@@ -338,7 +338,7 @@ void CZeroconfAvahi::groupCallback(AvahiEntryGroup *fp_group, AvahiEntryGroupSta
           if (it->second->mp_txt)
           {
             avahi_string_list_free(it->second->mp_txt);
-            it->second->mp_txt = NULL;
+            it->second->mp_txt = nullptr;
           }
           break;
         }
@@ -407,7 +407,7 @@ void CZeroconfAvahi::addService(tServiceMap::mapped_type fp_service_info, AvahiC
   {
     if ((ret = avahi_entry_group_add_service_strlst(fp_service_info->mp_group, AVAHI_IF_UNSPEC, AVAHI_PROTO_UNSPEC, AvahiPublishFlags(0),
                                              fp_service_info->m_name.c_str(),
-                                             fp_service_info->m_type.c_str(), NULL, NULL, fp_service_info->m_port, fp_service_info->mp_txt)) < 0)
+                                             fp_service_info->m_type.c_str(), nullptr, nullptr, fp_service_info->m_port, fp_service_info->mp_txt)) < 0)
     {
       if (ret == AVAHI_ERR_COLLISION)
       {

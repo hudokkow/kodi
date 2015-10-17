@@ -60,7 +60,7 @@ namespace EVENTPACKET
 
      Legend:
             %s - null terminated ASCII string (strlen + '\0' bytes)
-                 (empty string is represented as a single byte NULL '\0')
+                 (empty string is represented as a single byte nullptr '\0')
             %c - single byte
             %i - network byte ordered short unsigned integer (2 bytes)
             %d - network byte ordered long unsigned integer  (4 bytes)
@@ -211,7 +211,7 @@ namespace EVENTPACKET
       m_bValid = false;
       m_iSeq = 0;
       m_iTotalPackets = 0;
-      m_pPayload = NULL;
+      m_pPayload = nullptr;
       m_iPayloadSize = 0;
       m_iClientToken = 0;
       m_cMajVer = '0';
@@ -224,7 +224,7 @@ namespace EVENTPACKET
       m_bValid = false;
       m_iSeq = 0;
       m_iTotalPackets = 0;
-      m_pPayload = NULL;
+      m_pPayload = nullptr;
       m_iPayloadSize = 0;
       m_iClientToken = 0;
       m_cMajVer = '0';
