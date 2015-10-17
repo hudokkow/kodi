@@ -59,14 +59,14 @@ bool CWin32InterfaceForCLog::OpenLogFile(const std::string& logFilename, const s
     (void)MoveFileW(strLogFileW.c_str(), strLogFileOldW.c_str()); // if it's failed, try to continue
   }
 
-  m_hFile = CreateFileW(strLogFileW.c_str(), GENERIC_WRITE, FILE_SHARE_READ, NULL,
-                                  CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+  m_hFile = CreateFileW(strLogFileW.c_str(), GENERIC_WRITE, FILE_SHARE_READ, nullptr,
+                                  CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
   if (m_hFile == INVALID_HANDLE_VALUE)
     return false;
 
   static const unsigned char BOM[3] = { 0xEF, 0xBB, 0xBF };
   DWORD written;
-  (void)WriteFile(m_hFile, BOM, sizeof(BOM), &written, NULL); // write BOM, ignore possible errors
+  (void)WriteFile(m_hFile, BOM, sizeof(BOM), &written, nullptr); // write BOM, ignore possible errors
   (void)FlushFileBuffers(m_hFile);
 
   return true;
@@ -91,7 +91,7 @@ bool CWin32InterfaceForCLog::WriteStringToLog(const std::string& logString)
   strData += "\r\n";
 
   DWORD written;
-  const bool ret = (WriteFile(m_hFile, strData.c_str(), strData.length(), &written, NULL) != 0) && written == strData.length();
+  const bool ret = (WriteFile(m_hFile, strData.c_str(), strData.length(), &written, nullptr) != 0) && written == strData.length();
 
   return ret;
 }
@@ -100,7 +100,7 @@ void CWin32InterfaceForCLog::PrintDebugString(const std::string& debugString)
 {
 #ifdef _DEBUG
   ::OutputDebugStringW(L"Debug Print: ");
-  int bufSize = MultiByteToWideChar(CP_UTF8, 0, debugString.c_str(), debugString.length(), NULL, 0);
+  int bufSize = MultiByteToWideChar(CP_UTF8, 0, debugString.c_str(), debugString.length(), nullptr, 0);
   XUTILS::auto_buffer buf(sizeof(wchar_t) * (bufSize + 1)); // '+1' for extra safety
   if (MultiByteToWideChar(CP_UTF8, 0, debugString.c_str(), debugString.length(), (wchar_t*)buf.get(), buf.size() / sizeof(wchar_t)) == bufSize)
     ::OutputDebugStringW(std::wstring((wchar_t*)buf.get(), bufSize).c_str());

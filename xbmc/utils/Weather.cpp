@@ -156,7 +156,7 @@ void CWeatherJob::LoadLocalizedToken()
   // We load the english strings in to get our tokens
   std::string language = LANGUAGE_DEFAULT;
   CSettingString* languageSetting = static_cast<CSettingString*>(CSettings::GetInstance().GetSetting(CSettings::SETTING_LOCALE_LANGUAGE));
-  if (languageSetting != NULL)
+  if (languageSetting != nullptr)
     language = languageSetting->GetDefault();
 
   // Try the strings PO file first
@@ -400,7 +400,7 @@ void CWeather::OnJobComplete(unsigned int jobID, bool success, CJob *job)
 
 void CWeather::OnSettingChanged(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string settingId = setting->GetId();
@@ -415,14 +415,14 @@ void CWeather::OnSettingChanged(const CSetting *setting)
 
 void CWeather::OnSettingAction(const CSetting *setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string settingId = setting->GetId();
   if (settingId == CSettings::SETTING_WEATHER_ADDONSETTINGS)
   {
     AddonPtr addon;
-    if (CAddonMgr::GetInstance().GetAddon(CSettings::GetInstance().GetString(CSettings::SETTING_WEATHER_ADDON), addon, ADDON_SCRIPT_WEATHER) && addon != NULL)
+    if (CAddonMgr::GetInstance().GetAddon(CSettings::GetInstance().GetString(CSettings::SETTING_WEATHER_ADDON), addon, ADDON_SCRIPT_WEATHER) && addon != nullptr)
     { // TODO: maybe have ShowAndGetInput return a bool if settings changed, then only reset weather if true.
       CGUIDialogAddonSettings::ShowAndGetInput(addon);
       Refresh();

@@ -59,7 +59,7 @@ namespace XUTILS
 
     /**
      * Get pointer to buffer content
-     * @return pointer to buffer content or NULL if buffer is zero size
+     * @return pointer to buffer content or nullptr if buffer is zero size
      */
     inline char* get(void) { return static_cast<char*>(p); }
     /**

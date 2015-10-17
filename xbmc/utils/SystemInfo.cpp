@@ -85,7 +85,7 @@ static bool sysGetVersionExWByRef(OSVERSIONINFOEXW& osVerInfo)
   
   typedef NTSTATUS(__stdcall *RtlGetVersionPtr)(RTL_OSVERSIONINFOEXW* pOsInfo);
   static HMODULE hNtDll = GetModuleHandleW(L"ntdll.dll");
-  if (hNtDll != NULL)
+  if (hNtDll != nullptr)
   {
     static RtlGetVersionPtr RtlGetVer = (RtlGetVersionPtr) GetProcAddress(hNtDll, "RtlGetVersion");
     if (RtlGetVer && RtlGetVer(&osVerInfo) == 0)
@@ -218,11 +218,11 @@ static std::string getValueFromLsb_release(enum lsb_rel_info_type infoType)
     return "";
   }
   FILE* lsb_rel = popen(command.c_str(), "r");
-  if (lsb_rel == NULL)
+  if (lsb_rel == nullptr)
     return "";
 
   char buf[300]; // more than enough
-  if (fgets(buf, 300, lsb_rel) == NULL)
+  if (fgets(buf, 300, lsb_rel) == nullptr)
   {
     pclose(lsb_rel);
     return "";
@@ -405,7 +405,7 @@ CSysInfo::~CSysInfo()
 
 bool CSysInfo::Load(const TiXmlNode *settings)
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
   
   const TiXmlElement *pElement = settings->FirstChildElement("general");
@@ -417,15 +417,15 @@ bool CSysInfo::Load(const TiXmlNode *settings)
 
 bool CSysInfo::Save(TiXmlNode *settings) const
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   TiXmlNode *generalNode = settings->FirstChild("general");
-  if (generalNode == NULL)
+  if (generalNode == nullptr)
   {
     TiXmlElement generalNodeNew("general");
     generalNode = settings->InsertEndChild(generalNodeNew);
-    if (generalNode == NULL)
+    if (generalNode == nullptr)
       return false;
   }
   XMLUtils::SetInt(generalNode, "systemtotaluptime", m_iSystemTimeTotalUp);
@@ -435,7 +435,7 @@ bool CSysInfo::Save(TiXmlNode *settings) const
 
 const std::string& CSysInfo::GetAppName(void)
 {
-  assert(CCompileInfo::GetAppName() != NULL);
+  assert(CCompileInfo::GetAppName() != nullptr);
   static const std::string appName(CCompileInfo::GetAppName());
 
   return appName;
@@ -452,9 +452,9 @@ bool CSysInfo::GetDiskSpace(const std::string& drive,int& iTotal, int& iTotalFre
 #ifdef TARGET_WINDOWS
     UINT uidriveType = GetDriveType(( drive + ":\\" ).c_str());
     if(uidriveType != DRIVE_UNKNOWN && uidriveType != DRIVE_NO_ROOT_DIR)
-      bRet= ( 0 != GetDiskFreeSpaceEx( ( drive + ":\\" ).c_str(), NULL, &ULTotal, &ULTotalFree) );
+      bRet= ( 0 != GetDiskFreeSpaceEx( ( drive + ":\\" ).c_str(), nullptr, &ULTotal, &ULTotalFree) );
 #elif defined(TARGET_POSIX)
-    bRet = (0 != GetDiskFreeSpaceEx(drive.c_str(), NULL, &ULTotal, &ULTotalFree));
+    bRet = (0 != GetDiskFreeSpaceEx(drive.c_str(), nullptr, &ULTotal, &ULTotalFree));
 #endif
   }
   else
@@ -462,7 +462,7 @@ bool CSysInfo::GetDiskSpace(const std::string& drive,int& iTotal, int& iTotalFre
     ULARGE_INTEGER ULTotalTmp= { { 0 } };
     ULARGE_INTEGER ULTotalFreeTmp= { { 0 } };
 #ifdef TARGET_WINDOWS
-    char* pcBuffer= NULL;
+    char* pcBuffer= nullptr;
     DWORD dwStrLength= GetLogicalDriveStrings( 0, pcBuffer );
     if( dwStrLength != 0 )
     {
@@ -472,7 +472,7 @@ bool CSysInfo::GetDiskSpace(const std::string& drive,int& iTotal, int& iTotalFre
       int iPos= 0;
       do {
         if( DRIVE_FIXED == GetDriveType( pcBuffer + iPos  ) &&
-            GetDiskFreeSpaceEx( ( pcBuffer + iPos ), NULL, &ULTotal, &ULTotalFree ) )
+            GetDiskFreeSpaceEx( ( pcBuffer + iPos ), nullptr, &ULTotal, &ULTotalFree ) )
         {
           ULTotalTmp.QuadPart+= ULTotal.QuadPart;
           ULTotalFreeTmp.QuadPart+= ULTotalFree.QuadPart;
@@ -482,7 +482,7 @@ bool CSysInfo::GetDiskSpace(const std::string& drive,int& iTotal, int& iTotalFre
     }
     delete[] pcBuffer;
 #else // for linux and osx
-    if( GetDiskFreeSpaceEx( "/", NULL, &ULTotal, &ULTotalFree ) )
+    if( GetDiskFreeSpaceEx( "/", nullptr, &ULTotal, &ULTotalFree ) )
     {
       ULTotalTmp.QuadPart+= ULTotal.QuadPart;
       ULTotalFreeTmp.QuadPart+= ULTotalFree.QuadPart;
@@ -783,7 +783,7 @@ std::string CSysInfo::GetManufacturerName(void)
       wchar_t buf[400]; // more than enough
       DWORD bufSize = sizeof(buf);
       DWORD valType;
-      if (RegQueryValueExW(hKey, L"SystemManufacturer", NULL, &valType, (LPBYTE)buf, &bufSize) == ERROR_SUCCESS && valType == REG_SZ)
+      if (RegQueryValueExW(hKey, L"SystemManufacturer", nullptr, &valType, (LPBYTE)buf, &bufSize) == ERROR_SUCCESS && valType == REG_SZ)
       {
         g_charsetConverter.wToUTF8(std::wstring(buf, bufSize / sizeof(wchar_t)), manufName);
         size_t zeroPos = manufName.find(char(0));
@@ -818,10 +818,10 @@ std::string CSysInfo::GetModelName(void)
     modelName = CDarwinUtils::getIosPlatformString();
 #elif defined(TARGET_DARWIN_OSX)
     size_t nameLen = 0; // 'nameLen' should include terminating null
-    if (sysctlbyname("hw.model", NULL, &nameLen, NULL, 0) == 0 && nameLen > 1)
+    if (sysctlbyname("hw.model", nullptr, &nameLen, nullptr, 0) == 0 && nameLen > 1)
     {
       XUTILS::auto_buffer buf(nameLen);
-      if (sysctlbyname("hw.model", buf.get(), &nameLen, NULL, 0) == 0 && nameLen == buf.size())
+      if (sysctlbyname("hw.model", buf.get(), &nameLen, nullptr, 0) == 0 && nameLen == buf.size())
         modelName.assign(buf.get(), nameLen - 1); // assign exactly 'nameLen-1' characters to 'modelName'
     }
 #elif defined(TARGET_WINDOWS)
@@ -831,7 +831,7 @@ std::string CSysInfo::GetModelName(void)
       wchar_t buf[400]; // more than enough
       DWORD bufSize = sizeof(buf);
       DWORD valType; 
-      if (RegQueryValueExW(hKey, L"SystemProductName", NULL, &valType, (LPBYTE)buf, &bufSize) == ERROR_SUCCESS && valType == REG_SZ)
+      if (RegQueryValueExW(hKey, L"SystemProductName", nullptr, &valType, (LPBYTE)buf, &bufSize) == ERROR_SUCCESS && valType == REG_SZ)
       {
         g_charsetConverter.wToUTF8(std::wstring(buf, bufSize / sizeof(wchar_t)), modelName);
         size_t zeroPos = modelName.find(char(0));

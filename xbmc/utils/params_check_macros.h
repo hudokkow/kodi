@@ -57,7 +57,7 @@
 // for example: void SetName(IN_STRING const char* newName);
 #define IN_STRING _In_z_
 
-// specify that parameter must be zero-terminated string or NULL
+// specify that parameter must be zero-terminated string or nullptr
 // for example: bool SetAdditionalName(IN_OPT_STRING const char* addName);
 #define IN_OPT_STRING _In_opt_z_
 #else  // ! _MSC_VER

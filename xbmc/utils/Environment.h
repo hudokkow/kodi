@@ -97,8 +97,8 @@ public:
   static std::string getenv(const std::string &name);
 #ifdef TARGET_WINDOWS
 private:
-  static std::wstring win32ConvertUtf8ToW(const std::string &text, bool *resultSuccessful = NULL);
-  static std::string win32ConvertWToUtf8(const std::wstring &text, bool *resultSuccessful = NULL);
+  static std::wstring win32ConvertUtf8ToW(const std::string &text, bool *resultSuccessful = nullptr);
+  static std::string win32ConvertWToUtf8(const std::wstring &text, bool *resultSuccessful = nullptr);
   enum updateAction:int {addOrUpdateOnly = -2, deleteVariable = -1, addOnly =  0, autoDetect = 1};
   static int win32_setenv(const std::string &name, const std::string &value = "", updateAction action = autoDetect);
 #endif // TARGET_WINDOWS

@@ -27,23 +27,23 @@ std::string CJSONVariantWriter::Write(const CVariant &value, bool compact)
 {
   std::string output;
 
-  yajl_gen g = yajl_gen_alloc(NULL);
+  yajl_gen g = yajl_gen_alloc(nullptr);
   yajl_gen_config(g, yajl_gen_beautify, compact ? 0 : 1);
   yajl_gen_config(g, yajl_gen_indent_string, "\t");
 
   // Set locale to classic ("C") to ensure valid JSON numbers
 #ifndef TARGET_WINDOWS
-  const char *currentLocale = setlocale(LC_NUMERIC, NULL);
+  const char *currentLocale = setlocale(LC_NUMERIC, nullptr);
   std::string backupLocale;
-  if (currentLocale != NULL && (currentLocale[0] != 'C' || currentLocale[1] != 0))
+  if (currentLocale != nullptr && (currentLocale[0] != 'C' || currentLocale[1] != 0))
   {
     backupLocale = currentLocale;
     setlocale(LC_NUMERIC, "C");
   }
 #else  // TARGET_WINDOWS
-  const wchar_t* const currentLocale = _wsetlocale(LC_NUMERIC, NULL);
+  const wchar_t* const currentLocale = _wsetlocale(LC_NUMERIC, nullptr);
   std::wstring backupLocale;
-  if (currentLocale != NULL && (currentLocale[0] != L'C' || currentLocale[1] != 0))
+  if (currentLocale != nullptr && (currentLocale[0] != L'C' || currentLocale[1] != 0))
   {
     backupLocale = currentLocale;
     _wsetlocale(LC_NUMERIC, L"C");

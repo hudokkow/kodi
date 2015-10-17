@@ -112,7 +112,7 @@ CDateTime CTimeUtils::GetLocalTime(time_t time)
   local = localtime(&time); // Conversion to local time
 #endif
   /*
-   * Microsoft implementation of localtime returns NULL if on or before epoch.
+   * Microsoft implementation of localtime returns nullptr if on or before epoch.
    * http://msdn.microsoft.com/en-us/library/bf12f0hc(VS.80).aspx
    */
   if (local)

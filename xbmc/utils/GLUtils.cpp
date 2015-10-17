@@ -71,25 +71,25 @@ void LogGraphicsInfo()
   if (s)
     CLog::Log(LOGNOTICE, "GL_VENDOR = %s", s);
   else
-    CLog::Log(LOGNOTICE, "GL_VENDOR = NULL");
+    CLog::Log(LOGNOTICE, "GL_VENDOR = nullptr");
 
   s = glGetString(GL_RENDERER);
   if (s)
     CLog::Log(LOGNOTICE, "GL_RENDERER = %s", s);
   else
-    CLog::Log(LOGNOTICE, "GL_RENDERER = NULL");
+    CLog::Log(LOGNOTICE, "GL_RENDERER = nullptr");
 
   s = glGetString(GL_VERSION);
   if (s)
     CLog::Log(LOGNOTICE, "GL_VERSION = %s", s);
   else
-    CLog::Log(LOGNOTICE, "GL_VERSION = NULL");
+    CLog::Log(LOGNOTICE, "GL_VERSION = nullptr");
 
   s = glGetString(GL_SHADING_LANGUAGE_VERSION);
   if (s)
     CLog::Log(LOGNOTICE, "GL_SHADING_LANGUAGE_VERSION = %s", s);
   else
-    CLog::Log(LOGNOTICE, "GL_SHADING_LANGUAGE_VERSION = NULL");
+    CLog::Log(LOGNOTICE, "GL_SHADING_LANGUAGE_VERSION = nullptr");
 
   //GL_NVX_gpu_memory_info extension
 #define GL_GPU_MEMORY_INFO_DEDICATED_VIDMEM_NVX          0x9047
@@ -114,7 +114,7 @@ void LogGraphicsInfo()
   if (s)
     CLog::Log(LOGNOTICE, "GL_EXTENSIONS = %s", s);
   else
-    CLog::Log(LOGNOTICE, "GL_EXTENSIONS = NULL");
+    CLog::Log(LOGNOTICE, "GL_EXTENSIONS = nullptr");
 
 #else /* !HAS_GL */
   CLog::Log(LOGNOTICE,

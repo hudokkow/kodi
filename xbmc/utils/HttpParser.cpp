@@ -58,7 +58,7 @@ HttpParser::parseHeader()
         LOWER = 0x1,
 
         // convert current character to null.
-        NULLIFY = 0x2,
+        nullptrIFY = 0x2,
 
         // set the header index to the current position
         SET_HEADER_START = 0x4,
@@ -82,17 +82,17 @@ HttpParser::parseHeader()
         State nextState;
         unsigned actions;
     } fsm[] = {
-        { p_request_line,         CR, p_request_line_cr,     NULLIFY                            },
+        { p_request_line,         CR, p_request_line_cr,     nullptrIFY                            },
         { p_request_line,        ANY, p_request_line,        0                                  },
         { p_request_line_cr,      LF, p_request_line_crlf,   0                                  },
         { p_request_line_crlf,    CR, p_request_line_crlfcr, 0                                  },
         { p_request_line_crlf,   ANY, p_key,                 SET_HEADER_START | SET_KEY | LOWER },
         { p_request_line_crlfcr,  LF, p_content,             SET_CONTENT_START                  },
-        { p_key,                 ':', p_key_colon,           NULLIFY                            },
+        { p_key,                 ':', p_key_colon,           nullptrIFY                            },
         { p_key,                 ANY, p_key,                 LOWER                              },
         { p_key_colon,           ' ', p_key_colon_sp,        0                                  },
         { p_key_colon_sp,        ANY, p_value,               SET_VALUE                          },
-        { p_value,                CR, p_value_cr,            NULLIFY | STORE_KEY_VALUE          },
+        { p_value,                CR, p_value_cr,            nullptrIFY | STORE_KEY_VALUE          },
         { p_value,               ANY, p_value,               0                                  },
         { p_value_cr,             LF, p_value_crlf,          0                                  },
         { p_value_crlf,           CR, p_value_crlfcr,        0                                  },
@@ -115,7 +115,7 @@ HttpParser::parseHeader()
                     _data[i] = tolower( _data[i] );
                 }
 
-                if ( fsm[d].actions & NULLIFY ) {
+                if ( fsm[d].actions & nullptrIFY ) {
                     _data[i] = 0;
                 }
 
@@ -237,7 +237,7 @@ HttpParser::getBody() const
     if ( _contentLength > 0 ) {
         return &_data[_contentStart];
     } else  {
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -255,7 +255,7 @@ HttpParser::getValue( const char* key ) const
 
     }
 
-    return NULL;
+    return nullptr;
 }
 
 unsigned
