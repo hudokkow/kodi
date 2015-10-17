@@ -590,7 +590,7 @@ xtwc::Compositor::Ready(void *data)
   }
   
   wl_event_source_remove(compositor->m_readySource);
-  compositor->m_readySource = NULL;
+  compositor->m_readySource = nullptr;
   
   /* Initialize the fake keyboard and pointer on our seat. This is
    * effectively manipulating the backend into doing something it
@@ -783,7 +783,7 @@ module_init(struct weston_compositor *c,
                        &xbmc_wayland_interface,
                        1,
                        compositor,
-                       xtw::XBMCWayland::BindToClient) == NULL)
+                       xtw::XBMCWayland::BindToClient) == nullptr)
     return -1;
 
   return 0;

@@ -43,9 +43,9 @@ xbmc::KeyboardProcessor::KeyboardProcessor(IEventListener &listener,
                                            ITimeoutManager &timeouts) :
   m_listener(listener),
   m_timeouts(timeouts),
-  m_xbmcWindow(NULL),
+  m_xbmcWindow(nullptr),
   m_repeatSym(0),
-  m_context(NULL)
+  m_context(nullptr)
 {
 }
 

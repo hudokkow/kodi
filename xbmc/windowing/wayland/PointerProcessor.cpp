@@ -148,5 +148,5 @@ xbmc::PointerProcessor::Enter(struct wl_surface *surface,
                               double surfaceX,
                               double surfaceY)
 {
-  m_cursorManager.SetCursor(0, NULL, 0, 0);
+  m_cursorManager.SetCursor(0, nullptr, 0, 0);
 }

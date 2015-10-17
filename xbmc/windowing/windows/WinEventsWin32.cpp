@@ -53,7 +53,7 @@
 
 using namespace PERIPHERALS;
 
-HWND g_hWnd = NULL;
+HWND g_hWnd = nullptr;
 
 #ifndef LODWORD
 #define LODWORD(longval) ((DWORD)((DWORDLONG)(longval)))
@@ -74,10 +74,10 @@ uint32_t g_uQueryCancelAutoPlay = 0;
 
 int XBMC_TranslateUNICODE = 1;
 
-PHANDLE_EVENT_FUNC CWinEventsWin32::m_pEventFunc = NULL;
+PHANDLE_EVENT_FUNC CWinEventsWin32::m_pEventFunc = nullptr;
 int CWinEventsWin32::m_originalZoomDistance = 0;
 Pointer CWinEventsWin32::m_touchPointer;
-CGenericTouchSwipeDetector* CWinEventsWin32::m_touchSwipeDetector = NULL;
+CGenericTouchSwipeDetector* CWinEventsWin32::m_touchSwipeDetector = nullptr;
 
 // register to receive SD card events (insert/remove)
 // seen at http://www.codeproject.com/Messages/2897423/Re-No-message-triggered-on-SD-card-insertion-remov.aspx
@@ -243,7 +243,7 @@ void DIB_InitOSKeymap()
 
 static int XBMC_MapVirtualKey(int scancode, int vkey)
 {
-  int mvke = MapVirtualKeyEx(scancode & 0xFF, 1, NULL);
+  int mvke = MapVirtualKeyEx(scancode & 0xFF, 1, nullptr);
 
   switch(vkey)
   { /* These are always correct */
@@ -370,7 +370,7 @@ void CWinEventsWin32::MessagePush(XBMC_Event *newEvent)
 {
   // m_pEventFunc should be set because MessagePush is only executed by
   // methods called from WndProc()
-  if (m_pEventFunc == NULL)
+  if (m_pEventFunc == nullptr)
     return;
 
   m_pEventFunc(*newEvent);
@@ -379,7 +379,7 @@ void CWinEventsWin32::MessagePush(XBMC_Event *newEvent)
 bool CWinEventsWin32::MessagePump()
 {
   MSG  msg;
-  while( PeekMessage( &msg, NULL, 0U, 0U, PM_REMOVE ) )
+  while( PeekMessage( &msg, nullptr, 0U, 0U, PM_REMOVE ) )
   {
     TranslateMessage( &msg );
     DispatchMessage( &msg );
@@ -390,7 +390,7 @@ bool CWinEventsWin32::MessagePump()
 size_t CWinEventsWin32::GetQueueSize()
 {
   MSG  msg;
-  return PeekMessage( &msg, NULL, 0U, 0U, PM_NOREMOVE );
+  return PeekMessage( &msg, nullptr, 0U, 0U, PM_NOREMOVE );
 }
 
 LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -405,7 +405,7 @@ LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
     SetWindowLongPtr(hWnd, GWLP_USERDATA, (LONG)(((LPCREATESTRUCT)lParam)->lpCreateParams));
     DIB_InitOSKeymap();
     g_uQueryCancelAutoPlay = RegisterWindowMessage(TEXT("QueryCancelAutoPlay"));
-    shcne.pidl = NULL;
+    shcne.pidl = nullptr;
     shcne.fRecursive = TRUE;
     long fEvents = SHCNE_DRIVEADD | SHCNE_DRIVEREMOVED | SHCNE_MEDIAREMOVED | SHCNE_MEDIAINSERTED;
     SHChangeNotifyRegister(hWnd, SHCNRF_ShellLevel | SHCNRF_NewDelivery, fEvents, WM_MEDIA_CHANGE, 1, &shcne);
@@ -414,7 +414,7 @@ LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
   }
 
   if (uMsg == WM_DESTROY)
-    g_hWnd = NULL;
+    g_hWnd = nullptr;
 
   m_pEventFunc = (PHANDLE_EVENT_FUNC)GetWindowLongPtr(hWnd, GWLP_USERDATA);
   if (!m_pEventFunc)
@@ -769,7 +769,7 @@ LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
                 if(wParam == DBT_DEVICEARRIVAL)
                 {
                   CLog::Log(LOGDEBUG, __FUNCTION__": Drive %s Media has arrived.", strdrive.c_str());
-                  CJobManager::GetInstance().AddJob(new CDetectDisc(strdrive, true), NULL);
+                  CJobManager::GetInstance().AddJob(new CDetectDisc(strdrive, true), nullptr);
                 }
                 else
                 {
@@ -899,7 +899,7 @@ void CWinEventsWin32::OnGesture(HWND hWnd, LPARAM lParam)
   // set the "current" touch
   m_touchPointer.current.x = (float)point.x;
   m_touchPointer.current.y = (float)point.y;
-  m_touchPointer.current.time = time(NULL);
+  m_touchPointer.current.time = time(nullptr);
 
   switch (gi.dwID)
   {
@@ -930,7 +930,7 @@ void CWinEventsWin32::OnGesture(HWND hWnd, LPARAM lParam)
                                                           m_touchPointer.current.x - m_touchPointer.last.x, m_touchPointer.current.y - m_touchPointer.last.y,
                                                           velocityX, velocityY);
 
-      if (m_touchSwipeDetector != NULL)
+      if (m_touchSwipeDetector != nullptr)
       {
         if (gi.dwFlags & GF_BEGIN)
         {
@@ -942,7 +942,7 @@ void CWinEventsWin32::OnGesture(HWND hWnd, LPARAM lParam)
           m_touchSwipeDetector->OnTouchUp(0, m_touchPointer);
 
           delete m_touchSwipeDetector;
-          m_touchSwipeDetector = NULL;
+          m_touchSwipeDetector = nullptr;
         }
         else
           m_touchSwipeDetector->OnTouchMove(0, m_touchPointer);

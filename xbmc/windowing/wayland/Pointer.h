@@ -68,7 +68,7 @@ public:
 
   /* This method changes the cursor to have the contents of
    * an arbitrary surface on the server side. It can also hide
-   * the cursor if NULL is passed as "surface" */
+   * the cursor if nullptr is passed as "surface" */
   void SetCursor(uint32_t serial,
                  struct wl_surface *surface,
                  int32_t hotspot_x,

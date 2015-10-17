@@ -30,7 +30,7 @@
 namespace xw = xbmc::wayland;
 
 /* We only support version 1 of this interface, the
- * other struct members are impliedly set to NULL */
+ * other struct members are impliedly set to nullptr */
 const struct wl_seat_listener xw::Seat::m_listener =
 {
   Seat::HandleCapabilitiesCallback

@@ -68,8 +68,8 @@ static SDTV_ASPECT_T get_sdtv_aspect_from_display_aspect(float display_aspect);
 CEGLNativeTypeRaspberryPI::CEGLNativeTypeRaspberryPI()
 {
 #if defined(TARGET_RASPBERRY_PI)
-  m_DllBcmHost    = NULL;
-  m_nativeWindow  = NULL;
+  m_DllBcmHost    = nullptr;
+  m_nativeWindow  = nullptr;
 #endif
 }
 
@@ -95,7 +95,7 @@ bool CEGLNativeTypeRaspberryPI::CheckCompatibility()
 void CEGLNativeTypeRaspberryPI::Initialize()
 {
 #if defined(TARGET_RASPBERRY_PI)
-  m_DllBcmHost              = NULL;
+  m_DllBcmHost              = nullptr;
   m_dispman_element         = DISPMANX_NO_HANDLE;
   m_dispman_display         = DISPMANX_NO_HANDLE;
 
@@ -114,7 +114,7 @@ void CEGLNativeTypeRaspberryPI::Destroy()
   if(m_DllBcmHost && m_DllBcmHost->IsLoaded())
     m_DllBcmHost->Unload();
   delete m_DllBcmHost;
-  m_DllBcmHost = NULL;
+  m_DllBcmHost = nullptr;
 #endif
 }
 
@@ -164,7 +164,7 @@ bool CEGLNativeTypeRaspberryPI::DestroyNativeWindow()
 #if defined(TARGET_RASPBERRY_PI)
   DestroyDispmaxWindow();
   free(m_nativeWindow);
-  m_nativeWindow = NULL;
+  m_nativeWindow = nullptr;
   DLOG("CEGLNativeTypeRaspberryPI::DestroyNativeWindow\n");
   return true;
 #else
@@ -592,9 +592,9 @@ void CEGLNativeTypeRaspberryPI::GetSupportedModes(HDMI_RES_GROUP_T group, std::v
   HDMI_RES_GROUP_T prefer_group;
   uint32_t prefer_mode;
   int i;
-  TV_SUPPORTED_MODE_NEW_T *supported_modes = NULL;
+  TV_SUPPORTED_MODE_NEW_T *supported_modes = nullptr;
   // query the number of modes first
-  int max_supported_modes = m_DllBcmHost->vc_tv_hdmi_get_supported_modes_new(group, NULL, 0, &prefer_group, &prefer_mode);
+  int max_supported_modes = m_DllBcmHost->vc_tv_hdmi_get_supported_modes_new(group, nullptr, 0, &prefer_group, &prefer_mode);
 
   if (max_supported_modes > 0)
     supported_modes = new TV_SUPPORTED_MODE_NEW_T[max_supported_modes];

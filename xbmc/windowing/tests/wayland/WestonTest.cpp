@@ -134,7 +134,7 @@ SignalGuard<Iterator>::SignalGuard(const Iterator &begin,
        ++it)
     sigaddset(&mask, *it);
 
-  if (sigprocmask(SIG_BLOCK, &mask, NULL))
+  if (sigprocmask(SIG_BLOCK, &mask, nullptr))
   {
     std::stringstream ss;
     ss << "sigprogmask: "
@@ -146,7 +146,7 @@ SignalGuard<Iterator>::SignalGuard(const Iterator &begin,
 template <typename Iterator>
 SignalGuard<Iterator>::~SignalGuard()
 {
-  if (sigprocmask(SIG_UNBLOCK, &mask, NULL))
+  if (sigprocmask(SIG_UNBLOCK, &mask, nullptr))
     CLog::Log(LOGERROR, "Failed to unblock signals");
 }
 

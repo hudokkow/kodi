@@ -51,9 +51,9 @@ CWinSystemEGL::CWinSystemEGL() : CWinSystemBase()
   m_display           = EGL_NO_DISPLAY;
   m_surface           = EGL_NO_SURFACE;
   m_context           = EGL_NO_CONTEXT;
-  m_config            = NULL;
+  m_config            = nullptr;
 
-  m_egl               = NULL;
+  m_egl               = nullptr;
   m_iVSyncMode        = 0;
 }
 
@@ -263,7 +263,7 @@ bool CWinSystemEGL::DestroyWindowSystem()
 
   m_egl->Destroy();
   delete m_egl;
-  m_egl = NULL;
+  m_egl = nullptr;
 
   CWinSystemBase::DestroyWindowSystem();
   return true;
@@ -342,7 +342,7 @@ bool CWinSystemEGL::ResizeWindow(int newWidth, int newHeight, int newLeft, int n
 
 bool CWinSystemEGL::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res, bool blankOtherDisplays)
 {
-  CreateNewWindow("", fullScreen, res, NULL);
+  CreateNewWindow("", fullScreen, res, nullptr);
   CRenderSystemGLES::ResetRenderSystem(res.iWidth, res.iHeight, fullScreen, res.fRefreshRate);
   int vsync_mode = CSettings::GetInstance().GetInt(CSettings::SETTING_VIDEOSCREEN_VSYNC);
   if (vsync_mode != VSYNC_DRIVER)

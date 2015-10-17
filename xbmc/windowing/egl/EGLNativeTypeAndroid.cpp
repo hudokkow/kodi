@@ -52,7 +52,7 @@ static bool DeviceCanUseDisplaysize(const std::string &name)
   // Devices that can render GUI in 4K
   static const char *devicecanusedisplaysize[] = {
     "foster",
-    NULL
+    nullptr
   };
 
   for (const char **ptr = devicecanusedisplaysize; *ptr; ptr++)
@@ -98,7 +98,7 @@ bool CEGLNativeTypeAndroid::GetNativeWindow(XBNativeWindowType **nativeWindow) c
   if (!nativeWindow)
     return false;
   *nativeWindow = (XBNativeWindowType*) CXBMCApp::GetNativeWindow(30000);
-  return (*nativeWindow != NULL);
+  return (*nativeWindow != nullptr);
 }
 
 bool CEGLNativeTypeAndroid::DestroyNativeDisplay()

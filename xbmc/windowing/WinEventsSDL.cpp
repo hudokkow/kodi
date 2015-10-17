@@ -152,7 +152,7 @@ static void InitEvdev(void)
   // Set m_bEvdevInit to indicate we have been initialised
   m_bEvdevInit = true;
 
-  Display* dpy = XOpenDisplay(NULL);
+  Display* dpy = XOpenDisplay(nullptr);
   if (!dpy)
   {
     CLog::Log(LOGERROR, "CWinEventsSDL::CWinEventsSDL - XOpenDisplay failed");
@@ -281,7 +281,7 @@ bool CWinEventsSDL::MessagePump()
 
         // Check if the Windows keys are down because SDL doesn't flag this.
         uint16_t mod = event.key.keysym.mod;
-        uint8_t* keystate = SDL_GetKeyState(NULL);
+        uint8_t* keystate = SDL_GetKeyState(nullptr);
         if (keystate[SDLK_LSUPER] || keystate[SDLK_RSUPER])
           mod |= XBMCKMOD_LSUPER;
         newEvent.key.keysym.mod = (XBMCMod) mod;

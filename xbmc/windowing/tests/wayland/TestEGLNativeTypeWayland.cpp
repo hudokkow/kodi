@@ -187,7 +187,7 @@ TEST_F(ConnectedEGLNativeTypeWaylandWestonTest, CurrentNativeSuccess)
 TEST_F(ConnectedEGLNativeTypeWaylandWestonTest, GetMostRecentSurface)
 {
   m_nativeType.CreateNativeWindow();
-  EXPECT_TRUE(m_mostRecentSurface != NULL);
+  EXPECT_TRUE(m_mostRecentSurface != nullptr);
 }
 
 #if defined(HAVE_WAYLAND_XBMC_PROTO)
@@ -245,7 +245,7 @@ AssistedEGLNativeTypeWaylandTest::Global(struct wl_registry *registry,
 
 TEST_F(AssistedEGLNativeTypeWaylandTest, TestGotXBMCWayland)
 {
-  EXPECT_TRUE(m_xbmcWayland.get() != NULL);
+  EXPECT_TRUE(m_xbmcWayland.get() != nullptr);
 }
 
 TEST_F(AssistedEGLNativeTypeWaylandTest, AdditionalResolutions)

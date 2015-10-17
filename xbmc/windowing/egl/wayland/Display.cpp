@@ -59,10 +59,10 @@ boost::scoped_ptr<xw::WaylandDisplayListener> xw::WaylandDisplayListener::m_inst
 
 xw::Display::Display(IDllWaylandClient &clientLibrary) :
   m_clientLibrary(clientLibrary),
-  m_display(m_clientLibrary.wl_display_connect(NULL))
+  m_display(m_clientLibrary.wl_display_connect(nullptr))
 {
   /* wl_display_connect won't throw when it fails, but it does
-   * return NULL on failure. If this object would be incomplete
+   * return nullptr on failure. If this object would be incomplete
    * then that is a fatal error for the backend and we should
    * throw a runtime_error for the main connection manager to handle
    */

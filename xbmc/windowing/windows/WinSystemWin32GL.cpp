@@ -39,8 +39,8 @@
 
 CWinSystemWin32GL::CWinSystemWin32GL()
 {
-  m_hglrc = NULL;
-  m_wglSwapIntervalEXT = NULL;
+  m_hglrc = nullptr;
+  m_wglSwapIntervalEXT = nullptr;
 }
 
 CWinSystemWin32GL::~CWinSystemWin32GL()
@@ -50,7 +50,7 @@ CWinSystemWin32GL::~CWinSystemWin32GL()
 
 bool CWinSystemWin32GL::InitRenderSystem()
 {
-  if(m_hWnd == NULL || m_hDC == NULL)
+  if(m_hWnd == nullptr || m_hDC == nullptr)
     return false;
 
   PIXELFORMATDESCRIPTOR pfd;

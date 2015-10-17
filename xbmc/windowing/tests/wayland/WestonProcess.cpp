@@ -111,7 +111,7 @@ xt::Process::Process(const westring &xbmcTestBase,
     "--backend=headless-backend.so",
     modulesOption.c_str(),
     socketOption.c_str(),
-    NULL
+    nullptr
   };
   
   m_pid = fork();
@@ -144,7 +144,7 @@ xt::Process::Child(const char *program,
   sigset_t signalMask;
   sigemptyset(&signalMask);
   sigaddset(&signalMask, SIGUSR2);
-  if (sigprocmask(SIG_UNBLOCK, &signalMask, NULL))
+  if (sigprocmask(SIG_UNBLOCK, &signalMask, nullptr))
   {
     std::stringstream ss;
     ss << "sigprocmask: " << strerror(errno);
@@ -202,7 +202,7 @@ xt::Process::WaitForSignal(int signal, int timeout)
     {
       errno = 0;
       received = sigtimedwait(&signalMask,
-                              NULL,
+                              nullptr,
                               &ts);
       if (received == -1)
       {
@@ -225,7 +225,7 @@ xt::Process::WaitForSignal(int signal, int timeout)
     sigemptyset(&signalMask);
     sigaddset(&signalMask, signal);
     errno = 0;
-    int received = sigwaitinfo(&signalMask, NULL);
+    int received = sigwaitinfo(&signalMask, nullptr);
     
     if (received != signal)
     {
@@ -441,7 +441,7 @@ xt::Process::WaitForStatus(int code, int timeout)
        * the signal */
       ts.tv_nsec = timeout * MsecToNsec / 10;
       
-      nanosleep(&ts, NULL);
+      nanosleep(&ts, nullptr);
     }
   }
   while (timeout == -1 ||

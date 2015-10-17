@@ -333,7 +333,7 @@ xw::WaylandGlobalObject<Implementation>::FetchPending(Registry &registry)
     return proxy;
   }
   
-  return NULL;
+  return nullptr;
 }
 
 template<typename Implementation, typename WaylandImplementation>

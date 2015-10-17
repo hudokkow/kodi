@@ -30,7 +30,7 @@
 namespace xw = xbmc::wayland;
 
 /* We only support version 1 of this interface, the other
- * struct members are impliedly set to NULL */
+ * struct members are impliedly set to nullptr */
 const wl_output_listener xw::Output::m_listener = 
 {
   Output::GeometryCallback,
@@ -194,7 +194,7 @@ xw::Output::Mode(uint32_t flags,
                  int32_t height,
                  int32_t refresh)
 {
-  xw::Output::ModeGeometry *update = NULL;
+  xw::Output::ModeGeometry *update = nullptr;
   
   for (std::vector<ModeGeometry>::iterator it = m_modes.begin();
        it != m_modes.end();

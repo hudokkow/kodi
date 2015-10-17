@@ -200,10 +200,10 @@ void InputEventsWestonTest::SetUp()
   /* Wait for the seat, shell, compositor to appear */
   WaitForSynchronize();
   
-  ASSERT_TRUE(input.get() != NULL);
-  ASSERT_TRUE(compositor.get() != NULL);
-  ASSERT_TRUE(shell.get() != NULL);
-  ASSERT_TRUE(xbmcWayland.get() != NULL);
+  ASSERT_TRUE(input.get() != nullptr);
+  ASSERT_TRUE(compositor.get() != nullptr);
+  ASSERT_TRUE(shell.get() != nullptr);
+  ASSERT_TRUE(xbmcWayland.get() != nullptr);
   
   /* Wait for input devices to appear etc */
   WaitForSynchronize();

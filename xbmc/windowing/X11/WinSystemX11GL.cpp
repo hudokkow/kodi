@@ -28,10 +28,10 @@
 
 CWinSystemX11GL::CWinSystemX11GL()
 {
-  m_glXGetVideoSyncSGI   = NULL;
-  m_glXWaitVideoSyncSGI  = NULL;
-  m_glXSwapIntervalMESA  = NULL;
-  m_glXSwapIntervalEXT   = NULL;
+  m_glXGetVideoSyncSGI   = nullptr;
+  m_glXWaitVideoSyncSGI  = nullptr;
+  m_glXSwapIntervalMESA  = nullptr;
+  m_glXSwapIntervalEXT   = nullptr;
 
   m_iVSyncErrors = 0;
 }
@@ -174,22 +174,22 @@ bool CWinSystemX11GL::CreateNewWindow(const std::string& name, bool fullScreen, 
   if (IsExtSupported("GLX_SGI_video_sync"))
     m_glXWaitVideoSyncSGI = (int (*)(int, int, unsigned int*))glXGetProcAddress((const GLubyte*)"glXWaitVideoSyncSGI");
   else
-    m_glXWaitVideoSyncSGI = NULL;
+    m_glXWaitVideoSyncSGI = nullptr;
 
   if (IsExtSupported("GLX_SGI_video_sync"))
     m_glXGetVideoSyncSGI = (int (*)(unsigned int*))glXGetProcAddress((const GLubyte*)"glXGetVideoSyncSGI");
   else
-    m_glXGetVideoSyncSGI = NULL;
+    m_glXGetVideoSyncSGI = nullptr;
 
   if (IsExtSupported("GLX_MESA_swap_control"))
     m_glXSwapIntervalMESA = (int (*)(int))glXGetProcAddress((const GLubyte*)"glXSwapIntervalMESA");
   else
-    m_glXSwapIntervalMESA = NULL;
+    m_glXSwapIntervalMESA = nullptr;
 
   if (IsExtSupported("GLX_EXT_swap_control"))
     m_glXSwapIntervalEXT = (PFNGLXSWAPINTERVALEXTPROC)glXGetProcAddress((const GLubyte*)"glXSwapIntervalEXT");
   else
-    m_glXSwapIntervalEXT = NULL;
+    m_glXSwapIntervalEXT = nullptr;
 
   return true;
 }
