@@ -55,8 +55,8 @@ class CTagLoaderTagLib : public MUSIC_INFO::IMusicInfoTagLoader
 public:
   CTagLoaderTagLib();
   virtual ~CTagLoaderTagLib();
-  virtual bool                   Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, MUSIC_INFO::EmbeddedArt *art = NULL);
-  bool                           Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, const std::string& fallbackFileExtension, MUSIC_INFO::EmbeddedArt *art = NULL);
+  virtual bool                   Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, MUSIC_INFO::EmbeddedArt *art = nullptr);
+  bool                           Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, const std::string& fallbackFileExtension, MUSIC_INFO::EmbeddedArt *art = nullptr);
 
   static const std::vector<std::string> SplitMBID(const std::vector<std::string> &values);
 protected:
@@ -73,4 +73,5 @@ private:
   static const std::vector<std::string> GetID3v2StringList(const TagLib::ID3v2::FrameList& frameList);
   void                           SetFlacArt(TagLib::FLAC::File *flacFile, MUSIC_INFO::EmbeddedArt *art, MUSIC_INFO::CMusicInfoTag &tag);
 };
+
 

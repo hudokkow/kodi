@@ -5391,3 +5391,4 @@ void CMusicDatabase::UpdateFileDateAdded(int songId, const std::string& strFileN
     CLog::Log(LOGERROR, "%s (%s, %s) failed", __FUNCTION__, CURL::GetRedacted(strFileNameAndPath).c_str(), dateAdded.GetAsDBDateTime().c_str());
   }
 }
+

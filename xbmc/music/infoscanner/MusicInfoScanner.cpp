@@ -68,7 +68,7 @@ CMusicInfoScanner::CMusicInfoScanner() : CThread("MusicInfoScanner"), m_fileCoun
 {
   m_bRunning = false;
   m_showDialog = false;
-  m_handle = NULL;
+  m_handle = nullptr;
   m_bCanInterrupt = false;
   m_currentItem=0;
   m_itemCount=0;
@@ -259,7 +259,7 @@ void CMusicInfoScanner::Process()
   
   if (m_handle)
     m_handle->MarkFinished();
-  m_handle = NULL;
+  m_handle = nullptr;
 }
 
 void CMusicInfoScanner::Start(const std::string& strDirectory, int flags)
@@ -535,7 +535,7 @@ INFO_RET CMusicInfoScanner::ScanTags(const CFileItemList& items, CFileItemList& 
     if (!tag.Loaded())
     {
       std::unique_ptr<IMusicInfoTagLoader> pLoader (CMusicInfoTagLoaderFactory::CreateLoader(*pItem));
-      if (NULL != pLoader.get())
+      if (nullptr != pLoader.get())
         pLoader->Load(pItem->GetPath(), tag);
     }
 
@@ -566,7 +566,7 @@ static bool SortSongsByTrack(const CSong& song, const CSong& song2)
   return song.iTrack < song2.iTrack;
 }
 
-void CMusicInfoScanner::FileItemsToAlbums(CFileItemList& items, VECALBUMS& albums, MAPSONGS* songsMap /* = NULL */)
+void CMusicInfoScanner::FileItemsToAlbums(CFileItemList& items, VECALBUMS& albums, MAPSONGS* songsMap /* = nullptr */)
 {
   /*
    * Step 1: Convert the FileItems into Songs. 
@@ -580,7 +580,7 @@ void CMusicInfoScanner::FileItemsToAlbums(CFileItemList& items, VECALBUMS& album
     CSong song(*items[i]);
 
     // keep the db-only fields intact on rescan...
-    if (songsMap != NULL)
+    if (songsMap != nullptr)
     {
       MAPSONGS::iterator it = songsMap->find(items[i]->GetPath());
       if (it != songsMap->end())
@@ -877,7 +877,7 @@ void CMusicInfoScanner::FindArtForAlbums(VECALBUMS &albums, const std::string &p
      keep everything as song art.
      */
     bool singleArt = true;
-    CSong *art = NULL;
+    CSong *art = nullptr;
     for (VECSONGS::iterator k = album.songs.begin(); k != album.songs.end(); ++k)
     {
       CSong &song = *k;
@@ -951,7 +951,7 @@ int CMusicInfoScanner::GetPathHash(const CFileItemList &items, std::string &hash
   return count;
 }
 
-INFO_RET CMusicInfoScanner::UpdateDatabaseAlbumInfo(CAlbum& album, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog /* = NULL */)
+INFO_RET CMusicInfoScanner::UpdateDatabaseAlbumInfo(CAlbum& album, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog /* = nullptr */)
 {
   if (!scraper)
     return INFO_ERROR;
@@ -995,7 +995,7 @@ loop:
   return albumDownloadStatus;
 }
 
-INFO_RET CMusicInfoScanner::UpdateDatabaseArtistInfo(CArtist& artist, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog /* = NULL */)
+INFO_RET CMusicInfoScanner::UpdateDatabaseArtistInfo(CArtist& artist, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog /* = nullptr */)
 {
   if (!scraper)
     return INFO_ERROR;
@@ -1115,7 +1115,7 @@ INFO_RET CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album, const ADDON::
     }
   }
 
-  CGUIDialogSelect *pDlg = NULL;
+  CGUIDialogSelect *pDlg = nullptr;
   int iSelectedAlbum=0;
   if (result == CNfoFile::NO_NFO && !bMusicBrainz)
   {
@@ -1236,7 +1236,7 @@ INFO_RET CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album, const ADDON::
   albumInfo = scraper.GetAlbum(iSelectedAlbum);
   
   if (result == CNfoFile::COMBINED_NFO)
-    nfoReader.GetDetails(albumInfo.GetAlbum(), NULL, true);
+    nfoReader.GetDetails(albumInfo.GetAlbum(), nullptr, true);
   
   return INFO_ADDED;
 }
@@ -1410,7 +1410,7 @@ INFO_RET CMusicInfoScanner::DownloadArtistInfo(const CArtist& artist, const ADDO
   artistInfo = scraper.GetArtist(iSelectedArtist);
 
   if (result == CNfoFile::COMBINED_NFO)
-    nfoReader.GetDetails(artistInfo.GetArtist(), NULL, true);
+    nfoReader.GetDetails(artistInfo.GetArtist(), nullptr, true);
 
   return INFO_ADDED;
 }

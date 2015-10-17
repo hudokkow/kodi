@@ -74,7 +74,7 @@ public:
    \param songs [in/out] list of songs to categorise - albumartist field may be altered.
    \param albums [out] albums found within these songs.
    */
-  static void FileItemsToAlbums(CFileItemList& items, VECALBUMS& albums, MAPSONGS* songsMap = NULL);
+  static void FileItemsToAlbums(CFileItemList& items, VECALBUMS& albums, MAPSONGS* songsMap = nullptr);
 
   /*! \brief Fixup albums and songs
    
@@ -122,7 +122,7 @@ public:
    \param bAllowSelection [in] should we allow the user to manually override the info with a GUI if the album is not found?
    \param pDialog [in] a progress dialog which this and downstream functions can update with status, if required
    */
-  INFO_RET UpdateDatabaseAlbumInfo(CAlbum& album, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog = NULL);
+  INFO_RET UpdateDatabaseAlbumInfo(CAlbum& album, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog = nullptr);
  
   /*! \brief Update the database information for a MusicDB artist
    Given an artist, search and update its info with the given scraper.
@@ -133,7 +133,7 @@ public:
    \param bAllowSelection [in] should we allow the user to manually override the info with a GUI if the album is not found?
    \param pDialog [in] a progress dialog which this and downstream functions can update with status, if required
    */
-  INFO_RET UpdateDatabaseArtistInfo(CArtist& artist, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog = NULL);
+  INFO_RET UpdateDatabaseArtistInfo(CArtist& artist, const ADDON::ScraperPtr& scraper, bool bAllowSelection, CGUIDialogProgress* pDialog = nullptr);
 
   /*! \brief Using the scrapers download metadata for an album
    Given a CAlbum style struct containing some data about an album, query
@@ -145,7 +145,7 @@ public:
    \param albumInfo [in/out] a CMusicAlbumInfo struct which will be populated with the output of the scraper
    \param pDialog [in] a progress dialog which this and downstream functions can update with status, if required
    */
-  INFO_RET DownloadAlbumInfo(const CAlbum& album, const ADDON::ScraperPtr& scraper, MUSIC_GRABBER::CMusicAlbumInfo& albumInfo, CGUIDialogProgress* pDialog = NULL);
+  INFO_RET DownloadAlbumInfo(const CAlbum& album, const ADDON::ScraperPtr& scraper, MUSIC_GRABBER::CMusicAlbumInfo& albumInfo, CGUIDialogProgress* pDialog = nullptr);
 
   /*! \brief Using the scrapers download metadata for an artist
    Given a CAlbum style struct containing some data about an artist, query
@@ -157,7 +157,7 @@ public:
    \param artistInfo [in/out] a CMusicAlbumInfo struct which will be populated with the output of the scraper
    \param pDialog [in] a progress dialog which this and downstream functions can update with status, if required
    */
-  INFO_RET DownloadArtistInfo(const CArtist& artist, const ADDON::ScraperPtr& scraper, MUSIC_GRABBER::CMusicArtistInfo& artistInfo, CGUIDialogProgress* pDialog = NULL);
+  INFO_RET DownloadArtistInfo(const CArtist& artist, const ADDON::ScraperPtr& scraper, MUSIC_GRABBER::CMusicArtistInfo& artistInfo, CGUIDialogProgress* pDialog = nullptr);
 
   /*! \brief Search for art for an artist
    Look for art for an artist. Checks the artist structure for thumbs, and checks
