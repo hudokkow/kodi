@@ -76,7 +76,6 @@ namespace EPG
     virtual void DoRender();
     virtual void Render();
     void LoadLayout(TiXmlElement *layout);
-    void LoadContent(TiXmlElement *content);
 
     virtual CGUIListItemPtr GetListItem(int offset, unsigned int flag = 0) const;
     virtual std::string GetLabel(int info) const;
