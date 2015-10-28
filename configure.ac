@@ -1110,18 +1110,18 @@ fi
 AC_CHECK_LIB([bluetooth],   [hci_devid],, AC_MSG_RESULT([Could not find suitable version of libbluetooth]))
 
 AC_LANG_PUSH([C++])
-PKG_CHECK_MODULES([TINYXML], [tinyxml >= 2.6.2],
-  [INCLUDES="$INCLUDES $TINYXML_CFLAGS"; LIBS="$LIBS $TINYXML_LIBS"],
+PKG_CHECK_MODULES([TINYXML2], [tinyxml2 >= 2.2.0],
+  [INCLUDES="$INCLUDES $TINYXML2_CFLAGS"; LIBS="$LIBS $TINYXML2_LIBS"],
   [AC_RUN_IFELSE(
    [AC_LANG_SOURCE([[
 #include <stdlib.h>
-#include <tinyxml.h>
+#include <tinyxml2.h>
 
 int main() {
-  if (TIXML_MAJOR_VERSION < 2) exit(1);
-  if (TIXML_MAJOR_VERSION == 2 && ( TIXML_MINOR_VERSION < 6 || ( TIXML_MINOR_VERSION == 6 && TIXML_PATCH_VERSION < 2 ))) exit(1);
+  if (TIXML2_MAJOR_VERSION < 2) exit(1);
+  if (TIXML2_MAJOR_VERSION == 2 && TIXML2_MINOR_VERSION < 2 ) exit(1);
 }
-    ]])],[AC_CHECK_LIB([tinyxml], [main],, AC_MSG_ERROR("tinyxml >= 2.6.2 not found"))], [AC_MSG_ERROR([tinyxml >= 2.6.2 not found])]
+    ]])],[AC_CHECK_LIB([tinyxml2], [main],, AC_MSG_ERROR("tinyxml2 >= 2.2.0 not found"))], [AC_MSG_ERROR([tinyxml2 >= 2.2.0 not found])]
   )])
 AC_LANG_POP([C++])
 
