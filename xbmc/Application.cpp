@@ -1580,8 +1580,8 @@ bool CApplication::Load(const TiXmlNode *settings)
   const TiXmlElement *audioElement = settings->FirstChildElement("audio");
   if (audioElement != NULL)
   {
-    XMLUtils::GetBoolean(audioElement, "mute", m_muted);
-    if (!XMLUtils::GetFloat(audioElement, "fvolumelevel", m_volumeLevel, VOLUME_MINIMUM, VOLUME_MAXIMUM))
+    CXMLUtils::GetBoolean(audioElement, "mute", m_muted);
+    if (!CXMLUtils::GetFloat(audioElement, "fvolumelevel", m_volumeLevel, VOLUME_MINIMUM, VOLUME_MAXIMUM))
       m_volumeLevel = VOLUME_MAXIMUM;
   }
 
@@ -1598,8 +1598,8 @@ bool CApplication::Save(TiXmlNode *settings) const
   if (audioNode == NULL)
     return false;
 
-  XMLUtils::SetBoolean(audioNode, "mute", m_muted);
-  XMLUtils::SetFloat(audioNode, "fvolumelevel", m_volumeLevel);
+  CXMLUtils::SetBoolean(audioNode, "mute", m_muted);
+  CXMLUtils::SetFloat(audioNode, "fvolumelevel", m_volumeLevel);
 
   return true;
 }
@@ -1791,7 +1791,7 @@ bool CApplication::LoadUserWindows()
         std::string skinFile = URIUtils::GetFileName(items[i]->GetPath());
         if (StringUtils::StartsWithNoCase(skinFile, "custom"))
         {
-          CXBMCTinyXML xmlDoc;
+          CXMLUtils xmlDoc;
           if (!xmlDoc.LoadFile(items[i]->GetPath()))
           {
             CLog::Log(LOGERROR, "unable to load: %s, Line %d\n%s", items[i]->GetPath().c_str(), xmlDoc.ErrorRow(), xmlDoc.ErrorDesc());

@@ -27,7 +27,7 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 CGUIColorManager g_colorManager;
 
@@ -51,7 +51,7 @@ void CGUIColorManager::Load(const std::string &colorFile)
   Clear();
 
   // load the global color map if it exists
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (xmlDoc.LoadFile(CSpecialProtocol::TranslatePathConvertCase("special://xbmc/system/colors.xml")))
     LoadXML(xmlDoc);
 
@@ -75,7 +75,7 @@ void CGUIColorManager::Load(const std::string &colorFile)
     LoadXML(xmlDoc);
 }
 
-bool CGUIColorManager::LoadXML(CXBMCTinyXML &xmlDoc)
+bool CGUIColorManager::LoadXML(CXMLUtils &xmlDoc)
 {
   TiXmlElement* pRootElement = xmlDoc.RootElement();
 

@@ -25,7 +25,7 @@
 #include "GUIInfoManager.h"
 #include "GUIListLabel.h"
 #include "GUIImage.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 CGUIListItemLayout::CGUIListItemLayout()
 : m_group(0, 0, 0, 0, 0, 0)

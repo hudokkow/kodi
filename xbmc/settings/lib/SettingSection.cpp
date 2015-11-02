@@ -23,7 +23,7 @@
 #include "SettingsManager.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 template<class T> void addISetting(const TiXmlNode *node, const T &item, std::vector<T> &items)
 {

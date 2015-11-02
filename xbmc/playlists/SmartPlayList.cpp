@@ -1014,7 +1014,7 @@ const TiXmlNode* CSmartPlaylist::readName(const TiXmlNode *root)
     m_playlistType = "musicvideos";
 
   // load the playlist name
-  XMLUtils::GetString(root, "name", m_playlistName);
+  CXMLUtils::GetString(root, "name", m_playlistName);
 
   return root;
 }
@@ -1141,7 +1141,7 @@ bool CSmartPlaylist::LoadFromXML(const TiXmlNode *root, const std::string &encod
     return false;
 
   std::string tmp;
-  if (XMLUtils::GetString(root, "match", tmp))
+  if (CXMLUtils::GetString(root, "match", tmp))
     m_ruleCombination.SetType(StringUtils::EqualsNoCase(tmp, "all") ? CSmartPlaylistRuleCombination::CombinationAnd : CSmartPlaylistRuleCombination::CombinationOr);
 
   // now the rules
@@ -1165,7 +1165,7 @@ bool CSmartPlaylist::LoadFromXML(const TiXmlNode *root, const std::string &encod
 
   // now any limits
   // format is <limit>25</limit>
-  XMLUtils::GetUInt(root, "limit", m_limit);
+  CXMLUtils::GetUInt(root, "limit", m_limit);
 
   // and order
   // format is <order direction="ascending">field</order>
@@ -1196,7 +1196,7 @@ bool CSmartPlaylist::LoadFromJson(const std::string &json)
 
 bool CSmartPlaylist::Save(const std::string &path) const
 {
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   TiXmlDeclaration decl("1.0", "UTF-8", "yes");
   doc.InsertEndChild(decl);
 
@@ -1207,10 +1207,10 @@ bool CSmartPlaylist::Save(const std::string &path) const
     return false;
 
   // add the <name> tag
-  XMLUtils::SetString(pRoot, "name", m_playlistName);
+  CXMLUtils::SetString(pRoot, "name", m_playlistName);
 
   // add the <match> tag
-  XMLUtils::SetString(pRoot, "match", m_ruleCombination.GetType() == CSmartPlaylistRuleCombination::CombinationAnd ? "all" : "one");
+  CXMLUtils::SetString(pRoot, "match", m_ruleCombination.GetType() == CSmartPlaylistRuleCombination::CombinationAnd ? "all" : "one");
 
   // add <rule> tags
   m_ruleCombination.Save(pRoot);
@@ -1228,7 +1228,7 @@ bool CSmartPlaylist::Save(const std::string &path) const
 
   // add <limit> tag
   if (m_limit)
-    XMLUtils::SetInt(pRoot, "limit", m_limit);
+    CXMLUtils::SetInt(pRoot, "limit", m_limit);
 
   // add <order> tag
   if (m_orderField != SortByNone)

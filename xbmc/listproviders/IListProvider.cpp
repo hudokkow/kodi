@@ -19,7 +19,7 @@
  */
 
 #include "IListProvider.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "StaticProvider.h"
 #include "DirectoryProvider.h"
 

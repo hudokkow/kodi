@@ -23,7 +23,6 @@
 
 #include "PlayListWPL.h"
 #include "Util.h"
-#include "utils/XBMCTinyXML.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
@@ -61,7 +60,7 @@ CPlayListWPL::~CPlayListWPL(void)
 
 bool CPlayListWPL::LoadData(std::istream& stream)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
 
   stream >> xmlDoc;
   if (xmlDoc.Error())
@@ -92,7 +91,7 @@ bool CPlayListWPL::LoadData(std::istream& stream)
   if (!pMediaElement) return false;
   while (pMediaElement)
   {
-    std::string strFileName = XMLUtils::GetAttribute(pMediaElement, "src");
+    std::string strFileName = CXMLUtils::GetAttribute(pMediaElement, "src");
     if (!strFileName.empty())
     {
       std::string strFileNameClean = URIUtils::SubstitutePath(strFileName);

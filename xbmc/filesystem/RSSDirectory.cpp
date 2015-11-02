@@ -33,7 +33,6 @@
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 #include "video/VideoInfoTag.h"
 
@@ -129,8 +128,8 @@ static void ParseItemMRSS(CFileItem* item, SResources& resources, TiXmlElement* 
   {
     SResource res;
     res.tag = "media:content";
-    res.mime    = XMLUtils::GetAttribute(item_child, "type");
-    res.path    = XMLUtils::GetAttribute(item_child, "url");
+    res.mime    = CXMLUtils::GetAttribute(item_child, "type");
+    res.path    = CXMLUtils::GetAttribute(item_child, "url");
     item_child->Attribute("width", &res.width);
     item_child->Attribute("height", &res.height);
     item_child->Attribute("bitrate", &res.bitrate);
@@ -170,7 +169,7 @@ static void ParseItemMRSS(CFileItem* item, SResources& resources, TiXmlElement* 
       return;
 
     std::string description = text;
-    if(XMLUtils::GetAttribute(item_child, "type") == "html")
+    if(CXMLUtils::GetAttribute(item_child, "type") == "html")
       HTML::CHTMLUtil::RemoveTags(description);
     item->SetProperty("description", description);
   }
@@ -179,7 +178,7 @@ static void ParseItemMRSS(CFileItem* item, SResources& resources, TiXmlElement* 
     if(text.empty())
       return;
 
-    std::string scheme = XMLUtils::GetAttribute(item_child, "scheme");
+    std::string scheme = CXMLUtils::GetAttribute(item_child, "scheme");
 
     /* okey this is silly, boxee what did you think?? */
     if     (scheme == "urn:boxee:genre")
@@ -206,7 +205,7 @@ static void ParseItemMRSS(CFileItem* item, SResources& resources, TiXmlElement* 
   }
   else if(name == "rating")
   {
-    std::string scheme = XMLUtils::GetAttribute(item_child, "scheme");
+    std::string scheme = CXMLUtils::GetAttribute(item_child, "scheme");
     if(scheme == "urn:user")
       vtag->m_fRating = (float)atof(text.c_str());
     else
@@ -214,7 +213,7 @@ static void ParseItemMRSS(CFileItem* item, SResources& resources, TiXmlElement* 
   }
   else if(name == "credit")
   {
-    std::string role = XMLUtils::GetAttribute(item_child, "role");
+    std::string role = CXMLUtils::GetAttribute(item_child, "role");
     if     (role == "director")
       vtag->m_director.push_back(text);
     else if(role == "author"
@@ -285,8 +284,8 @@ static void ParseItemRSS(CFileItem* item, SResources& resources, TiXmlElement* i
 
     SResource res;
     res.tag = "rss:enclosure";
-    res.path = XMLUtils::GetAttribute(item_child, "url");
-    res.mime = XMLUtils::GetAttribute(item_child, "type");
+    res.path = CXMLUtils::GetAttribute(item_child, "url");
+    res.mime = CXMLUtils::GetAttribute(item_child, "type");
     if(len)
       res.size = _atoi64(len);
 
@@ -321,7 +320,7 @@ static void ParseItemVoddler(CFileItem* item, SResources& resources, TiXmlElemen
 
     SResource res;
     res.tag  = "voddler:trailer";
-    res.mime = XMLUtils::GetAttribute(element, "type");
+    res.mime = CXMLUtils::GetAttribute(element, "type");
     res.path = text;
     resources.push_back(res);
   }
@@ -574,7 +573,7 @@ bool CRSSDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   }
   lock.Leave();
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(strPath))
   {
     CLog::Log(LOGERROR,"failed to load xml from <%s>. error: <%d>", strPath.c_str(), xmlDoc.ErrorId());

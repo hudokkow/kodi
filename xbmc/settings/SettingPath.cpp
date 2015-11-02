@@ -22,7 +22,6 @@
 #include "settings/lib/SettingsManager.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 
 #define XML_ELM_DEFAULT     "default"
@@ -67,7 +66,7 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (constraints != NULL)
   {
     // get writable
-    XMLUtils::GetBoolean(constraints, "writable", m_writable);
+    CXMLUtils::GetBoolean(constraints, "writable", m_writable);
 
     // get sources
     const TiXmlNode *sources = constraints->FirstChild("sources");

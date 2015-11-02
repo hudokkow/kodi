@@ -25,7 +25,7 @@
 #include "settings/lib/Setting.h"
 #include "threads/SingleLock.h"
 #include "utils/URIUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "filesystem/Directory.h"
 #include "addons/AddonManager.h"
 #include "addons/Skin.h"
@@ -250,7 +250,7 @@ bool CGUIAudioManager::Load()
   std::string strSoundsXml = URIUtils::AddFileToFolder(m_strMediaDir, "sounds.xml");
 
   //  Load our xml file
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
 
   CLog::Log(LOGINFO, "Loading %s", strSoundsXml.c_str());
 

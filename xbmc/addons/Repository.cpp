@@ -43,7 +43,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 using namespace XFILE;
 using namespace ADDON;
@@ -176,7 +176,7 @@ bool CRepository::Parse(const DirInfo& dir, VECADDONS &result)
   }
 
   VECADDONS addons;
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   if (doc.LoadFile(file) && doc.RootElement() &&
       CAddonMgr::GetInstance().AddonsFromRepoXML(doc.RootElement(), addons))
   {

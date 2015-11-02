@@ -63,7 +63,7 @@ CScraperParser &CScraperParser::operator=(const CScraperParser &parser)
     if (parser.m_document)
     {
       m_scraper = parser.m_scraper;
-      m_document = new CXBMCTinyXML(*parser.m_document);
+      m_document = new CXMLUtils(*parser.m_document);
       LoadFromXML();
     }
     else
@@ -90,7 +90,7 @@ bool CScraperParser::Load(const std::string& strXMLFile)
 {
   Clear();
 
-  m_document = new CXBMCTinyXML();
+  m_document = new CXMLUtils();
 
   if (!m_document)
     return false;
@@ -191,7 +191,7 @@ void CScraperParser::ReplaceBuffers(std::string& strDest)
 
 void CScraperParser::ParseExpression(const std::string& input, std::string& dest, TiXmlElement* element, bool bAppend)
 {
-  std::string strOutput = XMLUtils::GetAttribute(element, "output");
+  std::string strOutput = CXMLUtils::GetAttribute(element, "output");
 
   TiXmlElement* pExpression = element->FirstChildElement("expression");
   if (pExpression)
@@ -601,7 +601,7 @@ void CScraperParser::InsertToken(std::string& strOutput, int buf, const char* to
   }
 }
 
-void CScraperParser::AddDocument(const CXBMCTinyXML* doc)
+void CScraperParser::AddDocument(const CXMLUtils* doc)
 {
   const TiXmlNode* node = doc->RootElement()->FirstChild();
   while (node)

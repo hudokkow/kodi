@@ -277,7 +277,7 @@ bool CAddonInstaller::InstallFromZip(const std::string &path)
   // TODO: possibly add support for github generated zips here?
   std::string archive = URIUtils::AddFileToFolder(items[0]->GetPath(), "addon.xml");
 
-  CXBMCTinyXML xml;
+  CXMLUtils xml;
   AddonPtr addon;
   if (xml.LoadFile(archive) && CAddonMgr::GetInstance().LoadAddonDescriptionFromMemory(xml.RootElement(), addon))
   {

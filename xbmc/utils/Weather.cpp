@@ -198,7 +198,7 @@ void CWeatherJob::LoadLocalizedToken()
   // We load the tokens from the strings.xml file
   std::string strLanguagePath = URIUtils::AddFileToFolder(CLangInfo::GetLanguagePath(language), "strings.xml");
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(strLanguagePath) || !xmlDoc.RootElement())
   {
     CLog::Log(LOGERROR, "Weather: unable to load %s: %s at line %d", strLanguagePath.c_str(), xmlDoc.ErrorDesc(), xmlDoc.ErrorRow());

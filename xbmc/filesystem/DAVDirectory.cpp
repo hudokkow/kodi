@@ -19,15 +19,18 @@
  */
 
 #include "DAVDirectory.h"
-
 #include "DAVCommon.h"
 #include "DAVFile.h"
-#include "URL.h"
 #include "CurlFile.h"
 #include "FileItem.h"
-#include "utils/StringUtils.h"
+#include "URL.h"
 #include "utils/log.h"
+#include "utils/StringUtils.h"
+
 #include "utils/URIUtils.h"
+#include "utils/XMLUtils.h"
+
+#include <string>
 
 using namespace XFILE;
 
@@ -138,7 +141,7 @@ bool CDAVDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   dav.ReadData(strResponse);
 
   std::string fileCharset(dav.GetServerReportedCharset());
-  CXBMCTinyXML davResponse;
+  CXMLUtils davResponse;
   davResponse.Parse(strResponse, fileCharset);
 
   if (!davResponse.Parse(strResponse))

@@ -28,7 +28,7 @@
 #include <string>
 
 // forward declarations
-class CXBMCTinyXML;
+class CXMLUtils;
 class CGUIDialogProgress;
 
 namespace ADDON

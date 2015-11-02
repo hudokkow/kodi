@@ -26,7 +26,7 @@
 #include "utils/CharsetConverter.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "InputCodingTableFactory.h"
 
 CKeyboardLayout::CKeyboardLayout()

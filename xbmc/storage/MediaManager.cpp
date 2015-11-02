@@ -41,7 +41,7 @@
 #include "GUIUserMessages.h"
 #include "settings/MediaSourceSettings.h"
 #include "settings/Settings.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "dialogs/GUIDialogKaiToast.h"
@@ -121,7 +121,7 @@ bool CMediaManager::LoadSources()
   m_locations.clear();
 
   // load xml file...
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if ( !xmlDoc.LoadFile( MEDIA_SOURCES_XML ) )
     return false;
 
@@ -154,7 +154,7 @@ bool CMediaManager::LoadSources()
 
 bool CMediaManager::SaveSources()
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   TiXmlElement xmlRootElement("mediasources");
   TiXmlNode *pRoot = xmlDoc.InsertEndChild(xmlRootElement);
   if (!pRoot) return false;

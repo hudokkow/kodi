@@ -20,7 +20,7 @@
 
 #include "GUITextBox.h"
 #include "GUIInfoManager.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/MathUtils.h"
 #include "utils/StringUtils.h"
 #include "guiinfo/GUIInfoLabels.h"

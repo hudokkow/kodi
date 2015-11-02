@@ -19,9 +19,9 @@
  *
  */
 
-#include "IDirectory.h"
-#include "utils/XBMCTinyXML.h"
 #include "FileItem.h"
+#include "IDirectory.h"
+#include "utils/XMLUtils.h"
 
 namespace XFILE
 {

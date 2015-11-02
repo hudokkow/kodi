@@ -28,7 +28,7 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 #define XML_SKINSETTINGS  "skinsettings"
 

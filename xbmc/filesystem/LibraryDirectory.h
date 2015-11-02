@@ -20,7 +20,9 @@
  */
 
 #include "IDirectory.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
+
+#include <string>
 
 namespace XFILE
 {
@@ -46,6 +48,6 @@ namespace XFILE
      */
     TiXmlElement *LoadXML(const std::string &xmlFile);
 
-    CXBMCTinyXML m_doc;
+    CXMLUtils m_doc;
   };
 }

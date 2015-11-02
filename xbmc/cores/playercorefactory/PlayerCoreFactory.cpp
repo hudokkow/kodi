@@ -300,7 +300,7 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
     return false;
   }
 
-  CXBMCTinyXML playerCoreFactoryXML;
+  CXMLUtils playerCoreFactoryXML;
   if (!playerCoreFactoryXML.LoadFile(file))
   {
     CLog::Log(LOGERROR, "Error loading %s, Line %d (%s)", file.c_str(), playerCoreFactoryXML.ErrorRow(), playerCoreFactoryXML.ErrorDesc());
@@ -349,8 +349,8 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
     TiXmlElement* pPlayer = pPlayers->FirstChildElement("player");
     while (pPlayer)
     {
-      std::string name = XMLUtils::GetAttribute(pPlayer, "name");
-      std::string type = XMLUtils::GetAttribute(pPlayer, "type");
+      std::string name = CXMLUtils::GetAttribute(pPlayer, "name");
+      std::string type = CXMLUtils::GetAttribute(pPlayer, "type");
       if (type.empty()) type = name;
       StringUtils::ToLower(type);
 

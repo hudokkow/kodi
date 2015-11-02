@@ -1500,10 +1500,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\test\TestXBMCTinyXML.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\test\TestXMLUtils.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1560,7 +1556,6 @@
     <ClCompile Include="..\..\xbmc\utils\Variant.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Weather.cpp" />
     <ClCompile Include="..\..\xbmc\utils\Environment.cpp" />
-    <ClCompile Include="..\..\xbmc\utils\XBMCTinyXML.cpp" />
     <ClCompile Include="..\..\xbmc\utils\XMLUtils.cpp" />
     <ClCompile Include="..\..\xbmc\video\Bookmark.cpp" />
     <ClCompile Include="..\..\xbmc\video\dialogs\GUIDialogAudioSubtitleSettings.cpp" />
@@ -2209,7 +2204,6 @@
     <ClInclude Include="..\..\xbmc\utils\Variant.h" />
     <ClInclude Include="..\..\xbmc\utils\Weather.h" />
     <ClInclude Include="..\..\xbmc\utils\Environment.h" />
-    <ClInclude Include="..\..\xbmc\utils\XBMCTinyXML.h" />
     <ClInclude Include="..\..\xbmc\utils\XMLUtils.h" />
     <ClInclude Include="..\..\xbmc\video\Bookmark.h" />
     <ClInclude Include="..\..\xbmc\video\dialogs\GUIDialogAudioSubtitleSettings.h" />

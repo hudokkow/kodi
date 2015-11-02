@@ -625,7 +625,7 @@ bool CExternalPlayer::SetPlayerState(const std::string& state)
 
 bool CExternalPlayer::Initialize(TiXmlElement* pConfig)
 {
-  XMLUtils::GetString(pConfig, "filename", m_filename);
+  CXMLUtils::GetString(pConfig, "filename", m_filename);
   if (m_filename.length() > 0)
   {
     CLog::Log(LOGNOTICE, "ExternalPlayer Filename: %s", m_filename.c_str());
@@ -638,11 +638,11 @@ bool CExternalPlayer::Initialize(TiXmlElement* pConfig)
     return false;
   }
 
-  XMLUtils::GetString(pConfig, "args", m_args);
-  XMLUtils::GetBoolean(pConfig, "playonestackitem", m_playOneStackItem);
-  XMLUtils::GetBoolean(pConfig, "islauncher", m_islauncher);
-  XMLUtils::GetBoolean(pConfig, "hidexbmc", m_hidexbmc);
-  if (!XMLUtils::GetBoolean(pConfig, "hideconsole", m_hideconsole))
+  CXMLUtils::GetString(pConfig, "args", m_args);
+  CXMLUtils::GetBoolean(pConfig, "playonestackitem", m_playOneStackItem);
+  CXMLUtils::GetBoolean(pConfig, "islauncher", m_islauncher);
+  CXMLUtils::GetBoolean(pConfig, "hidexbmc", m_hidexbmc);
+  if (!CXMLUtils::GetBoolean(pConfig, "hideconsole", m_hideconsole))
   {
 #ifdef TARGET_WINDOWS
     // Default depends on whether player is a batch file
@@ -651,11 +651,11 @@ bool CExternalPlayer::Initialize(TiXmlElement* pConfig)
   }
 
   bool bHideCursor;
-  if (XMLUtils::GetBoolean(pConfig, "hidecursor", bHideCursor) && bHideCursor)
+  if (CXMLUtils::GetBoolean(pConfig, "hidecursor", bHideCursor) && bHideCursor)
     m_warpcursor = WARP_BOTTOM_RIGHT;
 
   std::string warpCursor;
-  if (XMLUtils::GetString(pConfig, "warpcursor", warpCursor) && !warpCursor.empty())
+  if (CXMLUtils::GetString(pConfig, "warpcursor", warpCursor) && !warpCursor.empty())
   {
     if (warpCursor == "bottomright") m_warpcursor = WARP_BOTTOM_RIGHT;
     else if (warpCursor == "bottomleft") m_warpcursor = WARP_BOTTOM_LEFT;
@@ -669,7 +669,7 @@ bool CExternalPlayer::Initialize(TiXmlElement* pConfig)
     }
   }
 
-  XMLUtils::GetInt(pConfig, "playcountminimumtime", m_playCountMinTime, 1, INT_MAX);
+  CXMLUtils::GetInt(pConfig, "playcountminimumtime", m_playCountMinTime, 1, INT_MAX);
 
   CLog::Log(LOGNOTICE, "ExternalPlayer Tweaks: hideconsole (%s), hidexbmc (%s), islauncher (%s), warpcursor (%s)",
           m_hideconsole ? "true" : "false",
@@ -727,9 +727,9 @@ void CExternalPlayer::GetCustomRegexpReplacers(TiXmlElement *pRootElement,
       std::string strMatch;
       std::string strPat;
       std::string strRep;
-      XMLUtils::GetString(pReplacer,"match",strMatch);
-      XMLUtils::GetString(pReplacer,"pat",strPat);
-      XMLUtils::GetString(pReplacer,"rep",strRep);
+      CXMLUtils::GetString(pReplacer,"match",strMatch);
+      CXMLUtils::GetString(pReplacer,"pat",strPat);
+      CXMLUtils::GetString(pReplacer,"rep",strRep);
 
       if (!strPat.empty() && !strRep.empty())
       {

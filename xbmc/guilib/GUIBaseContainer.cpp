@@ -28,7 +28,7 @@
 #include "FileItem.h"
 #include "input/Key.h"
 #include "utils/MathUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "listproviders/IListProvider.h"
 #include "settings/Settings.h"
 #include "guiinfo/GUIInfoLabels.h"

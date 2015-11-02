@@ -23,7 +23,6 @@
 
 #include "PlayListB4S.h"
 #include "Util.h"
-#include "utils/XBMCTinyXML.h"
 #include "music/tags/MusicInfoTag.h"
 #include "filesystem/File.h"
 #include "utils/log.h"
@@ -59,7 +58,7 @@ CPlayListB4S::~CPlayListB4S(void)
 
 bool CPlayListB4S::LoadData(std::istream& stream)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
 
   stream >> xmlDoc;
 
@@ -74,14 +73,14 @@ bool CPlayListB4S::LoadData(std::istream& stream)
 
   TiXmlElement* pPlayListElement = pRootElement->FirstChildElement("playlist");
   if (!pPlayListElement ) return false;
-  m_strPlayListName = XMLUtils::GetAttribute(pPlayListElement, "label");
+  m_strPlayListName = CXMLUtils::GetAttribute(pPlayListElement, "label");
 
   TiXmlElement* pEntryElement = pPlayListElement->FirstChildElement("entry");
 
   if (!pEntryElement) return false;
   while (pEntryElement)
   {
-    std::string strFileName = XMLUtils::GetAttribute(pEntryElement, "Playstring");
+    std::string strFileName = CXMLUtils::GetAttribute(pEntryElement, "Playstring");
     size_t iColon = strFileName.find(":");
     if (iColon != std::string::npos)
     {

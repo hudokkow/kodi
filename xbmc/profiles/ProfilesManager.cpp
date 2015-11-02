@@ -125,16 +125,16 @@ bool CProfilesManager::Load(const std::string &file)
 
   if (CFile::Exists(file))
   {
-    CXBMCTinyXML profilesDoc;
+    CXMLUtils profilesDoc;
     if (profilesDoc.LoadFile(file))
     {
       const TiXmlElement *rootElement = profilesDoc.RootElement();
       if (rootElement && StringUtils::EqualsNoCase(rootElement->Value(), XML_PROFILES))
       {
-        XMLUtils::GetUInt(rootElement, XML_LAST_LOADED, m_lastUsedProfile);
-        XMLUtils::GetBoolean(rootElement, XML_LOGIN_SCREEN, m_usingLoginScreen);
-        XMLUtils::GetInt(rootElement, XML_AUTO_LOGIN, m_autoLoginProfile);
-        XMLUtils::GetInt(rootElement, XML_NEXTID, m_nextProfileId);
+        CXMLUtils::GetUInt(rootElement, XML_LAST_LOADED, m_lastUsedProfile);
+        CXMLUtils::GetBoolean(rootElement, XML_LOGIN_SCREEN, m_usingLoginScreen);
+        CXMLUtils::GetInt(rootElement, XML_AUTO_LOGIN, m_autoLoginProfile);
+        CXMLUtils::GetInt(rootElement, XML_NEXTID, m_nextProfileId);
         
         std::string defaultDir("special://home/userdata");
         if (!CDirectory::Exists(defaultDir))
@@ -198,16 +198,16 @@ bool CProfilesManager::Save(const std::string &file) const
 {
   CSingleLock lock(m_critical);
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   TiXmlElement xmlRootElement(XML_PROFILES);
   TiXmlNode *pRoot = xmlDoc.InsertEndChild(xmlRootElement);
   if (pRoot == NULL)
     return false;
 
-  XMLUtils::SetInt(pRoot, XML_LAST_LOADED, m_currentProfile);
-  XMLUtils::SetBoolean(pRoot, XML_LOGIN_SCREEN, m_usingLoginScreen);
-  XMLUtils::SetInt(pRoot, XML_AUTO_LOGIN, m_autoLoginProfile);
-  XMLUtils::SetInt(pRoot, XML_NEXTID, m_nextProfileId);      
+  CXMLUtils::SetInt(pRoot, XML_LAST_LOADED, m_currentProfile);
+  CXMLUtils::SetBoolean(pRoot, XML_LOGIN_SCREEN, m_usingLoginScreen);
+  CXMLUtils::SetInt(pRoot, XML_AUTO_LOGIN, m_autoLoginProfile);
+  CXMLUtils::SetInt(pRoot, XML_NEXTID, m_nextProfileId);      
 
   for (std::vector<CProfile>::const_iterator profile = m_profiles.begin(); profile != m_profiles.end(); ++profile)
     profile->Save(pRoot);
@@ -262,7 +262,7 @@ bool CProfilesManager::LoadProfile(size_t index)
 
   if (m_currentProfile != 0)
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     if (doc.LoadFile(URIUtils::AddFileToFolder(GetUserDataFolder(), "guisettings.xml")))
     {
       CSettings::GetInstance().LoadSetting(doc.RootElement(), CSettings::SETTING_MASTERLOCK_MAXRETRIES);

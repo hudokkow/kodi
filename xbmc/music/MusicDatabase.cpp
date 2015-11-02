@@ -5080,7 +5080,7 @@ void CMusicDatabase::ExportToXML(const std::string &xmlFile, bool singleFile, bo
     }
 
     // create our xml document
-    CXBMCTinyXML xmlDoc;
+    CXMLUtils xmlDoc;
     TiXmlDeclaration decl("1.0", "UTF-8", "yes");
     xmlDoc.InsertEndChild(decl);
     TiXmlNode *pMain = NULL;
@@ -5169,7 +5169,7 @@ void CMusicDatabase::ExportToXML(const std::string &xmlFile, bool singleFile, bo
       { // append to the XML
         TiXmlElement additionalNode("art");
         for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-          XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+          CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
         pMain->LastChild()->InsertEndChild(additionalNode);
       }
       if (!singleFile)
@@ -5251,7 +5251,7 @@ void CMusicDatabase::ImportFromXML(const std::string &xmlFile)
     if (NULL == m_pDB.get()) return;
     if (NULL == m_pDS.get()) return;
 
-    CXBMCTinyXML xmlDoc;
+    CXMLUtils xmlDoc;
     if (!xmlDoc.LoadFile(xmlFile))
       return;
 

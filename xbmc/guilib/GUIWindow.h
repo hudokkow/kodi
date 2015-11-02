@@ -64,7 +64,7 @@ enum RenderOrder {
 // forward
 class TiXmlNode;
 class TiXmlElement;
-class CXBMCTinyXML;
+class CXMLUtils;
 class CVariant;
 
 class COrigin

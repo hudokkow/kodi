@@ -80,7 +80,7 @@
 #include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
 #include "utils/Weather.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/SeekHandler.h"
 #include "utils/Variant.h"
 #include "view/ViewStateSettings.h"
@@ -466,7 +466,7 @@ bool CSettings::Load()
 
 bool CSettings::Load(const std::string &file)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   bool updated = false;
   if (!XFILE::CFile::Exists(file) || !xmlDoc.LoadFile(file) ||
       !m_settingsManager->Load(xmlDoc.RootElement(), updated))
@@ -520,7 +520,7 @@ bool CSettings::Save()
 
 bool CSettings::Save(const std::string &file)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   TiXmlElement rootElement(SETTINGS_XML_ROOT);
   TiXmlNode *root = xmlDoc.InsertEndChild(rootElement);
   if (root == NULL)
@@ -756,7 +756,7 @@ bool CSettings::LoadSetting(const TiXmlNode *node, const std::string &settingId)
 
 bool CSettings::Initialize(const std::string &file)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(file.c_str()))
   {
     CLog::Log(LOGERROR, "CSettings: error loading settings definition from %s, Line %d\n%s", file.c_str(), xmlDoc.ErrorRow(), xmlDoc.ErrorDesc());

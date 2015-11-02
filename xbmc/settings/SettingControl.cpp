@@ -24,7 +24,6 @@
 #include "settings/lib/SettingDefinitions.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 
 #define SHOW_ADDONS_ALL               "all"
@@ -65,7 +64,7 @@ bool CSettingControlFormattedRange::Deserialize(const TiXmlNode *node, bool upda
 
   if (m_format == "string")
   {
-    XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
+    CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
 
     // get the minimum label from <setting><constraints><minimum label="X" />
     const TiXmlNode *settingNode = node->Parent();
@@ -90,7 +89,7 @@ bool CSettingControlFormattedRange::Deserialize(const TiXmlNode *node, bool upda
     if (m_minimumLabel < 0)
     {
       std::string strFormat;
-      if (XMLUtils::GetString(node, SETTING_XML_ATTR_FORMAT, strFormat) && !strFormat.empty())
+      if (CXMLUtils::GetString(node, SETTING_XML_ATTR_FORMAT, strFormat) && !strFormat.empty())
         m_formatString = strFormat;
     }
   }
@@ -116,9 +115,9 @@ bool CSettingControlEdit::Deserialize(const TiXmlNode *node, bool update /* = fa
   if (!ISettingControl::Deserialize(node, update))
     return false;
 
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDDEN, m_hidden);
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_VERIFYNEW, m_verifyNewValue);
-  XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDDEN, m_hidden);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_VERIFYNEW, m_verifyNewValue);
+  CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
 
   return true;
 }
@@ -143,13 +142,13 @@ bool CSettingControlButton::Deserialize(const TiXmlNode *node, bool update /* = 
   if (!ISettingControl::Deserialize(node, update))
     return false;
   
-  XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDEVALUE, m_hideValue);
+  CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDEVALUE, m_hideValue);
 
   if (m_format == "addon")
   {
     std::string strShowAddons;
-    if (XMLUtils::GetString(node, "show", strShowAddons) && !strShowAddons.empty())
+    if (CXMLUtils::GetString(node, "show", strShowAddons) && !strShowAddons.empty())
     {
       if (StringUtils::EqualsNoCase(strShowAddons, SHOW_ADDONS_ALL))
       {
@@ -218,9 +217,9 @@ bool CSettingControlList::Deserialize(const TiXmlNode *node, bool update /* = fa
   if (!CSettingControlFormattedRange::Deserialize(node, update))
     return false;
   
-  XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_MULTISELECT, m_multiselect);
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDEVALUE, m_hideValue);
+  CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_MULTISELECT, m_multiselect);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_HIDEVALUE, m_hideValue);
 
   return true;
 }
@@ -242,14 +241,14 @@ bool CSettingControlSlider::Deserialize(const TiXmlNode *node, bool update /* = 
   if (!ISettingControl::Deserialize(node, update))
     return false;
 
-  XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
-  XMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_POPUP, m_popup);
+  CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_HEADING, m_heading);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ELM_CONTROL_POPUP, m_popup);
 
-  XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
+  CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
   if (m_formatLabel < 0)
   {
     std::string strFormat;
-    if (XMLUtils::GetString(node, SETTING_XML_ATTR_FORMAT, strFormat) && !strFormat.empty())
+    if (CXMLUtils::GetString(node, SETTING_XML_ATTR_FORMAT, strFormat) && !strFormat.empty())
       m_formatString = strFormat;
   }
 
@@ -281,7 +280,7 @@ bool CSettingControlRange::Deserialize(const TiXmlNode *node, bool update /* = f
   const TiXmlElement *formatLabel = node->FirstChildElement(SETTING_XML_ELM_CONTROL_FORMATLABEL);
   if (formatLabel != NULL)
   {
-    XMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
+    CXMLUtils::GetInt(node, SETTING_XML_ELM_CONTROL_FORMATLABEL, m_formatLabel);
     if (m_formatLabel < 0)
       return false;
 
@@ -328,14 +327,14 @@ bool CSettingControlTitle::Deserialize(const TiXmlNode *node, bool update /* = f
     return false;
 
   std::string strTmp;
-  if (XMLUtils::GetString(node, SETTING_XML_ATTR_SEPARATOR_POSITION, strTmp))
+  if (CXMLUtils::GetString(node, SETTING_XML_ATTR_SEPARATOR_POSITION, strTmp))
   {
     if (!StringUtils::EqualsNoCase(strTmp, "top") && !StringUtils::EqualsNoCase(strTmp, "bottom"))
       CLog::Log(LOGWARNING, "CSettingControlTitle: error reading \"value\" attribute of <%s>", SETTING_XML_ATTR_SEPARATOR_POSITION);
     else
       m_separatorBelowLabel = StringUtils::EqualsNoCase(strTmp, "bottom");
   }
-  XMLUtils::GetBoolean(node, SETTING_XML_ATTR_HIDE_SEPARATOR, m_separatorHidden);
+  CXMLUtils::GetBoolean(node, SETTING_XML_ATTR_HIDE_SEPARATOR, m_separatorHidden);
 
   return true;
 }

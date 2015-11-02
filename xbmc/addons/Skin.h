@@ -219,8 +219,8 @@ protected:
 
   virtual bool HasSettingsDefinition() const { return false; }
   virtual bool HasSettingsToSave() const;
-  virtual bool SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults = false);
-  virtual void SettingsToXML(CXBMCTinyXML &doc) const;
+  virtual bool SettingsFromXML(const CXMLUtils &doc, bool loadDefaults = false);
+  virtual void SettingsToXML(CXMLUtils &doc) const;
 
   RESOLUTION_INFO m_defaultRes;
   std::vector<RESOLUTION_INFO> m_resolutions;

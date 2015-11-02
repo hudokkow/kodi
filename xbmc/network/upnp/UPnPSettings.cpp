@@ -23,7 +23,6 @@
 #include "threads/SingleLock.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 
 #define XML_UPNP          "upnpserver"
@@ -65,7 +64,7 @@ bool CUPnPSettings::Load(const std::string &file)
   if (!CFile::Exists(file))
     return false;
   
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   if (!doc.LoadFile(file))
   {
     CLog::Log(LOGERROR, "CUPnPSettings: error loading %s, Line %d\n%s", file.c_str(), doc.ErrorRow(), doc.ErrorDesc());
@@ -80,11 +79,11 @@ bool CUPnPSettings::Load(const std::string &file)
   }
 
   // load settings
-  XMLUtils::GetString(pRootElement, XML_SERVER_UUID, m_serverUUID);
-  XMLUtils::GetInt(pRootElement, XML_SERVER_PORT, m_serverPort);
-  XMLUtils::GetInt(pRootElement, XML_MAX_ITEMS, m_maxReturnedItems);
-  XMLUtils::GetString(pRootElement, XML_RENDERER_UUID, m_rendererUUID);
-  XMLUtils::GetInt(pRootElement, XML_RENDERER_PORT, m_rendererPort);
+  CXMLUtils::GetString(pRootElement, XML_SERVER_UUID, m_serverUUID);
+  CXMLUtils::GetInt(pRootElement, XML_SERVER_PORT, m_serverPort);
+  CXMLUtils::GetInt(pRootElement, XML_MAX_ITEMS, m_maxReturnedItems);
+  CXMLUtils::GetString(pRootElement, XML_RENDERER_UUID, m_rendererUUID);
+  CXMLUtils::GetInt(pRootElement, XML_RENDERER_PORT, m_rendererPort);
 
   return true;
 }
@@ -93,17 +92,17 @@ bool CUPnPSettings::Save(const std::string &file) const
 {
   CSingleLock lock(m_critical);
 
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   TiXmlElement xmlRootElement(XML_UPNP);
   TiXmlNode *pRoot = doc.InsertEndChild(xmlRootElement);
   if (pRoot == NULL)
     return false;
 
-  XMLUtils::SetString(pRoot, XML_SERVER_UUID, m_serverUUID);
-  XMLUtils::SetInt(pRoot, XML_SERVER_PORT, m_serverPort);
-  XMLUtils::SetInt(pRoot, XML_MAX_ITEMS, m_maxReturnedItems);
-  XMLUtils::SetString(pRoot, XML_RENDERER_UUID, m_rendererUUID);
-  XMLUtils::SetInt(pRoot, XML_RENDERER_PORT, m_rendererPort);
+  CXMLUtils::SetString(pRoot, XML_SERVER_UUID, m_serverUUID);
+  CXMLUtils::SetInt(pRoot, XML_SERVER_PORT, m_serverPort);
+  CXMLUtils::SetInt(pRoot, XML_MAX_ITEMS, m_maxReturnedItems);
+  CXMLUtils::SetString(pRoot, XML_RENDERER_UUID, m_rendererUUID);
+  CXMLUtils::SetInt(pRoot, XML_RENDERER_PORT, m_rendererPort);
 
   // save the file
   return doc.SaveFile(file);

@@ -34,6 +34,8 @@
 #include "GUIInfoManager.h"
 #include "utils/log.h"
 
+#include <string>
+
 using namespace XFILE;
 
 CLibraryDirectory::CLibraryDirectory(void)
@@ -55,18 +57,18 @@ bool CLibraryDirectory::GetDirectory(const CURL& url, CFileItemList &items)
     TiXmlElement *node = LoadXML(libNode);
     if (node)
     {
-      std::string type = XMLUtils::GetAttribute(node, "type");
+      std::string type = CXMLUtils::GetAttribute(node, "type");
       if (type == "filter")
       {
         CSmartPlaylist playlist;
         std::string type, label;
-        XMLUtils::GetString(node, "content", type);
+        CXMLUtils::GetString(node, "content", type);
         if (type.empty())
         {
           CLog::Log(LOGERROR, "<content> tag must not be empty for type=\"filter\" node '%s'", libNode.c_str());
           return false;
         }
-        if (XMLUtils::GetString(node, "label", label))
+        if (CXMLUtils::GetString(node, "label", label))
           label = CGUIControlFactory::FilterLabel(label);
         playlist.SetType(type);
         playlist.SetName(label);
@@ -81,7 +83,7 @@ bool CLibraryDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       else if (type == "folder")
       {
         std::string path;
-        XMLUtils::GetPath(node, "path", path);
+        CXMLUtils::GetPath(node, "path", path);
         if (!path.empty())
         {
           URIUtils::AddSlashAtEnd(path);
@@ -111,7 +113,7 @@ bool CLibraryDirectory::GetDirectory(const CURL& url, CFileItemList &items)
       if (node && URIUtils::GetFileName(xml) == "index.xml")
       { // set the label on our items
         std::string label;
-        if (XMLUtils::GetString(node, "label", label))
+        if (CXMLUtils::GetString(node, "label", label))
           label = CGUIControlFactory::FilterLabel(label);
         items.SetLabel(label);
         continue;
@@ -120,9 +122,9 @@ bool CLibraryDirectory::GetDirectory(const CURL& url, CFileItemList &items)
     if (node)
     {
       std::string label, icon;
-      if (XMLUtils::GetString(node, "label", label))
+      if (CXMLUtils::GetString(node, "label", label))
         label = CGUIControlFactory::FilterLabel(label);
-      XMLUtils::GetString(node, "icon", icon);
+      CXMLUtils::GetString(node, "icon", icon);
       int order = 0;
       node->Attribute("order", &order);
 
@@ -155,7 +157,7 @@ TiXmlElement *CLibraryDirectory::LoadXML(const std::string &xmlFile)
     return NULL;
 
   // check the condition
-  std::string condition = XMLUtils::GetAttribute(xml, "visible");
+  std::string condition = CXMLUtils::GetAttribute(xml, "visible");
   if (condition.empty() || g_infoManager.EvaluateBool(condition))
     return xml;
 

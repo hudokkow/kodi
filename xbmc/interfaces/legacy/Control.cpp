@@ -39,7 +39,7 @@
 #include "guilib/GUIControlFactory.h"
 #include "listproviders/StaticProvider.h"
 
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/StringUtils.h"
 #include "WindowException.h"
 
@@ -801,7 +801,7 @@ namespace XBMCAddon
 
     void Control::setAnimations(const std::vector< Tuple<String,String> >& eventAttr)
     {
-      CXBMCTinyXML xmlDoc;
+      CXMLUtils xmlDoc;
       TiXmlElement xmlRootElement("control");
       TiXmlNode *pRoot = xmlDoc.InsertEndChild(xmlRootElement);
       if (!pRoot)

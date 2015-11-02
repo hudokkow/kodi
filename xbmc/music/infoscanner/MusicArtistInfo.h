@@ -23,7 +23,7 @@
 #include "music/Artist.h"
 #include "addons/Scraper.h"
 
-class CXBMCTinyXML;
+class CXMLUtils;
 class CScraperUrl;
 
 namespace MUSIC_GRABBER

@@ -58,20 +58,20 @@ bool CArtist::Load(const TiXmlElement *artist, bool append, bool prioritise)
   if (!append)
     Reset();
 
-  XMLUtils::GetString(artist,                "name", strArtist);
-  XMLUtils::GetString(artist, "musicBrainzArtistID", strMusicBrainzArtistID);
+  CXMLUtils::GetString(artist,                "name", strArtist);
+  CXMLUtils::GetString(artist, "musicBrainzArtistID", strMusicBrainzArtistID);
 
-  XMLUtils::GetStringArray(artist,       "genre", genre, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(artist,       "style", styles, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(artist,        "mood", moods, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(artist, "yearsactive", yearsActive, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(artist, "instruments", instruments, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(artist,       "genre", genre, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(artist,       "style", styles, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(artist,        "mood", moods, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(artist, "yearsactive", yearsActive, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(artist, "instruments", instruments, prioritise, g_advancedSettings.m_musicItemSeparator);
 
-  XMLUtils::GetString(artist,      "born", strBorn);
-  XMLUtils::GetString(artist,    "formed", strFormed);
-  XMLUtils::GetString(artist, "biography", strBiography);
-  XMLUtils::GetString(artist,      "died", strDied);
-  XMLUtils::GetString(artist, "disbanded", strDisbanded);
+  CXMLUtils::GetString(artist,      "born", strBorn);
+  CXMLUtils::GetString(artist,    "formed", strFormed);
+  CXMLUtils::GetString(artist, "biography", strBiography);
+  CXMLUtils::GetString(artist,      "died", strDied);
+  CXMLUtils::GetString(artist, "disbanded", strDisbanded);
 
   size_t iThumbCount = thumbURL.m_url.size();
   std::string xmlAdd = thumbURL.m_xml;
@@ -141,21 +141,21 @@ bool CArtist::Save(TiXmlNode *node, const std::string &tag, const std::string& s
 
   if (!artist) return false;
 
-  XMLUtils::SetString(artist,                      "name", strArtist);
-  XMLUtils::SetString(artist,       "musicBrainzArtistID", strMusicBrainzArtistID);
-  XMLUtils::SetStringArray(artist,                "genre", genre);
-  XMLUtils::SetStringArray(artist,                "style", styles);
-  XMLUtils::SetStringArray(artist,                 "mood", moods);
-  XMLUtils::SetStringArray(artist,          "yearsactive", yearsActive);
-  XMLUtils::SetStringArray(artist,          "instruments", instruments);
-  XMLUtils::SetString(artist,                      "born", strBorn);
-  XMLUtils::SetString(artist,                    "formed", strFormed);
-  XMLUtils::SetString(artist,                 "biography", strBiography);
-  XMLUtils::SetString(artist,                      "died", strDied);
-  XMLUtils::SetString(artist,                 "disbanded", strDisbanded);
+  CXMLUtils::SetString(artist,                      "name", strArtist);
+  CXMLUtils::SetString(artist,       "musicBrainzArtistID", strMusicBrainzArtistID);
+  CXMLUtils::SetStringArray(artist,                "genre", genre);
+  CXMLUtils::SetStringArray(artist,                "style", styles);
+  CXMLUtils::SetStringArray(artist,                 "mood", moods);
+  CXMLUtils::SetStringArray(artist,          "yearsactive", yearsActive);
+  CXMLUtils::SetStringArray(artist,          "instruments", instruments);
+  CXMLUtils::SetString(artist,                      "born", strBorn);
+  CXMLUtils::SetString(artist,                    "formed", strFormed);
+  CXMLUtils::SetString(artist,                 "biography", strBiography);
+  CXMLUtils::SetString(artist,                      "died", strDied);
+  CXMLUtils::SetString(artist,                 "disbanded", strDisbanded);
   if (!thumbURL.m_xml.empty())
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     doc.Parse(thumbURL.m_xml);
     const TiXmlNode* thumb = doc.FirstChild("thumb");
     while (thumb)
@@ -164,10 +164,10 @@ bool CArtist::Save(TiXmlNode *node, const std::string &tag, const std::string& s
       thumb = thumb->NextSibling("thumb");
     }
   }
-  XMLUtils::SetString(artist,        "path", strPath);
+  CXMLUtils::SetString(artist,        "path", strPath);
   if (fanart.m_xml.size())
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     doc.Parse(fanart.m_xml);
     artist->InsertEndChild(*doc.RootElement());
   }

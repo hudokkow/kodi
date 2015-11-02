@@ -22,7 +22,6 @@
 #include "addons/Addon.h"
 #include "settings/lib/SettingsManager.h"
 #include "utils/log.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 
 CSettingAddon::CSettingAddon(const std::string &id, CSettingsManager *settingsManager /* = NULL */)
@@ -66,7 +65,7 @@ bool CSettingAddon::Deserialize(const TiXmlNode *node, bool update /* = false */
   if (constraints != NULL)
   {
     // get the addon type
-    if (XMLUtils::GetString(constraints, "addontype", strAddonType) && !strAddonType.empty())
+    if (CXMLUtils::GetString(constraints, "addontype", strAddonType) && !strAddonType.empty())
     {
       m_addonType = ADDON::TranslateType(strAddonType);
       if (m_addonType != ADDON::ADDON_UNKNOWN)

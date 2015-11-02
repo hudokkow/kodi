@@ -26,7 +26,7 @@
 
 #include "dbwrappers/DatabaseQuery.h"
 #include "utils/SortUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 class CURL;
 class CVariant;
@@ -185,6 +185,6 @@ private:
   std::string m_group;
   bool m_groupMixed;
 
-  CXBMCTinyXML m_xmlDoc;
+  CXMLUtils m_xmlDoc;
 };
 

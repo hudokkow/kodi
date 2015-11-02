@@ -1849,9 +1849,6 @@
     <ClCompile Include="..\..\xbmc\network\httprequesthandler\HTTPVfsHandler.cpp">
       <Filter>network\httprequesthandler</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\XBMCTinyXML.cpp">
-      <Filter>utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\Base64.cpp">
       <Filter>utils</Filter>
     </ClCompile>
@@ -2429,9 +2426,6 @@
       <Filter>utils\test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\test\TestXMLUtils.cpp">
-      <Filter>utils\test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\xbmc\utils\test\TestXBMCTinyXML.cpp">
       <Filter>utils\test</Filter>
     </ClCompile>
     <ClCompile Include="..\..\xbmc\utils\test\TestGlobalsHandlingPattern1.h">
@@ -5110,9 +5104,6 @@
     </ClInclude>
     <ClInclude Include="..\..\xbmc\filesystem\FileCache.h">
       <Filter>filesystem</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\xbmc\utils\XBMCTinyXML.h">
-      <Filter>utils</Filter>
     </ClInclude>
     <ClInclude Include="..\..\xbmc\filesystem\BlurayDirectory.h">
       <Filter>filesystem</Filter>

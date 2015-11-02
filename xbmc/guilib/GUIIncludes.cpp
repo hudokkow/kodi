@@ -23,7 +23,6 @@
 #include "GUIInfoManager.h"
 #include "GUIInfoTypes.h"
 #include "utils/log.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 #include "utils/StringUtils.h"
 #include "interfaces/info/SkinVariable.h"
@@ -104,7 +103,7 @@ bool CGUIIncludes::LoadIncludes(const std::string &includeFile)
   if (HasIncludeFile(includeFile))
     return true;
 
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   if (!doc.LoadFile(includeFile))
   {
     CLog::Log(LOGINFO, "Error loading includes.xml file (%s): %s (row=%i, col=%i)", includeFile.c_str(), doc.ErrorDesc(), doc.ErrorRow(), doc.ErrorCol());
@@ -231,7 +230,7 @@ void CGUIIncludes::ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::Inf
   std::string type;
   if (node->ValueStr() == "control")
   {
-    type = XMLUtils::GetAttribute(node, "type");
+    type = CXMLUtils::GetAttribute(node, "type");
     std::map<std::string, TiXmlElement>::const_iterator it = m_defaults.find(type);
     if (it != m_defaults.end())
     {
@@ -365,7 +364,7 @@ bool CGUIIncludes::GetParameters(const TiXmlElement *include, const char *valueA
     foundAny = param != NULL;  // doesn't matter if param isn't entirely valid
     while (param)
     {
-      std::string paramName = XMLUtils::GetAttribute(param, "name");
+      std::string paramName = CXMLUtils::GetAttribute(param, "name");
       if (!paramName.empty())
       {
         std::string paramValue;

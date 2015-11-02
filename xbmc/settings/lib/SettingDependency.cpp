@@ -30,7 +30,7 @@
 #include "SettingsManager.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 CSettingDependencyCondition::CSettingDependencyCondition(CSettingsManager *settingsManager /* = NULL */)
   : CSettingConditionItem(settingsManager),

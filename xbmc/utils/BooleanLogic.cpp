@@ -21,7 +21,7 @@
 #include "BooleanLogic.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 bool CBooleanLogicValue::Deserialize(const TiXmlNode *node)
 {

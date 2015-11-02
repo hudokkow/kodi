@@ -164,7 +164,7 @@ bool CLocalizeStrings::LoadPO(const std::string &filename, std::string &encoding
 
 bool CLocalizeStrings::LoadXML(const std::string &filename, std::string &encoding, uint32_t offset /* = 0 */)
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(filename))
   {
     CLog::Log(LOGDEBUG, "unable to load %s: %s at line %d", filename.c_str(), xmlDoc.ErrorDesc(), xmlDoc.ErrorRow());

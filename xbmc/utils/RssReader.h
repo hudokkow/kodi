@@ -26,7 +26,7 @@
 #include "threads/CriticalSection.h"
 #include "threads/Thread.h"
 #include "utils/IRssObserver.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 class CRssReader : public CThread
 {
@@ -61,7 +61,7 @@ private:
   std::vector<SYSTEMTIME *> m_vecTimeStamps;
   std::vector<int> m_vecUpdateTimes;
   int m_spacesBetweenFeeds;
-  CXBMCTinyXML m_xml;
+  CXMLUtils m_xml;
   std::list<std::string> m_tagSet;
   std::vector<std::string> m_vecUrls;
   std::vector<int> m_vecQueue;

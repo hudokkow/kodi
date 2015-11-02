@@ -26,7 +26,7 @@
 #endif
 
 #include "DllDvdNav.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "DVDStateSerializer.h"
 #include <sstream>
 
@@ -48,7 +48,7 @@ bool CDVDStateSerializer::test( const dvd_state_t *state  )
 bool CDVDStateSerializer::DVDToXMLState( std::string &xmlstate, const dvd_state_t *state )
 {
   char buffer[256];
-  CXBMCTinyXML xmlDoc("navstate");
+  CXMLUtils xmlDoc("navstate");
 
   TiXmlElement eRoot("navstate");
   eRoot.SetAttribute("version", 1);
@@ -210,7 +210,7 @@ bool CDVDStateSerializer::DVDToXMLState( std::string &xmlstate, const dvd_state_
 
 bool CDVDStateSerializer::XMLToDVDState( dvd_state_t *state, const std::string &xmlstate )
 {
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
 
   xmlDoc.Parse(xmlstate);
 

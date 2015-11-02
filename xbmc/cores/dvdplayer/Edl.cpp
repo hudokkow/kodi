@@ -24,7 +24,7 @@
 #include "filesystem/File.h"
 #include "settings/AdvancedSettings.h"
 #include "utils/log.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "PlatformDefs.h"
 #include "pvr/recordings/PVRRecordings.h"
 #include "pvr/PVRManager.h"
@@ -491,7 +491,7 @@ bool CEdl::ReadBeyondTV(const std::string& strMovie)
   if (!CFile::Exists(beyondTVFilename))
     return false;
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(beyondTVFilename))
   {
     CLog::Log(LOGERROR, "%s - Could not load Beyond TV file: %s. %s", __FUNCTION__, beyondTVFilename.c_str(),

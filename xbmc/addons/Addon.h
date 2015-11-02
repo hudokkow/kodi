@@ -21,7 +21,7 @@
 
 #include "IAddon.h"
 #include "addons/AddonVersion.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "guilib/LocalizeStrings.h"
 #include "utils/ISerializable.h"
 #include <vector>
@@ -235,15 +235,15 @@ protected:
    \return true if settings are loaded, false otherwise
    \sa SettingsToXML
    */
-  virtual bool SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults = false);
+  virtual bool SettingsFromXML(const CXMLUtils &doc, bool loadDefaults = false);
 
   /*! \brief Write settings into an XML document
    \param doc XML document to receive the settings
    \sa SettingsFromXML
    */
-  virtual void SettingsToXML(CXBMCTinyXML &doc) const;
+  virtual void SettingsToXML(CXMLUtils &doc) const;
 
-  CXBMCTinyXML      m_addonXmlDoc;
+  CXMLUtils          m_addonXmlDoc;
   std::string       m_strLibName;
   bool              m_settingsLoaded;
   bool              m_userSettingsLoaded;

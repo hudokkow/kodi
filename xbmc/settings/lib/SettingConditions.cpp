@@ -22,7 +22,7 @@
 #include "SettingDefinitions.h"
 #include "SettingsManager.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 bool CSettingConditionItem::Deserialize(const TiXmlNode *node)
 {

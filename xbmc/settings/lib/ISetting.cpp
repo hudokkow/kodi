@@ -22,7 +22,6 @@
 
 #include "ISetting.h"
 #include "SettingDefinitions.h"
-#include "utils/XBMCTinyXML.h"
 #include "utils/XMLUtils.h"
 
 ISetting::ISetting(const std::string &id, CSettingsManager *settingsManager /* = NULL */)
@@ -40,7 +39,7 @@ bool ISetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
     return false;
 
   bool value;
-  if (XMLUtils::GetBoolean(node, SETTING_XML_ELM_VISIBLE, value))
+  if (CXMLUtils::GetBoolean(node, SETTING_XML_ELM_VISIBLE, value))
     m_visible = value;
 
   const TiXmlElement *element = node->ToElement();

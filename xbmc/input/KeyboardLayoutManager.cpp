@@ -26,7 +26,7 @@
 #include "filesystem/Directory.h"
 #include "URL.h"
 #include "utils/log.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 #define KEYBOARD_LAYOUTS_PATH   "special://xbmc/system/keyboardlayouts"
 
@@ -68,7 +68,7 @@ bool CKeyboardLayoutManager::Load(const std::string& path /* = "" */)
     if (layoutPath.empty())
       continue;
 
-    CXBMCTinyXML xmlDoc;
+    CXMLUtils xmlDoc;
     if (!xmlDoc.LoadFile(layoutPath))
     {
       CLog::Log(LOGWARNING, "CKeyboardLayoutManager: unable to open %s", layoutPath.c_str());

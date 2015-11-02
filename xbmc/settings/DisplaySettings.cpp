@@ -121,22 +121,22 @@ bool CDisplaySettings::Load(const TiXmlNode *settings)
     // get the data for this calibration
     RESOLUTION_INFO cal;
 
-    XMLUtils::GetString(pResolution, "description", cal.strMode);
-    XMLUtils::GetInt(pResolution, "subtitles", cal.iSubtitles);
-    XMLUtils::GetFloat(pResolution, "pixelratio", cal.fPixelRatio);
+    CXMLUtils::GetString(pResolution, "description", cal.strMode);
+    CXMLUtils::GetInt(pResolution, "subtitles", cal.iSubtitles);
+    CXMLUtils::GetFloat(pResolution, "pixelratio", cal.fPixelRatio);
 #ifdef HAVE_X11
-    XMLUtils::GetFloat(pResolution, "refreshrate", cal.fRefreshRate);
-    XMLUtils::GetString(pResolution, "output", cal.strOutput);
-    XMLUtils::GetString(pResolution, "xrandrid", cal.strId);
+    CXMLUtils::GetFloat(pResolution, "refreshrate", cal.fRefreshRate);
+    CXMLUtils::GetString(pResolution, "output", cal.strOutput);
+    CXMLUtils::GetString(pResolution, "xrandrid", cal.strId);
 #endif
 
     const TiXmlElement *pOverscan = pResolution->FirstChildElement("overscan");
     if (pOverscan)
     {
-      XMLUtils::GetInt(pOverscan, "left", cal.Overscan.left);
-      XMLUtils::GetInt(pOverscan, "top", cal.Overscan.top);
-      XMLUtils::GetInt(pOverscan, "right", cal.Overscan.right);
-      XMLUtils::GetInt(pOverscan, "bottom", cal.Overscan.bottom);
+      CXMLUtils::GetInt(pOverscan, "left", cal.Overscan.left);
+      CXMLUtils::GetInt(pOverscan, "top", cal.Overscan.top);
+      CXMLUtils::GetInt(pOverscan, "right", cal.Overscan.right);
+      CXMLUtils::GetInt(pOverscan, "bottom", cal.Overscan.bottom);
     }
 
     // mark calibration as not updated
@@ -185,13 +185,13 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
       return false;
 
     // Now write each of the pieces of information we need...
-    XMLUtils::SetString(pNode, "description", it->strMode);
-    XMLUtils::SetInt(pNode, "subtitles", it->iSubtitles);
-    XMLUtils::SetFloat(pNode, "pixelratio", it->fPixelRatio);
+    CXMLUtils::SetString(pNode, "description", it->strMode);
+    CXMLUtils::SetInt(pNode, "subtitles", it->iSubtitles);
+    CXMLUtils::SetFloat(pNode, "pixelratio", it->fPixelRatio);
 #ifdef HAVE_X11
-    XMLUtils::SetFloat(pNode, "refreshrate", it->fRefreshRate);
-    XMLUtils::SetString(pNode, "output", it->strOutput);
-    XMLUtils::SetString(pNode, "xrandrid", it->strId);
+    CXMLUtils::SetFloat(pNode, "refreshrate", it->fRefreshRate);
+    CXMLUtils::SetString(pNode, "output", it->strOutput);
+    CXMLUtils::SetString(pNode, "xrandrid", it->strId);
 #endif
 
     // create the overscan child
@@ -200,10 +200,10 @@ bool CDisplaySettings::Save(TiXmlNode *settings) const
     if (pOverscanNode == NULL)
       return false;
 
-    XMLUtils::SetInt(pOverscanNode, "left", it->Overscan.left);
-    XMLUtils::SetInt(pOverscanNode, "top", it->Overscan.top);
-    XMLUtils::SetInt(pOverscanNode, "right", it->Overscan.right);
-    XMLUtils::SetInt(pOverscanNode, "bottom", it->Overscan.bottom);
+    CXMLUtils::SetInt(pOverscanNode, "left", it->Overscan.left);
+    CXMLUtils::SetInt(pOverscanNode, "top", it->Overscan.top);
+    CXMLUtils::SetInt(pOverscanNode, "right", it->Overscan.right);
+    CXMLUtils::SetInt(pOverscanNode, "bottom", it->Overscan.bottom);
   }
 
   return true;

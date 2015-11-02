@@ -19,7 +19,7 @@
  */
 
 #include "GUIControlProfiler.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/TimeUtils.h"
 #include "utils/StringUtils.h"
 
@@ -338,7 +338,7 @@ bool CGUIControlProfiler::SaveResults(void)
   if (m_strOutputFile.empty())
     return false;
 
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   TiXmlDeclaration decl("1.0", "", "yes");
   doc.InsertEndChild(decl);
 

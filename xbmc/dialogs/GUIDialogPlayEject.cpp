@@ -101,7 +101,7 @@ bool CGUIDialogPlayEject::ShowAndGetInput(const CFileItem & item,
 
   // Figure out Lines 1 and 2 of the dialog
   std::string strLine1, strLine2;
-  CXBMCTinyXML discStubXML;
+  CXMLUtils discStubXML;
   if (discStubXML.LoadFile(item.GetPath()))
   {
     TiXmlElement * pRootElement = discStubXML.RootElement();
@@ -109,8 +109,8 @@ bool CGUIDialogPlayEject::ShowAndGetInput(const CFileItem & item,
       CLog::Log(LOGERROR, "Error loading %s, no <discstub> node", item.GetPath().c_str());
     else
     {
-      XMLUtils::GetString(pRootElement, "title", strLine1);
-      XMLUtils::GetString(pRootElement, "message", strLine2);
+      CXMLUtils::GetString(pRootElement, "title", strLine1);
+      CXMLUtils::GetString(pRootElement, "message", strLine2);
     }
   }
 

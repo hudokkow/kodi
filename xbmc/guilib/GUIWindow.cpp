@@ -137,7 +137,7 @@ bool CGUIWindow::LoadXML(const std::string &strPath, const std::string &strLower
   // load window xml if we don't have it stored yet
   if (!m_windowXMLRootElement)
   {
-    CXBMCTinyXML xmlDoc;
+    CXMLUtils xmlDoc;
     std::string strPathLower = strPath;
     StringUtils::ToLower(strPathLower);
     if (!xmlDoc.LoadFile(strPath) && !xmlDoc.LoadFile(strPathLower) && !xmlDoc.LoadFile(strLowerPath))
@@ -228,10 +228,10 @@ bool CGUIWindow::Load(TiXmlElement* pRootElement)
     }
     else if (strValue == "coordinates")
     {
-      XMLUtils::GetFloat(pChild, "posx", m_posX);
-      XMLUtils::GetFloat(pChild, "posy", m_posY);
-      XMLUtils::GetFloat(pChild, "left", m_posX);
-      XMLUtils::GetFloat(pChild, "top", m_posY);
+      CXMLUtils::GetFloat(pChild, "posx", m_posX);
+      CXMLUtils::GetFloat(pChild, "posy", m_posY);
+      CXMLUtils::GetFloat(pChild, "left", m_posX);
+      CXMLUtils::GetFloat(pChild, "top", m_posY);
 
       TiXmlElement *originElement = pChild->FirstChildElement("origin");
       while (originElement)

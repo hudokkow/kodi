@@ -37,7 +37,7 @@
 // Forward
 class CGUIFont;
 class CGUIFontTTFBase;
-class CXBMCTinyXML;
+class CXMLUtils;
 class TiXmlNode;
 class CSetting;
 

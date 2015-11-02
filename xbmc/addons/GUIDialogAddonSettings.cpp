@@ -236,14 +236,14 @@ bool CGUIDialogAddonSettings::ShowVirtualKeyboard(int iControl)
     if (controlId == iControl)
     {
       const CGUIControl* control = GetControl(controlId);
-      const std::string id = XMLUtils::GetAttribute(setting, "id");
-      const std::string type = XMLUtils::GetAttribute(setting, "type");
+      const std::string id = CXMLUtils::GetAttribute(setting, "id");
+      const std::string type = CXMLUtils::GetAttribute(setting, "type");
 
       //Special handling for actions: does not require id attribute. TODO: refactor me.
       if (control && control->GetControlType() == CGUIControl::GUICONTROL_BUTTON && type == "action")
       {
         const char *option = setting->Attribute("option");
-        std::string action = XMLUtils::GetAttribute(setting, "action");
+        std::string action = CXMLUtils::GetAttribute(setting, "action");
         if (!action.empty())
         {
           // replace $CWD with the url of plugin/script
@@ -327,7 +327,7 @@ bool CGUIDialogAddonSettings::ShowVirtualKeyboard(int iControl)
             }
             else if (source)
             {
-              valuesVec = GetFileEnumValues(source, XMLUtils::GetAttribute(setting, "mask"), XMLUtils::GetAttribute(setting, "option"));
+              valuesVec = GetFileEnumValues(source, CXMLUtils::GetAttribute(setting, "mask"), CXMLUtils::GetAttribute(setting, "option"));
             }
 
             for (unsigned int i = 0; i < valuesVec.size(); i++)
@@ -510,8 +510,8 @@ void CGUIDialogAddonSettings::UpdateFromControls()
   const TiXmlElement *setting = GetFirstSetting();
   while (setting)
   {
-    const std::string id   = XMLUtils::GetAttribute(setting, "id");
-    const std::string type = XMLUtils::GetAttribute(setting, "type");
+    const std::string id   = CXMLUtils::GetAttribute(setting, "id");
+    const std::string type = CXMLUtils::GetAttribute(setting, "type");
     const CGUIControl* control = GetControl(controlID++);
 
     if (control)
@@ -533,7 +533,7 @@ void CGUIDialogAddonSettings::UpdateFromControls()
           break;
         case CGUIControl::GUICONTROL_SETTINGS_SLIDER:
           {
-            std::string option = XMLUtils::GetAttribute(setting, "option");
+            std::string option = CXMLUtils::GetAttribute(setting, "option");
             if (option.size() == 0 || StringUtils::EqualsNoCase(option, "float"))
               value = StringUtils::Format("%f", ((CGUISettingsSliderControl *)control)->GetFloatValue());
             else
@@ -633,7 +633,7 @@ void CGUIDialogAddonSettings::CreateSections()
     const TiXmlElement *setting = category->FirstChildElement("setting");
     while (setting)
     {
-      const std::string id = XMLUtils::GetAttribute(setting, "id");
+      const std::string id = CXMLUtils::GetAttribute(setting, "id");
       if (!id.empty())
         m_settings[id] = m_addon->GetSetting(id);
       setting = setting->NextSiblingElement("setting");
@@ -677,16 +677,16 @@ void CGUIDialogAddonSettings::CreateControls()
   const TiXmlElement *setting = GetFirstSetting();
   while (setting)
   {
-    const std::string       type = XMLUtils::GetAttribute(setting, "type");
-    const std::string         id = XMLUtils::GetAttribute(setting, "id");
-    const std::string     values = XMLUtils::GetAttribute(setting, "values");
-    const std::string    lvalues = XMLUtils::GetAttribute(setting, "lvalues");
-    const std::string    entries = XMLUtils::GetAttribute(setting, "entries");
-    const std::string defaultVal = XMLUtils::GetAttribute(setting, "default");
-    const std::string subsetting = XMLUtils::GetAttribute(setting, "subsetting");
+    const std::string       type = CXMLUtils::GetAttribute(setting, "type");
+    const std::string         id = CXMLUtils::GetAttribute(setting, "id");
+    const std::string     values = CXMLUtils::GetAttribute(setting, "values");
+    const std::string    lvalues = CXMLUtils::GetAttribute(setting, "lvalues");
+    const std::string    entries = CXMLUtils::GetAttribute(setting, "entries");
+    const std::string defaultVal = CXMLUtils::GetAttribute(setting, "default");
+    const std::string subsetting = CXMLUtils::GetAttribute(setting, "subsetting");
     const std::string      label = GetString(setting->Attribute("label"), subsetting == "true");
 
-    bool bSort = XMLUtils::GetAttribute(setting, "sort") == "yes";
+    bool bSort = CXMLUtils::GetAttribute(setting, "sort") == "yes";
     if (!type.empty())
     {
       bool isAddonSetting = false;
@@ -706,7 +706,7 @@ void CGUIDialogAddonSettings::CreateControls()
           std::string value = m_settings[id];
           m_buttonValues[id] = value;
           // get any option to test for hidden
-          const std::string option = XMLUtils::GetAttribute(setting, "option");
+          const std::string option = CXMLUtils::GetAttribute(setting, "option");
           if (option == "urlencoded")
             value = CURL::Decode(value);
           else if (option == "hidden")
@@ -802,7 +802,7 @@ void CGUIDialogAddonSettings::CreateControls()
         ((CGUISpinControlEx *)pControl)->SetText(label);
         ((CGUISpinControlEx *)pControl)->SetFloatValue(1.0f);
 
-        std::vector<std::string> items = GetFileEnumValues(values, XMLUtils::GetAttribute(setting, "mask"), XMLUtils::GetAttribute(setting, "option"));
+        std::vector<std::string> items = GetFileEnumValues(values, CXMLUtils::GetAttribute(setting, "mask"), CXMLUtils::GetAttribute(setting, "option"));
         for (unsigned int i = 0; i < items.size(); ++i)
         {
           ((CGUISpinControlEx *)pControl)->AddLabel(items[i], i);
@@ -853,7 +853,7 @@ void CGUIDialogAddonSettings::CreateControls()
         float fMin = 0.0f;
         float fMax = 100.0f;
         float fInc = 1.0f;
-        std::vector<std::string> range = StringUtils::Split(XMLUtils::GetAttribute(setting, "range"), ',');
+        std::vector<std::string> range = StringUtils::Split(CXMLUtils::GetAttribute(setting, "range"), ',');
         if (range.size() > 1)
         {
           fMin = (float)atof(range[0].c_str());
@@ -866,7 +866,7 @@ void CGUIDialogAddonSettings::CreateControls()
             fMax = (float)atof(range[1].c_str());
         }
 
-        std::string option = XMLUtils::GetAttribute(setting, "option");
+        std::string option = CXMLUtils::GetAttribute(setting, "option");
         int iType=0;
 
         if (option.empty() || StringUtils::EqualsNoCase(option, "float"))
@@ -1116,8 +1116,8 @@ void CGUIDialogAddonSettings::SetDefaultSettings()
     const TiXmlElement *setting = category->FirstChildElement("setting");
     while (setting)
     {
-      const std::string   id = XMLUtils::GetAttribute(setting, "id");
-      const std::string type = XMLUtils::GetAttribute(setting, "type");
+      const std::string   id = CXMLUtils::GetAttribute(setting, "id");
+      const std::string type = CXMLUtils::GetAttribute(setting, "type");
       const char *value = setting->Attribute("default");
       if (!id.empty())
       {

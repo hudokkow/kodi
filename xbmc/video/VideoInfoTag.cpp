@@ -107,39 +107,39 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
 
   if (!movie) return false;
 
-  XMLUtils::SetString(movie, "title", m_strTitle);
+  CXMLUtils::SetString(movie, "title", m_strTitle);
   if (!m_strOriginalTitle.empty())
-    XMLUtils::SetString(movie, "originaltitle", m_strOriginalTitle);
+    CXMLUtils::SetString(movie, "originaltitle", m_strOriginalTitle);
   if (!m_strShowTitle.empty())
-    XMLUtils::SetString(movie, "showtitle", m_strShowTitle);
+    CXMLUtils::SetString(movie, "showtitle", m_strShowTitle);
   if (!m_strSortTitle.empty())
-    XMLUtils::SetString(movie, "sorttitle", m_strSortTitle);
-  XMLUtils::SetFloat(movie, "rating", m_fRating);
-  XMLUtils::SetInt(movie, "userrating", m_iUserRating);
-  XMLUtils::SetFloat(movie, "epbookmark", m_fEpBookmark);
-  XMLUtils::SetInt(movie, "year", m_iYear);
-  XMLUtils::SetInt(movie, "top250", m_iTop250);
+    CXMLUtils::SetString(movie, "sorttitle", m_strSortTitle);
+  CXMLUtils::SetFloat(movie, "rating", m_fRating);
+  CXMLUtils::SetInt(movie, "userrating", m_iUserRating);
+  CXMLUtils::SetFloat(movie, "epbookmark", m_fEpBookmark);
+  CXMLUtils::SetInt(movie, "year", m_iYear);
+  CXMLUtils::SetInt(movie, "top250", m_iTop250);
   if (tag == "episodedetails" || tag == "tvshow")
   {
-    XMLUtils::SetInt(movie, "season", m_iSeason);
-    XMLUtils::SetInt(movie, "episode", m_iEpisode);
-    XMLUtils::SetString(movie, "uniqueid", m_strUniqueId);
-    XMLUtils::SetInt(movie, "displayseason",m_iSpecialSortSeason);
-    XMLUtils::SetInt(movie, "displayepisode",m_iSpecialSortEpisode);
+    CXMLUtils::SetInt(movie, "season", m_iSeason);
+    CXMLUtils::SetInt(movie, "episode", m_iEpisode);
+    CXMLUtils::SetString(movie, "uniqueid", m_strUniqueId);
+    CXMLUtils::SetInt(movie, "displayseason",m_iSpecialSortSeason);
+    CXMLUtils::SetInt(movie, "displayepisode",m_iSpecialSortEpisode);
   }
   if (tag == "musicvideo")
   {
-    XMLUtils::SetInt(movie, "track", m_iTrack);
-    XMLUtils::SetString(movie, "album", m_strAlbum);
+    CXMLUtils::SetInt(movie, "track", m_iTrack);
+    CXMLUtils::SetString(movie, "album", m_strAlbum);
   }
-  XMLUtils::SetString(movie, "votes", m_strVotes);
-  XMLUtils::SetString(movie, "outline", m_strPlotOutline);
-  XMLUtils::SetString(movie, "plot", m_strPlot);
-  XMLUtils::SetString(movie, "tagline", m_strTagLine);
-  XMLUtils::SetInt(movie, "runtime", GetDuration() / 60);
+  CXMLUtils::SetString(movie, "votes", m_strVotes);
+  CXMLUtils::SetString(movie, "outline", m_strPlotOutline);
+  CXMLUtils::SetString(movie, "plot", m_strPlot);
+  CXMLUtils::SetString(movie, "tagline", m_strTagLine);
+  CXMLUtils::SetInt(movie, "runtime", GetDuration() / 60);
   if (!m_strPictureURL.m_xml.empty())
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     doc.Parse(m_strPictureURL.m_xml);
     const TiXmlNode* thumb = doc.FirstChild("thumb");
     while (thumb)
@@ -150,50 +150,50 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
   }
   if (m_fanart.m_xml.size())
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     doc.Parse(m_fanart.m_xml);
     movie->InsertEndChild(*doc.RootElement());
   }
-  XMLUtils::SetString(movie, "mpaa", m_strMPAARating);
-  XMLUtils::SetInt(movie, "playcount", m_playCount);
-  XMLUtils::SetDate(movie, "lastplayed", m_lastPlayed);
+  CXMLUtils::SetString(movie, "mpaa", m_strMPAARating);
+  CXMLUtils::SetInt(movie, "playcount", m_playCount);
+  CXMLUtils::SetDate(movie, "lastplayed", m_lastPlayed);
   if (savePathInfo)
   {
-    XMLUtils::SetString(movie, "file", m_strFile);
-    XMLUtils::SetString(movie, "path", m_strPath);
-    XMLUtils::SetString(movie, "filenameandpath", m_strFileNameAndPath);
-    XMLUtils::SetString(movie, "basepath", m_basePath);
+    CXMLUtils::SetString(movie, "file", m_strFile);
+    CXMLUtils::SetString(movie, "path", m_strPath);
+    CXMLUtils::SetString(movie, "filenameandpath", m_strFileNameAndPath);
+    CXMLUtils::SetString(movie, "basepath", m_basePath);
   }
   if (!m_strEpisodeGuide.empty())
   {
-    CXBMCTinyXML doc;
+    CXMLUtils doc;
     doc.Parse(m_strEpisodeGuide);
     if (doc.RootElement())
       movie->InsertEndChild(*doc.RootElement());
     else
-      XMLUtils::SetString(movie, "episodeguide", m_strEpisodeGuide);
+      CXMLUtils::SetString(movie, "episodeguide", m_strEpisodeGuide);
   }
 
-  XMLUtils::SetString(movie, "id", m_strIMDBNumber);
-  XMLUtils::SetStringArray(movie, "genre", m_genre);
-  XMLUtils::SetStringArray(movie, "country", m_country);
+  CXMLUtils::SetString(movie, "id", m_strIMDBNumber);
+  CXMLUtils::SetStringArray(movie, "genre", m_genre);
+  CXMLUtils::SetStringArray(movie, "country", m_country);
   if (!m_strSet.empty())
   {
     TiXmlElement set("set");
-    XMLUtils::SetString(&set, "name", m_strSet);
+    CXMLUtils::SetString(&set, "name", m_strSet);
     if (!m_strSetOverview.empty())
-      XMLUtils::SetString(&set, "overview", m_strSetOverview);
+      CXMLUtils::SetString(&set, "overview", m_strSetOverview);
     movie->InsertEndChild(set);
   }
-  XMLUtils::SetStringArray(movie, "tag", m_tags);
-  XMLUtils::SetStringArray(movie, "credits", m_writingCredits);
-  XMLUtils::SetStringArray(movie, "director", m_director);
-  XMLUtils::SetDate(movie, "premiered", m_premiered);
-  XMLUtils::SetString(movie, "status", m_strStatus);
-  XMLUtils::SetString(movie, "code", m_strProductionCode);
-  XMLUtils::SetDate(movie, "aired", m_firstAired);
-  XMLUtils::SetStringArray(movie, "studio", m_studio);
-  XMLUtils::SetString(movie, "trailer", m_strTrailer);
+  CXMLUtils::SetStringArray(movie, "tag", m_tags);
+  CXMLUtils::SetStringArray(movie, "credits", m_writingCredits);
+  CXMLUtils::SetStringArray(movie, "director", m_director);
+  CXMLUtils::SetDate(movie, "premiered", m_premiered);
+  CXMLUtils::SetString(movie, "status", m_strStatus);
+  CXMLUtils::SetString(movie, "code", m_strProductionCode);
+  CXMLUtils::SetDate(movie, "aired", m_firstAired);
+  CXMLUtils::SetStringArray(movie, "studio", m_studio);
+  CXMLUtils::SetString(movie, "trailer", m_strTrailer);
 
   if (m_streamDetails.HasItems())
   {
@@ -203,26 +203,26 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
     for (int iStream=1; iStream<=m_streamDetails.GetVideoStreamCount(); iStream++)
     {
       TiXmlElement stream("video");
-      XMLUtils::SetString(&stream, "codec", m_streamDetails.GetVideoCodec(iStream));
-      XMLUtils::SetFloat(&stream, "aspect", m_streamDetails.GetVideoAspect(iStream));
-      XMLUtils::SetInt(&stream, "width", m_streamDetails.GetVideoWidth(iStream));
-      XMLUtils::SetInt(&stream, "height", m_streamDetails.GetVideoHeight(iStream));
-      XMLUtils::SetInt(&stream, "durationinseconds", m_streamDetails.GetVideoDuration(iStream));
-      XMLUtils::SetString(&stream, "stereomode", m_streamDetails.GetStereoMode(iStream));
+      CXMLUtils::SetString(&stream, "codec", m_streamDetails.GetVideoCodec(iStream));
+      CXMLUtils::SetFloat(&stream, "aspect", m_streamDetails.GetVideoAspect(iStream));
+      CXMLUtils::SetInt(&stream, "width", m_streamDetails.GetVideoWidth(iStream));
+      CXMLUtils::SetInt(&stream, "height", m_streamDetails.GetVideoHeight(iStream));
+      CXMLUtils::SetInt(&stream, "durationinseconds", m_streamDetails.GetVideoDuration(iStream));
+      CXMLUtils::SetString(&stream, "stereomode", m_streamDetails.GetStereoMode(iStream));
       streamdetails.InsertEndChild(stream);
     }
     for (int iStream=1; iStream<=m_streamDetails.GetAudioStreamCount(); iStream++)
     {
       TiXmlElement stream("audio");
-      XMLUtils::SetString(&stream, "codec", m_streamDetails.GetAudioCodec(iStream));
-      XMLUtils::SetString(&stream, "language", m_streamDetails.GetAudioLanguage(iStream));
-      XMLUtils::SetInt(&stream, "channels", m_streamDetails.GetAudioChannels(iStream));
+      CXMLUtils::SetString(&stream, "codec", m_streamDetails.GetAudioCodec(iStream));
+      CXMLUtils::SetString(&stream, "language", m_streamDetails.GetAudioLanguage(iStream));
+      CXMLUtils::SetInt(&stream, "channels", m_streamDetails.GetAudioChannels(iStream));
       streamdetails.InsertEndChild(stream);
     }
     for (int iStream=1; iStream<=m_streamDetails.GetSubtitleStreamCount(); iStream++)
     {
       TiXmlElement stream("subtitle");
-      XMLUtils::SetString(&stream, "language", m_streamDetails.GetSubtitleLanguage(iStream));
+      CXMLUtils::SetString(&stream, "language", m_streamDetails.GetSubtitleLanguage(iStream));
       streamdetails.InsertEndChild(stream);
     }
     fileinfo.InsertEndChild(streamdetails);
@@ -235,13 +235,13 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
     // add a <actor> tag
     TiXmlElement cast("actor");
     TiXmlNode *node = movie->InsertEndChild(cast);
-    XMLUtils::SetString(node, "name", it->strName);
-    XMLUtils::SetString(node, "role", it->strRole);
-    XMLUtils::SetInt(node, "order", it->order);
-    XMLUtils::SetString(node, "thumb", it->thumbUrl.GetFirstThumb().m_url);
+    CXMLUtils::SetString(node, "name", it->strName);
+    CXMLUtils::SetString(node, "role", it->strRole);
+    CXMLUtils::SetInt(node, "order", it->order);
+    CXMLUtils::SetString(node, "thumb", it->thumbUrl.GetFirstThumb().m_url);
   }
-  XMLUtils::SetStringArray(movie, "artist", m_artist);
-  XMLUtils::SetStringArray(movie, "showlink", m_showLink);
+  CXMLUtils::SetStringArray(movie, "artist", m_artist);
+  CXMLUtils::SetStringArray(movie, "showlink", m_showLink);
 
   for (const auto& namedSeason : m_namedSeasons)
   {
@@ -252,11 +252,11 @@ bool CVideoInfoTag::Save(TiXmlNode *node, const std::string &tag, bool savePathI
   }
  
   TiXmlElement resume("resume");
-  XMLUtils::SetFloat(&resume, "position", (float)m_resumePoint.timeInSeconds);
-  XMLUtils::SetFloat(&resume, "total", (float)m_resumePoint.totalTimeInSeconds);
+  CXMLUtils::SetFloat(&resume, "position", (float)m_resumePoint.timeInSeconds);
+  CXMLUtils::SetFloat(&resume, "total", (float)m_resumePoint.totalTimeInSeconds);
   movie->InsertEndChild(resume);
 
-  XMLUtils::SetDateTime(movie, "dateadded", m_dateAdded);
+  CXMLUtils::SetDateTime(movie, "dateadded", m_dateAdded);
 
   if (additionalNode)
     movie->InsertEndChild(*additionalNode);
@@ -623,21 +623,21 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
 {
   std::string value;
 
-  if (XMLUtils::GetString(movie, "title", value))
+  if (CXMLUtils::GetString(movie, "title", value))
     SetTitle(value);
 
-  if (XMLUtils::GetString(movie, "originaltitle", value))
+  if (CXMLUtils::GetString(movie, "originaltitle", value))
     SetOriginalTitle(value);
 
-  if (XMLUtils::GetString(movie, "showtitle", value))
+  if (CXMLUtils::GetString(movie, "showtitle", value))
     SetShowTitle(value);
 
-  if (XMLUtils::GetString(movie, "sorttitle", value))
+  if (CXMLUtils::GetString(movie, "sorttitle", value))
     SetSortTitle(value);
 
-  XMLUtils::GetFloat(movie, "rating", m_fRating);
-  XMLUtils::GetInt(movie, "userrating", m_iUserRating);
-  XMLUtils::GetFloat(movie, "epbookmark", m_fEpBookmark);
+  CXMLUtils::GetFloat(movie, "rating", m_fRating);
+  CXMLUtils::GetInt(movie, "userrating", m_iUserRating);
+  CXMLUtils::GetFloat(movie, "epbookmark", m_fEpBookmark);
   int max_value = 10;
   const TiXmlElement* rElement = movie->FirstChildElement("rating");
   if (rElement && (rElement->QueryIntAttribute("max", &max_value) == TIXML_SUCCESS) && max_value>=1)
@@ -647,74 +647,74 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
   const TiXmlElement* urElement = movie->FirstChildElement("userrating");
   if (urElement && (urElement->QueryIntAttribute("max", &max_value) == TIXML_SUCCESS) && max_value >= 1)
     m_iUserRating = m_iUserRating / max_value * 10; // Normalise the user Movie Rating to between 1 and 10
-  XMLUtils::GetInt(movie, "year", m_iYear);
-  XMLUtils::GetInt(movie, "top250", m_iTop250);
-  XMLUtils::GetInt(movie, "season", m_iSeason);
-  XMLUtils::GetInt(movie, "episode", m_iEpisode);
-  XMLUtils::GetInt(movie, "track", m_iTrack);
-  if (XMLUtils::GetString(movie, "uniqueid", value))
+  CXMLUtils::GetInt(movie, "year", m_iYear);
+  CXMLUtils::GetInt(movie, "top250", m_iTop250);
+  CXMLUtils::GetInt(movie, "season", m_iSeason);
+  CXMLUtils::GetInt(movie, "episode", m_iEpisode);
+  CXMLUtils::GetInt(movie, "track", m_iTrack);
+  if (CXMLUtils::GetString(movie, "uniqueid", value))
     SetUniqueId(value);
 
-  XMLUtils::GetInt(movie, "displayseason", m_iSpecialSortSeason);
-  XMLUtils::GetInt(movie, "displayepisode", m_iSpecialSortEpisode);
+  CXMLUtils::GetInt(movie, "displayseason", m_iSpecialSortSeason);
+  CXMLUtils::GetInt(movie, "displayepisode", m_iSpecialSortEpisode);
   int after=0;
-  XMLUtils::GetInt(movie, "displayafterseason",after);
+  CXMLUtils::GetInt(movie, "displayafterseason",after);
   if (after > 0)
   {
     m_iSpecialSortSeason = after;
     m_iSpecialSortEpisode = 0x1000; // should be more than any realistic episode number
   }
-  if (XMLUtils::GetString(movie, "votes", value))
+  if (CXMLUtils::GetString(movie, "votes", value))
     SetVotes(value);
 
-  if (XMLUtils::GetString(movie, "outline", value))
+  if (CXMLUtils::GetString(movie, "outline", value))
     SetPlotOutline(value);
 
-  if (XMLUtils::GetString(movie, "plot", value))
+  if (CXMLUtils::GetString(movie, "plot", value))
     SetPlot(value);
 
-  if (XMLUtils::GetString(movie, "tagline", value))
+  if (CXMLUtils::GetString(movie, "tagline", value))
     SetTagLine(value);
 
   
-  if (XMLUtils::GetString(movie, "runtime", value) && !value.empty())
+  if (CXMLUtils::GetString(movie, "runtime", value) && !value.empty())
     m_duration = GetDurationFromMinuteString(StringUtils::Trim(value));
   
-  if (XMLUtils::GetString(movie, "mpaa", value))
+  if (CXMLUtils::GetString(movie, "mpaa", value))
     SetMPAARating(value);
 
-  XMLUtils::GetInt(movie, "playcount", m_playCount);
-  XMLUtils::GetDate(movie, "lastplayed", m_lastPlayed);
+  CXMLUtils::GetInt(movie, "playcount", m_playCount);
+  CXMLUtils::GetDate(movie, "lastplayed", m_lastPlayed);
   
-  if (XMLUtils::GetString(movie, "file", value))
+  if (CXMLUtils::GetString(movie, "file", value))
     SetFile(value);
 
-  if (XMLUtils::GetString(movie, "path", value))
+  if (CXMLUtils::GetString(movie, "path", value))
     SetPath(value);
 
-  if (XMLUtils::GetString(movie, "id", value))
+  if (CXMLUtils::GetString(movie, "id", value))
     SetIMDBNumber(value);
 
-  if (XMLUtils::GetString(movie, "filenameandpath", value))
+  if (CXMLUtils::GetString(movie, "filenameandpath", value))
     SetFileNameAndPath(value);
 
-  XMLUtils::GetDate(movie, "premiered", m_premiered);
+  CXMLUtils::GetDate(movie, "premiered", m_premiered);
   
-  if (XMLUtils::GetString(movie, "status", value))
+  if (CXMLUtils::GetString(movie, "status", value))
     SetStatus(value);
 
-  if (XMLUtils::GetString(movie, "code", value))
+  if (CXMLUtils::GetString(movie, "code", value))
     SetProductionCode(value);
 
-  XMLUtils::GetDate(movie, "aired", m_firstAired);
+  CXMLUtils::GetDate(movie, "aired", m_firstAired);
   
-  if (XMLUtils::GetString(movie, "album", value))
+  if (CXMLUtils::GetString(movie, "album", value))
     SetAlbum(value);
 
-  if (XMLUtils::GetString(movie, "trailer", value))
+  if (CXMLUtils::GetString(movie, "trailer", value))
     SetTrailer(value);
 
-  if (XMLUtils::GetString(movie, "basepath", value))
+  if (CXMLUtils::GetString(movie, "basepath", value))
     SetBasePath(value);
 
   size_t iThumbCount = m_strPictureURL.m_url.size();
@@ -743,23 +743,23 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
   }
 
   std::vector<std::string> genres(m_genre);
-  if (XMLUtils::GetStringArray(movie, "genre", genres, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "genre", genres, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetGenre(genres);
 
   std::vector<std::string> country(m_country);
-  if (XMLUtils::GetStringArray(movie, "country", country, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "country", country, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetCountry(country);
 
   std::vector<std::string> credits(m_writingCredits);
-  if (XMLUtils::GetStringArray(movie, "credits", credits, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "credits", credits, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetWritingCredits(credits);
 
   std::vector<std::string> director(m_director);
-  if (XMLUtils::GetStringArray(movie, "director", director, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "director", director, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetDirector(director);
 
   std::vector<std::string> showLink(m_showLink);
-  if (XMLUtils::GetStringArray(movie, "showlink", showLink, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "showlink", showLink, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetShowLink(showLink);
 
   const TiXmlElement* namedSeason = movie->FirstChildElement("namedseason");
@@ -786,10 +786,10 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
       SActorInfo info;
       info.strName = actor->FirstChild()->Value();
       
-      if (XMLUtils::GetString(node, "role", value))
+      if (CXMLUtils::GetString(node, "role", value))
         info.strRole = StringUtils::Trim(value);
       
-      XMLUtils::GetInt(node, "order", info.order);
+      CXMLUtils::GetInt(node, "order", info.order);
       const TiXmlElement* thumb = node->FirstChildElement("thumb");
       while (thumb)
       {
@@ -806,7 +806,7 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
 
   // Pre-Jarvis NFO file:
   // <set>A set</set>
-  if (XMLUtils::GetString(movie, "set", value))
+  if (CXMLUtils::GetString(movie, "set", value))
     SetSet(value);
   // Jarvis+:
   // <set><name>A set</name><overview>A set with a number of movies...</overview></set>
@@ -814,20 +814,20 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
   if (node)
   {
     // No name, no set
-    if (XMLUtils::GetString(node, "name", value))
+    if (CXMLUtils::GetString(node, "name", value))
     {
       SetSet(value);
-      if (XMLUtils::GetString(node, "overview", value))
+      if (CXMLUtils::GetString(node, "overview", value))
         SetSetOverview(value);
     }
   }
 
   std::vector<std::string> tags(m_tags);
-  if (XMLUtils::GetStringArray(movie, "tag", tags, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "tag", tags, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetTags(tags);
 
   std::vector<std::string> studio(m_studio);
-  if (XMLUtils::GetStringArray(movie, "studio", studio, prioritise, g_advancedSettings.m_videoItemSeparator))
+  if (CXMLUtils::GetStringArray(movie, "studio", studio, prioritise, g_advancedSettings.m_videoItemSeparator))
     SetStudio(studio);
 
   // artists
@@ -866,13 +866,13 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
       while ((nodeDetail = nodeStreamDetails->IterateChildren("audio", nodeDetail)))
       {
         CStreamDetailAudio *p = new CStreamDetailAudio();
-        if (XMLUtils::GetString(nodeDetail, "codec", value))
+        if (CXMLUtils::GetString(nodeDetail, "codec", value))
           p->m_strCodec = StringUtils::Trim(value);
 
-        if (XMLUtils::GetString(nodeDetail, "language", value))
+        if (CXMLUtils::GetString(nodeDetail, "language", value))
           p->m_strLanguage = StringUtils::Trim(value);
 
-        XMLUtils::GetInt(nodeDetail, "channels", p->m_iChannels);
+        CXMLUtils::GetInt(nodeDetail, "channels", p->m_iChannels);
         StringUtils::ToLower(p->m_strCodec);
         StringUtils::ToLower(p->m_strLanguage);
         m_streamDetails.AddStream(p);
@@ -881,14 +881,14 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
       while ((nodeDetail = nodeStreamDetails->IterateChildren("video", nodeDetail)))
       {
         CStreamDetailVideo *p = new CStreamDetailVideo();
-        if (XMLUtils::GetString(nodeDetail, "codec", value))
+        if (CXMLUtils::GetString(nodeDetail, "codec", value))
           p->m_strCodec = StringUtils::Trim(value);
 
-        XMLUtils::GetFloat(nodeDetail, "aspect", p->m_fAspect);
-        XMLUtils::GetInt(nodeDetail, "width", p->m_iWidth);
-        XMLUtils::GetInt(nodeDetail, "height", p->m_iHeight);
-        XMLUtils::GetInt(nodeDetail, "durationinseconds", p->m_iDuration);
-        if (XMLUtils::GetString(nodeDetail, "stereomode", value))
+        CXMLUtils::GetFloat(nodeDetail, "aspect", p->m_fAspect);
+        CXMLUtils::GetInt(nodeDetail, "width", p->m_iWidth);
+        CXMLUtils::GetInt(nodeDetail, "height", p->m_iHeight);
+        CXMLUtils::GetInt(nodeDetail, "durationinseconds", p->m_iDuration);
+        if (CXMLUtils::GetString(nodeDetail, "stereomode", value))
           p->m_strStereoMode = StringUtils::Trim(value);
 
         StringUtils::ToLower(p->m_strCodec);
@@ -899,7 +899,7 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
       while ((nodeDetail = nodeStreamDetails->IterateChildren("subtitle", nodeDetail)))
       {
         CStreamDetailSubtitle *p = new CStreamDetailSubtitle();
-        if (XMLUtils::GetString(nodeDetail, "language", value))
+        if (CXMLUtils::GetString(nodeDetail, "language", value))
           p->m_strLanguage = StringUtils::Trim(value);
         StringUtils::ToLower(p->m_strLanguage);
         m_streamDetails.AddStream(p);
@@ -942,11 +942,11 @@ void CVideoInfoTag::ParseNative(const TiXmlElement* movie, bool prioritise)
   const TiXmlNode *resume = movie->FirstChild("resume");
   if (resume)
   {
-    XMLUtils::GetDouble(resume, "position", m_resumePoint.timeInSeconds);
-    XMLUtils::GetDouble(resume, "total", m_resumePoint.totalTimeInSeconds);
+    CXMLUtils::GetDouble(resume, "position", m_resumePoint.timeInSeconds);
+    CXMLUtils::GetDouble(resume, "total", m_resumePoint.totalTimeInSeconds);
   }
 
-  XMLUtils::GetDateTime(movie, "dateadded", m_dateAdded);
+  CXMLUtils::GetDateTime(movie, "dateadded", m_dateAdded);
 }
 
 bool CVideoInfoTag::HasStreamDetails() const

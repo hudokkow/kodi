@@ -22,7 +22,7 @@
 #include "SettingDefinitions.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 bool ISettingControl::Deserialize(const TiXmlNode *node, bool update /* = false */)
 {

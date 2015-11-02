@@ -19,7 +19,7 @@
  *
  */
 
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "cores/IPlayer.h"
 #include "PlayerCoreFactory.h"
 #include "cores/dvdplayer/DVDPlayer.h"

@@ -26,7 +26,7 @@
 #include <sys/wait.h>
 #include "system.h"
 #include "PlatformInclude.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/StringUtils.h"
 #include "../xbmc/utils/log.h"
 #include "threads/SystemClock.h"
@@ -88,7 +88,7 @@ bool CXRandR::Query(bool force, int screennum, bool ignoreoff)
   }
 
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(file, TIXML_DEFAULT_ENCODING))
   {
     CLog::Log(LOGERROR, "CXRandR::Query - unable to open xrandr xml");
@@ -393,7 +393,7 @@ XMode CXRandR::GetPreferredMode(const std::string& outputName)
 void CXRandR::LoadCustomModeLinesToAllOutputs(void)
 {
   Query();
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
 
   if (!xmlDoc.LoadFile("special://xbmc/userdata/ModeLines.xml"))
   {

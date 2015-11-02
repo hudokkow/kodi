@@ -22,6 +22,7 @@
 #include "threads/SystemClock.h"
 #include "RssReader.h"
 #include "utils/HTMLUtil.h"
+#include "utils/XMLUtils.h"
 #include "Application.h"
 #include "CharsetConverter.h"
 #include "URL.h"

@@ -20,18 +20,41 @@
  *
  */
 
+#if (defined HAVE_CONFIG_H) && (!defined TARGET_WINDOWS)
+  #include "config.h"
+#endif
+#ifdef TARGET_WINDOWS
+#define TIXML_USE_STL
+#pragma comment(lib, "tinyxmlSTL.lib")
+#else
+//compile fix for TinyXml < 2.6.0
+#define DOCUMENT    TINYXML_DOCUMENT
+#define ELEMENT     TINYXML_ELEMENT
+#define COMMENT     TINYXML_COMMENT
+#define UNKNOWN     TINYXML_UNKNOWN
+#define TEXT        TINYXML_TEXT
+#define DECLARATION TINYXML_DECLARATION
+#define TYPECOUNT   TINYXML_TYPECOUNT
+#endif
+
 #include <string>
 #include <stdint.h>
 #include <vector>
-#include "utils/XBMCTinyXML.h"
+#include <tinyxml.h>
+
+#undef DOCUMENT
+#undef ELEMENT
+#undef COMMENT
+#undef UNKNOWN
+//#undef TEXT
+#undef DECLARATION
+#undef TYPECOUNT
 
 class CDateTime;
 
-class XMLUtils
+class CXMLUtils : public TiXmlDocument
 {
 public:
-  static bool HasChild(const TiXmlNode* pRootNode, const char* strTag);
-
   static bool GetHex(const TiXmlNode* pRootNode, const char* strTag, uint32_t& dwHexValue);
   static bool GetUInt(const TiXmlNode* pRootNode, const char* strTag, uint32_t& dwUIntValue);
   static bool GetLong(const TiXmlNode* pRootNode, const char* strTag, long& lLongValue);
@@ -51,14 +74,6 @@ public:
    */
   static bool GetString(const TiXmlNode* pRootNode, const char* strTag, std::string& strStringValue);
 
-  /*! \brief Get a string value from the xml tag
-      
-   \param[in]  pRootNode the xml node that contains the tag
-   \param[in]  strTag the tag to read from
-   
-   \return the value in the specified tag or an empty string if the tag isn't found
-   */
-  static std::string GetString(const TiXmlNode* pRootNode, const char* strTag);
   /*! \brief Get multiple tags, concatenating the values together.
    Transforms
      <tag>value1</tag>
@@ -101,5 +116,24 @@ public:
   static void SetDateTime(TiXmlNode* pRootNode, const char *strTag, const CDateTime& dateTime);
 
   static const int path_version = 1;
+
+  // moved from XBMCTinyXML
+  CXMLUtils();
+  CXMLUtils(const char*);
+  bool LoadFile(const char*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  bool LoadFile(const std::string& _filename, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  bool LoadFile(FILE*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  bool SaveFile(const char*) const;
+  bool SaveFile(const std::string& filename) const;
+  bool Parse(const char*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  bool Parse(const std::string& data, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+  bool Parse(const std::string& data, const std::string& dataCharset);
+  inline std::string GetUsedCharset(void) const      { return m_UsedCharset; }
+protected:
+  bool TryParse(const std::string& data, const std::string& tryDataCharset);
+  bool InternalParse(const std::string& rawdata, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING);
+
+  std::string m_SuggestedCharset;
+  std::string m_UsedCharset;
 };
 

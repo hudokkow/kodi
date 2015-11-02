@@ -342,7 +342,7 @@ void GUIFontManager::LoadFonts(const std::string& fontSet)
   const std::string strPath = g_SkinInfo->GetSkinPath("Font.xml", &m_skinResolution);
   CLog::Log(LOGINFO, "Loading fonts from %s", strPath.c_str());
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(strPath))
   {
     CLog::Log(LOGERROR, "Couldn't load %s", strPath.c_str());
@@ -400,13 +400,13 @@ void GUIFontManager::LoadFonts(const TiXmlNode* fontNode)
     color_t textColor = 0;
     int iStyle = FONT_STYLE_NORMAL;
 
-    XMLUtils::GetString(fontNode, "name", fontName);
-    XMLUtils::GetInt(fontNode, "size", iSize);
-    XMLUtils::GetFloat(fontNode, "linespacing", lineSpacing);
-    XMLUtils::GetFloat(fontNode, "aspect", aspect);
+    CXMLUtils::GetString(fontNode, "name", fontName);
+    CXMLUtils::GetInt(fontNode, "size", iSize);
+    CXMLUtils::GetFloat(fontNode, "linespacing", lineSpacing);
+    CXMLUtils::GetFloat(fontNode, "aspect", aspect);
     CGUIControlFactory::GetColor(fontNode, "shadow", shadowColor);
     CGUIControlFactory::GetColor(fontNode, "color", textColor);
-    XMLUtils::GetString(fontNode, "filename", fileName);
+    CXMLUtils::GetString(fontNode, "filename", fileName);
     GetStyle(fontNode, iStyle);
 
     if (!fontName.empty() && URIUtils::HasExtension(fileName, ".ttf"))
@@ -424,7 +424,7 @@ void GUIFontManager::GetStyle(const TiXmlNode *fontNode, int &iStyle)
 {
   std::string style;
   iStyle = FONT_STYLE_NORMAL;
-  if (XMLUtils::GetString(fontNode, "style", style))
+  if (CXMLUtils::GetString(fontNode, "style", style))
   {
     std::vector<std::string> styles = StringUtils::Tokenize(style, " ");
     for (std::vector<std::string>::const_iterator i = styles.begin(); i != styles.end(); ++i)

@@ -434,7 +434,7 @@ namespace XBMCAddon
     {
       XBMC_TRACE;
       // load our window
-      CXBMCTinyXML xmlDoc;
+      CXMLUtils xmlDoc;
 
       std::string strPathLower = strPath;
       StringUtils::ToLower(strPathLower);

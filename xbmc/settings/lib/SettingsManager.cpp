@@ -28,7 +28,7 @@
 #include "Setting.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 CSettingsManager::CSettingsManager()
   : m_initialized(false), m_loaded(false)

@@ -20,7 +20,7 @@
 
 #include "SkinVariable.h"
 #include "GUIInfoManager.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 
 using namespace INFO;
 

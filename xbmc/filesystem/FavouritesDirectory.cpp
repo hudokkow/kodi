@@ -24,7 +24,7 @@
 #include "Util.h"
 #include "profiles/ProfilesManager.h"
 #include "FileItem.h"
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
 #include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
@@ -78,7 +78,7 @@ bool CFavouritesDirectory::Load(CFileItemList &items)
 
 bool CFavouritesDirectory::LoadFavourites(const std::string& strPath, CFileItemList& items)
 {
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   if (!doc.LoadFile(strPath))
   {
     CLog::Log(LOGERROR, "Unable to load %s (row %i column %i)", strPath.c_str(), doc.Row(), doc.Column());
@@ -118,7 +118,7 @@ bool CFavouritesDirectory::LoadFavourites(const std::string& strPath, CFileItemL
 bool CFavouritesDirectory::Save(const CFileItemList &items)
 {
   std::string favourites;
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   TiXmlElement xmlRootElement("favourites");
   TiXmlNode *rootNode = doc.InsertEndChild(xmlRootElement);
   if (!rootNode) return false;

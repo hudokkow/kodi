@@ -76,11 +76,11 @@ bool CSkinSetting::Deserialize(const TiXmlElement* element)
   if (element == nullptr)
     return false;
 
-  name = XMLUtils::GetAttribute(element, XML_ATTR_ID);
+  name = CXMLUtils::GetAttribute(element, XML_ATTR_ID);
 
   // backwards compatibility for guisettings.xml
   if (name.empty())
-    name = XMLUtils::GetAttribute(element, XML_ATTR_NAME);
+    name = CXMLUtils::GetAttribute(element, XML_ATTR_NAME);
 
   return true;
 }
@@ -437,7 +437,7 @@ void CSkinInfo::SettingOptionsSkinFontsFiller(const CSetting *setting, std::vect
   bool currentValueSet = false;
   std::string strPath = g_SkinInfo->GetSkinPath("Font.xml");
 
-  CXBMCTinyXML xmlDoc;
+  CXMLUtils xmlDoc;
   if (!xmlDoc.LoadFile(strPath))
   {
     CLog::Log(LOGERROR, "FillInSkinFonts: Couldn't load %s", strPath.c_str());
@@ -679,7 +679,7 @@ CSkinSettingPtr CSkinInfo::ParseSetting(const TiXmlElement* element)
   if (element == nullptr)
     return CSkinSettingPtr();
 
-  std::string settingType = XMLUtils::GetAttribute(element, XML_ATTR_TYPE);
+  std::string settingType = CXMLUtils::GetAttribute(element, XML_ATTR_TYPE);
   CSkinSettingPtr setting;
   if (settingType == "string")
     setting = CSkinSettingPtr(new CSkinSettingString());
@@ -702,7 +702,7 @@ bool CSkinInfo::HasSettingsToSave() const
   return !m_strings.empty() || !m_bools.empty();
 }
 
-bool CSkinInfo::SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults /* = false */)
+bool CSkinInfo::SettingsFromXML(const CXMLUtils &doc, bool loadDefaults /* = false */)
 {
   const TiXmlElement *rootElement = doc.RootElement();
   if (rootElement == nullptr || rootElement->ValueStr().compare(XML_SETTINGS) != 0)
@@ -729,7 +729,7 @@ bool CSkinInfo::SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults /* = 
   return true;
 }
 
-void CSkinInfo::SettingsToXML(CXBMCTinyXML &doc) const
+void CSkinInfo::SettingsToXML(CXMLUtils &doc) const
 {
   // add the <skinsettings> tag
   TiXmlElement rootElement(XML_SETTINGS);

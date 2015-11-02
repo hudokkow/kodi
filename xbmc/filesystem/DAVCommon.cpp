@@ -19,8 +19,12 @@
  */
 
 #include "DAVCommon.h"
+#include "utils/log.h"
 #include "utils/StringUtils.h"
-#include "utils/log.h"   
+#include "utils/XMLUtils.h"
+
+#include <string>
+#include <vector>
 
 using namespace XFILE;
 

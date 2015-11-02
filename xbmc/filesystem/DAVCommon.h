@@ -19,7 +19,9 @@
  *
  */
 
-#include "utils/XBMCTinyXML.h"
+#include "utils/XMLUtils.h"
+
+#include <string>
 
 namespace XFILE
 {

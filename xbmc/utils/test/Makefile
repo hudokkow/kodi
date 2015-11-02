@@ -48,7 +48,6 @@ SRCS=	\
 	TestURIUtils.cpp \
 	TestUrlOptions.cpp \
 	TestVariant.cpp \
-	TestXBMCTinyXML.cpp \
 	TestXMLUtils.cpp
 
 LIB=utilsTest.a

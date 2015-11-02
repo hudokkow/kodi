@@ -39,6 +39,7 @@
 #include "utils/StringUtils.h"
 #include "utils/URIUtils.h"
 #include "utils/Variant.h"
+#include "utils/XMLUtils.h"
 
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
@@ -519,7 +520,7 @@ bool CAddon::ReloadSettings()
 bool CAddon::LoadUserSettings()
 {
   m_userSettingsLoaded = false;
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   if (doc.LoadFile(m_userSettingsPath))
     m_userSettingsLoaded = SettingsFromXML(doc);
   return m_userSettingsLoaded;
@@ -548,7 +549,7 @@ void CAddon::SaveSettings(void)
     CDirectory::Create(strAddon);
 
   // create the XML file
-  CXBMCTinyXML doc;
+  CXMLUtils doc;
   SettingsToXML(doc);
   doc.SaveFile(m_userSettingsPath);
   m_userSettingsLoaded = true;
@@ -577,7 +578,7 @@ void CAddon::UpdateSetting(const std::string& key, const std::string& value)
   m_settings[key] = value;
 }
 
-bool CAddon::SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults /*=false */)
+bool CAddon::SettingsFromXML(const CXMLUtils &doc, bool loadDefaults /*=false */)
 {
   if (!doc.RootElement())
     return false;
@@ -609,7 +610,7 @@ bool CAddon::SettingsFromXML(const CXBMCTinyXML &doc, bool loadDefaults /*=false
   return foundSetting;
 }
 
-void CAddon::SettingsToXML(CXBMCTinyXML &doc) const
+void CAddon::SettingsToXML(CXMLUtils &doc) const
 {
   TiXmlElement node("settings");
   doc.InsertEndChild(node);

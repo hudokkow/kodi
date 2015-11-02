@@ -465,7 +465,7 @@ ADDON_STATUS CAddonDll<TheDll, TheStruct, TheProps>::TransferSettings()
     {
       ADDON_STATUS status = ADDON_STATUS_OK;
       const char *id = setting->Attribute("id");
-      const std::string type = XMLUtils::GetAttribute(setting, "type");
+      const std::string type = CXMLUtils::GetAttribute(setting, "type");
       const char *option = setting->Attribute("option");
 
       if (id && !type.empty())
