@@ -626,7 +626,7 @@ void CAnimation::Create(const TiXmlElement *node, const CRect &rect, int context
   std::string type = node->FirstChild()->Value();
   m_type = ANIM_TYPE_CONDITIONAL;
   if (effect) // new layout
-    type = XMLUtils::GetAttribute(node, "type");
+    type = CXMLUtils::GetAttribute(node, "type");
 
   if (StringUtils::StartsWithNoCase(type, "visible")) m_type = ANIM_TYPE_VISIBLE;
   else if (StringUtils::EqualsNoCase(type, "hidden")) m_type = ANIM_TYPE_HIDDEN;
@@ -655,7 +655,7 @@ void CAnimation::Create(const TiXmlElement *node, const CRect &rect, int context
   if (!effect)
   { // old layout:
     // <animation effect="fade" start="0" end="100" delay="10" time="2000" condition="blahdiblah" reversible="false">focus</animation>
-    std::string type = XMLUtils::GetAttribute(node, "effect");
+    std::string type = CXMLUtils::GetAttribute(node, "effect");
     AddEffect(type, node, rect);
   }
   while (effect)
@@ -664,7 +664,7 @@ void CAnimation::Create(const TiXmlElement *node, const CRect &rect, int context
     //   <effect type="fade" start="0" end="100" delay="10" time="2000" />
     //   ...
     // </animation>
-    std::string type = XMLUtils::GetAttribute(effect, "type");
+    std::string type = CXMLUtils::GetAttribute(effect, "type");
     AddEffect(type, effect, rect);
     effect = effect->NextSiblingElement("effect");
   }

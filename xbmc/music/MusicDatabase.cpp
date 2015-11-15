@@ -5169,7 +5169,7 @@ void CMusicDatabase::ExportToXML(const std::string &xmlFile, bool singleFile, bo
       { // append to the XML
         TiXmlElement additionalNode("art");
         for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-          XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+          CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
         pMain->LastChild()->InsertEndChild(additionalNode);
       }
       if (!singleFile)

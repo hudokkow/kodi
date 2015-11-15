@@ -80,7 +80,7 @@ bool CSetting::Deserialize(const TiXmlNode *node, bool update /* = false */)
 
   // get the <level>
   int level = -1;
-  if (XMLUtils::GetInt(node, SETTING_XML_ELM_LEVEL, level))
+  if (CXMLUtils::GetInt(node, SETTING_XML_ELM_LEVEL, level))
     m_level = (SettingLevel)level;
     
   if (m_level < (int)SettingLevelBasic || m_level > (int)SettingLevelInternal)
@@ -340,13 +340,13 @@ bool CSettingList::Deserialize(const TiXmlNode *node, bool update /* = false */)
   {
     // read the delimiter
     std::string delimiter;
-    if (XMLUtils::GetString(constraints, SETTING_XML_ELM_DELIMITER, delimiter) && !delimiter.empty())
+    if (CXMLUtils::GetString(constraints, SETTING_XML_ELM_DELIMITER, delimiter) && !delimiter.empty())
       m_delimiter = delimiter;
 
-    XMLUtils::GetInt(constraints, SETTING_XML_ELM_MINIMUM_ITEMS, m_minimumItems);
+    CXMLUtils::GetInt(constraints, SETTING_XML_ELM_MINIMUM_ITEMS, m_minimumItems);
     if (m_minimumItems < 0)
       m_minimumItems = 0;
-    XMLUtils::GetInt(constraints, SETTING_XML_ELM_MAXIMUM_ITEMS, m_maximumItems);
+    CXMLUtils::GetInt(constraints, SETTING_XML_ELM_MAXIMUM_ITEMS, m_maximumItems);
     if (m_maximumItems <= 0)
       m_maximumItems = -1;
     else if (m_maximumItems < m_minimumItems)
@@ -358,7 +358,7 @@ bool CSettingList::Deserialize(const TiXmlNode *node, bool update /* = false */)
 
   // read the default and initial values
   std::string values;
-  if (XMLUtils::GetString(node, SETTING_XML_ELM_DEFAULT, values))
+  if (CXMLUtils::GetString(node, SETTING_XML_ELM_DEFAULT, values))
   {
     if (!fromString(values, m_defaults))
     {
@@ -612,7 +612,7 @@ bool CSettingBool::Deserialize(const TiXmlNode *node, bool update /* = false */)
     
   // get the default value
   bool value;
-  if (XMLUtils::GetBoolean(node, SETTING_XML_ELM_DEFAULT, value))
+  if (CXMLUtils::GetBoolean(node, SETTING_XML_ELM_DEFAULT, value))
     m_value = m_default = value;
   else if (!update)
   {
@@ -770,7 +770,7 @@ bool CSettingInt::Deserialize(const TiXmlNode *node, bool update /* = false */)
 
   // get the default value
   int value;
-  if (XMLUtils::GetInt(node, SETTING_XML_ELM_DEFAULT, value))
+  if (CXMLUtils::GetInt(node, SETTING_XML_ELM_DEFAULT, value))
     m_value = m_default = value;
   else if (!update)
   {
@@ -814,11 +814,11 @@ bool CSettingInt::Deserialize(const TiXmlNode *node, bool update /* = false */)
     }
 
     // get minimum
-    XMLUtils::GetInt(constraints, SETTING_XML_ELM_MINIMUM, m_min);
+    CXMLUtils::GetInt(constraints, SETTING_XML_ELM_MINIMUM, m_min);
     // get step
-    XMLUtils::GetInt(constraints, SETTING_XML_ELM_STEP, m_step);
+    CXMLUtils::GetInt(constraints, SETTING_XML_ELM_STEP, m_step);
     // get maximum
-    XMLUtils::GetInt(constraints, SETTING_XML_ELM_MAXIMUM, m_max);
+    CXMLUtils::GetInt(constraints, SETTING_XML_ELM_MAXIMUM, m_max);
   }
 
   return true;
@@ -1048,7 +1048,7 @@ bool CSettingNumber::Deserialize(const TiXmlNode *node, bool update /* = false *
     
   // get the default value
   double value;
-  if (XMLUtils::GetDouble(node, SETTING_XML_ELM_DEFAULT, value))
+  if (CXMLUtils::GetDouble(node, SETTING_XML_ELM_DEFAULT, value))
     m_value = m_default = value;
   else if (!update)
   {
@@ -1060,11 +1060,11 @@ bool CSettingNumber::Deserialize(const TiXmlNode *node, bool update /* = false *
   if (constraints != NULL)
   {
     // get the minimum value
-    XMLUtils::GetDouble(constraints, SETTING_XML_ELM_MINIMUM, m_min);
+    CXMLUtils::GetDouble(constraints, SETTING_XML_ELM_MINIMUM, m_min);
     // get the step value
-    XMLUtils::GetDouble(constraints, SETTING_XML_ELM_STEP, m_step);
+    CXMLUtils::GetDouble(constraints, SETTING_XML_ELM_STEP, m_step);
     // get the maximum value
-    XMLUtils::GetDouble(constraints, SETTING_XML_ELM_MAXIMUM, m_max);
+    CXMLUtils::GetDouble(constraints, SETTING_XML_ELM_MAXIMUM, m_max);
   }
 
   return true;
@@ -1218,7 +1218,7 @@ bool CSettingString::Deserialize(const TiXmlNode *node, bool update /* = false *
   if (constraints != NULL)
   {
     // get allowempty (needs to be parsed before parsing the default value)
-    XMLUtils::GetBoolean(constraints, SETTING_XML_ELM_ALLOWEMPTY, m_allowEmpty);
+    CXMLUtils::GetBoolean(constraints, SETTING_XML_ELM_ALLOWEMPTY, m_allowEmpty);
 
     // get the entries
     const TiXmlNode *options = constraints->FirstChild(SETTING_XML_ELM_OPTIONS);
@@ -1237,7 +1237,7 @@ bool CSettingString::Deserialize(const TiXmlNode *node, bool update /* = false *
 
   // get the default value
   std::string value;
-  if (XMLUtils::GetString(node, SETTING_XML_ELM_DEFAULT, value) &&
+  if (CXMLUtils::GetString(node, SETTING_XML_ELM_DEFAULT, value) &&
      (!value.empty() || m_allowEmpty))
     m_value = m_default = value;
   else if (!update && !m_allowEmpty)

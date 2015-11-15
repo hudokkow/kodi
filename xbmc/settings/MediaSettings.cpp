@@ -86,9 +86,9 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
   if (pElement != NULL)
   {
     int deinterlaceMode;
-    bool deinterlaceModePresent = XMLUtils::GetInt(pElement, "deinterlacemode", deinterlaceMode, VS_DEINTERLACEMODE_OFF, VS_DEINTERLACEMODE_FORCE);
+    bool deinterlaceModePresent = CXMLUtils::GetInt(pElement, "deinterlacemode", deinterlaceMode, VS_DEINTERLACEMODE_OFF, VS_DEINTERLACEMODE_FORCE);
     int interlaceMethod;
-    bool interlaceMethodPresent = XMLUtils::GetInt(pElement, "interlacemethod", interlaceMethod, VS_INTERLACEMETHOD_AUTO, VS_INTERLACEMETHOD_MAX);
+    bool interlaceMethodPresent = CXMLUtils::GetInt(pElement, "interlacemethod", interlaceMethod, VS_INTERLACEMETHOD_AUTO, VS_INTERLACEMETHOD_MAX);
     // For smooth conversion of settings stored before the deinterlaceMode existed
     if (!deinterlaceModePresent && interlaceMethodPresent)
     {
@@ -105,38 +105,38 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
     m_defaultVideoSettings.m_DeinterlaceMode = (EDEINTERLACEMODE)deinterlaceMode;
     m_defaultVideoSettings.m_InterlaceMethod = (EINTERLACEMETHOD)interlaceMethod;
     int scalingMethod;
-    if (!XMLUtils::GetInt(pElement, "scalingmethod", scalingMethod, VS_SCALINGMETHOD_NEAREST, VS_SCALINGMETHOD_MAX))
+    if (!CXMLUtils::GetInt(pElement, "scalingmethod", scalingMethod, VS_SCALINGMETHOD_NEAREST, VS_SCALINGMETHOD_MAX))
       scalingMethod = (int)VS_SCALINGMETHOD_LINEAR;
     m_defaultVideoSettings.m_ScalingMethod = (ESCALINGMETHOD)scalingMethod;
 
-    XMLUtils::GetInt(pElement, "viewmode", m_defaultVideoSettings.m_ViewMode, ViewModeNormal, ViewModeCustom);
-    if (!XMLUtils::GetFloat(pElement, "zoomamount", m_defaultVideoSettings.m_CustomZoomAmount, 0.5f, 2.0f))
+    CXMLUtils::GetInt(pElement, "viewmode", m_defaultVideoSettings.m_ViewMode, ViewModeNormal, ViewModeCustom);
+    if (!CXMLUtils::GetFloat(pElement, "zoomamount", m_defaultVideoSettings.m_CustomZoomAmount, 0.5f, 2.0f))
       m_defaultVideoSettings.m_CustomZoomAmount = 1.0f;
-    if (!XMLUtils::GetFloat(pElement, "pixelratio", m_defaultVideoSettings.m_CustomPixelRatio, 0.5f, 2.0f))
+    if (!CXMLUtils::GetFloat(pElement, "pixelratio", m_defaultVideoSettings.m_CustomPixelRatio, 0.5f, 2.0f))
       m_defaultVideoSettings.m_CustomPixelRatio = 1.0f;
-    if (!XMLUtils::GetFloat(pElement, "verticalshift", m_defaultVideoSettings.m_CustomVerticalShift, -2.0f, 2.0f))
+    if (!CXMLUtils::GetFloat(pElement, "verticalshift", m_defaultVideoSettings.m_CustomVerticalShift, -2.0f, 2.0f))
       m_defaultVideoSettings.m_CustomVerticalShift = 0.0f;
-    if (!XMLUtils::GetFloat(pElement, "volumeamplification", m_defaultVideoSettings.m_VolumeAmplification, VOLUME_DRC_MINIMUM * 0.01f, VOLUME_DRC_MAXIMUM * 0.01f))
+    if (!CXMLUtils::GetFloat(pElement, "volumeamplification", m_defaultVideoSettings.m_VolumeAmplification, VOLUME_DRC_MINIMUM * 0.01f, VOLUME_DRC_MAXIMUM * 0.01f))
       m_defaultVideoSettings.m_VolumeAmplification = VOLUME_DRC_MINIMUM * 0.01f;
-    if (!XMLUtils::GetFloat(pElement, "noisereduction", m_defaultVideoSettings.m_NoiseReduction, 0.0f, 1.0f))
+    if (!CXMLUtils::GetFloat(pElement, "noisereduction", m_defaultVideoSettings.m_NoiseReduction, 0.0f, 1.0f))
       m_defaultVideoSettings.m_NoiseReduction = 0.0f;
-    XMLUtils::GetBoolean(pElement, "postprocess", m_defaultVideoSettings.m_PostProcess);
-    if (!XMLUtils::GetFloat(pElement, "sharpness", m_defaultVideoSettings.m_Sharpness, -1.0f, 1.0f))
+    CXMLUtils::GetBoolean(pElement, "postprocess", m_defaultVideoSettings.m_PostProcess);
+    if (!CXMLUtils::GetFloat(pElement, "sharpness", m_defaultVideoSettings.m_Sharpness, -1.0f, 1.0f))
       m_defaultVideoSettings.m_Sharpness = 0.0f;
-    XMLUtils::GetBoolean(pElement, "outputtoallspeakers", m_defaultVideoSettings.m_OutputToAllSpeakers);
-    XMLUtils::GetBoolean(pElement, "showsubtitles", m_defaultVideoSettings.m_SubtitleOn);
-    if (!XMLUtils::GetFloat(pElement, "brightness", m_defaultVideoSettings.m_Brightness, 0, 100))
+    CXMLUtils::GetBoolean(pElement, "outputtoallspeakers", m_defaultVideoSettings.m_OutputToAllSpeakers);
+    CXMLUtils::GetBoolean(pElement, "showsubtitles", m_defaultVideoSettings.m_SubtitleOn);
+    if (!CXMLUtils::GetFloat(pElement, "brightness", m_defaultVideoSettings.m_Brightness, 0, 100))
       m_defaultVideoSettings.m_Brightness = 50;
-    if (!XMLUtils::GetFloat(pElement, "contrast", m_defaultVideoSettings.m_Contrast, 0, 100))
+    if (!CXMLUtils::GetFloat(pElement, "contrast", m_defaultVideoSettings.m_Contrast, 0, 100))
       m_defaultVideoSettings.m_Contrast = 50;
-    if (!XMLUtils::GetFloat(pElement, "gamma", m_defaultVideoSettings.m_Gamma, 0, 100))
+    if (!CXMLUtils::GetFloat(pElement, "gamma", m_defaultVideoSettings.m_Gamma, 0, 100))
       m_defaultVideoSettings.m_Gamma = 20;
-    if (!XMLUtils::GetFloat(pElement, "audiodelay", m_defaultVideoSettings.m_AudioDelay, -10.0f, 10.0f))
+    if (!CXMLUtils::GetFloat(pElement, "audiodelay", m_defaultVideoSettings.m_AudioDelay, -10.0f, 10.0f))
       m_defaultVideoSettings.m_AudioDelay = 0.0f;
-    if (!XMLUtils::GetFloat(pElement, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay, -10.0f, 10.0f))
+    if (!CXMLUtils::GetFloat(pElement, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay, -10.0f, 10.0f))
       m_defaultVideoSettings.m_SubtitleDelay = 0.0f;
-    XMLUtils::GetBoolean(pElement, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
-    if (!XMLUtils::GetInt(pElement, "stereomode", m_defaultVideoSettings.m_StereoMode))
+    CXMLUtils::GetBoolean(pElement, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
+    if (!CXMLUtils::GetInt(pElement, "stereomode", m_defaultVideoSettings.m_StereoMode))
       m_defaultVideoSettings.m_StereoMode = 0;
 
     m_defaultVideoSettings.m_SubtitleCached = false;
@@ -145,11 +145,11 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
   pElement = settings->FirstChildElement("defaultaudiosettings");
   if (pElement != NULL)
   {
-    if (!XMLUtils::GetInt(pElement, "masterstreamtype", m_defaultAudioSettings.m_MasterStreamType))
+    if (!CXMLUtils::GetInt(pElement, "masterstreamtype", m_defaultAudioSettings.m_MasterStreamType))
       m_defaultAudioSettings.m_MasterStreamType = AE_DSP_ASTREAM_AUTO;
-    if (!XMLUtils::GetInt(pElement, "masterstreamtypesel", m_defaultAudioSettings.m_MasterStreamTypeSel))
+    if (!CXMLUtils::GetInt(pElement, "masterstreamtypesel", m_defaultAudioSettings.m_MasterStreamTypeSel))
       m_defaultAudioSettings.m_MasterStreamTypeSel = AE_DSP_ASTREAM_AUTO;
-    if (!XMLUtils::GetInt(pElement, "masterstreambase", m_defaultAudioSettings.m_MasterStreamBase))
+    if (!CXMLUtils::GetInt(pElement, "masterstreambase", m_defaultAudioSettings.m_MasterStreamBase))
       m_defaultAudioSettings.m_MasterStreamBase = AE_DSP_ABASE_STEREO;
 
     std::string strTag;
@@ -159,7 +159,7 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
       {
         int tmp;
         strTag = StringUtils::Format("masterprocess_%i_%i", type, base);
-        if (XMLUtils::GetInt(pElement, strTag.c_str(), tmp))
+        if (CXMLUtils::GetInt(pElement, strTag.c_str(), tmp))
           m_defaultAudioSettings.m_MasterModes[type][base] = tmp;
         else
           m_defaultAudioSettings.m_MasterModes[type][base] = 0;
@@ -174,10 +174,10 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
     const TiXmlElement *pChild = pElement->FirstChildElement("playlist");
     if (pChild != NULL)
     {
-      XMLUtils::GetBoolean(pChild, "repeat", m_musicPlaylistRepeat);
-      XMLUtils::GetBoolean(pChild, "shuffle", m_musicPlaylistShuffle);
+      CXMLUtils::GetBoolean(pChild, "repeat", m_musicPlaylistRepeat);
+      CXMLUtils::GetBoolean(pChild, "shuffle", m_musicPlaylistShuffle);
     }
-    if (!XMLUtils::GetInt(pElement, "needsupdate", m_musicNeedsUpdate, 0, INT_MAX))
+    if (!CXMLUtils::GetInt(pElement, "needsupdate", m_musicNeedsUpdate, 0, INT_MAX))
       m_musicNeedsUpdate = 0;
   }
   
@@ -186,20 +186,20 @@ bool CMediaSettings::Load(const TiXmlNode *settings)
   if (pElement != NULL)
   {
     int tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodemovies", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
+    if (CXMLUtils::GetInt(pElement, "watchmodemovies", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
       m_watchedModes["movies"] = (WatchedMode)tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodetvshows", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
+    if (CXMLUtils::GetInt(pElement, "watchmodetvshows", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
       m_watchedModes["tvshows"] = (WatchedMode)tmp;
-    if (XMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
+    if (CXMLUtils::GetInt(pElement, "watchmodemusicvideos", tmp, (int)WatchedModeAll, (int)WatchedModeWatched))
       m_watchedModes["musicvideos"] = (WatchedMode)tmp;
 
     const TiXmlElement *pChild = pElement->FirstChildElement("playlist");
     if (pChild != NULL)
     {
-      XMLUtils::GetBoolean(pChild, "repeat", m_videoPlaylistRepeat);
-      XMLUtils::GetBoolean(pChild, "shuffle", m_videoPlaylistShuffle);
+      CXMLUtils::GetBoolean(pChild, "repeat", m_videoPlaylistRepeat);
+      CXMLUtils::GetBoolean(pChild, "shuffle", m_videoPlaylistShuffle);
     }
-    if (!XMLUtils::GetInt(pElement, "needsupdate", m_videoNeedsUpdate, 0, INT_MAX))
+    if (!CXMLUtils::GetInt(pElement, "needsupdate", m_videoNeedsUpdate, 0, INT_MAX))
       m_videoNeedsUpdate = 0;
   }
 
@@ -226,26 +226,26 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
   if (pNode == NULL)
     return false;
 
-  XMLUtils::SetInt(pNode, "deinterlacemode", m_defaultVideoSettings.m_DeinterlaceMode);
-  XMLUtils::SetInt(pNode, "interlacemethod", m_defaultVideoSettings.m_InterlaceMethod);
-  XMLUtils::SetInt(pNode, "scalingmethod", m_defaultVideoSettings.m_ScalingMethod);
-  XMLUtils::SetFloat(pNode, "noisereduction", m_defaultVideoSettings.m_NoiseReduction);
-  XMLUtils::SetBoolean(pNode, "postprocess", m_defaultVideoSettings.m_PostProcess);
-  XMLUtils::SetFloat(pNode, "sharpness", m_defaultVideoSettings.m_Sharpness);
-  XMLUtils::SetInt(pNode, "viewmode", m_defaultVideoSettings.m_ViewMode);
-  XMLUtils::SetFloat(pNode, "zoomamount", m_defaultVideoSettings.m_CustomZoomAmount);
-  XMLUtils::SetFloat(pNode, "pixelratio", m_defaultVideoSettings.m_CustomPixelRatio);
-  XMLUtils::SetFloat(pNode, "verticalshift", m_defaultVideoSettings.m_CustomVerticalShift);
-  XMLUtils::SetFloat(pNode, "volumeamplification", m_defaultVideoSettings.m_VolumeAmplification);
-  XMLUtils::SetBoolean(pNode, "outputtoallspeakers", m_defaultVideoSettings.m_OutputToAllSpeakers);
-  XMLUtils::SetBoolean(pNode, "showsubtitles", m_defaultVideoSettings.m_SubtitleOn);
-  XMLUtils::SetFloat(pNode, "brightness", m_defaultVideoSettings.m_Brightness);
-  XMLUtils::SetFloat(pNode, "contrast", m_defaultVideoSettings.m_Contrast);
-  XMLUtils::SetFloat(pNode, "gamma", m_defaultVideoSettings.m_Gamma);
-  XMLUtils::SetFloat(pNode, "audiodelay", m_defaultVideoSettings.m_AudioDelay);
-  XMLUtils::SetFloat(pNode, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay);
-  XMLUtils::SetBoolean(pNode, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
-  XMLUtils::SetInt(pNode, "stereomode", m_defaultVideoSettings.m_StereoMode);
+  CXMLUtils::SetInt(pNode, "deinterlacemode", m_defaultVideoSettings.m_DeinterlaceMode);
+  CXMLUtils::SetInt(pNode, "interlacemethod", m_defaultVideoSettings.m_InterlaceMethod);
+  CXMLUtils::SetInt(pNode, "scalingmethod", m_defaultVideoSettings.m_ScalingMethod);
+  CXMLUtils::SetFloat(pNode, "noisereduction", m_defaultVideoSettings.m_NoiseReduction);
+  CXMLUtils::SetBoolean(pNode, "postprocess", m_defaultVideoSettings.m_PostProcess);
+  CXMLUtils::SetFloat(pNode, "sharpness", m_defaultVideoSettings.m_Sharpness);
+  CXMLUtils::SetInt(pNode, "viewmode", m_defaultVideoSettings.m_ViewMode);
+  CXMLUtils::SetFloat(pNode, "zoomamount", m_defaultVideoSettings.m_CustomZoomAmount);
+  CXMLUtils::SetFloat(pNode, "pixelratio", m_defaultVideoSettings.m_CustomPixelRatio);
+  CXMLUtils::SetFloat(pNode, "verticalshift", m_defaultVideoSettings.m_CustomVerticalShift);
+  CXMLUtils::SetFloat(pNode, "volumeamplification", m_defaultVideoSettings.m_VolumeAmplification);
+  CXMLUtils::SetBoolean(pNode, "outputtoallspeakers", m_defaultVideoSettings.m_OutputToAllSpeakers);
+  CXMLUtils::SetBoolean(pNode, "showsubtitles", m_defaultVideoSettings.m_SubtitleOn);
+  CXMLUtils::SetFloat(pNode, "brightness", m_defaultVideoSettings.m_Brightness);
+  CXMLUtils::SetFloat(pNode, "contrast", m_defaultVideoSettings.m_Contrast);
+  CXMLUtils::SetFloat(pNode, "gamma", m_defaultVideoSettings.m_Gamma);
+  CXMLUtils::SetFloat(pNode, "audiodelay", m_defaultVideoSettings.m_AudioDelay);
+  CXMLUtils::SetFloat(pNode, "subtitledelay", m_defaultVideoSettings.m_SubtitleDelay);
+  CXMLUtils::SetBoolean(pNode, "nonlinstretch", m_defaultVideoSettings.m_CustomNonLinStretch);
+  CXMLUtils::SetInt(pNode, "stereomode", m_defaultVideoSettings.m_StereoMode);
 
   // default audio settings for dsp addons
   TiXmlElement audioSettingsNode("defaultaudiosettings");
@@ -253,9 +253,9 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
   if (pNode == NULL)
     return false;
 
-  XMLUtils::SetInt(pNode, "masterstreamtype", m_defaultAudioSettings.m_MasterStreamType);
-  XMLUtils::SetInt(pNode, "masterstreamtypesel", m_defaultAudioSettings.m_MasterStreamTypeSel);
-  XMLUtils::SetInt(pNode, "masterstreambase", m_defaultAudioSettings.m_MasterStreamBase);
+  CXMLUtils::SetInt(pNode, "masterstreamtype", m_defaultAudioSettings.m_MasterStreamType);
+  CXMLUtils::SetInt(pNode, "masterstreamtypesel", m_defaultAudioSettings.m_MasterStreamTypeSel);
+  CXMLUtils::SetInt(pNode, "masterstreambase", m_defaultAudioSettings.m_MasterStreamBase);
 
   std::string strTag;
   for (int type = AE_DSP_ASTREAM_BASIC; type < AE_DSP_ASTREAM_MAX; type++)
@@ -263,7 +263,7 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
     for (int base = AE_DSP_ABASE_STEREO; base < AE_DSP_ABASE_MAX; base++)
     {
       strTag = StringUtils::Format("masterprocess_%i_%i", type, base);
-      XMLUtils::SetInt(pNode, strTag.c_str(), m_defaultAudioSettings.m_MasterModes[type][base]);
+      CXMLUtils::SetInt(pNode, strTag.c_str(), m_defaultAudioSettings.m_MasterModes[type][base]);
     }
   }
 
@@ -281,10 +281,10 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
   TiXmlNode *playlistNode = pNode->InsertEndChild(musicPlaylistNode);
   if (playlistNode == NULL)
     return false;
-  XMLUtils::SetBoolean(playlistNode, "repeat", m_musicPlaylistRepeat);
-  XMLUtils::SetBoolean(playlistNode, "shuffle", m_musicPlaylistShuffle);
+  CXMLUtils::SetBoolean(playlistNode, "repeat", m_musicPlaylistRepeat);
+  CXMLUtils::SetBoolean(playlistNode, "shuffle", m_musicPlaylistShuffle);
 
-  XMLUtils::SetInt(pNode, "needsupdate", m_musicNeedsUpdate);
+  CXMLUtils::SetInt(pNode, "needsupdate", m_musicNeedsUpdate);
 
   // myvideos
   pNode = settings->FirstChild("myvideos");
@@ -296,18 +296,18 @@ bool CMediaSettings::Save(TiXmlNode *settings) const
       return false;
   }
 
-  XMLUtils::SetInt(pNode, "watchmodemovies", m_watchedModes.find("movies")->second);
-  XMLUtils::SetInt(pNode, "watchmodetvshows", m_watchedModes.find("tvshows")->second);
-  XMLUtils::SetInt(pNode, "watchmodemusicvideos", m_watchedModes.find("musicvideos")->second);
+  CXMLUtils::SetInt(pNode, "watchmodemovies", m_watchedModes.find("movies")->second);
+  CXMLUtils::SetInt(pNode, "watchmodetvshows", m_watchedModes.find("tvshows")->second);
+  CXMLUtils::SetInt(pNode, "watchmodemusicvideos", m_watchedModes.find("musicvideos")->second);
 
   TiXmlElement videoPlaylistNode("playlist");
   playlistNode = pNode->InsertEndChild(videoPlaylistNode);
   if (playlistNode == NULL)
     return false;
-  XMLUtils::SetBoolean(playlistNode, "repeat", m_videoPlaylistRepeat);
-  XMLUtils::SetBoolean(playlistNode, "shuffle", m_videoPlaylistShuffle);
+  CXMLUtils::SetBoolean(playlistNode, "repeat", m_videoPlaylistRepeat);
+  CXMLUtils::SetBoolean(playlistNode, "shuffle", m_videoPlaylistShuffle);
 
-  XMLUtils::SetInt(pNode, "needsupdate", m_videoNeedsUpdate);
+  CXMLUtils::SetInt(pNode, "needsupdate", m_videoNeedsUpdate);
 
   return true;
 }

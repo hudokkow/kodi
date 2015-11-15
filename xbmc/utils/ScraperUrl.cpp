@@ -82,7 +82,7 @@ bool CScraperUrl::ParseElement(const TiXmlElement* element)
 
   SUrlEntry url;
   url.m_url = element->FirstChild()->Value();
-  url.m_spoof = XMLUtils::GetAttribute(element, "spoof");
+  url.m_spoof = CXMLUtils::GetAttribute(element, "spoof");
   const char* szPost=element->Attribute("post");
   if (szPost && stricmp(szPost,"yes") == 0)
     url.m_post = true;
@@ -93,7 +93,7 @@ bool CScraperUrl::ParseElement(const TiXmlElement* element)
     url.m_isgz = true;
   else
     url.m_isgz = false;
-  url.m_cache = XMLUtils::GetAttribute(element, "cache");
+  url.m_cache = CXMLUtils::GetAttribute(element, "cache");
 
   const char* szType = element->Attribute("type");
   url.m_type = URL_TYPE_GENERAL;
@@ -105,7 +105,7 @@ bool CScraperUrl::ParseElement(const TiXmlElement* element)
     if (szSeason)
       url.m_season = atoi(szSeason);
   }
-  url.m_aspect = XMLUtils::GetAttribute(element, "aspect");
+  url.m_aspect = CXMLUtils::GetAttribute(element, "aspect");
 
   m_url.push_back(url);
 

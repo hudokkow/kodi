@@ -432,7 +432,7 @@ bool CPeripherals::LoadMappings(void)
     PeripheralID id;
     PeripheralDeviceMapping mapping;
 
-    mapping.m_strDeviceName = XMLUtils::GetAttribute(currentNode, "name");
+    mapping.m_strDeviceName = CXMLUtils::GetAttribute(currentNode, "name");
 
     // If there is no vendor_product attribute ignore this entry
     if (currentNode->Attribute("vendor_product"))
@@ -454,9 +454,9 @@ bool CPeripherals::LoadMappings(void)
       }
     }
 
-    mapping.m_busType       = PeripheralTypeTranslator::GetBusTypeFromString(XMLUtils::GetAttribute(currentNode, "bus"));
-    mapping.m_class         = PeripheralTypeTranslator::GetTypeFromString(XMLUtils::GetAttribute(currentNode, "class"));
-    mapping.m_mappedTo      = PeripheralTypeTranslator::GetTypeFromString(XMLUtils::GetAttribute(currentNode, "mapTo"));
+    mapping.m_busType       = PeripheralTypeTranslator::GetBusTypeFromString(CXMLUtils::GetAttribute(currentNode, "bus"));
+    mapping.m_class         = PeripheralTypeTranslator::GetTypeFromString(CXMLUtils::GetAttribute(currentNode, "class"));
+    mapping.m_mappedTo      = PeripheralTypeTranslator::GetTypeFromString(CXMLUtils::GetAttribute(currentNode, "mapTo"));
     GetSettingsFromMappingsFile(currentNode, mapping.m_settings);
 
     m_mappings.push_back(mapping);
@@ -474,17 +474,17 @@ void CPeripherals::GetSettingsFromMappingsFile(TiXmlElement *xmlNode, std::map<s
   while (currentNode)
   {
     CSetting *setting = NULL;
-    std::string strKey = XMLUtils::GetAttribute(currentNode, "key");
+    std::string strKey = CXMLUtils::GetAttribute(currentNode, "key");
     if (strKey.empty())
       continue;
 
-    std::string strSettingsType = XMLUtils::GetAttribute(currentNode, "type");
+    std::string strSettingsType = CXMLUtils::GetAttribute(currentNode, "type");
     int iLabelId = currentNode->Attribute("label") ? atoi(currentNode->Attribute("label")) : -1;
-    const std::string config = XMLUtils::GetAttribute(currentNode, "configurable");
+    const std::string config = CXMLUtils::GetAttribute(currentNode, "configurable");
     bool bConfigurable = (config.empty() || (config != "no" && config != "false" && config != "0"));
     if (strSettingsType == "bool")
     {
-      const std::string value = XMLUtils::GetAttribute(currentNode, "value");
+      const std::string value = CXMLUtils::GetAttribute(currentNode, "value");
       bool bValue = (value != "no" && value != "false" && value != "0");
       setting = new CSettingBool(strKey, iLabelId, bValue);
     }
@@ -506,7 +506,7 @@ void CPeripherals::GetSettingsFromMappingsFile(TiXmlElement *xmlNode, std::map<s
     }
     else if (StringUtils::EqualsNoCase(strSettingsType, "enum"))
     {
-      std::string strEnums = XMLUtils::GetAttribute(currentNode, "lvalues");
+      std::string strEnums = CXMLUtils::GetAttribute(currentNode, "lvalues");
       if (!strEnums.empty())
       {
         std::vector< std::pair<int,int> > enums;
@@ -520,7 +520,7 @@ void CPeripherals::GetSettingsFromMappingsFile(TiXmlElement *xmlNode, std::map<s
     }
     else
     {
-      std::string strValue = XMLUtils::GetAttribute(currentNode, "value");
+      std::string strValue = CXMLUtils::GetAttribute(currentNode, "value");
       setting = new CSettingString(strKey, iLabelId, strValue);
     }
 

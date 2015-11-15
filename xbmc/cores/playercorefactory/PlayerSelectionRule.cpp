@@ -44,7 +44,7 @@ CPlayerSelectionRule::~CPlayerSelectionRule()
 
 void CPlayerSelectionRule::Initialize(TiXmlElement* pRule)
 {
-  m_name = XMLUtils::GetAttribute(pRule, "name");
+  m_name = CXMLUtils::GetAttribute(pRule, "name");
   if (m_name.empty())
     m_name = "un-named";
 
@@ -60,16 +60,16 @@ void CPlayerSelectionRule::Initialize(TiXmlElement* pRule)
   m_tDVDFile = GetTristate(pRule->Attribute("dvdfile"));
   m_tDVDImage = GetTristate(pRule->Attribute("dvdimage"));
 
-  m_protocols = XMLUtils::GetAttribute(pRule, "protocols");
-  m_fileTypes = XMLUtils::GetAttribute(pRule, "filetypes");
-  m_mimeTypes = XMLUtils::GetAttribute(pRule, "mimetypes");
-  m_fileName = XMLUtils::GetAttribute(pRule, "filename");
+  m_protocols = CXMLUtils::GetAttribute(pRule, "protocols");
+  m_fileTypes = CXMLUtils::GetAttribute(pRule, "filetypes");
+  m_mimeTypes = CXMLUtils::GetAttribute(pRule, "mimetypes");
+  m_fileName = CXMLUtils::GetAttribute(pRule, "filename");
 
-  m_audioCodec = XMLUtils::GetAttribute(pRule, "audiocodec");
-  m_audioChannels = XMLUtils::GetAttribute(pRule, "audiochannels");
-  m_videoCodec = XMLUtils::GetAttribute(pRule, "videocodec");
-  m_videoResolution = XMLUtils::GetAttribute(pRule, "videoresolution");
-  m_videoAspect = XMLUtils::GetAttribute(pRule, "videoaspect");
+  m_audioCodec = CXMLUtils::GetAttribute(pRule, "audiocodec");
+  m_audioChannels = CXMLUtils::GetAttribute(pRule, "audiochannels");
+  m_videoCodec = CXMLUtils::GetAttribute(pRule, "videocodec");
+  m_videoResolution = CXMLUtils::GetAttribute(pRule, "videoresolution");
+  m_videoAspect = CXMLUtils::GetAttribute(pRule, "videoaspect");
 
   m_bStreamDetails = m_audioCodec.length() > 0 || m_audioChannels.length() > 0 ||
     m_videoCodec.length() > 0 || m_videoResolution.length() > 0 || m_videoAspect.length() > 0;
@@ -79,7 +79,7 @@ void CPlayerSelectionRule::Initialize(TiXmlElement* pRule)
       CLog::Log(LOGWARNING, "CPlayerSelectionRule::Initialize: rule: %s needs media flagging, which is disabled", m_name.c_str());
   }
 
-  m_playerName = XMLUtils::GetAttribute(pRule, "player");
+  m_playerName = CXMLUtils::GetAttribute(pRule, "player");
   m_playerCoreId = 0;
 
   TiXmlElement* pSubRule = pRule->FirstChildElement("rule");

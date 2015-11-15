@@ -501,8 +501,8 @@ void CPeripheral::LoadPersistedSettings(void)
     const TiXmlElement *setting = doc.RootElement()->FirstChildElement("setting");
     while (setting)
     {
-      std::string    strId = XMLUtils::GetAttribute(setting, "id");
-      std::string strValue = XMLUtils::GetAttribute(setting, "value");
+      std::string    strId = CXMLUtils::GetAttribute(setting, "id");
+      std::string strValue = CXMLUtils::GetAttribute(setting, "value");
       SetSetting(strId, strValue);
 
       setting = setting->NextSiblingElement("setting");

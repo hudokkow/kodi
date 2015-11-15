@@ -201,8 +201,8 @@ bool CAddonCallbacksAddon::GetAddonSetting(void *addonData, const char *strSetti
       const TiXmlElement *setting = category->FirstChildElement("setting");
       while (setting)
       {
-        const std::string   id = XMLUtils::GetAttribute(setting, "id");
-        const std::string type = XMLUtils::GetAttribute(setting, "type");
+        const std::string   id = CXMLUtils::GetAttribute(setting, "id");
+        const std::string type = CXMLUtils::GetAttribute(setting, "type");
 
         if (id == strSettingName && !type.empty())
         {

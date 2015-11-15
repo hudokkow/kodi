@@ -76,11 +76,11 @@ bool CSkinSetting::Deserialize(const TiXmlElement* element)
   if (element == nullptr)
     return false;
 
-  name = XMLUtils::GetAttribute(element, XML_ATTR_ID);
+  name = CXMLUtils::GetAttribute(element, XML_ATTR_ID);
 
   // backwards compatibility for guisettings.xml
   if (name.empty())
-    name = XMLUtils::GetAttribute(element, XML_ATTR_NAME);
+    name = CXMLUtils::GetAttribute(element, XML_ATTR_NAME);
 
   return true;
 }
@@ -679,7 +679,7 @@ CSkinSettingPtr CSkinInfo::ParseSetting(const TiXmlElement* element)
   if (element == nullptr)
     return CSkinSettingPtr();
 
-  std::string settingType = XMLUtils::GetAttribute(element, XML_ATTR_TYPE);
+  std::string settingType = CXMLUtils::GetAttribute(element, XML_ATTR_TYPE);
   CSkinSettingPtr setting;
   if (settingType == "string")
     setting = CSkinSettingPtr(new CSkinSettingString());

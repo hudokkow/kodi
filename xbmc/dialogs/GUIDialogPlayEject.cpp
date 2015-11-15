@@ -109,8 +109,8 @@ bool CGUIDialogPlayEject::ShowAndGetInput(const CFileItem & item,
       CLog::Log(LOGERROR, "Error loading %s, no <discstub> node", item.GetPath().c_str());
     else
     {
-      XMLUtils::GetString(pRootElement, "title", strLine1);
-      XMLUtils::GetString(pRootElement, "message", strLine2);
+      CXMLUtils::GetString(pRootElement, "title", strLine1);
+      CXMLUtils::GetString(pRootElement, "message", strLine2);
     }
   }
 

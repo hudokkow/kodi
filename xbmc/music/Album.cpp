@@ -281,28 +281,28 @@ bool CAlbum::Load(const TiXmlElement *album, bool append, bool prioritise)
   if (!append)
     Reset();
 
-  XMLUtils::GetString(album,              "title", strAlbum);
-  XMLUtils::GetString(album, "musicBrainzAlbumID", strMusicBrainzAlbumID);
+  CXMLUtils::GetString(album,              "title", strAlbum);
+  CXMLUtils::GetString(album, "musicBrainzAlbumID", strMusicBrainzAlbumID);
   std::vector<std::string> artist; // Support old style <artist></artist> for backwards compatibility
-  XMLUtils::GetStringArray(album, "artist", artist, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(album, "genre", genre, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(album, "style", styles, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(album, "mood", moods, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetStringArray(album, "theme", themes, prioritise, g_advancedSettings.m_musicItemSeparator);
-  XMLUtils::GetBoolean(album, "compilation", bCompilation);
+  CXMLUtils::GetStringArray(album, "artist", artist, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(album, "genre", genre, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(album, "style", styles, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(album, "mood", moods, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetStringArray(album, "theme", themes, prioritise, g_advancedSettings.m_musicItemSeparator);
+  CXMLUtils::GetBoolean(album, "compilation", bCompilation);
 
-  XMLUtils::GetString(album,"review",strReview);
-  XMLUtils::GetString(album,"releasedate",m_strDateOfRelease);
-  XMLUtils::GetString(album,"label",strLabel);
-  XMLUtils::GetString(album,"type",strType);
+  CXMLUtils::GetString(album,"review",strReview);
+  CXMLUtils::GetString(album,"releasedate",m_strDateOfRelease);
+  CXMLUtils::GetString(album,"label",strLabel);
+  CXMLUtils::GetString(album,"type",strType);
 
-  XMLUtils::GetInt(album,"year",iYear);
+  CXMLUtils::GetInt(album,"year",iYear);
   const TiXmlElement* rElement = album->FirstChildElement("rating");
   if (rElement)
   {
     float rating = 0;
     float max_rating = 5;
-    XMLUtils::GetFloat(album, "rating", rating);
+    CXMLUtils::GetFloat(album, "rating", rating);
     if (rElement->QueryFloatAttribute("max", &max_rating) == TIXML_SUCCESS && max_rating>=1)
       rating *= (5.f / max_rating); // Normalise the Rating to between 0 and 5 
     if (rating > 5.f)
@@ -342,10 +342,10 @@ bool CAlbum::Load(const TiXmlElement *album, bool append, bool prioritise)
     if (albumArtistCreditsNode->FirstChild())
     {
       CArtistCredit artistCredit;
-      XMLUtils::GetString(albumArtistCreditsNode,  "artist",               artistCredit.m_strArtist);
-      XMLUtils::GetString(albumArtistCreditsNode,  "musicBrainzArtistID",  artistCredit.m_strMusicBrainzArtistID);
-      XMLUtils::GetString(albumArtistCreditsNode,  "joinphrase",           artistCredit.m_strJoinPhrase);
-      XMLUtils::GetBoolean(albumArtistCreditsNode, "featuring",            artistCredit.m_boolFeatured);
+      CXMLUtils::GetString(albumArtistCreditsNode,  "artist",               artistCredit.m_strArtist);
+      CXMLUtils::GetString(albumArtistCreditsNode,  "musicBrainzArtistID",  artistCredit.m_strMusicBrainzArtistID);
+      CXMLUtils::GetString(albumArtistCreditsNode,  "joinphrase",           artistCredit.m_strJoinPhrase);
+      CXMLUtils::GetBoolean(albumArtistCreditsNode, "featuring",            artistCredit.m_boolFeatured);
       artistCredits.push_back(artistCredit);
     }
 
@@ -385,25 +385,25 @@ bool CAlbum::Load(const TiXmlElement *album, bool append, bool prioritise)
         if (songArtistCreditsNode->FirstChild())
         {
           CArtistCredit artistCredit;
-          XMLUtils::GetString(songArtistCreditsNode,  "artist",               artistCredit.m_strArtist);
-          XMLUtils::GetString(songArtistCreditsNode,  "musicBrainzArtistID",  artistCredit.m_strMusicBrainzArtistID);
-          XMLUtils::GetString(songArtistCreditsNode,  "joinphrase",           artistCredit.m_strJoinPhrase);
-          XMLUtils::GetBoolean(songArtistCreditsNode, "featuring",            artistCredit.m_boolFeatured);
+          CXMLUtils::GetString(songArtistCreditsNode,  "artist",               artistCredit.m_strArtist);
+          CXMLUtils::GetString(songArtistCreditsNode,  "musicBrainzArtistID",  artistCredit.m_strMusicBrainzArtistID);
+          CXMLUtils::GetString(songArtistCreditsNode,  "joinphrase",           artistCredit.m_strJoinPhrase);
+          CXMLUtils::GetBoolean(songArtistCreditsNode, "featuring",            artistCredit.m_boolFeatured);
           song.artistCredits.push_back(artistCredit);
         }
         
         songArtistCreditsNode = songArtistCreditsNode->NextSiblingElement("songArtistCredits");
       }
 
-      XMLUtils::GetString(node,   "musicBrainzTrackID",   song.strMusicBrainzTrackID);
-      XMLUtils::GetInt(node, "position", song.iTrack);
+      CXMLUtils::GetString(node,   "musicBrainzTrackID",   song.strMusicBrainzTrackID);
+      CXMLUtils::GetInt(node, "position", song.iTrack);
 
       if (song.iTrack == 0)
         bIncrement = true;
 
-      XMLUtils::GetString(node,"title",song.strTitle);
+      CXMLUtils::GetString(node,"title",song.strTitle);
       std::string strDur;
-      XMLUtils::GetString(node,"duration",strDur);
+      CXMLUtils::GetString(node,"duration",strDur);
       song.iDuration = StringUtils::TimeStringToSeconds(strDur);
 
       if (bIncrement)
@@ -415,7 +415,7 @@ bool CAlbum::Load(const TiXmlElement *album, bool append, bool prioritise)
   }
 
   std::string strReleaseType;
-  if (XMLUtils::GetString(album, "releasetype", strReleaseType))
+  if (CXMLUtils::GetString(album, "releasetype", strReleaseType))
     SetReleaseType(strReleaseType);
   else
     releaseType = Album;
@@ -433,20 +433,20 @@ bool CAlbum::Save(TiXmlNode *node, const std::string &tag, const std::string& st
 
   if (!album) return false;
 
-  XMLUtils::SetString(album,                    "title", strAlbum);
-  XMLUtils::SetString(album,       "musicBrainzAlbumID", strMusicBrainzAlbumID);
-  XMLUtils::SetStringArray(album,              "artist", GetAlbumArtist());
-  XMLUtils::SetStringArray(album,               "genre", genre);
-  XMLUtils::SetStringArray(album,               "style", styles);
-  XMLUtils::SetStringArray(album,                "mood", moods);
-  XMLUtils::SetStringArray(album,               "theme", themes);
-  XMLUtils::SetBoolean(album,      "compilation", bCompilation);
+  CXMLUtils::SetString(album,                    "title", strAlbum);
+  CXMLUtils::SetString(album,       "musicBrainzAlbumID", strMusicBrainzAlbumID);
+  CXMLUtils::SetStringArray(album,              "artist", GetAlbumArtist());
+  CXMLUtils::SetStringArray(album,               "genre", genre);
+  CXMLUtils::SetStringArray(album,               "style", styles);
+  CXMLUtils::SetStringArray(album,                "mood", moods);
+  CXMLUtils::SetStringArray(album,               "theme", themes);
+  CXMLUtils::SetBoolean(album,      "compilation", bCompilation);
 
-  XMLUtils::SetString(album,      "review", strReview);
-  XMLUtils::SetString(album,        "type", strType);
-  XMLUtils::SetString(album, "releasedate", m_strDateOfRelease);
-  XMLUtils::SetString(album,       "label", strLabel);
-  XMLUtils::SetString(album,        "type", strType);
+  CXMLUtils::SetString(album,      "review", strReview);
+  CXMLUtils::SetString(album,        "type", strType);
+  CXMLUtils::SetString(album, "releasedate", m_strDateOfRelease);
+  CXMLUtils::SetString(album,       "label", strLabel);
+  CXMLUtils::SetString(album,        "type", strType);
   if (!thumbURL.m_xml.empty())
   {
     CXBMCTinyXML doc;
@@ -458,20 +458,20 @@ bool CAlbum::Save(TiXmlNode *node, const std::string &tag, const std::string& st
       thumb = thumb->NextSibling("thumb");
     }
   }
-  XMLUtils::SetString(album,        "path", strPath);
+  CXMLUtils::SetString(album,        "path", strPath);
 
-  XMLUtils::SetInt(album,         "rating", iRating);
-  XMLUtils::SetInt(album,           "year", iYear);
+  CXMLUtils::SetInt(album,         "rating", iRating);
+  CXMLUtils::SetInt(album,           "year", iYear);
 
   for( VECARTISTCREDITS::const_iterator artistCredit = artistCredits.begin();artistCredit != artistCredits.end();++artistCredit)
   {
     // add an <albumArtistCredits> tag
     TiXmlElement albumArtistCreditsElement("albumArtistCredits");
     TiXmlNode *albumArtistCreditsNode = album->InsertEndChild(albumArtistCreditsElement);
-    XMLUtils::SetString(albumArtistCreditsNode,               "artist", artistCredit->m_strArtist);
-    XMLUtils::SetString(albumArtistCreditsNode,  "musicBrainzArtistID", artistCredit->m_strMusicBrainzArtistID);
-    XMLUtils::SetString(albumArtistCreditsNode,           "joinphrase", artistCredit->m_strJoinPhrase);
-    XMLUtils::SetString(albumArtistCreditsNode,            "featuring", artistCredit->GetArtist());
+    CXMLUtils::SetString(albumArtistCreditsNode,               "artist", artistCredit->m_strArtist);
+    CXMLUtils::SetString(albumArtistCreditsNode,  "musicBrainzArtistID", artistCredit->m_strMusicBrainzArtistID);
+    CXMLUtils::SetString(albumArtistCreditsNode,           "joinphrase", artistCredit->m_strJoinPhrase);
+    CXMLUtils::SetString(albumArtistCreditsNode,            "featuring", artistCredit->GetArtist());
   }
 
   for( VECSONGS::const_iterator song = infoSongs.begin(); song != infoSongs.end(); ++song)
@@ -484,18 +484,18 @@ bool CAlbum::Save(TiXmlNode *node, const std::string &tag, const std::string& st
       // add an <albumArtistCredits> tag
       TiXmlElement songArtistCreditsElement("songArtistCredits");
       TiXmlNode *songArtistCreditsNode = node->InsertEndChild(songArtistCreditsElement);
-      XMLUtils::SetString(songArtistCreditsNode,               "artist", artistCredit->m_strArtist);
-      XMLUtils::SetString(songArtistCreditsNode,  "musicBrainzArtistID", artistCredit->m_strMusicBrainzArtistID);
-      XMLUtils::SetString(songArtistCreditsNode,           "joinphrase", artistCredit->m_strJoinPhrase);
-      XMLUtils::SetString(songArtistCreditsNode,            "featuring", artistCredit->GetArtist());
+      CXMLUtils::SetString(songArtistCreditsNode,               "artist", artistCredit->m_strArtist);
+      CXMLUtils::SetString(songArtistCreditsNode,  "musicBrainzArtistID", artistCredit->m_strMusicBrainzArtistID);
+      CXMLUtils::SetString(songArtistCreditsNode,           "joinphrase", artistCredit->m_strJoinPhrase);
+      CXMLUtils::SetString(songArtistCreditsNode,            "featuring", artistCredit->GetArtist());
     }
-    XMLUtils::SetString(node,   "musicBrainzTrackID",   song->strMusicBrainzTrackID);
-    XMLUtils::SetString(node,   "title",                song->strTitle);
-    XMLUtils::SetInt(node,      "position",             song->iTrack);
-    XMLUtils::SetString(node,   "duration",             StringUtils::SecondsToTimeString(song->iDuration));
+    CXMLUtils::SetString(node,   "musicBrainzTrackID",   song->strMusicBrainzTrackID);
+    CXMLUtils::SetString(node,   "title",                song->strTitle);
+    CXMLUtils::SetInt(node,      "position",             song->iTrack);
+    CXMLUtils::SetString(node,   "duration",             StringUtils::SecondsToTimeString(song->iDuration));
   }
 
-  XMLUtils::SetString(album, "releasetype", GetReleaseType());
+  CXMLUtils::SetString(album, "releasetype", GetReleaseType());
 
   return true;
 }

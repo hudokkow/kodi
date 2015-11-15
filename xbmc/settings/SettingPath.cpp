@@ -67,7 +67,7 @@ bool CSettingPath::Deserialize(const TiXmlNode *node, bool update /* = false */)
   if (constraints != NULL)
   {
     // get writable
-    XMLUtils::GetBoolean(constraints, "writable", m_writable);
+    CXMLUtils::GetBoolean(constraints, "writable", m_writable);
 
     // get sources
     const TiXmlNode *sources = constraints->FirstChild("sources");

@@ -27,7 +27,7 @@
 
 class CDateTime;
 
-class XMLUtils
+class CXMLUtils
 {
 public:
   static bool HasChild(const TiXmlNode* pRootNode, const char* strTag);

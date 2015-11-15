@@ -8304,7 +8304,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
     {
       TiXmlElement xmlMainElement("videodb");
       pMain = xmlDoc.InsertEndChild(xmlMainElement);
-      XMLUtils::SetInt(pMain,"version", GetExportVersion());
+      CXMLUtils::SetInt(pMain,"version", GetExportVersion());
     }
 
     while (!m_pDS->eof())
@@ -8318,7 +8318,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
       {
         TiXmlElement additionalNode("art");
         for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-          XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+          CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
         movie.Save(pMain, "movie", true, &additionalNode);
       }
       else
@@ -8415,7 +8415,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
       {
         TiXmlElement additionalNode("art");
         for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-          XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+          CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
         movie.Save(pMain, "musicvideo", true, &additionalNode);
       }
       else
@@ -8505,13 +8505,13 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
       {
         TiXmlElement additionalNode("art");
         for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-          XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+          CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
         for (std::map<int, std::map<std::string, std::string> >::const_iterator i = seasonArt.begin(); i != seasonArt.end(); ++i)
         {
           TiXmlElement seasonNode("season");
           seasonNode.SetAttribute("num", i->first);
           for (std::map<std::string, std::string>::const_iterator j = i->second.begin(); j != i->second.end(); ++j)
-            XMLUtils::SetString(&seasonNode, j->first.c_str(), j->second);
+            CXMLUtils::SetString(&seasonNode, j->first.c_str(), j->second);
           additionalNode.InsertEndChild(seasonNode);
         }
         tvshow.Save(pMain, "tvshow", true, &additionalNode);
@@ -8610,7 +8610,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
         {
           TiXmlElement additionalNode("art");
           for (std::map<std::string, std::string>::const_iterator i = artwork.begin(); i != artwork.end(); ++i)
-            XMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
+            CXMLUtils::SetString(&additionalNode, i->first.c_str(), i->second);
           episode.Save(pMain->LastChild(), "episodedetails", true, &additionalNode);
         }
         else if (singleFile)
@@ -8704,11 +8704,11 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
         {
           TiXmlElement xmlPathElement2("path");
           TiXmlNode *pPath = pPaths->InsertEndChild(xmlPathElement2);
-          XMLUtils::SetString(pPath,"url", *iter);
-          XMLUtils::SetInt(pPath,"scanrecursive", settings.recurse);
-          XMLUtils::SetBoolean(pPath,"usefoldernames", settings.parent_name);
-          XMLUtils::SetString(pPath,"content", TranslateContent(info->Content()));
-          XMLUtils::SetString(pPath,"scraperpath", info->ID());
+          CXMLUtils::SetString(pPath,"url", *iter);
+          CXMLUtils::SetInt(pPath,"scanrecursive", settings.recurse);
+          CXMLUtils::SetBoolean(pPath,"usefoldernames", settings.parent_name);
+          CXMLUtils::SetString(pPath,"content", TranslateContent(info->Content()));
+          CXMLUtils::SetString(pPath,"scraperpath", info->ID());
         }
       }
       xmlDoc.SaveFile(xmlFile);
@@ -8789,7 +8789,7 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
     }
 
     int iVersion = 0;
-    XMLUtils::GetInt(root, "version", iVersion);
+    CXMLUtils::GetInt(root, "version", iVersion);
 
     CLog::Log(LOGDEBUG, "%s: Starting import (export version = %i)", __FUNCTION__, iVersion);
 
@@ -8817,23 +8817,23 @@ void CVideoDatabase::ImportFromXML(const std::string &path)
     while (path)
     {
       std::string strPath;
-      if (XMLUtils::GetString(path,"url",strPath) && !strPath.empty())
+      if (CXMLUtils::GetString(path,"url",strPath) && !strPath.empty())
         AddPath(strPath);
 
       std::string content;
-      if (XMLUtils::GetString(path,"content", content) && !content.empty())
+      if (CXMLUtils::GetString(path,"content", content) && !content.empty())
       { // check the scraper exists, if so store the path
         AddonPtr addon;
         std::string id;
-        XMLUtils::GetString(path,"scraperpath",id);
+        CXMLUtils::GetString(path,"scraperpath",id);
         if (CAddonMgr::GetInstance().GetAddon(id, addon))
         {
           SScanSettings settings;
           ScraperPtr scraper = std::dynamic_pointer_cast<CScraper>(addon);
           // FIXME: scraper settings are not exported?
           scraper->SetPathSettings(TranslateContent(content), "");
-          XMLUtils::GetInt(path,"scanrecursive",settings.recurse);
-          XMLUtils::GetBoolean(path,"usefoldernames",settings.parent_name);
+          CXMLUtils::GetInt(path,"scanrecursive",settings.recurse);
+          CXMLUtils::GetBoolean(path,"usefoldernames",settings.parent_name);
           SetScraperForPath(strPath,scraper,settings);
         }
       }

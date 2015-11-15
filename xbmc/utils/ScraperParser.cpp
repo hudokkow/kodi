@@ -191,7 +191,7 @@ void CScraperParser::ReplaceBuffers(std::string& strDest)
 
 void CScraperParser::ParseExpression(const std::string& input, std::string& dest, TiXmlElement* element, bool bAppend)
 {
-  std::string strOutput = XMLUtils::GetAttribute(element, "output");
+  std::string strOutput = CXMLUtils::GetAttribute(element, "output");
 
   TiXmlElement* pExpression = element->FirstChildElement("expression");
   if (pExpression)

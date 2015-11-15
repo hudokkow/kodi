@@ -449,7 +449,7 @@ bool CLangInfo::Load(const std::string& strLanguage)
     while (pRegion)
     {
       CRegion region(m_defaultRegion);
-      region.m_strName = XMLUtils::GetAttribute(pRegion, "name");
+      region.m_strName = CXMLUtils::GetAttribute(pRegion, "name");
       if (region.m_strName.empty())
         region.m_strName="N/A";
 
@@ -477,8 +477,8 @@ bool CLangInfo::Load(const std::string& strLanguage)
       if (pTime && !pTime->NoChildren())
       {
         region.m_strTimeFormat=pTime->FirstChild()->Value();
-        region.m_strMeridiemSymbols[MeridiemSymbolAM] = XMLUtils::GetAttribute(pTime, "symbolAM");
-        region.m_strMeridiemSymbols[MeridiemSymbolPM] = XMLUtils::GetAttribute(pTime, "symbolPM");
+        region.m_strMeridiemSymbols[MeridiemSymbolAM] = CXMLUtils::GetAttribute(pTime, "symbolAM");
+        region.m_strMeridiemSymbols[MeridiemSymbolPM] = CXMLUtils::GetAttribute(pTime, "symbolPM");
       }
 
       const TiXmlNode *pTempUnit=pRegion->FirstChild("tempunit");

@@ -410,7 +410,7 @@ bool CSysInfo::Load(const TiXmlNode *settings)
   
   const TiXmlElement *pElement = settings->FirstChildElement("general");
   if (pElement)
-    XMLUtils::GetInt(pElement, "systemtotaluptime", m_iSystemTimeTotalUp, 0, INT_MAX);
+    CXMLUtils::GetInt(pElement, "systemtotaluptime", m_iSystemTimeTotalUp, 0, INT_MAX);
 
   return true;
 }
@@ -428,7 +428,7 @@ bool CSysInfo::Save(TiXmlNode *settings) const
     if (generalNode == NULL)
       return false;
   }
-  XMLUtils::SetInt(generalNode, "systemtotaluptime", m_iSystemTimeTotalUp);
+  CXMLUtils::SetInt(generalNode, "systemtotaluptime", m_iSystemTimeTotalUp);
 
   return true;
 }

@@ -120,8 +120,8 @@ static void CheckScraperError(const TiXmlElement *pxeRoot)
     return;
   std::string sTitle;
   std::string sMessage;
-  XMLUtils::GetString(pxeRoot, "title", sTitle);
-  XMLUtils::GetString(pxeRoot, "message", sMessage);
+  CXMLUtils::GetString(pxeRoot, "title", sTitle);
+  CXMLUtils::GetString(pxeRoot, "message", sMessage);
   throw CScraperError(sTitle, sMessage);
 }
 
@@ -450,7 +450,7 @@ CScraperUrl CScraper::NfoUrl(const std::string &sNfoContent)
       /*
        NOTE: Scrapers might return invalid xml with some loose
        elements (eg. '<url>http://some.url</url><id>123</id>').
-       Since XMLUtils::GetString() is assuming well formed xml
+       Since CXMLUtils::GetString() is assuming well formed xml
        with start and end-tags we're not able to use it.
        Check for the desired Elements instead.
       */
@@ -512,7 +512,7 @@ CScraperUrl CScraper::ResolveIDToUrl(const std::string& externalID)
       /*
        NOTE: Scrapers might return invalid xml with some loose
        elements (eg. '<url>http://some.url</url><id>123</id>').
-       Since XMLUtils::GetString() is assuming well formed xml
+       Since CXMLUtils::GetString() is assuming well formed xml
        with start and end-tags we're not able to use it.
        Check for the desired Elements instead.
        */
@@ -631,7 +631,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl, const std:
       if (pxnTitle && pxnTitle->FirstChild() && pxeLink && pxeLink->FirstChild())
       {
         scurlMovie.strTitle = pxnTitle->FirstChild()->Value();
-        XMLUtils::GetString(pxeMovie, "id", scurlMovie.strId);
+        CXMLUtils::GetString(pxeMovie, "id", scurlMovie.strId);
 
         for ( ; pxeLink && pxeLink->FirstChild(); pxeLink = pxeLink->NextSiblingElement("url"))
           scurlMovie.ParseElement(pxeLink);
@@ -649,7 +649,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl, const std:
          * countries), otherwise it scores 0.
          */
         std::string sCompareYear;
-        XMLUtils::GetString(pxeMovie, "year", sCompareYear);
+        CXMLUtils::GetString(pxeMovie, "year", sCompareYear);
 
         double yearScore = 0;
         if (!sYear.empty() && !sCompareYear.empty())
@@ -662,7 +662,7 @@ std::vector<CScraperUrl> CScraper::FindMovie(XFILE::CCurlFile &fcurl, const std:
           scurlMovie.strTitle += StringUtils::Format(" (%s)", sCompareYear.c_str());
 
         std::string sLanguage;
-        if (XMLUtils::GetString(pxeMovie, "language", sLanguage) && !sLanguage.empty())
+        if (CXMLUtils::GetString(pxeMovie, "language", sLanguage) && !sLanguage.empty())
           scurlMovie.strTitle += StringUtils::Format(" (%s)", sLanguage.c_str());
 
         // filter for dupes from naughty scrapers
@@ -736,17 +736,17 @@ std::vector<CMusicAlbumInfo> CScraper::FindAlbum(CCurlFile &fcurl, const std::st
       pxeAlbum; pxeAlbum = pxeAlbum->NextSiblingElement())
     {
       std::string sTitle;
-      if (XMLUtils::GetString(pxeAlbum, "title", sTitle) && !sTitle.empty())
+      if (CXMLUtils::GetString(pxeAlbum, "title", sTitle) && !sTitle.empty())
       {
         std::string sArtist;
         std::string sAlbumName;
-        if (XMLUtils::GetString(pxeAlbum, "artist", sArtist) && !sArtist.empty())
+        if (CXMLUtils::GetString(pxeAlbum, "artist", sArtist) && !sArtist.empty())
           sAlbumName = StringUtils::Format("%s - %s", sArtist.c_str(), sTitle.c_str());
         else
           sAlbumName = sTitle;
 
         std::string sYear;
-        if (XMLUtils::GetString(pxeAlbum, "year", sYear) && !sYear.empty())
+        if (CXMLUtils::GetString(pxeAlbum, "year", sYear) && !sYear.empty())
           sAlbumName = StringUtils::Format("%s (%s)", sAlbumName.c_str(), sYear.c_str());
 
         // if no URL is provided, use the URL we got back from CreateAlbumSearchUrl
@@ -847,10 +847,10 @@ std::vector<CMusicArtistInfo> CScraper::FindArtist(CCurlFile &fcurl,
 
         CMusicArtistInfo ari(pxnTitle->FirstChild()->Value(), scurlArtist);
         std::string genre;
-        XMLUtils::GetString(pxeArtist, "genre", genre);
+        CXMLUtils::GetString(pxeArtist, "genre", genre);
         if (!genre.empty())
           ari.GetArtist().genre = StringUtils::Split(genre, g_advancedSettings.m_musicItemSeparator);
-        XMLUtils::GetString(pxeArtist, "year", ari.GetArtist().strBorn);
+        CXMLUtils::GetString(pxeArtist, "year", ari.GetArtist().strBorn);
 
         vcari.push_back(ari);
       }
@@ -893,16 +893,16 @@ EPISODELIST CScraper::GetEpisodeList(XFILE::CCurlFile &fcurl, const CScraperUrl 
       EPISODE ep;
       TiXmlElement *pxeLink = pxeMovie->FirstChildElement("url");
       std::string strEpNum;
-      if (pxeLink && XMLUtils::GetInt(pxeMovie, "season", ep.iSeason) &&
-        XMLUtils::GetString(pxeMovie, "epnum", strEpNum) && !strEpNum.empty())
+      if (pxeLink && CXMLUtils::GetInt(pxeMovie, "season", ep.iSeason) &&
+        CXMLUtils::GetString(pxeMovie, "epnum", strEpNum) && !strEpNum.empty())
       {
         CScraperUrl &scurlEp(ep.cScraperUrl);
         size_t dot = strEpNum.find(".");
         ep.iEpisode = atoi(strEpNum.c_str());
         ep.iSubepisode = (dot != std::string::npos) ? atoi(strEpNum.substr(dot + 1).c_str()) : 0;
-        if (!XMLUtils::GetString(pxeMovie, "title", scurlEp.strTitle) || scurlEp.strTitle.empty() )
+        if (!CXMLUtils::GetString(pxeMovie, "title", scurlEp.strTitle) || scurlEp.strTitle.empty() )
             scurlEp.strTitle = g_localizeStrings.Get(416);
-        XMLUtils::GetString(pxeMovie, "id", scurlEp.strId);
+        CXMLUtils::GetString(pxeMovie, "id", scurlEp.strId);
 
         for ( ; pxeLink && pxeLink->FirstChild(); pxeLink = pxeLink->NextSiblingElement("url"))
           scurlEp.ParseElement(pxeLink);
@@ -910,7 +910,7 @@ EPISODELIST CScraper::GetEpisodeList(XFILE::CCurlFile &fcurl, const CScraperUrl 
         // date must be the format of yyyy-mm-dd
         ep.cDate.SetValid(FALSE);
         std::string sDate;
-        if (XMLUtils::GetString(pxeMovie, "aired", sDate) && sDate.length() == 10)
+        if (CXMLUtils::GetString(pxeMovie, "aired", sDate) && sDate.length() == 10)
         {
           tm tm;
           if (strptime(sDate.c_str(), "%Y-%m-%d", &tm))

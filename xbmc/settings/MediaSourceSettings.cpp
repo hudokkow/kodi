@@ -414,7 +414,7 @@ bool CMediaSourceSettings::GetSource(const std::string &category, const TiXmlNod
   if (pThumbnailNode && pThumbnailNode->FirstChild())
     share.m_strThumbnailImage = pThumbnailNode->FirstChild()->Value();
 
-  XMLUtils::GetBoolean(source, "allowsharing", share.m_allowSharing);
+  CXMLUtils::GetBoolean(source, "allowsharing", share.m_allowSharing);
 
   return true;
 }
@@ -466,7 +466,7 @@ bool CMediaSourceSettings::SetSources(TiXmlNode *root, const char *section, cons
   if (sectionNode == NULL)
     return false;
 
-  XMLUtils::SetPath(sectionNode, "default", defaultPath);
+  CXMLUtils::SetPath(sectionNode, "default", defaultPath);
   for (CIVECSOURCES it = shares.begin(); it != shares.end(); it++)
   {
     const CMediaSource &share = *it;
@@ -474,22 +474,22 @@ bool CMediaSourceSettings::SetSources(TiXmlNode *root, const char *section, cons
       continue;
 
     TiXmlElement source(XML_SOURCE);
-    XMLUtils::SetString(&source, "name", share.strName);
+    CXMLUtils::SetString(&source, "name", share.strName);
 
     for (unsigned int i = 0; i < share.vecPaths.size(); i++)
-      XMLUtils::SetPath(&source, "path", share.vecPaths[i]);
+      CXMLUtils::SetPath(&source, "path", share.vecPaths[i]);
 
     if (share.m_iHasLock)
     {
-      XMLUtils::SetInt(&source, "lockmode", share.m_iLockMode);
-      XMLUtils::SetString(&source, "lockcode", share.m_strLockCode);
-      XMLUtils::SetInt(&source, "badpwdcount", share.m_iBadPwdCount);
+      CXMLUtils::SetInt(&source, "lockmode", share.m_iLockMode);
+      CXMLUtils::SetString(&source, "lockcode", share.m_strLockCode);
+      CXMLUtils::SetInt(&source, "badpwdcount", share.m_iBadPwdCount);
     }
 
     if (!share.m_strThumbnailImage.empty())
-      XMLUtils::SetPath(&source, "thumbnail", share.m_strThumbnailImage);
+      CXMLUtils::SetPath(&source, "thumbnail", share.m_strThumbnailImage);
 
-    XMLUtils::SetBoolean(&source, "allowsharing", share.m_allowSharing);
+    CXMLUtils::SetBoolean(&source, "allowsharing", share.m_allowSharing);
 
     sectionNode->InsertEndChild(source);
   }

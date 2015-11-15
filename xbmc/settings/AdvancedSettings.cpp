@@ -456,22 +456,22 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   TiXmlElement *pElement = pRootElement->FirstChildElement("audio");
   if (pElement)
   {
-    XMLUtils::GetFloat(pElement, "ac3downmixgain", m_ac3Gain, -96.0f, 96.0f);
-    XMLUtils::GetInt(pElement, "headroom", m_audioHeadRoom, 0, 12);
-    XMLUtils::GetString(pElement, "defaultplayer", m_audioDefaultPlayer);
+    CXMLUtils::GetFloat(pElement, "ac3downmixgain", m_ac3Gain, -96.0f, 96.0f);
+    CXMLUtils::GetInt(pElement, "headroom", m_audioHeadRoom, 0, 12);
+    CXMLUtils::GetString(pElement, "defaultplayer", m_audioDefaultPlayer);
     // 101 on purpose - can be used to never automark as watched
-    XMLUtils::GetFloat(pElement, "playcountminimumpercent", m_audioPlayCountMinimumPercent, 0.0f, 101.0f);
+    CXMLUtils::GetFloat(pElement, "playcountminimumpercent", m_audioPlayCountMinimumPercent, 0.0f, 101.0f);
 
-    XMLUtils::GetBoolean(pElement, "usetimeseeking", m_musicUseTimeSeeking);
-    XMLUtils::GetInt(pElement, "timeseekforward", m_musicTimeSeekForward, 0, 6000);
-    XMLUtils::GetInt(pElement, "timeseekbackward", m_musicTimeSeekBackward, -6000, 0);
-    XMLUtils::GetInt(pElement, "timeseekforwardbig", m_musicTimeSeekForwardBig, 0, 6000);
-    XMLUtils::GetInt(pElement, "timeseekbackwardbig", m_musicTimeSeekBackwardBig, -6000, 0);
+    CXMLUtils::GetBoolean(pElement, "usetimeseeking", m_musicUseTimeSeeking);
+    CXMLUtils::GetInt(pElement, "timeseekforward", m_musicTimeSeekForward, 0, 6000);
+    CXMLUtils::GetInt(pElement, "timeseekbackward", m_musicTimeSeekBackward, -6000, 0);
+    CXMLUtils::GetInt(pElement, "timeseekforwardbig", m_musicTimeSeekForwardBig, 0, 6000);
+    CXMLUtils::GetInt(pElement, "timeseekbackwardbig", m_musicTimeSeekBackwardBig, -6000, 0);
 
-    XMLUtils::GetInt(pElement, "percentseekforward", m_musicPercentSeekForward, 0, 100);
-    XMLUtils::GetInt(pElement, "percentseekbackward", m_musicPercentSeekBackward, -100, 0);
-    XMLUtils::GetInt(pElement, "percentseekforwardbig", m_musicPercentSeekForwardBig, 0, 100);
-    XMLUtils::GetInt(pElement, "percentseekbackwardbig", m_musicPercentSeekBackwardBig, -100, 0);
+    CXMLUtils::GetInt(pElement, "percentseekforward", m_musicPercentSeekForward, 0, 100);
+    CXMLUtils::GetInt(pElement, "percentseekbackward", m_musicPercentSeekBackward, -100, 0);
+    CXMLUtils::GetInt(pElement, "percentseekforwardbig", m_musicPercentSeekForwardBig, 0, 100);
+    CXMLUtils::GetInt(pElement, "percentseekbackwardbig", m_musicPercentSeekBackwardBig, -100, 0);
 
     TiXmlElement* pAudioExcludes = pElement->FirstChildElement("excludefromlisting");
     if (pAudioExcludes)
@@ -481,48 +481,48 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     if (pAudioExcludes)
       GetCustomRegexps(pAudioExcludes, m_audioExcludeFromScanRegExps);
 
-    XMLUtils::GetFloat(pElement, "applydrc", m_audioApplyDrc);
-    XMLUtils::GetBoolean(pElement, "dvdplayerignoredtsinwav", m_dvdplayerIgnoreDTSinWAV);
+    CXMLUtils::GetFloat(pElement, "applydrc", m_audioApplyDrc);
+    CXMLUtils::GetBoolean(pElement, "dvdplayerignoredtsinwav", m_dvdplayerIgnoreDTSinWAV);
 
-    XMLUtils::GetFloat(pElement, "limiterhold", m_limiterHold, 0.0f, 100.0f);
-    XMLUtils::GetFloat(pElement, "limiterrelease", m_limiterRelease, 0.001f, 100.0f);
+    CXMLUtils::GetFloat(pElement, "limiterhold", m_limiterHold, 0.0f, 100.0f);
+    CXMLUtils::GetFloat(pElement, "limiterrelease", m_limiterRelease, 0.001f, 100.0f);
   }
 
   pElement = pRootElement->FirstChildElement("omx");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "omxhwaudiodecode", m_omxHWAudioDecode);
-    XMLUtils::GetBoolean(pElement, "omxdecodestartwithvalidframe", m_omxDecodeStartWithValidFrame);
+    CXMLUtils::GetBoolean(pElement, "omxhwaudiodecode", m_omxHWAudioDecode);
+    CXMLUtils::GetBoolean(pElement, "omxdecodestartwithvalidframe", m_omxDecodeStartWithValidFrame);
   }
 
   pElement = pRootElement->FirstChildElement("video");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "assfixedworks", m_videoAssFixedWorks);
-    XMLUtils::GetString(pElement, "stereoscopicregex3d", m_stereoscopicregex_3d);
-    XMLUtils::GetString(pElement, "stereoscopicregexsbs", m_stereoscopicregex_sbs);
-    XMLUtils::GetString(pElement, "stereoscopicregextab", m_stereoscopicregex_tab);
-    XMLUtils::GetFloat(pElement, "subsdelayrange", m_videoSubsDelayRange, 10, 600);
-    XMLUtils::GetFloat(pElement, "audiodelayrange", m_videoAudioDelayRange, 10, 600);
-    XMLUtils::GetInt(pElement, "blackbarcolour", m_videoBlackBarColour, 0, 255);
-    XMLUtils::GetString(pElement, "defaultplayer", m_videoDefaultPlayer);
-    XMLUtils::GetString(pElement, "defaultdvdplayer", m_videoDefaultDVDPlayer);
-    XMLUtils::GetBoolean(pElement, "fullscreenonmoviestart", m_fullScreenOnMovieStart);
+    CXMLUtils::GetBoolean(pElement, "assfixedworks", m_videoAssFixedWorks);
+    CXMLUtils::GetString(pElement, "stereoscopicregex3d", m_stereoscopicregex_3d);
+    CXMLUtils::GetString(pElement, "stereoscopicregexsbs", m_stereoscopicregex_sbs);
+    CXMLUtils::GetString(pElement, "stereoscopicregextab", m_stereoscopicregex_tab);
+    CXMLUtils::GetFloat(pElement, "subsdelayrange", m_videoSubsDelayRange, 10, 600);
+    CXMLUtils::GetFloat(pElement, "audiodelayrange", m_videoAudioDelayRange, 10, 600);
+    CXMLUtils::GetInt(pElement, "blackbarcolour", m_videoBlackBarColour, 0, 255);
+    CXMLUtils::GetString(pElement, "defaultplayer", m_videoDefaultPlayer);
+    CXMLUtils::GetString(pElement, "defaultdvdplayer", m_videoDefaultDVDPlayer);
+    CXMLUtils::GetBoolean(pElement, "fullscreenonmoviestart", m_fullScreenOnMovieStart);
     // 101 on purpose - can be used to never automark as watched
-    XMLUtils::GetFloat(pElement, "playcountminimumpercent", m_videoPlayCountMinimumPercent, 0.0f, 101.0f);
-    XMLUtils::GetInt(pElement, "ignoresecondsatstart", m_videoIgnoreSecondsAtStart, 0, 900);
-    XMLUtils::GetFloat(pElement, "ignorepercentatend", m_videoIgnorePercentAtEnd, 0, 100.0f);
+    CXMLUtils::GetFloat(pElement, "playcountminimumpercent", m_videoPlayCountMinimumPercent, 0.0f, 101.0f);
+    CXMLUtils::GetInt(pElement, "ignoresecondsatstart", m_videoIgnoreSecondsAtStart, 0, 900);
+    CXMLUtils::GetFloat(pElement, "ignorepercentatend", m_videoIgnorePercentAtEnd, 0, 100.0f);
 
-    XMLUtils::GetBoolean(pElement, "usetimeseeking", m_videoUseTimeSeeking);
-    XMLUtils::GetInt(pElement, "timeseekforward", m_videoTimeSeekForward, 0, 6000);
-    XMLUtils::GetInt(pElement, "timeseekbackward", m_videoTimeSeekBackward, -6000, 0);
-    XMLUtils::GetInt(pElement, "timeseekforwardbig", m_videoTimeSeekForwardBig, 0, 6000);
-    XMLUtils::GetInt(pElement, "timeseekbackwardbig", m_videoTimeSeekBackwardBig, -6000, 0);
+    CXMLUtils::GetBoolean(pElement, "usetimeseeking", m_videoUseTimeSeeking);
+    CXMLUtils::GetInt(pElement, "timeseekforward", m_videoTimeSeekForward, 0, 6000);
+    CXMLUtils::GetInt(pElement, "timeseekbackward", m_videoTimeSeekBackward, -6000, 0);
+    CXMLUtils::GetInt(pElement, "timeseekforwardbig", m_videoTimeSeekForwardBig, 0, 6000);
+    CXMLUtils::GetInt(pElement, "timeseekbackwardbig", m_videoTimeSeekBackwardBig, -6000, 0);
 
-    XMLUtils::GetInt(pElement, "percentseekforward", m_videoPercentSeekForward, 0, 100);
-    XMLUtils::GetInt(pElement, "percentseekbackward", m_videoPercentSeekBackward, -100, 0);
-    XMLUtils::GetInt(pElement, "percentseekforwardbig", m_videoPercentSeekForwardBig, 0, 100);
-    XMLUtils::GetInt(pElement, "percentseekbackwardbig", m_videoPercentSeekBackwardBig, -100, 0);
+    CXMLUtils::GetInt(pElement, "percentseekforward", m_videoPercentSeekForward, 0, 100);
+    CXMLUtils::GetInt(pElement, "percentseekbackward", m_videoPercentSeekBackward, -100, 0);
+    CXMLUtils::GetInt(pElement, "percentseekforwardbig", m_videoPercentSeekForwardBig, 0, 100);
+    CXMLUtils::GetInt(pElement, "percentseekbackwardbig", m_videoPercentSeekBackwardBig, -100, 0);
 
     TiXmlElement* pVideoExcludes = pElement->FirstChildElement("excludefromlisting");
     if (pVideoExcludes)
@@ -540,36 +540,36 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     if (pVideoExcludes)
       GetCustomRegexps(pVideoExcludes, m_videoCleanStringRegExps);
 
-    XMLUtils::GetString(pElement,"cleandatetime", m_videoCleanDateTimeRegExp);
-    XMLUtils::GetString(pElement,"ppffmpegdeinterlacing",m_videoPPFFmpegDeint);
-    XMLUtils::GetString(pElement,"ppffmpegpostprocessing",m_videoPPFFmpegPostProc);
-    XMLUtils::GetInt(pElement,"vdpauscaling",m_videoVDPAUScaling);
+    CXMLUtils::GetString(pElement,"cleandatetime", m_videoCleanDateTimeRegExp);
+    CXMLUtils::GetString(pElement,"ppffmpegdeinterlacing",m_videoPPFFmpegDeint);
+    CXMLUtils::GetString(pElement,"ppffmpegpostprocessing",m_videoPPFFmpegPostProc);
+    CXMLUtils::GetInt(pElement,"vdpauscaling",m_videoVDPAUScaling);
     // There is a large amount of drivers implementing VAAPI in a non stable way
     // the forcevaapienabled setting let's the user decide to use it nevertheless
-    XMLUtils::GetBoolean(pElement, "forcevaapienabled", m_videoVAAPIforced);
-    XMLUtils::GetFloat(pElement, "nonlinearstretchratio", m_videoNonLinStretchRatio, 0.01f, 1.0f);
-    XMLUtils::GetBoolean(pElement,"enablehighqualityhwscalers", m_videoEnableHighQualityHwScalers);
-    XMLUtils::GetFloat(pElement,"autoscalemaxfps",m_videoAutoScaleMaxFps, 0.0f, 1000.0f);
-    XMLUtils::GetBoolean(pElement, "disablebackgrounddeinterlace", m_videoDisableBackgroundDeinterlace);
-    XMLUtils::GetInt(pElement, "useocclusionquery", m_videoCaptureUseOcclusionQuery, -1, 1);
-    XMLUtils::GetBoolean(pElement,"vdpauInvTelecine",m_videoVDPAUtelecine);
-    XMLUtils::GetBoolean(pElement,"vdpauHDdeintSkipChroma",m_videoVDPAUdeintSkipChromaHD);
-    XMLUtils::GetBoolean(pElement,"useffmpegvda", m_useFfmpegVda);
+    CXMLUtils::GetBoolean(pElement, "forcevaapienabled", m_videoVAAPIforced);
+    CXMLUtils::GetFloat(pElement, "nonlinearstretchratio", m_videoNonLinStretchRatio, 0.01f, 1.0f);
+    CXMLUtils::GetBoolean(pElement,"enablehighqualityhwscalers", m_videoEnableHighQualityHwScalers);
+    CXMLUtils::GetFloat(pElement,"autoscalemaxfps",m_videoAutoScaleMaxFps, 0.0f, 1000.0f);
+    CXMLUtils::GetBoolean(pElement, "disablebackgrounddeinterlace", m_videoDisableBackgroundDeinterlace);
+    CXMLUtils::GetInt(pElement, "useocclusionquery", m_videoCaptureUseOcclusionQuery, -1, 1);
+    CXMLUtils::GetBoolean(pElement,"vdpauInvTelecine",m_videoVDPAUtelecine);
+    CXMLUtils::GetBoolean(pElement,"vdpauHDdeintSkipChroma",m_videoVDPAUdeintSkipChromaHD);
+    CXMLUtils::GetBoolean(pElement,"useffmpegvda", m_useFfmpegVda);
 
     TiXmlElement* pStagefrightElem = pElement->FirstChildElement("stagefright");
     if (pStagefrightElem)
     {
-      XMLUtils::GetInt(pStagefrightElem,"useavccodec",m_stagefrightConfig.useAVCcodec, -1, 1);
-      XMLUtils::GetInt(pStagefrightElem,"usehevccodec",m_stagefrightConfig.useHEVCcodec, -1, 1);
-      XMLUtils::GetInt(pStagefrightElem,"usevc1codec",m_stagefrightConfig.useVC1codec, -1, 1);
-      XMLUtils::GetInt(pStagefrightElem,"usevpxcodec",m_stagefrightConfig.useVPXcodec, -1, 1);
-      XMLUtils::GetInt(pStagefrightElem,"usemp4codec",m_stagefrightConfig.useMP4codec, -1, 1);
-      XMLUtils::GetInt(pStagefrightElem,"usempeg2codec",m_stagefrightConfig.useMPEG2codec, -1, 1);
-      XMLUtils::GetBoolean(pStagefrightElem,"useswrenderer",m_stagefrightConfig.useSwRenderer);
-      XMLUtils::GetBoolean(pStagefrightElem,"useinputdts",m_stagefrightConfig.useInputDTS);
+      CXMLUtils::GetInt(pStagefrightElem,"useavccodec",m_stagefrightConfig.useAVCcodec, -1, 1);
+      CXMLUtils::GetInt(pStagefrightElem,"usehevccodec",m_stagefrightConfig.useHEVCcodec, -1, 1);
+      CXMLUtils::GetInt(pStagefrightElem,"usevc1codec",m_stagefrightConfig.useVC1codec, -1, 1);
+      CXMLUtils::GetInt(pStagefrightElem,"usevpxcodec",m_stagefrightConfig.useVPXcodec, -1, 1);
+      CXMLUtils::GetInt(pStagefrightElem,"usemp4codec",m_stagefrightConfig.useMP4codec, -1, 1);
+      CXMLUtils::GetInt(pStagefrightElem,"usempeg2codec",m_stagefrightConfig.useMPEG2codec, -1, 1);
+      CXMLUtils::GetBoolean(pStagefrightElem,"useswrenderer",m_stagefrightConfig.useSwRenderer);
+      CXMLUtils::GetBoolean(pStagefrightElem,"useinputdts",m_stagefrightConfig.useInputDTS);
     }
 
-    XMLUtils::GetBoolean(pElement,"mediacodecforcesoftwarerendering",m_mediacodecForceSoftwareRendring);
+    CXMLUtils::GetBoolean(pElement,"mediacodecforcesoftwarerendering",m_mediacodecForceSoftwareRendring);
 
     TiXmlElement* pAdjustRefreshrate = pElement->FirstChildElement("adjustrefreshrate");
     if (pAdjustRefreshrate)
@@ -580,30 +580,30 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
         RefreshOverride override = {0};
 
         float fps;
-        if (XMLUtils::GetFloat(pRefreshOverride, "fps", fps))
+        if (CXMLUtils::GetFloat(pRefreshOverride, "fps", fps))
         {
           override.fpsmin = fps - 0.01f;
           override.fpsmax = fps + 0.01f;
         }
 
         float fpsmin, fpsmax;
-        if (XMLUtils::GetFloat(pRefreshOverride, "fpsmin", fpsmin) &&
-            XMLUtils::GetFloat(pRefreshOverride, "fpsmax", fpsmax))
+        if (CXMLUtils::GetFloat(pRefreshOverride, "fpsmin", fpsmin) &&
+            CXMLUtils::GetFloat(pRefreshOverride, "fpsmax", fpsmax))
         {
           override.fpsmin = fpsmin;
           override.fpsmax = fpsmax;
         }
 
         float refresh;
-        if (XMLUtils::GetFloat(pRefreshOverride, "refresh", refresh))
+        if (CXMLUtils::GetFloat(pRefreshOverride, "refresh", refresh))
         {
           override.refreshmin = refresh - 0.01f;
           override.refreshmax = refresh + 0.01f;
         }
 
         float refreshmin, refreshmax;
-        if (XMLUtils::GetFloat(pRefreshOverride, "refreshmin", refreshmin) &&
-            XMLUtils::GetFloat(pRefreshOverride, "refreshmax", refreshmax))
+        if (CXMLUtils::GetFloat(pRefreshOverride, "refreshmin", refreshmin) &&
+            CXMLUtils::GetFloat(pRefreshOverride, "refreshmax", refreshmax))
         {
           override.refreshmin = refreshmin;
           override.refreshmax = refreshmax;
@@ -628,15 +628,15 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
         fallback.fallback = true;
 
         float refresh;
-        if (XMLUtils::GetFloat(pRefreshFallback, "refresh", refresh))
+        if (CXMLUtils::GetFloat(pRefreshFallback, "refresh", refresh))
         {
           fallback.refreshmin = refresh - 0.01f;
           fallback.refreshmax = refresh + 0.01f;
         }
 
         float refreshmin, refreshmax;
-        if (XMLUtils::GetFloat(pRefreshFallback, "refreshmin", refreshmin) &&
-            XMLUtils::GetFloat(pRefreshFallback, "refreshmax", refreshmax))
+        if (CXMLUtils::GetFloat(pRefreshFallback, "refreshmin", refreshmin) &&
+            CXMLUtils::GetFloat(pRefreshFallback, "refreshmax", refreshmax))
         {
           fallback.refreshmin = refreshmin;
           fallback.refreshmax = refreshmax;
@@ -652,17 +652,17 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
       }
     }
 
-    m_DXVACheckCompatibilityPresent = XMLUtils::GetBoolean(pElement,"checkdxvacompatibility", m_DXVACheckCompatibility);
+    m_DXVACheckCompatibilityPresent = CXMLUtils::GetBoolean(pElement,"checkdxvacompatibility", m_DXVACheckCompatibility);
 
-    XMLUtils::GetBoolean(pElement,"forcedxvarenderer", m_DXVAForceProcessorRenderer);
-    XMLUtils::GetBoolean(pElement,"dxvanodeintforprogressive", m_DXVANoDeintProcForProgressive);
-    XMLUtils::GetBoolean(pElement, "dxvaallowhqscaling", m_DXVAAllowHqScaling);
+    CXMLUtils::GetBoolean(pElement,"forcedxvarenderer", m_DXVAForceProcessorRenderer);
+    CXMLUtils::GetBoolean(pElement,"dxvanodeintforprogressive", m_DXVANoDeintProcForProgressive);
+    CXMLUtils::GetBoolean(pElement, "dxvaallowhqscaling", m_DXVAAllowHqScaling);
     //0 = disable fps detect, 1 = only detect on timestamps with uniform spacing, 2 detect on all timestamps
-    XMLUtils::GetInt(pElement, "fpsdetect", m_videoFpsDetect, 0, 2);
+    CXMLUtils::GetInt(pElement, "fpsdetect", m_videoFpsDetect, 0, 2);
 
     // controls the delay, in milliseconds, until
     // the busy dialog is shown when starting video playback.
-    XMLUtils::GetInt(pElement, "busydialogdelayms", m_videoBusyDialogDelay_ms, 0, 1000);
+    CXMLUtils::GetInt(pElement, "busydialogdelayms", m_videoBusyDialogDelay_ms, 0, 1000);
 
     // Store global display latency settings
     TiXmlElement* pVideoLatency = pElement->FirstChildElement("latency");
@@ -675,18 +675,18 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
       {
         RefreshVideoLatency videolatency = {0};
 
-        if (XMLUtils::GetFloat(pRefreshVideoLatency, "rate", refresh))
+        if (CXMLUtils::GetFloat(pRefreshVideoLatency, "rate", refresh))
         {
           videolatency.refreshmin = refresh - 0.01f;
           videolatency.refreshmax = refresh + 0.01f;
         }
-        else if (XMLUtils::GetFloat(pRefreshVideoLatency, "min", refreshmin) &&
-                 XMLUtils::GetFloat(pRefreshVideoLatency, "max", refreshmax))
+        else if (CXMLUtils::GetFloat(pRefreshVideoLatency, "min", refreshmin) &&
+                 CXMLUtils::GetFloat(pRefreshVideoLatency, "max", refreshmax))
         {
           videolatency.refreshmin = refreshmin;
           videolatency.refreshmax = refreshmax;
         }
-        if (XMLUtils::GetFloat(pRefreshVideoLatency, "delay", delay, -600.0f, 600.0f))
+        if (CXMLUtils::GetFloat(pRefreshVideoLatency, "delay", delay, -600.0f, 600.0f))
           videolatency.delay = delay;
 
         if (videolatency.refreshmin > 0.0f && videolatency.refreshmax >= videolatency.refreshmin)
@@ -698,40 +698,40 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
       }
 
       // Get default global display latency
-      XMLUtils::GetFloat(pVideoLatency, "delay", m_videoDefaultLatency, -600.0f, 600.0f);
+      CXMLUtils::GetFloat(pVideoLatency, "delay", m_videoDefaultLatency, -600.0f, 600.0f);
     }
   }
 
   pElement = pRootElement->FirstChildElement("musiclibrary");
   if (pElement)
   {
-    XMLUtils::GetInt(pElement, "recentlyaddeditems", m_iMusicLibraryRecentlyAddedItems, 1, INT_MAX);
-    XMLUtils::GetBoolean(pElement, "prioritiseapetags", m_prioritiseAPEv2tags);
-    XMLUtils::GetBoolean(pElement, "allitemsonbottom", m_bMusicLibraryAllItemsOnBottom);
-    XMLUtils::GetBoolean(pElement, "cleanonupdate", m_bMusicLibraryCleanOnUpdate);
-    XMLUtils::GetString(pElement, "albumformat", m_strMusicLibraryAlbumFormat);
-    XMLUtils::GetString(pElement, "itemseparator", m_musicItemSeparator);
-    XMLUtils::GetInt(pElement, "dateadded", m_iMusicLibraryDateAdded);
+    CXMLUtils::GetInt(pElement, "recentlyaddeditems", m_iMusicLibraryRecentlyAddedItems, 1, INT_MAX);
+    CXMLUtils::GetBoolean(pElement, "prioritiseapetags", m_prioritiseAPEv2tags);
+    CXMLUtils::GetBoolean(pElement, "allitemsonbottom", m_bMusicLibraryAllItemsOnBottom);
+    CXMLUtils::GetBoolean(pElement, "cleanonupdate", m_bMusicLibraryCleanOnUpdate);
+    CXMLUtils::GetString(pElement, "albumformat", m_strMusicLibraryAlbumFormat);
+    CXMLUtils::GetString(pElement, "itemseparator", m_musicItemSeparator);
+    CXMLUtils::GetInt(pElement, "dateadded", m_iMusicLibraryDateAdded);
   }
 
   pElement = pRootElement->FirstChildElement("videolibrary");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "allitemsonbottom", m_bVideoLibraryAllItemsOnBottom);
-    XMLUtils::GetInt(pElement, "recentlyaddeditems", m_iVideoLibraryRecentlyAddedItems, 1, INT_MAX);
-    XMLUtils::GetBoolean(pElement, "cleanonupdate", m_bVideoLibraryCleanOnUpdate);
-    XMLUtils::GetBoolean(pElement, "usefasthash", m_bVideoLibraryUseFastHash);
-    XMLUtils::GetString(pElement, "itemseparator", m_videoItemSeparator);
-    XMLUtils::GetBoolean(pElement, "exportautothumbs", m_bVideoLibraryExportAutoThumbs);
-    XMLUtils::GetBoolean(pElement, "importwatchedstate", m_bVideoLibraryImportWatchedState);
-    XMLUtils::GetBoolean(pElement, "importresumepoint", m_bVideoLibraryImportResumePoint);
-    XMLUtils::GetInt(pElement, "dateadded", m_iVideoLibraryDateAdded);
+    CXMLUtils::GetBoolean(pElement, "allitemsonbottom", m_bVideoLibraryAllItemsOnBottom);
+    CXMLUtils::GetInt(pElement, "recentlyaddeditems", m_iVideoLibraryRecentlyAddedItems, 1, INT_MAX);
+    CXMLUtils::GetBoolean(pElement, "cleanonupdate", m_bVideoLibraryCleanOnUpdate);
+    CXMLUtils::GetBoolean(pElement, "usefasthash", m_bVideoLibraryUseFastHash);
+    CXMLUtils::GetString(pElement, "itemseparator", m_videoItemSeparator);
+    CXMLUtils::GetBoolean(pElement, "exportautothumbs", m_bVideoLibraryExportAutoThumbs);
+    CXMLUtils::GetBoolean(pElement, "importwatchedstate", m_bVideoLibraryImportWatchedState);
+    CXMLUtils::GetBoolean(pElement, "importresumepoint", m_bVideoLibraryImportResumePoint);
+    CXMLUtils::GetInt(pElement, "dateadded", m_iVideoLibraryDateAdded);
   }
 
   pElement = pRootElement->FirstChildElement("videoscanner");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "ignoreerrors", m_bVideoScannerIgnoreErrors);
+    CXMLUtils::GetBoolean(pElement, "ignoreerrors", m_bVideoScannerIgnoreErrors);
   }
 
   // Backward-compatibility of ExternalPlayer config
@@ -743,53 +743,53 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   pElement = pRootElement->FirstChildElement("slideshow");
   if (pElement)
   {
-    XMLUtils::GetFloat(pElement, "panamount", m_slideshowPanAmount, 0.0f, 20.0f);
-    XMLUtils::GetFloat(pElement, "zoomamount", m_slideshowZoomAmount, 0.0f, 20.0f);
-    XMLUtils::GetFloat(pElement, "blackbarcompensation", m_slideshowBlackBarCompensation, 0.0f, 50.0f);
+    CXMLUtils::GetFloat(pElement, "panamount", m_slideshowPanAmount, 0.0f, 20.0f);
+    CXMLUtils::GetFloat(pElement, "zoomamount", m_slideshowZoomAmount, 0.0f, 20.0f);
+    CXMLUtils::GetFloat(pElement, "blackbarcompensation", m_slideshowBlackBarCompensation, 0.0f, 50.0f);
   }
 
   pElement = pRootElement->FirstChildElement("network");
   if (pElement)
   {
-    XMLUtils::GetInt(pElement, "curlclienttimeout", m_curlconnecttimeout, 1, 1000);
-    XMLUtils::GetInt(pElement, "curllowspeedtime", m_curllowspeedtime, 1, 1000);
-    XMLUtils::GetInt(pElement, "curlretries", m_curlretries, 0, 10);
-    XMLUtils::GetBoolean(pElement,"disableipv6", m_curlDisableIPV6);
-    XMLUtils::GetUInt(pElement, "cachemembuffersize", m_cacheMemBufferSize);
-    XMLUtils::GetUInt(pElement, "buffermode", m_networkBufferMode, 0, 3);
-    XMLUtils::GetFloat(pElement, "readbufferfactor", m_readBufferFactor);
+    CXMLUtils::GetInt(pElement, "curlclienttimeout", m_curlconnecttimeout, 1, 1000);
+    CXMLUtils::GetInt(pElement, "curllowspeedtime", m_curllowspeedtime, 1, 1000);
+    CXMLUtils::GetInt(pElement, "curlretries", m_curlretries, 0, 10);
+    CXMLUtils::GetBoolean(pElement,"disableipv6", m_curlDisableIPV6);
+    CXMLUtils::GetUInt(pElement, "cachemembuffersize", m_cacheMemBufferSize);
+    CXMLUtils::GetUInt(pElement, "buffermode", m_networkBufferMode, 0, 3);
+    CXMLUtils::GetFloat(pElement, "readbufferfactor", m_readBufferFactor);
   }
 
   pElement = pRootElement->FirstChildElement("jsonrpc");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "compactoutput", m_jsonOutputCompact);
-    XMLUtils::GetUInt(pElement, "tcpport", m_jsonTcpPort);
+    CXMLUtils::GetBoolean(pElement, "compactoutput", m_jsonOutputCompact);
+    CXMLUtils::GetUInt(pElement, "tcpport", m_jsonTcpPort);
   }
 
   pElement = pRootElement->FirstChildElement("samba");
   if (pElement)
   {
-    XMLUtils::GetString(pElement,  "doscodepage",   m_sambadoscodepage);
-    XMLUtils::GetInt(pElement, "clienttimeout", m_sambaclienttimeout, 5, 100);
-    XMLUtils::GetBoolean(pElement, "statfiles", m_sambastatfiles);
+    CXMLUtils::GetString(pElement,  "doscodepage",   m_sambadoscodepage);
+    CXMLUtils::GetInt(pElement, "clienttimeout", m_sambaclienttimeout, 5, 100);
+    CXMLUtils::GetBoolean(pElement, "statfiles", m_sambastatfiles);
   }
 
   pElement = pRootElement->FirstChildElement("httpdirectory");
   if (pElement)
-    XMLUtils::GetBoolean(pElement, "statfilesize", m_bHTTPDirectoryStatFilesize);
+    CXMLUtils::GetBoolean(pElement, "statfilesize", m_bHTTPDirectoryStatFilesize);
 
   pElement = pRootElement->FirstChildElement("ftp");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "remotethumbs", m_bFTPThumbs);
+    CXMLUtils::GetBoolean(pElement, "remotethumbs", m_bFTPThumbs);
   }
 
   pElement = pRootElement->FirstChildElement("loglevel");
   if (pElement)
   { // read the loglevel setting, so set the setting advanced to hide it in GUI
     // as altering it will do nothing - we don't write to advancedsettings.xml
-    XMLUtils::GetInt(pRootElement, "loglevel", m_logLevelHint, LOG_LEVEL_NONE, LOG_LEVEL_MAX);
+    CXMLUtils::GetInt(pRootElement, "loglevel", m_logLevelHint, LOG_LEVEL_NONE, LOG_LEVEL_MAX);
     const char* hide = pElement->Attribute("hide");
     if (hide == NULL || strnicmp("false", hide, 4) != 0)
     {
@@ -801,60 +801,60 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     CLog::SetLogLevel(g_advancedSettings.m_logLevel);
   }
 
-  XMLUtils::GetString(pRootElement, "cddbaddress", m_cddbAddress);
+  CXMLUtils::GetString(pRootElement, "cddbaddress", m_cddbAddress);
 
   //airtunes + airplay
-  XMLUtils::GetInt(pRootElement,     "airtunesport", m_airTunesPort);
-  XMLUtils::GetInt(pRootElement,     "airplayport", m_airPlayPort);  
+  CXMLUtils::GetInt(pRootElement,     "airtunesport", m_airTunesPort);
+  CXMLUtils::GetInt(pRootElement,     "airplayport", m_airPlayPort);  
 
-  XMLUtils::GetBoolean(pRootElement, "handlemounting", m_handleMounting);
+  CXMLUtils::GetBoolean(pRootElement, "handlemounting", m_handleMounting);
 
 #if defined(HAS_SDL) || defined(TARGET_WINDOWS)
-  XMLUtils::GetBoolean(pRootElement, "fullscreen", m_startFullScreen);
+  CXMLUtils::GetBoolean(pRootElement, "fullscreen", m_startFullScreen);
 #endif
-  XMLUtils::GetBoolean(pRootElement, "splash", m_splashImage);
-  XMLUtils::GetBoolean(pRootElement, "showexitbutton", m_showExitButton);
-  XMLUtils::GetBoolean(pRootElement, "canwindowed", m_canWindowed);
+  CXMLUtils::GetBoolean(pRootElement, "splash", m_splashImage);
+  CXMLUtils::GetBoolean(pRootElement, "showexitbutton", m_showExitButton);
+  CXMLUtils::GetBoolean(pRootElement, "canwindowed", m_canWindowed);
 
-  XMLUtils::GetInt(pRootElement, "songinfoduration", m_songInfoDuration, 0, INT_MAX);
-  XMLUtils::GetInt(pRootElement, "playlistretries", m_playlistRetries, -1, 5000);
-  XMLUtils::GetInt(pRootElement, "playlisttimeout", m_playlistTimeout, 0, 5000);
+  CXMLUtils::GetInt(pRootElement, "songinfoduration", m_songInfoDuration, 0, INT_MAX);
+  CXMLUtils::GetInt(pRootElement, "playlistretries", m_playlistRetries, -1, 5000);
+  CXMLUtils::GetInt(pRootElement, "playlisttimeout", m_playlistTimeout, 0, 5000);
 
-  XMLUtils::GetBoolean(pRootElement,"glrectanglehack", m_GLRectangleHack);
-  XMLUtils::GetInt(pRootElement,"skiploopfilter", m_iSkipLoopFilter, -16, 48);
-  XMLUtils::GetFloat(pRootElement, "forcedswaptime", m_ForcedSwapTime, 0.0, 100.0);
+  CXMLUtils::GetBoolean(pRootElement,"glrectanglehack", m_GLRectangleHack);
+  CXMLUtils::GetInt(pRootElement,"skiploopfilter", m_iSkipLoopFilter, -16, 48);
+  CXMLUtils::GetFloat(pRootElement, "forcedswaptime", m_ForcedSwapTime, 0.0, 100.0);
 
-  XMLUtils::GetUInt(pRootElement,"restrictcapsmask", m_RestrictCapsMask);
-  XMLUtils::GetFloat(pRootElement,"sleepbeforeflip", m_sleepBeforeFlip, 0.0f, 1.0f);
-  XMLUtils::GetBoolean(pRootElement,"virtualshares", m_bVirtualShares);
-  XMLUtils::GetUInt(pRootElement, "packagefoldersize", m_addonPackageFolderSize);
-  XMLUtils::GetBoolean(pRootElement, "allowdeferredrendering", m_bAllowDeferredRendering);
+  CXMLUtils::GetUInt(pRootElement,"restrictcapsmask", m_RestrictCapsMask);
+  CXMLUtils::GetFloat(pRootElement,"sleepbeforeflip", m_sleepBeforeFlip, 0.0f, 1.0f);
+  CXMLUtils::GetBoolean(pRootElement,"virtualshares", m_bVirtualShares);
+  CXMLUtils::GetUInt(pRootElement, "packagefoldersize", m_addonPackageFolderSize);
+  CXMLUtils::GetBoolean(pRootElement, "allowdeferredrendering", m_bAllowDeferredRendering);
 
   // EPG
   pElement = pRootElement->FirstChildElement("epg");
   if (pElement)
   {
-    XMLUtils::GetInt(pElement, "lingertime", m_iEpgLingerTime);
-    XMLUtils::GetInt(pElement, "updatecheckinterval", m_iEpgUpdateCheckInterval);
-    XMLUtils::GetInt(pElement, "cleanupinterval", m_iEpgCleanupInterval);
-    XMLUtils::GetInt(pElement, "activetagcheckinterval", m_iEpgActiveTagCheckInterval);
-    XMLUtils::GetInt(pElement, "retryinterruptedupdateinterval", m_iEpgRetryInterruptedUpdateInterval);
-    XMLUtils::GetInt(pElement, "updateemptytagsinterval", m_iEpgUpdateEmptyTagsInterval);
-    XMLUtils::GetBoolean(pElement, "displayupdatepopup", m_bEpgDisplayUpdatePopup);
-    XMLUtils::GetBoolean(pElement, "displayincrementalupdatepopup", m_bEpgDisplayIncrementalUpdatePopup);
+    CXMLUtils::GetInt(pElement, "lingertime", m_iEpgLingerTime);
+    CXMLUtils::GetInt(pElement, "updatecheckinterval", m_iEpgUpdateCheckInterval);
+    CXMLUtils::GetInt(pElement, "cleanupinterval", m_iEpgCleanupInterval);
+    CXMLUtils::GetInt(pElement, "activetagcheckinterval", m_iEpgActiveTagCheckInterval);
+    CXMLUtils::GetInt(pElement, "retryinterruptedupdateinterval", m_iEpgRetryInterruptedUpdateInterval);
+    CXMLUtils::GetInt(pElement, "updateemptytagsinterval", m_iEpgUpdateEmptyTagsInterval);
+    CXMLUtils::GetBoolean(pElement, "displayupdatepopup", m_bEpgDisplayUpdatePopup);
+    CXMLUtils::GetBoolean(pElement, "displayincrementalupdatepopup", m_bEpgDisplayIncrementalUpdatePopup);
   }
 
   // EDL commercial break handling
   pElement = pRootElement->FirstChildElement("edl");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "mergeshortcommbreaks", m_bEdlMergeShortCommBreaks);
-    XMLUtils::GetInt(pElement, "maxcommbreaklength", m_iEdlMaxCommBreakLength, 0, 10 * 60); // Between 0 and 10 minutes
-    XMLUtils::GetInt(pElement, "mincommbreaklength", m_iEdlMinCommBreakLength, 0, 5 * 60);  // Between 0 and 5 minutes
-    XMLUtils::GetInt(pElement, "maxcommbreakgap", m_iEdlMaxCommBreakGap, 0, 5 * 60);        // Between 0 and 5 minutes.
-    XMLUtils::GetInt(pElement, "maxstartgap", m_iEdlMaxStartGap, 0, 10 * 60);               // Between 0 and 10 minutes
-    XMLUtils::GetInt(pElement, "commbreakautowait", m_iEdlCommBreakAutowait, 0, 10);        // Between 0 and 10 seconds
-    XMLUtils::GetInt(pElement, "commbreakautowind", m_iEdlCommBreakAutowind, 0, 10);        // Between 0 and 10 seconds
+    CXMLUtils::GetBoolean(pElement, "mergeshortcommbreaks", m_bEdlMergeShortCommBreaks);
+    CXMLUtils::GetInt(pElement, "maxcommbreaklength", m_iEdlMaxCommBreakLength, 0, 10 * 60); // Between 0 and 10 minutes
+    CXMLUtils::GetInt(pElement, "mincommbreaklength", m_iEdlMinCommBreakLength, 0, 5 * 60);  // Between 0 and 5 minutes
+    CXMLUtils::GetInt(pElement, "maxcommbreakgap", m_iEdlMaxCommBreakGap, 0, 5 * 60);        // Between 0 and 5 minutes.
+    CXMLUtils::GetInt(pElement, "maxstartgap", m_iEdlMaxStartGap, 0, 10 * 60);               // Between 0 and 10 minutes
+    CXMLUtils::GetInt(pElement, "commbreakautowait", m_iEdlCommBreakAutowait, 0, 10);        // Between 0 and 10 seconds
+    CXMLUtils::GetInt(pElement, "commbreakautowind", m_iEdlCommBreakAutowind, 0, 10);        // Between 0 and 10 seconds
   }
 
   // picture exclude regexps
@@ -888,7 +888,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
   // TODO: Should cache path be given in terms of our predefined paths??
   //       Are we even going to have predefined paths??
   std::string tmp;
-  if (XMLUtils::GetPath(pRootElement, "cachepath", tmp))
+  if (CXMLUtils::GetPath(pRootElement, "cachepath", tmp))
     m_cachePath = tmp;
   URIUtils::AddSlashAtEnd(m_cachePath);
 
@@ -920,7 +920,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     GetCustomTVRegexps(pTVStacking, m_tvshowEnumRegExps);
 
   //tv multipart enumeration regexp
-  XMLUtils::GetString(pRootElement, "tvmultipartmatching", m_tvshowMultiPartEnumRegExp);
+  CXMLUtils::GetString(pRootElement, "tvmultipartmatching", m_tvshowMultiPartEnumRegExp);
 
   // path substitutions
   TiXmlElement* pPathSubstitution = pRootElement->FirstChildElement("pathsubstitution");
@@ -960,17 +960,17 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     }
   }
 
-  XMLUtils::GetInt(pRootElement, "remotedelay", m_remoteDelay, 1, 20);
-  XMLUtils::GetFloat(pRootElement, "controllerdeadzone", m_controllerDeadzone, 0.0f, 1.0f);
-  XMLUtils::GetUInt(pRootElement, "fanartres", m_fanartRes, 0, 1080);
-  XMLUtils::GetUInt(pRootElement, "imageres", m_imageRes, 0, 1080);
+  CXMLUtils::GetInt(pRootElement, "remotedelay", m_remoteDelay, 1, 20);
+  CXMLUtils::GetFloat(pRootElement, "controllerdeadzone", m_controllerDeadzone, 0.0f, 1.0f);
+  CXMLUtils::GetUInt(pRootElement, "fanartres", m_fanartRes, 0, 1080);
+  CXMLUtils::GetUInt(pRootElement, "imageres", m_imageRes, 0, 1080);
 #if !defined(TARGET_RASPBERRY_PI)
-  XMLUtils::GetBoolean(pRootElement, "useddsfanart", m_useDDSFanart);
+  CXMLUtils::GetBoolean(pRootElement, "useddsfanart", m_useDDSFanart);
 #endif
-  if (XMLUtils::GetString(pRootElement, "imagescalingalgorithm", tmp))
+  if (CXMLUtils::GetString(pRootElement, "imagescalingalgorithm", tmp))
     m_imageScalingAlgorithm = CPictureScalingAlgorithm::FromString(tmp);
-  XMLUtils::GetBoolean(pRootElement, "playlistasfolders", m_playlistAsFolders);
-  XMLUtils::GetBoolean(pRootElement, "detectasudf", m_detectAsUdf);
+  CXMLUtils::GetBoolean(pRootElement, "playlistasfolders", m_playlistAsFolders);
+  CXMLUtils::GetBoolean(pRootElement, "detectasudf", m_detectAsUdf);
 
   // music thumbs
   TiXmlElement* pThumbs = pRootElement->FirstChildElement("musicthumbs");
@@ -1003,7 +1003,7 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     {
       if(!element->NoChildren())
       {
-        std::string name  = XMLUtils::GetAttribute(element, "name");
+        std::string name  = CXMLUtils::GetAttribute(element, "name");
         std::string value = element->FirstChild()->ValueStr();
         if (!name.empty())
           CDNSNameCache::Add(name, value);
@@ -1012,125 +1012,125 @@ void CAdvancedSettings::ParseSettingsFile(const std::string &file)
     }
   }
 
-  XMLUtils::GetString(pRootElement, "cputempcommand", m_cpuTempCmd);
-  XMLUtils::GetString(pRootElement, "gputempcommand", m_gpuTempCmd);
+  CXMLUtils::GetString(pRootElement, "cputempcommand", m_cpuTempCmd);
+  CXMLUtils::GetString(pRootElement, "gputempcommand", m_gpuTempCmd);
 
-  XMLUtils::GetBoolean(pRootElement, "alwaysontop", m_alwaysOnTop);
+  CXMLUtils::GetBoolean(pRootElement, "alwaysontop", m_alwaysOnTop);
 
   TiXmlElement *pPVR = pRootElement->FirstChildElement("pvr");
   if (pPVR)
   {
-    XMLUtils::GetInt(pPVR, "timecorrection", m_iPVRTimeCorrection, 0, 1440);
-    XMLUtils::GetInt(pPVR, "infotoggleinterval", m_iPVRInfoToggleInterval, 0, 30000);
-    XMLUtils::GetInt(pPVR, "minvideocachelevel", m_iPVRMinVideoCacheLevel, 0, 100);
-    XMLUtils::GetInt(pPVR, "minaudiocachelevel", m_iPVRMinAudioCacheLevel, 0, 100);
-    XMLUtils::GetBoolean(pPVR, "cacheindvdplayer", m_bPVRCacheInDvdPlayer);
-    XMLUtils::GetBoolean(pPVR, "channeliconsautoscan", m_bPVRChannelIconsAutoScan);
-    XMLUtils::GetBoolean(pPVR, "autoscaniconsuserset", m_bPVRAutoScanIconsUserSet);
-    XMLUtils::GetInt(pPVR, "numericchannelswitchtimeout", m_iPVRNumericChannelSwitchTimeout, 50, 60000);
+    CXMLUtils::GetInt(pPVR, "timecorrection", m_iPVRTimeCorrection, 0, 1440);
+    CXMLUtils::GetInt(pPVR, "infotoggleinterval", m_iPVRInfoToggleInterval, 0, 30000);
+    CXMLUtils::GetInt(pPVR, "minvideocachelevel", m_iPVRMinVideoCacheLevel, 0, 100);
+    CXMLUtils::GetInt(pPVR, "minaudiocachelevel", m_iPVRMinAudioCacheLevel, 0, 100);
+    CXMLUtils::GetBoolean(pPVR, "cacheindvdplayer", m_bPVRCacheInDvdPlayer);
+    CXMLUtils::GetBoolean(pPVR, "channeliconsautoscan", m_bPVRChannelIconsAutoScan);
+    CXMLUtils::GetBoolean(pPVR, "autoscaniconsuserset", m_bPVRAutoScanIconsUserSet);
+    CXMLUtils::GetInt(pPVR, "numericchannelswitchtimeout", m_iPVRNumericChannelSwitchTimeout, 50, 60000);
   }
 
   TiXmlElement* pDatabase = pRootElement->FirstChildElement("videodatabase");
   if (pDatabase)
   {
     CLog::Log(LOGWARNING, "VIDEO database configuration is experimental.");
-    XMLUtils::GetString(pDatabase, "type", m_databaseVideo.type);
-    XMLUtils::GetString(pDatabase, "host", m_databaseVideo.host);
-    XMLUtils::GetString(pDatabase, "port", m_databaseVideo.port);
-    XMLUtils::GetString(pDatabase, "user", m_databaseVideo.user);
-    XMLUtils::GetString(pDatabase, "pass", m_databaseVideo.pass);
-    XMLUtils::GetString(pDatabase, "name", m_databaseVideo.name);
-    XMLUtils::GetString(pDatabase, "key", m_databaseVideo.key);
-    XMLUtils::GetString(pDatabase, "cert", m_databaseVideo.cert);
-    XMLUtils::GetString(pDatabase, "ca", m_databaseVideo.ca);
-    XMLUtils::GetString(pDatabase, "capath", m_databaseVideo.capath);
-    XMLUtils::GetString(pDatabase, "ciphers", m_databaseVideo.ciphers);
-    XMLUtils::GetBoolean(pDatabase, "compression", m_databaseVideo.compression);
+    CXMLUtils::GetString(pDatabase, "type", m_databaseVideo.type);
+    CXMLUtils::GetString(pDatabase, "host", m_databaseVideo.host);
+    CXMLUtils::GetString(pDatabase, "port", m_databaseVideo.port);
+    CXMLUtils::GetString(pDatabase, "user", m_databaseVideo.user);
+    CXMLUtils::GetString(pDatabase, "pass", m_databaseVideo.pass);
+    CXMLUtils::GetString(pDatabase, "name", m_databaseVideo.name);
+    CXMLUtils::GetString(pDatabase, "key", m_databaseVideo.key);
+    CXMLUtils::GetString(pDatabase, "cert", m_databaseVideo.cert);
+    CXMLUtils::GetString(pDatabase, "ca", m_databaseVideo.ca);
+    CXMLUtils::GetString(pDatabase, "capath", m_databaseVideo.capath);
+    CXMLUtils::GetString(pDatabase, "ciphers", m_databaseVideo.ciphers);
+    CXMLUtils::GetBoolean(pDatabase, "compression", m_databaseVideo.compression);
   }
 
   pDatabase = pRootElement->FirstChildElement("musicdatabase");
   if (pDatabase)
   {
-    XMLUtils::GetString(pDatabase, "type", m_databaseMusic.type);
-    XMLUtils::GetString(pDatabase, "host", m_databaseMusic.host);
-    XMLUtils::GetString(pDatabase, "port", m_databaseMusic.port);
-    XMLUtils::GetString(pDatabase, "user", m_databaseMusic.user);
-    XMLUtils::GetString(pDatabase, "pass", m_databaseMusic.pass);
-    XMLUtils::GetString(pDatabase, "name", m_databaseMusic.name);
-    XMLUtils::GetString(pDatabase, "key", m_databaseMusic.key);
-    XMLUtils::GetString(pDatabase, "cert", m_databaseMusic.cert);
-    XMLUtils::GetString(pDatabase, "ca", m_databaseMusic.ca);
-    XMLUtils::GetString(pDatabase, "capath", m_databaseMusic.capath);
-    XMLUtils::GetString(pDatabase, "ciphers", m_databaseMusic.ciphers);
-    XMLUtils::GetBoolean(pDatabase, "compression", m_databaseMusic.compression);
+    CXMLUtils::GetString(pDatabase, "type", m_databaseMusic.type);
+    CXMLUtils::GetString(pDatabase, "host", m_databaseMusic.host);
+    CXMLUtils::GetString(pDatabase, "port", m_databaseMusic.port);
+    CXMLUtils::GetString(pDatabase, "user", m_databaseMusic.user);
+    CXMLUtils::GetString(pDatabase, "pass", m_databaseMusic.pass);
+    CXMLUtils::GetString(pDatabase, "name", m_databaseMusic.name);
+    CXMLUtils::GetString(pDatabase, "key", m_databaseMusic.key);
+    CXMLUtils::GetString(pDatabase, "cert", m_databaseMusic.cert);
+    CXMLUtils::GetString(pDatabase, "ca", m_databaseMusic.ca);
+    CXMLUtils::GetString(pDatabase, "capath", m_databaseMusic.capath);
+    CXMLUtils::GetString(pDatabase, "ciphers", m_databaseMusic.ciphers);
+    CXMLUtils::GetBoolean(pDatabase, "compression", m_databaseMusic.compression);
   }
 
   pDatabase = pRootElement->FirstChildElement("tvdatabase");
   if (pDatabase)
   {
-    XMLUtils::GetString(pDatabase, "type", m_databaseTV.type);
-    XMLUtils::GetString(pDatabase, "host", m_databaseTV.host);
-    XMLUtils::GetString(pDatabase, "port", m_databaseTV.port);
-    XMLUtils::GetString(pDatabase, "user", m_databaseTV.user);
-    XMLUtils::GetString(pDatabase, "pass", m_databaseTV.pass);
-    XMLUtils::GetString(pDatabase, "name", m_databaseTV.name);
-    XMLUtils::GetString(pDatabase, "key", m_databaseTV.key);
-    XMLUtils::GetString(pDatabase, "cert", m_databaseTV.cert);
-    XMLUtils::GetString(pDatabase, "ca", m_databaseTV.ca);
-    XMLUtils::GetString(pDatabase, "capath", m_databaseTV.capath);
-    XMLUtils::GetString(pDatabase, "ciphers", m_databaseTV.ciphers);
-    XMLUtils::GetBoolean(pDatabase, "compression", m_databaseTV.compression);
+    CXMLUtils::GetString(pDatabase, "type", m_databaseTV.type);
+    CXMLUtils::GetString(pDatabase, "host", m_databaseTV.host);
+    CXMLUtils::GetString(pDatabase, "port", m_databaseTV.port);
+    CXMLUtils::GetString(pDatabase, "user", m_databaseTV.user);
+    CXMLUtils::GetString(pDatabase, "pass", m_databaseTV.pass);
+    CXMLUtils::GetString(pDatabase, "name", m_databaseTV.name);
+    CXMLUtils::GetString(pDatabase, "key", m_databaseTV.key);
+    CXMLUtils::GetString(pDatabase, "cert", m_databaseTV.cert);
+    CXMLUtils::GetString(pDatabase, "ca", m_databaseTV.ca);
+    CXMLUtils::GetString(pDatabase, "capath", m_databaseTV.capath);
+    CXMLUtils::GetString(pDatabase, "ciphers", m_databaseTV.ciphers);
+    CXMLUtils::GetBoolean(pDatabase, "compression", m_databaseTV.compression);
   }
 
   pDatabase = pRootElement->FirstChildElement("adspdatabase");
   if (pDatabase)
   {
-    XMLUtils::GetString(pDatabase, "type", m_databaseADSP.type);
-    XMLUtils::GetString(pDatabase, "host", m_databaseADSP.host);
-    XMLUtils::GetString(pDatabase, "port", m_databaseADSP.port);
-    XMLUtils::GetString(pDatabase, "user", m_databaseADSP.user);
-    XMLUtils::GetString(pDatabase, "pass", m_databaseADSP.pass);
-    XMLUtils::GetString(pDatabase, "name", m_databaseADSP.name);
-    XMLUtils::GetString(pDatabase, "key", m_databaseADSP.key);
-    XMLUtils::GetString(pDatabase, "cert", m_databaseADSP.cert);
-    XMLUtils::GetString(pDatabase, "ca", m_databaseADSP.ca);
-    XMLUtils::GetString(pDatabase, "capath", m_databaseADSP.capath);
-    XMLUtils::GetString(pDatabase, "ciphers", m_databaseADSP.ciphers);
+    CXMLUtils::GetString(pDatabase, "type", m_databaseADSP.type);
+    CXMLUtils::GetString(pDatabase, "host", m_databaseADSP.host);
+    CXMLUtils::GetString(pDatabase, "port", m_databaseADSP.port);
+    CXMLUtils::GetString(pDatabase, "user", m_databaseADSP.user);
+    CXMLUtils::GetString(pDatabase, "pass", m_databaseADSP.pass);
+    CXMLUtils::GetString(pDatabase, "name", m_databaseADSP.name);
+    CXMLUtils::GetString(pDatabase, "key", m_databaseADSP.key);
+    CXMLUtils::GetString(pDatabase, "cert", m_databaseADSP.cert);
+    CXMLUtils::GetString(pDatabase, "ca", m_databaseADSP.ca);
+    CXMLUtils::GetString(pDatabase, "capath", m_databaseADSP.capath);
+    CXMLUtils::GetString(pDatabase, "ciphers", m_databaseADSP.ciphers);
   }
 
   pDatabase = pRootElement->FirstChildElement("epgdatabase");
   if (pDatabase)
   {
-    XMLUtils::GetString(pDatabase, "type", m_databaseEpg.type);
-    XMLUtils::GetString(pDatabase, "host", m_databaseEpg.host);
-    XMLUtils::GetString(pDatabase, "port", m_databaseEpg.port);
-    XMLUtils::GetString(pDatabase, "user", m_databaseEpg.user);
-    XMLUtils::GetString(pDatabase, "pass", m_databaseEpg.pass);
-    XMLUtils::GetString(pDatabase, "name", m_databaseEpg.name);
-    XMLUtils::GetString(pDatabase, "key", m_databaseEpg.key);
-    XMLUtils::GetString(pDatabase, "cert", m_databaseEpg.cert);
-    XMLUtils::GetString(pDatabase, "ca", m_databaseEpg.ca);
-    XMLUtils::GetString(pDatabase, "capath", m_databaseEpg.capath);
-    XMLUtils::GetString(pDatabase, "ciphers", m_databaseEpg.ciphers);
-    XMLUtils::GetBoolean(pDatabase, "compression", m_databaseEpg.compression);
+    CXMLUtils::GetString(pDatabase, "type", m_databaseEpg.type);
+    CXMLUtils::GetString(pDatabase, "host", m_databaseEpg.host);
+    CXMLUtils::GetString(pDatabase, "port", m_databaseEpg.port);
+    CXMLUtils::GetString(pDatabase, "user", m_databaseEpg.user);
+    CXMLUtils::GetString(pDatabase, "pass", m_databaseEpg.pass);
+    CXMLUtils::GetString(pDatabase, "name", m_databaseEpg.name);
+    CXMLUtils::GetString(pDatabase, "key", m_databaseEpg.key);
+    CXMLUtils::GetString(pDatabase, "cert", m_databaseEpg.cert);
+    CXMLUtils::GetString(pDatabase, "ca", m_databaseEpg.ca);
+    CXMLUtils::GetString(pDatabase, "capath", m_databaseEpg.capath);
+    CXMLUtils::GetString(pDatabase, "ciphers", m_databaseEpg.ciphers);
+    CXMLUtils::GetBoolean(pDatabase, "compression", m_databaseEpg.compression);
   }
 
   pElement = pRootElement->FirstChildElement("enablemultimediakeys");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pRootElement, "enablemultimediakeys", m_enableMultimediaKeys);
+    CXMLUtils::GetBoolean(pRootElement, "enablemultimediakeys", m_enableMultimediaKeys);
   }
   
   pElement = pRootElement->FirstChildElement("gui");
   if (pElement)
   {
-    XMLUtils::GetBoolean(pElement, "visualizedirtyregions", m_guiVisualizeDirtyRegions);
-    XMLUtils::GetInt(pElement, "algorithmdirtyregions",     m_guiAlgorithmDirtyRegions);
-    XMLUtils::GetInt(pElement, "nofliptimeout",             m_guiDirtyRegionNoFlipTimeout);
+    CXMLUtils::GetBoolean(pElement, "visualizedirtyregions", m_guiVisualizeDirtyRegions);
+    CXMLUtils::GetInt(pElement, "algorithmdirtyregions",     m_guiAlgorithmDirtyRegions);
+    CXMLUtils::GetInt(pElement, "nofliptimeout",             m_guiDirtyRegionNoFlipTimeout);
   }
 
   std::string seekSteps;
-  XMLUtils::GetString(pRootElement, "seeksteps", seekSteps);
+  CXMLUtils::GetString(pRootElement, "seeksteps", seekSteps);
   if (!seekSteps.empty())
   {
     m_seekSteps.clear();
@@ -1196,12 +1196,12 @@ void CAdvancedSettings::GetCustomTVRegexps(TiXmlElement *pRootElement, SETTINGS_
         int iDefaultSeason = 1;
         if (pRegExp->ToElement())
         {
-          std::string byDate = XMLUtils::GetAttribute(pRegExp->ToElement(), "bydate");
+          std::string byDate = CXMLUtils::GetAttribute(pRegExp->ToElement(), "bydate");
           if (byDate == "true")
           {
             bByDate = true;
           }
-          std::string defaultSeason = XMLUtils::GetAttribute(pRegExp->ToElement(), "defaultseason");
+          std::string defaultSeason = CXMLUtils::GetAttribute(pRegExp->ToElement(), "defaultseason");
           if(!defaultSeason.empty())
           {
             iDefaultSeason = atoi(defaultSeason.c_str());
@@ -1264,9 +1264,9 @@ void CAdvancedSettings::GetCustomRegexps(TiXmlElement *pRootElement, std::vector
 void CAdvancedSettings::GetCustomExtensions(TiXmlElement *pRootElement, std::string& extensions)
 {
   std::string extraExtensions;
-  if (XMLUtils::GetString(pRootElement, "add", extraExtensions) && !extraExtensions.empty())
+  if (CXMLUtils::GetString(pRootElement, "add", extraExtensions) && !extraExtensions.empty())
     extensions += "|" + extraExtensions;
-  if (XMLUtils::GetString(pRootElement, "remove", extraExtensions) && !extraExtensions.empty())
+  if (CXMLUtils::GetString(pRootElement, "remove", extraExtensions) && !extraExtensions.empty())
   {
     std::vector<std::string> exts = StringUtils::Split(extraExtensions, '|');
     for (std::vector<std::string>::const_iterator i = exts.begin(); i != exts.end(); ++i)

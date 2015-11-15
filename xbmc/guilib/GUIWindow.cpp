@@ -228,10 +228,10 @@ bool CGUIWindow::Load(TiXmlElement* pRootElement)
     }
     else if (strValue == "coordinates")
     {
-      XMLUtils::GetFloat(pChild, "posx", m_posX);
-      XMLUtils::GetFloat(pChild, "posy", m_posY);
-      XMLUtils::GetFloat(pChild, "left", m_posX);
-      XMLUtils::GetFloat(pChild, "top", m_posY);
+      CXMLUtils::GetFloat(pChild, "posx", m_posX);
+      CXMLUtils::GetFloat(pChild, "posy", m_posY);
+      CXMLUtils::GetFloat(pChild, "left", m_posX);
+      CXMLUtils::GetFloat(pChild, "top", m_posY);
 
       TiXmlElement *originElement = pChild->FirstChildElement("origin");
       while (originElement)

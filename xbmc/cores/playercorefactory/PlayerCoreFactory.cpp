@@ -349,8 +349,8 @@ bool CPlayerCoreFactory::LoadConfiguration(const std::string &file, bool clear)
     TiXmlElement* pPlayer = pPlayers->FirstChildElement("player");
     while (pPlayer)
     {
-      std::string name = XMLUtils::GetAttribute(pPlayer, "name");
-      std::string type = XMLUtils::GetAttribute(pPlayer, "type");
+      std::string name = CXMLUtils::GetAttribute(pPlayer, "name");
+      std::string type = CXMLUtils::GetAttribute(pPlayer, "type");
       if (type.empty()) type = name;
       StringUtils::ToLower(type);
 

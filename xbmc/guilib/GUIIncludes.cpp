@@ -231,7 +231,7 @@ void CGUIIncludes::ResolveIncludesForNode(TiXmlElement *node, std::map<INFO::Inf
   std::string type;
   if (node->ValueStr() == "control")
   {
-    type = XMLUtils::GetAttribute(node, "type");
+    type = CXMLUtils::GetAttribute(node, "type");
     std::map<std::string, TiXmlElement>::const_iterator it = m_defaults.find(type);
     if (it != m_defaults.end())
     {
@@ -365,7 +365,7 @@ bool CGUIIncludes::GetParameters(const TiXmlElement *include, const char *valueA
     foundAny = param != NULL;  // doesn't matter if param isn't entirely valid
     while (param)
     {
-      std::string paramName = XMLUtils::GetAttribute(param, "name");
+      std::string paramName = CXMLUtils::GetAttribute(param, "name");
       if (!paramName.empty())
       {
         std::string paramValue;

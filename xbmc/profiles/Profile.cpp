@@ -71,34 +71,34 @@ void CProfile::setDate()
 
 void CProfile::Load(const TiXmlNode *node, int nextIdProfile)
 {
-  if (!XMLUtils::GetInt(node, "id", m_id))
+  if (!CXMLUtils::GetInt(node, "id", m_id))
     m_id = nextIdProfile; 
 
-  XMLUtils::GetString(node, "name", m_name);
-  XMLUtils::GetPath(node, "directory", m_directory);
-  XMLUtils::GetPath(node, "thumbnail", m_thumb);
-  XMLUtils::GetBoolean(node, "hasdatabases", m_bDatabases);
-  XMLUtils::GetBoolean(node, "canwritedatabases", m_bCanWrite);
-  XMLUtils::GetBoolean(node, "hassources", m_bSources);
-  XMLUtils::GetBoolean(node, "canwritesources", m_bCanWriteSources);
-  XMLUtils::GetBoolean(node, "lockaddonmanager", m_locks.addonManager);
+  CXMLUtils::GetString(node, "name", m_name);
+  CXMLUtils::GetPath(node, "directory", m_directory);
+  CXMLUtils::GetPath(node, "thumbnail", m_thumb);
+  CXMLUtils::GetBoolean(node, "hasdatabases", m_bDatabases);
+  CXMLUtils::GetBoolean(node, "canwritedatabases", m_bCanWrite);
+  CXMLUtils::GetBoolean(node, "hassources", m_bSources);
+  CXMLUtils::GetBoolean(node, "canwritesources", m_bCanWriteSources);
+  CXMLUtils::GetBoolean(node, "lockaddonmanager", m_locks.addonManager);
   int settings = m_locks.settings;
-  XMLUtils::GetInt(node, "locksettings", settings);
+  CXMLUtils::GetInt(node, "locksettings", settings);
   m_locks.settings = (LOCK_LEVEL::SETTINGS_LOCK)settings;
-  XMLUtils::GetBoolean(node, "lockfiles", m_locks.files);
-  XMLUtils::GetBoolean(node, "lockmusic", m_locks.music);
-  XMLUtils::GetBoolean(node, "lockvideo", m_locks.video);
-  XMLUtils::GetBoolean(node, "lockpictures", m_locks.pictures);
-  XMLUtils::GetBoolean(node, "lockprograms", m_locks.programs);
+  CXMLUtils::GetBoolean(node, "lockfiles", m_locks.files);
+  CXMLUtils::GetBoolean(node, "lockmusic", m_locks.music);
+  CXMLUtils::GetBoolean(node, "lockvideo", m_locks.video);
+  CXMLUtils::GetBoolean(node, "lockpictures", m_locks.pictures);
+  CXMLUtils::GetBoolean(node, "lockprograms", m_locks.programs);
   
   int lockMode = m_locks.mode;
-  XMLUtils::GetInt(node, "lockmode", lockMode);
+  CXMLUtils::GetInt(node, "lockmode", lockMode);
   m_locks.mode = (LockType)lockMode;
   if (m_locks.mode > LOCK_MODE_QWERTY || m_locks.mode < LOCK_MODE_EVERYONE)
     m_locks.mode = LOCK_MODE_EVERYONE;
   
-  XMLUtils::GetString(node, "lockcode", m_locks.code);
-  XMLUtils::GetString(node, "lastdate", m_date);
+  CXMLUtils::GetString(node, "lockcode", m_locks.code);
+  CXMLUtils::GetString(node, "lastdate", m_date);
 }
 
 void CProfile::Save(TiXmlNode *root) const
@@ -106,25 +106,25 @@ void CProfile::Save(TiXmlNode *root) const
   TiXmlElement profileNode("profile");
   TiXmlNode *node = root->InsertEndChild(profileNode);
 
-  XMLUtils::SetInt(node, "id", m_id);
-  XMLUtils::SetString(node, "name", m_name);
-  XMLUtils::SetPath(node, "directory", m_directory);
-  XMLUtils::SetPath(node, "thumbnail", m_thumb);
-  XMLUtils::SetBoolean(node, "hasdatabases", m_bDatabases);
-  XMLUtils::SetBoolean(node, "canwritedatabases", m_bCanWrite);
-  XMLUtils::SetBoolean(node, "hassources", m_bSources);
-  XMLUtils::SetBoolean(node, "canwritesources", m_bCanWriteSources);
-  XMLUtils::SetBoolean(node, "lockaddonmanager", m_locks.addonManager);
-  XMLUtils::SetInt(node, "locksettings", m_locks.settings);
-  XMLUtils::SetBoolean(node, "lockfiles", m_locks.files);
-  XMLUtils::SetBoolean(node, "lockmusic", m_locks.music);
-  XMLUtils::SetBoolean(node, "lockvideo", m_locks.video);
-  XMLUtils::SetBoolean(node, "lockpictures", m_locks.pictures);
-  XMLUtils::SetBoolean(node, "lockprograms", m_locks.programs);
+  CXMLUtils::SetInt(node, "id", m_id);
+  CXMLUtils::SetString(node, "name", m_name);
+  CXMLUtils::SetPath(node, "directory", m_directory);
+  CXMLUtils::SetPath(node, "thumbnail", m_thumb);
+  CXMLUtils::SetBoolean(node, "hasdatabases", m_bDatabases);
+  CXMLUtils::SetBoolean(node, "canwritedatabases", m_bCanWrite);
+  CXMLUtils::SetBoolean(node, "hassources", m_bSources);
+  CXMLUtils::SetBoolean(node, "canwritesources", m_bCanWriteSources);
+  CXMLUtils::SetBoolean(node, "lockaddonmanager", m_locks.addonManager);
+  CXMLUtils::SetInt(node, "locksettings", m_locks.settings);
+  CXMLUtils::SetBoolean(node, "lockfiles", m_locks.files);
+  CXMLUtils::SetBoolean(node, "lockmusic", m_locks.music);
+  CXMLUtils::SetBoolean(node, "lockvideo", m_locks.video);
+  CXMLUtils::SetBoolean(node, "lockpictures", m_locks.pictures);
+  CXMLUtils::SetBoolean(node, "lockprograms", m_locks.programs);
 
-  XMLUtils::SetInt(node, "lockmode", m_locks.mode);
-  XMLUtils::SetString(node,"lockcode", m_locks.code);
-  XMLUtils::SetString(node, "lastdate", m_date);
+  CXMLUtils::SetInt(node, "lockmode", m_locks.mode);
+  CXMLUtils::SetString(node,"lockcode", m_locks.code);
+  CXMLUtils::SetString(node, "lastdate", m_date);
 }
 
 void CProfile::SetLocks(const CProfile::CLock &locks)

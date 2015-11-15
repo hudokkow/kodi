@@ -355,8 +355,8 @@ bool CGUIControlFactory::GetTexture(const TiXmlNode* pRootNode, const char* strT
   if (flipX && strcmpi(flipX, "true") == 0) image.orientation = 1;
   const char *flipY = pNode->Attribute("flipy");
   if (flipY && strcmpi(flipY, "true") == 0) image.orientation = 3 - image.orientation;  // either 3 or 2
-  image.diffuse = XMLUtils::GetAttribute(pNode, "diffuse");
-  image.diffuseColor.Parse(XMLUtils::GetAttribute(pNode, "colordiffuse"), 0);
+  image.diffuse = CXMLUtils::GetAttribute(pNode, "diffuse");
+  image.diffuseColor.Parse(CXMLUtils::GetAttribute(pNode, "colordiffuse"), 0);
   const char *background = pNode->Attribute("background");
   if (background && strnicmp(background, "true", 4) == 0)
     image.useLarge = true;
@@ -500,7 +500,7 @@ bool CGUIControlFactory::GetActions(const TiXmlNode* pRootNode, const char* strT
     if (pElement->FirstChild())
     {
       CGUIAction::cond_action_pair pair;
-      pair.condition = XMLUtils::GetAttribute(pElement, "condition");
+      pair.condition = CXMLUtils::GetAttribute(pElement, "condition");
       pair.action = pElement->FirstChild()->Value();
       action.m_actions.push_back(pair);
     }
@@ -531,7 +531,7 @@ bool CGUIControlFactory::GetScroller(const TiXmlNode *control, const std::string
   if (node)
   {
     unsigned int scrollTime;
-    if (XMLUtils::GetUInt(control, scrollerTag.c_str(), scrollTime))
+    if (CXMLUtils::GetUInt(control, scrollerTag.c_str(), scrollTime))
     {
       scroller = CScroller(scrollTime, CAnimEffect::GetTweener(node));
       return true;
@@ -579,7 +579,7 @@ bool CGUIControlFactory::GetInfoLabelFromElement(const TiXmlElement *element, CG
   if (label.empty() || label == "-")
     return false;
 
-  std::string fallback = XMLUtils::GetAttribute(element, "fallback");
+  std::string fallback = CXMLUtils::GetAttribute(element, "fallback");
   if (StringUtils::IsNaturalNumber(label))
     label = g_localizeStrings.Get(atoi(label.c_str()));
   if (StringUtils::IsNaturalNumber(fallback))
@@ -598,7 +598,7 @@ void CGUIControlFactory::GetInfoLabels(const TiXmlNode *pControlNode, const std:
   // 3.  <label fallback="blah">$LOCALIZE(blah) $INFO(blah)</label> -> infolabel with given fallback
   // 4.  <info>ListItem.Album</info> (uses <label> as fallback)
   int labelNumber = 0;
-  if (XMLUtils::GetInt(pControlNode, "number", labelNumber))
+  if (CXMLUtils::GetInt(pControlNode, "number", labelNumber))
   {
     std::string label = StringUtils::Format("%i", labelNumber);
     infoLabels.push_back(CGUIInfoLabel(label));
@@ -644,7 +644,7 @@ std::string CGUIControlFactory::FilterLabel(const std::string &label)
 
 bool CGUIControlFactory::GetString(const TiXmlNode* pRootNode, const char *strTag, std::string &text)
 {
-  if (!XMLUtils::GetString(pRootNode, strTag, text))
+  if (!CXMLUtils::GetString(pRootNode, strTag, text))
     return false;
   if (text == "-")
     text.clear();
@@ -655,9 +655,9 @@ bool CGUIControlFactory::GetString(const TiXmlNode* pRootNode, const char *strTa
 
 std::string CGUIControlFactory::GetType(const TiXmlElement *pControlNode)
 {
-  std::string type = XMLUtils::GetAttribute(pControlNode, "type");
+  std::string type = CXMLUtils::GetAttribute(pControlNode, "type");
   if (type.empty())  // backward compatibility - not desired
-    XMLUtils::GetString(pControlNode, "type", type);
+    CXMLUtils::GetString(pControlNode, "type", type);
   return type;
 }
 
@@ -792,7 +792,7 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   //
 
   if (!pControlNode->Attribute("id", (int*) &id))
-    XMLUtils::GetInt(pControlNode, "id", (int&) id);       // backward compatibility - not desired
+    CXMLUtils::GetInt(pControlNode, "id", (int&) id);       // backward compatibility - not desired
   // TODO: Perhaps we should check here whether id is valid for focusable controls
   // such as buttons etc.  For labels/fadelabels/images it does not matter
 
@@ -816,8 +816,8 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
       height = std::max(rect.Height() - posY, 0.0f);
   }
 
-  XMLUtils::GetFloat(pControlNode, "offsetx", offset.x);
-  XMLUtils::GetFloat(pControlNode, "offsety", offset.y);
+  CXMLUtils::GetFloat(pControlNode, "offsetx", offset.x);
+  CXMLUtils::GetFloat(pControlNode, "offsety", offset.y);
 
   hitRect.SetRect(posX, posY, posX + width, posY + height);
   GetHitRect(pControlNode, hitRect);
@@ -833,18 +833,18 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetActions(pControlNode, "onback",  actions[ACTION_NAV_BACK]);
   GetActions(pControlNode, "oninfo",  actions[ACTION_SHOW_INFO]);
 
-  if (XMLUtils::GetInt(pControlNode, "defaultcontrol", defaultControl))
+  if (CXMLUtils::GetInt(pControlNode, "defaultcontrol", defaultControl))
   {
     const char *always = pControlNode->FirstChildElement("defaultcontrol")->Attribute("always");
     if (always && strnicmp(always, "true", 4) == 0)
       defaultAlways = true;
   }
-  XMLUtils::GetInt(pControlNode, "pagecontrol", pageControl);
+  CXMLUtils::GetInt(pControlNode, "pagecontrol", pageControl);
 
   GetInfoColor(pControlNode, "colordiffuse", colorDiffuse, parentID);
 
   GetConditionalVisibility(pControlNode, visibleCondition, allowHiddenFocus);
-  XMLUtils::GetString(pControlNode, "enable", enableCondition);
+  CXMLUtils::GetString(pControlNode, "enable", enableCondition);
 
   CRect animRect(posX, posY, posX + width, posY + height);
   GetAnimations(pControlNode, animRect, parentID, animations);
@@ -855,17 +855,17 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetInfoColor(pControlNode, "shadowcolor", labelInfo.shadowColor, parentID);
   GetInfoColor(pControlNode, "selectedcolor", labelInfo.selectedColor, parentID);
   GetInfoColor(pControlNode, "invalidcolor", labelInfo.invalidColor, parentID);
-  XMLUtils::GetFloat(pControlNode, "textoffsetx", labelInfo.offsetX);
-  XMLUtils::GetFloat(pControlNode, "textoffsety", labelInfo.offsetY);
+  CXMLUtils::GetFloat(pControlNode, "textoffsetx", labelInfo.offsetX);
+  CXMLUtils::GetFloat(pControlNode, "textoffsety", labelInfo.offsetY);
   int angle = 0;  // use the negative angle to compensate for our vertically flipped cartesian plane
-  if (XMLUtils::GetInt(pControlNode, "angle", angle)) labelInfo.angle = (float)-angle;
+  if (CXMLUtils::GetInt(pControlNode, "angle", angle)) labelInfo.angle = (float)-angle;
   std::string strFont;
-  if (XMLUtils::GetString(pControlNode, "font", strFont))
+  if (CXMLUtils::GetString(pControlNode, "font", strFont))
     labelInfo.font = g_fontManager.GetFont(strFont);
   uint32_t alignY = 0;
   if (GetAlignmentY(pControlNode, "aligny", alignY))
     labelInfo.align |= alignY;
-  if (XMLUtils::GetFloat(pControlNode, "textwidth", labelInfo.width))
+  if (CXMLUtils::GetFloat(pControlNode, "textwidth", labelInfo.width))
     labelInfo.align |= XBFONT_TRUNCATED;
 
   GetActions(pControlNode, "onclick", clickActions);
@@ -876,7 +876,7 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetActions(pControlNode, "altclick", altclickActions);
 
   std::string infoString;
-  if (XMLUtils::GetString(pControlNode, "info", infoString))
+  if (CXMLUtils::GetString(pControlNode, "info", infoString))
     singleInfo = g_infoManager.TranslateString(infoString);
 
   GetTexture(pControlNode, "texturefocus", textureFocus);
@@ -884,10 +884,10 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetTexture(pControlNode, "alttexturefocus", textureAltFocus);
   GetTexture(pControlNode, "alttexturenofocus", textureAltNoFocus);
 
-  XMLUtils::GetString(pControlNode, "usealttexture", toggleSelect);
-  XMLUtils::GetString(pControlNode, "selected", toggleSelect);
+  CXMLUtils::GetString(pControlNode, "usealttexture", toggleSelect);
+  CXMLUtils::GetString(pControlNode, "selected", toggleSelect);
 
-  XMLUtils::GetBoolean(pControlNode, "haspath", bHasPath);
+  CXMLUtils::GetBoolean(pControlNode, "haspath", bHasPath);
 
   GetTexture(pControlNode, "textureup", textureUp);
   GetTexture(pControlNode, "texturedown", textureDown);
@@ -902,19 +902,19 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetTexture(pControlNode, "texturerightfocus", textureRightFocus);
 
   GetInfoColor(pControlNode, "spincolor", spinInfo.textColor, parentID);
-  if (XMLUtils::GetString(pControlNode, "spinfont", strFont))
+  if (CXMLUtils::GetString(pControlNode, "spinfont", strFont))
     spinInfo.font = g_fontManager.GetFont(strFont);
   if (!spinInfo.font) spinInfo.font = labelInfo.font;
 
-  XMLUtils::GetFloat(pControlNode, "spinwidth", spinWidth);
-  XMLUtils::GetFloat(pControlNode, "spinheight", spinHeight);
-  XMLUtils::GetFloat(pControlNode, "spinposx", spinPosX);
-  XMLUtils::GetFloat(pControlNode, "spinposy", spinPosY);
+  CXMLUtils::GetFloat(pControlNode, "spinwidth", spinWidth);
+  CXMLUtils::GetFloat(pControlNode, "spinheight", spinHeight);
+  CXMLUtils::GetFloat(pControlNode, "spinposx", spinPosX);
+  CXMLUtils::GetFloat(pControlNode, "spinposy", spinPosY);
 
-  XMLUtils::GetFloat(pControlNode, "markwidth", checkWidth);
-  XMLUtils::GetFloat(pControlNode, "markheight", checkHeight);
-  XMLUtils::GetFloat(pControlNode, "sliderwidth", sliderWidth);
-  XMLUtils::GetFloat(pControlNode, "sliderheight", sliderHeight);
+  CXMLUtils::GetFloat(pControlNode, "markwidth", checkWidth);
+  CXMLUtils::GetFloat(pControlNode, "markheight", checkHeight);
+  CXMLUtils::GetFloat(pControlNode, "sliderwidth", sliderWidth);
+  CXMLUtils::GetFloat(pControlNode, "sliderheight", sliderHeight);
   GetTexture(pControlNode, "texturecheckmark", textureCheckMark);
   GetTexture(pControlNode, "texturecheckmarknofocus", textureCheckMarkNF);
   if (!GetTexture(pControlNode, "textureradioonfocus", textureRadioOnFocus) || !GetTexture(pControlNode, "textureradioonnofocus", textureRadioOnNoFocus))
@@ -937,12 +937,12 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetTexture(pControlNode, "textureslidernib", textureNib);
   GetTexture(pControlNode, "textureslidernibfocus", textureNibFocus);
 
-  XMLUtils::GetString(pControlNode, "title", strTitle);
-  XMLUtils::GetString(pControlNode, "tagset", strRSSTags);
+  CXMLUtils::GetString(pControlNode, "title", strTitle);
+  CXMLUtils::GetString(pControlNode, "tagset", strRSSTags);
   GetInfoColor(pControlNode, "headlinecolor", headlineColor, parentID);
   GetInfoColor(pControlNode, "titlecolor", textColor3, parentID);
 
-  if (XMLUtils::GetString(pControlNode, "subtype", strSubType))
+  if (CXMLUtils::GetString(pControlNode, "subtype", strSubType))
   {
     StringUtils::ToLower(strSubType);
 
@@ -961,8 +961,8 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
     GetFloatRange(pControlNode, "range", fMin, fMax, fInterval);
   }
 
-  XMLUtils::GetBoolean(pControlNode, "reverse", bReverse);
-  XMLUtils::GetBoolean(pControlNode, "reveal", bReveal);
+  CXMLUtils::GetBoolean(pControlNode, "reverse", bReverse);
+  CXMLUtils::GetBoolean(pControlNode, "reveal", bReveal);
 
   GetTexture(pControlNode, "texturebg", textureBackground);
   GetTexture(pControlNode, "lefttexture", textureLeft);
@@ -991,55 +991,55 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   GetString(pControlNode, "altlabel", altLabel);
   GetString(pControlNode, "label2", strLabel2);
 
-  XMLUtils::GetBoolean(pControlNode, "wrapmultiline", wrapMultiLine);
-  XMLUtils::GetInt(pControlNode,"urlset",iUrlSet);
+  CXMLUtils::GetBoolean(pControlNode, "wrapmultiline", wrapMultiLine);
+  CXMLUtils::GetInt(pControlNode,"urlset",iUrlSet);
 
-  if ( XMLUtils::GetString(pControlNode, "orientation", strTmp) )
+  if ( CXMLUtils::GetString(pControlNode, "orientation", strTmp) )
   {
     StringUtils::ToLower(strTmp);
     if (strTmp == "horizontal")
       orientation = HORIZONTAL;
   }
-  XMLUtils::GetFloat(pControlNode, "itemgap", buttonGap);
-  XMLUtils::GetInt(pControlNode, "movement", iMovementRange);
+  CXMLUtils::GetFloat(pControlNode, "itemgap", buttonGap);
+  CXMLUtils::GetInt(pControlNode, "movement", iMovementRange);
   GetAspectRatio(pControlNode, "aspectratio", aspect);
 
   bool alwaysScroll;
-  if (XMLUtils::GetBoolean(pControlNode, "scroll", alwaysScroll))
+  if (CXMLUtils::GetBoolean(pControlNode, "scroll", alwaysScroll))
     scrollValue = alwaysScroll ? CGUIControl::ALWAYS : CGUIControl::NEVER;
 
-  XMLUtils::GetBoolean(pControlNode,"pulseonselect", bPulse);
-  XMLUtils::GetInt(pControlNode, "timeblocks", timeBlocks);
-  XMLUtils::GetInt(pControlNode, "rulerunit", rulerUnit);
+  CXMLUtils::GetBoolean(pControlNode,"pulseonselect", bPulse);
+  CXMLUtils::GetInt(pControlNode, "timeblocks", timeBlocks);
+  CXMLUtils::GetInt(pControlNode, "rulerunit", rulerUnit);
   GetTexture(pControlNode, "progresstexture", textureProgressIndicator);
 
   GetInfoTexture(pControlNode, "imagepath", texture, texturePath, parentID);
 
-  XMLUtils::GetUInt(pControlNode,"timeperimage", timePerImage);
-  XMLUtils::GetUInt(pControlNode,"fadetime", fadeTime);
-  XMLUtils::GetUInt(pControlNode,"pauseatend", timeToPauseAtEnd);
-  XMLUtils::GetBoolean(pControlNode, "randomize", randomized);
-  XMLUtils::GetBoolean(pControlNode, "loop", loop);
-  XMLUtils::GetBoolean(pControlNode, "scrollout", scrollOut);
+  CXMLUtils::GetUInt(pControlNode,"timeperimage", timePerImage);
+  CXMLUtils::GetUInt(pControlNode,"fadetime", fadeTime);
+  CXMLUtils::GetUInt(pControlNode,"pauseatend", timeToPauseAtEnd);
+  CXMLUtils::GetBoolean(pControlNode, "randomize", randomized);
+  CXMLUtils::GetBoolean(pControlNode, "loop", loop);
+  CXMLUtils::GetBoolean(pControlNode, "scrollout", scrollOut);
 
-  XMLUtils::GetFloat(pControlNode, "radiowidth", radioWidth);
-  XMLUtils::GetFloat(pControlNode, "radioheight", radioHeight);
-  XMLUtils::GetFloat(pControlNode, "radioposx", radioPosX);
-  XMLUtils::GetFloat(pControlNode, "radioposy", radioPosY);
+  CXMLUtils::GetFloat(pControlNode, "radiowidth", radioWidth);
+  CXMLUtils::GetFloat(pControlNode, "radioheight", radioHeight);
+  CXMLUtils::GetFloat(pControlNode, "radioposx", radioPosX);
+  CXMLUtils::GetFloat(pControlNode, "radioposy", radioPosY);
   std::string borderStr;
-  if (XMLUtils::GetString(pControlNode, "bordersize", borderStr))
+  if (CXMLUtils::GetString(pControlNode, "bordersize", borderStr))
     GetRectFromString(borderStr, borderSize);
 
-  XMLUtils::GetBoolean(pControlNode, "showonepage", showOnePage);
-  XMLUtils::GetInt(pControlNode, "focusposition", focusPosition);
-  XMLUtils::GetInt(pControlNode, "scrolltime", scrollTime);
-  XMLUtils::GetInt(pControlNode, "preloaditems", preloadItems, 0, 2);
+  CXMLUtils::GetBoolean(pControlNode, "showonepage", showOnePage);
+  CXMLUtils::GetInt(pControlNode, "focusposition", focusPosition);
+  CXMLUtils::GetInt(pControlNode, "scrolltime", scrollTime);
+  CXMLUtils::GetInt(pControlNode, "preloaditems", preloadItems, 0, 2);
 
-  XMLUtils::GetBoolean(pControlNode, "usecontrolcoords", useControlCoords);
-  XMLUtils::GetBoolean(pControlNode, "renderfocusedlast", renderFocusedLast);
-  XMLUtils::GetBoolean(pControlNode, "resetonlabelchange", resetOnLabelChange);
+  CXMLUtils::GetBoolean(pControlNode, "usecontrolcoords", useControlCoords);
+  CXMLUtils::GetBoolean(pControlNode, "renderfocusedlast", renderFocusedLast);
+  CXMLUtils::GetBoolean(pControlNode, "resetonlabelchange", resetOnLabelChange);
 
-  XMLUtils::GetBoolean(pControlNode, "password", bPassword);
+  CXMLUtils::GetBoolean(pControlNode, "password", bPassword);
 
   // view type
   VIEW_TYPE viewType = VIEW_TYPE_NONE;
@@ -1096,16 +1096,16 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
     cam->QueryFloatAttribute("y", &camera.y);
   }
 
-  if (XMLUtils::GetFloat(pControlNode, "depth", stereo))
+  if (CXMLUtils::GetFloat(pControlNode, "depth", stereo))
     stereo = std::max(-1.f, std::min(1.f, stereo));
 
-  XMLUtils::GetInt(pControlNode, "scrollspeed", labelInfo.scrollSpeed);
+  CXMLUtils::GetInt(pControlNode, "scrollspeed", labelInfo.scrollSpeed);
   spinInfo.scrollSpeed = labelInfo.scrollSpeed;
 
   GetString(pControlNode, "scrollsuffix", labelInfo.scrollSuffix);
   spinInfo.scrollSuffix = labelInfo.scrollSuffix;
 
-  XMLUtils::GetString(pControlNode, "action", action);
+  CXMLUtils::GetString(pControlNode, "action", action);
 
   /////////////////////////////////////////////////////////////////////////////
   // Instantiate a new control using the properties gathered above

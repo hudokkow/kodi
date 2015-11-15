@@ -73,7 +73,7 @@ CPlayListXML::~CPlayListXML(void)
 static inline std::string GetString( const TiXmlElement* pRootElement, const char *tagName )
 {
   std::string strValue;
-  if ( XMLUtils::GetString(pRootElement, tagName, strValue) )
+  if ( CXMLUtils::GetString(pRootElement, tagName, strValue) )
     return strValue;
 
   return "";

@@ -689,11 +689,11 @@ void CWakeOnAccess::LoadFromXML()
   SetEnabled(enabled);
 
   int tmp;
-  if (XMLUtils::GetInt(pRootElement, "netinittimeout", tmp, 0, 5 * 60))
+  if (CXMLUtils::GetInt(pRootElement, "netinittimeout", tmp, 0, 5 * 60))
     m_netinit_sec = tmp;
   CLog::Log(LOGNOTICE,"  -Network init timeout : [%d] sec", m_netinit_sec);
   
-  if (XMLUtils::GetInt(pRootElement, "netsettletime", tmp, 0, 5 * 1000))
+  if (CXMLUtils::GetInt(pRootElement, "netsettletime", tmp, 0, 5 * 1000))
     m_netsettle_ms = tmp;
   CLog::Log(LOGNOTICE,"  -Network settle time  : [%d] ms", m_netsettle_ms);
 
@@ -703,10 +703,10 @@ void CWakeOnAccess::LoadFromXML()
     WakeUpEntry entry;
 
     std::string strtmp;
-    if (XMLUtils::GetString(pWakeUp, "host", strtmp))
+    if (CXMLUtils::GetString(pWakeUp, "host", strtmp))
       entry.host = strtmp;
 
-    if (XMLUtils::GetString(pWakeUp, "mac", strtmp))
+    if (CXMLUtils::GetString(pWakeUp, "mac", strtmp))
       entry.mac = strtmp;
 
     if (entry.host.empty())
@@ -715,22 +715,22 @@ void CWakeOnAccess::LoadFromXML()
        CLog::Log(LOGERROR, "%s - Missing <mac> tag or it's empty", __FUNCTION__);
     else
     {
-      if (XMLUtils::GetInt(pWakeUp, "pingport", tmp, 0, USHRT_MAX))
+      if (CXMLUtils::GetInt(pWakeUp, "pingport", tmp, 0, USHRT_MAX))
         entry.ping_port = (unsigned short) tmp;
 
-      if (XMLUtils::GetInt(pWakeUp, "pingmode", tmp, 0, USHRT_MAX))
+      if (CXMLUtils::GetInt(pWakeUp, "pingmode", tmp, 0, USHRT_MAX))
         entry.ping_mode = (unsigned short) tmp;
 
-      if (XMLUtils::GetInt(pWakeUp, "timeout", tmp, 10, 12 * 60 * 60))
+      if (CXMLUtils::GetInt(pWakeUp, "timeout", tmp, 10, 12 * 60 * 60))
         entry.timeout.SetDateTimeSpan (0, 0, 0, tmp);
 
-      if (XMLUtils::GetInt(pWakeUp, "waitonline", tmp, 0, 10 * 60)) // max 10 minutes
+      if (CXMLUtils::GetInt(pWakeUp, "waitonline", tmp, 0, 10 * 60)) // max 10 minutes
         entry.wait_online1_sec = tmp;
 
-      if (XMLUtils::GetInt(pWakeUp, "waitonline2", tmp, 0, 10 * 60)) // max 10 minutes
+      if (CXMLUtils::GetInt(pWakeUp, "waitonline2", tmp, 0, 10 * 60)) // max 10 minutes
         entry.wait_online2_sec = tmp;
 
-      if (XMLUtils::GetInt(pWakeUp, "waitservices", tmp, 0, 5 * 60)) // max 5 minutes
+      if (CXMLUtils::GetInt(pWakeUp, "waitservices", tmp, 0, 5 * 60)) // max 5 minutes
         entry.wait_services_sec = tmp;
 
       CLog::Log(LOGNOTICE,"  Registering wakeup entry:");
@@ -757,8 +757,8 @@ void CWakeOnAccess::SaveToXML()
   TiXmlNode *pRoot = xmlDoc.InsertEndChild(xmlRootElement);
   if (!pRoot) return;
 
-  XMLUtils::SetInt(pRoot, "netinittimeout", m_netinit_sec);
-  XMLUtils::SetInt(pRoot, "netsettletime", m_netsettle_ms);
+  CXMLUtils::SetInt(pRoot, "netinittimeout", m_netinit_sec);
+  CXMLUtils::SetInt(pRoot, "netsettletime", m_netsettle_ms);
 
   for (EntriesVector::const_iterator i = m_entries.begin(); i != m_entries.end(); ++i)
   {
@@ -766,14 +766,14 @@ void CWakeOnAccess::SaveToXML()
     TiXmlNode* pWakeUpNode = pRoot->InsertEndChild(xmlSetting);
     if (pWakeUpNode)
     {
-      XMLUtils::SetString(pWakeUpNode, "host", i->host);
-      XMLUtils::SetString(pWakeUpNode, "mac", i->mac);
-      XMLUtils::SetInt(pWakeUpNode, "pingport", i->ping_port);
-      XMLUtils::SetInt(pWakeUpNode, "pingmode", i->ping_mode);
-      XMLUtils::SetInt(pWakeUpNode, "timeout", GetTotalSeconds(i->timeout));
-      XMLUtils::SetInt(pWakeUpNode, "waitonline", i->wait_online1_sec);
-      XMLUtils::SetInt(pWakeUpNode, "waitonline2", i->wait_online2_sec);
-      XMLUtils::SetInt(pWakeUpNode, "waitservices", i->wait_services_sec);
+      CXMLUtils::SetString(pWakeUpNode, "host", i->host);
+      CXMLUtils::SetString(pWakeUpNode, "mac", i->mac);
+      CXMLUtils::SetInt(pWakeUpNode, "pingport", i->ping_port);
+      CXMLUtils::SetInt(pWakeUpNode, "pingmode", i->ping_mode);
+      CXMLUtils::SetInt(pWakeUpNode, "timeout", GetTotalSeconds(i->timeout));
+      CXMLUtils::SetInt(pWakeUpNode, "waitonline", i->wait_online1_sec);
+      CXMLUtils::SetInt(pWakeUpNode, "waitonline2", i->wait_online2_sec);
+      CXMLUtils::SetInt(pWakeUpNode, "waitservices", i->wait_services_sec);
     }
   }
 

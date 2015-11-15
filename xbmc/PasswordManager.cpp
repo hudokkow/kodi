@@ -132,7 +132,7 @@ void CPasswordManager::Load()
     while (path)
     {
       std::string from, to;
-      if (XMLUtils::GetPath(path, "from", from) && XMLUtils::GetPath(path, "to", to))
+      if (CXMLUtils::GetPath(path, "from", from) && CXMLUtils::GetPath(path, "to", to))
       {
         m_permanentCache[from] = to;
         m_temporaryCache[from] = to;
@@ -159,8 +159,8 @@ void CPasswordManager::Save() const
   {
     TiXmlElement pathElement("path");
     TiXmlNode *path = root->InsertEndChild(pathElement);
-    XMLUtils::SetPath(path, "from", i->first);
-    XMLUtils::SetPath(path, "to", i->second);
+    CXMLUtils::SetPath(path, "from", i->first);
+    CXMLUtils::SetPath(path, "to", i->second);
   }
 
   doc.SaveFile(CProfilesManager::GetInstance().GetUserDataItem("passwords.xml"));
