@@ -18,10 +18,13 @@ sudo: required
 compiler:
   - gcc
   - clang
+os: osx
+osx_image: xcode7.3
 
 env:
   - BUILD=Linux64 TOOLS=Autotools
   - BUILD=Linux64 TOOLS=CMake
+  - BUILD=OSX64   TOOLS=xcode7.3
   - ADDONS=adsp
   - ADDONS=audiodecoder
   - ADDONS=audioencoder
@@ -38,6 +41,12 @@ matrix:
     - env: ADDONS=pvr
     - env: ADDONS=screensaver
     - env: ADDONS=visualization
+  exclude:
+    - os: linux
+      env: BUILD=OSX64   TOOLS=xcode7.3
+    - os: osx
+      env: BUILD=Linux64 TOOLS=Autotools
+      env: BUILD=Linux64 TOOLS=CMake
 
 # Prepare system
 #
