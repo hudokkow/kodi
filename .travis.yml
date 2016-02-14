@@ -15,12 +15,12 @@ language: cpp
 os:
   - linux
   - osx
-    osx_image: xcode7.3
 dist: trusty
 sudo: required
 compiler:
   - gcc
   - clang
+osx_image: xcode7.3
 
 env:
   - BUILD=Linux64 TOOLS=Autotools
