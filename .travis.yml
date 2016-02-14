@@ -118,8 +118,8 @@ before_script:
         cmake -DCMAKE_CXX_FLAGS="-Qunused-arguments" ../project/cmake;
       fi
     fi
-  - if [[ "$BUILD" != "Linux64" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" ||
-          "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
+  - if [[ "$BUILD" != "Linux64" && "$BUILD" != "OSX64" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" ||
+          "$ADDONS" == "audioencoder" || "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
       cd $TRAVIS_BUILD_DIR/project/cmake/addons &&
       mkdir -p build &&
       cd build/ &&
@@ -140,8 +140,8 @@ script:
         make check;
       fi
     fi
-  - if [[ "$BUILD" != "Linux64" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" ||
-          "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
+  - if [[ "$BUILD" != "Linux64" && "$BUILD" != "OSX64" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" ||
+          "$ADDONS" == "audioencoder" || "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
       cd $TRAVIS_BUILD_DIR/ &&
       mkdir -p build &&
       cmake -DADDONS_TO_BUILD="$ADDONS".* -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../addons $TRAVIS_BUILD_DIR/project/cmake/addons &&
