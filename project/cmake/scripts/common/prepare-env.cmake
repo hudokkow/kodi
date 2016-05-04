@@ -21,10 +21,9 @@ if(NOT DEFINED APP_VERSION_MAJOR OR NOT DEFINED APP_VERSION_MINOR)
   message(FATAL_ERROR "Could not determine app version! make sure that ${CORE_SOURCE_DIR}/version.txt exists")
 endif()
 
-# in case we need to download something, set KODI_MIRROR to the default if not alread set
-if(NOT DEFINED KODI_MIRROR)
-  set(KODI_MIRROR "http://mirrors.kodi.tv")
-endif()
+# bail early if Kodi mirrors aren't reachable
+include(${CORE_SOURCE_DIR}/project/cmake/scripts/common/macros.cmake)
+check_kodi_mirrors_connectivity()
 
 ### copy all the addon binding header files to include/kodi
 # make sure include/kodi exists and is empty
