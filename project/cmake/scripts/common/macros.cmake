@@ -388,3 +388,57 @@ macro(core_find_versions)
   file(STRINGS ${CORE_SOURCE_DIR}/xbmc/addons/kodi-addon-dev-kit/include/kodi/libKODI_guilib.h guilib_version_min REGEX "^.*GUILIB_MIN_API_VERSION (.*)$")
   string(REGEX REPLACE ".*\"(.*)\"" "\\1" guilib_version_min ${guilib_version_min})
 endmacro()
+
+# Check if Kodi mirrors are reachable
+# ping exit status codes:
+#   Success: code 0
+#   No reply: code 1
+#   Other errors: code 2
+#
+# There are reports of ping exit status on Windows not being reliable
+# See https://mail.python.org/pipermail/tutor/2012-January/087959.html
+# for some background. Brief testing indicates that it works like its
+# *nix counterpart but for extra bonus points we check for the presence
+# of a specific string in the response output, i.e.
+# ping -n 1 http://mirrors.kodi.tv | find "TTL"
+macro(check_kodi_mirrors_connectivity)
+  set(KODI_MIRROR "mirrors.kodi.tv")
+
+  if(CORE_SYSTEM_NAME STREQUAL windows)
+    execute_process(COMMAND ping -n 1 localhost | find "TTL"
+                    RESULT_VARIABLE status_code_local
+                    OUTPUT_QUIET)
+    if(status_code_local STREQUAL "0")
+      execute_process(COMMAND ping -n 1 ${KODI_MIRROR} | find "TTL"
+                      RESULT_VARIABLE status_code_web
+                      OUTPUT_QUIET)
+      if(status_code_web "0")
+        message(STATUS "Kodi mirrors are reachable")
+      endif()
+    endif()
+  else()
+    execute_process(COMMAND ping -c 1 localhost
+                    RESULT_VARIABLE status_code_local
+                    OUTPUT_QUIET)
+    if(status_code_local STREQUAL "0")
+      execute_process(COMMAND ping -c 1 ${KODI_MIRROR}
+                      RESULT_VARIABLE status_code_web
+                      OUTPUT_QUIET)
+      if(status_code_web STREQUAL "0")
+        message(STATUS "Kodi mirros are reachable")
+      endif()
+    endif()
+  endif()
+
+  if(status_code_web STREQUAL "0")
+    set(KODI_MIRROR "http://${KODI_MIRROR}")
+  endif()
+
+  # bail if we can't connect to mirrors
+  if(NOT status_code_local STREQUAL "0")
+    message(FATAL_ERROR "Your network connection is down!\n")
+  endif()
+  if(NOT status_code_web STREQUAL "0")
+    message(FATAL_ERROR "Kodi mirrors aren't reachable! We're either experiencing problems or your Internet connection is down.\n")
+  endif()
+endmacro()

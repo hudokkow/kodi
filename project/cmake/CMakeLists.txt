@@ -67,6 +67,9 @@ include(scripts/common/projectmacros.cmake)
 include(scripts/common/pathsetup.cmake)
 include(ExternalProject)
 
+# bail early if Kodi mirrors aren't reachable
+check_kodi_mirrors_connectivity()
+
 core_find_git_rev()
 core_find_versions()
 
