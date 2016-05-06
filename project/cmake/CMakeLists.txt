@@ -402,3 +402,5 @@ if(VERBOSE)
 endif()
 message(STATUS "#---------------------------------------------#")
 
+enable_testing()
+include(CTest)
