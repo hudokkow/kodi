@@ -32,11 +32,8 @@ function(add_internal id url inputfile)
                                       -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
-                                      -P ${PROJECT_SOURCE_DIR}/install.cmake
-                     )
+                                      -P ${PROJECT_SOURCE_DIR}/install.cmake)
 endfunction()
-
-#find_package(7Zip REQUIRED)
 
 file(GLOB_RECURSE download_input_files prebuilt/*.txt)
 foreach(file ${download_input_files})

@@ -47,7 +47,7 @@ macro(build_addon target prefix libs)
   # get the library's location
   set(LIBRARY_LOCATION $<TARGET_FILE:${target}>)
   # get the library's filename
-  if("${CORE_SYSTEM_NAME}" STREQUAL "android")
+  if(CORE_SYSTEM_NAME STREQUAL "android")
     # for android we need the filename without any version numbers
     set(LIBRARY_FILENAME $<TARGET_LINKER_FILE_NAME:${target}>)
   else()

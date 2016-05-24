@@ -296,7 +296,7 @@ foreach(addon ${addons})
           # if we ever use other repositories, this might need adapting
           set(url ${url}/archive/${revision}.tar.gz)
           set(archive_name ${archive_name}-${revision})
-        elseif("${SOURCE_DIR}" STREQUAL "")
+        elseif(SOURCE_DIR STREQUAL "")
           # check if the URL starts with file://
           string(REGEX MATCH "^file://.*$" local_url "${url}")
 

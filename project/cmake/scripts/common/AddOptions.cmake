@@ -25,9 +25,9 @@
 
 function(add_options langs builds)
   # special handling of empty language specification
-  if("${langs}" STREQUAL "ALL_LANGUAGES")
+  if(langs STREQUAL "ALL_LANGUAGES")
 	set(langs CXX C Fortran)
-  endif("${langs}" STREQUAL "ALL_LANGUAGES")
+  endif(langs STREQUAL "ALL_LANGUAGES")
   foreach(lang IN LISTS langs)
 	# prepend underscore if necessary
 	foreach(build IN LISTS builds)
@@ -46,7 +46,7 @@ function(add_options langs builds)
 		# we need to strip this one as well, so they are comparable
 		string(STRIP "${${_var}}" _stripped)
 		# if it wasn't there, then add it at the end
-		if("${_without}" STREQUAL "${_stripped}")
+		if(_without STREQUAL "${_stripped}")
 		  # don't add any extra spaces if no options yet are set
 		  if(NOT ${_stripped} STREQUAL "")
 			set(${_var} "${_stripped} ${_opt}")
@@ -54,7 +54,7 @@ function(add_options langs builds)
 			set(${_var} "${_opt}")
 		  endif(NOT ${_stripped} STREQUAL "")
 		  set(${_var} "${${_var}}" PARENT_SCOPE)
-		endif("${_without}" STREQUAL "${_stripped}")
+		endif(_without STREQUAL "${_stripped}")
 	  endforeach(_opt)
 	endforeach(build)
   endforeach(lang)
