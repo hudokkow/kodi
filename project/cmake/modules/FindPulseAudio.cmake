@@ -15,36 +15,29 @@
 
 if(NOT PULSEAUDIO_MINIMUM_VERSION)
   set(PULSEAUDIO_MINIMUM_VERSION "1.0.0")
-endif(NOT PULSEAUDIO_MINIMUM_VERSION)
+endif()
 
 if(PULSEAUDIO_INCLUDE_DIRS AND PULSEAUDIO_LIBRARY AND PULSEAUDIO_MAINLOOP_LIBRARY)
-   # Already in cache, be silent
-   set(PULSEAUDIO_FIND_QUIETLY TRUE)
-endif(PULSEAUDIO_INCLUDE_DIRS AND PULSEAUDIO_LIBRARY AND PULSEAUDIO_MAINLOOP_LIBRARY)
+  # Already in cache, be silent
+  set(PULSEAUDIO_FIND_QUIETLY TRUE)
+endif()
 
 if(NOT WIN32)
-   include(FindPkgConfig)
-   pkg_check_modules(PC_PULSEAUDIO libpulse>=${PULSEAUDIO_MINIMUM_VERSION})
-   pkg_check_modules(PC_PULSEAUDIO_MAINLOOP libpulse-mainloop-glib)
-endif(NOT WIN32)
+  include(FindPkgConfig)
+  pkg_check_modules(PC_PULSEAUDIO libpulse>=${PULSEAUDIO_MINIMUM_VERSION})
+  pkg_check_modules(PC_PULSEAUDIO_MAINLOOP libpulse-mainloop-glib)
+endif()
 
-find_path(PULSEAUDIO_INCLUDE_DIRS pulse/pulseaudio.h
-   HINTS
-   ${PC_PULSEAUDIO_INCLUDEDIR}
-   ${PC_PULSEAUDIO_INCLUDE_DIRS}
-   )
+find_path(PULSEAUDIO_INCLUDE_DIRS pulse/pulseaudio.h HINTS ${PC_PULSEAUDIO_INCLUDEDIR}
+                                                           ${PC_PULSEAUDIO_INCLUDE_DIRS})
 
-find_library(PULSEAUDIO_LIBRARY NAMES pulse libpulse
-   HINTS
-   ${PC_PULSEAUDIO_LIBDIR}
-   ${PC_PULSEAUDIO_LIBRARY_DIRS}
-   )
+find_library(PULSEAUDIO_LIBRARY NAMES pulse libpulse HINTS ${PC_PULSEAUDIO_LIBDIR}
+                                                           ${PC_PULSEAUDIO_LIBRARY_DIRS})
 
-find_library(PULSEAUDIO_MAINLOOP_LIBRARY NAMES pulse-mainloop pulse-mainloop-glib libpulse-mainloop-glib
-   HINTS
-   ${PC_PULSEAUDIO_LIBDIR}
-   ${PC_PULSEAUDIO_LIBRARY_DIRS}
-   )
+find_library(PULSEAUDIO_MAINLOOP_LIBRARY
+             NAMES pulse-mainloop pulse-mainloop-glib libpulse-mainloop-glib
+             HINTS ${PC_PULSEAUDIO_LIBDIR}
+                   ${PC_PULSEAUDIO_LIBRARY_DIRS})
 
 if(NOT PULSEAUDIO_INCLUDE_DIRS OR NOT PULSEAUDIO_LIBRARY)
   set(PULSEAUDIO_FOUND FALSE)
@@ -53,17 +46,17 @@ else()
 endif()
 
 if(PULSEAUDIO_FOUND)
-   if(NOT PULSEAUDIO_FIND_QUIETLY)
-      message(STATUS "Found PulseAudio: ${PULSEAUDIO_LIBRARY}")
-      if(PULSEAUDIO_MAINLOOP_LIBRARY)
-          message(STATUS "Found PulseAudio Mainloop: ${PULSEAUDIO_MAINLOOP_LIBRARY}")
-      else(PULSAUDIO_MAINLOOP_LIBRARY)
-          message(STATUS "Could NOT find PulseAudio Mainloop Library")
-      endif(PULSEAUDIO_MAINLOOP_LIBRARY)
-   endif(NOT PULSEAUDIO_FIND_QUIETLY)
-else(PULSEAUDIO_FOUND)
+  if(NOT PULSEAUDIO_FIND_QUIETLY)
+    message(STATUS "Found PulseAudio: ${PULSEAUDIO_LIBRARY}")
+    if(PULSEAUDIO_MAINLOOP_LIBRARY)
+      message(STATUS "Found PulseAudio Mainloop: ${PULSEAUDIO_MAINLOOP_LIBRARY}")
+    else()
+      message(STATUS "Could NOT find PulseAudio Mainloop Library")
+    endif()
+  endif()
+else()
    message(STATUS "Could NOT find PulseAudio")
-endif(PULSEAUDIO_FOUND)
+endif()
 
 set(PULSEAUDIO_LIBRARIES ${PULSEAUDIO_LIBRARY})
 
