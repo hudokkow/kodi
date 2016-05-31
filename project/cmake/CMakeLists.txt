@@ -403,4 +403,6 @@ if(VERBOSE)
   message(STATUS "GIT_REV: ${APP_SCMID}")
 endif()
 message(STATUS "#---------------------------------------------#")
+message(STATUS "CORE_BUILD_DIR: ${CORE_BUILD_DIR}")
+message(STATUS "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
 
