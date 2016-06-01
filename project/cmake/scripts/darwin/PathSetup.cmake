@@ -29,4 +29,4 @@ list(APPEND final_message "Datarootdir: ${datarootdir}")
 list(APPEND final_message "Datadir: ${datadir}")
 
 set(PATH_DEFINES -DBIN_INSTALL_PATH=\"${libdir}/kodi\"
-                   -DINSTALL_PATH=\"${datarootdir}/kodi\")
+                 -DINSTALL_PATH=\"${datarootdir}/kodi\")
