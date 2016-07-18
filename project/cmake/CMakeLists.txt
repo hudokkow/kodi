@@ -70,6 +70,11 @@ include(scripts/common/ProjectMacros.cmake)
 include(scripts/${CORE_SYSTEM_NAME}/PathSetup.cmake)
 include(ExternalProject)
 
+# Platform specific dependency download and preparation
+if(EXISTS ${PROJECT_SOURCE_DIR}/scripts/${CORE_SYSTEM_NAME}/DependsPreparation.cmake)
+  include(${PROJECT_SOURCE_DIR}/scripts/${CORE_SYSTEM_NAME}/DependsPreparation.cmake)
+endif()
+
 core_find_git_rev()
 core_find_versions()
 
@@ -450,3 +455,4 @@ if(VERBOSE)
   message(STATUS "CPACK_SOURCE_GENERATOR: ${CPACK_SOURCE_GENERATOR}")
   message(STATUS "#---------------------------------------------#")
 endif()
+
