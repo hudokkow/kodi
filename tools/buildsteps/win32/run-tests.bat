@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 SETLOCAL ENABLEDELAYEDEXPANSION
 REM setup all paths
 SET cur_dir=%WORKSPACE%\project\Win32BuildSetup

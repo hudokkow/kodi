@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 SETLOCAL
 
 rem batch file to compile mingw libs via BuildSetup

@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 REM Turn on delayed variable expansion so that we can interpolate environment variables in the URLs
 SETLOCAL enableDelayedExpansion

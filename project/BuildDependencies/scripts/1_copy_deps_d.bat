@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 IF EXIST "%APP_PATH%\system\webserver" rmdir "%APP_PATH%\system\webserver" /S /Q
 IF EXIST "%APP_PATH%\system\airplay" rmdir "%APP_PATH%\system\airplay" /S /Q

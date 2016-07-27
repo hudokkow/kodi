@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 ECHO Workspace is %WORKSPACE%
 
