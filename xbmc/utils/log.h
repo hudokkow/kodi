@@ -50,7 +50,6 @@ public:
   static void PrintDebugString(const std::string& line); // universal interface for printing debug strings
   static void SetLogLevel(int level);
   static int  GetLogLevel();
-  static void SetExtraLogLevels(int level);
   static bool IsLogLevelLogged(int loglevel);
 
 protected:

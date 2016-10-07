@@ -163,12 +163,6 @@ int CLog::GetLogLevel()
   return s_globals.m_logLevel;
 }
 
-void CLog::SetExtraLogLevels(int level)
-{
-  CSingleLock waitLock(s_globals.critSec);
-  s_globals.m_extraLogLevels = level;
-}
-
 bool CLog::IsLogLevelLogged(int loglevel)
 {
   const int extras = (loglevel & ~LOGMASK);
