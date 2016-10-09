@@ -28,7 +28,7 @@ function(add_internal id url inputfile)
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND ""
                       INSTALL_COMMAND ${CMAKE_COMMAND}
-                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
+                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
                                       -P ${PROJECT_SOURCE_DIR}/Install.cmake
@@ -41,13 +41,13 @@ function(add_7zip id url inputfile)
                       DOWNLOAD_COMMAND ${CMAKE_COMMAND}
                                        -D7ZIP_EXECUTABLE=${7ZIP_EXECUTABLE}
                                        -DURL=${url}
-                                       -DDEST=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
-                                       -DDESTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
+                                       -DDEST=${PROJECT_BINARY_DIR}/download/${id}
+                                       -DDESTDIR=${PROJECT_BINARY_DIR}/download/${id}
                                        -P ${PROJECT_SOURCE_DIR}/Extract7z.cmake
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND ""
                       INSTALL_COMMAND ${CMAKE_COMMAND}
-                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
+                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
                                       -P ${PROJECT_SOURCE_DIR}/Install.cmake
@@ -59,12 +59,12 @@ function(add_direct id url inputfile)
                       PREFIX build/${id}
                       DOWNLOAD_COMMAND ${CMAKE_COMMAND}
                                        -DURL=${url}
-                                       -DDEST=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
+                                       -DDEST=${PROJECT_BINARY_DIR}/download/${id}
                                        -P ${PROJECT_SOURCE_DIR}/ExtractDirect.cmake
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND ""
                       INSTALL_COMMAND ${CMAKE_COMMAND}
-                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
+                                      -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
                                       -P ${PROJECT_SOURCE_DIR}/Install.cmake
