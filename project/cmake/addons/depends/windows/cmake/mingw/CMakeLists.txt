@@ -1,6 +1,5 @@
+cmake_minimum_required(VERSION 3.1)
 project(mingw)
-
-cmake_minimum_required(VERSION 2.8)
 
 function(generate_mingw32_wrapper cmd)
   set(CMD ${cmd})
@@ -13,8 +12,8 @@ set(MINGW_PATH "${CMAKE_INSTALL_PREFIX}/mingw")
 # configure the MinGW toolchain file
 configure_file(${PROJECT_SOURCE_DIR}/Toolchain_mingw32.cmake.in ${CMAKE_INSTALL_PREFIX}/Toolchain_mingw32.cmake @ONLY)
 
-# configure mingw-config.cmake
-configure_file(${PROJECT_SOURCE_DIR}/mingw-config.cmake.in ${CMAKE_INSTALL_PREFIX}/mingw-config.cmake)
+# configure MinGWConfig.cmake
+configure_file(${PROJECT_SOURCE_DIR}/MinGWConfig.cmake.in ${CMAKE_INSTALL_PREFIX}/MinGWConfig.cmake)
 
 # configure the MinGW wrapper batch scripts
 generate_mingw32_wrapper("mingw32-make")

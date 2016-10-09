@@ -35,6 +35,11 @@ endif()
 # generate the proper KodiConfig.cmake file
 configure_file(${CORE_SOURCE_DIR}/project/cmake/KodiConfig.cmake.in ${APP_LIB_DIR}/KodiConfig.cmake @ONLY)
 
+# configure MinGWConfig.cmake
+if(WIN32)
+  configure_file(${CORE_SOURCE_DIR}/project/cmake/addons/depends/windows/cmake/mingw/MinGWConfig.cmake.in ${APP_LIB_DIR}/MinGWConfig.cmake @ONLY)
+endif()
+
 # copy cmake helpers to lib/kodi
 file(COPY ${CORE_SOURCE_DIR}/project/cmake/scripts/common/AddonHelpers.cmake
           ${CORE_SOURCE_DIR}/project/cmake/scripts/common/AddOptions.cmake

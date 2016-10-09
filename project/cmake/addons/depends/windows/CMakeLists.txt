@@ -43,14 +43,14 @@ function(add_7zip id url inputfile)
                                        -DURL=${url}
                                        -DDEST=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
                                        -DDESTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
-                                       -P ${PROJECT_SOURCE_DIR}/extract-7z.cmake
+                                       -P ${PROJECT_SOURCE_DIR}/Extract7z.cmake
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND ""
                       INSTALL_COMMAND ${CMAKE_COMMAND}
                                       -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
-                                      -P ${PROJECT_SOURCE_DIR}/install.cmake
+                                      -P ${PROJECT_SOURCE_DIR}/Install.cmake
                      )
 endfunction()
 
@@ -60,14 +60,14 @@ function(add_direct id url inputfile)
                       DOWNLOAD_COMMAND ${CMAKE_COMMAND}
                                        -DURL=${url}
                                        -DDEST=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
-                                       -P ${PROJECT_SOURCE_DIR}/extract-direct.cmake
+                                       -P ${PROJECT_SOURCE_DIR}/ExtractDirect.cmake
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND ""
                       INSTALL_COMMAND ${CMAKE_COMMAND}
                                       -DINPUTDIR=${PROJECT_BINARY_DIR}/build/${id}/src/${id}
                                       -DINPUTFILE=${inputfile}
                                       -DDESTDIR=${DEPENDS_PATH}
-                                      -P ${PROJECT_SOURCE_DIR}/install.cmake
+                                      -P ${PROJECT_SOURCE_DIR}/Install.cmake
                      )
 endfunction()
 
