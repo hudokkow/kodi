@@ -31,6 +31,9 @@ include(scripts/common/ProjectMacros.cmake)
 include(scripts/${CORE_SYSTEM_NAME}/PathSetup.cmake)
 include(ExternalProject)
 
+# bail early if mirrors.kodi.tv/user defined Kodi mirror URL isn't reachable
+check_mirrors_connectivity()
+
 # Languages and global compiler settings
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -481,3 +484,5 @@ if(VERBOSE)
   message(STATUS "CPACK_SOURCE_GENERATOR: ${CPACK_SOURCE_GENERATOR}")
   message(STATUS "#---------------------------------------------#")
 endif()
+  message(STATUS "APP_MIRRORS: ${APP_MIRRORS}")
+  message(STATUS "APP_CODENAME_LC: ${APP_CODENAME_LC}")

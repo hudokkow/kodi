@@ -624,3 +624,61 @@ macro(core_find_versions)
   endif()
 endmacro()
 
+# Check if Kodi mirrors are reachable
+# ping exit status codes:
+#   Success: code 0
+#   No reply: code 1
+#   Other errors: code 2
+#
+# There are reports of ping exit status on Windows not being reliable
+# See https://mail.python.org/pipermail/tutor/2012-January/087959.html
+# for some background. Brief testing indicates that it works like its
+# *nix counterpart but for extra bonus points we check for the presence
+# of a specific string in the response output, i.e.
+# ping -n 1 http://mirrors.kodi.tv | find "TTL"
+#
+# http://stackoverflow.com/questions/12199059/how-to-check-if-an-url-exists-with-the-shell-and-probably-curl
+# http://stackoverflow.com/questions/929368/how-to-test-a-internet-connection-in-bash
+#
+# http://www.msftncsi.com/ncsi.txt
+#
+#
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/kodi/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/xbmc/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/pub/kodi/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/pub/xbmc/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+
+macro(check_mirrors_connectivity)
+# check if user decided to use another mirror
+  if(NOT DEFINED APP_MIRRORS)
+    set(APP_MIRRORS "mirrors.kodi.tv")
+  endif()
+  if(CORE_SYSTEM_NAME STREQUAL windows)
+    execute_process(COMMAND ping -n 1 -w 2000 ${APP_MIRRORS} | find "TTL"
+                    RESULT_VARIABLE status_code
+                    OUTPUT_QUIET)
+
+# curl -o /dev/null -s -f -r 0-0 http://fe.up.pt/pub/kodi/addons/krypton/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 http://${APP_MIRRORS}/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+#
+#
+# curl -s -f -r 0-0 http://mirrors.kodi.tv/addons/krypton/addons.xml.gz && echo "$?"
+# curl -s -f -r 0-0 ${APP_MIRRORS}/addons/${APP_CODENAME_LC}/addons.xml.gz && echo "$?"
+  else()
+#    execute_process(COMMAND ping -c 1 ${APP_MIRRORS}
+#                    RESULT_VARIABLE status_code
+#                    OUTPUT_QUIET)
+    execute_process(COMMAND curl -s -f -r 0-0 ${APP_MIRRORS}/addons/${APP_CODENAME_LC}/addons.xml.gz
+                    RESULT_VARIABLE status_code
+                    OUTPUT_QUIET)
+  endif()
+  if(NOT status_code)
+    message(STATUS "${APP_MIRRORS} is reachable")
+  else()
+    # bail if we can't connect to mirrors
+    message(FATAL_ERROR "${APP_MIRRORS} isn't reachable! Either Kodi's mirrors are experiencing problems or your Internet connection is down.\n")
+  endif()
+endmacro()
+
+
