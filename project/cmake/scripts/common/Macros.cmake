@@ -571,6 +571,8 @@ endfunction()
 #   APP_NAME_LC - lowercased app name
 #   APP_NAME_UC - uppercased app name
 #   COMPANY_NAME - company name
+#   APP_WEBSITE - website url
+#   APP_MIRRORS - mirrors url
 #   APP_VERSION_MAJOR - the app version major
 #   APP_VERSION_MINOR - the app version minor
 #   APP_VERSION_TAG - the app version tag
@@ -586,7 +588,7 @@ macro(core_find_versions)
   include(CMakeParseArguments)
   core_file_read_filtered(version_list ${CORE_SOURCE_DIR}/version.txt)
   string(REPLACE " " ";" version_list "${version_list}")
-  cmake_parse_arguments(APP "" "APP_NAME;COMPANY_NAME;WEBSITE;VERSION_MAJOR;VERSION_MINOR;VERSION_TAG;VERSION_CODE;ADDON_API" "" ${version_list})
+  cmake_parse_arguments(APP "" "APP_NAME;COMPANY_NAME;WEBSITE;MIRRORS;VERSION_MAJOR;VERSION_MINOR;VERSION_TAG;VERSION_CODENAME;VERSION_CODE;ADDON_API" "" ${version_list})
 
   set(APP_NAME ${APP_APP_NAME}) # inconsistency but APP_APP_NAME looks weird
   string(TOLOWER ${APP_APP_NAME} APP_NAME_LC)
@@ -598,6 +600,9 @@ macro(core_find_versions)
   endif()
   string(REPLACE "." "," FILE_VERSION ${APP_ADDON_API}.0)
   string(TOLOWER ${APP_VERSION_TAG} APP_VERSION_TAG_LC)
+  set(APP_CODENAME ${APP_VERSION_CODENAME})
+  string(TOLOWER ${APP_VERSION_CODENAME} APP_CODENAME_LC)
+  string(TOUPPER ${APP_VERSION_CODENAME} APP_CODENAME_UC)
   file(STRINGS ${CORE_SOURCE_DIR}/xbmc/addons/kodi-addon-dev-kit/include/kodi/libKODI_guilib.h guilib_version REGEX "^.*GUILIB_API_VERSION (.*)$")
   string(REGEX REPLACE ".*\"(.*)\"" "\\1" guilib_version ${guilib_version})
   file(STRINGS ${CORE_SOURCE_DIR}/xbmc/addons/kodi-addon-dev-kit/include/kodi/libKODI_guilib.h guilib_version_min REGEX "^.*GUILIB_MIN_API_VERSION (.*)$")
@@ -605,6 +610,8 @@ macro(core_find_versions)
   # unset variables not used anywhere else
   unset(version_list)
   unset(APP_APP_NAME)
+  unset(APP_COMPANY_NAME)
+  unset(APP_VERSION_CODENAME)
 
   # bail if we can't parse version.txt
   if(NOT DEFINED APP_VERSION_MAJOR OR NOT DEFINED APP_VERSION_MINOR)
