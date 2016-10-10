@@ -2,11 +2,6 @@
 include(${CORE_SOURCE_DIR}/project/cmake/scripts/common/Macros.cmake)
 core_find_versions()
 
-# in case we need to download something, set KODI_MIRROR to the default if not alread set
-if(NOT DEFINED KODI_MIRROR)
-  set(KODI_MIRROR "http://mirrors.kodi.tv")
-endif()
-
 ### copy all the addon binding header files to include/kodi
 # make sure include/kodi exists and is empty
 set(APP_LIB_DIR ${DEPENDS_PATH}/lib/${APP_NAME_LC})
@@ -59,7 +54,7 @@ if(WIN32)
   else()
     set(PATCH_ARCHIVE_NAME "patch-2.5.9-7-bin-3")
     set(PATCH_ARCHIVE "${PATCH_ARCHIVE_NAME}.zip")
-    set(PATCH_URL "${KODI_MIRROR}/build-deps/win32/${PATCH_ARCHIVE}")
+    set(PATCH_URL "${APP_MIRRORS}/build-deps/win32/${PATCH_ARCHIVE}")
     set(PATCH_DOWNLOAD ${BUILD_DIR}/download/${PATCH_ARCHIVE})
 
     # download the archive containing patch.exe
