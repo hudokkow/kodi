@@ -1,1 +1,0 @@
-game.libretro.stella https://github.com/kodi-game/game.libretro.stella master

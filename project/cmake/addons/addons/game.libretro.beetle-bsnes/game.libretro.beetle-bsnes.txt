@@ -1,1 +1,0 @@
-game.libretro.beetle-bsnes https://github.com/kodi-game/game.libretro.beetle-bsnes master

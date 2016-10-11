@@ -1,1 +1,0 @@
-game.libretro.nestopia https://github.com/kodi-game/game.libretro.nestopia master

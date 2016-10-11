@@ -1,1 +1,0 @@
-game.libretro.vbam https://github.com/kodi-game/game.libretro.vbam master

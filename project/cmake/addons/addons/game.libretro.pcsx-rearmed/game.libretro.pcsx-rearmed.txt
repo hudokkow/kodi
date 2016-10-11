@@ -1,1 +1,0 @@
-game.libretro.pcsx-rearmed https://github.com/kodi-game/game.libretro.pcsx-rearmed master

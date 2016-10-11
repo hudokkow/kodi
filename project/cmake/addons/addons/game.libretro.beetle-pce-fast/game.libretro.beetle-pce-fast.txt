@@ -1,1 +1,0 @@
-game.libretro.beetle-pce-fast https://github.com/kodi-game/game.libretro.beetle-pce-fast master

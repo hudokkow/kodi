@@ -1,1 +1,0 @@
-game.libretro.mupen64plus https://github.com/kodi-game/game.libretro.mupen64plus master
