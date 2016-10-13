@@ -1,3 +1,4 @@
+#https://github.com/BtbN/OdbCmake
 find_package(ODB REQUIRED COMPONENTS sqlite mysql)
 
 include(${ODB_USE_FILE})
