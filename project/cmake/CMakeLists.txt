@@ -477,4 +477,95 @@ if(VERBOSE)
   message(STATUS "CPACK_GENERATOR       : ${CPACK_GENERATOR}")
   message(STATUS "CPACK_SOURCE_GENERATOR: ${CPACK_SOURCE_GENERATOR}")
   message(STATUS "#---------------------------------------------#")
+
+  core_file_read_filtered(mingw_deps ${PROJECT_SOURCE_DIR}/mingw.txt)
+  string(REPLACE " " ";" mingw_deps "${mingw_deps}")
+  message(STATUS "mingw_deps: ${mingw_deps}\n\n\n")
+
+
+function (get_filename_shortest_extension file ext)
+  # get_filename_component returns extension from first occurrence of . in file name
+  # this function computes the extension from last occurrence of . in file name
+  string (FIND "${file}" "." index REVERSE)
+  if(index GREATER -1)
+    math(EXPR index "${index} + 1")
+    string(SUBSTRING "${file}" ${index} -1 Ext)
+  else()
+    set(Ext "")
+  endif()
+  set(${ext} "${Ext}" PARENT_SCOPE)
+endfunction()
+
+file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/depsunpacked")
+
+# for lzma tar --lzma -xvf automake1.11-1.11.1-1-mingw32-bin.tar.lzma --strip-components=1
+
+function(decompress_file file)
+  message(STATUS "Dependency: Decompressing '${file}'.")
+  get_filename_component(ext "${file}" EXT)
+  
+  #execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzvf "${CMAKE_BINARY_DIR}/depscache/${file}"
+  #                        RESULT_VARIABLE STATUS_CODE
+  #                        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/depsunpacked")
+  execute_process(COMMAND tar xzvf "--strip-components=1 ${CMAKE_BINARY_DIR}/depscache/${file}"
+                          RESULT_VARIABLE STATUS_CODE
+                          WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/depsunpacked")
+  if(NOT STATUS_CODE)
+    message(STATUS "Dependency: Successfully decompressed '${file}'.")
+  else()
+    message(FATAL_ERROR "Dependency: Failed to decompress '${file}'.")
+  endif()
+endfunction()
+
+
+function(download_file dep url file)
+# Download, extract and copy deps files
+  # Get files
+  if(EXISTS "${CMAKE_BINARY_DIR}/depscache/${file}")
+    message(STATUS "  Dependency: Found '${file}' in download cache. Skipping download.")
+  else()
+    message(STATUS "  Dependency: Downloading '${file}' from mirrors.")
+    if(VERBOSE)
+      file(DOWNLOAD "${url}" "${CMAKE_BINARY_DIR}/depscache/${file}"
+           SHOW_PROGRESS
+           STATUS DOWNLOAD_STATUS)
+    else()
+    file(DOWNLOAD "${url}" "${CMAKE_BINARY_DIR}/depscache/${file}"
+         STATUS DOWNLOAD_STATUS)
+    endif()
+
+    list(GET DOWNLOAD_STATUS 0 DOWNLOAD_STATUS)
+    if(NOT DOWNLOAD_STATUS)
+      message(STATUS "  Dependency: Successfully downloaded '${file}'.\n")
+    else()
+      message(FATAL_ERROR "  Dependency: Failed to download '${file}'.")
+    endif()
+  endif()
+  #decompress_file(${CMAKE_BINARY_DIR}/depscache/${file})
+endfunction()
+
+
+
+
+  set(index 0)
+  list(LENGTH mingw_deps mingw_deps_size)
+  math(EXPR depssize "${mingw_deps_size} / 2")
+  message(STATUS "mingw_deps_size: ${depssize}")
+  while(index LESS mingw_deps_size)
+    # get dep
+    list(GET mingw_deps ${index} dep)
+    # increase by one to get the url
+    math(EXPR index "${index} + 1")
+    list(GET mingw_deps ${index} dep_url)
+    get_filename_component(file "${dep_url}" NAME)
+    get_filename_component(ext "${dep_url}" EXT)
+    get_filename_shortest_extension("${dep_url}" MYFILE_WITHOUT_EXT)
+    message(STATUS "dep: ${dep} located at: ${dep_url} and the file is named ${file} with extension ${ext} AAAAANNNDDDD ${MYFILE_WITHOUT_EXT}")
+    download_file(${dep} ${dep_url} ${file})
+    math(EXPR index "${index} + 1")
+  endwhile()
+
+  core_file_read_filtered(msys_deps ${PROJECT_SOURCE_DIR}/msys.txt)
+  message(STATUS "mingw_deps: ${msys_deps}")
+
 endif()

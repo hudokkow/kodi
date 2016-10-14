@@ -1,0 +1,32 @@
+# mingw deps
+# ==========
+# latest at http://ftp.ntua.gr/mirror/mingw/
+automake http://mirrors.kodi.tv/build-deps/win32/mingw-msys/automake1.11-1.11.1-1-mingw32-bin.tar.lzma
+binutils http://mirrors.kodi.tv/build-deps/win32/mingw-msys/binutils-2.22-1-mingw32-bin.tar.lzma
+dlfcn http://mirrors.kodi.tv/build-deps/win32/mingw-msys/dlfcn-win32-static-r19.tar.bz2
+expat_mingw http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libexpat-2.0.1-1-mingw32-dev.tar.gz
+gcc-c++ http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gcc-c++-4.6.2-1-mingw32-bin.tar.lzma
+gcc-core http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gcc-core-4.6.2-1-mingw32-bin.tar.lzma
+gettext http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gettext-0.17-1-mingw32-dev.tar.lzma
+gmp http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libgmp-5.0.1-1-mingw32-dll-10.tar.lzma
+gnutls http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gnutls-dev_2.4.2-1_win32.zip
+iconv-dev_mingw http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libiconv-1.13.1-1-mingw32-dev.tar.lzma
+iconv_mingw http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libiconv-1.13.1-1-mingw32-dll-2.tar.lzma
+libintl http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libintl-0.17-1-mingw32-dll-8.tar.lzma
+libstdc++ http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libstdc++-4.6.2-1-mingw32-dll-6.tar.lzma
+libtool http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libtool-2.4-1-mingw32-bin.tar.lzma
+mads http://mirrors.kodi.tv/build-deps/win32/mingw-msys/mads_1.9.3.7z
+make http://mirrors.kodi.tv/build-deps/win32/mingw-msys/make-3.82-5-mingw32-bin.tar.lzma
+mingw-rt-dev http://mirrors.kodi.tv/build-deps/win32/mingw-msys/mingwrt-3.20-mingw32-dev.tar.gz
+mingw-rt http://mirrors.kodi.tv/build-deps/win32/mingw-msys/mingwrt-3.20-mingw32-dll.tar.gz
+mpc http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libmpc-0.8.1-1-mingw32-dll-2.tar.lzma
+mpfr http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libmpfr-2.4.1-1-mingw32-dll-1.tar.lzma
+pkgconfig-lite http://mirrors.kodi.tv/build-deps/win32/mingw-msys/pkg-config-lite-0.28-1_bin-win32.zip
+plibc http://mirrors.kodi.tv/build-deps/win32/mingw-msys/plibc-0.1.6.zip
+pthreadgc http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libpthreadgc-2.9.0-mingw32-pre-20110507-2-dll-2.tar.lzma
+pthreads http://mirrors.kodi.tv/build-deps/win32/mingw-msys/pthreads-w32-2.9.0-mingw32-pre-20110507-2-dev.tar.lzma
+w32api-dev http://mirrors.kodi.tv/build-deps/win32/mingw-msys/w32api-3.17-2-mingw32-dev.tar.lzma
+xasm http://mirrors.kodi.tv/build-deps/win32/mingw-msys/xasm-3.0.2-windows.zip
+yasm http://mirrors.kodi.tv/build-deps/win32/mingw-msys/yasm-1.2.0-win32.exe
+zlib_mingw http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libz-1.2.5-1-mingw32-dev.tar.lzma
+

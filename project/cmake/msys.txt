@@ -1,0 +1,32 @@
+# msys deps
+# ==========
+# latest at http://ftp.ntua.gr/mirror/mingw/
+autoconf http://mirrors.kodi.tv/build-deps/win32/mingw-msys/autoconf-2.68-1-msys-1.0.17-bin.tar.lzma
+automake_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/automake-1.11.1-1-msys-1.0.13-bin.tar.lzma
+bash http://mirrors.kodi.tv/build-deps/win32/mingw-msys/bash-3.1.17-4-msys-1.0.16-bin.tar.lzma
+coreutils597 http://mirrors.kodi.tv/build-deps/win32/mingw-msys/coreutils-5.97-MSYS-1.0.11-snapshot.tar.bz2
+coreutils http://mirrors.kodi.tv/build-deps/win32/mingw-msys/coreutils-5.97-3-msys-1.0.13-bin.tar.lzma
+crypt http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libcrypt-1.1_1-3-msys-1.0.13-dll-0.tar.lzma
+diffutils http://mirrors.kodi.tv/build-deps/win32/mingw-msys/diffutils-2.8.7.20071206cvs-3-msys-1.0.13-bin.tar.lzma
+findutils http://mirrors.kodi.tv/build-deps/win32/mingw-msys/findutils-4.4.2-2-msys-1.0.13-bin.tar.lzma
+gawk http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gawk-3.1.7-2-msys-1.0.13-bin.tar.lzma
+gettext_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gettext-0.17-2-msys-1.0.13-bin.tar.lzma
+grep http://mirrors.kodi.tv/build-deps/win32/mingw-msys/grep-2.5.4-2-msys-1.0.13-bin.tar.lzma
+gzip http://mirrors.kodi.tv/build-deps/win32/mingw-msys/gzip-1.3.12-2-msys-1.0.13-bin.tar.lzma
+iconv_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libiconv-1.13.1-2-msys-1.0.13-dll-2.tar.lzma
+libintl_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libintl-0.17-2-msys-dll-8.tar.lzma
+libtool_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libtool-2.4-1-msys-1.0.15-bin.tar.lzma
+m4 http://mirrors.kodi.tv/build-deps/win32/mingw-msys/m4-1.4.14-1-msys-1.0.13-bin.tar.lzma
+make_msys http://mirrors.kodi.tv/build-deps/win32/mingw-msys/make-3.81-3-msys-1.0.13-bin.tar.lzma
+mktemp http://mirrors.kodi.tv/build-deps/win32/mingw-msys/mktemp-1.6-2-msys-1.0.13-bin.tar.lzma
+msyscore-ext http://mirrors.kodi.tv/build-deps/win32/mingw-msys/msysCORE-1.0.17-1-msys-1.0.17-ext.tar.lzma
+msyscore http://mirrors.kodi.tv/build-deps/win32/mingw-msys/msysCORE-1.0.17-1-msys-1.0.17-bin.tar.lzma
+patch http://mirrors.kodi.tv/build-deps/win32/mingw-msys/patch-2.6.1-1-msys-1.0.13-bin.tar.lzma
+perl http://mirrors.kodi.tv/build-deps/win32/mingw-msys/perl-5.6.1_2-2-msys-1.0.13-bin.tar.lzma
+regex http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libregex-1.20090805-2-msys-1.0.13-dll-1.tar.lzma
+rxvt http://mirrors.kodi.tv/build-deps/win32/mingw-msys/rxvt-2.7.2-3-msys-1.0.14-bin.tar.lzma
+sed http://mirrors.kodi.tv/build-deps/win32/mingw-msys/sed-4.2.1-2-msys-1.0.13-bin.tar.lzma
+tar http://mirrors.kodi.tv/build-deps/win32/mingw-msys/tar-1.23-1-msys-1.0.13-bin.tar.lzma
+termcap http://mirrors.kodi.tv/build-deps/win32/mingw-msys/libtermcap-0.20050421_1-2-msys-1.0.13-dll-0.tar.lzma
+texinfo http://mirrors.kodi.tv/build-deps/win32/mingw-msys/texinfo-4.13a-2-msys-1.0.13-bin.tar.lzma
+xz http://mirrors.kodi.tv/build-deps/win32/mingw-msys/xz-4.999.9beta_20100401-1-msys-1.0.13-bin.tar.gz
