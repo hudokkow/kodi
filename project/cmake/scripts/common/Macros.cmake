@@ -193,13 +193,18 @@ endfunction()
 #   Files is mirrored to the build tree and added to ${install_data}
 #   (if NO_INSTALL is not given).
 function(copy_file_to_buildtree file)
-  cmake_parse_arguments(arg "NO_INSTALL" "DIRECTORY" "" ${ARGN})
+  cmake_parse_arguments(arg "NO_INSTALL" "DIRECTORY;STRIP_DIRECTORY" "" ${ARGN})
   if(arg_DIRECTORY)
     set(outdir ${arg_DIRECTORY})
     get_filename_component(outfile ${file} NAME)
     set(outfile ${outdir}/${outfile})
   else()
-    string(REPLACE "${CORE_SOURCE_DIR}/" "" outfile ${file})
+    if(arg_STRIP_DIRECTORY)
+      set(strip ${arg_STRIP_DIRECTORY})
+      string(REPLACE "${strip}/" "" outfile ${file})
+    else()
+      string(REPLACE "${CORE_SOURCE_DIR}/" "" outfile ${file})
+    endif()
     get_filename_component(outdir ${outfile} DIRECTORY)
   endif()
 
@@ -288,6 +293,102 @@ function(copy_files_from_filelist_to_buildtree pattern)
   endforeach()
   set(install_data ${install_data} PARENT_SCOPE)
 endfunction()
+
+# Decompress a file to given target dir.
+# Arguments:
+#   file file to decompress
+#   target dir where file will be decompressed to
+function(decompress_file file target)
+  if(NOT EXISTS ${target})
+    file(MAKE_DIRECTORY "${target}")
+  endif()
+  message(STATUS "decompress_file: Decompressing '${file}' to ${target}.")
+  execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzvf "${file}"
+                          RESULT_VARIABLE STATUS_CODE
+                          WORKING_DIRECTORY "${target}")
+
+  if(NOT STATUS_CODE)
+    message(STATUS "decompress_file: Successfully decompressed '${file}'.")
+  else()
+    message(FATAL_ERROR "decompress_file: Failed to decompress '${file}'.")
+  endif()
+endfunction()
+
+# Download a file to given target dir.
+# If file exists in target dir, download is skipped
+# Arguments:
+#   url url of the file to download
+#   file file to check for presence in download cache
+#   target dir where file will be downloaded to
+function(download_file url file target)
+  if(NOT EXISTS ${target})
+    file(MAKE_DIRECTORY "${target}")
+  endif()
+  if(EXISTS "${target}/${file}")
+    message(STATUS "download_file: Found '${file}' in download cache. Skipping download.")
+  else()
+    message(STATUS "download_file: Downloading '${file}' from mirrors.")
+    if(VERBOSE)
+      file(DOWNLOAD "${url}" "${target}/${file}"
+           SHOW_PROGRESS
+           STATUS DOWNLOAD_STATUS)
+    else()
+      file(DOWNLOAD "${url}" "${target}/${file}"
+           STATUS DOWNLOAD_STATUS)
+    endif()
+
+    list(GET DOWNLOAD_STATUS 0 DOWNLOAD_STATUS)
+    if(NOT DOWNLOAD_STATUS)
+      message(STATUS "download_file: Successfully downloaded '${file}'.\n")
+    else()
+      message(FATAL_ERROR "download_file: Failed to download '${file}'.")
+    endif()
+  endif()
+endfunction()
+
+# Reads STRINGS from text files with comments
+# filtered out and requests a download of the
+# file after generating download url based on
+# ${APP_MIRRORS}, ${subdir} (based on parsed txt
+# file name without extension), ${APP_CODENAME_LC}
+# and ${name}-${version}.zip
+# Files are downloaded and cached  inside
+# ${CMAKE_BINARY_DIR}/downloadcache for future use
+# Arguments:
+#   dir dir of the files to read
+# Input:  [glob pattern: filepattern]
+macro(download_to_buildtree dir)
+  file(GLOB files ${dir})
+  foreach(file ${files})
+    core_file_read_filtered(downloaded_deps ${file})
+    string(REPLACE " " ";" downloaded_deps "${downloaded_deps}")
+    get_filename_component(subdir ${file} NAME_WE)
+
+    set(index 0)
+    list(LENGTH downloaded_deps size)
+    while(index LESS size)
+      # get file version
+      list(GET downloaded_deps ${index} version)
+
+      # increase by one to get the file name
+      math(EXPR index "${index} + 1")
+      list(GET downloaded_deps ${index} name)
+
+      set(file "${name}-${version}.zip")
+      set(url ${APP_MIRRORS}/${subdir}/${APP_CODENAME_LC}/${name}/${file})
+      set(target "${CMAKE_BINARY_DIR}/downloadcache")
+
+      download_file(${url} ${file} ${target})
+      decompress_file(${target}/${file} ${target}/${subdir})
+
+      file(GLOB_RECURSE files ${target}/${subdir}/${name}/*)
+      foreach(file ${files})
+        copy_file_to_buildtree(${file} STRIP_DIRECTORY ${CMAKE_BINARY_DIR}/downloadcache)
+      endforeach()
+      math(EXPR index "${index} + 1")
+    endwhile()
+  endforeach()
+endmacro()
 
 # helper macro to set modified variables in parent scope
 macro(export_dep)

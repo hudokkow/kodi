@@ -273,6 +273,8 @@ set_target_properties(gtest PROPERTIES FOLDER "External Projects")
 # copy files to build tree
 copy_files_from_filelist_to_buildtree(${PROJECT_SOURCE_DIR}/installdata/common/*.txt
                                       ${PROJECT_SOURCE_DIR}/installdata/${CORE_SYSTEM_NAME}/*.txt)
+# download files to build tree
+download_to_buildtree(${PROJECT_SOURCE_DIR}/downloaddata/common/*.txt)
 
 list(APPEND SKINS "${CORE_SOURCE_DIR}/addons/skin.estuary\;${CORE_SOURCE_DIR}")
 list(APPEND SKINS "${CORE_SOURCE_DIR}/addons/skin.estouchy\;${CORE_SOURCE_DIR}")

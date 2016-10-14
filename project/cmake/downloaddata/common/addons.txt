@@ -1,0 +1,16 @@
+# add-ons that will be downloaded and added to Kodi during build/packaging process
+# file format is 'add-on version' 'add-on name'
+# CMake logic will compose the proper url and fetch it
+
+2.7.0 metadata.album.universal
+3.7.2 metadata.artists.universal
+3.1.1 metadata.common.allmusic.com
+3.1.4 metadata.common.fanart.tv
+1.3.4 metadata.common.htbackdrops.com
+2.8.7 metadata.common.imdb.com
+2.1.1 metadata.common.musicbrainz.org
+1.9.0 metadata.common.theaudiodb.com
+2.14.0 metadata.common.themoviedb.org
+3.9.2 metadata.themoviedb.org
+1.8.4 metadata.tvdb.com
+#0.0.0 webinterface.default
