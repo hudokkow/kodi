@@ -11,7 +11,7 @@ else
     PLATFORM = native
     TARBALLS_LOCATION = $(ROOT_DIR)
     BASE_URL := http://mirrors.kodi.tv/build-deps/sources
-    RETRIEVE_TOOL := curl -Ls --create-dirs -f -O
+    RETRIEVE_TOOL := curl -L --create-dirs -f -O
     ARCHIVE_TOOL := tar --strip-components=1 -xf
   endif
 endif
@@ -19,7 +19,7 @@ endif
 # lib name, version
 LIBNAME=libodb
 VERSION=2.4.0
-BASE_URL=http://codesynthesis.com/download/odb/2.4/
+BASE_URL=http://codesynthesis.com/download/odb/2.4
 
 SOURCE=$(LIBNAME)-$(VERSION)
 ARCHIVE=$(SOURCE).tar.gz
