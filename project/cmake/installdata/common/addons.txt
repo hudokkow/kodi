@@ -37,14 +37,3 @@ addons/resource.uisounds.kodi/*
 addons/resource.images.weathericons.default/*
 addons/service.xbmc.versioncheck/*
 addons/metadata.local/*
-addons/metadata.album.universal/*
-addons/metadata.artists.universal/*
-addons/metadata.common.allmusic.com/*
-addons/metadata.common.fanart.tv/*
-addons/metadata.common.htbackdrops.com/*
-addons/metadata.common.imdb.com/*
-addons/metadata.common.musicbrainz.org/*
-addons/metadata.common.theaudiodb.com/*
-addons/metadata.common.themoviedb.org/*
-addons/metadata.themoviedb.org/*
-addons/metadata.tvdb.com/*
