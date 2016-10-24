@@ -1,46 +1,34 @@
-# Kodi's travis-ci.org integration file
-
-# TODO:
-# integrate with slack
-# make it perfect... or not ;-r
-
 language: cpp
-cache: ccache
+#dummy commit to test
 
 # Define the build matrix
 #
 # Travis defaults to building on Ubuntu Precise when building on Linux. We need Trusty in order to get up
 # to date versions of cmake and g++.
 #
-os: linux
-dist: trusty
-sudo: required
-compiler:
-  - gcc
-  - clang
-
-env:
-  - BUILD=Kodi
-  - ADDONS=adsp
-  - ADDONS=audiodecoder
-  - ADDONS=audioencoder
-  - ADDONS=inputstream
-  - ADDONS=peripheral
-  - ADDONS=pvr
-  - ADDONS=screensaver
-  - ADDONS=visualization
-
 matrix:
+  include:
+    - os: linux
+      dist: trusty    
+      sudo: required
+      compiler: gcc
+      cache: ccache
+      env: ADDONS=adsp CACHE_NAME=gcc
+    - os: linux
+      dist: trusty    
+      sudo: required
+      compiler: clang
+      cache: ccache
+      env: ADDONS=adsp CACHE_NAME=clang
+    - os: osx
+      osx_image: xcode8
+      cache: ccache
+      env: ADDONS=adsp CACHE_NAME=osx8
+    - os: osx
+      osx_image: xcode7.3
+      cache: ccache
+      env: ADDONS=adsp CACHE_NAME=osx7.3
   fast_finish: true
-  allow_failures:
-    - env: ADDONS=adsp
-    - env: ADDONS=audiodecoder
-    - env: ADDONS=audioencoder
-    - env: ADDONS=inputstream
-    - env: ADDONS=peripheral
-    - env: ADDONS=pvr
-    - env: ADDONS=screensaver
-    - env: ADDONS=visualization
 
 # Prepare system
 #
@@ -55,7 +43,7 @@ before_install:
 #
 # Add team-xbmc/xbmc-ppa-build-depends for some dependencies and ppa:wsnipex/vaapi for libda-dev 1.6.0.
 # Stupid libda-dev 1.3.0 does not work on Trusty.
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD" == "Kodi" ]]; then
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g") &&
       sudo add-apt-repository -y ppa:team-xbmc/xbmc-ppa-build-depends &&
       sudo add-apt-repository -y ppa:wsnipex/vaapi &&
@@ -63,11 +51,20 @@ before_install:
       sudo apt-get update -qq;
     fi
 
+### OSX
+#
+# Some of the OS X images don't have cmake, contrary to what people 
+# on the Internet say
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew update        ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew install cmake ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which ccache || brew update        ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which ccache || brew install ccache ; fi
+
 install:
 ### Linux
 #
 #Install any prerequisites or dependencies necessary to run our builds
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD" == "Kodi" ]]; then
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       sudo apt-get install -qq automake autopoint build-essential cmake ccache curl default-jre gawk gdb gdc
       gettext git-core gperf libasound2-dev libass-dev libbz2-dev libcap-dev libcdio-dev libcrossguid-dev libcurl3
       libcurl4-openssl-dev libdbus-1-dev libfontconfig-dev libegl1-mesa-dev libfreetype6-dev libfribidi-dev libgif-dev
@@ -84,18 +81,7 @@ before_script:
 
 ### Linux
 #
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$BUILD" == "Kodi" ]]; then
-      ulimit -c unlimited -S;
-      mkdir $TRAVIS_BUILD_DIR/build &&
-      cd $TRAVIS_BUILD_DIR/build;
-      if [[ "$CXX" == "g++" ]]; then
-        cmake -DCMAKE_BUILD_TYPE=Debug ../project/cmake;
-      elif [[ "$CXX" == "clang++" ]]; then
-        cmake -DCMAKE_CXX_FLAGS="-Qunused-arguments" ../project/cmake;
-      fi
-    fi
-
-  - if [[ "$BUILD" != "Kodi" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" || "$ADDONS" == "inputstream" ||
+  - if [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" || "$ADDONS" == "inputstream" ||
           "$ADDONS" == "peripheral" || "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
       cd $TRAVIS_BUILD_DIR/project/cmake/addons &&
       mkdir -p build &&
@@ -107,22 +93,12 @@ before_script:
 # Actually build
 #
 script:
-  - if [[ "$BUILD" == "Kodi" ]]; then
-      make -j3 &&
-      make check;
-    fi
-  - if [[ "$BUILD" != "Kodi" ]] && [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" || "$ADDONS" == "inputstream" ||
+  - if [[ "$ADDONS" == "adsp" || "$ADDONS" == "audiodecoder" || "$ADDONS" == "audioencoder" || "$ADDONS" == "inputstream" ||
           "$ADDONS" == "peripheral" || "$ADDONS" == "pvr" || "$ADDONS" == "screensaver" || "$ADDONS" == "visualization" ]]; then
       cd $TRAVIS_BUILD_DIR/ &&
       mkdir -p build &&
       cmake -DADDONS_TO_BUILD="$ADDONS".* -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=../addons $TRAVIS_BUILD_DIR/project/cmake/addons &&
       make -j3;
-    fi
-
-after_failure:
-  - COREFILE=$(find . -maxdepth 1 -name "core*" | head -n 1)
-  - if [[ -f "$COREFILE" ]]; then
-      gdb -c "$COREFILE" kodi-test -ex "thread apply all bt" -ex "set pagination 0" -batch;
     fi
 
 # Disable annoying emails
