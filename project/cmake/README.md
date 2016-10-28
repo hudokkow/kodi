@@ -296,3 +296,17 @@ lines:
 #set(CMAKE_END_TEMP_FILE "")
 #set(CMAKE_VERBOSE_MAKEFILE 1)
 ```
+
+
+Option | Description | Default | All | A | B | I | L | O | R | W
+------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- | -------
+ENABLE_AIRTUNES | AirTunes support | ON | :heavy_check_mark: ||||||||
+ENABLE_CEC | CEC support | ON | :heavy_check_mark: ||||||||
+ENABLE_DVDCSS | libdvdcss support | ON | :heavy_check_mark: ||||||||
+ENABLE_NONFREE | non-free components (rar support) | ON | :heavy_check_mark: ||||||||
+ENABLE_OPTICAL | Optical support | ON | :heavy_check_mark: ||||||||
+ENABLE_UPNP | UPnP support | ON | :heavy_check_mark: ||||||||
+VERBOSE | Verbose output | ON | :heavy_check_mark: ||||||||
+ENABLE_INTERNAL_FFMPEG | Enable internal ffmpeg | ON ||| :heavy_check_mark: || :heavy_check_mark: ||||
+
+A - Android, B - FreeBSD, I - iOS, L - Linux, O - OSX, R - RBPi, W - Windows
