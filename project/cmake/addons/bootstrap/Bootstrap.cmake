@@ -11,24 +11,24 @@ if(NOT ADDONS_TO_BUILD)
 else()
   string(STRIP "${ADDONS_TO_BUILD}" ADDONS_TO_BUILD)
   message(STATUS "Bootstrapping following addons: ${ADDONS_TO_BUILD}")
-  separate_arguments(ADDONS_TO_BUILD)
+  string(REPLACE " " ";" ADDONS_TO_BUILD ${ADDONS_TO_BUILD})
 endif()
 
 # find all addon definitions and go through them
 file(GLOB_RECURSE ADDON_DEFINITIONS ${PROJECT_SOURCE_DIR}/*.txt)
+# remove platforms.txt
+list(FILTER ADDON_DEFINITIONS EXCLUDE REGEX "platforms.txt")
 foreach(ADDON_DEFINITION_FILE ${ADDON_DEFINITIONS})
-  # ignore platforms.txt
-  if(NOT (ADDON_DEFINITION_FILE MATCHES platforms.txt))
+
     # read the addon definition file
     file(STRINGS ${ADDON_DEFINITION_FILE} ADDON_DEFINITION)
-    separate_arguments(ADDON_DEFINITION)
+    string(REPLACE " " ";" ADDON_DEFINITION ${ADDON_DEFINITION})
 
     # extract the addon definition's identifier
     list(GET ADDON_DEFINITION 0 ADDON_ID)
 
     # check if the addon definition should be built
-    list(FIND ADDONS_TO_BUILD ${ADDON_ID} ADDONS_TO_BUILD_IDX)
-    if(ADDONS_TO_BUILD_IDX GREATER -1 OR "${ADDONS_TO_BUILD}" STREQUAL "all")
+    if(ADDON_ID MATCHES "^${ADDONS_TO_BUILD}" OR ADDONS_TO_BUILD STREQUAL all)
       # get the path to the addon definition directory
       get_filename_component(ADDON_DEFINITION_DIR ${ADDON_DEFINITION_FILE} DIRECTORY)
 
@@ -36,5 +36,4 @@ foreach(ADDON_DEFINITION_FILE ${ADDON_DEFINITIONS})
       message(STATUS "Bootstrapping ${ADDON_ID} addon...")
       file(INSTALL ${ADDON_DEFINITION_DIR} DESTINATION ${CMAKE_INSTALL_PREFIX})
     endif()
-  endif()
 endforeach()
