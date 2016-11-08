@@ -5,20 +5,26 @@ language: cpp
 # to date versions of cmake and g++.
 #
 matrix:
+  fast_finish: true
   include:
     - os: linux
       dist: trusty    
       sudo: required
       compiler: gcc
       cache: ccache
-      env: CACHE_NAME=gcc
+      env:
+        - JOB_NAME=gcc
+        - CACHE_NAME=gcc
+        - USE_CACHE=true
     - os: linux
       dist: trusty    
       sudo: required
       compiler: clang
       cache: ccache
-      env: CACHE_NAME=clang
-  fast_finish: true
+      env:
+        - JOB_NAME=clang
+        - CACHE_NAME=clang
+        - USE_CACHE=true
 
 ### Prepare system
 
@@ -93,12 +99,12 @@ before_script:
 # Actually build
 #
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]] && [[ "$CACHE_NAME" == "gcc" || "$CACHE_NAME" == "clang" ]]; then
-      make -j3 &&
-      make check;
-    fi
-  - $CXX --version
-  - $CC --version
+#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]] && [[ "$CACHE_NAME" == "gcc" || "$CACHE_NAME" == "clang" ]]; then
+#      make -j3 &&
+#      make check;
+#    fi
+#  - $CXX --version
+#  - $CC --version
 
 #after_failure:
 #  - COREFILE=$(find . -maxdepth 1 -name "core*" | head -n 1)
