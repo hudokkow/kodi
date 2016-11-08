@@ -4,6 +4,11 @@ language: cpp
 # Travis defaults to building on Ubuntu Precise when building on Linux. We need Trusty in order to get up
 # to date versions of cmake and g++.
 #
+env:
+  global:
+    - MAKEJOBS=3
+    - MAKE_TESTS=false
+
 matrix:
   fast_finish: true
   include:
@@ -69,16 +74,6 @@ install:
       nasm pmount python-dev python-imaging python-sqlite swig unzip uuid-dev yasm zip zlib1g-dev;
     fi
 
-#  - cmake --version
-# Print compiler info
-#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-#      if [[ "$CXX" == "g++" ]]; then
-#        gcc -v;
-#      elif [[ "$CXX" == "clang++" ]]; then
-#        clang -v;
-#      fi
-#    fi
-
 # Prepare builds
 #
 before_script:
@@ -99,12 +94,14 @@ before_script:
 # Actually build
 #
 script:
-#  - if [[ "$TRAVIS_OS_NAME" == "linux" ]] && [[ "$CACHE_NAME" == "gcc" || "$CACHE_NAME" == "clang" ]]; then
-#      make -j3 &&
-#      make check;
-#    fi
-#  - $CXX --version
-#  - $CC --version
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      make -j$MAKEJOBS;
+      if [[ "$MAKE_TESTS" == "true" ]]; then
+        make -j$MAKEJOBS check;
+      fi
+    fi
+  - $CXX --version
+  - $CC --version
 
 #after_failure:
 #  - COREFILE=$(find . -maxdepth 1 -name "core*" | head -n 1)
