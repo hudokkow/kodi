@@ -106,7 +106,7 @@ macro (build_addon target prefix libs)
     set(CPACK_COMPONENTS_IGNORE_GROUPS 1)
     list(APPEND CPACK_COMPONENTS_ALL ${target}-${${prefix}_VERSION})
     # Pack files together to create an archive
-    install(DIRECTORY ${target} DESTINATION ./ COMPONENT ${target}-${${prefix}_VERSION} PATTERN "xml.in" EXCLUDE)
+    install(DIRECTORY ${target} DESTINATION ${CMAKE_INSTALL_PREFIX} COMPONENT ${target}-${${prefix}_VERSION} PATTERN "xml.in" EXCLUDE)
     if(WIN32)
       if(NOT CPACK_PACKAGE_DIRECTORY)
         # determine the temporary path
