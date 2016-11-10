@@ -1,53 +1,44 @@
 cmake_minimum_required(VERSION 3.1)
 project(kodi-addons)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR})
-
 option(ADDON_TARBALL_CACHING "Cache downloaded addon source tarballs?" ON)
-if(ADDON_TARBALL_CACHING)
-  message(STATUS "Addon source tarball caching is enabled")
-else()
-  message(STATUS "Addon source tarball caching is disabled")
-endif()
-
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
-if(NOT CORE_SYSTEM_NAME)
-  if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
-    set(CORE_SYSTEM_NAME "osx")
-  else()
-    string(TOLOWER ${CMAKE_SYSTEM_NAME} CORE_SYSTEM_NAME)
-  endif()
-endif()
+option(PACKAGE_ZIP           "Prepare built addons for packaging" OFF)
 
 include(ExternalProject)
 
-### setup all the necessary paths
+# Set CORE_SYSTEM_NAME
+if(CMAKE_SYSTEM_NAME STREQUAL Darwin)
+  set(CORE_SYSTEM_NAME osx)
+else()
+  string(TOLOWER ${CMAKE_SYSTEM_NAME} CORE_SYSTEM_NAME)
+endif()
+
+# APP_ROOT is deprecated
 if(APP_ROOT)
   set(CORE_SOURCE_DIR ${APP_ROOT})
   unset(APP_ROOT)
-  message(WARNING "APP_ROOT is deprecated. Please use CORE_SOURCE_DIR instead.")
+  message(AUTHOR_WARNING "Add-ons: 'APP_ROOT' is deprecated. Please use 'CORE_SOURCE_DIR' instead.")
 endif()
-if(NOT CORE_SOURCE_DIR)
-  set(CORE_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../../..)
-else()
-  file(TO_CMAKE_PATH "${CORE_SOURCE_DIR}" CORE_SOURCE_DIR)
-endif()
-get_filename_component(CORE_SOURCE_DIR "${CORE_SOURCE_DIR}" ABSOLUTE)
 
-if(NOT BUILD_DIR)
-  set(BUILD_DIR "${CMAKE_BINARY_DIR}/build")
+# Setup all the necessary paths
+if(CORE_SOURCE_DIR)
+  file(TO_CMAKE_PATH "${CORE_SOURCE_DIR}" CORE_SOURCE_DIR)
 else()
+  set(CORE_SOURCE_DIR ${PROJECT_SOURCE_DIR}/../../..)
+endif()
+get_filename_component(CORE_SOURCE_DIR ${CORE_SOURCE_DIR} ABSOLUTE)
+
+if(BUILD_DIR)
   file(TO_CMAKE_PATH "${BUILD_DIR}" BUILD_DIR)
+else()
+  set(BUILD_DIR "${CMAKE_BINARY_DIR}/build")
 endif()
 get_filename_component(BUILD_DIR "${BUILD_DIR}" ABSOLUTE)
 
-if(NOT DEPENDS_PATH)
-  set(DEPENDS_PATH "${BUILD_DIR}/depends")
-else()
+if(DEPENDS_PATH)
   file(TO_CMAKE_PATH "${DEPENDS_PATH}" DEPENDS_PATH)
+else()
+  set(DEPENDS_PATH "${BUILD_DIR}/depends")
 endif()
 get_filename_component(DEPENDS_PATH "${DEPENDS_PATH}" ABSOLUTE)
 
@@ -56,12 +47,50 @@ if(NOT PLATFORM_DIR)
   file(TO_CMAKE_PATH "${PLATFORM_DIR}" PLATFORM_DIR)
 endif()
 
-# make sure CMAKE_PREFIX_PATH is set
-if(NOT CMAKE_PREFIX_PATH)
-  set(CMAKE_PREFIX_PATH "${DEPENDS_PATH}")
-else()
+if(CMAKE_PREFIX_PATH)
   file(TO_CMAKE_PATH "${CMAKE_PREFIX_PATH}" CMAKE_PREFIX_PATH)
   list(APPEND CMAKE_PREFIX_PATH "${DEPENDS_PATH}")
+else()
+  set(CMAKE_PREFIX_PATH "${DEPENDS_PATH}")
+endif()
+
+if(ADDONS_DEFINITION_DIR)
+  file(TO_CMAKE_PATH "${ADDONS_DEFINITION_DIR}" ADDONS_DEFINITION_DIR)
+else()
+  set(ADDONS_DEFINITION_DIR ${PROJECT_SOURCE_DIR}/addons)
+endif()
+get_filename_component(ADDONS_DEFINITION_DIR "${ADDONS_DEFINITION_DIR}" ABSOLUTE)
+
+if(ADDON_SRC_PREFIX)
+  if(NOT IS_ABSOLUTE ${ADDON_SRC_PREFIX})
+    get_filename_component(ADDON_SRC_PREFIX "${CMAKE_BINARY_DIR}/${ADDON_SRC_PREFIX}" ABSOLUTE)
+  endif()
+  message(STATUS "Add-ons: Overriding add-on source dir prefix: ${ADDON_SRC_PREFIX}")
+endif()
+
+if(APP_LIB_DIR)
+
+  file(TO_CMAKE_PATH "${APP_LIB_DIR}" APP_LIB_DIR)
+else()
+  set(APP_LIB_DIR "${DEPENDS_PATH}/lib/kodi")
+endif()
+
+set(APP_PREFIX "${CMAKE_INSTALL_PREFIX}")
+
+
+# include check_target_platform() function
+include(${CORE_SOURCE_DIR}/project/cmake/scripts/common/CheckTargetPlatform.cmake)
+
+set(ADDON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
+if(NOT WIN32)
+  # check install permissions
+  check_install_permissions(${CMAKE_INSTALL_PREFIX} can_write)
+  if(NOT ${can_write} AND CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(NEED_SUDO TRUE)
+    set(ADDON_INSTALL_DIR ${CMAKE_BINARY_DIR}/.install)
+    list(APPEND BUILD_ARGS -DOVERRIDE_PATHS=ON)
+    message(STATUS "NEED_SUDO: ${NEED_SUDO} (no write permission for ${CMAKE_INSTALL_PREFIX})")
+  endif()
 endif()
 
 # check for autoconf stuff to pass on
@@ -93,57 +122,43 @@ if(MSVC)
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
-option(PACKAGE_ZIP "Prepare built addons for packaging" OFF)
+# download cache info
+if(ADDON_TARBALL_CACHING)
+  message(STATUS "Add-ons: Source tarball caching is enabled")
+else()
+  message(STATUS "Add-ons: Source tarball caching is disabled")
+endif()
+
+# ZIP packaging handling
 if(PACKAGE_ZIP)
   # needed for project installing
   list(APPEND BUILD_ARGS -DPACKAGE_ZIP=ON)
 
   # figure out where to store the packaged ZIP archives
-  if(NOT PACKAGE_DIR)
-    set(PACKAGE_DIR "${BUILD_DIR}/zips")
-  else()
+  if(PACKAGE_DIR)
     file(TO_CMAKE_PATH "${PACKAGE_DIR}" PACKAGE_DIR)
+  else()
+    set(PACKAGE_DIR "${BUILD_DIR}/zips")
   endif()
   list(APPEND BUILD_ARGS -DPACKAGE_DIR=${PACKAGE_DIR})
 
-  message(STATUS "ZIP packaging enabled (destination: ${PACKAGE_DIR})")
+  message(STATUS "Add-ons: ZIP packaging enabled (destination: ${PACKAGE_DIR})")
 endif()
 
+# check if we have a toolchain file and add it to BUILD_ARGS
 if(CMAKE_TOOLCHAIN_FILE)
   list(APPEND BUILD_ARGS -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE})
-  message(STATUS "Toolchain specified")
-  message(STATUS ${BUILD_ARGS})
+  message(STATUS "Add-ons: Toolchain specified. Building args\n${BUILD_ARGS}")
 endif()
 
-if(NOT ADDONS_TO_BUILD)
-  set(ADDONS_TO_BUILD "all")
-else()
+# check add-ons to build
+if(ADDONS_TO_BUILD)
   string(STRIP "${ADDONS_TO_BUILD}" ADDONS_TO_BUILD)
-  message(STATUS "Building following addons: ${ADDONS_TO_BUILD}")
+  message(STATUS "Add-ons: Building following addons: ${ADDONS_TO_BUILD}")
   string(REPLACE " " ";" ADDONS_TO_BUILD ${ADDONS_TO_BUILD})
-endif()
-
-if(NOT ADDONS_DEFINITION_DIR)
-  set(ADDONS_DEFINITION_DIR ${PROJECT_SOURCE_DIR}/addons)
 else()
-  file(TO_CMAKE_PATH "${ADDONS_DEFINITION_DIR}" ADDONS_DEFINITION_DIR)
+  set(ADDONS_TO_BUILD all)
 endif()
-get_filename_component(ADDONS_DEFINITION_DIR "${ADDONS_DEFINITION_DIR}" ABSOLUTE)
-
-if(ADDON_SRC_PREFIX)
-  if(NOT IS_ABSOLUTE ${ADDON_SRC_PREFIX})
-    get_filename_component(ADDON_SRC_PREFIX "${CMAKE_BINARY_DIR}/${ADDON_SRC_PREFIX}" ABSOLUTE)
-  endif()
-  message(STATUS "Overriding addon source directory prefix: ${ADDON_SRC_PREFIX}")
-endif()
-
-if(NOT APP_LIB_DIR)
-  set(APP_LIB_DIR "${DEPENDS_PATH}/lib/kodi")
-else()
-  file(TO_CMAKE_PATH "${APP_LIB_DIR}" APP_LIB_DIR)
-endif()
-
-set(APP_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
 # check for platform specific stuff
 if(EXISTS ${PLATFORM_DIR}/defines.txt)
@@ -154,20 +169,7 @@ if(EXISTS ${PLATFORM_DIR}/defines.txt)
   endif()
 endif()
 
-# include check_target_platform() function
-include(${CORE_SOURCE_DIR}/project/cmake/scripts/common/CheckTargetPlatform.cmake)
 
-set(ADDON_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
-if(NOT WIN32)
-  # check install permissions
-  check_install_permissions(${CMAKE_INSTALL_PREFIX} can_write)
-  if(NOT ${can_write} AND CMAKE_SYSTEM_NAME STREQUAL "Linux")
-    set(NEED_SUDO TRUE)
-    set(ADDON_INSTALL_DIR ${CMAKE_BINARY_DIR}/.install)
-    list(APPEND BUILD_ARGS -DOVERRIDE_PATHS=ON)
-    message(STATUS "NEED_SUDO: ${NEED_SUDO} (no write permission for ${CMAKE_INSTALL_PREFIX})")
-  endif()
-endif()
 
 ### prepare the build environment for the binary addons
 # copy the PrepareEnv.cmake script to the depends path so that we can include it
