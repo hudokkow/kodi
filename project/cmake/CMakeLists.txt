@@ -79,6 +79,11 @@ endif()
 core_find_git_rev(APP_SCMID FULL)
 core_find_versions()
 
+# Platform specific prebuilt dependencies
+if(EXISTS ${PROJECT_SOURCE_DIR}/scripts/${CORE_SYSTEM_NAME}/PrebuiltDeps.cmake)
+  include(${PROJECT_SOURCE_DIR}/scripts/${CORE_SYSTEM_NAME}/PrebuiltDeps.cmake)
+endif()
+
 # Dynamically loaded libraries built with the project
 add_custom_target(${APP_NAME_LC}-libraries)
 set(LIBRARY_FILES "" CACHE STRING "" FORCE)

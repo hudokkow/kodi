@@ -563,6 +563,53 @@ function(core_find_git_rev stamp)
   endif()
 endfunction()
 
+# Download a file to given target dir.
+# If file exists in target dir, download is skipped
+# Arguments:
+#   url url of the file to download
+#   sha1 sha1sum of file to check for integrity
+#   target dir where file will be downloaded to
+function(download_file url sha1 target)
+  get_filename_component(file "${url}" NAME)
+  if(EXISTS ${target}/${file})
+    message(STATUS "download_file: Found '${file}' file in target dir, skipping download")
+  else()
+    message(STATUS "download_file: Downloading '${file}' from mirrors")
+    file(DOWNLOAD "${url}" "${target}/${file}"
+         EXPECTED_HASH SHA1=${sha1}
+         SHOW_PROGRESS
+         STATUS DOWNLOAD_STATUS)
+
+    list(GET DOWNLOAD_STATUS 0 STATUS)
+    if(NOT STATUS)
+      message(STATUS "download_file: Successfully downloaded '${file}'\n")
+    else()
+      message(FATAL_ERROR "download_file: Failed to download '${file}' with error '${DOWNLOAD_STATUS}'")
+    endif()
+  endif()
+endfunction()
+
+# Decompress a file to given target dir.
+# Arguments:
+#   file file to decompress
+#   target dir where file will be decompressed to
+function(decompress_file file target)
+  if(NOT EXISTS ${target})
+    file(MAKE_DIRECTORY "${target}")
+  endif()
+  get_filename_component(filename "${file}" NAME)
+  message(STATUS "decompress_file: Decompressing '${filename}' to ${target}")
+  execute_process(COMMAND ${CMAKE_COMMAND} -E tar xzvf "${file}"
+                          RESULT_VARIABLE STATUS_CODE
+                          WORKING_DIRECTORY "${target}")
+
+  if(NOT STATUS_CODE)
+    message(STATUS "decompress_file: Successfully decompressed '${filename}'\n")
+  else()
+    message(FATAL_ERROR "decompress_file: Failed to decompress '${filename}' with error '${STATUS_CODE}'")
+  endif()
+endfunction()
+
 # Parses version.txt and libKODI_guilib.h and sets variables
 # used to construct dirs structure, file naming, API version, etc.
 #
