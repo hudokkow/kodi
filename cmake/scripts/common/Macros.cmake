@@ -583,6 +583,23 @@ function(core_find_git_rev stamp)
   endif()
 endfunction()
 
+# Parses git info and sets branch name used to identify the build
+# Arguments:
+#   stamp variable name to return
+# On return:
+#   Variable is set with generated git branch name to PARENT_SCOPE
+function(core_find_git_branch stamp)
+  find_package(Git)
+  if(GIT_FOUND AND EXISTS ${CMAKE_SOURCE_DIR}/.git)
+    execute_process(COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD
+                    OUTPUT_VARIABLE BRANCH
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+  else()
+    set(BRANCH "nogitfound")
+  endif()
+    set(${stamp} ${BRANCH} PARENT_SCOPE)
+endfunction()
+
 # Parses version.txt and libKODI_guilib.h and sets variables
 # used to construct dirs structure, file naming, API version, etc.
 #
