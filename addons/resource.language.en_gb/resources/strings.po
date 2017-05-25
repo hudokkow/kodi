@@ -1423,6 +1423,7 @@ msgstr ""
 
 #. Setting in international settings
 #: system/settings/settings.xml
+#: xbmc/addons/Addon.cpp
 msgctxt "#310"
 msgid "Keyboard layouts"
 msgstr ""

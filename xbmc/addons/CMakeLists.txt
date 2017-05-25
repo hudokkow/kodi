@@ -22,6 +22,7 @@ set(SOURCES Addon.cpp
             ImageDecoder.cpp
             ImageResource.cpp
             InputStream.cpp
+            KeyboardResource.cpp
             LanguageResource.cpp
             PluginSource.cpp
             PVRClient.cpp
@@ -64,6 +65,7 @@ set(HEADERS Addon.h
             ImageDecoder.h
             ImageResource.h
             InputStream.h
+            KeyboardResource.h
             LanguageResource.h
             PluginSource.h
             PVRClient.h
