@@ -3226,22 +3226,23 @@
           </dependencies>
           <control type="list" format="string" />
         </setting>
-        <setting id="locale.keyboardlayouts" type="list[string]" label="310" help="36432">
+        <setting id="locale.keyboardlayouts" type="addon" label="310" help="36432">
           <level>0</level>
-          <default>English QWERTY</default>
+          <default>resource.keyboard.english</default>
           <constraints>
-            <options>keyboardlayouts</options>
+            <addontype>kodi.resource.keyboard</addontype>
             <delimiter>|</delimiter>
             <minimumitems>1</minimumitems>
             <maximumitems>3</maximumitems>
           </constraints>
-          <control type="list" format="string">
+          <control type="button" format="addon">
             <multiselect>true</multiselect>
+            <show more="false" details="false">all</show>
           </control>
         </setting>
         <setting id="locale.activekeyboardlayout" type="string" label="0" help="0">
           <level>4</level>
-          <default>English QWERTY</default>
+          <default>resource.keyboard.english</default>
         </setting>
       </group>
       <group id="2" label="14270">
