@@ -26,6 +26,7 @@
 #include "addons/ImageDecoder.h"
 #include "addons/ImageResource.h"
 #include "addons/InputStream.h"
+#include "addons/KeyboardResource.h"
 #include "addons/LanguageResource.h"
 #include "addons/PluginSource.h"
 #include "addons/Repository.h"
@@ -154,6 +155,8 @@ std::shared_ptr<IAddon> CAddonBuilder::Build()
       return CImageResource::FromExtension(std::move(m_addonInfo), m_extPoint);
     case ADDON_RESOURCE_GAMES:
       return CGameResource::FromExtension(std::move(m_addonInfo), m_extPoint);
+    case ADDON_RESOURCE_KEYBOARD:
+      return std::make_shared<CKeyboardResource>(std::move(m_addonInfo));
     case ADDON_RESOURCE_LANGUAGE:
       return CLanguageResource::FromExtension(std::move(m_addonInfo), m_extPoint);
     case ADDON_RESOURCE_UISOUNDS:
@@ -218,6 +221,8 @@ AddonPtr CAddonBuilder::FromProps(CAddonInfo addonInfo)
       return AddonPtr(new CImageResource(std::move(addonInfo)));
     case ADDON_RESOURCE_GAMES:
       return AddonPtr(new CGameResource(std::move(addonInfo)));
+    case ADDON_RESOURCE_KEYBOARD:
+      return AddonPtr(new CKeyboardResource(std::move(addonInfo)));
     case ADDON_RESOURCE_LANGUAGE:
       return AddonPtr(new CLanguageResource(std::move(addonInfo)));
     case ADDON_RESOURCE_UISOUNDS:

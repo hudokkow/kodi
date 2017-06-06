@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="resource.keyboard.english"
+       name="English keyboard"
+       version="1.0.0"
+       provider-name="Team Kodi">
+  <requires>
+    <import addon="kodi.resource" version="1.0.0"/>
+  </requires>
+  <extension point="kodi.resource.keyboard"/>
+  <extension point="kodi.addon.metadata">
+    <summary lang="en">English keyboard</summary>
+    <description lang="en">English keyboard layout for Kodi.</description>
+    <platform>all</platform>
+  </extension>
+</addon>

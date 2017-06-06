@@ -33,6 +33,7 @@ typedef std::map<std::string, CKeyboardLayout> KeyboardLayouts;
 class CKeyboardLayoutManager
 {
 public:
+  CKeyboardLayoutManager() {}
   virtual ~CKeyboardLayoutManager();
 
   static CKeyboardLayoutManager& GetInstance();
@@ -46,9 +47,10 @@ public:
   static void SettingOptionsKeyboardLayoutsFiller(std::shared_ptr<const CSetting> setting, std::vector< std::pair<std::string, std::string> > &list, std::string &current, void* data);
 
 private:
-  CKeyboardLayoutManager() { }
   CKeyboardLayoutManager(const CKeyboardLayoutManager&);
   CKeyboardLayoutManager const& operator=(CKeyboardLayoutManager const&);
 
   KeyboardLayouts m_layouts;
 };
+
+extern CKeyboardLayoutManager g_keyboardLayoutManager;

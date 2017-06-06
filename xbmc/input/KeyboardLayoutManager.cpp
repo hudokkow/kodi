@@ -30,6 +30,8 @@
 
 #define KEYBOARD_LAYOUTS_PATH   "special://xbmc/system/keyboardlayouts"
 
+CKeyboardLayoutManager g_keyboardLayoutManager;
+
 CKeyboardLayoutManager::~CKeyboardLayoutManager()
 {
   Unload();
