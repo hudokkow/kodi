@@ -7,7 +7,6 @@ set(SOURCES DNSNameCache.cpp
             Network.cpp
             NetworkServices.cpp
             Socket.cpp
-            TCPServer.cpp
             UdpClient.cpp
             WakeOnAccess.cpp
             WebServer.cpp
@@ -23,12 +22,16 @@ set(HEADERS DNSNameCache.h
             Network.h
             NetworkServices.h
             Socket.h
-            TCPServer.h
             UdpClient.h
             WakeOnAccess.h
             WebServer.h
             Zeroconf.h
             ZeroconfBrowser.h)
+
+if(HAS_JSONRPC)
+  list(APPEND SOURCES TCPServer.cpp)
+  list(APPEND HEADERS TCPServer.h)
+endif()
 
 if(ENABLE_OPTICAL)
   list(APPEND SOURCES cddb.cpp)
