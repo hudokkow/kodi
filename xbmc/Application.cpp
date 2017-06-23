@@ -3669,13 +3669,14 @@ void CApplication::OnPlayBackSeek(int64_t iTime, int64_t seekOffset)
 #ifdef HAS_PYTHON
   g_pythonParser.OnPlayBackSeek(static_cast<int>(iTime), static_cast<int>(seekOffset));
 #endif
-
+#ifdef HAS_JSONRPC
   CVariant param;
   CJSONUtils::MillisecondsToTimeObject(iTime, param["player"]["time"]);
   CJSONUtils::MillisecondsToTimeObject(seekOffset, param["player"]["seekoffset"]);
   param["player"]["playerid"] = g_playlistPlayer.GetCurrentPlaylist();
   param["player"]["speed"] = (int)m_pPlayer->GetPlaySpeed();
   CAnnouncementManager::GetInstance().Announce(Player, "xbmc", "OnSeek", m_itemCurrentFile, param);
+#endif
   g_infoManager.SetDisplayAfterSeek(2500, static_cast<int>(seekOffset));
 }
 

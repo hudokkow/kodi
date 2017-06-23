@@ -485,8 +485,10 @@ void CNetworkServices::Start()
   StartUPnP();
   if (CServiceBroker::GetSettings().GetBool(CSettings::SETTING_SERVICES_ESENABLED) && !StartEventServer())
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(33102), g_localizeStrings.Get(33100));
+#ifdef HAS_JSONRPC
   if (CServiceBroker::GetSettings().GetBool(CSettings::SETTING_SERVICES_ESENABLED) && !StartJSONRPCServer())
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(33103), g_localizeStrings.Get(33100));
+#endif
   
   // note - airtunesserver has to start before airplay server (ios7 client detection bug)
   StartAirTunesServer();
