@@ -120,9 +120,9 @@ class CVideoBufferSysMem : public CVideoBuffer
 {
 public:
   CVideoBufferSysMem(IVideoBufferPool &pool, int id, AVPixelFormat format, int width, int height);
-  virtual ~CVideoBufferSysMem();
-  virtual void GetPlanes(uint8_t*(&planes)[YuvImage::MAX_PLANES]) override;
-  virtual void GetStrides(int(&strides)[YuvImage::MAX_PLANES]) override;
+  ~CVideoBufferSysMem() override;
+  void GetPlanes(uint8_t*(&planes)[YuvImage::MAX_PLANES]) override;
+  void GetStrides(int(&strides)[YuvImage::MAX_PLANES]) override;
   bool Alloc();
 
 protected:
@@ -138,12 +138,12 @@ protected:
 class CVideoBufferPoolSysMem : public IVideoBufferPool
 {
 public:
-  virtual CVideoBuffer* Get() override;
-  virtual void Return(int id) override;
-  virtual void SetDimensions(int width, int height, int alignedWidth, int alignedHeight) override;
-  virtual void Configure(AVPixelFormat format, int size) override;
-  virtual bool IsConfigured() override;
-  virtual bool IsCompatible(AVPixelFormat format, int size) override;
+  CVideoBuffer* Get() override;
+  void Return(int id) override;
+  void SetDimensions(int width, int height, int alignedWidth, int alignedHeight) override;
+  void Configure(AVPixelFormat format, int size) override;
+  bool IsConfigured() override;
+  bool IsCompatible(AVPixelFormat format, int size) override;
 
 protected:
   int m_width = 0;

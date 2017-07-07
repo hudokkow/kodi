@@ -258,16 +258,16 @@ class CMixer : private CThread
 {
 public:
   CMixer(CEvent *inMsgEvent);
-  virtual ~CMixer();
+  ~CMixer() override;
   void Start();
   void Dispose();
   bool IsActive();
   CMixerControlProtocol m_controlPort;
   CMixerDataProtocol m_dataPort;
 protected:
-  void OnStartup();
-  void OnExit();
-  void Process();
+  void OnStartup() override;
+  void OnExit() override;
+  void Process() override;
   void StateMachine(int signal, Actor::Protocol *port, Actor::Message *msg);
   void Init();
   void Uninit();
@@ -370,15 +370,15 @@ class COutput : private CThread
 {
 public:
   COutput(CDecoder &decoder, CEvent *inMsgEvent);
-  virtual ~COutput();
+  ~COutput() override;
   void Start();
   void Dispose();
   COutputControlProtocol m_controlPort;
   COutputDataProtocol m_dataPort;
 protected:
-  void OnStartup();
-  void OnExit();
-  void Process();
+  void OnStartup() override;
+  void OnExit() override;
+  void Process() override;
   void StateMachine(int signal, Actor::Protocol *port, Actor::Message *msg);
   bool HasWork();
   CVdpauRenderPicture *ProcessMixerPicture();
@@ -482,20 +482,20 @@ public:
   };
 
   CDecoder(CProcessInfo& processInfo);
-  virtual ~CDecoder();
+  ~CDecoder() override;
 
-  virtual bool Open      (AVCodecContext* avctx, AVCodecContext* mainctx, const enum AVPixelFormat);
-  virtual CDVDVideoCodec::VCReturn Decode    (AVCodecContext* avctx, AVFrame* frame);
-  virtual bool GetPicture(AVCodecContext* avctx, VideoPicture* picture);
-  virtual void Reset();
+  bool Open      (AVCodecContext* avctx, AVCodecContext* mainctx, const enum AVPixelFormat) override;
+  CDVDVideoCodec::VCReturn Decode    (AVCodecContext* avctx, AVFrame* frame) override;
+  bool GetPicture(AVCodecContext* avctx, VideoPicture* picture) override;
+  void Reset() override;
   virtual void Close();
-  virtual long Release();
-  virtual bool CanSkipDeint();
-  virtual unsigned GetAllowedReferences() { return 5; }
+  long Release() override;
+  bool CanSkipDeint() override;
+  unsigned GetAllowedReferences() override { return 5; }
 
-  virtual CDVDVideoCodec::VCReturn Check(AVCodecContext* avctx);
-  virtual const std::string Name() { return "vdpau"; }
-  virtual void SetCodecControl(int flags);
+  CDVDVideoCodec::VCReturn Check(AVCodecContext* avctx) override;
+  const std::string Name() override { return "vdpau"; }
+  void SetCodecControl(int flags) override;
 
   bool Supports(VdpVideoMixerFeature feature);
   static bool IsVDPAUFormat(AVPixelFormat fmt);
@@ -506,8 +506,8 @@ public:
                     const VdpPictureInfo *info, uint32_t buffers_used,
                     const VdpBitstreamBuffer *buffers);
 
-  virtual void OnLostDisplay();
-  virtual void OnResetDisplay();
+  void OnLostDisplay() override;
+  void OnResetDisplay() override;
 
   static IHardwareDecoder* Create(CDVDStreamInfo &hint, CProcessInfo &processInfo, AVPixelFormat fmt);
   static void Register();
