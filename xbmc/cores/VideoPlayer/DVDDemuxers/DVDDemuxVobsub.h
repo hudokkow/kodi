@@ -35,6 +35,7 @@ public:
   CDVDDemuxVobsub();
   ~CDVDDemuxVobsub() override;
 
+  bool Open(const std::string& filename, int source, const std::string& subfilename);
 
   // implementation of CDVDDemux
   void          Reset() override;

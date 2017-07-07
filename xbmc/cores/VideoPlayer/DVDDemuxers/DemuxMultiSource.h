@@ -57,7 +57,6 @@ public:
   std::vector<CDemuxStream*> GetStreams() const override;
   std::string GetStreamCodecName(int64_t demuxerId, int iStreamId) override;
   int GetStreamLength() override;
-  bool Open(CDVDInputStream* pInput);
   DemuxPacket* Read() override;
   void Reset() override;
   bool SeekTime(double time, bool backwards = false, double* startpts = NULL) override;
