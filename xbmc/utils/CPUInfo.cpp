@@ -106,7 +106,7 @@
 CCPUInfo::CCPUInfo(void)
 {
 #ifdef TARGET_POSIX
-  m_fProcStat = m_fProcTemperature = m_fCPUFreq = NULL;
+  m_fProcStat = m_fProcTemperature = m_fCPUFreq = nullptr;
   m_cpuInfoForFreq = false;
 #elif defined(TARGET_WINDOWS)
   m_cpuQueryFreq = nullptr;
@@ -122,24 +122,24 @@ CCPUInfo::CCPUInfo(void)
   std::string cpuVendor;
   
   // The number of cores.
-  if (sysctlbyname("hw.activecpu", &m_cpuCount, &len, NULL, 0) == -1)
+  if (sysctlbyname("hw.activecpu", &m_cpuCount, &len, nullptr, 0) == -1)
       m_cpuCount = 1;
 
   // The model.
 #if defined(__ppc__) || defined (TARGET_DARWIN_IOS)
   const NXArchInfo *info = NXGetLocalArchInfo();
-  if (info != NULL)
+  if (info != nullptr)
     m_cpuModel = info->description;
 #else
   // NXGetLocalArchInfo is ugly for intel so keep using this method
   char buffer[512];
   len = 512;
-  if (sysctlbyname("machdep.cpu.brand_string", &buffer, &len, NULL, 0) == 0)
+  if (sysctlbyname("machdep.cpu.brand_string", &buffer, &len, nullptr, 0) == 0)
     m_cpuModel = buffer;
 
   // The CPU vendor
   len = 512;
-  if (sysctlbyname("machdep.cpu.vendor", &buffer, &len, NULL, 0) == 0)
+  if (sysctlbyname("machdep.cpu.vendor", &buffer, &len, nullptr, 0) == 0)
     cpuVendor = buffer;
   
 #endif
@@ -243,11 +243,11 @@ CCPUInfo::CCPUInfo(void)
   char cpumodel[512];
 
   len = sizeof(m_cpuCount);
-  if (sysctlbyname("hw.ncpu", &m_cpuCount, &len, NULL, 0) != 0)
+  if (sysctlbyname("hw.ncpu", &m_cpuCount, &len, nullptr, 0) != 0)
     m_cpuCount = 1;
 
   len = sizeof(cpumodel);
-  if (sysctlbyname("hw.model", &cpumodel, &len, NULL, 0) != 0)
+  if (sysctlbyname("hw.model", &cpumodel, &len, nullptr, 0) != 0)
     (void)strncpy(cpumodel, "Unknown", 8);
   m_cpuModel = cpumodel;
 
@@ -261,16 +261,16 @@ CCPUInfo::CCPUInfo(void)
 #else
   m_fProcStat = fopen("/proc/stat", "r");
   m_fProcTemperature = fopen("/proc/acpi/thermal_zone/THM0/temperature", "r");
-  if (m_fProcTemperature == NULL)
+  if (m_fProcTemperature == nullptr)
     m_fProcTemperature = fopen("/proc/acpi/thermal_zone/THRM/temperature", "r");
-  if (m_fProcTemperature == NULL)
+  if (m_fProcTemperature == nullptr)
     m_fProcTemperature = fopen("/proc/acpi/thermal_zone/THR0/temperature", "r");
-  if (m_fProcTemperature == NULL)
+  if (m_fProcTemperature == nullptr)
     m_fProcTemperature = fopen("/proc/acpi/thermal_zone/TZ0/temperature", "r");
   // read from the new location of the temperature data on new kernels, 2.6.39, 3.0 etc
-  if (m_fProcTemperature == NULL)   
+  if (m_fProcTemperature == nullptr)   
     m_fProcTemperature = fopen("/sys/class/hwmon/hwmon0/temp1_input", "r");
-  if (m_fProcTemperature == NULL)   
+  if (m_fProcTemperature == nullptr)   
     m_fProcTemperature = fopen("/sys/class/thermal/thermal_zone0/temp", "r");  // On Raspberry PIs
 
   m_fCPUFreq = fopen ("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq", "r");
@@ -385,7 +385,7 @@ CCPUInfo::CCPUInfo(void)
         char* needle = strchr(buffer, ':');
         if (needle)
         {
-          char* tok = NULL,
+          char* tok = nullptr,
               * save;
           needle++;
           tok = strtok_r(needle, " ", &save);
@@ -411,7 +411,7 @@ CCPUInfo::CCPUInfo(void)
               m_cpuFeatures |= CPU_FEATURE_3DNOW;
             else if (0 == strcmp(tok, "3dnowext"))
               m_cpuFeatures |= CPU_FEATURE_3DNOWEXT;
-            tok = strtok_r(NULL, " ", &save);
+            tok = strtok_r(nullptr, " ", &save);
           }
         }
       }
@@ -473,13 +473,13 @@ CCPUInfo::CCPUInfo(void)
 CCPUInfo::~CCPUInfo()
 {
 #ifdef TARGET_POSIX
-  if (m_fProcStat != NULL)
+  if (m_fProcStat != nullptr)
     fclose(m_fProcStat);
 
-  if (m_fProcTemperature != NULL)
+  if (m_fProcTemperature != nullptr)
     fclose(m_fProcTemperature);
 
-  if (m_fCPUFreq != NULL)
+  if (m_fCPUFreq != nullptr)
     fclose(m_fCPUFreq);
 #elif defined(TARGET_WINDOWS)
   if (m_cpuQueryFreq)
@@ -539,7 +539,7 @@ float CCPUInfo::getCPUFrequency()
 #if defined(TARGET_DARWIN)
   long long hz = 0;
   size_t len = sizeof(hz);
-  if (sysctlbyname("hw.cpufrequency", &hz, &len, NULL, 0) == -1)
+  if (sysctlbyname("hw.cpufrequency", &hz, &len, nullptr, 0) == -1)
     return 0.f;
   return hz / 1000000.0;
 #elif defined TARGET_WINDOWS
@@ -561,7 +561,7 @@ float CCPUInfo::getCPUFrequency()
 #elif defined(TARGET_FREEBSD)
   int hz = 0;
   size_t len = sizeof(hz);
-  if (sysctlbyname("dev.cpu.0.freq", &hz, &len, NULL, 0) != 0)
+  if (sysctlbyname("dev.cpu.0.freq", &hz, &len, nullptr, 0) != 0)
     hz = 0;
   return (float)hz;
 #else
@@ -607,12 +607,12 @@ bool CCPUInfo::getTemperature(CTemperature& temperature)
   scale = 'c';
 #else
   int         ret   = 0;
-  FILE        *p    = NULL;
+  FILE        *p    = nullptr;
   std::string  cmd   = g_advancedSettings.m_cpuTempCmd;
 
   temperature.SetValid(false);
 
-  if (cmd.empty() && m_fProcTemperature == NULL)
+  if (cmd.empty() && m_fProcTemperature == nullptr)
     return false;
 
   if (!cmd.empty())
@@ -732,12 +732,12 @@ bool CCPUInfo::readProcStat(unsigned long long& user, unsigned long long& nice,
   int i;
 
   len = sizeof(long) * 32 * CPUSTATES;
-  if (sysctlbyname("kern.cp_times", NULL, &len, NULL, 0) != 0)
+  if (sysctlbyname("kern.cp_times", nullptr, &len, nullptr, 0) != 0)
     return false;
   cptimes = (long*)malloc(len);
-  if (cptimes == NULL)
+  if (cptimes == nullptr)
     return false;
-  if (sysctlbyname("kern.cp_times", cptimes, &len, NULL, 0) != 0)
+  if (sysctlbyname("kern.cp_times", cptimes, &len, nullptr, 0) != 0)
   {
     free(cptimes);
     return false;
@@ -786,7 +786,7 @@ bool CCPUInfo::readProcStat(unsigned long long& user, unsigned long long& nice,
   }
   free(cptimes);
 #else
-  if (m_fProcStat == NULL)
+  if (m_fProcStat == nullptr)
     return false;
 
 #ifdef TARGET_ANDROID
@@ -912,7 +912,7 @@ void CCPUInfo::ReadCPUFeatures()
     size_t len = 512 - 1; // '-1' for trailing space
     char buffer[512] ={0};
 
-    if (sysctlbyname("machdep.cpu.features", &buffer, &len, NULL, 0) == 0)
+    if (sysctlbyname("machdep.cpu.features", &buffer, &len, nullptr, 0) == 0)
     {
       strcat(buffer, " ");
       if (strstr(buffer,"MMX "))

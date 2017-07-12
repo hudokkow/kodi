@@ -73,7 +73,7 @@ struct CoreInfo
 #ifdef TARGET_POSIX
   CoreInfo() : m_id(0), m_fSpeed(.0), m_fPct(.0), m_user(0LL), m_nice(0LL), m_system(0LL), m_io(0LL), m_idle(0LL) {}
 #elif defined(TARGET_WINDOWS)
-  CoreInfo() : m_id(0), m_fSpeed(.0), m_fPct(.0), m_coreCounter(NULL), m_total(0LL), m_idle(0LL) {}
+  CoreInfo() : m_id(0), m_fSpeed(.0), m_fPct(.0), m_coreCounter(nullptr), m_total(0LL), m_idle(0LL) {}
 #endif
   bool operator<(const CoreInfo& other) const { return m_id < other.m_id; }
 };

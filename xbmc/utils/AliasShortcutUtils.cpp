@@ -63,7 +63,7 @@ void TranslateAliasShortcut(std::string& path)
   CComPtr<IShellLink> ipShellLink;
 
   // Get a pointer to the IShellLink interface
-  if (NOERROR == CoCreateInstance(CLSID_ShellLink, NULL, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&ipShellLink))
+  if (NOERROR == CoCreateInstance(CLSID_ShellLink, nullptr, CLSCTX_INPROC_SERVER, IID_IShellLink, (void**)&ipShellLink))
     WCHAR wszTemp[MAX_PATH];
 
     // Get a pointer to the IPersistFile interface
@@ -80,7 +80,7 @@ void TranslateAliasShortcut(std::string& path)
     if (NOERROR == ipPersistFile->Load(wszTemp, STGM_READ))
     {
       // Try to find the target of a shortcut even if it has been moved or renamed
-      if (NOERROR == ipShellLink->Resolve(NULL, SLR_UPDATE))
+      if (NOERROR == ipShellLink->Resolve(nullptr, SLR_UPDATE))
       {
         WIN32_FIND_DATA wfd;
         TCHAR real_path[PATH_MAX];

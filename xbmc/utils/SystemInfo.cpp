@@ -94,7 +94,7 @@ static bool sysGetVersionExWByRef(OSVERSIONINFOEXW& osVerInfo)
   
   typedef NTSTATUS(__stdcall *RtlGetVersionPtr)(RTL_OSVERSIONINFOEXW* pOsInfo);
   static HMODULE hNtDll = GetModuleHandleW(L"ntdll.dll");
-  if (hNtDll != NULL)
+  if (hNtDll != nullptr)
   {
     static RtlGetVersionPtr RtlGetVer = (RtlGetVersionPtr) GetProcAddress(hNtDll, "RtlGetVersion");
     if (RtlGetVer && RtlGetVer(&osVerInfo) == 0)
@@ -228,11 +228,11 @@ static std::string getValueFromLsb_release(enum lsb_rel_info_type infoType)
   }
   command += " 2>/dev/null";
   FILE* lsb_rel = popen(command.c_str(), "r");
-  if (lsb_rel == NULL)
+  if (lsb_rel == nullptr)
     return "";
 
   char buf[300]; // more than enough
-  if (fgets(buf, 300, lsb_rel) == NULL)
+  if (fgets(buf, 300, lsb_rel) == nullptr)
   {
     pclose(lsb_rel);
     return "";
@@ -411,7 +411,7 @@ CSysInfo::~CSysInfo() = default;
 
 bool CSysInfo::Load(const TiXmlNode *settings)
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
   
   const TiXmlElement *pElement = settings->FirstChildElement("general");
@@ -423,15 +423,15 @@ bool CSysInfo::Load(const TiXmlNode *settings)
 
 bool CSysInfo::Save(TiXmlNode *settings) const
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   TiXmlNode *generalNode = settings->FirstChild("general");
-  if (generalNode == NULL)
+  if (generalNode == nullptr)
   {
     TiXmlElement generalNodeNew("general");
     generalNode = settings->InsertEndChild(generalNodeNew);
-    if (generalNode == NULL)
+    if (generalNode == nullptr)
       return false;
   }
   XMLUtils::SetInt(generalNode, "systemtotaluptime", m_iSystemTimeTotalUp);
@@ -441,7 +441,7 @@ bool CSysInfo::Save(TiXmlNode *settings) const
 
 const std::string& CSysInfo::GetAppName(void)
 {
-  assert(CCompileInfo::GetAppName() != NULL);
+  assert(CCompileInfo::GetAppName() != nullptr);
   static const std::string appName(CCompileInfo::GetAppName());
 
   return appName;
@@ -770,10 +770,10 @@ std::string CSysInfo::GetModelName(void)
     modelName = CDarwinUtils::getIosPlatformString();
 #elif defined(TARGET_DARWIN_OSX)
     size_t nameLen = 0; // 'nameLen' should include terminating null
-    if (sysctlbyname("hw.model", NULL, &nameLen, NULL, 0) == 0 && nameLen > 1)
+    if (sysctlbyname("hw.model", nullptr, &nameLen, nullptr, 0) == 0 && nameLen > 1)
     {
       XUTILS::auto_buffer buf(nameLen);
-      if (sysctlbyname("hw.model", buf.get(), &nameLen, NULL, 0) == 0 && nameLen == buf.size())
+      if (sysctlbyname("hw.model", buf.get(), &nameLen, nullptr, 0) == 0 && nameLen == buf.size())
         modelName.assign(buf.get(), nameLen - 1); // assign exactly 'nameLen-1' characters to 'modelName'
     }
 #elif defined(TARGET_WINDOWS)
