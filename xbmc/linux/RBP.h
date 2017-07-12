@@ -85,7 +85,7 @@ public:
   int GetGUIResolutionLimit() { return m_gui_resolution_limit; }
   // stride can be null for packed output
   unsigned char *CaptureDisplay(int width, int height, int *stride, bool swap_red_blue, bool video_only = true);
-  DllOMX *GetDllOMX() { return m_OMX ? m_OMX->GetDll() : NULL; }
+  DllOMX *GetDllOMX() { return m_OMX ? m_OMX->GetDll() : nullptr; }
   uint32_t LastVsync(int64_t &time);
   uint32_t LastVsync();
   uint32_t WaitVsync(uint32_t target = ~0U);

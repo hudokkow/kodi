@@ -107,7 +107,7 @@ public:
   OMX_ERRORTYPE UseEGLImage(OMX_BUFFERHEADERTYPE** ppBufferHdr, OMX_U32 nPortIndex, OMX_PTR pAppPrivate, void* eglImage);
 
   bool          Initialize( const std::string &component_name, OMX_INDEXTYPE index);
-  bool          IsInitialized() const { return m_handle != NULL; }
+  bool          IsInitialized() const { return m_handle != nullptr; }
   bool          Deinitialize();
 
   // OMXCore Decoder delegate callback routines.
