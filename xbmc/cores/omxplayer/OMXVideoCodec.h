@@ -185,7 +185,7 @@ public:
    */
   virtual bool GetUserData(DVDVideoUserData* pDvdVideoUserData)
   {
-    pDvdVideoUserData->data = NULL;
+    pDvdVideoUserData->data = nullptr;
     pDvdVideoUserData->size = 0;
     return false;
   }

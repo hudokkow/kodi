@@ -124,7 +124,7 @@ COMXImageFile *COMXImage::LoadJpeg(const std::string& texturePath)
   {
     CLog::Log(LOGNOTICE, "%s: unable to load %s", __func__, texturePath.c_str());
     delete file;
-    file = NULL;
+    file = nullptr;
   }
   return file;
 }
@@ -264,7 +264,7 @@ bool COMXImage::AllocTextureInternal(EGLDisplay egl_display, EGLContext egl_cont
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
   GLenum type = CServiceBroker::GetSettings().GetBool("videoscreen.textures32") ? GL_UNSIGNED_BYTE:GL_UNSIGNED_SHORT_5_6_5;
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tex->width, tex->height, 0, GL_RGB, type, 0);
-  tex->egl_image = eglCreateImageKHR(egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR, (EGLClientBuffer)tex->texture, NULL);
+  tex->egl_image = eglCreateImageKHR(egl_display, egl_context, EGL_GL_TEXTURE_2D_KHR, (EGLClientBuffer)tex->texture, nullptr);
   if (!tex->egl_image)
     CLog::Log(LOGDEBUG, "%s: eglCreateImageKHR failed to allocate", __func__);
   GLint m_result;
@@ -311,13 +311,13 @@ bool COMXImage::DecodeJpegToTexture(COMXImageFile *file, unsigned int width, uns
 
   struct textureinfo *tex = new struct textureinfo;
   if (!tex)
-    return NULL;
+    return nullptr;
 
   tex->parent = (void *)this;
   tex->width = width;
   tex->height = height;
   tex->texture = 0;
-  tex->egl_image = NULL;
+  tex->egl_image = nullptr;
   tex->filename = file->GetFilename();
 
   SendMessage(AllocTextureCallback, tex);
@@ -350,10 +350,10 @@ static bool ChooseConfig(EGLDisplay display, const EGLint *configAttrs, EGLConfi
 {
   EGLBoolean eglStatus = true;
   EGLint     configCount = 0;
-  EGLConfig* configList = NULL;
+  EGLConfig* configList = nullptr;
   GLint m_result;
   // Find out how many configurations suit our needs
-  eglStatus = eglChooseConfig(display, configAttrs, NULL, 0, &configCount);
+  eglStatus = eglChooseConfig(display, configAttrs, nullptr, 0, &configCount);
   CheckError();
 
   if (!eglStatus || !configCount)
@@ -392,7 +392,7 @@ void COMXImage::CreateContext()
   GLint m_result;
   EGLDisplay egl_display = g_Windowing.GetEGLDisplay();
 
-  eglInitialize(egl_display, NULL, NULL);
+  eglInitialize(egl_display, nullptr, nullptr);
   CheckError();
   eglBindAPI(EGL_OPENGL_ES_API);
   CheckError();
@@ -424,7 +424,7 @@ void COMXImage::CreateContext()
     CLog::Log(LOGERROR, "%s: Could not create a context",__FUNCTION__);
     return;
   }
-  EGLSurface egl_surface = eglCreatePbufferSurface(egl_display, egl_config, NULL);
+  EGLSurface egl_surface = eglCreatePbufferSurface(egl_display, egl_config, nullptr);
   CheckError();
   if (egl_surface == EGL_NO_SURFACE)
   {
@@ -480,7 +480,7 @@ void COMXImage::OnExit()
 COMXImageFile::COMXImageFile()
 {
   m_image_size    = 0;
-  m_image_buffer  = NULL;
+  m_image_buffer  = nullptr;
   m_orientation   = 0;
   m_width         = 0;
   m_height        = 0;
@@ -887,7 +887,7 @@ bool COMXImageFile::ReadFile(const std::string& inputFile, int orientation)
 
   if(m_image_buffer)
     free(m_image_buffer);
-  m_image_buffer = NULL;
+  m_image_buffer = nullptr;
 
   m_image_size = m_pFile.GetLength();
 
@@ -924,7 +924,7 @@ bool COMXImageFile::ReadFile(const std::string& inputFile, int orientation)
 COMXImageDec::COMXImageDec()
 {
   limit_calls_enter();
-  m_decoded_buffer = NULL;
+  m_decoded_buffer = nullptr;
   OMX_INIT_STRUCTURE(m_decoded_format);
   m_success = false;
 }
@@ -934,7 +934,7 @@ COMXImageDec::~COMXImageDec()
   Close();
 
   OMX_INIT_STRUCTURE(m_decoded_format);
-  m_decoded_buffer = NULL;
+  m_decoded_buffer = nullptr;
   limit_calls_leave();
 }
 
@@ -1087,7 +1087,7 @@ bool COMXImageDec::Decode(const uint8_t *demuxer_content, unsigned demuxer_bytes
 {
   CSingleLock lock(m_OMXSection);
   OMX_ERRORTYPE omx_err = OMX_ErrorNone;
-  OMX_BUFFERHEADERTYPE *omx_buffer = NULL;
+  OMX_BUFFERHEADERTYPE *omx_buffer = nullptr;
 
   if(!demuxer_content || !demuxer_bytes)
   {
@@ -1150,7 +1150,7 @@ bool COMXImageDec::Decode(const uint8_t *demuxer_content, unsigned demuxer_bytes
     if (demuxer_bytes)
     {
        omx_buffer = m_omx_decoder.GetInputBuffer(1000);
-       if(omx_buffer == NULL)
+       if(omx_buffer == nullptr)
          return false;
 
        omx_buffer->nOffset = omx_buffer->nFlags  = 0;
@@ -1225,7 +1225,7 @@ COMXImageEnc::COMXImageEnc()
   limit_calls_enter();
   CSingleLock lock(m_OMXSection);
   OMX_INIT_STRUCTURE(m_encoded_format);
-  m_encoded_buffer = NULL;
+  m_encoded_buffer = nullptr;
   m_success = false;
 }
 
@@ -1234,7 +1234,7 @@ COMXImageEnc::~COMXImageEnc()
   CSingleLock lock(m_OMXSection);
 
   OMX_INIT_STRUCTURE(m_encoded_format);
-  m_encoded_buffer = NULL;
+  m_encoded_buffer = nullptr;
   if (!m_success)
   {
     if(m_omx_encoder.IsInitialized())
@@ -1254,9 +1254,9 @@ bool COMXImageEnc::Encode(unsigned char *buffer, int size, unsigned width, unsig
   CSingleLock lock(m_OMXSection);
 
   unsigned int demuxer_bytes = 0;
-  const uint8_t *demuxer_content = NULL;
+  const uint8_t *demuxer_content = nullptr;
   OMX_ERRORTYPE omx_err = OMX_ErrorNone;
-  OMX_BUFFERHEADERTYPE *omx_buffer = NULL;
+  OMX_BUFFERHEADERTYPE *omx_buffer = nullptr;
   OMX_INIT_STRUCTURE(m_encoded_format);
 
   if (pitch == 0)
@@ -1367,7 +1367,7 @@ bool COMXImageEnc::Encode(unsigned char *buffer, int size, unsigned width, unsig
   while(demuxer_bytes > 0)
   {
     omx_buffer = m_omx_encoder.GetInputBuffer(1000);
-    if(omx_buffer == NULL)
+    if(omx_buffer == nullptr)
     {
       return false;
     }
@@ -1465,8 +1465,8 @@ bool COMXImageEnc::CreateThumbnailFromSurface(unsigned char* buffer, unsigned in
 COMXImageReEnc::COMXImageReEnc()
 {
   limit_calls_enter();
-  m_encoded_buffer = NULL;
-  m_pDestBuffer = NULL;
+  m_encoded_buffer = nullptr;
+  m_pDestBuffer = nullptr;
   m_nDestAllocSize = 0;
   m_success = false;
 }
@@ -1476,7 +1476,7 @@ COMXImageReEnc::~COMXImageReEnc()
   Close();
   if (m_pDestBuffer)
     free (m_pDestBuffer);
-  m_pDestBuffer = NULL;
+  m_pDestBuffer = nullptr;
   m_nDestAllocSize = 0;
   limit_calls_leave();
 }
@@ -1918,7 +1918,7 @@ bool COMXImageReEnc::ReEncode(COMXImageFile &srcFile, unsigned int maxWidth, uns
       }
       memcpy((char *)m_pDestBuffer + nDestSize, m_encoded_buffer->pBuffer, m_encoded_buffer->nFilledLen);
       nDestSize += m_encoded_buffer->nFilledLen;
-      m_encoded_buffer = NULL;
+      m_encoded_buffer = nullptr;
     }
   }
 
@@ -2076,7 +2076,7 @@ bool COMXTexture::HandlePortSettingChange(unsigned int resize_width, unsigned in
     return false;
   }
 
-  omx_err = m_omx_egl_render.UseEGLImage(&m_egl_buffer, m_omx_egl_render.GetOutputPort(), NULL, egl_image);
+  omx_err = m_omx_egl_render.UseEGLImage(&m_egl_buffer, m_omx_egl_render.GetOutputPort(), nullptr, egl_image);
   if (omx_err != OMX_ErrorNone)
   {
     CLog::Log(LOGERROR, "%s::%s error m_omx_egl_render.UseEGLImage (%x)", CLASSNAME, __func__, omx_err);
