@@ -74,14 +74,14 @@ void GlobalMemoryStatusEx(LPMEMORYSTATUSEX lpBuffer)
   size_t miblen = ARRAY_SIZE(mib);
 
   // Total physical memory.
-  if (sysctl(mib, miblen, &physmem, &len, NULL, 0) == 0 && len == sizeof (physmem))
+  if (sysctl(mib, miblen, &physmem, &len, nullptr, 0) == 0 && len == sizeof (physmem))
       lpBuffer->ullTotalPhys = physmem;
 
   // Virtual memory.
   mib[0] = CTL_VM; mib[1] = VM_SWAPUSAGE;
   struct xsw_usage swap;
   len = sizeof(struct xsw_usage);
-  if (sysctl(mib, miblen, &swap, &len, NULL, 0) == 0)
+  if (sysctl(mib, miblen, &swap, &len, nullptr, 0) == 0)
   {
       lpBuffer->ullAvailPageFile = swap.xsu_avail;
       lpBuffer->ullTotalVirtual = lpBuffer->ullTotalPhys + swap.xsu_total;
@@ -105,7 +105,7 @@ void GlobalMemoryStatusEx(LPMEMORYSTATUSEX lpBuffer)
       int pageSize;
       mib[0] = CTL_HW; mib[1] = HW_PAGESIZE;
       len = sizeof(int);
-      if (sysctl(mib, miblen, &pageSize, &len, NULL, 0) == 0)
+      if (sysctl(mib, miblen, &pageSize, &len, nullptr, 0) == 0)
 #endif
       {
           uint64_t used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pageSize;
@@ -121,32 +121,32 @@ void GlobalMemoryStatusEx(LPMEMORYSTATUSEX lpBuffer)
 
   /* physmem */
   len = sizeof(physmem);
-  if (sysctlbyname("hw.physmem", &physmem, &len, NULL, 0) == 0) {
+  if (sysctlbyname("hw.physmem", &physmem, &len, nullptr, 0) == 0) {
     lpBuffer->ullTotalPhys = physmem;
     lpBuffer->ullTotalVirtual = physmem;
   }
   /* pagesize */
   len = sizeof(pagesize);
-  if (sysctlbyname("hw.pagesize", &pagesize, &len, NULL, 0) != 0)
+  if (sysctlbyname("hw.pagesize", &pagesize, &len, nullptr, 0) != 0)
     pagesize = 4096;
   /* mem_inactive */
   len = sizeof(mem_inactive);
-  if (sysctlbyname("vm.stats.vm.v_inactive_count", &mem_inactive, &len, NULL, 0) == 0)
+  if (sysctlbyname("vm.stats.vm.v_inactive_count", &mem_inactive, &len, nullptr, 0) == 0)
     mem_inactive *= pagesize;
   /* mem_cache */
   len = sizeof(mem_cache);
-  if (sysctlbyname("vm.stats.vm.v_cache_count", &mem_cache, &len, NULL, 0) == 0)
+  if (sysctlbyname("vm.stats.vm.v_cache_count", &mem_cache, &len, nullptr, 0) == 0)
     mem_cache *= pagesize;
   /* mem_free */
   len = sizeof(mem_free);
-  if (sysctlbyname("vm.stats.vm.v_free_count", &mem_free, &len, NULL, 0) == 0)
+  if (sysctlbyname("vm.stats.vm.v_free_count", &mem_free, &len, nullptr, 0) == 0)
     mem_free *= pagesize;
 
   /* mem_avail = mem_inactive + mem_cache + mem_free */
   lpBuffer->ullAvailPhys = mem_inactive + mem_cache + mem_free;
   lpBuffer->ullAvailVirtual = mem_inactive + mem_cache + mem_free;
 
-  if (sysctlbyname("vm.stats.vm.v_swappgsout", &swap_free, &len, NULL, 0) == 0)
+  if (sysctlbyname("vm.stats.vm.v_swappgsout", &swap_free, &len, nullptr, 0) == 0)
     lpBuffer->ullAvailPageFile = swap_free * pagesize;
 #else
   struct sysinfo info;

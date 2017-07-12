@@ -42,12 +42,12 @@ OMXClock::OMXClock()
   m_WaitMask = 0;
   m_eState = OMX_TIME_ClockStateStopped;
   m_eClock = OMX_TIME_RefClockNone;
-  m_clock        = NULL;
+  m_clock        = nullptr;
   m_last_media_time = 0.0f;
   m_last_media_time_read = 0.0f;
   m_speedAdjust = 0;
 
-  pthread_mutex_init(&m_lock, NULL);
+  pthread_mutex_init(&m_lock, nullptr);
 }
 
 OMXClock::~OMXClock()
@@ -68,7 +68,7 @@ void OMXClock::UnLock()
 
 void OMXClock::OMXSetClockPorts(OMX_TIME_CONFIG_CLOCKSTATETYPE *clock, bool has_video, bool has_audio)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return;
 
   if(!clock)
@@ -137,7 +137,7 @@ bool OMXClock::OMXInitialize(CDVDClock *clock)
 
 void OMXClock::OMXDeinitialize()
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return;
 
   m_omx_clock.Deinitialize();
@@ -148,7 +148,7 @@ void OMXClock::OMXDeinitialize()
 
 bool OMXClock::OMXStateExecute(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -180,7 +180,7 @@ bool OMXClock::OMXStateExecute(bool lock /* = true */)
 
 void OMXClock::OMXStateIdle(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return;
 
   if(lock)
@@ -201,7 +201,7 @@ COMXCoreComponent *OMXClock::GetOMXClock()
 
 bool  OMXClock::OMXStop(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -234,7 +234,7 @@ bool  OMXClock::OMXStop(bool lock /* = true */)
 
 bool OMXClock::OMXStep(int steps /* = 1 */, bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -265,7 +265,7 @@ bool OMXClock::OMXStep(int steps /* = 1 */, bool lock /* = true */)
 
 bool OMXClock::OMXReset(bool has_video, bool has_audio, bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -316,7 +316,7 @@ bool OMXClock::OMXReset(bool has_video, bool has_audio, bool lock /* = true */)
 double OMXClock::OMXMediaTime(bool lock /* = true */)
 {
   double pts = 0.0;
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return 0;
 
   double now = GetAbsoluteClock();
@@ -357,7 +357,7 @@ double OMXClock::OMXMediaTime(bool lock /* = true */)
 
 double OMXClock::OMXClockAdjustment(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return 0;
 
   if(lock)
@@ -391,7 +391,7 @@ double OMXClock::OMXClockAdjustment(bool lock /* = true */)
 // useful after a seek so mediatime is updated immediately (rather than waiting for first decoded packet)
 bool OMXClock::OMXMediaTime(double pts, bool lock /* = true*/)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -432,7 +432,7 @@ bool OMXClock::OMXMediaTime(double pts, bool lock /* = true*/)
 
 bool OMXClock::OMXPause(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(!m_pause)
@@ -452,7 +452,7 @@ bool OMXClock::OMXPause(bool lock /* = true */)
 
 bool OMXClock::OMXResume(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(m_pause)
@@ -472,7 +472,7 @@ bool OMXClock::OMXResume(bool lock /* = true */)
 
 bool OMXClock::OMXSetSpeed(int speed, bool lock /* = true */, bool pause_resume /* = false */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -524,7 +524,7 @@ void OMXClock::OMXSetSpeedAdjust(double adjust, bool lock /* = true */)
 
 bool OMXClock::OMXFlush(bool lock)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
@@ -542,7 +542,7 @@ bool OMXClock::OMXFlush(bool lock)
 
 bool OMXClock::HDMIClockSync(bool lock /* = true */)
 {
-  if(m_omx_clock.GetComponent() == NULL)
+  if(m_omx_clock.GetComponent() == nullptr)
     return false;
 
   if(lock)
