@@ -118,7 +118,7 @@ bool CRenderSystemGL::InitRenderSystem()
   m_RenderVersionMinor = 0;
 
   const char* ver = (const char*)glGetString(GL_VERSION);
-  if (ver != 0)
+  if (ver != nullptr)
   {
     sscanf(ver, "%d.%d", &m_RenderVersionMajor, &m_RenderVersionMinor);
     m_RenderVersion = ver;
@@ -141,12 +141,12 @@ bool CRenderSystemGL::InitRenderSystem()
   // Get our driver vendor and renderer
   const char* tmpVendor = (const char*) glGetString(GL_VENDOR);
   m_RenderVendor.clear();
-  if (tmpVendor != NULL)
+  if (tmpVendor != nullptr)
     m_RenderVendor = tmpVendor;
 
   const char* tmpRenderer = (const char*) glGetString(GL_RENDERER);
   m_RenderRenderer.clear();
-  if (tmpRenderer != NULL)
+  if (tmpRenderer != nullptr)
     m_RenderRenderer = tmpRenderer;
 
   // grab our capabilities
@@ -443,7 +443,7 @@ void CRenderSystemGL::CalculateMaxTexturesize()
   for (int i = 0 ; i<8 ; i++)
   {
     glTexImage2D(GL_PROXY_TEXTURE_2D, 0, 4, width, width, 0, GL_BGRA,
-                 GL_UNSIGNED_BYTE, NULL);
+                 GL_UNSIGNED_BYTE, nullptr);
     glGetTexLevelParameteriv(GL_PROXY_TEXTURE_2D, 0, GL_TEXTURE_WIDTH,
                              &width);
 
