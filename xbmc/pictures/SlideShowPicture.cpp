@@ -54,7 +54,7 @@ CSlideShowPic::CSlideShowPic() : m_alpha(0)
   m_bCanMoveHorizontally = false;
   m_bCanMoveVertically = false;
 #ifdef HAS_DX
-  m_vb = NULL;
+  m_vb = nullptr;
 #endif
 }
 
@@ -806,7 +806,7 @@ void CSlideShowPic::Render(float *x, float *y, CBaseTexture* pTexture, color_t c
     vertex[1].texCoord.x = vertex[2].texCoord.x = 1.0f;
     vertex[2].texCoord.y = vertex[3].texCoord.y = 1.0f;
   }
-  vertex[4] = vertex[0]; // Not used when pTexture != NULL
+  vertex[4] = vertex[0]; // Not used when pTexture != nullptr
 
   CGUIShaderDX* pGUIShader = g_Windowing.GetGUIShader();
   pGUIShader->Begin(SHADER_METHOD_RENDER_TEXTURE_BLEND);
@@ -983,6 +983,6 @@ void CSlideShowPic::Render(float *x, float *y, CBaseTexture* pTexture, color_t c
   g_Windowing.DisableGUIShader();
 #else
 // SDL render
-  g_Windowing.BlitToScreen(m_pImage, NULL, NULL);
+  g_Windowing.BlitToScreen(m_pImage, nullptr, nullptr);
 #endif
 }
