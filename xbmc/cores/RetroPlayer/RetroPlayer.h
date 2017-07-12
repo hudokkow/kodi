@@ -91,7 +91,7 @@ namespace RETRO
     //virtual int GetVideoStreamCount() const override { return 0; }
     //virtual void GetVideoStreamInfo(int streamId, SPlayerVideoStreamInfo &info) override { }
     //virtual void SetVideoStream(int iStream) override { }
-    //virtual TextCacheStruct_t* GetTeletextCache() override { return NULL; }
+    //virtual TextCacheStruct_t* GetTeletextCache() override { return nullptr; }
     //virtual void LoadPage(int p, int sp, unsigned char* buffer) override { }
     //virtual std::string GetRadioText(unsigned int line) override { return ""; }
     //virtual int GetChapterCount() override { return 0; }

@@ -87,7 +87,7 @@ bool CPixelConverterRBP::Open(AVPixelFormat pixfmt, AVPixelFormat targetfmt, uns
 
   m_swsContext = sws_getContext(width, height, pixfmt,
                                 width, height, targetfmt,
-                                SWS_FAST_BILINEAR, NULL, NULL, NULL);
+                                SWS_FAST_BILINEAR, nullptr, nullptr, nullptr);
   if (!m_swsContext)
   {
     CLog::Log(LOGERROR, "%s::%s: Failed to create swscale context", CLASSNAME, __FUNCTION__);
