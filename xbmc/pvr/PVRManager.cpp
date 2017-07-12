@@ -623,7 +623,7 @@ void CPVRManager::HideProgressDialog(void)
   if (m_progressHandle)
   {
     m_progressHandle->MarkFinished();
-    m_progressHandle = NULL;
+    m_progressHandle = nullptr;
   }
 }
 
@@ -751,7 +751,7 @@ void CPVRManager::ResetPlayingTag(void)
 void CPVRManager::StartRecordingOnPlayingChannel(bool bOnOff)
 {
   // can be called from VideoPlayer thread. SetRecordingOnChannel can open a dialog. Thus, execute async.
-  CJobManager::GetInstance().AddJob(new CPVRSetRecordingOnChannelJob(m_addons->GetPlayingChannel(), bOnOff), NULL);
+  CJobManager::GetInstance().AddJob(new CPVRSetRecordingOnChannelJob(m_addons->GetPlayingChannel(), bOnOff), nullptr);
 }
 
 void CPVRManager::RestartParentalTimer()
@@ -1223,7 +1223,7 @@ bool CPVRManager::AllLocalBackendsIdle(CPVRTimerInfoTagPtr& causingEvent) const
     if (IsNextEventWithinBackendIdleTime())
     {
       CFileItemPtr item = m_timers->GetNextActiveTimer();
-      if (item.get() == NULL)
+      if (item.get() == nullptr)
       {
         // Next event is due to automatic daily wakeup of PVR!
         causingEvent.reset();
@@ -1334,13 +1334,13 @@ void CPVRManager::TriggerChannelGroupsUpdate(void)
 void CPVRManager::TriggerSearchMissingChannelIcons(void)
 {
   if (IsStarted())
-    CJobManager::GetInstance().AddJob(new CPVRSearchMissingChannelIconsJob(), NULL);
+    CJobManager::GetInstance().AddJob(new CPVRSearchMissingChannelIconsJob(), nullptr);
 }
 
 void CPVRManager::ConnectionStateChange(CPVRClient *client, std::string connectString, PVR_CONNECTION_STATE state, std::string message)
 {
   // Note: No check for started pvr manager here. This method is intended to get called even before the mgr is started.
-  CJobManager::GetInstance().AddJob(new CPVRClientConnectionJob(client, connectString, state, message), NULL);
+  CJobManager::GetInstance().AddJob(new CPVRClientConnectionJob(client, connectString, state, message), nullptr);
 }
 
 bool CPVRManager::CreateChannelEpgs(void)
