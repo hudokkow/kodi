@@ -1422,7 +1422,7 @@ bool CRenderSystemDX::TestRender()
   if(delta > m_nBackBufferWidth)
     delta = 0;
 
-  LPDIRECT3DVERTEXBUFFER9 pVB = NULL;
+  LPDIRECT3DVERTEXBUFFER9 pVB = nullptr;
 
   // A structure for our custom vertex type
   struct CUSTOMVERTEX
@@ -1447,7 +1447,7 @@ bool CRenderSystemDX::TestRender()
   // specify the FVF, so the vertex buffer knows what data it contains.
   if( FAILED( m_pD3DDevice->CreateVertexBuffer( 3 * sizeof( CUSTOMVERTEX ),
     0, D3DFVF_CUSTOMVERTEX,
-    D3DPOOL_DEFAULT, &pVB, NULL ) ) )
+    D3DPOOL_DEFAULT, &pVB, nullptr ) ) )
   {
     return false;
   }
@@ -1946,7 +1946,7 @@ void CRenderSystemDX::InitHooks()
   UninitHooks();
 
   // enum devices to find matched
-  while (EnumDisplayDevicesW(NULL, adapter, &displayDevice, 0))
+  while (EnumDisplayDevicesW(nullptr, adapter, &displayDevice, 0))
   {
     if (wcscmp(displayDevice.DeviceName, outputDesc.DeviceName) == 0)
     {
