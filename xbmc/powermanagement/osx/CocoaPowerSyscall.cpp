@@ -45,8 +45,8 @@ OSStatus SendAppleEventToSystemProcess(AEEventID eventToSendID)
 {
   AEAddressDesc targetDesc;
   static const  ProcessSerialNumber kPSNOfSystemProcess = {0, kSystemProcess };
-  AppleEvent    eventReply  = {typeNull, NULL};
-  AppleEvent    eventToSend = {typeNull, NULL};
+  AppleEvent    eventReply  = {typeNull, nullptr};
+  AppleEvent    eventToSend = {typeNull, nullptr};
 
   OSStatus status = AECreateDesc(typeProcessSerialNumber,
     &kPSNOfSystemProcess, sizeof(kPSNOfSystemProcess), &targetDesc);
@@ -83,7 +83,7 @@ CCocoaPowerSyscall::CCocoaPowerSyscall()
   m_BatteryPercent = 100;
   m_SentBatteryMessage = false;
 #if !defined(TARGET_DARWIN_IOS)
-  m_power_source = NULL;
+  m_power_source = nullptr;
 #endif
   CreateOSPowerCallBacks();
 }
@@ -207,7 +207,7 @@ bool CCocoaPowerSyscall::HasBattery(void)
   if (m_HasBattery == -1)
   {
     CCocoaAutoPool autopool;
-    CFArrayRef battery_info = NULL;
+    CFArrayRef battery_info = nullptr;
 
     if (IOPMCopyBatteryInfo(kIOMasterPortDefault, &battery_info) != kIOReturnSuccess)
       result = false;
