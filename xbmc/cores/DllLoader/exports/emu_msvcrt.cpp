@@ -121,7 +121,7 @@ extern "C" void __stdcall init_emu_environ()
   LPTSTR lpszVariable;
   LPTCH lpvEnv;
   lpvEnv = GetEnvironmentStrings();
-  if (lpvEnv != NULL)
+  if (lpvEnv != nullptr)
   {
     lpszVariable = (LPTSTR) lpvEnv;
     while (*lpszVariable)
@@ -459,7 +459,7 @@ extern "C"
 #if !defined(TARGET_WINDOWS)
     return dlopen(filename, flag);
 #else
-    return NULL;
+    return nullptr;
 #endif
   }
 
@@ -892,7 +892,7 @@ extern "C"
       return (intptr_t)&vecDirsOpen[iDirSlot];
     }
     vecDirsOpen[iDirSlot].curr_index = -1;
-    return -1; // whatever != NULL
+    return -1; // whatever != nullptr
   }
 
   // should be moved to CFile classes
@@ -1903,7 +1903,7 @@ extern "C"
   int dll_fstat64i32(int fd, struct _stat64i32 *buffer)
   {
     CFile* pFile = g_emuFileWrapper.GetFileXbmcByDescriptor(fd);
-    if (pFile != NULL)
+    if (pFile != nullptr)
     {
       struct __stat64 tStat = {};
       if (pFile->Stat(&tStat) == 0)
@@ -2205,7 +2205,7 @@ extern "C"
     return getmntent(fp);
 #else
     CLog::Log(LOGWARNING, "%s - unimplemented function called", __FUNCTION__);
-    return NULL;
+    return nullptr;
 #endif
   }
 

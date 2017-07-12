@@ -100,7 +100,7 @@ LibraryLoader* DllLoaderContainer::GetModule(HMODULE hModule)
   return nullptr;
 }
 
-LibraryLoader* DllLoaderContainer::LoadModule(const char* sName, const char* sCurrentDir/*=NULL*/, bool bLoadSymbols/*=false*/)
+LibraryLoader* DllLoaderContainer::LoadModule(const char* sName, const char* sCurrentDir/*=nullptr*/, bool bLoadSymbols/*=false*/)
 {
   LibraryLoader* pDll=nullptr;
 

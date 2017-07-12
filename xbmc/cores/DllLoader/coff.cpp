@@ -213,7 +213,7 @@ int CoffLoader::LoadCoffHModule(FILE *fp)
   hModule = malloc(tempWindowsHeader.SizeOfImage);
 #else
   hModule = VirtualAllocEx(GetCurrentProcess(), (PVOID)tempWindowsHeader.ImageBase, tempWindowsHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
-  if (hModule == NULL)
+  if (hModule == nullptr)
     hModule = VirtualAlloc(GetCurrentProcess(), tempWindowsHeader.SizeOfImage, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
 #endif
   if (hModule == nullptr)

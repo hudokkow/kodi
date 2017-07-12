@@ -42,11 +42,11 @@ typedef void ( *PFV)(void);
 #define __IS_STDIN_STREAM(stream)  (stream == stdin || fileno(stream) == fileno(stdin) || fileno(stream) == 0)
 #define __IS_STDOUT_STREAM(stream) (stream == stdout || fileno(stream) == fileno(stdout) || fileno(stream) == 1)
 #define __IS_STDERR_STREAM(stream) (stream == stderr || fileno(stream) == fileno(stderr) || fileno(stream) == 2)
-#define IS_STDIN_STREAM(stream)     (stream != NULL && __IS_STDIN_STREAM(stream))
-#define IS_STDOUT_STREAM(stream)    (stream != NULL && __IS_STDOUT_STREAM(stream))
-#define IS_STDERR_STREAM(stream)    (stream != NULL && __IS_STDERR_STREAM(stream))
+#define IS_STDIN_STREAM(stream)     (stream != nullptr && __IS_STDIN_STREAM(stream))
+#define IS_STDOUT_STREAM(stream)    (stream != nullptr && __IS_STDOUT_STREAM(stream))
+#define IS_STDERR_STREAM(stream)    (stream != nullptr && __IS_STDERR_STREAM(stream))
 #if defined(TARGET_WINDOWS) && (_MSC_VER < 1900)
-#define IS_VALID_STREAM(stream)     (stream != NULL && (stream->_ptr != NULL))
+#define IS_VALID_STREAM(stream)     (stream != nullptr && (stream->_ptr != nullptr))
 #elif defined(TARGET_WINDOWS) && (_MSC_VER >= 1900)
 #define IS_VALID_STREAM(stream)     (stream != nullptr && (stream->_Placeholder != nullptr))
 #else
@@ -54,7 +54,7 @@ typedef void ( *PFV)(void);
 #endif
 
 
-#define IS_STD_STREAM(stream)       (stream != NULL && (__IS_STDIN_STREAM(stream) || __IS_STDOUT_STREAM(stream) || __IS_STDERR_STREAM(stream)))
+#define IS_STD_STREAM(stream)       (stream != nullptr && (__IS_STDIN_STREAM(stream) || __IS_STDOUT_STREAM(stream) || __IS_STDERR_STREAM(stream)))
 
 #define IS_STDIN_DESCRIPTOR(fd)  (fd == 0)
 #define IS_STDOUT_DESCRIPTOR(fd) (fd == 1)

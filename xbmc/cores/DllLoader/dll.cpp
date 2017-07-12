@@ -228,7 +228,7 @@ extern "C" HMODULE WINAPI dllGetModuleHandleA(LPCSTR lpModuleName)
   The file name string can include a trailing point character (.) to indicate that the module name has no extension.
   The string does not have to specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/).
   The name is compared (case independently)
-  If this parameter is NULL, GetModuleHandle returns a handle to the file used to create the calling process (.exe file).
+  If this parameter is nullptr, GetModuleHandle returns a handle to the file used to create the calling process (.exe file).
   */
 
   if( lpModuleName == nullptr )

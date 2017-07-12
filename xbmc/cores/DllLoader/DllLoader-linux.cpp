@@ -23,15 +23,15 @@
 #include "DllLoaderContainer.h"
 
 CoffLoader::CoffLoader() :
-  hModule           (NULL ),
-  CoffFileHeader    (NULL ),
-  OptionHeader      (NULL ),
-  WindowsHeader     (NULL ),
-  Directory         (NULL ),
-  SectionHeader     (NULL ),
-  SymTable          (NULL ),
-  StringTable       (NULL ),
-  SectionData       (NULL ),
+  hModule           (nullptr ),
+  CoffFileHeader    (nullptr ),
+  OptionHeader      (nullptr ),
+  WindowsHeader     (nullptr ),
+  Directory         (nullptr ),
+  SectionHeader     (nullptr ),
+  SymTable          (nullptr ),
+  StringTable       (nullptr ),
+  SectionData       (nullptr ),
   EntryAddress      (0    ),
   NumberOfSymbols   (0    ),
   SizeOfStringTable (0    ),
@@ -51,7 +51,7 @@ DllLoaderContainer::DllLoaderContainer()
 
 DllLoader* DllLoaderContainer::LoadModule(const char* sName, const char* sCurrentDir, bool bLoadSymbols)
 {
-  return NULL;
+  return nullptr;
 }
 
 bool DllLoader::Load()

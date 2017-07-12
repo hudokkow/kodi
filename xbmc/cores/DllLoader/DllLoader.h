@@ -36,10 +36,6 @@
 #include "ldt_keeper.h"
 #endif
 
-#ifndef NULL
-#define NULL 0
-#endif
-
 class DllLoader;
 
 

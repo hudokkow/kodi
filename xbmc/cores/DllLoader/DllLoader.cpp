@@ -804,7 +804,7 @@ void DllLoader::UnloadSymbols()
   ANSI_STRING name;
   OBJECT_ATTRIBUTES attributes;
   RtlInitAnsiString(&name, GetName());
-  InitializeObjectAttributes(&attributes, &name, OBJ_CASE_INSENSITIVE, NULL);
+  InitializeObjectAttributes(&attributes, &name, OBJ_CASE_INSENSITIVE, nullptr);
 
   // Try to unload the symbols from vs.net debugger
   DbgUnLoadImageSymbols(&name, (ULONG)hModule, 0xFFFFFFFF);
