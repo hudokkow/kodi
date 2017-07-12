@@ -707,7 +707,7 @@ std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(SettingGroup
 
 std::shared_ptr<CSettingList> CGUIDialogSettingsManualBase::AddList(SettingGroupPtr group, const std::string &id, int label, SettingLevel level, std::vector<int> values,
                                                     IntegerSettingOptionsFiller filler, int heading, int minimumItems /* = 0 */, int maximumItems /* = -1 */,
-                                                    bool visible /* = true */, int help /* = -1 */, SettingControlListValueFormatter formatter /* = NULL */)
+                                                    bool visible /* = true */, int help /* = -1 */, SettingControlListValueFormatter formatter /* = nullptr */)
 {
   if (group == nullptr || id.empty() || label < 0 || filler == nullptr ||
       GetSetting(id) != nullptr)
@@ -1102,7 +1102,7 @@ std::shared_ptr<ISettingControl> CGUIDialogSettingsManualBase::GetSpinnerControl
   return control;
 }
 
-std::shared_ptr<ISettingControl> CGUIDialogSettingsManualBase::GetListControl(const std::string &format, bool delayed /* = false */, int heading /* = -1 */, bool multiselect /* = false */,SettingControlListValueFormatter formatter /* = NULL */)
+std::shared_ptr<ISettingControl> CGUIDialogSettingsManualBase::GetListControl(const std::string &format, bool delayed /* = false */, int heading /* = -1 */, bool multiselect /* = false */,SettingControlListValueFormatter formatter /* = nullptr */)
 {
   std::shared_ptr<CSettingControlList> control = std::make_shared<CSettingControlList>();
   if (!control->SetFormat(format))
