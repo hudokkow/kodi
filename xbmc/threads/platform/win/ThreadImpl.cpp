@@ -27,8 +27,8 @@ void CThread::SpawnThread(unsigned stacksize)
   // Create in the suspended state, so that no matter the thread priorities and scheduled order, the handle will be assigned
   // before the new thread exits.
   unsigned threadId;
-  m_ThreadOpaque.handle = (HANDLE)_beginthreadex(NULL, stacksize, &staticThread, this, CREATE_SUSPENDED, &threadId);
-  if (m_ThreadOpaque.handle == NULL)
+  m_ThreadOpaque.handle = (HANDLE)_beginthreadex(nullptr, stacksize, &staticThread, this, CREATE_SUSPENDED, &threadId);
+  if (m_ThreadOpaque.handle == nullptr)
   {
     if (logger) logger->Log(LOGERROR, "%s - fatal error %d creating thread", __FUNCTION__, GetLastError());
     return;
@@ -43,7 +43,7 @@ void CThread::SpawnThread(unsigned stacksize)
 void CThread::TermHandler()
 {
   CloseHandle(m_ThreadOpaque.handle);
-  m_ThreadOpaque.handle = NULL;
+  m_ThreadOpaque.handle = nullptr;
 }
 
 void CThread::SetThreadInfo()
@@ -136,7 +136,7 @@ bool CThread::WaitForThreadExit(unsigned int milliseconds)
   bool bReturn = true;
 
   CSingleLock lock(m_CriticalSection);
-  if (m_ThreadId && m_ThreadOpaque.handle != NULL)
+  if (m_ThreadId && m_ThreadOpaque.handle != nullptr)
   {
     // boost priority of thread we are waiting on to same as caller
     int callee = GetThreadPriority(m_ThreadOpaque.handle);

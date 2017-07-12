@@ -288,7 +288,7 @@ void term_handler (int signum)
     if( curThread->IsAutoDelete() )
       delete curThread;
   }
-  pthread_exit(NULL);
+  pthread_exit(nullptr);
 }
 
 void CThread::SetSignalHandlers()
@@ -297,7 +297,7 @@ void CThread::SetSignalHandlers()
   action.sa_handler = term_handler;
   sigemptyset (&action.sa_mask);
   action.sa_flags = 0;
-  //sigaction (SIGABRT, &action, NULL);
-  //sigaction (SIGSEGV, &action, NULL);
+  //sigaction (SIGABRT, &action, nullptr);
+  //sigaction (SIGSEGV, &action, nullptr);
 }
 
