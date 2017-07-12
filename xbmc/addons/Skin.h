@@ -133,11 +133,11 @@ public:
   /*! \brief Get the full path to the specified file in the skin
    We search for XML files in the skin folder that best matches the current resolution.
    \param file XML file to look for
-   \param res [out] If non-NULL, the resolution that the returned XML file is in is returned.  Defaults to NULL.
+   \param res [out] If non-nullptr, the resolution that the returned XML file is in is returned.  Defaults to NULL.
    \param baseDir [in] If non-empty, the given directory is searched instead of the skin's directory.  Defaults to empty.
    \return path to the XML file
    */
-  std::string GetSkinPath(const std::string& file, RESOLUTION_INFO *res = NULL, const std::string& baseDir = "") const;
+  std::string GetSkinPath(const std::string& file, RESOLUTION_INFO *res = nullptr, const std::string& baseDir = "") const;
 
   /*! \brief Return whether skin debugging is enabled
    \return true if skin debugging (set via <debugging>true</debugging> in addon.xml) is enabled.
@@ -164,7 +164,7 @@ public:
    */
   static bool TranslateResolution(const std::string &name, RESOLUTION_INFO &res);
 
-  void ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = NULL);
+  void ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions = nullptr);
 
   float GetEffectsSlowdown() const { return m_effectsSlowDown; };
 

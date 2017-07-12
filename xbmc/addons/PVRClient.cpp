@@ -146,7 +146,7 @@ void CPVRClient::ResetProperties(int iClientId /* = PVR_INVALID_CLIENT_ID */)
   m_timertypes.clear();
   m_clientCapabilities.clear();
 
-  m_struct = {{0}};
+  m_struct = {{nullptr}};
   m_struct.props.strUserPath = m_strUserPath.c_str();
   m_struct.props.strClientPath = m_strClientPath.c_str();
   m_struct.props.iEpgMaxDays = CServiceBroker::GetPVRManager().EpgContainer().GetFutureDaysToDisplay();
@@ -1379,7 +1379,7 @@ DemuxPacket* CPVRClient::DemuxRead(void)
   {
     return m_struct.toAddon.DemuxRead();
   }
-  return NULL;
+  return nullptr;
 }
 
 bool CPVRClient::HasMenuHooks(PVR_MENUHOOK_CAT cat) const
@@ -2040,7 +2040,7 @@ private:
   CCodecIds(void)
   {
     // get ids and names
-    AVCodec* codec = NULL;
+    AVCodec* codec = nullptr;
     xbmc_codec_t tmp;
     while ((codec = av_codec_next(codec)))
     {

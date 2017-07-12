@@ -147,7 +147,7 @@ CAddonSettings::CAddonSettings(std::shared_ptr<const IAddon> addon)
   , m_unknownSettingLabelId(UnknownSettingLabelIdStart)
 { }
 
-std::shared_ptr<CSetting> CAddonSettings::CreateSetting(const std::string &settingType, const std::string &settingId, CSettingsManager *settingsManager /* = NULL */) const
+std::shared_ptr<CSetting> CAddonSettings::CreateSetting(const std::string &settingType, const std::string &settingId, CSettingsManager *settingsManager /* = nullptr */) const
 {
   if (StringUtils::EqualsNoCase(settingType, "urlencodedstring"))
     return std::make_shared<CSettingUrlEncodedString>(settingId, settingsManager);
