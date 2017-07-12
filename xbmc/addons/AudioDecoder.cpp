@@ -52,7 +52,7 @@ bool CAudioDecoder::Init(const CFileItem& file, unsigned int filecache)
 
   // for replaygain
   CTagLoaderTagLib tag;
-  tag.Load(file.GetPath(), XFILE::CMusicFileDirectory::m_tag, NULL);
+  tag.Load(file.GetPath(), XFILE::CMusicFileDirectory::m_tag, nullptr);
 
   int channels;
   int sampleRate;
