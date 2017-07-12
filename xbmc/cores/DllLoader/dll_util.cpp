@@ -116,7 +116,7 @@ uintptr_t get_win_function_address(const char* strDllName, const char* strFuncti
   if(handle != nullptr)
   {
     auto pGNSI = reinterpret_cast<uintptr_t>(GetProcAddress(handle, strFunctionName));
-    if(pGNSI != NULL)
+    if(pGNSI != nullptr)
       return pGNSI;
   }
 #endif

@@ -81,8 +81,8 @@ CExternalPlayer::CExternalPlayer(IPlayerCallback& callback)
   m_playCountMinTime = DEFAULT_PLAYCOUNT_MIN_TIME;
   m_playOneStackItem = false;
 
-  m_dialog = NULL;
-  m_hwndXbmc = NULL;
+  m_dialog = nullptr;
+  m_hwndXbmc = nullptr;
   m_xPos = 0;
   m_yPos = 0;
 
@@ -418,9 +418,9 @@ bool CExternalPlayer::ExecuteAppW32(const char* strPath, const char* strSwitches
 
   if (m_bAbortRequest) return false;
 
-  BOOL ret = CreateProcessW(WstrPath.empty() ? NULL : WstrPath.c_str(),
-                            (LPWSTR) WstrSwitches.c_str(), NULL, NULL, FALSE, NULL,
-                            NULL, NULL, &si, &m_processInfo);
+  BOOL ret = CreateProcessW(WstrPath.empty() ? nullptr : WstrPath.c_str(),
+                            (LPWSTR) WstrSwitches.c_str(), nullptr, nullptr, FALSE, nullptr,
+                            nullptr, nullptr, &si, &m_processInfo);
 
   if (ret == FALSE)
   {
