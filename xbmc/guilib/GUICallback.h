@@ -124,8 +124,8 @@ public:
 
   Callback()
   {
-    m_pInstance = NULL;
-    m_pMethod = NULL;
+    m_pInstance = nullptr;
+    m_pMethod = nullptr;
   }
 
   // Assign a CallbackHandler (CallbackHandler's are derived from Callback)

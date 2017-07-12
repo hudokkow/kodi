@@ -50,7 +50,7 @@ void CGUIInfoBool::Parse(const std::string &expression, int context)
   }
 }
 
-void CGUIInfoBool::Update(const CGUIListItem *item /*= NULL*/)
+void CGUIInfoBool::Update(const CGUIListItem *item /*= nullptr*/)
 {
   if (m_info)
     m_value = m_info->Get(item);
@@ -142,7 +142,7 @@ void CGUIInfoLabel::SetLabel(const std::string &label, const std::string &fallba
   Parse(label, context);
 }
 
-const std::string &CGUIInfoLabel::GetLabel(int contextWindow, bool preferImage, std::string *fallback /*= NULL*/) const
+const std::string &CGUIInfoLabel::GetLabel(int contextWindow, bool preferImage, std::string *fallback /*= nullptr*/) const
 {
   bool needsUpdate = m_dirty;
   if (!m_info.empty())
@@ -166,7 +166,7 @@ const std::string &CGUIInfoLabel::GetLabel(int contextWindow, bool preferImage, 
   return CacheLabel(needsUpdate);
 }
 
-const std::string &CGUIInfoLabel::GetItemLabel(const CGUIListItem *item, bool preferImages, std::string *fallback /*= NULL*/) const
+const std::string &CGUIInfoLabel::GetItemLabel(const CGUIListItem *item, bool preferImages, std::string *fallback /*= nullptr*/) const
 {
   bool needsUpdate = m_dirty;
   if (item->IsFileItem() && !m_info.empty())

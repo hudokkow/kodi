@@ -697,7 +697,7 @@ void CAnimation::AddEffect(const std::string &type, const TiXmlElement *node, co
     m_effects.push_back(effect);
 }
 
-CScroller::CScroller(unsigned int duration /* = 200 */, std::shared_ptr<Tweener> tweener /* = NULL */)
+CScroller::CScroller(unsigned int duration /* = 200 */, std::shared_ptr<Tweener> tweener /* = nullptr */)
 {
   m_scrollValue = 0;
   m_delta = 0;

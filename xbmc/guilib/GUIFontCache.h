@@ -210,7 +210,7 @@ struct CVertexBuffer
 #define  BUFFER_HANDLE_INIT 0
 #elif defined(HAS_DX)
   typedef void* BufferHandleType;
-#define BUFFER_HANDLE_INIT nullptr
+#define BUFFER_HANDLE_INIT NULL
 #endif
   BufferHandleType bufferHandle; // this is really a GLuint
   size_t size;

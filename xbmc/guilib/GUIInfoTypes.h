@@ -83,7 +83,7 @@ public:
    \brief Gets a label (or image) for a given window context from the info manager.
    \param contextWindow the context in which to evaluate the expression.
    \param preferImage caller is specifically wanting an image rather than a label. Defaults to false.
-   \param fallback if non-NULL, is set to an alternate value to use should the actual value be not appropriate. Defaults to NULL.
+   \param fallback if non-nullptr, is set to an alternate value to use should the actual value be not appropriate. Defaults to NULL.
    \return label (or image).
    */
   const std::string &GetLabel(int contextWindow, bool preferImage = false, std::string *fallback = nullptr) const;
@@ -100,7 +100,7 @@ public:
    \brief Gets a label (or image) for a given listitem from the info manager.
    \param item listitem in question.
    \param preferImage caller is specifically wanting an image rather than a label. Defaults to false.
-   \param fallback if non-NULL, is set to an alternate value to use should the actual value be not appropriate. Defaults to NULL.
+   \param fallback if non-nullptr, is set to an alternate value to use should the actual value be not appropriate. Defaults to NULL.
    \return label (or image).
    */
   const std::string &GetItemLabel(const CGUIListItem *item, bool preferImage = false, std::string *fallback = nullptr) const;

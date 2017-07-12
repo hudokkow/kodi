@@ -202,7 +202,7 @@ CBaseTexture *CBaseTexture::LoadFromFile(const std::string& texturePath, unsigne
       unsigned int inputBuffSize = file.ReadIcon(&inputBuff, &width, &height);
       file.Close();
       if (!inputBuffSize)
-        return NULL;
+        return nullptr;
 
       CTexture *texture = new CTexture();
       texture->LoadFromMemory(width, height, width*4, XB_FMT_RGBA8, true, inputBuff);

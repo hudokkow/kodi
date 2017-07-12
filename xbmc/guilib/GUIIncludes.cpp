@@ -307,7 +307,7 @@ bool CGUIIncludes::HasLoaded(const std::string &file) const
   return false;
 }
 
-void CGUIIncludes::Resolve(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::Resolve(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if (!node)
     return;
@@ -403,7 +403,7 @@ void CGUIIncludes::ResolveExpressions(TiXmlElement *node)
   }
 }
 
-void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if (!node)
     return;

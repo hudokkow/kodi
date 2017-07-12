@@ -244,7 +244,7 @@ bool CARBPixelShader::Compile()
   {
     const char* errStr = (const char*)glGetString(GL_PROGRAM_ERROR_STRING_ARB);
     if (!errStr)
-      errStr = "NULL";
+      errStr = "nullptr";
     CLog::Log(LOGERROR, "GL: Error compiling ARB pixel shader, GL_PROGRAM_ERROR_STRING_ARB = %s", errStr);
     m_compiled = false;
   }

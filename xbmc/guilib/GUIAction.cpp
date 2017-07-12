@@ -35,7 +35,7 @@ CGUIAction::CGUIAction(int controlID)
   SetNavigation(controlID);
 }
 
-bool CGUIAction::ExecuteActions(int controlID, int parentID, const CGUIListItemPtr &item /* = NULL */) const
+bool CGUIAction::ExecuteActions(int controlID, int parentID, const CGUIListItemPtr &item /* = nullptr */) const
 {
   if (m_actions.empty()) return false;
   // take a copy of actions that satisfy our conditions

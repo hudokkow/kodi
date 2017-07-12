@@ -703,7 +703,7 @@ void CGUIEditControl::OnPasteClipboard()
   }
 }
 
-void CGUIEditControl::SetInputValidation(StringValidation::Validator inputValidator, void *data /* = NULL */)
+void CGUIEditControl::SetInputValidation(StringValidation::Validator inputValidator, void *data /* = nullptr */)
 {
   if (m_inputValidator == inputValidator)
     return;
