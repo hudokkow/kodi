@@ -53,10 +53,10 @@ CWinSystemEGL::CWinSystemEGL() : CWinSystemBase()
   m_display           = EGL_NO_DISPLAY;
   m_surface           = EGL_NO_SURFACE;
   m_context           = EGL_NO_CONTEXT;
-  m_config            = NULL;
+  m_config            = nullptr;
   m_stereo_mode       = RENDER_STEREO_MODE_OFF;
 
-  m_egl               = NULL;
+  m_egl               = nullptr;
   m_iVSyncMode        = 0;
   m_delayDispReset    = false;
 }
@@ -260,7 +260,7 @@ bool CWinSystemEGL::DestroyWindowSystem()
 
   m_egl->Destroy();
   delete m_egl;
-  m_egl = NULL;
+  m_egl = nullptr;
 
   CWinSystemBase::DestroyWindowSystem();
   return true;

@@ -240,7 +240,7 @@ LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
   if (uMsg == WM_NCCREATE)
   {
     // if available, enable DPI scaling of non-client portion of window (title bar, etc.) 
-    if (g_Windowing.PtrEnableNonClientDpiScaling != NULL)
+    if (g_Windowing.PtrEnableNonClientDpiScaling != nullptr)
     {
       g_Windowing.PtrEnableNonClientDpiScaling(hWnd);
     }
@@ -652,7 +652,7 @@ LRESULT CALLBACK CWinEventsWin32::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, L
                 if(wParam == DBT_DEVICEARRIVAL)
                 {
                   CLog::Log(LOGDEBUG, __FUNCTION__": Drive %s Media has arrived.", strdrive.c_str());
-                  CJobManager::GetInstance().AddJob(new CDetectDisc(strdrive, true), NULL);
+                  CJobManager::GetInstance().AddJob(new CDetectDisc(strdrive, true), nullptr);
                 }
                 else
                 {

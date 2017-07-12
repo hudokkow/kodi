@@ -43,8 +43,8 @@
 CEGLNativeTypeIMX::CEGLNativeTypeIMX()
   : m_sar(0.0f)
   , m_show(true)
-  , m_display(NULL)
-  , m_window(NULL)
+  , m_display(nullptr)
+  , m_window(nullptr)
 {
 }
 
@@ -150,7 +150,7 @@ void CEGLNativeTypeIMX::Destroy()
 
   ioctl( fd, FBIOGET_FSCREENINFO, &fixed_info);
   // Black fb0
-  fb_buffer = mmap(NULL, fixed_info.smem_len, PROT_WRITE, MAP_SHARED, fd, 0);
+  fb_buffer = mmap(nullptr, fixed_info.smem_len, PROT_WRITE, MAP_SHARED, fd, 0);
   if (fb_buffer == MAP_FAILED)
   {
     CLog::Log(LOGERROR, "%s - fb mmap failed %s.\n", __FUNCTION__, strerror(errno));
@@ -217,7 +217,7 @@ bool CEGLNativeTypeIMX::DestroyNativeDisplay()
 #ifdef HAS_IMXVPU
   if (m_display)
     fbDestroyDisplay(m_display);
-  m_display =  NULL;
+  m_display =  nullptr;
   return true;
 #else
   return false;
@@ -229,7 +229,7 @@ bool CEGLNativeTypeIMX::DestroyNativeWindow()
 #ifdef HAS_IMXVPU
   if (m_window)
     fbDestroyWindow(m_window);
-  m_window =  NULL;
+  m_window =  nullptr;
   return true;
 #else
   return false;
@@ -335,7 +335,7 @@ bool CEGLNativeTypeIMX::ShowWindow(bool show)
 float CEGLNativeTypeIMX::GetMonitorSAR()
 {
   FILE *f_edid;
-  char *str = NULL;
+  char *str = nullptr;
   unsigned char p;
   size_t n;
   int done = 0;
@@ -387,7 +387,7 @@ float CEGLNativeTypeIMX::GetMonitorSAR()
     }
     if (str)
       free(str);
-    str = NULL;
+    str = nullptr;
   }
   fclose(f_edid);
 
