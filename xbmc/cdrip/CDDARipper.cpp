@@ -96,7 +96,7 @@ bool CCDDARipper::RipCD()
 {
   // return here if cd is not a CDDA disc
   MEDIA_DETECT::CCdInfo* pInfo = g_mediaManager.GetCdInfo();
-  if (pInfo == NULL || !pInfo->IsAudio(1))
+  if (pInfo == nullptr || !pInfo->IsAudio(1))
   {
     CLog::Log(LOGDEBUG, "cddaripper: CD is not an audio cd");
     return false;
@@ -113,7 +113,7 @@ bool CCDDARipper::RipCD()
     CFileItemPtr pItem = vecItems[i];
     CMusicInfoTagLoaderFactory factory;
     std::unique_ptr<IMusicInfoTagLoader> pLoader (factory.CreateLoader(*pItem));
-    if (NULL != pLoader.get())
+    if (nullptr != pLoader.get())
     {
       pLoader->Load(pItem->GetPath(), *pItem->GetMusicInfoTag()); // get tag from file
       if (!pItem->GetMusicInfoTag()->Loaded())
@@ -152,7 +152,7 @@ bool CCDDARipper::RipCD()
 bool CCDDARipper::CreateAlbumDir(const MUSIC_INFO::CMusicInfoTag& infoTag, std::string& strDirectory, int& legalType)
 {
   std::shared_ptr<CSettingPath> recordingpathSetting = std::static_pointer_cast<CSettingPath>(CServiceBroker::GetSettings().GetSetting(CSettings::SETTING_AUDIOCDS_RECORDINGPATH));
-  if (recordingpathSetting != NULL)
+  if (recordingpathSetting != nullptr)
   {
     strDirectory = recordingpathSetting->GetValue();
     if (strDirectory.empty())
