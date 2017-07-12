@@ -140,7 +140,7 @@ CWebSocketFrame::CWebSocketFrame(const char* data, uint64_t length)
   m_valid = true;
 }
 
-CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /* = NULL */, uint32_t length /* = 0 */,
+CWebSocketFrame::CWebSocketFrame(WebSocketFrameOpcode opcode, const char* data /* = nullptr */, uint32_t length /* = 0 */,
                                  bool final /* = true */, bool masked /* = false */, int32_t mask /* = 0 */, int8_t extension /* = 0 */)
 {
   reset();
@@ -419,7 +419,7 @@ const CWebSocketMessage* CWebSocket::Handle(const char* &buffer, size_t &length,
   return nullptr;
 }
 
-const CWebSocketMessage* CWebSocket::Send(WebSocketFrameOpcode opcode, const char* data /* = NULL */, uint32_t length /* = 0 */)
+const CWebSocketMessage* CWebSocket::Send(WebSocketFrameOpcode opcode, const char* data /* = nullptr */, uint32_t length /* = 0 */)
 {
   CWebSocketFrame *frame = GetFrame(opcode, data, length);
   if (frame == nullptr || !frame->IsValid())

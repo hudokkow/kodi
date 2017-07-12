@@ -341,7 +341,7 @@ bool CTCPServer::InitializeBlue()
   service.lpServiceClassId        = (LPGUID)&bt_service_guid;
   service.lpszComment             = const_cast<LPWSTR>(ToW(bt_service_desc).c_str());
   service.dwNameSpace             = NS_BTH;
-  service.lpNSProviderId          = NULL; /* RFCOMM? */
+  service.lpNSProviderId          = nullptr; /* RFCOMM? */
   service.lpcsaBuffer             = &addrinfo;
   service.dwNumberOfCsAddrs       = 1;
 

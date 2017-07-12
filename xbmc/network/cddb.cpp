@@ -221,7 +221,7 @@ bool Xcddb::queryCDinfo(CCdInfo* pInfo, int inexact_list_select)
   if (!Send(read_buffer.c_str()))
   {
     CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexact_list_select Error sending \"%s\"", read_buffer.c_str());
-    CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexact_list_select pInfo == NULL");
+    CLog::Log(LOGERROR, "Xcddb::queryCDinfo_inexact_list_select pInfo == nullptr");
     m_lastError = E_NETWORK_ERROR_SEND;
     return false;
   }
@@ -804,7 +804,7 @@ bool Xcddb::queryCDinfo(CCdInfo* pInfo)
 {
   if ( pInfo == nullptr )
   {
-    CLog::Log(LOGERROR, "Xcddb::queryCDinfo pInfo == NULL");
+    CLog::Log(LOGERROR, "Xcddb::queryCDinfo pInfo == nullptr");
     m_lastError = E_PARAMETER_WRONG;
     return false;
   }

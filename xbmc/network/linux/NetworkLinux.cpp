@@ -228,13 +228,13 @@ std::string CNetworkInterfaceLinux::GetCurrentDefaultGateway(void)
    mib[3] = 0;
    mib[4] = NET_RT_DUMP;
    mib[5] = 0;
-   if (sysctl(mib, 6, NULL, &needed, NULL, 0) < 0)
+   if (sysctl(mib, 6, nullptr, &needed, nullptr, 0) < 0)
       return result;
 
-   if ((buf = (char *)malloc(needed)) == NULL)
+   if ((buf = (char *)malloc(needed)) == nullptr)
       return result;
 
-   if (sysctl(mib, 6, buf, &needed, NULL, 0) < 0) {
+   if (sysctl(mib, 6, buf, &needed, nullptr, 0) < 0) {
       free(buf);
       return result;
    }
@@ -246,7 +246,7 @@ std::string CNetworkInterfaceLinux::GetCurrentDefaultGateway(void)
       sa = (struct sockaddr *)(SA_SIZE(sa) + (char *)sa);	
       sockin = (struct sockaddr_in *)sa;
       if (inet_ntop(AF_INET, &sockin->sin_addr.s_addr,
-         line, sizeof(line)) == NULL) {
+         line, sizeof(line)) == nullptr) {
             free(buf);
             return result;
 	  }
@@ -360,8 +360,8 @@ void CNetworkLinux::GetMacAddress(const std::string& interfaceName, char rawMac[
 #if !defined(IFT_ETHER)
 #define IFT_ETHER 0x6/* Ethernet CSMACD */
 #endif
-  const struct sockaddr_dl* dlAddr = NULL;
-  const uint8_t * base = NULL;
+  const struct sockaddr_dl* dlAddr = nullptr;
+  const uint8_t * base = nullptr;
   // Query the list of interfaces.
   struct ifaddrs *list;
   struct ifaddrs *interface;
@@ -371,7 +371,7 @@ void CNetworkLinux::GetMacAddress(const std::string& interfaceName, char rawMac[
     return;
   }
 
-  for(interface = list; interface != NULL; interface = interface->ifa_next)
+  for(interface = list; interface != nullptr; interface = interface->ifa_next)
   {
     if(interfaceName == interface->ifa_name)
     {
@@ -415,7 +415,7 @@ void CNetworkLinux::queryInterfaceList()
      return;
 
    struct ifaddrs *cur;
-   for(cur = list; cur != NULL; cur = cur->ifa_next)
+   for(cur = list; cur != nullptr; cur = cur->ifa_next)
    {
      if(cur->ifa_addr->sa_family != AF_INET)
        continue;
@@ -584,12 +584,12 @@ bool CNetworkInterfaceLinux::GetHostMacAddress(unsigned long host_ip, std::strin
   mib[4] = NET_RT_FLAGS;
   mib[5] = RTF_LLINFO;
   
-  if (sysctl(mib, ARRAY_SIZE(mib), NULL, &needed, NULL, 0) == 0)
+  if (sysctl(mib, ARRAY_SIZE(mib), nullptr, &needed, nullptr, 0) == 0)
   {   
     buf = (char*)malloc(needed);
     if (buf)
     {      
-      if (sysctl(mib, ARRAY_SIZE(mib), buf, &needed, NULL, 0) == 0)
+      if (sysctl(mib, ARRAY_SIZE(mib), buf, &needed, nullptr, 0) == 0)
       {        
         for (next = buf; next < buf + needed; next += rtm->rtm_msglen) 
         {

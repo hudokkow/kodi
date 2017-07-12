@@ -121,7 +121,7 @@ private:
                              NPT_UInt32                    requested_count,
                              const char*                   sort_criteria,
                              const PLT_HttpRequestContext& context,
-                             const char*                   parent_id /* = NULL */);
+                             const char*                   parent_id /* = nullptr */);
 
     // class methods
     static bool SortItems(CFileItemList& items, const char* sort_criteria);

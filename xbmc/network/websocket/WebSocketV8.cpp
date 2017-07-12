@@ -154,7 +154,7 @@ CWebSocketFrame* CWebSocketV8::GetFrame(const char* data, uint64_t length)
   return new CWebSocketFrame(data, length);
 }
 
-CWebSocketFrame* CWebSocketV8::GetFrame(WebSocketFrameOpcode opcode, const char* data /* = NULL */, uint32_t length /* = 0 */,
+CWebSocketFrame* CWebSocketV8::GetFrame(WebSocketFrameOpcode opcode, const char* data /* = nullptr */, uint32_t length /* = 0 */,
                                         bool final /* = true */, bool masked /* = false */, int32_t mask /* = 0 */, int8_t extension /* = 0 */)
 {
   return new CWebSocketFrame(opcode, data, length, final, masked, mask, extension);

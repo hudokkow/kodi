@@ -57,7 +57,7 @@ namespace UPNP
 |   CUPnPRenderer::CUPnPRenderer
 +---------------------------------------------------------------------*/
 CUPnPRenderer::CUPnPRenderer(const char* friendly_name, bool show_ip /*= false*/,
-                             const char* uuid /*= NULL*/, unsigned int port /*= 0*/)
+                             const char* uuid /*= nullptr*/, unsigned int port /*= 0*/)
     : PLT_MediaRenderer(friendly_name, show_ip, uuid, port)
 {
     CAnnouncementManager::GetInstance().AddAnnouncer(this);

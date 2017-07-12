@@ -100,7 +100,7 @@ EMediaControllerQuirks GetMediaControllerQuirks(const PLT_DeviceData *device)
 +---------------------------------------------------------------------*/
 NPT_String
 GetMimeType(const char* filename,
-            const PLT_HttpRequestContext* context /* = NULL */)
+            const PLT_HttpRequestContext* context /* = nullptr */)
 {
     NPT_String ext = URIUtils::GetExtension(filename).c_str();
     ext.TrimLeft('.');
@@ -114,7 +114,7 @@ GetMimeType(const char* filename,
 +---------------------------------------------------------------------*/
 NPT_String
 GetMimeType(const CFileItem& item,
-            const PLT_HttpRequestContext* context /* = NULL */)
+            const PLT_HttpRequestContext* context /* = nullptr */)
 {
     std::string path = item.GetPath();
     if (item.HasVideoInfoTag() && !item.GetVideoInfoTag()->GetPath().empty()) {
@@ -172,7 +172,7 @@ GetMimeType(const CFileItem& item,
 const NPT_String
 GetProtocolInfo(const CFileItem&              item,
                 const char*                   protocol,
-                const PLT_HttpRequestContext* context /* = NULL */)
+                const PLT_HttpRequestContext* context /* = nullptr */)
 {
     NPT_String proto = protocol;
 
@@ -360,8 +360,8 @@ BuildObject(CFileItem&                    item,
             NPT_String&                   file_path,
             bool                          with_count,
             NPT_Reference<CThumbLoader>&  thumb_loader,
-            const PLT_HttpRequestContext* context /* = NULL */,
-            CUPnPServer*                  upnp_server /* = NULL */,
+            const PLT_HttpRequestContext* context /* = nullptr */,
+            CUPnPServer*                  upnp_server /* = nullptr */,
             UPnPService                   upnp_service /* = UPnPServiceNone */)
 {
     PLT_MediaItemResource resource;
@@ -737,7 +737,7 @@ CorrectAllItemsSortHack(const std::string &item)
 int
 PopulateTagFromObject(CMusicInfoTag&         tag,
                       PLT_MediaObject&       object,
-                      PLT_MediaItemResource* resource /* = NULL */,
+                      PLT_MediaItemResource* resource /* = nullptr */,
                       UPnPService            service /* = UPnPServiceNone */)
 {
     tag.SetTitle((const char*)object.m_Title);
@@ -772,7 +772,7 @@ PopulateTagFromObject(CMusicInfoTag&         tag,
 int
 PopulateTagFromObject(CVideoInfoTag&         tag,
                       PLT_MediaObject&       object,
-                      PLT_MediaItemResource* resource /* = NULL */,
+                      PLT_MediaItemResource* resource /* = nullptr */,
                       UPnPService            service /* = UPnPServiceNone */)
 {
     CDateTime date;

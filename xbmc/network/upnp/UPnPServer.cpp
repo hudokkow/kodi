@@ -70,7 +70,7 @@ const char* video_containers[] = { "library://video/movies/titles.xml/", "librar
 /*----------------------------------------------------------------------
 |   CUPnPServer::CUPnPServer
 +---------------------------------------------------------------------*/
-CUPnPServer::CUPnPServer(const char* friendly_name, const char* uuid /*= NULL*/, int port /*= 0*/) :
+CUPnPServer::CUPnPServer(const char* friendly_name, const char* uuid /*= nullptr*/, int port /*= 0*/) :
     PLT_MediaConnect(friendly_name, false, uuid, port),
     PLT_FileMediaConnectDelegate("/", "/"),
     m_scanning(g_application.IsMusicScanning() || g_application.IsVideoScanning())
@@ -259,7 +259,7 @@ CUPnPServer::Build(CFileItemPtr                  item,
                    bool                          with_count,
                    const PLT_HttpRequestContext& context,
                    NPT_Reference<CThumbLoader>&  thumb_loader,
-                   const char*                   parent_id /* = NULL */)
+                   const char*                   parent_id /* = nullptr */)
 {
     PLT_MediaObject* object = nullptr;
     NPT_String       path = item->GetPath().c_str();
@@ -734,7 +734,7 @@ CUPnPServer::BuildResponse(PLT_ActionReference&          action,
                            NPT_UInt32                    requested_count,
                            const char*                   sort_criteria,
                            const PLT_HttpRequestContext& context,
-                           const char*                   parent_id /* = NULL */)
+                           const char*                   parent_id /* = nullptr */)
 {
     NPT_COMPILER_UNUSED(sort_criteria);
 

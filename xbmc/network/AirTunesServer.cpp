@@ -137,7 +137,7 @@ void CAirTunesServer::RefreshMetadata()
   CApplicationMessenger::GetInstance().PostMsg(TMSG_UPDATE_CURRENT_ITEM, 1, -1, static_cast<void*>(new CFileItem(tag)));
 }
 
-void CAirTunesServer::RefreshCoverArt(const char *outputFilename/* = NULL*/)
+void CAirTunesServer::RefreshCoverArt(const char *outputFilename/* = nullptr*/)
 {
   static std::string coverArtFile = TMP_COVERART_PATH_JPG;
 
