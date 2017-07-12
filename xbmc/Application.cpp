@@ -411,7 +411,7 @@ bool CApplication::SetupNetwork()
   m_network = new CNetwork();
 #endif
 
-  return m_network != NULL;
+  return m_network != nullptr;
 }
 
 bool CApplication::Create(const CAppParamParser &params)
@@ -1306,7 +1306,7 @@ void CApplication::StopServices()
 
 void CApplication::OnSettingChanged(std::shared_ptr<const CSetting> setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -1409,7 +1409,7 @@ void CApplication::OnSettingChanged(std::shared_ptr<const CSetting> setting)
 
 void CApplication::OnSettingAction(std::shared_ptr<const CSetting> setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -1449,7 +1449,7 @@ void CApplication::OnSettingAction(std::shared_ptr<const CSetting> setting)
 
 bool CApplication::OnSettingUpdate(std::shared_ptr<CSetting> setting, const char *oldSettingId, const TiXmlNode *oldSettingNode)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
 #if defined(HAS_LIBAMCODEC)
@@ -1536,11 +1536,11 @@ void CApplication::ReloadSkin(bool confirm/*=false*/)
 
 bool CApplication::Load(const TiXmlNode *settings)
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   const TiXmlElement *audioElement = settings->FirstChildElement("audio");
-  if (audioElement != NULL)
+  if (audioElement != nullptr)
   {
     XMLUtils::GetBoolean(audioElement, "mute", m_muted);
     if (!XMLUtils::GetFloat(audioElement, "fvolumelevel", m_volumeLevel, VOLUME_MINIMUM, VOLUME_MAXIMUM))
@@ -1552,12 +1552,12 @@ bool CApplication::Load(const TiXmlNode *settings)
 
 bool CApplication::Save(TiXmlNode *settings) const
 {
-  if (settings == NULL)
+  if (settings == nullptr)
     return false;
 
   TiXmlElement volumeNode("audio");
   TiXmlNode *audioNode = settings->InsertEndChild(volumeNode);
-  if (audioNode == NULL)
+  if (audioNode == nullptr)
     return false;
 
   XMLUtils::SetBoolean(audioNode, "mute", m_muted);
@@ -1796,7 +1796,7 @@ bool CApplication::LoadCustomWindows()
             continue;
           }
 
-          CGUIWindow* pWindow = NULL;
+          CGUIWindow* pWindow = nullptr;
           bool hasVisibleCondition = false;
 
           if (StringUtils::EqualsNoCase(strType, "dialog"))
@@ -2788,7 +2788,7 @@ bool CApplication::Cleanup()
 #endif
 
     delete m_network;
-    m_network = NULL;
+    m_network = nullptr;
 
     // Cleanup was called more than once on exit during my tests
     if (m_ServiceManager)
@@ -2909,7 +2909,7 @@ void CApplication::Stop(int exitCode)
     CServiceBroker::GetInputManager().DisableRemoteControl();
 
     // unregister ffmpeg lock manager call back
-    av_lockmgr_register(NULL);
+    av_lockmgr_register(nullptr);
 
     CLog::Log(LOGNOTICE, "stopped");
   }
@@ -3686,7 +3686,7 @@ void CApplication::SaveFileState(bool bForeground /* = false */)
     delete job;
   }
   else
-    CJobManager::GetInstance().AddJob(job, NULL, CJob::PRIORITY_NORMAL);
+    CJobManager::GetInstance().AddJob(job, nullptr, CJob::PRIORITY_NORMAL);
 }
 
 void CApplication::UpdateFileState()
