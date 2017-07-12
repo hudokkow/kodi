@@ -892,13 +892,13 @@ void CLinuxInputDevice::SetupKeyboardAutoRepeat(int fd)
     struct input_event event;
     memset(&event, 0, sizeof(event));
 
-    gettimeofday(&event.time, NULL);
+    gettimeofday(&event.time, nullptr);
     event.type  = EV_REP;
     event.code  = REP_DELAY;
     event.value = 0;
     write(fd, &event, sizeof(event));
 
-    gettimeofday(&event.time, NULL);
+    gettimeofday(&event.time, nullptr);
     event.type  = EV_REP;
     event.code  = REP_PERIOD;
     event.value = 0;
@@ -1109,7 +1109,7 @@ bool CLinuxInputDevices::IsUdevJoystick(const char *devpath)
     return false; // can't create udev
 
   enumerate = udev_enumerate_new(udev);
-  if (enumerate == NULL)
+  if (enumerate == nullptr)
   {
     udev_unref(udev);
     return false;
@@ -1127,10 +1127,10 @@ bool CLinuxInputDevices::IsUdevJoystick(const char *devpath)
         {
           path = udev_list_entry_get_name(dev_list_entry);
           dev = udev_device_new_from_syspath(udev, path);
-          if (dev != NULL)
+          if (dev != nullptr)
           {
             devfoundpath = udev_device_get_devnode(dev);
-            if (devfoundpath != NULL)
+            if (devfoundpath != nullptr)
             {
               // found (finally !)
               //printf("=> %s\n", devfoundpath);
