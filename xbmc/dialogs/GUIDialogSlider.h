@@ -42,7 +42,7 @@ public:
    \param delta amount the slider advances for a single click
    \param max maximal value the slider may take
    \param callback callback class that implements ISliderCallback::OnSliderChange
-   \param callbackData pointer to callback-specific data (defaults to NULL)
+   \param callbackData pointer to callback-specific data (defaults to nullptr)
    \sa ISliderCallback, Display
    */
   static void ShowAndGetInput(const std::string &label, float value, float min, float delta, float max, ISliderCallback *callback, void *callbackData = nullptr);

@@ -93,7 +93,7 @@ void CGUIDialogSlider::SetSlider(const std::string &label, float value, float mi
 
 void CGUIDialogSlider::OnWindowLoaded()
 {
-  // ensure our callbacks are NULL, incase we were loaded via some non-standard means
+  // ensure our callbacks are nullptr, incase we were loaded via some non-standard means
   m_callback = nullptr;
   m_callbackData = nullptr;
   CGUIDialog::OnWindowLoaded();
