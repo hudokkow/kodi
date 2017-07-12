@@ -41,15 +41,15 @@ CWinSystemWin32::CWinSystemWin32()
 : CWinSystemBase()
 {
   m_eWindowSystem = WINDOW_SYSTEM_WIN32;
-  m_hWnd = NULL;
-  m_hInstance = NULL;
-  m_hIcon = NULL;
-  m_hDC = NULL;
+  m_hWnd = nullptr;
+  m_hInstance = nullptr;
+  m_hIcon = nullptr;
+  m_hDC = nullptr;
   m_nPrimary = 0;
-  PtrCloseGestureInfoHandle = NULL;
-  PtrSetGestureConfig = NULL;
-  PtrGetGestureInfo = NULL;
-  PtrEnableNonClientDpiScaling = NULL;
+  PtrCloseGestureInfoHandle = nullptr;
+  PtrSetGestureConfig = nullptr;
+  PtrGetGestureInfo = nullptr;
+  PtrEnableNonClientDpiScaling = nullptr;
   m_ValidWindowedPosition = false;
   m_IsAlteringWindow = false;
 }
@@ -59,7 +59,7 @@ CWinSystemWin32::~CWinSystemWin32()
   if (m_hIcon)
   {
     DestroyIcon(m_hIcon);
-    m_hIcon = NULL;
+    m_hIcon = nullptr;
   }
 };
 
@@ -89,9 +89,9 @@ bool CWinSystemWin32::CreateNewWindow(const std::string& name, bool fullScreen, 
 
   auto nameW = ToW(name);
 
-  m_hInstance = ( HINSTANCE )GetModuleHandle( NULL );
+  m_hInstance = ( HINSTANCE )GetModuleHandle( nullptr );
 
-  if(m_hInstance == NULL)
+  if(m_hInstance == nullptr)
     CLog::Log(LOGDEBUG, "%s : GetModuleHandle failed with %d", __FUNCTION__, GetLastError());
 
   // Load Win32 procs if available
@@ -121,9 +121,9 @@ bool CWinSystemWin32::CreateNewWindow(const std::string& name, bool fullScreen, 
   wndClass.cbWndExtra = 0;
   wndClass.hInstance = m_hInstance;
   wndClass.hIcon = m_hIcon;
-  wndClass.hCursor = LoadCursor( NULL, IDC_ARROW );
+  wndClass.hCursor = LoadCursor( nullptr, IDC_ARROW );
   wndClass.hbrBackground = ( HBRUSH )GetStockObject( BLACK_BRUSH );
-  wndClass.lpszMenuName = NULL;
+  wndClass.lpszMenuName = nullptr;
   wndClass.lpszClassName = nameW.c_str();
 
   if( !RegisterClass( &wndClass ) )
@@ -134,8 +134,8 @@ bool CWinSystemWin32::CreateNewWindow(const std::string& name, bool fullScreen, 
 
   HWND hWnd = CreateWindow( nameW.c_str(), nameW.c_str(), fullScreen ? WS_POPUP : WS_OVERLAPPEDWINDOW,
     0, 0, m_nWidth, m_nHeight, 0,
-    NULL, m_hInstance, g_application.OnEvent );
-  if( hWnd == NULL )
+    nullptr, m_hInstance, g_application.OnEvent );
+  if( hWnd == nullptr )
   {
     CLog::Log(LOGERROR, "%s : CreateWindow failed with %d", __FUNCTION__, GetLastError());
     return false;
@@ -174,9 +174,9 @@ bool CWinSystemWin32::CreateBlankWindows()
   wcex.lpfnWndProc= DefWindowProc;
   wcex.cbClsExtra= 0;
   wcex.cbWndExtra= 0;
-  wcex.hInstance= NULL;
+  wcex.hInstance= nullptr;
   wcex.hIcon= 0;
-  wcex.hCursor= NULL;
+  wcex.hCursor= nullptr;
   wcex.hbrBackground= (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
   wcex.lpszMenuName= 0;
   wcex.lpszClassName= L"BlankWindowClass";
@@ -195,9 +195,9 @@ bool CWinSystemWin32::CreateBlankWindows()
   for (int i=0; i < BlankWindowsCount; i++)
   {
     HWND hBlankWindow = CreateWindowEx(WS_EX_TOPMOST, L"BlankWindowClass", L"", WS_POPUP | WS_DISABLED,
-    CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, NULL, NULL);
+    CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, nullptr, nullptr, nullptr, nullptr);
 
-    if(hBlankWindow ==  NULL)
+    if(hBlankWindow ==  nullptr)
     {
       CLog::Log(LOGERROR, "%s : CreateWindowEx failed with %d", __FUNCTION__, GetLastError());
       return false;
@@ -230,7 +230,7 @@ bool CWinSystemWin32::BlankNonActiveMonitors(bool bBlank)
   {
     RECT rBounds = ScreenRect(screen);
     // move and resize the window
-    SetWindowPos(m_hBlankWindows[i], NULL, rBounds.left, rBounds.top,
+    SetWindowPos(m_hBlankWindows[i], nullptr, rBounds.left, rBounds.top,
       rBounds.right - rBounds.left, rBounds.bottom - rBounds.top,
       SWP_NOACTIVATE);
 
@@ -347,7 +347,7 @@ bool CWinSystemWin32::DPIChanged(WORD dpi, RECT windowRect)
   (void)dpi;
   RECT resizeRect = windowRect;
   HMONITOR hMon = MonitorFromRect(&resizeRect, MONITOR_DEFAULTTONULL);
-  if (hMon == NULL)
+  if (hMon == nullptr)
   {
     hMon = MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTOPRIMARY);
   }
@@ -377,7 +377,7 @@ bool CWinSystemWin32::DPIChanged(WORD dpi, RECT windowRect)
 
   // resize the window to the suggested size. Will generate a WM_SIZE event
   SetWindowPos(m_hWnd,
-    NULL,
+    nullptr,
     resizeRect.left,
     resizeRect.top,
     resizeRect.right - resizeRect.left,
@@ -458,7 +458,7 @@ RECT CWinSystemWin32::ScreenRect(int screen)
 
 bool CWinSystemWin32::ResizeInternal(bool forceRefresh)
 {
-  if (m_hWnd == NULL)
+  if (m_hWnd == nullptr)
     return false;
   DWORD dwStyle = WS_CLIPCHILDREN;
   HWND windowAfter;
@@ -485,7 +485,7 @@ bool CWinSystemWin32::ResizeInternal(bool forceRefresh)
 
     // hasn't been windowed yet, or windowed position would not fullscreen to the same screen we were fullscreen on?
     // -> center on the screen that we were fullscreen on
-    if(!m_ValidWindowedPosition || hMon == NULL || hMon != hMon2)
+    if(!m_ValidWindowedPosition || hMon == nullptr || hMon != hMon2)
     {
       RECT newScreenRect = ScreenRect(GetCurrentScreen());
       rc.left = m_nLeft = newScreenRect.left + ((newScreenRect.right - newScreenRect.left) / 2) - (m_nWidth / 2);
@@ -520,7 +520,7 @@ bool CWinSystemWin32::ResizeInternal(bool forceRefresh)
     SetWindowPos(m_hWnd, windowAfter, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, SWP_SHOWWINDOW|SWP_DRAWFRAME);
 
     //! @todo Probably only need this if switching screens
-    ValidateRect(NULL, NULL);
+    ValidateRect(nullptr, nullptr);
   }
   return true;
 }
@@ -568,11 +568,11 @@ bool CWinSystemWin32::ChangeResolution(const RESOLUTION_INFO& res, bool forceCha
       if (EnumDisplaySettingsW(details->DeviceNameW.c_str(), ENUM_REGISTRY_SETTINGS, &sDevModeRegistry))
       {
         // Set requested mode in registry without actually changing resolution
-        rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevMode, NULL, CDS_UPDATEREGISTRY | CDS_NORESET, NULL);
+        rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevMode, nullptr, CDS_UPDATEREGISTRY | CDS_NORESET, nullptr);
         if (rc == DISP_CHANGE_SUCCESSFUL)
         {
           // Change resolution based on registry setting
-          rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), NULL, NULL, CDS_FULLSCREEN, NULL);
+          rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), nullptr, nullptr, CDS_FULLSCREEN, nullptr);
           if (rc == DISP_CHANGE_SUCCESSFUL)
             bResChanged = true;
           else
@@ -582,7 +582,7 @@ bool CWinSystemWin32::ChangeResolution(const RESOLUTION_INFO& res, bool forceCha
           sDevModeRegistry.dmSize = sizeof(sDevModeRegistry);
           sDevModeRegistry.dmDriverExtra = 0;
           sDevModeRegistry.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_DISPLAYFREQUENCY | DM_DISPLAYFLAGS;
-          rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevModeRegistry, NULL, CDS_UPDATEREGISTRY | CDS_NORESET, NULL);
+          rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevModeRegistry, nullptr, CDS_UPDATEREGISTRY | CDS_NORESET, nullptr);
           if (rc != DISP_CHANGE_SUCCESSFUL)
             CLog::Log(LOGERROR, "%s : ChangeDisplaySettingsEx (W8+ restore registry) failed with %d", __FUNCTION__, rc);
         }
@@ -598,7 +598,7 @@ bool CWinSystemWin32::ChangeResolution(const RESOLUTION_INFO& res, bool forceCha
     {
       // CDS_FULLSCREEN is for temporary fullscreen mode and prevents icons and windows from moving
       // to fit within the new dimensions of the desktop
-      rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevMode, NULL, CDS_FULLSCREEN, NULL);
+      rc = ChangeDisplaySettingsExW(details->DeviceNameW.c_str(), &sDevMode, nullptr, CDS_FULLSCREEN, nullptr);
       if (rc == DISP_CHANGE_SUCCESSFUL)
         bResChanged = true;
       else
@@ -723,7 +723,7 @@ bool CWinSystemWin32::UpdateResolutionsInternal()
   ddAdapter.cb = sizeof(ddAdapter);
   DWORD adapter = 0;
 
-  while (EnumDisplayDevicesW(NULL, adapter, &ddAdapter, 0))
+  while (EnumDisplayDevicesW(nullptr, adapter, &ddAdapter, 0))
   {
     // Exclude displays that are not part of the windows desktop. Using them is too different: no windows,
     // direct access with GDI CreateDC() or DirectDraw for example. So it may be possible to play video, but GUI?

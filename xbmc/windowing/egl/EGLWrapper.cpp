@@ -31,7 +31,7 @@
 
 CEGLWrapper::CEGLWrapper()
 {
-  m_nativeTypes = NULL;
+  m_nativeTypes = nullptr;
   m_result = EGL_SUCCESS;
 }
 
@@ -46,7 +46,7 @@ namespace
   CorrectGuess(CEGLNativeType *guess,
                const std::string &implementation)
   {
-    assert(guess != NULL);
+    assert(guess != nullptr);
 
     if(guess->CheckCompatibility())
     {
@@ -68,13 +68,13 @@ namespace
       return guess;
 
     delete guess;
-    return NULL;
+    return nullptr;
   }
 }
 
 bool CEGLWrapper::Initialize(const std::string &implementation)
 {
-  CEGLNativeType *nativeGuess = NULL;
+  CEGLNativeType *nativeGuess = nullptr;
 
   // Try to create each backend in sequence and go with the first one
   // that we know will work
@@ -101,7 +101,7 @@ bool CEGLWrapper::Destroy()
   m_nativeTypes->Destroy();
 
   delete m_nativeTypes;
-  m_nativeTypes = NULL;
+  m_nativeTypes = nullptr;
   return true;
 }
 
@@ -193,7 +193,7 @@ bool CEGLWrapper::InitDisplay(EGLDisplay *display)
 
   //nativeDisplay can be (and usually is) NULL. Don't use if(nativeDisplay) as a test!
   EGLint status;
-  EGLNativeDisplayType *nativeDisplay = NULL;
+  EGLNativeDisplayType *nativeDisplay = nullptr;
   if (!m_nativeTypes->GetNativeDisplay((XBNativeDisplayType**)&nativeDisplay))
     return false;
 
@@ -213,10 +213,10 @@ bool CEGLWrapper::InitDisplay(EGLDisplay *display)
 bool CEGLWrapper::ChooseConfig(EGLDisplay display, EGLint *configAttrs, EGLConfig *config)
 {
   EGLint     configCount = 0;
-  EGLConfig* configList = NULL;
+  EGLConfig* configList = nullptr;
 
   // Find out how many configurations suit our needs
-  EGLBoolean eglStatus = eglChooseConfig(display, configAttrs, NULL, 0, &configCount);
+  EGLBoolean eglStatus = eglChooseConfig(display, configAttrs, nullptr, 0, &configCount);
   CheckError();
 
   if (!eglStatus || !configCount)
@@ -254,7 +254,7 @@ bool CEGLWrapper::CreateContext(EGLDisplay display, EGLConfig config, EGLint *co
   if (!context)
     return false;
 
-  *context = eglCreateContext(display, config, NULL, contextAttrs);
+  *context = eglCreateContext(display, config, nullptr, contextAttrs);
   CheckError();
   return *context != EGL_NO_CONTEXT;
 }
@@ -264,11 +264,11 @@ bool CEGLWrapper::CreateSurface(EGLDisplay display, EGLConfig config, EGLSurface
   if (!surface || !m_nativeTypes)
     return false;
 
-  EGLNativeWindowType *nativeWindow=NULL;
+  EGLNativeWindowType *nativeWindow=nullptr;
   if (!m_nativeTypes->GetNativeWindow((XBNativeWindowType**)&nativeWindow))
     return false;
 
-  *surface = eglCreateWindowSurface(display, config, *nativeWindow, NULL);
+  *surface = eglCreateWindowSurface(display, config, *nativeWindow, nullptr);
   CheckError();
   return *surface != EGL_NO_SURFACE;
 }
@@ -389,7 +389,7 @@ void* CEGLWrapper::GetProcAddress(const char* function)
   if (!ext)
   {
     CLog::Log(LOGERROR, "EGL error in %s - cannot get proc addr of %s", __FUNCTION__, function);
-    return NULL;
+    return nullptr;
   }
 
   return ext;

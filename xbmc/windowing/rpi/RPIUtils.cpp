@@ -83,7 +83,7 @@ CRPIUtils::~CRPIUtils()
   }
 
   delete m_DllBcmHost;
-  m_DllBcmHost = NULL;
+  m_DllBcmHost = nullptr;
 }
 
 bool CRPIUtils::GetNativeResolution(RESOLUTION_INFO *res) const
@@ -522,9 +522,9 @@ void CRPIUtils::GetSupportedModes(HDMI_RES_GROUP_T group, std::vector<RESOLUTION
   HDMI_RES_GROUP_T prefer_group;
   uint32_t prefer_mode;
   int i;
-  TV_SUPPORTED_MODE_NEW_T *supported_modes = NULL;
+  TV_SUPPORTED_MODE_NEW_T *supported_modes = nullptr;
   // query the number of modes first
-  int max_supported_modes = m_DllBcmHost->vc_tv_hdmi_get_supported_modes_new(group, NULL, 0, &prefer_group, &prefer_mode);
+  int max_supported_modes = m_DllBcmHost->vc_tv_hdmi_get_supported_modes_new(group, nullptr, 0, &prefer_group, &prefer_mode);
 
   if (max_supported_modes > 0)
     supported_modes = new TV_SUPPORTED_MODE_NEW_T[max_supported_modes];

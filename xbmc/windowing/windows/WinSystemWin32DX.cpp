@@ -157,13 +157,13 @@ std::string CWinSystemWin32DX::GetClipboardText(void)
   std::wstring unicode_text;
   std::string utf8_text;
 
-  if (OpenClipboard(NULL))
+  if (OpenClipboard(nullptr))
   {
     HGLOBAL hglb = GetClipboardData(CF_UNICODETEXT);
-    if (hglb != NULL)
+    if (hglb != nullptr)
     {
       LPWSTR lpwstr = (LPWSTR) GlobalLock(hglb);
-      if (lpwstr != NULL)
+      if (lpwstr != nullptr)
       {
         unicode_text = lpwstr;
         GlobalUnlock(hglb);

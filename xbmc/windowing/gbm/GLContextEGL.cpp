@@ -73,14 +73,14 @@ bool CGLContextEGL::CreateDisplay(EGLDisplay display,
 
 #if defined(EGL_EXT_platform_base) && defined(EGL_KHR_platform_gbm)
   if (m_eglDisplay == EGL_NO_DISPLAY &&
-      client_extensions != NULL &&
+      client_extensions != nullptr &&
       strstr(client_extensions, "EGL_EXT_platform_base") &&
       strstr(client_extensions, "EGL_KHR_platform_gbm"))
   {
     PFNEGLGETPLATFORMDISPLAYEXTPROC getPlatformDisplayEXT = (PFNEGLGETPLATFORMDISPLAYEXTPROC)eglGetProcAddress("eglGetPlatformDisplayEXT");
     if (getPlatformDisplayEXT)
     {
-      m_eglDisplay = getPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, (EGLNativeDisplayType)display, NULL);
+      m_eglDisplay = getPlatformDisplayEXT(EGL_PLATFORM_GBM_KHR, (EGLNativeDisplayType)display, nullptr);
     }
   }
 #endif

@@ -251,7 +251,7 @@ bool CWinEventsX11Imp::Init(Display *dpy, Window win)
                                  XNInputStyle, XIMPreeditNothing | XIMStatusNothing,
                                  XNResourceName, res_name,
                                  XNResourceClass, res_name,
-                                 NULL);
+                                 nullptr);
   }
 
   if (!WinEvents->m_xic)
