@@ -167,7 +167,7 @@ static int AEChannelMapToAUDIOTRACKChannelMask(CAEChannelInfo info)
 
 jni::CJNIAudioTrack *CAESinkAUDIOTRACK::CreateAudioTrack(int stream, int sampleRate, int channelMask, int encoding, int bufferSize)
 {
-  jni::CJNIAudioTrack *jniAt = NULL;
+  jni::CJNIAudioTrack *jniAt = nullptr;
   m_jniAudioFormat = encoding;
 
   try
@@ -243,11 +243,11 @@ bool CAESinkAUDIOTRACK::m_sinkSupportsFloat = false;
 ////////////////////////////////////////////////////////////////////////////////////////////
 CAESinkAUDIOTRACK::CAESinkAUDIOTRACK()
 {
-  m_alignedS16 = NULL;
+  m_alignedS16 = nullptr;
   m_sink_frameSize = 0;
   m_encoding = CJNIAudioFormat::ENCODING_PCM_16BIT;
   m_audiotrackbuffer_sec = 0.0;
-  m_at_jni = NULL;
+  m_at_jni = nullptr;
   m_duration_written = 0;
   m_offset = -1;
   m_headPos = 0;
@@ -554,7 +554,7 @@ void CAESinkAUDIOTRACK::Deinitialize()
   m_linearmovingaverage.clear();
 
   delete m_at_jni;
-  m_at_jni = NULL;
+  m_at_jni = nullptr;
 }
 
 bool CAESinkAUDIOTRACK::IsInitialized()

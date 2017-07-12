@@ -147,7 +147,7 @@ AEDeviceInfoList DeviceInfoList;
 DEFINE_PROPERTYKEY(PKEY_Device_FriendlyName, 0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 14);
 DEFINE_PROPERTYKEY(PKEY_Device_EnumeratorName, 0xa45c254e, 0xdf1c, 0x4efd, 0x80, 0x20, 0x67, 0xd1, 0x46, 0xa8, 0x50, 0xe0, 24);
 
-DWORD ChLayoutToChMask(const enum AEChannel * layout, unsigned int * numberOfChannels = NULL)
+DWORD ChLayoutToChMask(const enum AEChannel * layout, unsigned int * numberOfChannels = nullptr)
 {
   if (numberOfChannels)
     *numberOfChannels = 0;
@@ -167,11 +167,11 @@ DWORD ChLayoutToChMask(const enum AEChannel * layout, unsigned int * numberOfCha
 
 std::string localWideToUtf(LPCWSTR wstr)
 {
-  if (wstr == NULL)
+  if (wstr == nullptr)
     return "";
-  int bufSize = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, NULL, 0, NULL, NULL);
+  int bufSize = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, nullptr, nullptr);
   char *multiStr = new char[bufSize + 1];
-  if (bufSize == 0 || WideCharToMultiByte(CP_UTF8, 0, wstr, -1, multiStr, bufSize, NULL, NULL) != bufSize)
+  if (bufSize == 0 || WideCharToMultiByte(CP_UTF8, 0, wstr, -1, multiStr, bufSize, nullptr, nullptr) != bufSize)
     multiStr[0] = 0;
   else
     multiStr[bufSize] = 0;
@@ -182,10 +182,10 @@ std::string localWideToUtf(LPCWSTR wstr)
 
 CAESinkWASAPI::CAESinkWASAPI() :
   m_needDataEvent(0),
-  m_pDevice(NULL),
-  m_pAudioClient(NULL),
-  m_pRenderClient(NULL),
-  m_pAudioClock(NULL),
+  m_pDevice(nullptr),
+  m_pAudioClient(nullptr),
+  m_pRenderClient(nullptr),
+  m_pAudioClock(nullptr),
   m_encodedChannels(0),
   m_encodedSampleRate(0),
   sinkReqFormat(AE_FMT_INVALID),
@@ -199,7 +199,7 @@ CAESinkWASAPI::CAESinkWASAPI() :
   m_sinkLatency(0.0),
   m_sinkFrames(0),
   m_clockFreq(0),
-  m_pBuffer(NULL),
+  m_pBuffer(nullptr),
   m_bufferPtr(0)
 {
   m_channelLayout.Reset();
@@ -223,10 +223,10 @@ bool CAESinkWASAPI::Initialize(AEAudioFormat &format, std::string &device)
   sinkReqFormat = format.m_dataFormat;
   sinkRetFormat = AE_FMT_INVALID;
 
-  IMMDeviceEnumerator* pEnumerator = NULL;
-  IMMDeviceCollection* pEnumDevices = NULL;
+  IMMDeviceEnumerator* pEnumerator = nullptr;
+  IMMDeviceCollection* pEnumDevices = nullptr;
 
-  HRESULT hr = CoCreateInstance(CLSID_MMDeviceEnumerator, NULL, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
+  HRESULT hr = CoCreateInstance(CLSID_MMDeviceEnumerator, nullptr, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Could not allocate WASAPI device enumerator. CoCreateInstance error code: %li", hr)
 
   /* Get our device. First try to find the named device. */
@@ -245,7 +245,7 @@ bool CAESinkWASAPI::Initialize(AEAudioFormat &format, std::string &device)
   {
     for (UINT i = 0; i < uiCount; i++)
     {
-      IPropertyStore *pProperty = NULL;
+      IPropertyStore *pProperty = nullptr;
       PROPVARIANT varName;
 
       hr = pEnumDevices->Item(i, &m_pDevice);
@@ -282,7 +282,7 @@ bool CAESinkWASAPI::Initialize(AEAudioFormat &format, std::string &device)
     hr = pEnumerator->GetDefaultAudioEndpoint(eRender, eConsole, &m_pDevice);
     EXIT_ON_FAILURE(hr, __FUNCTION__": Could not retrieve the default WASAPI audio endpoint.")
 
-    IPropertyStore *pProperty = NULL;
+    IPropertyStore *pProperty = nullptr;
     PROPVARIANT varName;
 
     hr = m_pDevice->OpenPropertyStore(STGM_READ, &pProperty);
@@ -297,7 +297,7 @@ bool CAESinkWASAPI::Initialize(AEAudioFormat &format, std::string &device)
 
   SAFE_RELEASE(pEnumerator);
 
-  hr = m_pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (void**)&m_pAudioClient);
+  hr = m_pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, (void**)&m_pAudioClient);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Activating the WASAPI endpoint device failed.")
 
   if (!InitializeExclusive(format))
@@ -322,7 +322,7 @@ bool CAESinkWASAPI::Initialize(AEAudioFormat &format, std::string &device)
   hr = m_pAudioClock->GetFrequency(&m_clockFreq);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Retrieval of IAudioClock::GetFrequency failed.")
 
-  m_needDataEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+  m_needDataEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
   hr = m_pAudioClient->SetEventHandle(m_needDataEvent);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Could not set the WASAPI event handler.");
 
@@ -553,19 +553,19 @@ unsigned int CAESinkWASAPI::AddPackets(uint8_t **data, unsigned int frames, unsi
 
 void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool force)
 {
-  IMMDeviceEnumerator* pEnumerator = NULL;
-  IMMDeviceCollection* pEnumDevices = NULL;
-  IMMDevice*           pDefaultDevice = NULL;
+  IMMDeviceEnumerator* pEnumerator = nullptr;
+  IMMDeviceCollection* pEnumDevices = nullptr;
+  IMMDevice*           pDefaultDevice = nullptr;
   CAEDeviceInfo        deviceInfo;
   CAEChannelInfo       deviceChannels;
-  LPWSTR               pwszID = NULL;
+  LPWSTR               pwszID = nullptr;
   std::wstring         wstrDDID;
   bool                 add192 = false;
 
   WAVEFORMATEXTENSIBLE wfxex = {0};
   HRESULT              hr;
 
-  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, NULL, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
+  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, nullptr, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Could not allocate WASAPI device enumerator. CoCreateInstance error code: %li", hr)
 
   UINT uiCount = 0;
@@ -590,8 +590,8 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
 
   for (UINT i = 0; i < uiCount; i++)
   {
-    IMMDevice *pDevice = NULL;
-    IPropertyStore *pProperty = NULL;
+    IMMDevice *pDevice = nullptr;
+    IPropertyStore *pProperty = nullptr;
     PROPVARIANT varName;
     PropVariantInit(&varName);
 
@@ -672,7 +672,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
     PropVariantClear(&varName);
 
     IAudioClient *pClient;
-    hr = pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (void**)&pClient);
+    hr = pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, (void**)&pClient);
     if (SUCCEEDED(hr))
     {
       /* Test format DTS-HD */
@@ -686,7 +686,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
       wfxex.Format.nChannels            = 8;
       wfxex.Format.nBlockAlign          = wfxex.Format.nChannels * (wfxex.Format.wBitsPerSample >> 3);
       wfxex.Format.nAvgBytesPerSec      = wfxex.Format.nSamplesPerSec * wfxex.Format.nBlockAlign;
-      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
       if (SUCCEEDED(hr) || aeDeviceType == AE_DEVTYPE_HDMI)
       {
         if(FAILED(hr))
@@ -698,7 +698,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
 
       /* Test format Dolby TrueHD */
       wfxex.SubFormat                   = KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_MLP;
-      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
       if (SUCCEEDED(hr) || aeDeviceType == AE_DEVTYPE_HDMI)
       {
         if(FAILED(hr))
@@ -713,7 +713,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
       wfxex.Format.nChannels            = 2;
       wfxex.Format.nBlockAlign          = wfxex.Format.nChannels * (wfxex.Format.wBitsPerSample >> 3);
       wfxex.Format.nAvgBytesPerSec      = wfxex.Format.nSamplesPerSec * wfxex.Format.nBlockAlign;
-      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
       if (SUCCEEDED(hr) || aeDeviceType == AE_DEVTYPE_HDMI)
       {
         if(FAILED(hr))
@@ -729,7 +729,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
       wfxex.SubFormat                   = KSDATAFORMAT_SUBTYPE_IEC61937_DTS;
       wfxex.Format.nBlockAlign          = wfxex.Format.nChannels * (wfxex.Format.wBitsPerSample >> 3);
       wfxex.Format.nAvgBytesPerSec      = wfxex.Format.nSamplesPerSec * wfxex.Format.nBlockAlign;
-      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
       if (SUCCEEDED(hr) || aeDeviceType == AE_DEVTYPE_HDMI)
       {
         if(FAILED(hr))
@@ -743,7 +743,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
 
       /* Test format Dolby AC3 */
       wfxex.SubFormat                   = KSDATAFORMAT_SUBTYPE_IEC61937_DOLBY_DIGITAL;
-      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+      hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
       if (SUCCEEDED(hr) || aeDeviceType == AE_DEVTYPE_HDMI)
       {
         if(FAILED(hr))
@@ -779,7 +779,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
           wfxex.Samples.wValidBitsPerSample = wfxex.Format.wBitsPerSample;
         }
 
-        hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+        hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
         if (SUCCEEDED(hr))
           deviceInfo.m_dataFormats.push_back((AEDataFormat) p);
       }
@@ -799,7 +799,7 @@ void CAESinkWASAPI::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bool fo
       {
         wfxex.Format.nSamplesPerSec     = WASAPISampleRates[j];
         wfxex.Format.nAvgBytesPerSec    = wfxex.Format.nSamplesPerSec * wfxex.Format.nBlockAlign;
-        hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+        hr = pClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
         if (SUCCEEDED(hr))
           deviceInfo.m_sampleRates.push_back(WASAPISampleRates[j]);
         else if (wfxex.Format.nSamplesPerSec == 192000 && add192)
@@ -969,7 +969,7 @@ bool CAESinkWASAPI::InitializeExclusive(AEAudioFormat &format)
 
   /* Test for incomplete format and provide defaults */
   if (format.m_sampleRate == 0 ||
-      format.m_channelLayout == NULL ||
+      format.m_channelLayout == nullptr ||
       format.m_dataFormat <= AE_FMT_INVALID ||
       format.m_dataFormat >= AE_FMT_MAX ||
       format.m_channelLayout.Count() == 0)
@@ -986,7 +986,7 @@ bool CAESinkWASAPI::InitializeExclusive(AEAudioFormat &format)
     wfxex.SubFormat                   = KSDATAFORMAT_SUBTYPE_PCM;
   }
 
-  HRESULT hr = m_pAudioClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+  HRESULT hr = m_pAudioClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
 
   if (SUCCEEDED(hr))
   {
@@ -1050,7 +1050,7 @@ bool CAESinkWASAPI::InitializeExclusive(AEAudioFormat &format)
           wfxex.Samples.wValidBitsPerSample);
 #endif
 
-        hr = m_pAudioClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, NULL);
+        hr = m_pAudioClient->IsFormatSupported(AUDCLNT_SHAREMODE_EXCLUSIVE, &wfxex.Format, nullptr);
 
         if (SUCCEEDED(hr))
         {
@@ -1127,7 +1127,7 @@ initialize:
     format.m_dataFormat = AE_FMT_S16NE;
 
   hr = m_pAudioClient->Initialize(AUDCLNT_SHAREMODE_EXCLUSIVE, AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_NOPERSIST,
-                                    audioSinkBufferDurationMsec, audioSinkBufferDurationMsec, &wfxex.Format, NULL);
+                                    audioSinkBufferDurationMsec, audioSinkBufferDurationMsec, &wfxex.Format, nullptr);
 
   if (hr == AUDCLNT_E_BUFFER_SIZE_NOT_ALIGNED)
   {
@@ -1146,7 +1146,7 @@ initialize:
     SAFE_RELEASE(m_pAudioClient);
 
     /* Create a new audio client */
-    hr = m_pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (void**)&m_pAudioClient);
+    hr = m_pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, (void**)&m_pAudioClient);
     if (FAILED(hr))
     {
       CLog::Log(LOGERROR, __FUNCTION__": Device Activation Failed : %s", WASAPIErrToStr(hr));
@@ -1155,7 +1155,7 @@ initialize:
 
     /* Open the stream and associate it with an audio session */
     hr = m_pAudioClient->Initialize(AUDCLNT_SHAREMODE_EXCLUSIVE, AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_NOPERSIST,
-                                      audioSinkBufferDurationMsec, audioSinkBufferDurationMsec, &wfxex.Format, NULL);
+                                      audioSinkBufferDurationMsec, audioSinkBufferDurationMsec, &wfxex.Format, nullptr);
   }
   if (FAILED(hr))
   {
@@ -1256,7 +1256,7 @@ const char *CAESinkWASAPI::WASAPIErrToStr(HRESULT err)
     ERRTOSTR(E_OUTOFMEMORY);
     default: break;
   }
-  return NULL;
+  return nullptr;
 }
 
 void CAESinkWASAPI::Drain()
@@ -1287,7 +1287,7 @@ void CAESinkWASAPI::Drain()
 
 bool CAESinkWASAPI::IsUSBDevice()
 {
-  IPropertyStore *pProperty = NULL;
+  IPropertyStore *pProperty = nullptr;
   PROPVARIANT varName;
   PropVariantInit(&varName);
   bool ret = false;

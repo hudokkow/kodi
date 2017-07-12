@@ -67,7 +67,7 @@ CActiveAEResamplePi::CActiveAEResamplePi()
   CLog::Log(LOGINFO, "%s::%s", CLASSNAME, __func__);
 
   m_Initialized = false;
-  m_encoded_buffer = NULL;
+  m_encoded_buffer = nullptr;
   m_offset = 0;
   m_ratio = 0.0;
 }
@@ -151,8 +151,8 @@ bool CActiveAEResamplePi::Init(uint64_t dst_chan_layout, int dst_channels, int d
 // this code is just uses ffmpeg to produce the 8x8 mixing matrix
 {
   // dummy sample rate and format, as we only care about channel mapping
-  SwrContext *m_pContext = swr_alloc_set_opts(NULL, m_dst_chan_layout, AV_SAMPLE_FMT_FLT, 48000,
-                                                        m_src_chan_layout, AV_SAMPLE_FMT_FLT, 48000, 0, NULL);
+  SwrContext *m_pContext = swr_alloc_set_opts(nullptr, m_dst_chan_layout, AV_SAMPLE_FMT_FLT, 48000,
+                                                        m_src_chan_layout, AV_SAMPLE_FMT_FLT, 48000, 0, nullptr);
   if (!m_pContext)
   {
     CLog::Log(LOGERROR, "CActiveAEResamplePi::Init - create context failed");
@@ -240,8 +240,8 @@ bool CActiveAEResamplePi::Init(uint64_t dst_chan_layout, int dst_channels, int d
 
   const int samples = 8;
   uint8_t *output, *input;
-  av_samples_alloc(&output, NULL, m_dst_channels, samples, AV_SAMPLE_FMT_FLT, 1);
-  av_samples_alloc(&input , NULL, m_src_channels, samples, AV_SAMPLE_FMT_FLT, 1);
+  av_samples_alloc(&output, nullptr, m_dst_channels, samples, AV_SAMPLE_FMT_FLT, 1);
+  av_samples_alloc(&input , nullptr, m_src_channels, samples, AV_SAMPLE_FMT_FLT, 1);
 
   // Produce "identity" samples
   float *f = (float *)input;
@@ -465,7 +465,7 @@ int CActiveAEResamplePi::Resample(uint8_t **dst_buffer, int dst_samples, uint8_t
       if (m_offset == m_encoded_buffer->nFilledLen / d_samplesize)
       {
         m_offset = 0;
-        m_encoded_buffer = NULL;
+        m_encoded_buffer = nullptr;
       }
       else if (m_offset > m_encoded_buffer->nFilledLen / d_samplesize) assert(0);
       else assert(sent == src_samples);
@@ -475,7 +475,7 @@ int CActiveAEResamplePi::Resample(uint8_t **dst_buffer, int dst_samples, uint8_t
       break;
 
     OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_mixer.GetInputBuffer(1000);
-    if (omx_buffer == NULL)
+    if (omx_buffer == nullptr)
     {
       CLog::Log(LOGERROR, "%s::%s m_omx_mixer.GetInputBuffer failed to get buffer", CLASSNAME, __func__);
       return false;
@@ -577,7 +577,7 @@ int CActiveAEResamplePi::CalcDstSampleCount(int src_samples, int dst_rate, int s
 
 int CActiveAEResamplePi::GetSrcBufferSize(int samples)
 {
-  int ret = av_samples_get_buffer_size(NULL, m_src_channels, samples, m_src_fmt, 1);
+  int ret = av_samples_get_buffer_size(nullptr, m_src_channels, samples, m_src_fmt, 1);
   #ifdef DEBUG_VERBOSE
   CLog::Log(LOGINFO, "%s::%s = %d", CLASSNAME, __func__, ret);
   #endif
@@ -586,7 +586,7 @@ int CActiveAEResamplePi::GetSrcBufferSize(int samples)
 
 int CActiveAEResamplePi::GetDstBufferSize(int samples)
 {
-  int ret = av_samples_get_buffer_size(NULL, m_dst_channels, samples, m_dst_fmt, 1);
+  int ret = av_samples_get_buffer_size(nullptr, m_dst_channels, samples, m_dst_fmt, 1);
   #ifdef DEBUG_VERBOSE
   CLog::Log(LOGINFO, "%s::%s = %d", CLASSNAME, __func__, ret);
   #endif

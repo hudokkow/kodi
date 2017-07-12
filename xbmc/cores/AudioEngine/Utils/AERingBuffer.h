@@ -48,7 +48,7 @@ public:
     m_iWritten(0),
     m_iSize(0),
     m_planes(0),
-    m_Buffer(NULL)
+    m_Buffer(nullptr)
   {
   }
 
@@ -59,7 +59,7 @@ public:
     m_iWritten(0),
     m_iSize(0),
     m_planes(0),
-    m_Buffer(NULL)
+    m_Buffer(nullptr)
   {
     Create(size, planes);
   }

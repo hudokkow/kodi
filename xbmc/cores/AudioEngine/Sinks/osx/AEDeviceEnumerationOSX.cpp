@@ -762,7 +762,7 @@ void AEDeviceEnumerationOSX::GetAEChannelMap(CAEChannelInfo &channelMap, unsigne
   bool logMapping = channelMap.Count() > 0; // only log if the engine requests a layout during init
   bool mapAvailable = false;
   unsigned int numberChannelsInDeviceLayout = CA_MAX_CHANNELS; // default number of channels from CAChannelMap
-  AudioChannelLayout *layout = NULL;
+  AudioChannelLayout *layout = nullptr;
   
   // try to fetch either the multichannel or the stereo channel layout from the device
   if (channelsPerFrame == 2 || channelMap.Count() == 2)
@@ -774,7 +774,7 @@ void AEDeviceEnumerationOSX::GetAEChannelMap(CAEChannelInfo &channelMap, unsigne
   if (mapAvailable)
   {
     layout = calayout;
-    if (layout == NULL || layout->mChannelLayoutTag != kAudioChannelLayoutTag_UseChannelDescriptions)
+    if (layout == nullptr || layout->mChannelLayoutTag != kAudioChannelLayoutTag_UseChannelDescriptions)
       mapAvailable = false;// wrong map format
     else
       numberChannelsInDeviceLayout = layout->mNumberChannelDescriptions;

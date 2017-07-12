@@ -93,7 +93,7 @@ void CAESinkFactory::ParseDevice(std::string &device, std::string &driver)
         driver == "OSS"         ||
 #endif
         driver == "PROFILER"    ||
-        driver == "NULL")
+        driver == "nullptr")
       device = device.substr(pos + 1, device.length() - pos - 1);
     else
       driver.clear();
@@ -106,7 +106,7 @@ IAESink *CAESinkFactory::TrySink(std::string &driver, std::string &device, AEAud
 {
   IAESink *sink = nullptr;
 
-  if (driver == "NULL")
+  if (driver == "nullptr")
     sink = new CAESinkNULL();
   else
   {
