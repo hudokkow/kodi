@@ -129,7 +129,7 @@ namespace PythonBindings
   /**
    * This method allows for conversion of the native api Type to the Python type.
    *
-   * When this form of the call is used (and pythonType isn't NULL) then the
+   * When this form of the call is used (and pythonType isn't nullptr) then the
    * passed type is used in the instance. This is for classes that extend API
    * classes in python. The type passed may not be the same type that's stored
    * in the class metadata of the AddonClass of which 'api' is an instance, 

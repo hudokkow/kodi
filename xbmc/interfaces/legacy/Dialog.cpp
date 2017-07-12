@@ -63,7 +63,7 @@ namespace XBMCAddon
       DelayedCallGuard dcguard(languageHook);
       CGUIDialogYesNo* pDialog = g_windowManager.GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       // get lines, last 4 lines are optional.
       if (!heading.empty())
@@ -109,7 +109,7 @@ namespace XBMCAddon
       DelayedCallGuard dcguard(languageHook);
       CGUIDialogContextMenu* pDialog= g_windowManager.GetWindow<CGUIDialogContextMenu>(WINDOW_DIALOG_CONTEXT_MENU);
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       CContextButtons choices;
       for(unsigned int i = 0; i < list.size(); i++)
@@ -125,7 +125,7 @@ namespace XBMCAddon
       DelayedCallGuard dcguard(languageHook);
       CGUIDialogSelect* pDialog= g_windowManager.GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       pDialog->Reset();
       if (!heading.empty())
@@ -184,7 +184,7 @@ namespace XBMCAddon
       DelayedCallGuard dcguard(languageHook);
       CGUIDialogOK* pDialog = g_windowManager.GetWindow<CGUIDialogOK>(WINDOW_DIALOG_OK);
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       if (!heading.empty())
         pDialog->SetHeading(CVariant{heading});
@@ -206,7 +206,7 @@ namespace XBMCAddon
 
       CGUIDialogTextViewer* pDialog = g_windowManager.GetWindow<CGUIDialogTextViewer>(WINDOW_DIALOG_TEXT_VIEWER);
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
       if (!heading.empty())
         pDialog->SetHeading(heading);
       if (!text.empty())
@@ -450,7 +450,7 @@ namespace XBMCAddon
       CGUIDialogProgress* pDialog= g_windowManager.GetWindow<CGUIDialogProgress>(WINDOW_DIALOG_PROGRESS);
 
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       dlg = pDialog;
       open = true;
@@ -530,7 +530,7 @@ namespace XBMCAddon
       CGUIDialogBusy* pDialog = g_windowManager.GetWindow<CGUIDialogBusy>(WINDOW_DIALOG_BUSY);
 
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       dlg = pDialog;
       open = true;
@@ -586,7 +586,7 @@ namespace XBMCAddon
           g_windowManager.GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
 
       if (pDialog == nullptr)
-        throw WindowException("Error: Window is NULL, this is not possible :-)");
+        throw WindowException("Error: Window is nullptr, this is not possible :-)");
 
       CGUIDialogProgressBarHandle* pHandle = pDialog->GetHandle(heading);
 

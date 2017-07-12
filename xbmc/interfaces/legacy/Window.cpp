@@ -696,7 +696,7 @@ namespace XBMCAddon
 //          if (PyThreadState_Get()->async_exc == PyExc_SystemExit)
 //          {
 //            CLog::Log(LOGDEBUG, "PYTHON: doModal() encountered a SystemExit exception, closing window and returning");
-//            Window_Close(self, NULL);
+//            Window_Close(self, nullptr);
 //            break;
 //          }
           languageHook->MakePendingCalls(); // MakePendingCalls

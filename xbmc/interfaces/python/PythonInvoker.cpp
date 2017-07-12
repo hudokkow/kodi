@@ -501,7 +501,7 @@ bool CPythonInvoker::stop(bool abort)
     }
 
     // Since we released the m_critical it's possible that the state is cleaned up
-    // so we need to recheck for m_threadState == NULL
+    // so we need to recheck for m_threadState == nullptr
     if (m_threadState != nullptr)
     {
       old = PyThreadState_Swap((PyThreadState*)m_threadState);
