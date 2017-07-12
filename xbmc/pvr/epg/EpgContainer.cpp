@@ -123,7 +123,7 @@ CPVREpgContainer::CPVREpgContainer(void) :
     CSettings::SETTING_EPG_PREVENTUPDATESWHILEPLAYINGTV
   })
 {
-  m_progressHandle = NULL;
+  m_progressHandle = nullptr;
   m_bStop = true;
   m_bIsUpdating = false;
   m_bIsInitialising = true;
@@ -224,7 +224,7 @@ void CPVREpgContainer::Start(bool bAsync)
   if (bAsync)
   {
     CPVREpgContainerStartJob *job = new CPVREpgContainerStartJob();
-    CJobManager::GetInstance().AddJob(job, NULL);
+    CJobManager::GetInstance().AddJob(job, nullptr);
     return;
   }
 
@@ -635,7 +635,7 @@ void CPVREpgContainer::CloseProgressDialog(void)
   if (m_progressHandle)
   {
     m_progressHandle->MarkFinished();
-    m_progressHandle = NULL;
+    m_progressHandle = nullptr;
   }
 }
 
