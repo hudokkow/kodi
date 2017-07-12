@@ -55,7 +55,7 @@ using namespace XFILE;
 #define JOYSTICK_EMULATION_PROVIDER         "application"
 
 #ifndef SAFE_DELETE
-  #define SAFE_DELETE(p)  do { delete (p); (p) = NULL; } while (0)
+  #define SAFE_DELETE(p)  do { delete (p); (p) = nullptr; } while (0)
 #endif
 
 CPeripheralAddon::CPeripheralAddon(const ADDON::BinaryAddonBasePtr& addonInfo)
@@ -80,7 +80,7 @@ void CPeripheralAddon::ResetProperties(void)
   m_strUserPath = CSpecialProtocol::TranslatePath(Profile());
   m_strClientPath = CSpecialProtocol::TranslatePath(Path());
 
-  m_struct = {{ 0 }};
+  m_struct = {{ nullptr }};
   m_struct.props.user_path = m_strUserPath.c_str();
   m_struct.props.addon_path = m_strClientPath.c_str();
 
