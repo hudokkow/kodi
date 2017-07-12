@@ -94,7 +94,7 @@ void TestBasicEnvironment::SetUp()
   if (!GetTempFileName(xbmcTempPath.c_str(), L"xbmctempdir", 0, lpTempPathBuffer))
     SetUpError();
   DeleteFile(lpTempPathBuffer);
-  if (!CreateDirectory(lpTempPathBuffer, NULL))
+  if (!CreateDirectory(lpTempPathBuffer, nullptr))
     SetUpError();
   CSpecialProtocol::SetTempPath(FromW(lpTempPathBuffer));
   CSpecialProtocol::SetProfilePath(FromW(lpTempPathBuffer));
