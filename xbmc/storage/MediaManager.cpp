@@ -88,7 +88,7 @@ class CMediaManager g_mediaManager;
 CMediaManager::CMediaManager()
 {
   m_bhasoptical = false;
-  m_platformStorage = NULL;
+  m_platformStorage = nullptr;
 }
 
 void CMediaManager::Stop()
@@ -97,7 +97,7 @@ void CMediaManager::Stop()
     m_platformStorage->Stop();
 
   delete m_platformStorage;
-  m_platformStorage = NULL;
+  m_platformStorage = nullptr;
 }
 
 void CMediaManager::Initialize()
@@ -382,14 +382,14 @@ bool CMediaManager::IsAudio(const std::string& devicePath)
     return false;
 
   CCdInfo* pCdInfo = GetCdInfo(devicePath);
-  if(pCdInfo != NULL && pCdInfo->IsAudio(1))
+  if(pCdInfo != nullptr && pCdInfo->IsAudio(1))
     return true;
 
   return false;
 #else
   //! @todo switch all ports to use auto sources
   MEDIA_DETECT::CCdInfo* pInfo = MEDIA_DETECT::CDetectDVDMedia::GetCdInfo();
-  if (pInfo != NULL && pInfo->IsAudio(1))
+  if (pInfo != nullptr && pInfo->IsAudio(1))
     return true;
 #endif
 #endif
@@ -445,7 +445,7 @@ CCdInfo* CMediaManager::GetCdInfo(const std::string& devicePath)
 {
 #ifdef TARGET_WINDOWS
   if(!m_bhasoptical)
-    return NULL;
+    return nullptr;
   
   std::string strDevice = TranslateDevicePath(devicePath, false);
   std::map<std::string,CCdInfo*>::iterator it;
@@ -456,10 +456,10 @@ CCdInfo* CMediaManager::GetCdInfo(const std::string& devicePath)
       return it->second;
   }
 
-  CCdInfo* pCdInfo=NULL;
+  CCdInfo* pCdInfo=nullptr;
   CCdIoSupport cdio;
   pCdInfo = cdio.GetCdInfo((char*)strDevice.c_str());
-  if(pCdInfo!=NULL)
+  if(pCdInfo!=nullptr)
   {
     CSingleLock waitLock(m_muAutoSource);
     m_mapCdInfo.insert(std::pair<std::string,CCdInfo*>(strDevice,pCdInfo));
@@ -483,7 +483,7 @@ bool CMediaManager::RemoveCdInfo(const std::string& devicePath)
   it = m_mapCdInfo.find(strDevice);
   if(it != m_mapCdInfo.end())
   {
-    if(it->second != NULL)
+    if(it->second != nullptr)
       delete it->second;
 
     m_mapCdInfo.erase(it);
@@ -511,7 +511,7 @@ std::string CMediaManager::GetDiskLabel(const std::string& devicePath)
   URIUtils::AddSlashAtEnd(strDevice);
   std::wstring strDeviceW;
   g_charsetConverter.utf8ToW(strDevice, strDeviceW);
-  if(GetVolumeInformationW(strDeviceW.c_str(), cVolumenName, 127, NULL, NULL, NULL, cFSName, 127)==0)
+  if(GetVolumeInformationW(strDeviceW.c_str(), cVolumenName, 127, nullptr, nullptr, nullptr, cFSName, 127)==0)
     return "";
   g_charsetConverter.wToUTF8(cVolumenName, strDevice);
   return StringUtils::TrimRight(strDevice, " ");
@@ -525,7 +525,7 @@ std::string CMediaManager::GetDiskUniqueId(const std::string& devicePath)
   std::string mediaPath;
 
   CCdInfo* pInfo = g_mediaManager.GetCdInfo(devicePath);
-  if (pInfo == NULL)
+  if (pInfo == nullptr)
     return "";
 
   if (mediaPath.empty() && pInfo->IsAudio(1))

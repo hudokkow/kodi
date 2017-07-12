@@ -45,7 +45,7 @@ void CWin32StorageProvider::Initialize()
   VECSOURCES::const_iterator it;
   for(it=vShare.begin();it!=vShare.end();++it)
     if(g_mediaManager.GetDriveStatus(it->strPath) == DRIVE_CLOSED_MEDIA_PRESENT)
-      CJobManager::GetInstance().AddJob(new CDetectDisc(it->strPath, false), NULL);
+      CJobManager::GetInstance().AddJob(new CDetectDisc(it->strPath, false), nullptr);
   // remove end
 #endif
 }

@@ -37,7 +37,7 @@ bool CDarwinStorageProvider::m_event = false;
 
 CDarwinStorageProvider::CDarwinStorageProvider()
 {
-  PumpDriveChangeEvents(NULL);
+  PumpDriveChangeEvents(nullptr);
 }
 
 void CDarwinStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
@@ -84,7 +84,7 @@ void CDarwinStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
   if (session)
   {
     unsigned i, count = 0;
-    struct statfs *buf = NULL;
+    struct statfs *buf = nullptr;
     std::string mountpoint, devicepath;
 
     count = getmntinfo(&buf, 0);
@@ -130,7 +130,7 @@ void CDarwinStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
   if (session)
   {
     unsigned i, count = 0;
-    struct statfs *buf = NULL;
+    struct statfs *buf = nullptr;
     std::string mountpoint, devicepath;
 
     count = getmntinfo(&buf, 0);
@@ -158,7 +158,7 @@ void CDarwinStorageProvider::GetRemovableDrives(VECSOURCES &removableDrives)
             {
               CFStringRef mediaKind = (CFStringRef)CFDictionaryGetValue(details, kDADiskDescriptionMediaKindKey);
               // and either cd or dvd kind of media in it
-              if (mediaKind != NULL &&
+              if (mediaKind != nullptr &&
                   (CFStringCompare(mediaKind, CFSTR(kIOCDMediaClass), 0) == kCFCompareEqualTo ||
                   CFStringCompare(mediaKind, CFSTR(kIODVDMediaClass), 0) == kCFCompareEqualTo))
                 share.m_iDriveType = CMediaSource::SOURCE_TYPE_DVD;
