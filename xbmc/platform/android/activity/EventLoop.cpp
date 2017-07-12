@@ -29,9 +29,9 @@
 CEventLoop::CEventLoop(android_app* application)
   : m_enabled(false),
     m_application(application),
-    m_activityHandler(NULL), m_inputHandler(NULL)
+    m_activityHandler(nullptr), m_inputHandler(nullptr)
 {
-  if (m_application == NULL)
+  if (m_application == nullptr)
     return;
 
   m_application->userData = this;
@@ -52,10 +52,10 @@ void CEventLoop::run(IActivityHandler &activityHandler, IInputHandler &inputHand
   while (1)
   {
     // We will block forever waiting for events.
-    while ((ident = ALooper_pollAll(-1, NULL, &events, (void**)&source)) >= 0)
+    while ((ident = ALooper_pollAll(-1, nullptr, &events, (void**)&source)) >= 0)
     {
       // Process this event.
-      if (source != NULL)
+      if (source != nullptr)
         source->process(m_application, source);
 
       // Check if we are exiting.
@@ -167,7 +167,7 @@ int32_t CEventLoop::processInput(AInputEvent* event)
 
 void CEventLoop::activityCallback(android_app* application, int32_t command)
 {
-  if (application == NULL || application->userData == NULL)
+  if (application == nullptr || application->userData == nullptr)
     return;
 
   CEventLoop& eventLoop = *((CEventLoop*)application->userData);
@@ -176,7 +176,7 @@ void CEventLoop::activityCallback(android_app* application, int32_t command)
 
 int32_t CEventLoop::inputCallback(android_app* application, AInputEvent* event)
 {
-  if (application == NULL || application->userData == NULL || event == NULL)
+  if (application == nullptr || application->userData == nullptr || event == nullptr)
     return 0;
 
   CEventLoop& eventLoop = *((CEventLoop*)application->userData);

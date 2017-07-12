@@ -43,7 +43,7 @@ int CAndroidFeatures::GetVersion()
     JNIEnv *jenv = xbmc_jnienv();
 
     jclass jcOsBuild = jenv->FindClass("android/os/Build$VERSION");
-    if (jcOsBuild == NULL) 
+    if (jcOsBuild == nullptr) 
     {
       CLog::Log(LOGERROR, "%s: Error getting class android.os.Build.VERSION", __PRETTY_FUNCTION__);
       return version;

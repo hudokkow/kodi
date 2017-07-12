@@ -192,7 +192,7 @@ bool CAndroidKey::m_handleSearchKeys = false;
 
 bool CAndroidKey::onKeyboardEvent(AInputEvent *event)
 {
-  if (event == NULL)
+  if (event == nullptr)
     return false;
 
   bool ret = true;
