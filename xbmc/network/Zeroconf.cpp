@@ -55,7 +55,7 @@ class CZeroconfDummy : public CZeroconf
 #endif
 
 std::atomic_flag CZeroconf::sm_singleton_guard = ATOMIC_FLAG_INIT;
-CZeroconf* CZeroconf::smp_instance = 0;
+CZeroconf* CZeroconf::smp_instance = nullptr;
 
 CZeroconf::CZeroconf():mp_crit_sec(new CCriticalSection),m_started(false)
 {
@@ -78,7 +78,7 @@ bool CZeroconf::PublishService(const std::string& fcr_identifier,
   if(!ret.second) //identifier exists
     return false;
   if(m_started)
-    CJobManager::GetInstance().AddJob(new CPublish(fcr_identifier, info), NULL);
+    CJobManager::GetInstance().AddJob(new CPublish(fcr_identifier, info), nullptr);
 
   //not yet started, so its just queued
   return true;
@@ -125,7 +125,7 @@ bool CZeroconf::Start()
     return true;
   m_started = true;
 
-  CJobManager::GetInstance().AddJob(new CPublish(m_service_map), NULL);
+  CJobManager::GetInstance().AddJob(new CPublish(m_service_map), nullptr);
   return true;
 }
 
@@ -163,7 +163,7 @@ void CZeroconf::ReleaseInstance()
 {
   CAtomicSpinLock lock(sm_singleton_guard);
   delete smp_instance;
-  smp_instance = 0;
+  smp_instance = nullptr;
 }
 
 CZeroconf::CPublish::CPublish(const std::string& fcr_identifier, const PublishInfo& pubinfo)
