@@ -42,7 +42,7 @@ DWORD D3DCOLOR_COLORVALUE(float r, float g, float b, float a)
 
 CGUIWindowTestPatternDX::CGUIWindowTestPatternDX(void) : CGUIWindowTestPattern()
 {
-  m_vb = NULL;
+  m_vb = nullptr;
   m_bufferWidth = 0;
 }
 
@@ -316,7 +316,7 @@ void CGUIWindowTestPatternDX::BeginRender()
   ID3D11DeviceContext* pContext = g_Windowing.Get3D11Context();
   ID3D11RenderTargetView* renderTarget;
 
-  pContext->OMGetRenderTargets(1, &renderTarget, NULL);
+  pContext->OMGetRenderTargets(1, &renderTarget, nullptr);
   float color[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
   pContext->ClearRenderTargetView(renderTarget, color);
   renderTarget->Release();

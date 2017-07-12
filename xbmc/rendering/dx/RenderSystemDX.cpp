@@ -829,3 +829,4 @@ void CRenderSystemDX::CheckDeviceCaps()
     m_shaderFormats.push_back(AV_PIX_FMT_UYVY422);
   }
 }
+
