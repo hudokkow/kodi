@@ -114,7 +114,7 @@ bool win32_exception::write_minidump(EXCEPTION_POINTERS* pEp)
   // Call the minidump api with normal dumping
   // We can get more detail information by using other minidump types but the dump file will be
   // extremely large.
-  BOOL bMiniDumpSuccessful = pDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &mdei, 0, NULL);
+  BOOL bMiniDumpSuccessful = pDump(GetCurrentProcess(), GetCurrentProcessId(), hDumpFile, MiniDumpNormal, &mdei, 0, nullptr);
   if( !bMiniDumpSuccessful )
   {
     goto cleanup;
@@ -150,9 +150,9 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
   bool returncode = false;
   STACKFRAME64 frame = { 0 };
   HANDLE hCurProc = GetCurrentProcess();
-  IMAGEHLP_SYMBOL64* pSym = NULL;
+  IMAGEHLP_SYMBOL64* pSym = nullptr;
   HANDLE hDumpFile = INVALID_HANDLE_VALUE;
-  tSC pSC = NULL;
+  tSC pSC = nullptr;
 
   HMODULE hDbgHelpDll = ::LoadLibrary(L"DBGHELP.DLL");
   if (!hDbgHelpDll)
@@ -171,8 +171,8 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
   tSFTA pSFTA   = (tSFTA) GetProcAddress(hDbgHelpDll, "SymFunctionTableAccess64" );
   tSGMB pSGMB   = (tSGMB) GetProcAddress(hDbgHelpDll, "SymGetModuleBase64" );
 
-  if(pSI == NULL || pSGO == NULL || pSSO == NULL || pSC == NULL || pSW == NULL || pSGSFA == NULL || pUDSN == NULL || pSGLFA == NULL ||
-     pSFTA == NULL || pSGMB == NULL)
+  if(pSI == nullptr || pSGO == nullptr || pSSO == nullptr || pSC == nullptr || pSW == nullptr || pSGSFA == nullptr || pUDSN == nullptr || pSGLFA == nullptr ||
+     pSFTA == nullptr || pSGMB == nullptr)
     goto cleanup;
 
   dumpFileName = StringUtils::Format("kodi_stacktrace-%s-%04d%02d%02d-%02d%02d%02d.txt",
@@ -204,7 +204,7 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
   frame.AddrFrame.Offset = pEp->ContextRecord->Rbp; // Value of register used to access local function variables.
 #endif
 
-  if(pSI(hCurProc, NULL, TRUE) == FALSE)
+  if(pSI(hCurProc, nullptr, TRUE) == FALSE)
     goto cleanup;
 
   DWORD symOptions = pSGO();
@@ -231,9 +231,9 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
   int seq=0;
 
   strOutput = StringUtils::Format("Thread %d (process %d)\r\n", GetCurrentThreadId(), GetCurrentProcessId());
-  WriteFile(hDumpFile, strOutput.c_str(), strOutput.size(), &dwBytes, NULL);
+  WriteFile(hDumpFile, strOutput.c_str(), strOutput.size(), &dwBytes, nullptr);
 
-  while(pSW(IMAGE_FILE_MACHINE_I386, hCurProc, GetCurrentThread(), &frame, pEp->ContextRecord, NULL, pSFTA, pSGMB, NULL))
+  while(pSW(IMAGE_FILE_MACHINE_I386, hCurProc, GetCurrentThread(), &frame, pEp->ContextRecord, nullptr, pSFTA, pSGMB, nullptr))
   {
     if(frame.AddrPC.Offset != 0)
     {
@@ -250,7 +250,7 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
         strOutput.append(StringUtils::Format(" at %s:%d", Line.FileName, Line.LineNumber));
 
       strOutput.append("\r\n");
-      WriteFile(hDumpFile, strOutput.c_str(), strOutput.size(), &dwBytes, NULL);
+      WriteFile(hDumpFile, strOutput.c_str(), strOutput.size(), &dwBytes, nullptr);
     }
   }
   returncode = true;

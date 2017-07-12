@@ -69,7 +69,7 @@ namespace XbmcThreads
 
 #ifdef TARGET_DARWIN
       struct timeval tv;
-      gettimeofday(&tv, NULL);
+      gettimeofday(&tv, nullptr);
       ts.tv_nsec = tv.tv_usec * 1000;
       ts.tv_sec  = tv.tv_sec;
 #else

@@ -224,7 +224,7 @@ TEST(TestEvent, GroupLimitedGroupScope)
   CEvent event2;
 
   {
-    CEventGroup group(&event1,&event2,NULL);
+    CEventGroup group(&event1,&event2,nullptr);
 
     bool result1 = false;
     bool result2 = false;
@@ -245,7 +245,7 @@ TEST(TestEvent, GroupLimitedGroupScope)
     EXPECT_TRUE(!result2);
 
     EXPECT_TRUE(w3.waiting);
-    EXPECT_TRUE(w3.result == NULL);
+    EXPECT_TRUE(w3.result == nullptr);
 
     event1.Set();
 
