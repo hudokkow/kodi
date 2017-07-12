@@ -6743,7 +6743,7 @@ std::string CGUIInfoManager::GetLabel(int info, int contextWindow, std::string *
 }
 
 // tries to get a integer value for use in progressbars/sliders and such
-bool CGUIInfoManager::GetInt(int &value, int info, int contextWindow, const CGUIListItem *item /* = NULL */) const
+bool CGUIInfoManager::GetInt(int &value, int info, int contextWindow, const CGUIListItem *item /* = nullptr */) const
 {
   if (info >= MULTI_INFO_START && info <= MULTI_INFO_END)
     return GetMultiInfoInt(value, m_multiInfo[info - MULTI_INFO_START], contextWindow);
@@ -6876,7 +6876,7 @@ INFO::InfoPtr CGUIInfoManager::Register(const std::string &expression, int conte
   return *(res.first);
 }
 
-bool CGUIInfoManager::EvaluateBool(const std::string &expression, int contextWindow /* = 0 */, const CGUIListItemPtr &item /* = NULL */)
+bool CGUIInfoManager::EvaluateBool(const std::string &expression, int contextWindow /* = 0 */, const CGUIListItemPtr &item /* = nullptr */)
 {
   bool result = false;
   INFO::InfoPtr info = Register(expression, contextWindow);
@@ -11106,7 +11106,7 @@ int CGUIInfoManager::TranslateSkinVariableString(const std::string& name, int co
 
 std::string CGUIInfoManager::GetSkinVariableString(int info,
                                                   bool preferImage /*= false*/,
-                                                  const CGUIListItem *item /*= NULL*/)
+                                                  const CGUIListItem *item /*= nullptr*/)
 {
   info -= CONDITIONAL_LABEL_START;
   if (info >= 0 && info < (int)m_skinVariableStrings.size())

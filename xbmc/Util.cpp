@@ -252,7 +252,7 @@ std::string GetHomePath(const std::string& strTarget, std::string strPath)
 
       // Convert to real path.
       char real_path[2 * MAXPATHLEN];
-      if (realpath(given_path, real_path) != NULL)
+      if (realpath(given_path, real_path) != nullptr)
       {
         strPath = real_path;
         return strPath;
@@ -1783,7 +1783,7 @@ std::string CUtil::ResolveExecutablePath()
   mib[3] = getpid();
 
   buflen = sizeof(buf) - 1;
-  if(sysctl(mib, 4, buf, &buflen, NULL, 0) < 0)
+  if(sysctl(mib, 4, buf, &buflen, nullptr, 0) < 0)
     strExecutablePath = "";
   else
     strExecutablePath = buf;
