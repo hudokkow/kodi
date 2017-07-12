@@ -121,7 +121,7 @@ bool CPeripheralBusUSB::PerformDeviceScan(const GUID *guid, const PeripheralType
 
       if (bDetailResult)
       {
-        bDetailResult = SetupDiGetDeviceRegistryProperty(hDevHandle, &deviceInfo, SPDRP_HARDWAREID, NULL, (PBYTE)deviceProperty, nPropertyBufferSize, &required);
+        bDetailResult = SetupDiGetDeviceRegistryProperty(hDevHandle, &deviceInfo, SPDRP_HARDWAREID, nullptr, (PBYTE)deviceProperty, nPropertyBufferSize, &required);
         if (!bDetailResult && GetLastError() == ERROR_INSUFFICIENT_BUFFER)
         {
           free(deviceProperty);
@@ -133,7 +133,7 @@ bool CPeripheralBusUSB::PerformDeviceScan(const GUID *guid, const PeripheralType
             return false;
           }
           nPropertyBufferSize = required;
-          bDetailResult = SetupDiGetDeviceRegistryProperty(hDevHandle, &deviceInfo, SPDRP_HARDWAREID, NULL, (PBYTE)deviceProperty, nPropertyBufferSize, &required);
+          bDetailResult = SetupDiGetDeviceRegistryProperty(hDevHandle, &deviceInfo, SPDRP_HARDWAREID, nullptr, (PBYTE)deviceProperty, nPropertyBufferSize, &required);
         }
       }
 
@@ -158,7 +158,7 @@ bool CPeripheralBusUSB::PerformDeviceScan(const GUID *guid, const PeripheralType
             result.m_iSequence    = GetNumberOfPeripheralsWithId(result.m_iVendorId, result.m_iProductId);
 
             // Assume that buffer is more then enough (we need only 8 chars, initial allocation is 100 chars). If not - just skip type detection.
-            if (SetupDiGetDeviceRegistryProperty(hDevHandle, &devInfoData, SPDRP_CLASS, NULL, (PBYTE)deviceProperty, nPropertyBufferSize, &required) &&
+            if (SetupDiGetDeviceRegistryProperty(hDevHandle, &devInfoData, SPDRP_CLASS, nullptr, (PBYTE)deviceProperty, nPropertyBufferSize, &required) &&
                 strcmp("HIDClass", deviceProperty) == 0)
               result.m_type = PERIPHERAL_HID;
             else
