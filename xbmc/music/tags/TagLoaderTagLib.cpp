@@ -124,7 +124,7 @@ void SetFlacArt(FLAC::File *flacFile, EmbeddedArt *art, CMusicInfoTag &tag)
 }
 }
 
-bool CTagLoaderTagLib::Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, MUSIC_INFO::EmbeddedArt *art /* = NULL */)
+bool CTagLoaderTagLib::Load(const std::string& strFileName, MUSIC_INFO::CMusicInfoTag& tag, MUSIC_INFO::EmbeddedArt *art /* = nullptr */)
 {
   return Load(strFileName, tag, "", art);
 }
@@ -1112,7 +1112,7 @@ void CTagLoaderTagLib::AddArtistInstrument(CMusicInfoTag &tag, const std::vector
   }
 }
 
-bool CTagLoaderTagLib::Load(const std::string& strFileName, CMusicInfoTag& tag, const std::string& fallbackFileExtension, MUSIC_INFO::EmbeddedArt *art /* = NULL */)
+bool CTagLoaderTagLib::Load(const std::string& strFileName, CMusicInfoTag& tag, const std::string& fallbackFileExtension, MUSIC_INFO::EmbeddedArt *art /* = nullptr */)
 {
   // Dont try to read the tags for streams & shoutcast  
   if (URIUtils::IsInternetStream(strFileName))
