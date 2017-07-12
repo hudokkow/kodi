@@ -53,7 +53,7 @@ public:
   bool HasChannel(const enum AEChannel ch) const;
   bool ContainsChannels(const CAEChannelInfo& rhs) const;
   void ReplaceChannel(const enum AEChannel from, const enum AEChannel to);
-  int BestMatch(const std::vector<CAEChannelInfo>& dsts, int* score = NULL) const;
+  int BestMatch(const std::vector<CAEChannelInfo>& dsts, int* score = nullptr) const;
   void AddMissingChannels(const CAEChannelInfo& rhs);
 
 private:

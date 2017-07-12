@@ -119,7 +119,7 @@ void CActiveAEDSP::TriggerModeUpdate(bool bAsync /* = true */)
   if (bAsync)
   {
     CActiveAEDSPModeUpdateJob *job = new CActiveAEDSPModeUpdateJob();
-    CJobManager::GetInstance().AddJob(job, NULL);
+    CJobManager::GetInstance().AddJob(job, nullptr);
     return;
   }
 
@@ -239,7 +239,7 @@ void CActiveAEDSP::ResetDatabase(void)
 //@{
 void CActiveAEDSP::OnSettingAction(std::shared_ptr<const CSetting> setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return;
 
   const std::string &settingId = setting->GetId();
@@ -337,7 +337,7 @@ bool CActiveAEDSP::TranslateBoolInfo(DWORD dwInfo) const
     bReturn = m_usedProcesses[m_activeProcessId]->HasActiveModes(AE_DSP_MODE_TYPE_OUTPUT_RESAMPLE);
     break;
   case ADSP_MASTER_ACTIVE:
-    bReturn = m_usedProcesses[m_activeProcessId]->GetActiveMasterMode() != NULL;
+    bReturn = m_usedProcesses[m_activeProcessId]->GetActiveMasterMode() != nullptr;
     break;
   default:
     break;
@@ -361,7 +361,7 @@ bool CActiveAEDSP::TranslateCharInfo(DWORD dwInfo, std::string &strValue) const
     return false;
 
   CActiveAEDSPModePtr activeMaster = m_usedProcesses[m_activeProcessId]->GetActiveMasterMode();
-  if (activeMaster == NULL)
+  if (activeMaster == nullptr)
     return false;
 
   switch (dwInfo)
@@ -463,7 +463,7 @@ int CActiveAEDSP::CreateDSPs(int streamId, CActiveAEDSPProcessPtr &process, cons
   CActiveAEDSPProcessPtr usedProc;
   if (0 <= streamId && streamId < AE_DSP_STREAM_MAX_STREAMS)
   {
-    if (m_usedProcesses[streamId] != NULL)
+    if (m_usedProcesses[streamId] != nullptr)
     {
       usedProc = m_usedProcesses[streamId];
     }
@@ -473,7 +473,7 @@ int CActiveAEDSP::CreateDSPs(int streamId, CActiveAEDSPProcessPtr &process, cons
     for (unsigned int i = 0; i < AE_DSP_STREAM_MAX_STREAMS; ++i)
     {
       /* find a free position */
-      if (m_usedProcesses[i] == NULL)
+      if (m_usedProcesses[i] == nullptr)
       {
         usedProc = CActiveAEDSPProcessPtr(new CActiveAEDSPProcess(i));
         streamId = i;
@@ -482,7 +482,7 @@ int CActiveAEDSP::CreateDSPs(int streamId, CActiveAEDSPProcessPtr &process, cons
     }
   }
 
-  if (usedProc == NULL)
+  if (usedProc == nullptr)
   {
     CLog::Log(LOGERROR, "ActiveAE DSP - %s - can't find active processing class", __FUNCTION__);
     return -1;
@@ -510,7 +510,7 @@ void CActiveAEDSP::DestroyDSPs(int streamId)
 {
   CSingleLock lock(m_critSection);
 
-  if (0 <= streamId && streamId < AE_DSP_STREAM_MAX_STREAMS && m_usedProcesses[streamId] != NULL)
+  if (0 <= streamId && streamId < AE_DSP_STREAM_MAX_STREAMS && m_usedProcesses[streamId] != nullptr)
   {
     m_usedProcesses[streamId]->Destroy();
     m_usedProcesses[streamId] = CActiveAEDSPProcessPtr();
