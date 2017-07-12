@@ -6752,14 +6752,14 @@ std::string CGUIInfoManager::GetLabel(int info, int contextWindow, std::string *
 }
 
 // tries to get a integer value for use in progressbars/sliders and such
-bool CGUIInfoManager::GetInt(int &value, int info, int contextWindow, const CGUIListItem *item /* = NULL */) const
+bool CGUIInfoManager::GetInt(int &value, int info, int contextWindow, const CGUIListItem *item /* = nullptr */) const
 {
   if (info >= MULTI_INFO_START && info <= MULTI_INFO_END)
     return GetMultiInfoInt(value, m_multiInfo[info - MULTI_INFO_START], contextWindow);
 
   if (info >= LISTITEM_START && info <= LISTITEM_END)
   {
-    if (item == NULL)
+    if (item == nullptr)
     {
       CGUIWindow *window = GetWindowWithCondition(contextWindow, WINDOW_CONDITION_HAS_LIST_ITEMS); // true for has list items
       if (window)
@@ -6885,7 +6885,7 @@ INFO::InfoPtr CGUIInfoManager::Register(const std::string &expression, int conte
   return *(res.first);
 }
 
-bool CGUIInfoManager::EvaluateBool(const std::string &expression, int contextWindow /* = 0 */, const CGUIListItemPtr &item /* = NULL */)
+bool CGUIInfoManager::EvaluateBool(const std::string &expression, int contextWindow /* = 0 */, const CGUIListItemPtr &item /* = nullptr */)
 {
   bool result = false;
   INFO::InfoPtr info = Register(expression, contextWindow);
@@ -7358,7 +7358,7 @@ bool CGUIInfoManager::GetBool(int condition1, int contextWindow, const CGUIListI
     break;
     case VIDEOPLAYER_HAS_EPG:
       if (m_currentFile->HasPVRChannelInfoTag())
-        bReturn = (m_currentFile->GetPVRChannelInfoTag()->GetEPGNow().get() != NULL);
+        bReturn = (m_currentFile->GetPVRChannelInfoTag()->GetEPGNow().get() != nullptr);
     break;
     case VIDEOPLAYER_IS_STEREOSCOPIC:
       if(g_application.m_pPlayer->IsPlaying())
@@ -8047,7 +8047,7 @@ std::string CGUIInfoManager::GetMultiInfoLabel(const GUIInfo &info, int contextW
            info.m_info == CONTAINER_CURRENT_ITEM || info.m_info == CONTAINER_NUM_ALL_ITEMS ||
            info.m_info == CONTAINER_NUM_NONFOLDER_ITEMS)
   {
-    const CGUIControl *control = NULL;
+    const CGUIControl *control = nullptr;
     if (info.GetData1())
     { // container specified
       CGUIWindow *window = GetWindowWithCondition(contextWindow, 0);
@@ -8113,7 +8113,7 @@ std::string CGUIInfoManager::GetMultiInfoLabel(const GUIInfo &info, int contextW
   }
   else if (info.m_info == WINDOW_PROPERTY)
   {
-    CGUIWindow *window = NULL;
+    CGUIWindow *window = nullptr;
     if (info.GetData1())
     { // window specified
       window = g_windowManager.GetWindow(info.GetData1());//GetWindowWithCondition(contextWindow, 0);
@@ -8993,7 +8993,7 @@ void CGUIInfoManager::ResetCurrentItem()
 void CGUIInfoManager::SetCurrentItem(const CFileItemPtr item)
 {
   CSetCurrentItemJob *job = new CSetCurrentItemJob(item);
-  CJobManager::GetInstance().AddJob(job, NULL);
+  CJobManager::GetInstance().AddJob(job, nullptr);
 }
 
 void CGUIInfoManager::SetCurrentItemJob(const CFileItemPtr item)
@@ -9183,7 +9183,7 @@ CTemperature CGUIInfoManager::GetGPUTemperature()
 #else
   std::string  cmd   = g_advancedSettings.m_gpuTempCmd;
   int         ret   = 0;
-  FILE        *p    = NULL;
+  FILE        *p    = nullptr;
 
   if (cmd.empty() || !(p = popen(cmd.c_str(), "r")))
     return CTemperature();
@@ -10587,7 +10587,7 @@ bool CGUIInfoManager::GetItemBool(const CGUIListItem *item, int condition) const
     {
       if (pItem->HasPVRChannelInfoTag())
       {
-        return (pItem->GetPVRChannelInfoTag()->GetEPGNow().get() != NULL);
+        return (pItem->GetPVRChannelInfoTag()->GetEPGNow().get() != nullptr);
       }
       if (pItem->HasPVRTimerInfoTag() && pItem->GetPVRTimerInfoTag()->GetEpgInfoTag())
       {
@@ -10704,7 +10704,7 @@ CGUIWindow *CGUIInfoManager::GetWindowWithCondition(int contextWindow, int condi
   if (CheckWindowCondition(window, condition))
     return window;
 
-  return NULL;
+  return nullptr;
 }
 
 void CGUIInfoManager::SetCurrentVideoTag(const CVideoInfoTag &tag)
@@ -10730,7 +10730,7 @@ const MUSIC_INFO::CMusicInfoTag* CGUIInfoManager::GetCurrentSongTag() const
   if (m_currentFile->HasMusicInfoTag())
     return m_currentFile->GetMusicInfoTag();
 
-  return NULL;
+  return nullptr;
 }
 
 const PVR::CPVRRadioRDSInfoTagPtr CGUIInfoManager::GetCurrentRadioRDSInfoTag() const
@@ -10747,7 +10747,7 @@ const CVideoInfoTag* CGUIInfoManager::GetCurrentMovieTag() const
   if (m_currentFile->HasVideoInfoTag())
     return m_currentFile->GetVideoInfoTag();
 
-  return NULL;
+  return nullptr;
 }
 
 void GUIInfo::SetInfoFlag(uint32_t flag)
@@ -10943,7 +10943,7 @@ int CGUIInfoManager::TranslateSkinVariableString(const std::string& name, int co
 
 std::string CGUIInfoManager::GetSkinVariableString(int info,
                                                   bool preferImage /*= false*/,
-                                                  const CGUIListItem *item /*= NULL*/)
+                                                  const CGUIListItem *item /*= nullptr*/)
 {
   info -= CONDITIONAL_LABEL_START;
   if (info >= 0 && info < (int)m_skinVariableStrings.size())

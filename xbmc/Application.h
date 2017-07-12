@@ -213,7 +213,7 @@ public:
   bool IsMutedInternal() const { return m_muted; }
   void ToggleMute(void);
   void SetMute(bool mute);
-  void ShowVolumeBar(const CAction *action = NULL);
+  void ShowVolumeBar(const CAction *action = nullptr);
   int GetSubtitleDelay() const;
   int GetAudioDelay() const;
   void ResetSystemIdleTimer();
@@ -282,7 +282,7 @@ public:
 
   void UpdateLibraries();
 
-  bool ExecuteXBMCAction(std::string action, const CGUIListItemPtr &item = NULL);
+  bool ExecuteXBMCAction(std::string action, const CGUIListItemPtr &item = nullptr);
 
   static bool OnEvent(XBMC_Event& newEvent);
 
