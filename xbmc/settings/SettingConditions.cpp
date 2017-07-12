@@ -52,15 +52,15 @@
 
 bool AddonHasSettings(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingAddon> settingAddon = std::dynamic_pointer_cast<const CSettingAddon>(setting);
-  if (settingAddon == NULL)
+  if (settingAddon == nullptr)
     return false;
 
   ADDON::AddonPtr addon;
-  if (!ADDON::CAddonMgr::GetInstance().GetAddon(settingAddon->GetValue(), addon, settingAddon->GetAddonType()) || addon == NULL)
+  if (!ADDON::CAddonMgr::GetInstance().GetAddon(settingAddon->GetValue(), addon, settingAddon->GetAddonType()) || addon == nullptr)
     return false;
 
   if (addon->Type() == ADDON::ADDON_SKIN)
@@ -190,9 +190,9 @@ bool ProfileHasVideosLocked(const std::string &condition, const std::string &val
 
 bool ProfileLockMode(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  char *tmp = NULL;
+  char *tmp = nullptr;
   LockType lock = (LockType)strtol(value.c_str(), &tmp, 0);
-  if (tmp != NULL && *tmp != '\0')
+  if (tmp != nullptr && *tmp != '\0')
     return false;
 
   return CProfilesManager::GetInstance().GetCurrentProfile().getLockMode() == lock;
@@ -200,14 +200,14 @@ bool ProfileLockMode(const std::string &condition, const std::string &value, Set
 
 bool GreaterThan(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
-  char *tmp = NULL;
+  char *tmp = nullptr;
 
   int lhs = settingInt->GetValue();
   int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
@@ -217,14 +217,14 @@ bool GreaterThan(const std::string &condition, const std::string &value, Setting
 
 bool GreaterThanOrEqual(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
-  char *tmp = NULL;
+  char *tmp = nullptr;
 
   int lhs = settingInt->GetValue();
   int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
@@ -234,14 +234,14 @@ bool GreaterThanOrEqual(const std::string &condition, const std::string &value, 
 
 bool LessThan(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
-  char *tmp = NULL;
+  char *tmp = nullptr;
 
   int lhs = settingInt->GetValue();
   int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
@@ -251,14 +251,14 @@ bool LessThan(const std::string &condition, const std::string &value, SettingCon
 
 bool LessThanOrEqual(const std::string &condition, const std::string &value, SettingConstPtr setting, void *data)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   std::shared_ptr<const CSettingInt> settingInt = std::dynamic_pointer_cast<const CSettingInt>(setting);
-  if (settingInt == NULL)
+  if (settingInt == nullptr)
     return false;
 
-  char *tmp = NULL;
+  char *tmp = nullptr;
 
   int lhs = settingInt->GetValue();
   int rhs = StringUtils::IsInteger(value) ? (int)strtol(value.c_str(), &tmp, 0) : 0;
@@ -389,14 +389,14 @@ void CSettingConditions::Initialize()
   m_complexConditions.insert(std::pair<std::string, SettingConditionCheck>("lte",                           LessThanOrEqual));
 }
 
-bool CSettingConditions::Check(const std::string &condition, const std::string &value /* = "" */, SettingConstPtr setting /* = NULL */)
+bool CSettingConditions::Check(const std::string &condition, const std::string &value /* = "" */, SettingConstPtr setting /* = nullptr */)
 {
   if (m_simpleConditions.find(condition) != m_simpleConditions.end())
     return true;
 
   std::map<std::string, SettingConditionCheck>::const_iterator itCondition = m_complexConditions.find(condition);
   if (itCondition != m_complexConditions.end())
-    return itCondition->second(condition, value, setting, NULL);
+    return itCondition->second(condition, value, setting, nullptr);
 
   return Check(condition);
 }

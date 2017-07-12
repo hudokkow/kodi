@@ -21,11 +21,11 @@
 #include "SettingDateTime.h"
 #include "XBDateTime.h"
 
-CSettingDate::CSettingDate(const std::string &id, CSettingsManager *settingsManager /* = NULL */)
+CSettingDate::CSettingDate(const std::string &id, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, settingsManager)
 { }
 
-CSettingDate::CSettingDate(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = NULL */)
+CSettingDate::CSettingDate(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, label, value, settingsManager)
 { }
   
@@ -48,11 +48,11 @@ bool CSettingDate::CheckValidity(const std::string &value) const
   return CDateTime::FromDBDate(value).IsValid();
 }
 
-CSettingTime::CSettingTime(const std::string &id, CSettingsManager *settingsManager /* = NULL */)
+CSettingTime::CSettingTime(const std::string &id, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, settingsManager)
 { }
 
-CSettingTime::CSettingTime(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = NULL */)
+CSettingTime::CSettingTime(const std::string &id, int label, const std::string &value, CSettingsManager *settingsManager /* = nullptr */)
   : CSettingString(id, label, value, settingsManager)
 { }
 
