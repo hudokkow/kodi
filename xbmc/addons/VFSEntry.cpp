@@ -399,13 +399,13 @@ CVFSEntryIFileWrapper::~CVFSEntryIFileWrapper()
 bool CVFSEntryIFileWrapper::Open(const CURL& url)
 {
   m_context = m_addon->Open(url);
-  return m_context != NULL;
+  return m_context != nullptr;
 }
 
 bool CVFSEntryIFileWrapper::OpenForWrite(const CURL& url, bool bOverWrite)
 {
   m_context = m_addon->OpenForWrite(url, bOverWrite);
-  return m_context != NULL;
+  return m_context != nullptr;
 }
 
 bool CVFSEntryIFileWrapper::Exists(const CURL& url)
@@ -452,7 +452,7 @@ void CVFSEntryIFileWrapper::Close()
   if (m_context)
   {
     m_addon->Close(m_context);
-    m_context = NULL;
+    m_context = nullptr;
   }
 }
 
