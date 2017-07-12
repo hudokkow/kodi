@@ -553,26 +553,26 @@ static void am_packet_init(am_packet_t *pkt)
   pkt->isvalid    = 0;
   pkt->newflag    = 0;
   pkt->lastpts    = INT64_0;
-  pkt->data       = NULL;
-  pkt->buf        = NULL;
+  pkt->data       = nullptr;
+  pkt->buf        = nullptr;
   pkt->data_size  = 0;
   pkt->buf_size   = 0;
-  pkt->hdr        = NULL;
-  pkt->codec      = NULL;
+  pkt->hdr        = nullptr;
+  pkt->codec      = nullptr;
 }
 
 void am_packet_release(am_packet_t *pkt)
 {
-  if (pkt->buf != NULL)
-    free(pkt->buf), pkt->buf= NULL;
-  if (pkt->hdr != NULL)
+  if (pkt->buf != nullptr)
+    free(pkt->buf), pkt->buf= nullptr;
+  if (pkt->hdr != nullptr)
   {
-    if (pkt->hdr->data != NULL)
-      free(pkt->hdr->data), pkt->hdr->data = NULL;
-    free(pkt->hdr), pkt->hdr = NULL;
+    if (pkt->hdr->data != nullptr)
+      free(pkt->hdr->data), pkt->hdr->data = nullptr;
+    free(pkt->hdr), pkt->hdr = nullptr;
   }
 
-  pkt->codec = NULL;
+  pkt->codec = nullptr;
 }
 
 int check_in_pts(am_private_t *para, am_packet_t *pkt)
@@ -592,7 +592,7 @@ static int write_header(am_private_t *para, am_packet_t *pkt)
     int write_bytes = 0, len = 0;
 
     if (pkt->hdr && pkt->hdr->size > 0) {
-        if ((NULL == pkt->codec) || (NULL == pkt->hdr->data)) {
+        if ((nullptr == pkt->codec) || (nullptr == pkt->hdr->data)) {
             CLog::Log(LOGDEBUG, "[write_header]codec null!");
             return PLAYER_EMPTY_P;
         }
@@ -705,7 +705,7 @@ int write_av_packet(am_private_t *para, am_packet_t *pkt)
 static int m4s2_dx50_mp4v_add_header(unsigned char *buf, int size,  am_packet_t *pkt)
 {
     if (size > pkt->hdr->size) {
-        free(pkt->hdr->data), pkt->hdr->data = NULL;
+        free(pkt->hdr->data), pkt->hdr->data = nullptr;
         pkt->hdr->size = 0;
 
         pkt->hdr->data = (char*)malloc(size);
@@ -1011,7 +1011,7 @@ int pre_header_feeding(am_private_t *para, am_packet_t *pkt)
 {
     int ret;
     if (para->stream_type == AM_STREAM_ES) {
-        if (pkt->hdr == NULL) {
+        if (pkt->hdr == nullptr) {
             pkt->hdr = (hdr_buf_t*)malloc(sizeof(hdr_buf_t));
             pkt->hdr->data = (char *)malloc(HDR_BUF_SIZE);
             if (!pkt->hdr->data) {
@@ -1085,14 +1085,14 @@ int pre_header_feeding(am_private_t *para, am_packet_t *pkt)
         if (pkt->hdr) {
             if (pkt->hdr->data) {
                 free(pkt->hdr->data);
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
             }
             free(pkt->hdr);
-            pkt->hdr = NULL;
+            pkt->hdr = nullptr;
         }
     }
     else if (para->stream_type == AM_STREAM_PS) {
-        if (pkt->hdr == NULL) {
+        if (pkt->hdr == nullptr) {
             pkt->hdr = (hdr_buf_t*)malloc(sizeof(hdr_buf_t));
             pkt->hdr->data = (char*)malloc(HDR_BUF_SIZE);
             if (!pkt->hdr->data) {
@@ -1111,10 +1111,10 @@ int pre_header_feeding(am_private_t *para, am_packet_t *pkt)
         if (pkt->hdr) {
             if (pkt->hdr->data) {
                 free(pkt->hdr->data);
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
             }
             free(pkt->hdr);
-            pkt->hdr = NULL;
+            pkt->hdr = nullptr;
         }
     }
     return PLAYER_SUCCESS;
@@ -1126,24 +1126,24 @@ int divx3_prefix(am_packet_t *pkt)
     const unsigned char divx311_chunk_prefix[DIVX311_CHUNK_HEAD_SIZE] = {
         0x00, 0x00, 0x00, 0x01, 0xb6, 'D', 'I', 'V', 'X', '3', '.', '1', '1'
     };
-    if ((pkt->hdr != NULL) && (pkt->hdr->data != NULL)) {
+    if ((pkt->hdr != nullptr) && (pkt->hdr->data != nullptr)) {
         free(pkt->hdr->data);
-        pkt->hdr->data = NULL;
+        pkt->hdr->data = nullptr;
     }
 
-    if (pkt->hdr == NULL) {
+    if (pkt->hdr == nullptr) {
         pkt->hdr = (hdr_buf_t*)malloc(sizeof(hdr_buf_t));
         if (!pkt->hdr) {
             CLog::Log(LOGDEBUG, "[divx3_prefix] NOMEM!");
             return PLAYER_FAILED;
         }
 
-        pkt->hdr->data = NULL;
+        pkt->hdr->data = nullptr;
         pkt->hdr->size = 0;
     }
 
     pkt->hdr->data = (char*)malloc(DIVX311_CHUNK_HEAD_SIZE + 4);
-    if (pkt->hdr->data == NULL) {
+    if (pkt->hdr->data == nullptr) {
         CLog::Log(LOGDEBUG, "[divx3_prefix] NOMEM!");
         return PLAYER_FAILED;
     }
@@ -1184,24 +1184,24 @@ int set_header_info(am_private_t *para)
         if (para->video_codec_type == VIDEO_DEC_FORMAT_WMV3) {
             unsigned i, check_sum = 0, data_len = 0;
 
-            if ((pkt->hdr != NULL) && (pkt->hdr->data != NULL)) {
+            if ((pkt->hdr != nullptr) && (pkt->hdr->data != nullptr)) {
                 free(pkt->hdr->data);
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
             }
 
-            if (pkt->hdr == NULL) {
+            if (pkt->hdr == nullptr) {
                 pkt->hdr = (hdr_buf_t*)malloc(sizeof(hdr_buf_t));
                 if (!pkt->hdr) {
                     return PLAYER_FAILED;
                 }
 
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
                 pkt->hdr->size = 0;
             }
 
             if (pkt->avpkt.flags) {
                 pkt->hdr->data = (char*)malloc(para->extrasize + 26 + 22);
-                if (pkt->hdr->data == NULL) {
+                if (pkt->hdr->data == nullptr) {
                     return PLAYER_FAILED;
                 }
 
@@ -1247,7 +1247,7 @@ int set_header_info(am_private_t *para)
                 data_len = para->extrasize + 26;
             } else {
                 pkt->hdr->data = (char*)malloc(22);
-                if (pkt->hdr->data == NULL) {
+                if (pkt->hdr->data == nullptr) {
                     return PLAYER_FAILED;
                 }
             }
@@ -1285,24 +1285,24 @@ int set_header_info(am_private_t *para)
             pkt->hdr->size = data_len + 22;
             pkt->newflag = 1;
         } else if (para->video_codec_type == VIDEO_DEC_FORMAT_WVC1) {
-            if ((pkt->hdr != NULL) && (pkt->hdr->data != NULL)) {
+            if ((pkt->hdr != nullptr) && (pkt->hdr->data != nullptr)) {
                 free(pkt->hdr->data);
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
             }
 
-            if (pkt->hdr == NULL) {
+            if (pkt->hdr == nullptr) {
                 pkt->hdr = (hdr_buf_t*)malloc(sizeof(hdr_buf_t));
                 if (!pkt->hdr) {
                     CLog::Log(LOGDEBUG, "[wvc1_prefix] NOMEM!");
                     return PLAYER_FAILED;
                 }
 
-                pkt->hdr->data = NULL;
+                pkt->hdr->data = nullptr;
                 pkt->hdr->size = 0;
             }
 
             pkt->hdr->data = (char*)malloc(4);
-            if (pkt->hdr->data == NULL) {
+            if (pkt->hdr->data == nullptr) {
                 CLog::Log(LOGDEBUG, "[wvc1_prefix] NOMEM!");
                 return PLAYER_FAILED;
             }
@@ -1346,8 +1346,8 @@ CAMLCodec::CAMLCodec()
 CAMLCodec::~CAMLCodec()
 {
   delete am_private;
-  am_private = NULL;
-  delete m_dll, m_dll = NULL;
+  am_private = nullptr;
+  delete m_dll, m_dll = nullptr;
 }
 
 float CAMLCodec::OMXPtsToSeconds(int omxpts)
@@ -1495,7 +1495,7 @@ bool CAMLCodec::OpenDecoder(CDVDStreamInfo &hints)
   am_private->gcodec.rate        = am_private->video_rate;
   am_private->gcodec.ratio       = am_private->video_ratio;
   am_private->gcodec.ratio64     = am_private->video_ratio64;
-  am_private->gcodec.param       = NULL;
+  am_private->gcodec.param       = nullptr;
 
   switch(am_private->video_format)
   {
@@ -1679,7 +1679,7 @@ void CAMLCodec::CloseDecoder()
 
   am_packet_release(&am_private->am_pkt);
   free(am_private->extradata);
-  am_private->extradata = NULL;
+  am_private->extradata = nullptr;
   // return tsync to default so external apps work
   SysfsUtils::SetInt("/sys/class/tsync/enable", 1);
 

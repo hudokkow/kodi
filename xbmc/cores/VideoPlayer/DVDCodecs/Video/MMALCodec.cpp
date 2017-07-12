@@ -85,10 +85,10 @@ CMMALVideo::CMMALVideo(CProcessInfo &processInfo) : CDVDVideoCodec(processInfo)
   m_decoderPts = DVD_NOPTS_VALUE;
   m_demuxerPts = DVD_NOPTS_VALUE;
 
-  m_dec = NULL;
-  m_dec_input = NULL;
-  m_dec_output = NULL;
-  m_dec_input_pool = NULL;
+  m_dec = nullptr;
+  m_dec_input = nullptr;
+  m_dec_output = nullptr;
+  m_dec_input_pool = nullptr;
   m_pool = nullptr;
 
   m_codingType = 0;
@@ -119,16 +119,16 @@ CMMALVideo::~CMMALVideo()
   if (m_dec_input && m_dec_input->is_enabled)
     mmal_port_disable(m_dec_input);
 
-  m_dec_output = NULL;
+  m_dec_output = nullptr;
 
   if (m_dec_input_pool)
     mmal_port_pool_destroy(m_dec_input, m_dec_input_pool);
-  m_dec_input_pool = NULL;
-  m_dec_input = NULL;
+  m_dec_input_pool = nullptr;
+  m_dec_input = nullptr;
 
-  m_dec = NULL;
+  m_dec = nullptr;
   mmal_format_free(m_es_format);
-  m_es_format = NULL;
+  m_es_format = nullptr;
 }
 
 void CMMALVideo::PortSettingsChanged(MMAL_PORT_T *port, MMAL_BUFFER_HEADER_T *buffer)
@@ -670,7 +670,7 @@ void CMMALVideo::Reset(void)
   // blow all ready video frames
   while (1)
   {
-    CMMALVideoBuffer *buffer = NULL;
+    CMMALVideoBuffer *buffer = nullptr;
     {
       CSingleLock output_lock(m_output_mutex);
       // fetch a output buffer and pop it off the ready list

@@ -86,7 +86,7 @@ static bool CanSurfaceRenderBlackList(const std::string &name)
   // but that seems to be hit or miss as most odd name devices
   // cannot surface render.
   static const char *cannotsurfacerender_decoders[] = {
-    NULL
+    nullptr
   };
   for (const char **ptr = cannotsurfacerender_decoders; *ptr; ptr++)
   {
@@ -111,7 +111,7 @@ static bool IsBlacklisted(const std::string &name)
     "VC1Decoder",
     "VPXDecoder",
     // End of Rockchip
-    NULL
+    nullptr
   };
   for (const char **ptr = blacklisted_decoders; *ptr; ptr++)
   {
@@ -154,7 +154,7 @@ public:
   virtual ~CDVDMediaCodecOnFrameAvailable()
   {
     // unhook the callback
-    CJNIXBMCSurfaceTextureOnFrameAvailableListener nullListener(jni::jhobject(NULL));
+    CJNIXBMCSurfaceTextureOnFrameAvailableListener nullListener(jni::jhobject(nullptr));
     m_surfaceTexture->setOnFrameAvailableListener(nullListener);
   }
 

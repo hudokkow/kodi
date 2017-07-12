@@ -114,7 +114,7 @@ void CRenderCaptureDispmanX::BeginRender()
 void CRenderCaptureDispmanX::EndRender()
 {
   delete[] m_pixels;
-  m_pixels = g_RBP.CaptureDisplay(m_width, m_height, NULL, true);
+  m_pixels = g_RBP.CaptureDisplay(m_width, m_height, nullptr, true);
 
   SetState(CAPTURESTATE_DONE);
 }

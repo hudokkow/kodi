@@ -65,7 +65,7 @@ void CRendererIMX::ReleaseBuffer(int idx)
 {
   CDVDVideoCodecIMXBuffer *buffer =  static_cast<CDVDVideoCodecIMXBuffer*>(m_buffers[idx].hwDec);
   SAFE_RELEASE(buffer);
-  m_buffers[idx].hwDec = NULL;
+  m_buffers[idx].hwDec = nullptr;
 }
 
 int CRendererIMX::GetImageHook(YuvImage *image, int source, bool readonly)

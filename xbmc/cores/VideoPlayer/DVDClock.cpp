@@ -228,7 +228,7 @@ void CDVDClock::SetMaxSpeedAdjust(double speed)
 }
 
 //returns the refreshrate if the videoreferenceclock is running, -1 otherwise
-int CDVDClock::UpdateFramerate(double fps, double* interval /*= NULL*/)
+int CDVDClock::UpdateFramerate(double fps, double* interval /*= nullptr*/)
 {
   //sent with fps of 0 means we are not playing video
   if(fps == 0.0)

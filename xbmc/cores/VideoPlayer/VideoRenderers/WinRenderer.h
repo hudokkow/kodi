@@ -98,7 +98,7 @@ struct SVideoBuffer
 struct SVideoPlane
 {
   CD3DTexture    texture;
-  D3D11_MAPPED_SUBRESOURCE rect;       // rect.pBits != NULL is used to know if the texture is locked
+  D3D11_MAPPED_SUBRESOURCE rect;       // rect.pBits != nullptr is used to know if the texture is locked
 };
 
 struct YUVBuffer : SVideoBuffer

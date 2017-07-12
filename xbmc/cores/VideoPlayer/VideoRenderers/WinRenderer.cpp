@@ -49,7 +49,7 @@ static RenderMethodDetail RenderMethodDetails[] = {
     { RENDER_SW     , "Software" },
     { RENDER_PS     , "Pixel Shaders" },
     { RENDER_DXVA   , "DXVA" },
-    { RENDER_INVALID, NULL }
+    { RENDER_INVALID, nullptr }
 };
 
 static RenderMethodDetail *FindRenderMethod(RenderMethod m)
@@ -619,7 +619,7 @@ void CWinRenderer::RenderSW()
   m_sw_scale_ctx = sws_getCachedContext(m_sw_scale_ctx,
                                         m_sourceWidth, m_sourceHeight, m_format,
                                         m_sourceWidth, m_sourceHeight, AV_PIX_FMT_BGRA,
-                                        SWS_FAST_BILINEAR, NULL, NULL, NULL);
+                                        SWS_FAST_BILINEAR, nullptr, nullptr, nullptr);
 
   YUVBuffer* buf = reinterpret_cast<YUVBuffer*>(m_VideoBuffers[m_iYV12RenderBuffer]);
 

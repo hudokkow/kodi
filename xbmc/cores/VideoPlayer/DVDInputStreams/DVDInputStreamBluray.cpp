@@ -483,7 +483,7 @@ bool CDVDInputStreamBluray::Open()
 
     m_dll->bd_register_overlay_proc (m_bd, this, bluray_overlay_cb);
 #ifdef HAVE_LIBBLURAY_BDJ
-    m_dll->bd_register_argb_overlay_proc (m_bd, this, bluray_overlay_argb_cb, NULL);
+    m_dll->bd_register_argb_overlay_proc (m_bd, this, bluray_overlay_argb_cb, nullptr);
 #endif
 
     if(m_dll->bd_play(m_bd) <= 0)
@@ -580,7 +580,7 @@ void CDVDInputStreamBluray::ProcessEvent() {
 
   case BD_EVENT_SEEK:
     CLog::Log(LOGDEBUG, "CDVDInputStreamBluray - BD_EVENT_SEEK");
-    //m_player->OnDVDNavResult(NULL, 1);
+    //m_player->OnDVDNavResult(nullptr, 1);
     //m_dll->bd_read_skip_still(m_bd);
     //m_hold = HOLD_HELD;
     break;
@@ -971,7 +971,7 @@ void CDVDInputStreamBluray::OverlayCallback(const BD_OVERLAY * const ov)
 #ifdef HAVE_LIBBLURAY_BDJ
 void CDVDInputStreamBluray::OverlayCallbackARGB(const struct bd_argb_overlay_s * const ov)
 {
-  if(ov == NULL || ov->cmd == BD_ARGB_OVERLAY_CLOSE)
+  if(ov == nullptr || ov->cmd == BD_ARGB_OVERLAY_CLOSE)
   {
     OverlayClose();
     return;
@@ -1000,7 +1000,7 @@ void CDVDInputStreamBluray::OverlayCallbackARGB(const struct bd_argb_overlay_s *
     SOverlay overlay(new CDVDOverlayImage(), std::ptr_fun(CDVDOverlay::Release));
 
     overlay->palette_colors = 0;
-    overlay->palette        = NULL;
+    overlay->palette        = nullptr;
 
     unsigned bytes = ov->stride * ov->h * 4;
     uint8_t *img = (uint8_t*) malloc(bytes);

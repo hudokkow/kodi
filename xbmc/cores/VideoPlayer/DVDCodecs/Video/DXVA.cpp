@@ -109,7 +109,7 @@ static const dxva2_mode_t dxva2_modes[] = {
     { "Intel VC-1 VLD",                                               &DXVADDI_Intel_ModeVC1_E,  0 },
 #endif
 
-    { NULL, NULL, 0 }
+    { nullptr, nullptr, 0 }
 };
 
 // Prefered targets must be first
@@ -438,7 +438,7 @@ bool CDXVAContext::CreateSurfaces(D3D11_VIDEO_DECODER_DESC format, unsigned int 
                                 count, 1, D3D11_BIND_DECODER);
 
   ID3D11Texture2D *texture = nullptr;
-  if (FAILED(pDevice->CreateTexture2D(&texDesc, NULL, &texture)))
+  if (FAILED(pDevice->CreateTexture2D(&texDesc, nullptr, &texture)))
   {
     CLog::Log(LOGERROR, "%s - failed creating decoder texture array", __FUNCTION__);
     return false;
