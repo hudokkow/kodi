@@ -222,9 +222,9 @@ CBaseTexture* CGUIFontTTFDX::ReallocTexture(unsigned int& newHeight)
   if(m_textureHeight == 0)
   {
     delete m_texture;
-    m_texture = NULL;
+    m_texture = nullptr;
     delete m_speedupTexture;
-    m_speedupTexture = NULL;
+    m_speedupTexture = nullptr;
   }
   m_staticCache.Flush();
   m_dynamicCache.Flush();
@@ -235,7 +235,7 @@ CBaseTexture* CGUIFontTTFDX::ReallocTexture(unsigned int& newHeight)
   {
     SAFE_DELETE(newSpeedupTexture);
     SAFE_DELETE(pNewTexture);
-    return NULL;
+    return nullptr;
   }
 
   ID3D11DeviceContext* pContext = g_Windowing.GetImmediateContext();

@@ -307,7 +307,7 @@ bool CGUIIncludes::HasLoaded(const std::string &file) const
   return false;
 }
 
-void CGUIIncludes::Resolve(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::Resolve(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if (!node)
     return;
@@ -403,7 +403,7 @@ void CGUIIncludes::ResolveExpressions(TiXmlElement *node)
   }
 }
 
-void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CGUIIncludes::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if (!node)
     return;
@@ -504,7 +504,7 @@ bool CGUIIncludes::GetParameters(const TiXmlElement *include, const char *valueA
   if (include)
   {
     const TiXmlElement *param = include->FirstChildElement("param");
-    foundAny = param != NULL;  // doesn't matter if param isn't entirely valid
+    foundAny = param != nullptr;  // doesn't matter if param isn't entirely valid
     while (param)
     {
       std::string paramName = XMLUtils::GetAttribute(param, "name");
@@ -650,5 +650,5 @@ const INFO::CSkinVariableString* CGUIIncludes::CreateSkinVariable(const std::str
   std::map<std::string, TiXmlElement>::const_iterator it = m_skinvariables.find(name);
   if (it != m_skinvariables.end())
     return INFO::CSkinVariable::CreateFromXML(it->second, context);
-  return NULL;
+  return nullptr;
 }

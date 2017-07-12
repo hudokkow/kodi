@@ -388,7 +388,7 @@ void CD3DTexture::SaveTexture()
       stagingDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
       stagingDesc.BindFlags = 0;
 
-      if (FAILED(g_Windowing.Get3D11Device()->CreateTexture2D(&stagingDesc, NULL, &texture)))
+      if (FAILED(g_Windowing.Get3D11Device()->CreateTexture2D(&stagingDesc, nullptr, &texture)))
         return;
 
       // copy contents to new texture
@@ -438,7 +438,7 @@ void CD3DTexture::RestoreTexture()
     }
 
     delete[] m_data;
-    m_data = NULL;
+    m_data = nullptr;
     m_pitch = 0;
   }
 }
@@ -898,7 +898,7 @@ void CD3DBuffer::OnDestroyDevice(bool fatal)
     trgDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
     trgDesc.BindFlags = 0;
 
-    if (SUCCEEDED(pDevice->CreateBuffer(&trgDesc, NULL, &buffer)))
+    if (SUCCEEDED(pDevice->CreateBuffer(&trgDesc, nullptr, &buffer)))
       pContext->CopyResource(buffer, m_buffer);
   }
   else
