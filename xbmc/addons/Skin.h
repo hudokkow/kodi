@@ -131,7 +131,7 @@ public:
   /*! \brief Get the full path to the specified file in the skin
    We search for XML files in the skin folder that best matches the current resolution.
    \param file XML file to look for
-   \param res [out] If non-NULL, the resolution that the returned XML file is in is returned.  Defaults to NULL.
+   \param res [out] If non-nullptr, the resolution that the returned XML file is in is returned.  Defaults to NULL.
    \param baseDir [in] If non-empty, the given directory is searched instead of the skin's directory.  Defaults to empty.
    \return path to the XML file
    */

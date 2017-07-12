@@ -281,7 +281,7 @@ void CSkinInfo::LoadIncludes()
   m_includes.Load(includesPath);
 }
 
-void CSkinInfo::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = NULL */)
+void CSkinInfo::ResolveIncludes(TiXmlElement *node, std::map<INFO::InfoPtr, bool>* xmlIncludeConditions /* = nullptr */)
 {
   if(xmlIncludeConditions)
     xmlIncludeConditions->clear();
