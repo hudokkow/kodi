@@ -114,7 +114,7 @@ public:
   void onInputDeviceChanged(int deviceId) override;
   void onInputDeviceRemoved(int deviceId) override;
 
-  bool isValid() { return m_activity != NULL; }
+  bool isValid() { return m_activity != nullptr; }
 
   void onStart() override;
   void onResume() override;

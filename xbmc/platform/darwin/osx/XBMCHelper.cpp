@@ -99,7 +99,7 @@ XBMCHelper::XBMCHelper()
 /////////////////////////////////////////////////////////////////////////////
 bool XBMCHelper::OnSettingChanging(std::shared_ptr<const CSetting> setting)
 {
-  if (setting == NULL)
+  if (setting == nullptr)
     return false;
 
   const std::string &settingId = setting->GetId();
@@ -233,7 +233,7 @@ void XBMCHelper::Configure()
 
     if (_NSGetExecutablePath(given_path, &path_size) == 0)
     {
-      if (realpath(given_path, real_path) != NULL)
+      if (realpath(given_path, real_path) != nullptr)
       {
         strConfig += "--appPath \"";
         strConfig += real_path;
@@ -415,7 +415,7 @@ int XBMCHelper::GetProcessPid(const char* strProgram)
   GetBSDProcessList(&mylist, &mycount);
   for (size_t k = 0; k < mycount && ret == -1; k++)
   {
-    kinfo_proc *proc = NULL;
+    kinfo_proc *proc = nullptr;
     proc = &mylist[k];
 
     // Process names are at most sixteen characters long.
@@ -451,12 +451,12 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
   // sysctl because the prototype doesn't include the const modifier.
   size_t length;
 
-  assert(procList != NULL);
-  assert(procCount != NULL);
+  assert(procList != nullptr);
+  assert(procCount != nullptr);
 
   *procCount = 0;
 
-  // We start by calling sysctl with result == NULL and length == 0.
+  // We start by calling sysctl with result == nullptr and length == 0.
   // That will succeed, and set length to the appropriate length.
   // We then allocate a buffer of that size and call sysctl again
   // with that buffer.  If that succeeds, we're done.  If that fails
@@ -466,16 +466,16 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
   // the amount of data returned, not the amount of data that
   // could have been returned.
   //
-  result = NULL;
+  result = nullptr;
   done = false;
   do
   {
-    assert(result == NULL);
+    assert(result == nullptr);
 
     // Call sysctl with a NULL buffer.
     length = 0;
-    err = sysctl((int *) name, (sizeof(name) / sizeof(*name)) - 1, NULL,
-        &length, NULL, 0);
+    err = sysctl((int *) name, (sizeof(name) / sizeof(*name)) - 1, nullptr,
+        &length, nullptr, 0);
     if (err == -1)
       err = errno;
 
@@ -483,7 +483,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     if (err == 0)
     {
       result = (kinfo_proc*) malloc(length);
-      if (result == NULL)
+      if (result == nullptr)
         err = ENOMEM;
     }
 
@@ -493,7 +493,7 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
     if (err == 0)
     {
       err = sysctl((int *) name, (sizeof(name) / sizeof(*name)) - 1, result,
-          &length, NULL, 0);
+          &length, nullptr, 0);
 
       if (err == -1)
         err = errno;
@@ -504,26 +504,26 @@ static int GetBSDProcessList(kinfo_proc **procList, size_t *procCount)
       }
       else if (err == ENOMEM)
       {
-        assert(result != NULL);
+        assert(result != nullptr);
         free(result);
-        result = NULL;
+        result = nullptr;
         err = 0;
       }
     }
   } while (err == 0 && !done);
 
   // Clean up and establish post conditions.
-  if (err != 0 && result != NULL)
+  if (err != 0 && result != nullptr)
   {
     free(result);
-    result = NULL;
+    result = nullptr;
   }
 
   *procList = result;
   if (err == 0)
     *procCount = length / sizeof(kinfo_proc);
 
-  assert( (err == 0) == (*procList != NULL) );
+  assert( (err == 0) == (*procList != nullptr) );
   return err;
 }
 #endif

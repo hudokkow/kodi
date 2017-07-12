@@ -110,14 +110,14 @@ template<class T, void(T::*fn)()>
 void* thread_run(void* obj)
 {
   (static_cast<T*>(obj)->*fn)();
-  return NULL;
+  return nullptr;
 }
 
-CXBMCApp* CXBMCApp::m_xbmcappinstance = NULL;
+CXBMCApp* CXBMCApp::m_xbmcappinstance = nullptr;
 CEvent CXBMCApp::m_windowCreated;
-ANativeActivity *CXBMCApp::m_activity = NULL;
-CJNIWakeLock *CXBMCApp::m_wakeLock = NULL;
-ANativeWindow* CXBMCApp::m_window = NULL;
+ANativeActivity *CXBMCApp::m_activity = nullptr;
+CJNIWakeLock *CXBMCApp::m_wakeLock = nullptr;
+ANativeWindow* CXBMCApp::m_window = nullptr;
 int CXBMCApp::m_batteryLevel = 0;
 bool CXBMCApp::m_hasFocus = false;
 bool CXBMCApp::m_headsetPlugged = false;
@@ -126,7 +126,7 @@ IInputDeviceEventHandler* CXBMCApp::m_inputDeviceEventHandler = nullptr;
 bool CXBMCApp::m_hasReqVisible = false;
 CCriticalSection CXBMCApp::m_applicationsMutex;
 std::vector<androidPackage> CXBMCApp::m_applications;
-CVideoSyncAndroid* CXBMCApp::m_syncImpl = NULL;
+CVideoSyncAndroid* CXBMCApp::m_syncImpl = nullptr;
 CEvent CXBMCApp::m_vsyncEvent;
 std::vector<CActivityResultEvent*> CXBMCApp::m_activityResultEvents;
 
@@ -141,7 +141,7 @@ CXBMCApp::CXBMCApp(ANativeActivity* nativeActivity)
   m_activity = nativeActivity;
   m_firstrun = true;
   m_exiting=false;
-  if (m_activity == NULL)
+  if (m_activity == nullptr)
   {
     android_printf("CXBMCApp: invalid ANativeActivity instance");
     exit(1);
@@ -151,7 +151,7 @@ CXBMCApp::CXBMCApp(ANativeActivity* nativeActivity)
 
 CXBMCApp::~CXBMCApp()
 {
-  m_xbmcappinstance = NULL;
+  m_xbmcappinstance = nullptr;
   delete m_wakeLock;
 }
 
@@ -270,7 +270,7 @@ void CXBMCApp::onDestroy()
   if (!m_exiting)
   {
     XBMC_Stop();
-    pthread_join(m_thread, NULL);
+    pthread_join(m_thread, nullptr);
     android_printf(" => XBMC finished");
   }
 }
@@ -296,7 +296,7 @@ void CXBMCApp::onLowMemory()
 void CXBMCApp::onCreateWindow(ANativeWindow* window)
 {
   android_printf("%s: ", __PRETTY_FUNCTION__);
-  if (window == NULL)
+  if (window == nullptr)
   {
     android_printf(" => invalid ANativeWindow object");
     return;
@@ -313,7 +313,7 @@ void CXBMCApp::onCreateWindow(ANativeWindow* window)
 void CXBMCApp::onResizeWindow()
 {
   android_printf("%s: ", __PRETTY_FUNCTION__);
-  m_window = NULL;
+  m_window = nullptr;
   m_windowCreated.Reset();
   // no need to do anything because we are fixed in fullscreen landscape mode
 }
@@ -326,7 +326,7 @@ void CXBMCApp::onDestroyWindow()
   if (!m_exiting)
   {
     XBMC_DestroyDisplay();
-    m_window = NULL;
+    m_window = nullptr;
     XBMC_Pause(true);
   }
 }
@@ -582,7 +582,7 @@ int CXBMCApp::android_printf(const char *format, ...)
 
 int CXBMCApp::GetDPI()
 {
-  if (m_activity == NULL || m_activity->assetManager == NULL)
+  if (m_activity == nullptr || m_activity->assetManager == nullptr)
     return 0;
 
   // grab DPI from the current configuration - this is approximate
@@ -774,7 +774,7 @@ std::vector<androidPackage> CXBMCApp::GetApplications()
 
 bool CXBMCApp::HasLaunchIntent(const std::string &package)
 {
-  return GetPackageManager().getLaunchIntentForPackage(package) != NULL;
+  return GetPackageManager().getLaunchIntentForPackage(package) != nullptr;
 }
 
 // Note intent, dataType, dataURI all default to ""
@@ -1137,7 +1137,7 @@ void CXBMCApp::InitFrameCallback(CVideoSyncAndroid* syncImpl)
 
 void CXBMCApp::DeinitFrameCallback()
 {
-  m_syncImpl = NULL;
+  m_syncImpl = nullptr;
 }
 
 void CXBMCApp::doFrame(int64_t frameTimeNanos)

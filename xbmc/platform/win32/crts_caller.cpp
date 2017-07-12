@@ -68,17 +68,17 @@ crts_caller::crts_caller(const char* func_name)
 {
   assert(func_name);
   assert(func_name[0]);
-  if (func_name == NULL)
+  if (func_name == nullptr)
     return;
 
   for (const wchar_t* const crtName : s_listOfCrts)
   {
-    HMODULE hCrt = NULL;
-    if (!GetModuleHandleExW(0, crtName, &hCrt) || hCrt == NULL) // Flag 0 ensures that CRL will not be unloaded while we are using it here
+    HMODULE hCrt = nullptr;
+    if (!GetModuleHandleExW(0, crtName, &hCrt) || hCrt == nullptr) // Flag 0 ensures that CRL will not be unloaded while we are using it here
       continue; // Module not loaded
 
     void* func_ptr = GetProcAddress(hCrt, func_name);
-    if (func_ptr != NULL)
+    if (func_ptr != nullptr)
     {
       m_crts.push_back(hCrt);
       m_funcPointers.push_back(func_ptr);

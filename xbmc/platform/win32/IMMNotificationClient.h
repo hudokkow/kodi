@@ -33,7 +33,7 @@ class CMMNotificationClient : public IMMNotificationClient
 
 
 public:
-  CMMNotificationClient() : _cRef(1), _pEnumerator(NULL)
+  CMMNotificationClient() : _cRef(1), _pEnumerator(nullptr)
   {
   }
 
@@ -73,7 +73,7 @@ public:
     }
     else
     {
-      *ppvInterface = NULL;
+      *ppvInterface = nullptr;
       return E_NOINTERFACE;
     }
     return S_OK;

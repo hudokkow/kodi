@@ -84,14 +84,14 @@ int start_logger(const char *app_name)
 
 // copied from new android_native_app_glue.c
 static void process_input(struct android_app* app, struct android_poll_source* source) {
-    AInputEvent* event = NULL;
+    AInputEvent* event = nullptr;
     int processed = 0;
     while (AInputQueue_getEvent(app->inputQueue, &event) >= 0) {
         if (AInputQueue_preDispatchEvent(app->inputQueue, event)) {
             continue;
         }
         int32_t handled = 0;
-        if (app->onInputEvent != NULL) handled = app->onInputEvent(app, event);
+        if (app->onInputEvent != nullptr) handled = app->onInputEvent(app, event);
         AInputQueue_finishEvent(app->inputQueue, event, handled);
         processed = 1;
     }

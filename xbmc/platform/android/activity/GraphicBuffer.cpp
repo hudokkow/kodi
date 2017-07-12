@@ -57,7 +57,7 @@
 #include "XBMCApp.h"
 #include "utils/log.h"
 
-DllGraphicBuffer *CGraphicBuffer::m_dll = NULL;
+DllGraphicBuffer *CGraphicBuffer::m_dll = nullptr;
 
 /* Yanked from Android's hardware.h */
 enum
