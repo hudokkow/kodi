@@ -62,7 +62,7 @@ public:
     if (!m_Callbacks)
       fprintf(stderr, "libXBMC_pvr-ERROR: PVRLib_register_me can't get callback table from Kodi !!!\n");
   
-    return m_Callbacks != NULL;
+    return m_Callbacks != nullptr;
   }
 
   /*!

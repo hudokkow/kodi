@@ -65,7 +65,7 @@ namespace addon
 
       if (vecObjects.empty())
       {
-        *pStructs = NULL;
+        *pStructs = nullptr;
       }
       else
       {
