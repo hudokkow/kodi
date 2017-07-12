@@ -52,7 +52,7 @@ const CSkinVariableString* CSkinVariable::CreateFromXML(const TiXmlElement& node
       return tmp;
     delete tmp;
   }
-  return NULL;
+  return nullptr;
 }
 
 CSkinVariableString::CSkinVariableString() = default;
@@ -67,7 +67,7 @@ const std::string& CSkinVariableString::GetName() const
   return m_name;
 }
 
-std::string CSkinVariableString::GetValue(bool preferImage /* = false*/, const CGUIListItem *item /* = NULL */)
+std::string CSkinVariableString::GetValue(bool preferImage /* = false*/, const CGUIListItem *item /* = nullptr */)
 {
   for (VECCONDITIONLABELPAIR::const_iterator it = m_conditionLabelPairs.begin() ; it != m_conditionLabelPairs.end(); ++it)
   {

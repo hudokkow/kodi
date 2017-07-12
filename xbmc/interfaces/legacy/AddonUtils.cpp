@@ -106,17 +106,17 @@ namespace XBMCAddonUtils
   TraceGuard::TraceGuard(const char* _function) :function(_function) 
   {
     parent = tlParent.get();
-    depth = parent == NULL ? 0 : parent->depth + 1;
+    depth = parent == nullptr ? 0 : parent->depth + 1;
 
     tlParent.set(this);
 
     CLog::Log(LOGDEBUG, "%sNEWADDON Entering %s", spaces[depth], function); 
   }
 
-  TraceGuard::TraceGuard() :function(NULL) 
+  TraceGuard::TraceGuard() :function(nullptr) 
   {
     parent = tlParent.get();
-    depth = parent == NULL ? 0 : parent->depth + 1;
+    depth = parent == nullptr ? 0 : parent->depth + 1;
     tlParent.set(this);
     // silent
   }

@@ -120,7 +120,7 @@ JSONRPC_STATUS CAddonsOperations::GetAddons(const std::string &method, ITranspor
       plugin = std::dynamic_pointer_cast<CPluginSource>(addons.at(index));
 
     if ((addons.at(index)->Type() <= ADDON_UNKNOWN || addons.at(index)->Type() >= ADDON_MAX) ||
-       ((content != CPluginSource::UNKNOWN && plugin == NULL) || (plugin != NULL && !plugin->Provides(content))))
+       ((content != CPluginSource::UNKNOWN && plugin == nullptr) || (plugin != nullptr && !plugin->Provides(content))))
     {
       addons.erase(addons.begin() + index);
       index--;
@@ -141,7 +141,7 @@ JSONRPC_STATUS CAddonsOperations::GetAddonDetails(const std::string &method, ITr
 {
   std::string id = parameterObject["addonid"].asString();
   AddonPtr addon;
-  if (!CAddonMgr::GetInstance().GetAddon(id, addon, ADDON::ADDON_UNKNOWN, false) || addon.get() == NULL ||
+  if (!CAddonMgr::GetInstance().GetAddon(id, addon, ADDON::ADDON_UNKNOWN, false) || addon.get() == nullptr ||
       addon->Type() <= ADDON_UNKNOWN || addon->Type() >= ADDON_MAX)
     return InvalidParams;
     
@@ -176,7 +176,7 @@ JSONRPC_STATUS CAddonsOperations::ExecuteAddon(const std::string &method, ITrans
 {
   std::string id = parameterObject["addonid"].asString();
   AddonPtr addon;
-  if (!CAddonMgr::GetInstance().GetAddon(id, addon) || addon.get() == NULL ||
+  if (!CAddonMgr::GetInstance().GetAddon(id, addon) || addon.get() == nullptr ||
       addon->Type() < ADDON_VIZ || addon->Type() >= ADDON_MAX)
     return InvalidParams;
     
@@ -262,7 +262,7 @@ static CVariant Serialize(const AddonPtr& addon)
 
 void CAddonsOperations::FillDetails(AddonPtr addon, const CVariant& fields, CVariant &result, CAddonDatabase &addondb, bool append /* = false */)
 {
-  if (addon.get() == NULL)
+  if (addon.get() == nullptr)
     return;
   
   CVariant addonInfo = Serialize(addon);

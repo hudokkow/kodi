@@ -27,9 +27,9 @@
 
 namespace PythonBindings
 {
-  TypeInfo::TypeInfo(const std::type_info& ti) : swigType(NULL), parentType(NULL), typeIndex(ti)
+  TypeInfo::TypeInfo(const std::type_info& ti) : swigType(nullptr), parentType(nullptr), typeIndex(ti)
   {
-    static PyTypeObject py_type_object_header = { PyObject_HEAD_INIT(NULL) 0};
+    static PyTypeObject py_type_object_header = { PyObject_HEAD_INIT(nullptr) 0};
     static int size = (long*)&(py_type_object_header.tp_name) - (long*)&py_type_object_header;
     memcpy(&(this->pythonType), &py_type_object_header, size);
   }
@@ -170,35 +170,35 @@ namespace PythonBindings
     PyObject* exc_type;
     PyObject* exc_value;
     PyObject* exc_traceback;
-    PyObject* pystring = NULL;
+    PyObject* pystring = nullptr;
 
     PyErr_Fetch(&exc_type, &exc_value, &exc_traceback);
-    if (exc_type == NULL && exc_value == NULL && exc_traceback == NULL)
+    if (exc_type == nullptr && exc_value == nullptr && exc_traceback == nullptr)
       return false;
 
     exceptionType.clear();
     exceptionValue.clear();
     exceptionTraceback.clear();
 
-    if (exc_type != NULL && (pystring = PyObject_Str(exc_type)) != NULL && PyString_Check(pystring))
+    if (exc_type != nullptr && (pystring = PyObject_Str(exc_type)) != nullptr && PyString_Check(pystring))
     {
       char *str = PyString_AsString(pystring);
-      if (str != NULL)
+      if (str != nullptr)
         exceptionType = str;
 
       pystring = PyObject_Str(exc_value);
-      if (pystring != NULL)
+      if (pystring != nullptr)
       {
         str = PyString_AsString(pystring);
         exceptionValue = str;
       }
 
       PyObject *tracebackModule = PyImport_ImportModule("traceback");
-      if (tracebackModule != NULL)
+      if (tracebackModule != nullptr)
       {
         char method[] = "format_exception";
         char format[] = "OOO";
-        PyObject *tbList = PyObject_CallMethod(tracebackModule, method, format, exc_type, exc_value == NULL ? Py_None : exc_value, exc_traceback == NULL ? Py_None : exc_traceback);
+        PyObject *tbList = PyObject_CallMethod(tracebackModule, method, format, exc_type, exc_value == nullptr ? Py_None : exc_value, exc_traceback == nullptr ? Py_None : exc_traceback);
 
         if (tbList)
         {
@@ -211,7 +211,7 @@ namespace PythonBindings
           if (strRetval)
           {
             str = PyString_AsString(strRetval);
-            if (str != NULL)
+            if (str != nullptr)
               exceptionTraceback = str;
             Py_DECREF(strRetval);
           }
@@ -341,7 +341,7 @@ namespace PythonBindings
   /**
    * This method allows for conversion of the native api Type to the Python type.
    *
-   * When this form of the call is used (and pytype isn't NULL) then the
+   * When this form of the call is used (and pytype isn't nullptr) then the
    * passed type is used in the instance. This is for classes that extend API
    * classes in python. The type passed may not be the same type that's stored
    * in the class metadata of the AddonClass of which 'api' is an instance, 
@@ -361,10 +361,10 @@ namespace PythonBindings
 
     // retrieve the TypeInfo from the api class
     const TypeInfo* typeInfo = getTypeInfoForInstance(api);
-    PyTypeObject* typeObj = pytype == NULL ? (PyTypeObject*)(&(typeInfo->pythonType)) : pytype;
+    PyTypeObject* typeObj = pytype == nullptr ? (PyTypeObject*)(&(typeInfo->pythonType)) : pytype;
 
     PyHolder* self = reinterpret_cast<PyHolder*>(typeObj->tp_alloc(typeObj,0));
-    if (!self) return NULL;
+    if (!self) return nullptr;
     self->magicNumber = XBMC_PYTHON_TYPE_MAGIC_NUMBER;
     self->typeInfo = typeInfo;
     self->pSelf = api;
