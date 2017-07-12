@@ -113,7 +113,7 @@ void CVideoInfoDownloader::Process()
 
 int CVideoInfoDownloader::FindMovie(const std::string &strMovie,
                                     MOVIELIST& movieList,
-                                    CGUIDialogProgress *pProgress /* = NULL */)
+                                    CGUIDialogProgress *pProgress /* = nullptr */)
 {
   //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::FindMovie(%s)", strMovie.c_str());
 
@@ -159,7 +159,7 @@ bool CVideoInfoDownloader::GetArtwork(CVideoInfoTag &details)
 
 bool CVideoInfoDownloader::GetDetails(const CScraperUrl &url,
                                       CVideoInfoTag &movieDetails,
-                                      CGUIDialogProgress *pProgress /* = NULL */)
+                                      CGUIDialogProgress *pProgress /* = nullptr */)
 {
   //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
@@ -194,7 +194,7 @@ bool CVideoInfoDownloader::GetDetails(const CScraperUrl &url,
 
 bool CVideoInfoDownloader::GetEpisodeDetails(const CScraperUrl &url,
                                              CVideoInfoTag &movieDetails,
-                                             CGUIDialogProgress *pProgress /* = NULL */)
+                                             CGUIDialogProgress *pProgress /* = nullptr */)
 {
   //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
@@ -229,7 +229,7 @@ bool CVideoInfoDownloader::GetEpisodeDetails(const CScraperUrl &url,
 
 bool CVideoInfoDownloader::GetEpisodeList(const CScraperUrl& url,
                                           EPISODELIST& movieDetails,
-                                          CGUIDialogProgress *pProgress /* = NULL */)
+                                          CGUIDialogProgress *pProgress /* = nullptr */)
 {
   //CLog::Log(LOGDEBUG,"CVideoInfoDownloader::GetDetails(%s)", url.m_strURL.c_str());
   m_url = url;
