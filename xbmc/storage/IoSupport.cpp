@@ -89,8 +89,8 @@ HANDLE CIoSupport::OpenCDROM()
 #else
 
   hDevice = CreateFile("\\\\.\\Cdrom0", GENERIC_READ, FILE_SHARE_READ,
-                       NULL, OPEN_EXISTING,
-                       FILE_FLAG_RANDOM_ACCESS, NULL );
+                       nullptr, OPEN_EXISTING,
+                       FILE_FLAG_RANDOM_ACCESS, nullptr);
 
 #endif
 #endif
@@ -264,7 +264,7 @@ INT CIoSupport::ReadSectorMode2(HANDLE hDevice, DWORD dwSector, LPSTR lpczBuffer
                           m_rawXferBuffer,
                           RAW_SECTOR_SIZE,
                           &dwBytesReturned,
-                          NULL ) != 0 )
+                          nullptr ) != 0 )
     {
       memcpy(lpczBuffer, (char*)m_rawXferBuffer+MODE2_DATA_START, MODE2_DATA_SIZE);
       return MODE2_DATA_SIZE;
