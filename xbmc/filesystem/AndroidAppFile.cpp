@@ -90,7 +90,7 @@ bool CFileAndroidApp::Exists(const CURL& url)
 unsigned int CFileAndroidApp::ReadIcon(unsigned char** lpBuf, unsigned int* width, unsigned int* height)
 {
   JNIEnv* env = xbmc_jnienv();
-  void *bitmapBuf = NULL;
+  void *bitmapBuf = nullptr;
   int densities[] = { CJNIDisplayMetrics::DENSITY_XXXHIGH, CJNIDisplayMetrics::DENSITY_XXHIGH, CJNIDisplayMetrics::DENSITY_XHIGH, -1 };
 
   CJNIBitmap bmp;

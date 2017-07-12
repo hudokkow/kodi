@@ -38,8 +38,8 @@ CAPKFile::CAPKFile()
   m_file_pos    = 0;
   m_file_size   = 0;
   m_zip_index   =-1;
-  m_zip_file    = NULL;
-  m_zip_archive = NULL;
+  m_zip_file    = nullptr;
+  m_zip_archive = nullptr;
 }
 
 CAPKFile::~CAPKFile()
@@ -70,7 +70,7 @@ bool CAPKFile::Open(const CURL& url)
     CLog::Log(LOGDEBUG, "CAPKFile::Open: Unable to locate file : '%s'",
       path.c_str());
     zip_close(m_zip_archive);
-    m_zip_archive = NULL;
+    m_zip_archive = nullptr;
     return false;
   }
 
@@ -83,7 +83,7 @@ bool CAPKFile::Open(const CURL& url)
     CLog::Log(LOGERROR, "CAPKFile::Open: Unable to stat file : '%s'",
       path.c_str());
     zip_close(m_zip_archive);
-    m_zip_archive = NULL;
+    m_zip_archive = nullptr;
     return false;
   }
   m_file_pos = 0;
@@ -96,7 +96,7 @@ bool CAPKFile::Open(const CURL& url)
     CLog::Log(LOGERROR, "CAPKFile::Open: Unable to open file : '%s'",
       path.c_str());
     zip_close(m_zip_archive);
-    m_zip_archive = NULL;
+    m_zip_archive = nullptr;
     return false;
   }
 
@@ -116,10 +116,10 @@ void CAPKFile::Close()
   {
     if (m_zip_file)
       zip_fclose(m_zip_file);
-    m_zip_file  = NULL;
+    m_zip_file  = nullptr;
   }
   zip_close(m_zip_archive);
-  m_zip_archive = NULL;
+  m_zip_archive = nullptr;
   m_file_pos    = 0;
   m_file_size   = 0;
   m_zip_index   =-1;

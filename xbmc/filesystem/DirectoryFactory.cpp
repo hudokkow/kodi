@@ -104,7 +104,7 @@ using namespace XFILE;
 IDirectory* CDirectoryFactory::Create(const CURL& url)
 {
   if (!CWakeOnAccess::GetInstance().WakeUpHost(url))
-    return NULL;
+    return nullptr;
 
   CFileItem item(url.Get(), true);
   IFileDirectory* pDir=CFileDirectoryFactory::Create(url, &item);
@@ -189,6 +189,6 @@ IDirectory* CDirectoryFactory::Create(const CURL& url)
   }
 
   CLog::Log(LOGWARNING, "%s - %sunsupported protocol(%s) in %s", __FUNCTION__, networkAvailable ? "" : "Network down or ", url.GetProtocol().c_str(), url.GetRedacted().c_str() );
-  return NULL;
+  return nullptr;
 }
 
