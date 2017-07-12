@@ -75,7 +75,7 @@ namespace Shaders {
     , public CGLSLShaderProgram
   {
   public:
-    BaseYUV2RGBGLSLShader(bool rect, unsigned flags, EShaderFormat format, bool stretch, GLSLOutput *output=NULL);
+    BaseYUV2RGBGLSLShader(bool rect, unsigned flags, EShaderFormat format, bool stretch, GLSLOutput *output=nullptr);
    ~BaseYUV2RGBGLSLShader() override;
     void SetField(int field) override { m_field  = field; }
     void SetWidth(int w) override { m_width  = w; }
@@ -183,7 +183,7 @@ namespace Shaders {
                              unsigned flags=0,
                              EShaderFormat format=SHADER_NONE,
                              bool stretch = false,
-                             GLSLOutput *output=NULL);
+                             GLSLOutput *output=nullptr);
   };
 
   class YUV2RGBBobShader : public BaseYUV2RGBGLSLShader
