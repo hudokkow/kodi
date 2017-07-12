@@ -120,7 +120,7 @@ UInt32 CCoreAudioStream::GetDirection()
   propertyAddress.mElement  = kAudioObjectPropertyElementMaster;
   propertyAddress.mSelector = kAudioStreamPropertyDirection; 
 
-  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, NULL, &size, &val); 
+  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, &size, &val); 
   if (ret)
     return 0;
 
@@ -158,7 +158,7 @@ bool CCoreAudioStream::GetStartingChannelInDevice(AudioStreamID id, UInt32 &star
   propertyAddress.mSelector = kAudioStreamPropertyStartingChannel; 
   
   // number of frames of latency in the AudioStream
-  OSStatus status = AudioObjectGetPropertyData(id, &propertyAddress, 0, NULL, &i_param_size, &i_param); 
+  OSStatus status = AudioObjectGetPropertyData(id, &propertyAddress, 0, nullptr, &i_param_size, &i_param); 
   if (status == noErr)
   {
     startingChannel = i_param;
@@ -181,7 +181,7 @@ UInt32 CCoreAudioStream::GetTerminalType(AudioStreamID id)
   propertyAddress.mElement  = kAudioObjectPropertyElementMaster;
   propertyAddress.mSelector = kAudioStreamPropertyTerminalType; 
 
-  OSStatus ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, NULL, &size, &val);
+  OSStatus ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, nullptr, &size, &val);
   if (ret)
     return 0;
   return val;
@@ -201,7 +201,7 @@ UInt32 CCoreAudioStream::GetNumLatencyFrames()
   propertyAddress.mSelector = kAudioStreamPropertyLatency; 
 
   // number of frames of latency in the AudioStream
-  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, NULL, &i_param_size, &i_param); 
+  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, &i_param_size, &i_param); 
   if (ret == noErr)
   {
     num_latency_frames += i_param;
@@ -221,11 +221,11 @@ bool CCoreAudioStream::GetVirtualFormat(AudioStreamBasicDescription* pDesc)
   propertyAddress.mScope    = kAudioObjectPropertyScopeGlobal; 
   propertyAddress.mElement  = kAudioObjectPropertyElementMaster;
   propertyAddress.mSelector = kAudioStreamPropertyVirtualFormat; 
-  OSStatus ret = AudioObjectGetPropertyDataSize(m_StreamId, &propertyAddress, 0, NULL, &size); 
+  OSStatus ret = AudioObjectGetPropertyDataSize(m_StreamId, &propertyAddress, 0, nullptr, &size); 
   if (ret)
     return false;
 
-  ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, NULL, &size, pDesc); 
+  ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, &size, pDesc); 
   if (ret)
     return false;
   return true;
@@ -263,7 +263,7 @@ bool CCoreAudioStream::SetVirtualFormat(AudioStreamBasicDescription* pDesc)
   propertyAddress.mSelector = kAudioStreamPropertyVirtualFormat; 
 
   UInt32 propertySize = sizeof(AudioStreamBasicDescription);
-  OSStatus ret = AudioObjectSetPropertyData(m_StreamId, &propertyAddress, 0, NULL, propertySize, pDesc); 
+  OSStatus ret = AudioObjectSetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, propertySize, pDesc); 
   if (ret)
   {
     CLog::Log(LOGERROR, "CCoreAudioStream::SetVirtualFormat: "
@@ -312,7 +312,7 @@ bool CCoreAudioStream::GetPhysicalFormat(AudioStreamBasicDescription* pDesc)
   propertyAddress.mElement  = kAudioObjectPropertyElementMaster;
   propertyAddress.mSelector = kAudioStreamPropertyPhysicalFormat; 
 
-  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, NULL, &size, pDesc); 
+  OSStatus ret = AudioObjectGetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, &size, pDesc); 
   if (ret)
     return false;
   return true;
@@ -349,7 +349,7 @@ bool CCoreAudioStream::SetPhysicalFormat(AudioStreamBasicDescription* pDesc)
   propertyAddress.mSelector = kAudioStreamPropertyPhysicalFormat; 
 
   UInt32 propertySize = sizeof(AudioStreamBasicDescription);
-  OSStatus ret = AudioObjectSetPropertyData(m_StreamId, &propertyAddress, 0, NULL, propertySize, pDesc); 
+  OSStatus ret = AudioObjectSetPropertyData(m_StreamId, &propertyAddress, 0, nullptr, propertySize, pDesc); 
   if (ret)
   {
     CLog::Log(LOGERROR, "CCoreAudioStream::SetPhysicalFormat: "
@@ -404,13 +404,13 @@ bool CCoreAudioStream::GetAvailableVirtualFormats(AudioStreamID id, StreamFormat
   propertyAddress.mSelector = kAudioStreamPropertyAvailableVirtualFormats; 
 
   UInt32 propertySize = 0;
-  OSStatus ret = AudioObjectGetPropertyDataSize(id, &propertyAddress, 0, NULL, &propertySize);
+  OSStatus ret = AudioObjectGetPropertyDataSize(id, &propertyAddress, 0, nullptr, &propertySize);
   if (ret)
     return false;
 
   UInt32 formatCount = propertySize / sizeof(AudioStreamRangedDescription);
   AudioStreamRangedDescription *pFormatList = new AudioStreamRangedDescription[formatCount];
-  ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, NULL, &propertySize, pFormatList);
+  ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, nullptr, &propertySize, pFormatList);
   if (!ret)
   {
     for (UInt32 format = 0; format < formatCount; format++)
@@ -436,13 +436,13 @@ bool CCoreAudioStream::GetAvailablePhysicalFormats(AudioStreamID id, StreamForma
   propertyAddress.mSelector = kAudioStreamPropertyAvailablePhysicalFormats; 
 
   UInt32 propertySize = 0;
-  OSStatus ret = AudioObjectGetPropertyDataSize(id, &propertyAddress, 0, NULL, &propertySize);
+  OSStatus ret = AudioObjectGetPropertyDataSize(id, &propertyAddress, 0, nullptr, &propertySize);
   if (ret)
     return false;
 
   UInt32 formatCount = propertySize / sizeof(AudioStreamRangedDescription);
   AudioStreamRangedDescription *pFormatList = new AudioStreamRangedDescription[formatCount];
-  ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, NULL, &propertySize, pFormatList);
+  ret = AudioObjectGetPropertyData(id, &propertyAddress, 0, nullptr, &propertySize, pFormatList);
   if (!ret)
   {
     for (UInt32 format = 0; format < formatCount; format++)
@@ -464,7 +464,7 @@ OSStatus CCoreAudioStream::HardwareStreamListener(AudioObjectID inObjectID,
       AudioStreamBasicDescription actualFormat;
       UInt32 propertySize = sizeof(AudioStreamBasicDescription);
       // hardware physical format has changed.
-      if (AudioObjectGetPropertyData(ca_stream->m_StreamId, &inAddresses[i], 0, NULL, &propertySize, &actualFormat) == noErr)
+      if (AudioObjectGetPropertyData(ca_stream->m_StreamId, &inAddresses[i], 0, nullptr, &propertySize, &actualFormat) == noErr)
       {
         std::string formatString;
         CLog::Log(LOGINFO, "CCoreAudioStream::HardwareStreamListener: "
@@ -477,7 +477,7 @@ OSStatus CCoreAudioStream::HardwareStreamListener(AudioObjectID inObjectID,
       // hardware virtual format has changed.
       AudioStreamBasicDescription actualFormat;
       UInt32 propertySize = sizeof(AudioStreamBasicDescription);
-      if (AudioObjectGetPropertyData(ca_stream->m_StreamId, &inAddresses[i], 0, NULL, &propertySize, &actualFormat) == noErr)
+      if (AudioObjectGetPropertyData(ca_stream->m_StreamId, &inAddresses[i], 0, nullptr, &propertySize, &actualFormat) == noErr)
       {
         std::string formatString;
         CLog::Log(LOGINFO, "CCoreAudioStream::HardwareStreamListener: "

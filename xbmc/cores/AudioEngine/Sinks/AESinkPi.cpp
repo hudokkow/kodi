@@ -44,7 +44,7 @@ CAESinkPi::CAESinkPi() :
     m_sinkbuffer_sec_per_byte(0),
     m_Initialized(false),
     m_submitted(0),
-    m_omx_output(NULL),
+    m_omx_output(nullptr),
     m_output(AESINKPI_UNKNOWN)
 {
 }
@@ -440,7 +440,7 @@ unsigned int CAESinkPi::AddPackets(uint8_t **data, unsigned int frames, unsigned
     return frames;
   }
   OMX_ERRORTYPE omx_err   = OMX_ErrorNone;
-  OMX_BUFFERHEADERTYPE *omx_buffer = NULL;
+  OMX_BUFFERHEADERTYPE *omx_buffer = nullptr;
 
   unsigned int channels    = m_format.m_channelLayout.Count();
   unsigned int sample_size = CAEUtil::DataFormatToBits(m_format.m_dataFormat) >> 3;
@@ -455,7 +455,7 @@ unsigned int CAESinkPi::AddPackets(uint8_t **data, unsigned int frames, unsigned
     CLog::Log(LOGNOTICE, "%s:%s Underrun (delay:%.2f frames:%d)", CLASSNAME, __func__, delay, frames);
 
   omx_buffer = m_omx_output->GetInputBuffer(1000);
-  if (omx_buffer == NULL)
+  if (omx_buffer == nullptr)
   {
     CLog::Log(LOGERROR, "CAESinkPi::AddPackets timeout");
     return 0;

@@ -33,7 +33,7 @@ bool CCoreAudioHardware::GetAutoHogMode()
 
   UInt32 val = 0;
   UInt32 size = sizeof(val);
-  OSStatus ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size, &val); 
+  OSStatus ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size, &val); 
   if (ret != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioHardware::GetAutoHogMode: "
@@ -52,7 +52,7 @@ void CCoreAudioHardware::SetAutoHogMode(bool enable)
 
   UInt32 val = enable ? 1 : 0;
   UInt32 size = sizeof(val);
-  OSStatus ret = AudioObjectSetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, size, &val); 
+  OSStatus ret = AudioObjectSetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, size, &val); 
   if (ret != noErr)
     CLog::Log(LOGERROR, "CCoreAudioHardware::SetAutoHogMode: "
       "Unable to set auto 'hog' mode. Error = %s", GetError(ret).c_str());
@@ -138,7 +138,7 @@ AudioDeviceID CCoreAudioHardware::FindAudioDevice(const std::string &searchName)
   propertyAddress.mSelector = kAudioHardwarePropertyDevices; 
 
   UInt32 size = 0;
-  OSStatus ret = AudioObjectGetPropertyDataSize(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size); 
+  OSStatus ret = AudioObjectGetPropertyDataSize(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size); 
   if (ret != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioHardware::FindAudioDevice: "
@@ -148,7 +148,7 @@ AudioDeviceID CCoreAudioHardware::FindAudioDevice(const std::string &searchName)
 
   size_t deviceCount = size / sizeof(AudioDeviceID);
   AudioDeviceID* pDevices = new AudioDeviceID[deviceCount];
-  ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size, pDevices);
+  ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size, pDevices);
   if (ret != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioHardware::FindAudioDevice: "
@@ -186,7 +186,7 @@ AudioDeviceID CCoreAudioHardware::GetDefaultOutputDevice()
   propertyAddress.mSelector = kAudioHardwarePropertyDefaultOutputDevice;
   
   UInt32 size = sizeof(AudioDeviceID);
-  OSStatus ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size, &deviceId);
+  OSStatus ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size, &deviceId);
 
   // outputDevice is set to 0 if there is no audio device available
   // or if the default device is set to an encoded format
@@ -219,9 +219,9 @@ void CCoreAudioHardware::GetOutputDeviceName(std::string& name)
     propertyAddress.mElement  = kAudioObjectPropertyElementMaster;
     propertyAddress.mSelector = kAudioObjectPropertyName;
 
-    CFStringRef theDeviceName = NULL;
+    CFStringRef theDeviceName = nullptr;
     UInt32 propertySize = sizeof(CFStringRef);
-    OSStatus ret = AudioObjectGetPropertyData(deviceId, &propertyAddress, 0, NULL, &propertySize, &theDeviceName); 
+    OSStatus ret = AudioObjectGetPropertyData(deviceId, &propertyAddress, 0, nullptr, &propertySize, &theDeviceName); 
     if (ret != noErr)
       return;
 
@@ -244,7 +244,7 @@ UInt32 CCoreAudioHardware::GetOutputDevices(CoreAudioDeviceList *pList)
   propertyAddress.mSelector = kAudioHardwarePropertyDevices; 
 
   UInt32 size = 0;
-  OSStatus ret = AudioObjectGetPropertyDataSize(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size); 
+  OSStatus ret = AudioObjectGetPropertyDataSize(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size); 
   if (ret != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioHardware::GetOutputDevices:"
@@ -254,7 +254,7 @@ UInt32 CCoreAudioHardware::GetOutputDevices(CoreAudioDeviceList *pList)
 
   size_t deviceCount = size / sizeof(AudioDeviceID);
   AudioDeviceID* pDevices = new AudioDeviceID[deviceCount];
-  ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size, pDevices);
+  ret = AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, nullptr, &size, pDevices);
   if (ret != noErr)
     CLog::Log(LOGERROR, "CCoreAudioHardware::GetOutputDevices:"
       " Unable to retrieve the list of available devices. Error = %s", GetError(ret).c_str());

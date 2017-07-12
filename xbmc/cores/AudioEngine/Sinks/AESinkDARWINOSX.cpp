@@ -143,7 +143,7 @@ CAESinkDARWINOSX::CAESinkDARWINOSX()
   m_planes(1),
   m_frameSizePerPlane(0),
   m_framesPerSecond(0),
-  m_buffer(NULL),
+  m_buffer(nullptr),
   m_started(false),
   m_render_tick(0),
   m_render_delay(0.0)
@@ -152,14 +152,14 @@ CAESinkDARWINOSX::CAESinkDARWINOSX()
   // If your process lacks such a run loop, you can set kAudioHardwarePropertyRunLoop to NULL which
   // tells the HAL to run its own thread for notifications (which was the default prior to SnowLeopard).
   // So tell the HAL to use its own thread for similar behavior under all supported versions of OSX.
-  CFRunLoopRef theRunLoop = NULL;
+  CFRunLoopRef theRunLoop = nullptr;
   AudioObjectPropertyAddress theAddress = {
     kAudioHardwarePropertyRunLoop,
     kAudioObjectPropertyScopeGlobal,
     kAudioObjectPropertyElementMaster
   };
   OSStatus theError = AudioObjectSetPropertyData(kAudioObjectSystemObject,
-                                                 &theAddress, 0, NULL, sizeof(CFRunLoopRef), &theRunLoop);
+                                                 &theAddress, 0, nullptr, sizeof(CFRunLoopRef), &theRunLoop);
   if (theError != noErr)
   {
     CLog::Log(LOGERROR, "CCoreAudioAE::constructor: kAudioHardwarePropertyRunLoop error.");
@@ -361,7 +361,7 @@ void CAESinkDARWINOSX::Deinitialize()
   if (m_buffer)
   {
     delete m_buffer;
-    m_buffer = NULL;
+    m_buffer = nullptr;
   }
   m_outputBufferIndex = 0;
   m_outputBitstream = false;
@@ -520,7 +520,7 @@ OSStatus CAESinkDARWINOSX::renderCallback(AudioDeviceID inDevice, const AudioTim
         if (i < outOutputData->mNumberBuffers && outOutputData->mBuffers[i].mData)
           sink->m_buffer->Read((unsigned char *)outOutputData->mBuffers[i].mData, bytes, i);
         else
-          sink->m_buffer->Read(NULL, bytes, i);
+          sink->m_buffer->Read(nullptr, bytes, i);
       }
       LogLevel(bytes, wanted);
     }

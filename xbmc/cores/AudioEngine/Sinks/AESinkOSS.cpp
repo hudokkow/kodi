@@ -381,7 +381,7 @@ void CAESinkOSS::Stop()
 {
 #ifdef SNDCTL_DSP_RESET
   if (m_fd != -1)
-    ioctl(m_fd, SNDCTL_DSP_RESET, NULL);
+    ioctl(m_fd, SNDCTL_DSP_RESET, nullptr);
 #endif
 }
 
@@ -428,7 +428,7 @@ void CAESinkOSS::Drain()
   if (m_fd == -1)
     return;
 
-  if(ioctl(m_fd, SNDCTL_DSP_SYNC, NULL) == -1)
+  if(ioctl(m_fd, SNDCTL_DSP_SYNC, nullptr) == -1)
   {
     CLog::Log(LOGERROR, "CAESinkOSS::Drain - Draining the Sink failed");
   }

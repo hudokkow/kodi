@@ -93,7 +93,7 @@ void CAESinkFactory::ParseDevice(std::string &device, std::string &driver)
         driver == "OSS"         ||
 #endif
         driver == "PROFILER"    ||
-        driver == "NULL")
+        driver == "nullptr")
       device = device.substr(pos + 1, device.length() - pos - 1);
     else
       driver.clear();
@@ -104,9 +104,9 @@ void CAESinkFactory::ParseDevice(std::string &device, std::string &driver)
 
 IAESink *CAESinkFactory::TrySink(const std::string &driver, std::string &device, AEAudioFormat &format)
 {
-  IAESink *sink = NULL;
+  IAESink *sink = nullptr;
 
-  if (driver == "NULL")
+  if (driver == "nullptr")
     sink = new CAESinkNULL();
   else
   {
@@ -149,7 +149,7 @@ IAESink *CAESinkFactory::TrySink(const std::string &driver, std::string &device,
   }
 
   if (!sink)
-    return NULL;
+    return nullptr;
 
   if (sink->Initialize(format, device))
   {
@@ -165,7 +165,7 @@ IAESink *CAESinkFactory::TrySink(const std::string &driver, std::string &device,
   }
   sink->Deinitialize();
   delete sink;
-  return NULL;
+  return nullptr;
 }
 
 IAESink *CAESinkFactory::Create(std::string &device, AEAudioFormat &desiredFormat, bool rawPassthrough)
@@ -185,7 +185,7 @@ IAESink *CAESinkFactory::Create(std::string &device, AEAudioFormat &desiredForma
     return sink;
   }
 
-  return NULL;
+  return nullptr;
 }
 
 void CAESinkFactory::EnumerateEx(AESinkInfoList &list, bool force)

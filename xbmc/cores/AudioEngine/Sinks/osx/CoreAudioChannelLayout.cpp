@@ -68,12 +68,12 @@ const char* g_ChannelLabels[] =
 };
 
 CCoreAudioChannelLayout::CCoreAudioChannelLayout() :
-  m_pLayout(NULL)
+  m_pLayout(nullptr)
 {
 }
 
 CCoreAudioChannelLayout::CCoreAudioChannelLayout(AudioChannelLayout& layout) :
-m_pLayout(NULL)
+m_pLayout(nullptr)
 {
   CopyLayout(layout);
 }
@@ -90,7 +90,7 @@ bool CCoreAudioChannelLayout::CopyLayout(AudioChannelLayout& layout)
   };
 
   free(m_pLayout);
-  m_pLayout = NULL;
+  m_pLayout = nullptr;
 
   // This method always produces a layout with a ChannelDescriptions structure
 
@@ -135,7 +135,7 @@ bool CCoreAudioChannelLayout::CopyLayoutForStereo(UInt32 layout[2])
   };
   
   free(m_pLayout);
-  m_pLayout = NULL;
+  m_pLayout = nullptr;
   
   UInt32 channels = 2;
   UInt32 size = sizeof(AudioChannelLayout) + (channels - kVariableLengthArray_deprecated) * sizeof(AudioChannelDescription);
@@ -193,7 +193,7 @@ const char* CCoreAudioChannelLayout::ChannelLabelToString(UInt32 label)
 
 const char* CCoreAudioChannelLayout::ChannelLayoutToString(AudioChannelLayout& layout, std::string& str)
 {
-  AudioChannelLayout* pLayout = NULL;
+  AudioChannelLayout* pLayout = nullptr;
 
   if (layout.mChannelLayoutTag == kAudioChannelLayoutTag_UseChannelDescriptions)
   {
@@ -239,7 +239,7 @@ const char* CCoreAudioChannelLayout::ChannelLayoutToString(AudioChannelLayout& l
 
 bool CCoreAudioChannelLayout::AllChannelUnknown()
 {
-  AudioChannelLayout* pLayout = NULL;
+  AudioChannelLayout* pLayout = nullptr;
 
   if (!m_pLayout)
     return false;

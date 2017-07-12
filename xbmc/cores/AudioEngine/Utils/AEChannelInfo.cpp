@@ -152,7 +152,7 @@ CAEChannelInfo& CAEChannelInfo::operator=(const CAEChannelInfo& rhs)
 CAEChannelInfo& CAEChannelInfo::operator=(const enum AEChannel* rhs)
 {
   Reset();
-  if (rhs == NULL)
+  if (rhs == nullptr)
     return *this;
 
   while (m_channelCount < AE_CH_MAX && rhs[m_channelCount] != AE_CH_NULL)
@@ -161,7 +161,7 @@ CAEChannelInfo& CAEChannelInfo::operator=(const enum AEChannel* rhs)
     ++m_channelCount;
   }
 
-  /* the last entry should be NULL, if not we were passed a non null terminated list */
+  /* the last entry should be nullptr, if not we were passed a non null terminated list */
   assert(rhs[m_channelCount] == AE_CH_NULL);
 
   return *this;
@@ -244,7 +244,7 @@ enum AEChannel CAEChannelInfo::operator[](unsigned int i) const
 CAEChannelInfo::operator std::string() const
 {
   if (m_channelCount == 0)
-    return "NULL";
+    return "nullptr";
 
   std::string s;
   for (unsigned int i = 0; i < m_channelCount - 1; ++i)

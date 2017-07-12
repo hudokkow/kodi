@@ -109,8 +109,8 @@ static BOOL CALLBACK DSEnumCallback(LPGUID lpGuid, LPCTSTR lpcstrDescription, LP
 }
 
 CAESinkDirectSound::CAESinkDirectSound() :
-  m_pBuffer       (NULL ),
-  m_pDSound       (NULL ),
+  m_pBuffer       (nullptr ),
+  m_pDSound       (nullptr ),
   m_encodedFormat (AE_FMT_INVALID),
   m_AvgBytesPerSec(0    ),
   m_dwChunkSize   (0    ),
@@ -165,12 +165,12 @@ bool CAESinkDirectSound::Initialize(AEAudioFormat &format, std::string &device)
     if (hr == RPC_S_OK) RpcStringFree(&wszUuid);
   }
 
-  hr = DirectSoundCreate(deviceGUID, &m_pDSound, NULL);
+  hr = DirectSoundCreate(deviceGUID, &m_pDSound, nullptr);
 
   if (FAILED(hr))
   {
     CLog::Log(LOGERROR, __FUNCTION__": Failed to create the DirectSound device %s with error %s, trying the default device.", deviceFriendlyName.c_str(), dserr2str(hr));
-    hr = DirectSoundCreate(NULL, &m_pDSound, NULL);
+    hr = DirectSoundCreate(nullptr, &m_pDSound, nullptr);
     if (FAILED(hr))
     {
       CLog::Log(LOGERROR, __FUNCTION__": Failed to create the default DirectSound device with error %s.", dserr2str(hr));
@@ -181,7 +181,7 @@ bool CAESinkDirectSound::Initialize(AEAudioFormat &format, std::string &device)
   HWND tmp_hWnd;
 
   /* Dodge the null handle on first init by using desktop handle */
-  if (g_hWnd == NULL)
+  if (g_hWnd == nullptr)
     tmp_hWnd = GetDesktopWindow();
   else
     tmp_hWnd = g_hWnd;
@@ -251,7 +251,7 @@ bool CAESinkDirectSound::Initialize(AEAudioFormat &format, std::string &device)
   dsbdesc.lpwfxFormat = (WAVEFORMATEX *)&wfxex;
 
   // now create the stream buffer
-  HRESULT res = IDirectSound_CreateSoundBuffer(m_pDSound, &dsbdesc, &m_pBuffer, NULL);
+  HRESULT res = IDirectSound_CreateSoundBuffer(m_pDSound, &dsbdesc, &m_pBuffer, nullptr);
   if (res != DS_OK)
   {
     if (dsbdesc.dwFlags & DSBCAPS_LOCHARDWARE)
@@ -260,7 +260,7 @@ bool CAESinkDirectSound::Initialize(AEAudioFormat &format, std::string &device)
       CLog::Log(LOGDEBUG, __FUNCTION__": Couldn't create secondary buffer (%s). Trying without LOCHARDWARE.", dserr2str(res));
       // Try without DSBCAPS_LOCHARDWARE
       dsbdesc.dwFlags &= ~DSBCAPS_LOCHARDWARE;
-      res = IDirectSound_CreateSoundBuffer(m_pDSound, &dsbdesc, &m_pBuffer, NULL);
+      res = IDirectSound_CreateSoundBuffer(m_pDSound, &dsbdesc, &m_pBuffer, nullptr);
     }
     if (res != DS_OK)
     {
@@ -327,8 +327,8 @@ void CAESinkDirectSound::Deinitialize()
   }
 
   m_initialized = false;
-  m_pBuffer = NULL;
-  m_pDSound = NULL;
+  m_pBuffer = nullptr;
+  m_pDSound = nullptr;
   m_BufferOffset = 0;
   m_CacheLen = 0;
   m_dwChunkSize = 0;
@@ -368,7 +368,7 @@ unsigned int CAESinkDirectSound::AddPackets(uint8_t **data, unsigned int frames,
 
   while (len)
   {
-    LPVOID start = NULL, startWrap = NULL;
+    LPVOID start = nullptr, startWrap = nullptr;
     DWORD size = 0, sizeWrap = 0;
     if (m_BufferOffset >= m_dwBufferLen) // Wrap-around manually
       m_BufferOffset = 0;
@@ -454,15 +454,15 @@ void CAESinkDirectSound::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bo
 {
   CAEDeviceInfo        deviceInfo;
 
-  IMMDeviceEnumerator* pEnumerator = NULL;
-  IMMDeviceCollection* pEnumDevices = NULL;
+  IMMDeviceEnumerator* pEnumerator = nullptr;
+  IMMDeviceCollection* pEnumDevices = nullptr;
 
   HRESULT                hr;
 
   std::string strDD = GetDefaultDevice();
 
   /* Windows Vista or later - supporting WASAPI device probing */
-  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, NULL, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
+  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, nullptr, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
   EXIT_ON_FAILURE(hr, __FUNCTION__": Could not allocate WASAPI device enumerator. CoCreateInstance error code: %li", hr)
 
   UINT uiCount = 0;
@@ -475,8 +475,8 @@ void CAESinkDirectSound::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bo
 
   for (UINT i = 0; i < uiCount; i++)
   {
-    IMMDevice *pDevice = NULL;
-    IPropertyStore *pProperty = NULL;
+    IMMDevice *pDevice = nullptr;
+    IPropertyStore *pProperty = nullptr;
     PROPVARIANT varName;
     PropVariantInit(&varName);
 
@@ -538,7 +538,7 @@ void CAESinkDirectSound::EnumerateDevicesEx(AEDeviceInfoList &deviceInfoList, bo
 
     /* In shared mode Windows tells us what format the audio must be in. */
     IAudioClient *pClient;
-    hr = pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, NULL, (void**)&pClient);
+    hr = pDevice->Activate(IID_IAudioClient, CLSCTX_ALL, nullptr, (void**)&pClient);
     if (FAILED(hr))
     {
       CLog::Log(LOGERROR, __FUNCTION__": Activate device failed (%s)", WASAPIErrToStr(hr));
@@ -791,19 +791,19 @@ const char *CAESinkDirectSound::WASAPIErrToStr(HRESULT err)
     ERRTOSTR(E_OUTOFMEMORY);
     default: break;
   }
-  return NULL;
+  return nullptr;
 }
 
 std::string CAESinkDirectSound::GetDefaultDevice()
 {
-  IMMDeviceEnumerator* pEnumerator = NULL;
-  IMMDevice*           pDevice = NULL;
-  IPropertyStore*      pProperty = NULL;
+  IMMDeviceEnumerator* pEnumerator = nullptr;
+  IMMDevice*           pDevice = nullptr;
+  IPropertyStore*      pProperty = nullptr;
   HRESULT              hr;
   PROPVARIANT          varName;
   std::string          strDevName = "default";
 
-  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, NULL, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
+  hr = CoCreateInstance(CLSID_MMDeviceEnumerator, nullptr, CLSCTX_ALL, IID_IMMDeviceEnumerator, (void**)&pEnumerator);
   if (FAILED(hr))
   {
     CLog::Log(LOGERROR, __FUNCTION__": Could not allocate WASAPI device enumerator. CoCreateInstance error code: %s", WASAPIErrToStr(hr));

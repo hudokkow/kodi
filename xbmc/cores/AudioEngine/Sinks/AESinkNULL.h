@@ -26,7 +26,7 @@
 class CAESinkNULL : public CThread, public IAESink
 {
 public:
-  const char *GetName() override { return "NULL"; }
+  const char *GetName() override { return "nullptr"; }
 
   CAESinkNULL();
   ~CAESinkNULL() override;
