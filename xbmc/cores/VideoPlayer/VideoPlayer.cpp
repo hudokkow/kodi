@@ -630,10 +630,10 @@ CVideoPlayer::CVideoPlayer(IPlayerCallback& callback)
       m_ready(true)
 {
   m_players_created = false;
-  m_pDemuxer = NULL;
-  m_pSubtitleDemuxer = NULL;
-  m_pCCDemuxer = NULL;
-  m_pInputStream = NULL;
+  m_pDemuxer = nullptr;
+  m_pSubtitleDemuxer = nullptr;
+  m_pCCDemuxer = nullptr;
+  m_pInputStream = nullptr;
 
   m_dvd.Clear();
   m_State.Clear();
@@ -798,7 +798,7 @@ bool CVideoPlayer::OpenInputStream()
   }
 
   m_pInputStream = CDVDFactoryInputStream::CreateInputStream(this, m_item, true);
-  if(m_pInputStream == NULL)
+  if(m_pInputStream == nullptr)
   {
     CLog::Log(LOGERROR, "CVideoPlayer::OpenInputStream - unable to create input stream for [%s]", CURL::GetRedacted(m_item.GetPath()).c_str());
     return false;
@@ -1058,7 +1058,7 @@ bool CVideoPlayer::ReadPacket(DemuxPacket*& packet, CDemuxStream*& stream)
       if(stream->source == STREAM_SOURCE_NONE)
       {
         m_SelectionStreams.Clear(STREAM_NONE, STREAM_SOURCE_DEMUX_SUB);
-        m_SelectionStreams.Update(NULL, m_pSubtitleDemuxer);
+        m_SelectionStreams.Update(nullptr, m_pSubtitleDemuxer);
       }
       return true;
     }
@@ -1131,7 +1131,7 @@ bool CVideoPlayer::IsValidStream(CCurrentStream& stream)
   if(source == STREAM_SOURCE_DEMUX_SUB)
   {
     CDemuxStream* st = m_pSubtitleDemuxer->GetStream(stream.demuxerId, stream.id);
-    if(st == NULL || st->disabled)
+    if(st == nullptr || st->disabled)
       return false;
     if(st->type != stream.type)
       return false;
@@ -1140,7 +1140,7 @@ bool CVideoPlayer::IsValidStream(CCurrentStream& stream)
   if(source == STREAM_SOURCE_DEMUX)
   {
     CDemuxStream* st = m_pDemuxer->GetStream(stream.demuxerId, stream.id);
-    if(st == NULL || st->disabled)
+    if(st == nullptr || st->disabled)
       return false;
     if(st->type != stream.type)
       return false;
@@ -1158,7 +1158,7 @@ bool CVideoPlayer::IsValidStream(CCurrentStream& stream)
   if (source == STREAM_SOURCE_VIDEOMUX)
   {
     CDemuxStream* st = m_pCCDemuxer->GetStream(stream.id);
-    if (st == NULL || st->disabled)
+    if (st == nullptr || st->disabled)
       return false;
     if (st->type != stream.type)
       return false;
@@ -1222,7 +1222,7 @@ bool CVideoPlayer::IsBetterStream(CCurrentStream& current, CDemuxStream* stream)
 void CVideoPlayer::CheckBetterStream(CCurrentStream& current, CDemuxStream* stream)
 {
   IDVDStreamPlayer* player = GetStreamPlayer(current.player);
-  if (!IsValidStream(current) && (player == NULL || player->IsStalled()))
+  if (!IsValidStream(current) && (player == nullptr || player->IsStalled()))
     CloseStream(current, true);
 
   if (IsBetterStream(current, stream))
@@ -1458,8 +1458,8 @@ void CVideoPlayer::Process()
        (m_processInfo->GetLevelVQ() > 50 || m_CurrentVideo.id < 0))
       Sleep(0);
 
-    DemuxPacket* pPacket = NULL;
-    CDemuxStream *pStream = NULL;
+    DemuxPacket* pPacket = nullptr;
+    CDemuxStream *pStream = nullptr;
     ReadPacket(pPacket, pStream);
     if (pPacket && !pStream)
     {
@@ -1590,7 +1590,7 @@ void CVideoPlayer::Process()
         bool first = true;
         while(!m_bAbortRequest)
         {
-          DemuxPacket *pkt = m_pCCDemuxer->Read(first ? pPacket : NULL);
+          DemuxPacket *pkt = m_pCCDemuxer->Read(first ? pPacket : nullptr);
           if (!pkt)
             break;
 
@@ -1598,7 +1598,7 @@ void CVideoPlayer::Process()
           if (m_pCCDemuxer->GetNrOfStreams() != m_SelectionStreams.CountSource(STREAM_SUBTITLE, STREAM_SOURCE_VIDEOMUX))
           {
             m_SelectionStreams.Clear(STREAM_SUBTITLE, STREAM_SOURCE_VIDEOMUX);
-            m_SelectionStreams.Update(NULL, m_pCCDemuxer, "");
+            m_SelectionStreams.Update(nullptr, m_pCCDemuxer, "");
             OpenDefaultStreams(false);
           }
           CDemuxStream *pSubStream = m_pCCDemuxer->GetStream(pkt->iStreamId);
@@ -2443,7 +2443,7 @@ IDVDStreamPlayer* CVideoPlayer::GetStreamPlayer(unsigned int target)
     return m_VideoPlayerTeletext;
   if(target == VideoPlayer_RDS)
     return m_VideoPlayerRadioRDS;
-  return NULL;
+  return nullptr;
 }
 
 void CVideoPlayer::SendPlayerMessage(CDVDMsg* pMsg, unsigned int target)
@@ -2634,9 +2634,9 @@ void CVideoPlayer::HandleMessages()
     }
     else if (pMsg->IsType(CDVDMsg::DEMUXER_RESET))
     {
-      m_CurrentAudio.stream = NULL;
-      m_CurrentVideo.stream = NULL;
-      m_CurrentSubtitle.stream = NULL;
+      m_CurrentAudio.stream = nullptr;
+      m_CurrentVideo.stream = nullptr;
+      m_CurrentSubtitle.stream = nullptr;
 
       // we need to reset the demuxer, probably because the streams have changed
       if(m_pDemuxer)
@@ -3518,7 +3518,7 @@ void CVideoPlayer::SetVideoStream(int iStream)
 TextCacheStruct_t* CVideoPlayer::GetTeletextCache()
 {
   if (m_CurrentTeletext.id < 0)
-    return 0;
+    return nullptr;
 
   return m_VideoPlayerTeletext->GetTeletextCache();
 }
@@ -3665,7 +3665,7 @@ bool CVideoPlayer::SupportsTempo()
 
 bool CVideoPlayer::OpenStream(CCurrentStream& current, int64_t demuxerId, int iStream, int source, bool reset /*= true*/)
 {
-  CDemuxStream* stream = NULL;
+  CDemuxStream* stream = nullptr;
   CDVDStreamInfo hint;
 
   CLog::Log(LOGNOTICE, "Opening stream: %i source: %i", iStream, source);
@@ -4238,7 +4238,7 @@ int CVideoPlayer::OnDiscNavResult(void* pData, int iMessage)
         else
           m_dvd.iSelectedSPUStream = -1;
 
-        m_CurrentSubtitle.stream = NULL;
+        m_CurrentSubtitle.stream = nullptr;
       }
       break;
     case DVDNAV_AUDIO_STREAM_CHANGE:
@@ -4253,7 +4253,7 @@ int CVideoPlayer::OnDiscNavResult(void* pData, int iMessage)
         else
           m_dvd.iSelectedAudioStream = -1;
 
-        m_CurrentAudio.stream = NULL;
+        m_CurrentAudio.stream = nullptr;
       }
       break;
     case DVDNAV_HIGHLIGHT:
@@ -4905,7 +4905,7 @@ int CVideoPlayer::AddSubtitleFile(const std::string& filename, const std::string
     CDVDDemuxVobsub v;
     if (!v.Open(filename, STREAM_SOURCE_NONE, vobsubfile))
       return -1;
-    m_SelectionStreams.Update(NULL, &v, vobsubfile);
+    m_SelectionStreams.Update(nullptr, &v, vobsubfile);
 
     ExternalStreamInfo info = CUtil::GetExternalStreamDetailsFromFilename(m_item.GetPath(), vobsubfile);
 

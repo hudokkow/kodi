@@ -42,7 +42,7 @@ CColorManager::CColorManager()
   m_cur3dlutFile = "";
   m_curIccProfile = "";
 #if defined(HAVE_LCMS2)
-  m_hProfile = NULL;
+  m_hProfile = nullptr;
 #endif  //defined(HAVE_LCMS2)
 }
 
@@ -52,7 +52,7 @@ CColorManager::~CColorManager()
   if (m_hProfile)
   {
     cmsCloseProfile(m_hProfile);
-    m_hProfile = NULL;
+    m_hProfile = nullptr;
   }
 #endif  //defined(HAVE_LCMS2)
 }
@@ -431,7 +431,7 @@ cmsToneCurve* CColorManager::CreateToneCurve(CMS_TRC_TYPE gammaType, float gamma
     CLog::Log(LOGERROR, "gamma type %d not implemented\n", gammaType);
   }
 
-  cmsToneCurve* result = cmsBuildTabulatedToneCurveFloat(0,
+  cmsToneCurve* result = cmsBuildTabulatedToneCurveFloat(nullptr,
       tableSize,
       gammaTable);
   return result;
