@@ -614,7 +614,7 @@ int CNFSFile::Stat(const CURL& url, struct __stat64* buffer)
 
   ret = gNfsConnection.GetImpl()->nfs_stat(gNfsConnection.GetNfsContext(), filename.c_str(), &tmpBuffer);
   
-  //if buffer == NULL we where called from Exists - in that case don't spam the log with errors
+  //if buffer == nullptr we where called from Exists - in that case don't spam the log with errors
   if (ret != 0 && buffer != nullptr) 
   {
     CLog::Log(LOGERROR, "NFS: Failed to stat(%s) %s\n", url.GetFileName().c_str(), gNfsConnection.GetImpl()->nfs_get_error(gNfsConnection.GetNfsContext()));

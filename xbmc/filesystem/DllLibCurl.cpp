@@ -117,8 +117,8 @@ void DllLibCurlGlobal::Unload()
 
 #if defined(HAS_CURL_STATIC)
     // Cleanup ssl locking array
-    crypto_set_id_callback(NULL);
-    crypto_set_locking_callback(NULL);
+    crypto_set_id_callback(nullptr);
+    crypto_set_locking_callback(nullptr);
     for (int i=0; i<CRYPTO_num_locks(); i++)
       delete m_sslLockArray[i];
  

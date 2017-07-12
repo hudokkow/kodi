@@ -169,7 +169,7 @@ NODE_TYPE CDirectoryNode::GetType() const
   return m_Type;
 }
 
-//  Return the parent directory node or NULL, if there is no
+//  Return the parent directory node or nullptr, if there is no
 CDirectoryNode* CDirectoryNode::GetParent() const
 {
   return m_pParent;

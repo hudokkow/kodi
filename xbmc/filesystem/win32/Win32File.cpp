@@ -83,7 +83,7 @@ bool CWin32File::Open(const CURL& url)
 
   m_filepathnameW = pathnameW;
   m_hFile = CreateFileW(pathnameW.c_str(), GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE,
-                        NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+                        nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
   if (m_smbFile)
     m_lastSMBFileErr = GetLastError(); // set real error state
 
@@ -106,7 +106,7 @@ bool CWin32File::OpenForWrite(const CURL& url, bool bOverWrite /*= false*/)
   assert((pathnameW.compare(4, 4, L"UNC\\", 4) == 0 && m_smbFile) || !m_smbFile);
 
   m_hFile = CreateFileW(pathnameW.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ,
-                        NULL, bOverWrite ? CREATE_ALWAYS : OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+                        nullptr, bOverWrite ? CREATE_ALWAYS : OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
 
   if (m_smbFile)
     m_lastSMBFileErr = GetLastError(); // set real error state
@@ -174,15 +174,15 @@ ssize_t CWin32File::Read(void* lpBuf, size_t uiBufSize)
   if (m_hFile == INVALID_HANDLE_VALUE)
     return -1;
 
-  assert(lpBuf != NULL || uiBufSize == 0);
-  if (lpBuf == NULL && uiBufSize != 0)
+  assert(lpBuf != nullptr || uiBufSize == 0);
+  if (lpBuf == nullptr && uiBufSize != 0)
     return -1;
 
   if (uiBufSize == 0)
   { // allow "test" read with zero size
     XUTILS::auto_buffer dummyBuf(255);
     DWORD bytesRead = 0;
-    if (!ReadFile(m_hFile, dummyBuf.get(), 0, &bytesRead, NULL))
+    if (!ReadFile(m_hFile, dummyBuf.get(), 0, &bytesRead, nullptr))
       return -1;
 
     assert(bytesRead == 0);
@@ -199,7 +199,7 @@ ssize_t CWin32File::Read(void* lpBuf, size_t uiBufSize)
   while (uiBufSize > 0)
   {
     DWORD lastRead = 0;
-    if (!ReadFile(m_hFile, ((BYTE*)lpBuf) + read, (uiBufSize > DWORD_MAX) ? DWORD_MAX : (DWORD)uiBufSize, &lastRead, NULL))
+    if (!ReadFile(m_hFile, ((BYTE*)lpBuf) + read, (uiBufSize > DWORD_MAX) ? DWORD_MAX : (DWORD)uiBufSize, &lastRead, nullptr))
     {
       m_filePos = -1;
       if (read > 0)
@@ -229,8 +229,8 @@ ssize_t CWin32File::Write(const void* lpBuf, size_t uiBufSize)
   if (m_hFile == INVALID_HANDLE_VALUE)
     return -1;
 
-  assert(lpBuf != NULL || uiBufSize == 0);
-  if (lpBuf == NULL && uiBufSize != 0)
+  assert(lpBuf != nullptr || uiBufSize == 0);
+  if (lpBuf == nullptr && uiBufSize != 0)
     return -1;
 
   if (!m_allowWrite)
@@ -244,7 +244,7 @@ ssize_t CWin32File::Write(const void* lpBuf, size_t uiBufSize)
     XUTILS::auto_buffer dummyBuf(255);
     dummyBuf.get()[0] = 0;
     DWORD bytesWritten = 0;
-    if (!WriteFile(m_hFile, dummyBuf.get(), 0, &bytesWritten, NULL))
+    if (!WriteFile(m_hFile, dummyBuf.get(), 0, &bytesWritten, nullptr))
       return -1;
 
     assert(bytesWritten == 0);
@@ -259,7 +259,7 @@ ssize_t CWin32File::Write(const void* lpBuf, size_t uiBufSize)
   {
     DWORD lastWritten = 0;
     const DWORD toWrite = uiBufSize > DWORD_MAX ? DWORD_MAX : (DWORD)uiBufSize;
-    if (!WriteFile(m_hFile, ((const BYTE*)lpBuf) + written, toWrite, &lastWritten, NULL))
+    if (!WriteFile(m_hFile, ((const BYTE*)lpBuf) + written, toWrite, &lastWritten, nullptr))
     {
       m_filePos = -1;
       if (written > 0)
@@ -479,7 +479,7 @@ int CWin32File::Stat(const CURL& url, struct __stat64* statData)
   // get maximum information about file from search function
   HANDLE hSearch;
   WIN32_FIND_DATAW findData;
-  hSearch = FindFirstFileExW(pathnameW.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, NULL, 0);
+  hSearch = FindFirstFileExW(pathnameW.c_str(), FindExInfoBasic, &findData, FindExSearchNameMatch, nullptr, 0);
 
   if (m_smbFile)
     m_lastSMBFileErr = GetLastError(); // set real error state
@@ -515,7 +515,7 @@ int CWin32File::Stat(const CURL& url, struct __stat64* statData)
     statData->st_dev = 0;
   statData->st_rdev = statData->st_dev;
 
-  const HANDLE hFile = CreateFileW(pathnameW.c_str(), FILE_READ_ATTRIBUTES, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+  const HANDLE hFile = CreateFileW(pathnameW.c_str(), FILE_READ_ATTRIBUTES, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
   /* set st_nlink */
   statData->st_nlink = 1; // fallback value
   if (hFile != INVALID_HANDLE_VALUE)

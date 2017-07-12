@@ -136,7 +136,7 @@ IFileDirectory* CFileDirectoryFactory::Create(const CURL& url, CFileItem* pItem,
       pItem->SetURL(zipURL);
       return new CAPKDirectory;
     }
-    return NULL;
+    return nullptr;
   }
 #endif
   if (url.IsFileType("zip"))

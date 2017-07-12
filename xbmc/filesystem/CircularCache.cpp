@@ -48,8 +48,8 @@ CCircularCache::~CCircularCache()
 int CCircularCache::Open()
 {
 #ifdef TARGET_WINDOWS
-  m_handle = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, m_size, NULL);
-  if(m_handle == NULL)
+  m_handle = CreateFileMapping(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, m_size, nullptr);
+  if(m_handle == nullptr)
     return CACHE_RC_ERROR;
   m_buf = (uint8_t*)MapViewOfFile(m_handle, FILE_MAP_ALL_ACCESS, 0, 0, 0);
 #else

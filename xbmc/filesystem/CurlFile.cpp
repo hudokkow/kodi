@@ -329,7 +329,7 @@ void CCurlFile::CReadState::SetResume(void)
     g_curlInterface.easy_setopt(m_easyHandle, CURLOPT_RANGE, "0-");
   else
   {
-    g_curlInterface.easy_setopt(m_easyHandle, CURLOPT_RANGE, NULL);
+    g_curlInterface.easy_setopt(m_easyHandle, CURLOPT_RANGE, nullptr);
     m_sendRange = false;
   }
 
@@ -553,7 +553,7 @@ void CCurlFile::SetCommonOptions(CReadState* state)
     g_curlInterface.easy_setopt(h, CURLOPT_REFERER, m_referer.c_str());
   else
   {
-    g_curlInterface.easy_setopt(h, CURLOPT_REFERER, NULL);
+    g_curlInterface.easy_setopt(h, CURLOPT_REFERER, nullptr);
     g_curlInterface.easy_setopt(h, CURLOPT_AUTOREFERER, TRUE);
   }
 
@@ -586,7 +586,7 @@ void CCurlFile::SetCommonOptions(CReadState* state)
   if( m_ftpport.length() > 0 )
     g_curlInterface.easy_setopt(h, CURLOPT_FTPPORT, m_ftpport.c_str());
   else
-    g_curlInterface.easy_setopt(h, CURLOPT_FTPPORT, NULL);
+    g_curlInterface.easy_setopt(h, CURLOPT_FTPPORT, nullptr);
 
   // allow curl to not use the ip address in the returned pasv response
   if( m_ftppasvip )
@@ -1228,7 +1228,7 @@ bool CCurlFile::Exists(const CURL& url)
   SetRequestHeaders(m_state);
   g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_TIMEOUT, 5);
   g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_NOBODY, 1);
-  g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_WRITEDATA, NULL); /* will cause write failure*/
+  g_curlInterface.easy_setopt(m_state->m_easyHandle, CURLOPT_WRITEDATA, nullptr); /* will cause write failure*/
 
   if(url2.IsProtocol("ftp") || url2.IsProtocol("ftps"))
   {
