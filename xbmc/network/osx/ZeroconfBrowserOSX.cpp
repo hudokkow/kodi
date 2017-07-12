@@ -39,13 +39,13 @@ namespace
   {
     CFIndex idx = 0;
     CZeroconfBrowser::ZeroconfService::tTxtRecordMap recordMap;
-    CFDataRef data = NULL;
+    CFDataRef data = nullptr;
 
     data=CFNetServiceGetTXTData(serviceRef);
-    if (data != NULL)
+    if (data != nullptr)
     {
       CFDictionaryRef dict = CFNetServiceCreateDictionaryWithTXTData(kCFAllocatorDefault, data);
-      if (dict != NULL)
+      if (dict != nullptr)
       {
         CFIndex numValues = 0;
         numValues = CFDictionaryGetCount(dict);
@@ -85,23 +85,23 @@ namespace
     char buffer[256];
     CFArrayRef addressResults = CFNetServiceGetAddressing( (CFNetServiceRef)serviceRef );
     
-    if ( addressResults != NULL )
+    if ( addressResults != nullptr )
     {
       CFIndex numAddressResults = CFArrayGetCount( addressResults );
-      CFDataRef sockAddrRef = NULL;
+      CFDataRef sockAddrRef = nullptr;
       struct sockaddr sockHdr;
       
       for ( idx = 0; idx < numAddressResults; idx++ )
       {
         sockAddrRef = (CFDataRef)CFArrayGetValueAtIndex( addressResults, idx );
-        if ( sockAddrRef != NULL )
+        if ( sockAddrRef != nullptr )
         {
           CFDataGetBytes( sockAddrRef, CFRangeMake(0, sizeof(sockHdr)), (UInt8*)&sockHdr );
           switch ( sockHdr.sa_family )
           {
             case AF_INET:
               CFDataGetBytes( sockAddrRef, CFRangeMake(0, sizeof(address)), (UInt8*)&address );
-              if ( inet_ntop(sockHdr.sa_family, &address.sin_addr, buffer, sizeof(buffer)) != NULL )
+              if ( inet_ntop(sockHdr.sa_family, &address.sin_addr, buffer, sizeof(buffer)) != nullptr )
               {
                 fr_address = buffer;
                 fr_port = ntohs(address.sin_port);
@@ -240,18 +240,18 @@ removeDiscoveredService(CFNetServiceBrowserRef browser, CFOptionFlags flags, CZe
 
 bool CZeroconfBrowserOSX::doAddServiceType(const std::string& fcr_service_type)
 {
-  CFNetServiceClientContext clientContext = { 0, this, NULL, NULL, NULL };
+  CFNetServiceClientContext clientContext = { 0, this, nullptr, nullptr, nullptr };
   CFStringRef domain = CFSTR("");
   CFNetServiceBrowserRef p_browser = CFNetServiceBrowserCreate(kCFAllocatorDefault,
     CZeroconfBrowserOSX::BrowserCallback, &clientContext);
-  assert(p_browser != NULL);
+  assert(p_browser != nullptr);
 
   //schedule the browser
   CFNetServiceBrowserScheduleWithRunLoop(p_browser, m_runloop, kCFRunLoopCommonModes);
   CFStreamError error;
-  CFStringRef type = CFStringCreateWithCString(NULL, fcr_service_type.c_str(), kCFStringEncodingUTF8);
+  CFStringRef type = CFStringCreateWithCString(nullptr, fcr_service_type.c_str(), kCFStringEncodingUTF8);
 
-  assert(type != NULL);
+  assert(type != nullptr);
   Boolean result = CFNetServiceBrowserSearchForServices(p_browser, domain, type, &error);
   CFRelease(type);
   if (result == false)
@@ -259,7 +259,7 @@ bool CZeroconfBrowserOSX::doAddServiceType(const std::string& fcr_service_type)
     // Something went wrong so lets clean up.
     CFNetServiceBrowserUnscheduleFromRunLoop(p_browser, m_runloop, kCFRunLoopCommonModes);         
     CFRelease(p_browser);
-    p_browser = NULL;
+    p_browser = nullptr;
     CLog::Log(LOGERROR, "CFNetServiceBrowserSearchForServices returned"
       "(domain = %d, error = %" PRId64")", (int)error.domain, (int64_t)error.error);
   }
@@ -325,14 +325,14 @@ std::vector<CZeroconfBrowser::ZeroconfService> CZeroconfBrowserOSX::doGetFoundSe
 bool CZeroconfBrowserOSX::doResolveService(CZeroconfBrowser::ZeroconfService &fr_service, double f_timeout)
 {
   bool ret = false;
-  CFStringRef type = CFStringCreateWithCString(NULL, fr_service.GetType().c_str(), kCFStringEncodingUTF8);
+  CFStringRef type = CFStringCreateWithCString(nullptr, fr_service.GetType().c_str(), kCFStringEncodingUTF8);
 
-  CFStringRef name = CFStringCreateWithCString(NULL, fr_service.GetName().c_str(), kCFStringEncodingUTF8);
+  CFStringRef name = CFStringCreateWithCString(nullptr, fr_service.GetName().c_str(), kCFStringEncodingUTF8);
 
-  CFStringRef domain = CFStringCreateWithCString(NULL, fr_service.GetDomain().c_str(), kCFStringEncodingUTF8);
+  CFStringRef domain = CFStringCreateWithCString(nullptr, fr_service.GetDomain().c_str(), kCFStringEncodingUTF8);
 
-  CFNetServiceRef service = CFNetServiceCreate (NULL, domain, type, name, 0);
-  if (CFNetServiceResolveWithTimeout(service, f_timeout, NULL) )
+  CFNetServiceRef service = CFNetServiceCreate (nullptr, domain, type, name, 0);
+  if (CFNetServiceResolveWithTimeout(service, f_timeout, nullptr) )
   {
     std::string ip;
     int port = 0;

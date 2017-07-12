@@ -40,7 +40,7 @@ extern HWND g_hWnd;
 
 CZeroconfBrowserMDNS::CZeroconfBrowserMDNS()
 {
-  m_browser = NULL;
+  m_browser = nullptr;
 }
 
 CZeroconfBrowserMDNS::~CZeroconfBrowserMDNS()
@@ -56,7 +56,7 @@ CZeroconfBrowserMDNS::~CZeroconfBrowserMDNS()
 
   if (m_browser)
     DNSServiceRefDeallocate(m_browser);
-  m_browser = NULL;
+  m_browser = nullptr;
 }
 
 void DNSSD_API CZeroconfBrowserMDNS::BrowserCallback(DNSServiceRef browser,
@@ -163,7 +163,7 @@ void DNSSD_API CZeroconfBrowserMDNS::ResolveCallback(DNSServiceRef              
     if(err != kDNSServiceErr_NoError)
       continue;
 
-    if(value != NULL && valueLen > 0)
+    if(value != nullptr && valueLen > 0)
       strvalue.append((const char *)value, valueLen);
 
     recordMap.insert(std::make_pair(key, strvalue));
@@ -226,10 +226,10 @@ void CZeroconfBrowserMDNS::removeDiscoveredService(DNSServiceRef browser, CZeroc
 bool CZeroconfBrowserMDNS::doAddServiceType(const std::string& fcr_service_type)
 {
   DNSServiceErrorType err;
-  DNSServiceRef browser = NULL;
+  DNSServiceRef browser = nullptr;
 
 #if !defined(HAS_MDNS_EMBEDDED)
-  if(m_browser == NULL)
+  if(m_browser == nullptr)
   {
     err = DNSServiceCreateConnection(&m_browser);
     if (err != kDNSServiceErr_NoError)
@@ -248,7 +248,7 @@ bool CZeroconfBrowserMDNS::doAddServiceType(const std::string& fcr_service_type)
   {
     CSingleLock lock(m_data_guard);
     browser = m_browser;
-    err = DNSServiceBrowse(&browser, kDNSServiceFlagsShareConnection, kDNSServiceInterfaceIndexAny, fcr_service_type.c_str(), NULL, BrowserCallback, this);
+    err = DNSServiceBrowse(&browser, kDNSServiceFlagsShareConnection, kDNSServiceInterfaceIndexAny, fcr_service_type.c_str(), nullptr, BrowserCallback, this);
   }
 
   if( err != kDNSServiceErr_NoError )
@@ -317,7 +317,7 @@ std::vector<CZeroconfBrowser::ZeroconfService> CZeroconfBrowserMDNS::doGetFoundS
 bool CZeroconfBrowserMDNS::doResolveService(CZeroconfBrowser::ZeroconfService& fr_service, double f_timeout)
 {
   DNSServiceErrorType err;
-  DNSServiceRef sdRef = NULL;
+  DNSServiceRef sdRef = nullptr;
   
   //start resolving
   m_resolving_service = fr_service;
@@ -357,7 +357,7 @@ bool CZeroconfBrowserMDNS::doResolveService(CZeroconfBrowser::ZeroconfService& f
 
     // use mdns resolving
     m_addrinfo_event.Reset();
-    sdRef = NULL;
+    sdRef = nullptr;
 
     err = DNSServiceGetAddrInfo(&sdRef, 0, kDNSServiceInterfaceIndexAny, kDNSServiceProtocol_IPv4, fr_service.GetHostname().c_str(), GetAddrInfoCallback, this);
 

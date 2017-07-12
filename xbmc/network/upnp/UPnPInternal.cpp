@@ -55,7 +55,7 @@ namespace UPNP
 +---------------------------------------------------------------------*/
 EClientQuirks GetClientQuirks(const PLT_HttpRequestContext* context)
 {
-  if(context == NULL)
+  if(context == nullptr)
       return ECLIENTQUIRKS_NONE;
 
   unsigned int quirks = 0;
@@ -84,7 +84,7 @@ EClientQuirks GetClientQuirks(const PLT_HttpRequestContext* context)
 +---------------------------------------------------------------------*/
 EMediaControllerQuirks GetMediaControllerQuirks(const PLT_DeviceData *device)
 {
-    if (device == NULL)
+    if (device == nullptr)
         return EMEDIACONTROLLERQUIRKS_NONE;
 
     unsigned int quirks = 0;
@@ -100,7 +100,7 @@ EMediaControllerQuirks GetMediaControllerQuirks(const PLT_DeviceData *device)
 +---------------------------------------------------------------------*/
 NPT_String
 GetMimeType(const char* filename,
-            const PLT_HttpRequestContext* context /* = NULL */)
+            const PLT_HttpRequestContext* context /* = nullptr */)
 {
     NPT_String ext = URIUtils::GetExtension(filename).c_str();
     ext.TrimLeft('.');
@@ -114,7 +114,7 @@ GetMimeType(const char* filename,
 +---------------------------------------------------------------------*/
 NPT_String
 GetMimeType(const CFileItem& item,
-            const PLT_HttpRequestContext* context /* = NULL */)
+            const PLT_HttpRequestContext* context /* = nullptr */)
 {
     std::string path = item.GetPath();
     if (item.HasVideoInfoTag() && !item.GetVideoInfoTag()->GetPath().empty()) {
@@ -172,7 +172,7 @@ GetMimeType(const CFileItem& item,
 const NPT_String
 GetProtocolInfo(const CFileItem&              item,
                 const char*                   protocol,
-                const PLT_HttpRequestContext* context /* = NULL */)
+                const PLT_HttpRequestContext* context /* = nullptr */)
 {
     NPT_String proto = protocol;
 
@@ -360,12 +360,12 @@ BuildObject(CFileItem&                    item,
             NPT_String&                   file_path,
             bool                          with_count,
             NPT_Reference<CThumbLoader>&  thumb_loader,
-            const PLT_HttpRequestContext* context /* = NULL */,
-            CUPnPServer*                  upnp_server /* = NULL */,
+            const PLT_HttpRequestContext* context /* = nullptr */,
+            CUPnPServer*                  upnp_server /* = nullptr */,
             UPnPService                   upnp_service /* = UPnPServiceNone */)
 {
     PLT_MediaItemResource resource;
-    PLT_MediaObject*      object = NULL;
+    PLT_MediaObject*      object = nullptr;
     std::string thumb;
 
     CLog::Log(LOGDEBUG, "UPnP: Building didl for object '%s'", item.GetPath().c_str());
@@ -618,7 +618,7 @@ BuildObject(CFileItem&                    item,
     // look for and add external subtitle if we are processing a video file and
     // we are being called by a UPnP player or renderer or the user has chosen
     // to look for external subtitles
-    if (upnp_server != NULL && item.IsVideo() &&
+    if (upnp_server != nullptr && item.IsVideo() &&
        (upnp_service == UPnPPlayer || upnp_service == UPnPRenderer ||
         CServiceBroker::GetSettings().GetBool(CSettings::SETTING_SERVICES_UPNPLOOKFOREXTERNALSUBTITLES)))
     {
@@ -715,7 +715,7 @@ BuildObject(CFileItem&                    item,
 
 failure:
     delete object;
-    return NULL;
+    return nullptr;
 }
 
 /*----------------------------------------------------------------------
@@ -737,7 +737,7 @@ CorrectAllItemsSortHack(const std::string &item)
 int
 PopulateTagFromObject(CMusicInfoTag&         tag,
                       PLT_MediaObject&       object,
-                      PLT_MediaItemResource* resource /* = NULL */,
+                      PLT_MediaItemResource* resource /* = nullptr */,
                       UPnPService            service /* = UPnPServiceNone */)
 {
     tag.SetTitle((const char*)object.m_Title);
@@ -772,7 +772,7 @@ PopulateTagFromObject(CMusicInfoTag&         tag,
 int
 PopulateTagFromObject(CVideoInfoTag&         tag,
                       PLT_MediaObject&       object,
-                      PLT_MediaItemResource* resource /* = NULL */,
+                      PLT_MediaItemResource* resource /* = nullptr */,
                       UPnPService            service /* = UPnPServiceNone */)
 {
     CDateTime date;
@@ -900,14 +900,14 @@ CFileItemPtr BuildObject(PLT_MediaObject* entry,
     // look for metadata
     if( ObjectClass.StartsWith("object.container.album.videoalbum") ) {
       pItem->SetLabelPreformatted(false);
-      UPNP::PopulateTagFromObject(*pItem->GetVideoInfoTag(), *entry, NULL, upnp_service);
+      UPNP::PopulateTagFromObject(*pItem->GetVideoInfoTag(), *entry, nullptr, upnp_service);
 
     } else if( ObjectClass.StartsWith("object.container.album.photoalbum")) {
       //CPictureInfoTag* tag = pItem->GetPictureInfoTag();
 
     } else if( ObjectClass.StartsWith("object.container.album") ) {
       pItem->SetLabelPreformatted(false);
-      UPNP::PopulateTagFromObject(*pItem->GetMusicInfoTag(), *entry, NULL, upnp_service);
+      UPNP::PopulateTagFromObject(*pItem->GetMusicInfoTag(), *entry, nullptr, upnp_service);
     }
 
   } else {
@@ -915,7 +915,7 @@ CFileItemPtr BuildObject(PLT_MediaObject* entry,
        , image = false
        , video = false;
     // set a general content type
-    const char* content = NULL;
+    const char* content = nullptr;
     if (ObjectClass.StartsWith("object.item.videoitem")) {
       pItem->SetMimeType("video/octet-stream");
       content = "video";
@@ -933,7 +933,7 @@ CFileItemPtr BuildObject(PLT_MediaObject* entry,
     }
 
     // attempt to find a valid resource (may be multiple)
-    PLT_MediaItemResource resource, *res = NULL;
+    PLT_MediaItemResource resource, *res = nullptr;
     if(NPT_SUCCEEDED(NPT_ContainerFind(entry->m_Resources,
                                        CResourceFinder("http-get", content), resource))) {
 
@@ -1105,7 +1105,7 @@ bool GetResource(const PLT_MediaObject* entry, CFileItem& item)
 CFileItemPtr GetFileItem(const NPT_String& uri, const NPT_String& meta)
 {
     PLT_MediaObjectListReference list;
-    PLT_MediaObject*             object = NULL;
+    PLT_MediaObject*             object = nullptr;
     CFileItemPtr                 item;
 
     if (NPT_SUCCEEDED(PLT_Didl::FromDidl(meta, list))) {

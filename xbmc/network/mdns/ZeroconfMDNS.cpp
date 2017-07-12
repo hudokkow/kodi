@@ -52,7 +52,7 @@ void CZeroconfMDNS::Process()
 
 CZeroconfMDNS::CZeroconfMDNS()  : CThread("ZeroconfEmbedded")
 {
-  m_service = NULL;
+  m_service = nullptr;
 #if defined(HAS_MDNS_EMBEDDED)
   embedded_mDNSInit();
   Create();
@@ -92,14 +92,14 @@ bool CZeroconfMDNS::doPublishService(const std::string& fcr_identifier,
                       unsigned int f_port,
                       const std::vector<std::pair<std::string, std::string> >& txt)
 {
-  DNSServiceRef netService = NULL;
+  DNSServiceRef netService = nullptr;
   TXTRecordRef txtRecord;
   DNSServiceErrorType err;
-  TXTRecordCreate(&txtRecord, 0, NULL);
+  TXTRecordCreate(&txtRecord, 0, nullptr);
 
 #if !defined(HAS_MDNS_EMBEDDED)
   CSingleLock lock(m_data_guard);
-  if(m_service == NULL)
+  if(m_service == nullptr)
   {
     err = DNSServiceCreateConnection(&m_service);
     if (err != kDNSServiceErr_NoError)
@@ -129,7 +129,7 @@ bool CZeroconfMDNS::doPublishService(const std::string& fcr_identifier,
   {
     CSingleLock lock(m_data_guard);
     netService = m_service;
-    err = DNSServiceRegister(&netService, kDNSServiceFlagsShareConnection, 0, fcr_name.c_str(), fcr_type.c_str(), NULL, NULL, htons(f_port), TXTRecordGetLength(&txtRecord), TXTRecordGetBytesPtr(&txtRecord), registerCallback, NULL);
+    err = DNSServiceRegister(&netService, kDNSServiceFlagsShareConnection, 0, fcr_name.c_str(), fcr_type.c_str(), nullptr, nullptr, htons(f_port), TXTRecordGetLength(&txtRecord), TXTRecordGetBytesPtr(&txtRecord), registerCallback, nullptr);
   }
 
   if (err != kDNSServiceErr_NoError)
@@ -169,7 +169,7 @@ bool CZeroconfMDNS::doForceReAnnounceService(const std::string& fcr_identifier)
       TXTRecordSetValue(&it->second.txtRecordRef, "xbmcdummy", strlen("odddummy"), "odddummy");
     it->second.updateNumber++;
 
-    if (DNSServiceUpdateRecord(it->second.serviceRef, NULL, 0, TXTRecordGetLength(&it->second.txtRecordRef), TXTRecordGetBytesPtr(&it->second.txtRecordRef), 0) ==  kDNSServiceErr_NoError)
+    if (DNSServiceUpdateRecord(it->second.serviceRef, nullptr, 0, TXTRecordGetLength(&it->second.txtRecordRef), TXTRecordGetBytesPtr(&it->second.txtRecordRef), 0) ==  kDNSServiceErr_NoError)
       ret = true;
   }
   return ret;
@@ -212,7 +212,7 @@ void CZeroconfMDNS::doStop()
 
     if (m_service)
       DNSServiceRefDeallocate(m_service);
-    m_service = NULL;
+    m_service = nullptr;
   }
 }
 
