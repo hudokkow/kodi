@@ -27,8 +27,8 @@
 #include <string>
 #include <vector>
 
-#define PERIPHERAL_SAFE_DELETE(x)        do { delete   (x); (x) = NULL; } while (0)
-#define PERIPHERAL_SAFE_DELETE_ARRAY(x)  do { delete[] (x); (x) = NULL; } while (0)
+#define PERIPHERAL_SAFE_DELETE(x)        do { delete   (x); (x) = nullptr; } while (0)
+#define PERIPHERAL_SAFE_DELETE_ARRAY(x)  do { delete[] (x); (x) = nullptr; } while (0)
 
 namespace kodi
 {
@@ -48,7 +48,7 @@ namespace addon
 
       if (vecObjects.empty())
       {
-        *pStructs = NULL;
+        *pStructs = nullptr;
       }
       else
       {
@@ -65,7 +65,7 @@ namespace addon
 
       if (vecObjects.empty())
       {
-        *pStructs = NULL;
+        *pStructs = nullptr;
       }
       else
       {
