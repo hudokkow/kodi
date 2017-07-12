@@ -122,24 +122,24 @@ CCPUInfo::CCPUInfo(void)
   std::string cpuVendor;
   
   // The number of cores.
-  if (sysctlbyname("hw.activecpu", &m_cpuCount, &len, NULL, 0) == -1)
+  if (sysctlbyname("hw.activecpu", &m_cpuCount, &len, nullptr, 0) == -1)
       m_cpuCount = 1;
 
   // The model.
 #if defined(__ppc__) || defined (TARGET_DARWIN_IOS)
   const NXArchInfo *info = NXGetLocalArchInfo();
-  if (info != NULL)
+  if (info != nullptr)
     m_cpuModel = info->description;
 #else
   // NXGetLocalArchInfo is ugly for intel so keep using this method
   char buffer[512];
   len = 512;
-  if (sysctlbyname("machdep.cpu.brand_string", &buffer, &len, NULL, 0) == 0)
+  if (sysctlbyname("machdep.cpu.brand_string", &buffer, &len, nullptr, 0) == 0)
     m_cpuModel = buffer;
 
   // The CPU vendor
   len = 512;
-  if (sysctlbyname("machdep.cpu.vendor", &buffer, &len, NULL, 0) == 0)
+  if (sysctlbyname("machdep.cpu.vendor", &buffer, &len, nullptr, 0) == 0)
     cpuVendor = buffer;
   
 #endif
@@ -243,11 +243,11 @@ CCPUInfo::CCPUInfo(void)
   char cpumodel[512];
 
   len = sizeof(m_cpuCount);
-  if (sysctlbyname("hw.ncpu", &m_cpuCount, &len, NULL, 0) != 0)
+  if (sysctlbyname("hw.ncpu", &m_cpuCount, &len, nullptr, 0) != 0)
     m_cpuCount = 1;
 
   len = sizeof(cpumodel);
-  if (sysctlbyname("hw.model", &cpumodel, &len, NULL, 0) != 0)
+  if (sysctlbyname("hw.model", &cpumodel, &len, nullptr, 0) != 0)
     (void)strncpy(cpumodel, "Unknown", 8);
   m_cpuModel = cpumodel;
 
@@ -539,7 +539,7 @@ float CCPUInfo::getCPUFrequency()
 #if defined(TARGET_DARWIN)
   long long hz = 0;
   size_t len = sizeof(hz);
-  if (sysctlbyname("hw.cpufrequency", &hz, &len, NULL, 0) == -1)
+  if (sysctlbyname("hw.cpufrequency", &hz, &len, nullptr, 0) == -1)
     return 0.f;
   return hz / 1000000.0;
 #elif defined TARGET_WINDOWS
@@ -561,7 +561,7 @@ float CCPUInfo::getCPUFrequency()
 #elif defined(TARGET_FREEBSD)
   int hz = 0;
   size_t len = sizeof(hz);
-  if (sysctlbyname("dev.cpu.0.freq", &hz, &len, NULL, 0) != 0)
+  if (sysctlbyname("dev.cpu.0.freq", &hz, &len, nullptr, 0) != 0)
     hz = 0;
   return (float)hz;
 #else
@@ -731,12 +731,12 @@ bool CCPUInfo::readProcStat(unsigned long long& user, unsigned long long& nice,
   int i;
 
   len = sizeof(long) * 32 * CPUSTATES;
-  if (sysctlbyname("kern.cp_times", NULL, &len, NULL, 0) != 0)
+  if (sysctlbyname("kern.cp_times", nullptr, &len, nullptr, 0) != 0)
     return false;
   cptimes = (long*)malloc(len);
-  if (cptimes == NULL)
+  if (cptimes == nullptr)
     return false;
-  if (sysctlbyname("kern.cp_times", cptimes, &len, NULL, 0) != 0)
+  if (sysctlbyname("kern.cp_times", cptimes, &len, nullptr, 0) != 0)
   {
     free(cptimes);
     return false;
@@ -911,7 +911,7 @@ void CCPUInfo::ReadCPUFeatures()
     size_t len = 512 - 1; // '-1' for trailing space
     char buffer[512] ={0};
 
-    if (sysctlbyname("machdep.cpu.features", &buffer, &len, NULL, 0) == 0)
+    if (sysctlbyname("machdep.cpu.features", &buffer, &len, nullptr, 0) == 0)
     {
       strcat(buffer, " ");
       if (strstr(buffer,"MMX "))

@@ -94,7 +94,7 @@ static bool sysGetVersionExWByRef(OSVERSIONINFOEXW& osVerInfo)
   
   typedef NTSTATUS(__stdcall *RtlGetVersionPtr)(RTL_OSVERSIONINFOEXW* pOsInfo);
   static HMODULE hNtDll = GetModuleHandleW(L"ntdll.dll");
-  if (hNtDll != NULL)
+  if (hNtDll != nullptr)
   {
     static RtlGetVersionPtr RtlGetVer = (RtlGetVersionPtr) GetProcAddress(hNtDll, "RtlGetVersion");
     if (RtlGetVer && RtlGetVer(&osVerInfo) == 0)
@@ -770,10 +770,10 @@ std::string CSysInfo::GetModelName(void)
     modelName = CDarwinUtils::getIosPlatformString();
 #elif defined(TARGET_DARWIN_OSX)
     size_t nameLen = 0; // 'nameLen' should include terminating null
-    if (sysctlbyname("hw.model", NULL, &nameLen, NULL, 0) == 0 && nameLen > 1)
+    if (sysctlbyname("hw.model", nullptr, &nameLen, nullptr, 0) == 0 && nameLen > 1)
     {
       XUTILS::auto_buffer buf(nameLen);
-      if (sysctlbyname("hw.model", buf.get(), &nameLen, NULL, 0) == 0 && nameLen == buf.size())
+      if (sysctlbyname("hw.model", buf.get(), &nameLen, nullptr, 0) == 0 && nameLen == buf.size())
         modelName.assign(buf.get(), nameLen - 1); // assign exactly 'nameLen-1' characters to 'modelName'
     }
 #elif defined(TARGET_WINDOWS)
