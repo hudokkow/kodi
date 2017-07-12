@@ -86,16 +86,16 @@ CDVDVideoCodecAmlogic::CDVDVideoCodecAmlogic(CProcessInfo &processInfo)
   , m_opened(false)
   , m_codecControlFlags(0)
   , m_last_pts(0.0)
-  , m_frame_queue(NULL)
+  , m_frame_queue(nullptr)
   , m_queue_depth(0)
   , m_framerate(0.0)
   , m_video_rate(0)
-  , m_mpeg2_sequence(NULL)
+  , m_mpeg2_sequence(nullptr)
   , m_has_keyframe(false)
-  , m_bitparser(NULL)
-  , m_bitstream(NULL)
+  , m_bitparser(nullptr)
+  , m_bitstream(nullptr)
 {
-  pthread_mutex_init(&m_queue_mutex, NULL);
+  pthread_mutex_init(&m_queue_mutex, nullptr);
 }
 
 CDVDVideoCodecAmlogic::~CDVDVideoCodecAmlogic()
@@ -327,13 +327,13 @@ void CDVDVideoCodecAmlogic::Dispose(void)
   m_videobuffer.iFlags = 0;
 
   if (m_mpeg2_sequence)
-    delete m_mpeg2_sequence, m_mpeg2_sequence = NULL;
+    delete m_mpeg2_sequence, m_mpeg2_sequence = nullptr;
 
   if (m_bitstream)
-    delete m_bitstream, m_bitstream = NULL;
+    delete m_bitstream, m_bitstream = nullptr;
 
   if (m_bitparser)
-    delete m_bitparser, m_bitparser = NULL;
+    delete m_bitparser, m_bitparser = nullptr;
 
   while (m_queue_depth)
     FrameQueuePop();
@@ -506,7 +506,7 @@ void CDVDVideoCodecAmlogic::FrameQueuePush(double dts, double pts)
   {
     // walk the queue and insert this frame where it belongs in display order.
     bool ptrInserted = false;
-    frame_queue *nextframe = NULL;
+    frame_queue *nextframe = nullptr;
     //
     while (!ptrInserted)
     {

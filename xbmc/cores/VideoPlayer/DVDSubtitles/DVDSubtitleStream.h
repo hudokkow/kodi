@@ -49,7 +49,7 @@ public:
   long Seek(long offset, int whence);
 
   char* ReadLine(char* pBuffer, int iLen);
-  //wchar* ReadLineW(wchar* pBuffer, int iLen) { return NULL; };
+  //wchar* ReadLineW(wchar* pBuffer, int iLen) { return nullptr; };
 
   std::stringstream m_stringstream;
 };

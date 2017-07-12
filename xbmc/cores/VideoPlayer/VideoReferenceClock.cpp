@@ -241,7 +241,7 @@ void CVideoReferenceClock::UpdateRefreshrate()
 }
 
 //VideoPlayer needs to know the refreshrate for matching the fps of the video playing to it
-double CVideoReferenceClock::GetRefreshRate(double* interval /*= NULL*/)
+double CVideoReferenceClock::GetRefreshRate(double* interval /*= nullptr*/)
 {
   CSingleLock SingleLock(m_CritSection);
 

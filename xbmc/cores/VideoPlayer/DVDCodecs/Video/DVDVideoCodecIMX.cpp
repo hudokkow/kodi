@@ -112,7 +112,7 @@ bool CIMXCodec::VpuAllocBuffers(VpuMemInfo *pMemBlock)
     if (pMemBlock->MemSubBlock[i].MemType == VPU_MEM_VIRT)
     { // Allocate standard virtual memory
       ptr = malloc(size);
-      if(ptr == NULL)
+      if(ptr == nullptr)
       {
         ExitError("%s - Unable to malloc %d bytes.\n", size);
         return false;
@@ -156,7 +156,7 @@ bool CIMXCodec::VpuFreeBuffers(bool dispose)
         free((void*)m_decMemInfo.virtMem[i]);
     }
     free(m_decMemInfo.virtMem);
-    m_decMemInfo.virtMem = NULL;
+    m_decMemInfo.virtMem = nullptr;
     m_decMemInfo.nVirtNum = 0;
   }
 
@@ -185,7 +185,7 @@ bool CIMXCodec::VpuFreeBuffers(bool dispose)
     if (!m_decMemInfo.nPhyNum)
     {
       free(m_decMemInfo.phyMem);
-      m_decMemInfo.phyMem = NULL;
+      m_decMemInfo.phyMem = nullptr;
     }
   }
 
@@ -416,9 +416,9 @@ CIMXCodec::CIMXCodec()
   m_nrOut.store(0);
 
   m_vpuHandle = 0;
-  m_converter = NULL;
+  m_converter = nullptr;
 #ifdef DUMP_STREAM
-  m_dump = NULL;
+  m_dump = nullptr;
 #endif
   m_drainMode = VPU_DEC_IN_NORMAL;
   m_skipMode = VPU_DEC_SKIPNONE;
@@ -473,7 +473,7 @@ bool CIMXCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptions &options, std::stri
 
 #ifdef DUMP_STREAM
   m_dump = fopen("stream.dump", "wb");
-  if (m_dump != NULL)
+  if (m_dump != nullptr)
   {
     fwrite(&hints.software, sizeof(hints.software), 1, m_dump);
     fwrite(&hints.codec, sizeof(hints.codec), 1, m_dump);
@@ -636,7 +636,7 @@ void CIMXCodec::Dispose()
   if (m_dump)
   {
     fclose(m_dump);
-    m_dump = NULL;
+    m_dump = nullptr;
   }
 #endif
 
@@ -881,7 +881,7 @@ void CIMXCodec::Process()
 #endif
 
     inData.nSize = task->demux.iSize;
-    inData.pPhyAddr = NULL;
+    inData.pPhyAddr = nullptr;
     inData.pVirAddr = task->demux.pData;
 
     // some streams have problem with getting initial info after seek into (during playback start).
@@ -1233,13 +1233,13 @@ CIMXContext::CIMXContext()
   , m_fbHandle(0)
   , m_fbCurrentPage(0)
   , m_fbPhysAddr(0)
-  , m_fbVirtAddr(NULL)
+  , m_fbVirtAddr(nullptr)
   , m_ipuHandle(0)
   , m_vsync(true)
-  , m_pageCrops(NULL)
+  , m_pageCrops(nullptr)
   , m_bFbIsConfigured(false)
-  , m_g2dHandle(NULL)
-  , m_bufferCapture(NULL)
+  , m_g2dHandle(nullptr)
+  , m_bufferCapture(nullptr)
   , m_deviceName("/dev/fb1")
 {
   m_pageCrops = new CRectInt[m_fbPages];
@@ -1339,7 +1339,7 @@ void CIMXContext::MemMap(struct fb_fix_screeninfo *fb_fix)
   if (m_fbVirtAddr && m_fbPhysSize)
   {
     munmap(m_fbVirtAddr, m_fbPhysSize);
-    m_fbVirtAddr = NULL;
+    m_fbVirtAddr = nullptr;
     m_fbPhysAddr = 0;
   }
   else if (fb_fix)
@@ -1388,7 +1388,7 @@ void CIMXContext::Dispose()
     return;
 
   delete[] m_pageCrops;
-  m_pageCrops = NULL;
+  m_pageCrops = nullptr;
 }
 
 void CIMXContext::OpenIPU()
@@ -1950,7 +1950,7 @@ bool CIMXContext::CaptureDisplay(unsigned char *&buffer, int iWidth, int iHeight
     CLog::Log(LOGERROR, "iMX : Error while freeing capture buffer\n");
 
   if (m_g2dHandle && !g2d_close(m_g2dHandle))
-    m_g2dHandle = NULL;
+    m_g2dHandle = nullptr;
   return true;
 }
 

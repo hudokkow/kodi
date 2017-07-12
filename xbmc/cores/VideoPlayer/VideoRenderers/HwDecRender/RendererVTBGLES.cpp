@@ -50,9 +50,9 @@ CRendererVTB::CRendererVTB()
 {
   m_textureCache = nullptr;
   CVReturn ret = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault,
-                                              NULL,
+                                              nullptr,
                                               g_Windowing.GetEAGLContextObj(),
-                                              NULL,
+                                              nullptr,
                                               &m_textureCache);
   if (ret != kCVReturnSuccess)
   {
@@ -120,9 +120,9 @@ bool CRendererVTB::LoadShadersHook()
   }
 
   CVReturn ret = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault,
-                                              NULL,
+                                              nullptr,
                                               g_Windowing.GetEAGLContextObj(),
-                                              NULL,
+                                              nullptr,
                                               &m_textureCache);
   if (ret != kCVReturnSuccess)
     return false;

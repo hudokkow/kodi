@@ -435,7 +435,7 @@ class CPostproc
 {
 public:
   virtual ~CPostproc() = default;
-  virtual bool PreInit(CVaapiConfig &config, SDiMethods *methods = NULL) = 0;
+  virtual bool PreInit(CVaapiConfig &config, SDiMethods *methods = nullptr) = 0;
   virtual bool Init(EINTERLACEMETHOD method) = 0;
   virtual bool AddPicture(CVaapiDecodedPicture &inPic) = 0;
   virtual bool Filter(CVaapiProcessedPicture &outPic) = 0;
@@ -455,7 +455,7 @@ protected:
 class CSkipPostproc : public CPostproc
 {
 public:
-  bool PreInit(CVaapiConfig &config, SDiMethods *methods = NULL) override;
+  bool PreInit(CVaapiConfig &config, SDiMethods *methods = nullptr) override;
   bool Init(EINTERLACEMETHOD method) override;
   bool AddPicture(CVaapiDecodedPicture &inPic) override;
   bool Filter(CVaapiProcessedPicture &outPic) override;
@@ -475,7 +475,7 @@ class CVppPostproc : public CPostproc
 public:
   CVppPostproc();
   ~CVppPostproc() override;
-  bool PreInit(CVaapiConfig &config, SDiMethods *methods = NULL) override;
+  bool PreInit(CVaapiConfig &config, SDiMethods *methods = nullptr) override;
   bool Init(EINTERLACEMETHOD method) override;
   bool AddPicture(CVaapiDecodedPicture &inPic) override;
   bool Filter(CVaapiProcessedPicture &outPic) override;
@@ -507,7 +507,7 @@ class CFFmpegPostproc : public CPostproc
 public:
   CFFmpegPostproc();
   ~CFFmpegPostproc() override;
-  bool PreInit(CVaapiConfig &config, SDiMethods *methods = NULL) override;
+  bool PreInit(CVaapiConfig &config, SDiMethods *methods = nullptr) override;
   bool Init(EINTERLACEMETHOD method) override;
   bool AddPicture(CVaapiDecodedPicture &inPic) override;
   bool Filter(CVaapiProcessedPicture &outPic) override;

@@ -442,7 +442,7 @@ bool CDXVAContext::CreateSurfaces(D3D11_VIDEO_DECODER_DESC format, unsigned int 
                                 count, 1, bindFlags);
 
   ID3D11Texture2D *texture = nullptr;
-  if (FAILED(pDevice->CreateTexture2D(&texDesc, NULL, &texture)))
+  if (FAILED(pDevice->CreateTexture2D(&texDesc, nullptr, &texture)))
   {
     CLog::LogF(LOGERROR, "failed creating decoder texture array.");
     return false;

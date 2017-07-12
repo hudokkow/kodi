@@ -86,9 +86,9 @@ CLinuxRendererGLES::CLinuxRendererGLES()
   m_iYV12RenderBuffer = 0;
   m_currentField = FIELD_FULL;
   m_reloadShaders = 0;
-  m_pYUVProgShader = NULL;
-  m_pYUVBobShader = NULL;
-  m_pVideoFilterShader = NULL;
+  m_pYUVProgShader = nullptr;
+  m_pYUVBobShader = nullptr;
+  m_pVideoFilterShader = nullptr;
   m_scalingMethod = VS_SCALINGMETHOD_LINEAR;
   m_scalingMethodGui = (ESCALINGMETHOD)-1;
 
@@ -445,7 +445,7 @@ void CLinuxRendererGLES::UpdateVideoFilter()
   {
     m_pVideoFilterShader->Free();
     delete m_pVideoFilterShader;
-    m_pVideoFilterShader = NULL;
+    m_pVideoFilterShader = nullptr;
   }
   m_fbo.fbo.Cleanup();
 
@@ -511,7 +511,7 @@ void CLinuxRendererGLES::UpdateVideoFilter()
   {
     m_pVideoFilterShader->Free();
     delete m_pVideoFilterShader;
-    m_pVideoFilterShader = NULL;
+    m_pVideoFilterShader = nullptr;
   }
   m_fbo.fbo.Cleanup();
 
@@ -591,13 +591,13 @@ void CLinuxRendererGLES::ReleaseShaders()
   {
     m_pYUVProgShader->Free();
     delete m_pYUVProgShader;
-    m_pYUVProgShader = NULL;
+    m_pYUVProgShader = nullptr;
   }
   if (m_pYUVBobShader)
   {
     m_pYUVBobShader->Free();
     delete m_pYUVBobShader;
-    m_pYUVBobShader = NULL;
+    m_pYUVBobShader = nullptr;
   }
 }
 
@@ -1197,7 +1197,7 @@ void CLinuxRendererGLES::DeleteYV12Texture(int index)
   }
 
   for(int p = 0;p<YuvImage::MAX_PLANES;p++)
-    im.plane[p] = NULL;
+    im.plane[p] = nullptr;
 }
 
 static GLint GetInternalFormat(GLint format, int bpp)
@@ -1312,7 +1312,7 @@ bool CLinuxRendererGLES::CreateYV12Texture(int index)
       else
         CLog::Log(LOGDEBUG,  "GL: Creating YUV NPOT texture of size %d x %d", plane.texwidth, plane.texheight);
 
-      glTexImage2D(m_textureTarget, 0, internalformat, plane.texwidth, plane.texheight, 0, format, GL_UNSIGNED_BYTE, NULL);
+      glTexImage2D(m_textureTarget, 0, internalformat, plane.texwidth, plane.texheight, 0, format, GL_UNSIGNED_BYTE, nullptr);
 
       glTexParameteri(m_textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(m_textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -1407,9 +1407,9 @@ bool CLinuxRendererGLES::CreateNV12Texture(int index)
   im.stride[1] = im.width;
   im.stride[2] = 0;
 
-  im.plane[0] = NULL;
-  im.plane[1] = NULL;
-  im.plane[2] = NULL;
+  im.plane[0] = nullptr;
+  im.plane[1] = nullptr;
+  im.plane[2] = nullptr;
 
   // Y plane
   im.planesize[0] = im.stride[0] * im.height;
@@ -1473,9 +1473,9 @@ bool CLinuxRendererGLES::CreateNV12Texture(int index)
       glBindTexture(m_textureTarget, plane.id);
 
       if (p == 1)
-        glTexImage2D(m_textureTarget, 0, GL_LUMINANCE_ALPHA, plane.texwidth, plane.texheight, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(m_textureTarget, 0, GL_LUMINANCE_ALPHA, plane.texwidth, plane.texheight, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, nullptr);
       else
-        glTexImage2D(m_textureTarget, 0, GL_LUMINANCE, plane.texwidth, plane.texheight, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(m_textureTarget, 0, GL_LUMINANCE, plane.texwidth, plane.texheight, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, nullptr);
 
       glTexParameteri(m_textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(m_textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -1514,7 +1514,7 @@ void CLinuxRendererGLES::DeleteNV12Texture(int index)
   }
 
   for(int p = 0;p<2;p++)
-    im.plane[p] = NULL;
+    im.plane[p] = nullptr;
 }
 
 //********************************************************************************************************

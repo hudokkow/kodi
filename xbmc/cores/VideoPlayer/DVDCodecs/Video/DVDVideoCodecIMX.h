@@ -173,7 +173,7 @@ private:
   void SetFieldData(uint8_t fieldFmt, double fps);
 
   void Dispose();
-  void MemMap(struct fb_fix_screeninfo *fb_fix = NULL);
+  void MemMap(struct fb_fix_screeninfo *fb_fix = nullptr);
 
   virtual void OnStartup() override;
   virtual void OnExit() override;
@@ -224,9 +224,9 @@ class CDecMemInfo
 public:
   CDecMemInfo()
     : nVirtNum(0)
-    , virtMem(NULL)
+    , virtMem(nullptr)
     , nPhyNum(0)
-    , phyMem(NULL)
+    , phyMem(nullptr)
   {}
 
   //virtual mem info

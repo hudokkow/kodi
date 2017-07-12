@@ -59,7 +59,7 @@ CDVDAudioCodecAndroidMediaCodec::CDVDAudioCodecAndroidMediaCodec(CProcessInfo &p
   m_opened(false),
   m_samplerate(0),
   m_channels(0),
-  m_buffer(NULL),
+  m_buffer(nullptr),
   m_bufferSize(0),
   m_bufferUsed(0),
   m_currentPts(DVD_NOPTS_VALUE),
@@ -160,7 +160,7 @@ bool CDVDAudioCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
   {
     CLog::Log(LOGDEBUG, "CDVDAudioCodecAndroidMediaCodec::Open Initializing MediaCrypto");
 
-    CJNIUUID uuid(jni::jhobject(NULL));
+    CJNIUUID uuid(jni::jhobject(nullptr));
     if (m_hints.cryptoSession->keySystem == CRYPTO_SESSION_SYSTEM_WIDEVINE)
       uuid = CJNIUUID(0xEDEF8BA979D64ACEULL, 0xA3C827DCD51D21EDULL);
     else if (m_hints.cryptoSession->keySystem == CRYPTO_SESSION_SYSTEM_PLAYREADY)
@@ -182,14 +182,14 @@ bool CDVDAudioCodecAndroidMediaCodec::Open(CDVDStreamInfo &hints, CDVDCodecOptio
     }
   }
   else
-    m_crypto = new CJNIMediaCrypto(jni::jhobject(NULL));
+    m_crypto = new CJNIMediaCrypto(jni::jhobject(nullptr));
 
   m_codec = std::shared_ptr<CJNIMediaCodec>(new CJNIMediaCodec(CJNIMediaCodec::createDecoderByType(m_mime)));
   if (xbmc_jnienv()->ExceptionCheck())
   {
     // Unsupported type?
     xbmc_jnienv()->ExceptionClear();
-    m_codec = NULL;
+    m_codec = nullptr;
   }
 
   if (!m_codec)
@@ -386,7 +386,7 @@ bool CDVDAudioCodecAndroidMediaCodec::ConfigureMediaCodec(void)
   // use a null MediaCrypto, our content is not encrypted.
   // use a null Surface
   int flags = 0;
-  CJNISurface surface(jni::jhobject(NULL));
+  CJNISurface surface(jni::jhobject(nullptr));
   m_codec->configure(mediaformat, surface, *m_crypto, flags);
 
   // always, check/clear jni exceptions.

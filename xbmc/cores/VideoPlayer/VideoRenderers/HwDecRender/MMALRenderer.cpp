@@ -539,8 +539,8 @@ bool CMMALRenderer::CheckConfigurationVout(uint32_t width, uint32_t height, uint
 CMMALRenderer::CMMALRenderer() : CThread("MMALRenderer"), m_processThread(this, "MMALProcess")
 {
   CLog::Log(LOGDEBUG, "%s::%s", CLASSNAME, __func__);
-  m_vout = NULL;
-  m_vout_input = NULL;
+  m_vout = nullptr;
+  m_vout_input = nullptr;
   memset(m_buffers, 0, sizeof m_buffers);
   m_iFlags = 0;
   m_bConfigured = false;
@@ -555,9 +555,9 @@ CMMALRenderer::CMMALRenderer() : CThread("MMALRenderer"), m_processThread(this, 
   m_vout_height = 0;
   m_vout_aligned_width = 0;
   m_vout_aligned_height = 0;
-  m_deint = NULL;
-  m_deint_input = NULL;
-  m_deint_output = NULL;
+  m_deint = nullptr;
+  m_deint_input = nullptr;
+  m_deint_output = nullptr;
   m_deint_width = 0;
   m_deint_height = 0;
   m_deint_aligned_width = 0;
@@ -885,7 +885,7 @@ void CMMALRenderer::ReleaseBuffer(int id)
   CSingleLock lock(m_sharedSection);
   CMMALBuffer *omvb = m_buffers[id];
   if (VERBOSE && g_advancedSettings.CanLogComponent(LOGVIDEO))
-    CLog::Log(LOGDEBUG, "%s::%s - MMAL: source:%d omvb:%p mmal:%p", CLASSNAME, __func__, id, omvb, omvb ? omvb->mmal_buffer:NULL);
+    CLog::Log(LOGDEBUG, "%s::%s - MMAL: source:%d omvb:%p mmal:%p", CLASSNAME, __func__, id, omvb, omvb ? omvb->mmal_buffer:nullptr);
   if (m_buffers[id])
     m_buffers[id]->Release();
   m_buffers[id] = nullptr;
@@ -1012,12 +1012,12 @@ void CMMALRenderer::UnInitMMAL()
 
   ReleaseBuffers();
 
-  m_vout_input = NULL;
+  m_vout_input = nullptr;
 
   if (m_vout)
   {
     mmal_component_release(m_vout);
-    m_vout = NULL;
+    m_vout = nullptr;
   }
 
   m_src_rect.SetRect(0, 0, 0, 0);
