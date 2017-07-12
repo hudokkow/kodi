@@ -139,8 +139,8 @@ class CDVDCodecOptions;
 // VC_ messages, messages can be combined
 #define VC_ERROR    0x00000001  // an error occured, no other messages will be returned
 #define VC_BUFFER   0x00000002  // the decoder needs more data
-#define VC_PICTURE  0x00000004  // the decoder got a picture, call Decode(NULL, 0) again to parse the rest of the data
-#define VC_USERDATA 0x00000008  // the decoder found some userdata,  call Decode(NULL, 0) again to parse the rest of the data
+#define VC_PICTURE  0x00000004  // the decoder got a picture, call Decode(nullptr, 0) again to parse the rest of the data
+#define VC_USERDATA 0x00000008  // the decoder found some userdata,  call Decode(nullptr, 0) again to parse the rest of the data
 #define VC_FLUSHED  0x00000010  // the decoder lost it's state, we need to restart decoding again
 class COMXVideoCodec
 {
@@ -161,7 +161,7 @@ public:
 
   /*
    * returns one or a combination of VC_ messages
-   * pData and iSize can be NULL, this means we should flush the rest of the data.
+   * pData and iSize can be nullptr, this means we should flush the rest of the data.
    */
   virtual int Decode(BYTE* pData, int iSize, double dts, double pts) = 0;
 
@@ -185,7 +185,7 @@ public:
    */
   virtual bool GetUserData(DVDVideoUserData* pDvdVideoUserData)
   {
-    pDvdVideoUserData->data = NULL;
+    pDvdVideoUserData->data = nullptr;
     pDvdVideoUserData->size = 0;
     return false;
   }

@@ -66,17 +66,17 @@ COMXVideo::COMXVideo(CRenderManager& renderManager, CProcessInfo &processInfo) :
 , m_processInfo(processInfo)
 {
   m_is_open           = false;
-  m_extradata         = NULL;
+  m_extradata         = nullptr;
   m_extrasize         = 0;
   m_deinterlace       = false;
   m_hdmi_clock_sync   = false;
   m_drop_state        = false;
   m_decoded_width     = 0;
   m_decoded_height    = 0;
-  m_omx_clock         = NULL;
-  m_av_clock          = NULL;
-  m_res_callback      = NULL;
-  m_res_ctx           = NULL;
+  m_omx_clock         = nullptr;
+  m_av_clock          = nullptr;
+  m_res_callback      = nullptr;
+  m_res_ctx           = nullptr;
   m_submitted_eos     = false;
   m_failed_eos        = false;
   m_settings_changed  = false;
@@ -95,11 +95,11 @@ bool COMXVideo::SendDecoderConfig()
   OMX_ERRORTYPE omx_err   = OMX_ErrorNone;
 
   /* send decoder config */
-  if(m_extrasize > 0 && m_extradata != NULL)
+  if(m_extrasize > 0 && m_extradata != nullptr)
   {
     OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_decoder.GetInputBuffer();
 
-    if(omx_buffer == NULL)
+    if(omx_buffer == nullptr)
     {
       CLog::Log(LOGERROR, "%s::%s - buffer error 0x%08x", CLASSNAME, __func__, omx_err);
       return false;
@@ -128,7 +128,7 @@ bool COMXVideo::NaluFormatStartCodes(enum AVCodecID codec, uint8_t *in_extradata
   switch(codec)
   {
     case AV_CODEC_ID_H264:
-      if (in_extrasize < 7 || in_extradata == NULL)
+      if (in_extrasize < 7 || in_extradata == nullptr)
         return true;
       // valid avcC atom data always starts with the value 1 (version), otherwise annexb
       else if ( *in_extradata != 1 )
@@ -371,8 +371,8 @@ bool COMXVideo::Open(CDVDStreamInfo &hints, OMXClock *clock, bool hdmi_clock_syn
   m_settings_changed = false;
   m_setStartTime = true;
 
-  m_res_ctx           = NULL;
-  m_res_callback      = NULL;
+  m_res_ctx           = nullptr;
+  m_res_callback      = nullptr;
 
   m_video_codec_name      = "";
   m_codingType            = OMX_VIDEO_CodingUnused;
@@ -384,7 +384,7 @@ bool COMXVideo::Open(CDVDStreamInfo &hints, OMXClock *clock, bool hdmi_clock_syn
   m_submitted_eos = false;
   m_failed_eos    = false;
 
-  if(hints.extrasize > 0 && hints.extradata != NULL)
+  if(hints.extrasize > 0 && hints.extradata != nullptr)
   {
     m_extrasize = hints.extrasize;
     m_extradata = (uint8_t *)malloc(m_extrasize);
@@ -509,16 +509,16 @@ bool COMXVideo::Open(CDVDStreamInfo &hints, OMXClock *clock, bool hdmi_clock_syn
   if(!m_omx_decoder.Initialize(decoder_name, OMX_IndexParamVideoInit))
     return false;
 
-  if(clock == NULL)
+  if(clock == nullptr)
     return false;
 
   m_av_clock = clock;
   m_omx_clock = m_av_clock->GetOMXClock();
 
-  if(m_omx_clock->GetComponent() == NULL)
+  if(m_omx_clock->GetComponent() == nullptr)
   {
-    m_av_clock = NULL;
-    m_omx_clock = NULL;
+    m_av_clock = nullptr;
+    m_omx_clock = nullptr;
     return false;
   }
 
@@ -697,15 +697,15 @@ void COMXVideo::Close()
 
   if(m_extradata)
     free(m_extradata);
-  m_extradata = NULL;
+  m_extradata = nullptr;
   m_extrasize = 0;
 
   m_video_codec_name  = "";
   m_deinterlace       = false;
-  m_av_clock          = NULL;
+  m_av_clock          = nullptr;
 
-  m_res_ctx           = NULL;
-  m_res_callback      = NULL;
+  m_res_ctx           = nullptr;
+  m_res_callback      = nullptr;
 }
 
 void COMXVideo::SetDropState(bool bDrop)
@@ -779,7 +779,7 @@ int COMXVideo::Decode(uint8_t *pData, int iSize, double dts, double pts, bool &s
     {
       // 500ms timeout
       OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_decoder.GetInputBuffer(500);
-      if(omx_buffer == NULL)
+      if(omx_buffer == nullptr)
       {
         CLog::Log(LOGERROR, "OMXVideo::Decode timeout\n");
         return false;
@@ -912,7 +912,7 @@ void COMXVideo::SubmitEOS()
   OMX_ERRORTYPE omx_err = OMX_ErrorNone;
   OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_decoder.GetInputBuffer(1000);
   
-  if(omx_buffer == NULL)
+  if(omx_buffer == nullptr)
   {
     CLog::Log(LOGERROR, "%s::%s - buffer error 0x%08x", CLASSNAME, __func__, omx_err);
     m_failed_eos = true;

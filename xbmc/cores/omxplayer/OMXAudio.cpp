@@ -78,13 +78,13 @@ COMXAudio::COMXAudio() :
   m_amplification   (1.0f   ),
   m_attenuation     (1.0f   ),
   m_submitted       (0.0f   ),
-  m_omx_clock       (NULL   ),
-  m_av_clock        (NULL   ),
+  m_omx_clock       (nullptr),
+  m_av_clock        (nullptr),
   m_settings_changed(false  ),
   m_setStartTime    (false  ),
   m_SampleRate      (0      ),
   m_eEncoding       (OMX_AUDIO_CodingPCM),
-  m_extradata       (NULL   ),
+  m_extradata       (nullptr),
   m_extrasize       (0      ),
   m_last_pts        (DVD_NOPTS_VALUE),
   m_submitted_eos   (false  ),
@@ -573,7 +573,7 @@ bool COMXAudio::Initialize(AEAudioFormat format, OMXClock *clock, CDVDStreamInfo
     m_output = AESINKPI_BOTH;
   else assert(0);
 
-  if(hints.extrasize > 0 && hints.extradata != NULL)
+  if(hints.extrasize > 0 && hints.extradata != nullptr)
   {
     m_extrasize = hints.extrasize;
     m_extradata = (uint8_t *)malloc(m_extrasize);
@@ -595,7 +595,7 @@ bool COMXAudio::Initialize(AEAudioFormat format, OMXClock *clock, CDVDStreamInfo
   {
     bool upmix = CServiceBroker::GetSettings().GetBool(CSettings::SETTING_AUDIOOUTPUT_STEREOUPMIX);
     bool normalize = !CServiceBroker::GetSettings().GetBool(CSettings::SETTING_AUDIOOUTPUT_MAINTAINORIGINALVOLUME);
-    void *remapLayout = NULL;
+    void *remapLayout = nullptr;
 
     CAEChannelInfo stdLayout = (enum AEStdChLayout)CServiceBroker::GetSettings().GetInt(CSettings::SETTING_AUDIOOUTPUT_CHANNELS);
 
@@ -623,8 +623,8 @@ bool COMXAudio::Initialize(AEAudioFormat format, OMXClock *clock, CDVDStreamInfo
 
     // this code is just uses ffmpeg to produce the 8x8 mixing matrix
     // dummy sample rate and format, as we only care about channel mapping
-    SwrContext *m_pContext = swr_alloc_set_opts(NULL, m_dst_chan_layout, AV_SAMPLE_FMT_FLT, 48000,
-                                                          m_src_chan_layout, AV_SAMPLE_FMT_FLT, 48000, 0, NULL);
+    SwrContext *m_pContext = swr_alloc_set_opts(nullptr, m_dst_chan_layout, AV_SAMPLE_FMT_FLT, 48000,
+                                                          m_src_chan_layout, AV_SAMPLE_FMT_FLT, 48000, 0, nullptr);
     if(!m_pContext)
     {
       CLog::Log(LOGERROR, "COMXAudio::Init - create context failed");
@@ -685,8 +685,8 @@ bool COMXAudio::Initialize(AEAudioFormat format, OMXClock *clock, CDVDStreamInfo
 
     const int samples = 8;
     uint8_t *output, *input;
-    av_samples_alloc(&output, NULL, m_dst_channels, samples, AV_SAMPLE_FMT_FLT, 1);
-    av_samples_alloc(&input , NULL, m_src_channels, samples, AV_SAMPLE_FMT_FLT, 1);
+    av_samples_alloc(&output, nullptr, m_dst_channels, samples, AV_SAMPLE_FMT_FLT, 1);
+    av_samples_alloc(&input , nullptr, m_src_channels, samples, AV_SAMPLE_FMT_FLT, 1);
 
     // Produce "identity" samples
     float *f = (float *)input;
@@ -849,7 +849,7 @@ bool COMXAudio::Initialize(AEAudioFormat format, OMXClock *clock, CDVDStreamInfo
   if(m_eEncoding == OMX_AUDIO_CodingPCM)
   {
     OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_decoder.GetInputBuffer();
-    if(omx_buffer == NULL)
+    if(omx_buffer == nullptr)
     {
       CLog::Log(LOGERROR, "COMXAudio::Initialize - buffer error 0x%08x", omx_err);
       return false;
@@ -936,14 +936,14 @@ bool COMXAudio::Deinitialize()
   m_BytesPerSec = 0;
   m_BufferLen   = 0;
 
-  m_omx_clock = NULL;
-  m_av_clock  = NULL;
+  m_omx_clock = nullptr;
+  m_av_clock  = nullptr;
 
   m_Initialized = false;
 
   if(m_extradata)
     free(m_extradata);
-  m_extradata = NULL;
+  m_extradata = nullptr;
   m_extrasize = 0;
 
   while(!m_ampqueue.empty())
@@ -1084,14 +1084,14 @@ unsigned int COMXAudio::AddPackets(const void* data, unsigned int len, double dt
 
   OMX_ERRORTYPE omx_err;
 
-  OMX_BUFFERHEADERTYPE *omx_buffer = NULL;
+  OMX_BUFFERHEADERTYPE *omx_buffer = nullptr;
 
   while(demuxer_samples_sent < demuxer_samples)
   {
     // 200ms timeout
     omx_buffer = m_omx_decoder.GetInputBuffer(200);
 
-    if(omx_buffer == NULL)
+    if(omx_buffer == nullptr)
     {
       CLog::Log(LOGERROR, "COMXAudio::Decode timeout\n");
       return len;
@@ -1408,7 +1408,7 @@ void COMXAudio::SubmitEOS()
   OMX_ERRORTYPE omx_err = OMX_ErrorNone;
   OMX_BUFFERHEADERTYPE *omx_buffer = m_omx_decoder.GetInputBuffer(1000);
 
-  if(omx_buffer == NULL)
+  if(omx_buffer == nullptr)
   {
     CLog::Log(LOGERROR, "%s::%s - buffer error 0x%08x", CLASSNAME, __func__, omx_err);
     m_failed_eos = true;

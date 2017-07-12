@@ -66,7 +66,7 @@ OMXPlayerAudio::OMXPlayerAudio(OMXClock *av_clock, CDVDMessageQueue& parent, CPr
 , m_messageParent(parent)
 {
   m_av_clock      = av_clock;
-  m_pAudioCodec   = NULL;
+  m_pAudioCodec   = nullptr;
   m_speed         = DVD_PLAYSPEED_NORMAL;
   m_syncState = IDVDStreamPlayer::SYNC_STARTING;
   m_stalled       = false;
@@ -100,7 +100,7 @@ bool OMXPlayerAudio::OpenStream(CDVDStreamInfo hints)
   if(!codec || !codec->Open(hints))
   {
     CLog::Log(LOGERROR, "Unsupported audio codec");
-    delete codec; codec = NULL;
+    delete codec; codec = nullptr;
     return false;
   }
 
@@ -155,7 +155,7 @@ void OMXPlayerAudio::CloseStream(bool bWaitForBuffers)
   {
     m_pAudioCodec->Dispose();
     delete m_pAudioCodec;
-    m_pAudioCodec = NULL;
+    m_pAudioCodec = nullptr;
   }
 
   CloseDecoder();
@@ -447,7 +447,7 @@ void OMXPlayerAudio::Process()
       COMXMsgAudioCodecChange* msg(static_cast<COMXMsgAudioCodecChange*>(pMsg));
       CLog::Log(LOGDEBUG, "COMXPlayerAudio - CDVDMsg::GENERAL_STREAMCHANGE");
       OpenStream(msg->m_hints, msg->m_codec);
-      msg->m_codec = NULL;
+      msg->m_codec = nullptr;
     }
 
     pMsg->Release();

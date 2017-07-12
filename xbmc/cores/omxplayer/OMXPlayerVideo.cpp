@@ -130,10 +130,10 @@ bool OMXPlayerVideo::OpenStream(CDVDStreamInfo hints)
   }
 
   if(m_messageQueue.IsInited())
-    SendMessage(new COMXMsgVideoCodecChange(hints, NULL), 0);
+    SendMessage(new COMXMsgVideoCodecChange(hints, nullptr), 0);
   else
   {
-    if(!OpenStream(hints, NULL))
+    if(!OpenStream(hints, nullptr))
       return false;
     CLog::Log(LOGNOTICE, "Creating video thread");
     m_messageQueue.Init();
@@ -447,7 +447,7 @@ void OMXPlayerVideo::Process()
     {
       COMXMsgVideoCodecChange* msg(static_cast<COMXMsgVideoCodecChange*>(pMsg));
       OpenStream(msg->m_hints, msg->m_codec);
-      msg->m_codec = NULL;
+      msg->m_codec = nullptr;
     }
     else if (pMsg->IsType(CDVDMsg::GENERAL_EOF))
     {

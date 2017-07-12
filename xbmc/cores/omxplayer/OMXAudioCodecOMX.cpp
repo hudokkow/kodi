@@ -36,15 +36,15 @@ static const char rounded_up_channels_shift[] = {0,0,1,2,2,3,3,3,3};
 
 COMXAudioCodecOMX::COMXAudioCodecOMX(CProcessInfo &processInfo) : m_processInfo(processInfo)
 {
-  m_pBufferOutput = NULL;
+  m_pBufferOutput = nullptr;
   m_iBufferOutputAlloced = 0;
   m_iBufferOutputUsed = 0;
 
-  m_pCodecContext = NULL;
-  m_pConvert = NULL;
+  m_pCodecContext = nullptr;
+  m_pConvert = nullptr;
 
   m_channels = 0;
-  m_pFrame1 = NULL;
+  m_pFrame1 = nullptr;
   m_frameSize = 0;
   m_bGotFrame = false;
   m_bNoConcatenate = false;
@@ -56,7 +56,7 @@ COMXAudioCodecOMX::COMXAudioCodecOMX(CProcessInfo &processInfo) : m_processInfo(
 COMXAudioCodecOMX::~COMXAudioCodecOMX()
 {
   av_free(m_pBufferOutput);
-  m_pBufferOutput = NULL;
+  m_pBufferOutput = nullptr;
   m_iBufferOutputAlloced = 0;
   m_iBufferOutputUsed = 0;
   Dispose();
@@ -64,7 +64,7 @@ COMXAudioCodecOMX::~COMXAudioCodecOMX()
 
 bool COMXAudioCodecOMX::Open(CDVDStreamInfo &hints)
 {
-  AVCodec* pCodec = NULL;
+  AVCodec* pCodec = nullptr;
 
   if (hints.codec == AV_CODEC_ID_DTS && g_RBP.RaspberryPiVersion() > 1)
     pCodec = avcodec_find_decoder_by_name("dcadec");
@@ -119,7 +119,7 @@ bool COMXAudioCodecOMX::Open(CDVDStreamInfo &hints)
     }
   }
 
-  if (avcodec_open2(m_pCodecContext, pCodec, NULL) < 0)
+  if (avcodec_open2(m_pCodecContext, pCodec, nullptr) < 0)
   {
     CLog::Log(LOGDEBUG,"COMXAudioCodecOMX::Open() Unable to open codec");
     Dispose();
@@ -239,12 +239,12 @@ int COMXAudioCodecOMX::GetData(BYTE** dst, double &dts, double &pts)
     if(!m_pConvert)
     {
       m_iSampleFormat = m_pCodecContext->sample_fmt;
-      m_pConvert = swr_alloc_set_opts(NULL,
+      m_pConvert = swr_alloc_set_opts(nullptr,
                       av_get_default_channel_layout(m_pCodecContext->channels), 
                       m_desiredSampleFormat, m_pCodecContext->sample_rate,
                       av_get_default_channel_layout(m_pCodecContext->channels), 
                       m_pCodecContext->sample_fmt, m_pCodecContext->sample_rate,
-                      0, NULL);
+                      0, nullptr);
 
       if(!m_pConvert || swr_init(m_pConvert) < 0)
       {
@@ -255,7 +255,7 @@ int COMXAudioCodecOMX::GetData(BYTE** dst, double &dts, double &pts)
 
     /* use unaligned flag to keep output packed */
     uint8_t *out_planes[m_pCodecContext->channels];
-    if(av_samples_fill_arrays(out_planes, NULL, m_pBufferOutput + m_iBufferOutputUsed, m_pCodecContext->channels, m_pFrame1->nb_samples, m_desiredSampleFormat, 1) < 0 ||
+    if(av_samples_fill_arrays(out_planes, nullptr, m_pBufferOutput + m_iBufferOutputUsed, m_pCodecContext->channels, m_pFrame1->nb_samples, m_desiredSampleFormat, 1) < 0 ||
        swr_convert(m_pConvert, out_planes, m_pFrame1->nb_samples, (const uint8_t **)m_pFrame1->data, m_pFrame1->nb_samples) < 0)
     {
       CLog::Log(LOGERROR, "COMXAudioCodecOMX::Decode - Unable to convert format %d to %d", (int)m_pCodecContext->sample_fmt, m_desiredSampleFormat);
@@ -266,7 +266,7 @@ int COMXAudioCodecOMX::GetData(BYTE** dst, double &dts, double &pts)
   {
     /* copy to a contiguous buffer */
     uint8_t *out_planes[m_pCodecContext->channels];
-    if (av_samples_fill_arrays(out_planes, NULL, m_pBufferOutput + m_iBufferOutputUsed, m_pCodecContext->channels, m_pFrame1->nb_samples, m_desiredSampleFormat, 1) < 0 ||
+    if (av_samples_fill_arrays(out_planes, nullptr, m_pBufferOutput + m_iBufferOutputUsed, m_pCodecContext->channels, m_pFrame1->nb_samples, m_desiredSampleFormat, 1) < 0 ||
       av_samples_copy(out_planes, m_pFrame1->data, 0, 0, m_pFrame1->nb_samples, m_pCodecContext->channels, m_desiredSampleFormat) < 0 )
     {
       outputSize = 0;
