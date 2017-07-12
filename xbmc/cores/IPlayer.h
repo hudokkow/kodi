@@ -282,7 +282,7 @@ public:
   virtual void GetVideoStreamInfo(int streamId, SPlayerVideoStreamInfo &info) {}
   virtual void SetVideoStream(int iStream) {}
 
-  virtual TextCacheStruct_t* GetTeletextCache() { return NULL; };
+  virtual TextCacheStruct_t* GetTeletextCache() { return nullptr; };
   virtual void LoadPage(int p, int sp, unsigned char* buffer) {};
 
   virtual std::string GetRadioText(unsigned int line) { return ""; };
