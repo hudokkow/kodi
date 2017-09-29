@@ -609,7 +609,7 @@ bool CApplication::Create(const CAppParamParser &params)
   //! @todo - move to CPlatformXXX
 #ifdef TARGET_WINDOWS
   CWIN32Util::SetThreadLocalLocale(true); // enable independent locale for each thread, see https://connect.microsoft.com/VisualStudio/feedback/details/794122
-#endif // TARGET_WINDOWS
+#endif // TARGET_WINDOWS 
 
   // initialize the addon database (must be before the addon manager is init'd)
   CDatabaseManager::GetInstance().Initialize(true);
@@ -984,6 +984,10 @@ bool CApplication::InitDirectoriesWin32()
 #ifdef TARGET_WINDOWS
   std::string xbmcPath = CUtil::GetHomePath();
   CEnvironment::setenv("KODI_HOME", xbmcPath);
+  
+  /*
+	No need for the setters below (only in Windows right now). Using specific getters now.
+ 
   CSpecialProtocol::SetXBMCBinPath(xbmcPath);
   CSpecialProtocol::SetXBMCPath(xbmcPath);
   CSpecialProtocol::SetXBMCBinAddonPath(xbmcPath + "/addons");
@@ -993,6 +997,7 @@ bool CApplication::InitDirectoriesWin32()
   CSpecialProtocol::SetHomePath(strWin32UserFolder);
   CSpecialProtocol::SetMasterProfilePath(URIUtils::AddFileToFolder(strWin32UserFolder, "userdata"));
   CSpecialProtocol::SetTempPath(URIUtils::AddFileToFolder(strWin32UserFolder,"cache"));
+ */
 
   CEnvironment::setenv("KODI_PROFILE_USERDATA", CSpecialProtocol::TranslatePath("special://masterprofile/"));
 
