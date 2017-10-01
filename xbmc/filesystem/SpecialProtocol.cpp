@@ -41,7 +41,7 @@
 
 
 #ifdef TARGET_WINDOWS
- //Getters
+//Getters
 std::string CSpecialProtocol::GetHomePath() 
 {
 	return CWIN32Util::GetProfilePath();
