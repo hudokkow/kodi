@@ -1,0 +1,317 @@
+## Table of Contents
+1. [Document Conventions](#1-document-conventions)
+2. [Code Guidelines and Formatting Conventions](#2-code-guidelines-and-formatting-conventions)
+3. [Indentation](#3-indentation)
+4. [Statements](#4-statements)
+5. [Namespaces](#5-namespaces)
+6. [Headers](#6-headers)
+7. [Braces](#7-braces)
+8. [Whitespace](#8-whitespace)
+9. [Vertical Alignment](#9-vertical-alignment)
+10. [Controls Statements](#10-controls-statements)  
+  10.1. [if else](#101-if-else)  
+  10.2. [switch case](#102-switch-case)
+11. [Naming](#11-naming)  
+  11.1. [Namespaces](#111-namespaces)  
+  11.2. [Constants](#112-constants)  
+  11.3. [Enums](#113-enums)  
+  11.4. [Interfaces](#114-interfaces)  
+  11.5. [Classes](#115-classes)  
+  11.6. [Methods](#116-methods)  
+  11.7. [Variables](#117-variables)
+12. [Conventions](#12-conventions)  
+  12.1. [Casts](#121-casts)  
+  12.2. [NULL vs nullptr](#122-null-vs-nullptr)  
+  12.3. [auto](#123-auto)  
+  12.4. [for loops](#124-for-loops)
+
+### 1. Document Conventions
+Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example: 
+ 
+**NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
+**TIP:** Algorithm is what developers call code they do not want to explain.  
+**WARNING:** Developers don't change light bulbs. It's a hardware problem.
+
+[back to top](#table-of-contents)
+
+### 2. Code Guidelines and Formatting Conventions
+These are conventions which we try to follow when writing code for Kodi. They are this way mainly for reasons of taste, however, sticking to a common set of formatting rules also makes it slightly easier to read through our sources. If you want to submit patches, please try to follow these rules.
+As such we don't follow these rules slavishly, in certain cases it is OK (and in fact favorable) to stray from them.
+
+[back to top](#table-of-contents)
+
+### 3. Indentation
+Use spaces as tab policy with an indentation size of 2.
+
+[back to top](#table-of-contents)
+
+### 4. Statements
+No multiple statements on a single line.
+```cpp
+std::vector<std::string> test; test.push_back("foobar");
+```
+Always use a new line for a new statement.
+```cpp
+std::vector<std::string> test;
+test.push_back("foobar");
+```
+It is much easier to debug if one can pinpoint a precise line number.
+
+[back to top](#table-of-contents)
+
+### 5. Namespaces
+Indentation is not requeired to simplify nested namespaces and wrapping *.cpp* files in a namespace.
+```cpp
+namespace KODI
+{
+namespace UTILS
+{
+class ILogger
+{
+  void Log(...) = 0;
+}
+}
+}
+```
+
+[back to top](#table-of-contents)
+
+### 6. Headers
+Included header files should be sorted alphabetically to prevent duplicates and allow better overview.
+Header order should be:
+* Header file corresponding to the *cpp* file
+* C system files
+* C++ system files
+* Other libraries' header files
+* Own header files
+
+```cpp
+#include "PVRManager.h"
+#include <cassert>
+#include <utility>
+#include "Application.h"
+#include "Util.h"
+#include "addons/AddonInstaller.h"
+#include "dialogs/GUIDialogExtendedProgressBar.h"
+#include "messaging/helpers/DialogHelper.h"
+#include "music/tags/MusicInfoTag.h"
+#include "network/Network.h"
+#include "pvr/addons/PVRClients.h"
+#include "pvr/channels/PVRChannel.h"
+#include "settings/Settings.h"
+#include "threads/SingleLock.h"
+#include "utils/JobManager.h"
+#include "utils/log.h"
+#include "utils/Variant.h"
+#include "video/VideoDatabase.h"
+```
+
+[back to top](#table-of-contents)
+
+### 7. Braces
+Braces should go to a newline.
+```cpp
+if (int i = 0; i < t; i++)
+{
+  [...]
+}
+else
+{
+  [...]
+}
+class Dummy()
+{
+  [...]
+}
+```
+
+[back to top](#table-of-contents)
+
+### 8. Whitespace
+Conventional operators should be surrounded by a whitespace.
+```cpp
+a = (b + c) * d;
+```
+Reserved words should be separated from opening parentheses by a whitespace.
+```cpp
+while (true)
+for (int i = 0; i < x; ++i)
+```
+Commas should be followed by a whitespace.
+```cpp
+void Dummy::Method(int a, int b, int c);
+int d, e;
+```
+
+[back to top](#table-of-contents)
+
+### 9. Vertical Alignment
+Do not use whitespaces to align value names together. This causes problems on code review if one needs to realign all values to their new position.
+
+Wrong:
+```cpp
+int                  value1             = 0;
+int                  value2             = 0;
+[...]
+CExampleClass       *exampleClass       = nullptr;
+CBiggerExampleClass *biggerExampleClass = nullptr;
+[...]
+exampleClass       = new CExampleClass      (value1, value2);
+biggerExampleClass = new CBiggerExampleClass(value1, value2);
+[...]
+exampleClass      ->InitExample();
+biggerExampleClass->InitExample();
+```
+
+Right:
+```cpp
+int value1 = 0;
+int value2 = 0;
+CExampleClass *exampleClass = nullptr;
+CBiggerExampleClass *biggerExampleClass = nullptr;
+exampleClass = new CExampleClass(value1, value2);
+biggerExampleClass = new CBiggerExampleClass(value1, value2);
+exampleClass->InitExample();
+biggerExampleClass->InitExample();
+```
+
+[back to top](#table-of-contents)
+
+### 10. Controls Statements
+Insert a new line before every:
+* else in an if statement
+* catch in a try statement
+* while in a do statement
+
+#### 10.1. if else
+Put `then`, `return` or `throw` statements on a new line. Keep `else if` statements on one line.
+```cpp
+if (true)
+  return;
+if (true)
+{
+  [...]
+} 
+else if (false)
+{
+  return;
+} 
+else
+  return;
+```
+
+#### 10.2. switch case
+```cpp
+switch (cmd)
+{
+  case x:
+  {
+    doSomething();
+    break;
+  }
+  case x:
+  case z:
+    return true;
+  default:
+    doSomething();
+}
+```
+
+[back to top](#table-of-contents)
+
+### 11. Naming
+#### 11.1. Namespaces
+Namespaces should be in uppercase.
+```cpp
+namespace KODI
+{
+  [...]
+}
+```
+
+#### 11.2. Constants
+Use uppercase with underscore spacing where necessary.
+```cpp
+const int MY_CONSTANT = 1;
+```
+
+#### 11.3. Enums
+Use CamelCase for the enum name and uppercase for the values.
+```cpp
+enum Dummy
+{
+  VALUE_X,
+  VALUE_Y
+};
+```
+
+#### 11.4. Interfaces
+Use CamelCase for interface names and they should be prefixed with an uppercase I. Filename should match the interface name without the prefixed I, e.g. ILogger.h
+```cpp
+class ILogger
+{
+  void Log(...) = 0;
+}
+```
+
+#### 11.5. Classes
+Use CamelCase for class names and they should be prefixed with an uppercase C. Filename should match the class name without the prefixed C, e.g. Logger.cpp
+```cpp
+class CLogger : public ILogger
+{
+  void Log(...)
+}
+```
+
+#### 11.6. Methods
+Use CamelCase for method names and first letter should always be uppercase, even if the methods are private or protected.
+```cpp
+void MyDummyClass::DoSomething();
+```
+
+#### 11.7. Variables
+Use CamelCase for variables. Type prefixing is optional.
+
+##### Global Variables
+Prefix global variables with *g_*
+```cpp
+int g_globalVariableA;
+```
+**WARNING:** Avoid globals use. It increases the chances of submitted code to be accepted.
+
+##### Member Variables
+Prefix member variables with *m_*
+```cpp
+int m_variableA;
+```
+
+[back to top](#table-of-contents)
+
+### 12. Conventions
+#### 12.1. Casts
+New code should use C++ style casts and not older C style casts. When modifying existing code the developer can choose to update it to C++ style casts or leave as is. Remember that whenever a `dynamic_cast` is used the result can be a `nullptr` and needs to be checked accordingly.
+
+#### 12.2. NULL vs nullptr
+Prefer the use of `nullptr` instead of `NULL`. `nullptr` is a typesafe version and as such can't be implicitly converted to `int` or anything else.
+
+#### 12.3. auto
+
+Feel free to use `auto` wherever it improves readability. Good places are iterators or when dealing with containers.
+```cpp
+std::map<std::string, std::vector<int>>::iterator i = var.begin();
+```
+vs
+```cpp
+auto i = var.being();
+```
+#### 12.4. for loops
+Use newer style foreach loops wherever it makes sense. If iterators are used see above about using `auto`.
+```cpp
+for (auto& : var)
+{
+  [...]
+}
+```
+Use `const auto&` if there's no reason to modify the value.
+
+[back to top](#table-of-contents)
