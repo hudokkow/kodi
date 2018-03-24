@@ -73,7 +73,7 @@ macro(winstore_set_assets target)
   set(RESOURCES ${RESOURCES} ${ASSET_FILES} 
                             "${CMAKE_SOURCE_DIR}/tools/windows/packaging/uwp/kodi_temp_key.pfx")
   set(LICENSE_FILES 
-    ${CMAKE_SOURCE_DIR}/LICENSE.GPL
+    ${CMAKE_SOURCE_DIR}/LICENSE.md
     ${CMAKE_SOURCE_DIR}/copying.txt
     ${CMAKE_SOURCE_DIR}/privacy-policy.txt)
   if(EXISTS "${CMAKE_SOURCE_DIR}/known_issues.txt")
