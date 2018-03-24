@@ -131,7 +131,7 @@ install(FILES ${CMAKE_SOURCE_DIR}/tools/Linux/packaging/media/icon256x256.png
 install(FILES ${CMAKE_SOURCE_DIR}/copying.txt
               ${CMAKE_SOURCE_DIR}/LICENSE.GPL
               ${CMAKE_SOURCE_DIR}/version.txt
-              ${CMAKE_SOURCE_DIR}/docs/README.linux
+              ${CMAKE_SOURCE_DIR}/docs/README.Linux.md
         DESTINATION ${docdir}
         COMPONENT kodi)
 
