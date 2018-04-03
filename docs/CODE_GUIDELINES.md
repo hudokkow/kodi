@@ -1,6 +1,6 @@
 ## Table of Contents
-1. [Document Conventions](#1-document-conventions)
-2. [Code Guidelines and Formatting Conventions](#2-code-guidelines-and-formatting-conventions)
+1. [Motivation](#1-motivation)
+2. [Document Conventions](#2-document-conventions)
 3. [Indentation](#3-indentation)
 4. [Statements](#4-statements)
 5. [Namespaces](#5-namespaces)
@@ -25,18 +25,17 @@
   12.3. [auto](#123-auto)  
   12.4. [for loops](#124-for-loops)
 
-### 1. Document Conventions
+### 1. Motivation
+When working in a large group, the two most important values are readability and maintainability. We code for other people, not computers. To accomplish these goals, we have created a unified set of code conventions.
+
+Conventions can be bent or broken in the interest of making code more readable and maintainable. However, if you submit a patch that contains excessive tyle conflicts, you may be asked to improve your code before your pull request is reviewed.
+
+### 2. Document Conventions
 Several different strategies are used to draw your attention to certain pieces of information. In order of how critical the information is, these items are marked as a note, tip, or warning. For example: 
  
 **NOTE:** Linux is user friendly... It's just very particular about who its friends are.  
 **TIP:** Algorithm is what developers call code they do not want to explain.  
 **WARNING:** Developers don't change light bulbs. It's a hardware problem.
-
-[back to top](#table-of-contents)
-
-### 2. Code Guidelines and Formatting Conventions
-These are conventions which we try to follow when writing code for Kodi. They are this way mainly for reasons of taste, however, sticking to a common set of formatting rules also makes it slightly easier to read through our sources. If you want to submit patches, please try to follow these rules.
-As such we don't follow these rules slavishly, in certain cases it is OK (and in fact favorable) to stray from them.
 
 [back to top](#table-of-contents)
 
