@@ -78,22 +78,20 @@ class ILogger
 ### 6. Headers
 Included header files should be sorted alphabetically to prevent duplicates and allow better overview.
 Header order should be:
-* Header file corresponding to the *cpp* file
-* C system files
-* C++ system files
+* Own header file
+* Other Kodi includes
+* C and C++ system files
 * Other libraries' header files
-* Own header files
 
 ```cpp
 #include "PVRManager.h"
-#include <cassert>
-#include <utility>
-#include "Application.h"
-#include "Util.h"
 #include "addons/AddonInstaller.h"
 #include "dialogs/GUIDialogExtendedProgressBar.h"
 #include "messaging/helpers/DialogHelper.h"
+#include "messaging/ApplicationMessenger.h"
+#include "messaging/ThreadMessage.h"
 #include "music/tags/MusicInfoTag.h"
+#include "music/MusicDatabase.h"
 #include "network/Network.h"
 #include "pvr/addons/PVRClients.h"
 #include "pvr/channels/PVRChannel.h"
@@ -103,6 +101,27 @@ Header order should be:
 #include "utils/log.h"
 #include "utils/Variant.h"
 #include "video/VideoDatabase.h"
+#include "Application.h"
+#include "ServiceBroker.h"
+
+#include <cassert>
+#include <utility>
+
+#include "libavutil/pixfmt.h"
+```
+
+Place directories before files. If the headers aren't sorted, either do your best to match the existing order, or precede your commit with an alphabetization commit.
+
+If possible, you should avoid including headers in another header. Instead, you can forward-declare the class and use a `std::unique_ptr`:
+
+```cpp
+class CFileItem;
+
+class Example
+{
+  ...
+  std::unique_ptr<CFileItem> m_fileItem;
+}
 ```
 
 [back to top](#table-of-contents)
