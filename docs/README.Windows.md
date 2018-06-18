@@ -49,7 +49,7 @@ To build Kodi:
 * **[CMake](https://cmake.org/download/)**
 * **[Git for Windows](https://gitforwindows.org/)**
 * **[Java Runtime Environment (JRE)](http://www.oracle.com/technetwork/java/javase/downloads/index.html)**
-* **[Nullsoft scriptable install system (NSIS)](http://nsis.sourceforge.net/Download)**
+* **[Nullsoft scriptable install system (NSIS)](http://nsis.sourceforge.net/Download)** (Only needed if you want to generate an installer file)
 * **[Visual Studio 2017](https://www.visualstudio.com/downloads/)** (Community Edition is fine)
 
 To run Kodi you need a relatively recent CPU with integrated GPU or discrete GPU with up-to-date graphics device-drivers installed from the manufacturer's website.
