@@ -80,9 +80,9 @@ class ILogger
 **[back to top](#table-of-contents)**
 
 ## 6. Headers
-Included header files should be sorted alphabetically to prevent duplicates and allow better overview, with an empty line clearly separating sections.
+Included header files have to be sorted alphabetically to prevent duplicates and allow better overview, with an empty line clearly separating sections.
 
-Header order should be:
+Header order has to be:
 * Own header file
 * Other Kodi includes
 * C and C++ system files
@@ -331,12 +331,12 @@ auto i = var.being();
 ### 12.4. for loops
 Use range-based for loops wherever it makes sense. If iterators are used see above about using `auto`.
 ```cpp
-for (auto& : var)
+for (const auto& : var)
 {
   [...]
 }
 ```
-Use `const auto&` if there's no reason to modify the value.
+Remove the `const` if the value has to be modified.
 
 **[back to top](#table-of-contents)**
 
