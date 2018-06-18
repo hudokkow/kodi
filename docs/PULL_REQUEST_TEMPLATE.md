@@ -26,9 +26,9 @@
 ## Checklist:
 <!--- Go over all the following points, and put an `X` in all the boxes that apply like this: [X] -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-- [ ] My code follows the **[Code guidelines](https://github.com/xbmc/xbmc/blob/master/docs/CODE_GUIDELINES.md)** of this project 
+- [ ] My code follows the **[Code Guidelines](CODE_GUIDELINES.md)** of this project 
 - [ ] My change requires a change to the documentation, either Doxygen or wiki
 - [ ] I have updated the documentation accordingly
-- [ ] I have read the **[CONTRIBUTING](https://github.com/xbmc/xbmc/blob/master/docs/CONTRIBUTING.md)** document
+- [ ] I have read the **[Contributing](CONTRIBUTING.md)** document
 - [ ] I have added tests to cover my change
 - [ ] All new and existing tests passed
