@@ -6,7 +6,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/xbmc/xbmc/pulls)
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat-square)](#how-to-contribute)
 [![Build](https://img.shields.io/badge/CI-jenkins-brightgreen.svg?style=flat-square)](http://jenkins.kodi.tv/)
-[![Commits](https://img.shields.io/github/commits-since/xbmc/xbmc/17.6-Krypton.svg?style=flat-square)](https://github.com/xbmc/xbmc/commits/master)
+[![Commits](https://img.shields.io/github/commits-since/xbmc/xbmc/latest.svg?style=flat-square)](https://github.com/xbmc/xbmc/commits/master)
 
 # Welcome to Kodi Home Theater Software!
 Kodi is an award-winning **free and open source** software media player and entertainment hub for digital media. Available as a native application for **Android, Linux, macOS, iOS and Windows operating systems**, Kodi runs on most common processor architectures.
