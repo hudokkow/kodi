@@ -886,7 +886,18 @@ std::string CCPUInfo::GetCoresUsageString() const
       if (!strCores.empty())
         strCores += ' ';
 
-      strCores += StringUtils::Format("#%d: %3.0f%%", it->first, it->second.m_fPct);
+      /* if (it == m_cores.begin())
+        strCores += StringUtils::Format("%d: %3.0f%%", it->first, it->second.m_fPct);
+      else
+        strCores += StringUtils::Format("- %d: %3.0f%%", it->first, it->second.m_fPct); */
+
+
+      if (it == m_cores.begin())
+        strCores += StringUtils::Format("%3.0f%%", it->second.m_fPct);
+      else
+        strCores += StringUtils::Format(" | %3.0f%%", it->second.m_fPct);
+
+      // strCores += StringUtils::Format("CPU%d: %3.0f%%", it->first, it->second.m_fPct);
     }
   }
   else
