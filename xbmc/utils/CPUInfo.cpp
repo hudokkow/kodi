@@ -470,7 +470,7 @@ CCPUInfo::CCPUInfo(void)
   if (m_cpuSerial.empty())
     m_cpuSerial = "N/A";
 
-  readProcStat(m_userTicks, m_niceTicks, m_systemTicks, m_idleTicks, m_ioTicks);
+  ReadProcStat(m_userTicks, m_niceTicks, m_systemTicks, m_idleTicks, m_ioTicks);
   m_nextUsedReadTime.Set(MINIMUM_TIME_BETWEEN_READS);
 
   ReadCPUFeatures();
@@ -506,7 +506,7 @@ CCPUInfo::~CCPUInfo()
 #endif
 }
 
-int CCPUInfo::getUsedPercentage()
+int CCPUInfo::GetCPUUsedPercentage()
 {
   int result = 0;
 
@@ -522,7 +522,7 @@ int CCPUInfo::getUsedPercentage()
   unsigned long long idleTicks;
   unsigned long long ioTicks;
 
-  if (!readProcStat(userTicks, niceTicks, systemTicks, idleTicks, ioTicks))
+  if (!ReadProcStat(userTicks, niceTicks, systemTicks, idleTicks, ioTicks))
     return m_lastUsedPercentage;
 
   userTicks -= m_userTicks;
@@ -547,7 +547,7 @@ int CCPUInfo::getUsedPercentage()
   return result;
 }
 
-float CCPUInfo::getCPUFrequency()
+float CCPUInfo::GetCPUFrequency()
 {
   // Get CPU frequency, scaled to MHz.
 #if defined(TARGET_DARWIN)
@@ -613,7 +613,7 @@ float CCPUInfo::getCPUFrequency()
 #endif
 }
 
-bool CCPUInfo::getTemperature(CTemperature& temperature)
+bool CCPUInfo::GetCPUTemperature(CTemperature& temperature)
 {
   int         value = 0;
   char        scale = 0;
@@ -694,7 +694,7 @@ const CoreInfo &CCPUInfo::GetCoreInfo(int nCoreId)
   return dummy;
 }
 
-bool CCPUInfo::readProcStat(unsigned long long& user, unsigned long long& nice,
+bool CCPUInfo::ReadProcStat(unsigned long long& user, unsigned long long& nice,
     unsigned long long& system, unsigned long long& idle, unsigned long long& io)
 {
 #if defined(TARGET_WINDOWS)

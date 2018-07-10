@@ -32,19 +32,19 @@
 
 #include "gtest/gtest.h"
 
-TEST(TestCPUInfo, getUsedPercentage)
+TEST(TestCPUInfo, GetCPUUsedPercentage)
 {
-  EXPECT_GE(g_cpuInfo.getUsedPercentage(), 0);
+  EXPECT_GE(g_cpuInfo.GetCPUUsedPercentage(), 0);
 }
 
-TEST(TestCPUInfo, getCPUCount)
+TEST(TestCPUInfo, GetCPUCount)
 {
-  EXPECT_GT(g_cpuInfo.getCPUCount(), 0);
+  EXPECT_GT(g_cpuInfo.GetCPUCount(), 0);
 }
 
-TEST(TestCPUInfo, getCPUFrequency)
+TEST(TestCPUInfo, GetCPUFrequency)
 {
-  EXPECT_GE(g_cpuInfo.getCPUFrequency(), 0.f);
+  EXPECT_GE(g_cpuInfo.GetCPUFrequency(), 0.f);
 }
 
 namespace
@@ -74,42 +74,42 @@ private:
 
 //Disabled for windows because there is no implementation to get the CPU temp and there will probably never be one
 #ifndef TARGET_WINDOWS
-TEST(TestCPUInfo, getTemperature)
+TEST(TestCPUInfo, GetCPUTemperature)
 {
   TemporarySetting command(g_advancedSettings.m_cpuTempCmd, "echo '50 c'");
   CTemperature t;
-  EXPECT_TRUE(g_cpuInfo.getTemperature(t));
+  EXPECT_TRUE(g_cpuInfo.GetCPUTemperature(t));
   EXPECT_TRUE(t.IsValid());
 }
 #endif
 
-TEST(TestCPUInfo, getCPUModel)
+TEST(TestCPUInfo, GetCPUModel)
 {
-  std::string s = g_cpuInfo.getCPUModel();
+  std::string s = g_cpuInfo.GetCPUModel();
   EXPECT_STRNE("", s.c_str());
 }
 
-TEST(TestCPUInfo, getCPUBogoMips)
+TEST(TestCPUInfo, GetCPUBogoMips)
 {
-  std::string s = g_cpuInfo.getCPUBogoMips();
+  std::string s = g_cpuInfo.GetCPUBogoMips();
   EXPECT_STRNE("", s.c_str());
 }
 
-TEST(TestCPUInfo, getCPUHardware)
+TEST(TestCPUInfo, GetCPUHardware)
 {
-  std::string s = g_cpuInfo.getCPUHardware();
+  std::string s = g_cpuInfo.GetCPUHardware();
   EXPECT_STRNE("", s.c_str());
 }
 
-TEST(TestCPUInfo, getCPURevision)
+TEST(TestCPUInfo, GetCPURevision)
 {
-  std::string s = g_cpuInfo.getCPURevision();
+  std::string s = g_cpuInfo.GetCPURevision();
   EXPECT_STRNE("", s.c_str());
 }
 
-TEST(TestCPUInfo, getCPUSerial)
+TEST(TestCPUInfo, GetCPUSerial)
 {
-  std::string s = g_cpuInfo.getCPUSerial();
+  std::string s = g_cpuInfo.GetCPUSerial();
   EXPECT_STRNE("", s.c_str());
 }
 
@@ -131,10 +131,10 @@ TEST(TestCPUInfo, GetCPUFeatures)
   (void)a;
 }
 
-TEST(TestCPUInfo, getUsedPercentage_output)
+TEST(TestCPUInfo, GetCPUUsedPercentage_output)
 {
   CCPUInfo c;
   Sleep(1); //! @todo Support option from main that sets this parameter
-  int r = c.getUsedPercentage();
+  int r = c.GetCPUUsedPercentage();
   std::cout << "Percentage: " << testing::PrintToString(r) << std::endl;
 }

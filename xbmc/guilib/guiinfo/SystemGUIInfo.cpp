@@ -68,7 +68,7 @@ std::string CSystemGUIInfo::GetSystemHeatInfo(int info) const
   {
     m_lastSysHeatInfoTime = CTimeUtils::GetFrameTime();
 #if defined(TARGET_POSIX)
-    g_cpuInfo.getTemperature(m_cpuTemp);
+    g_cpuInfo.GetCPUTemperature(m_cpuTemp);
     m_gpuTemp = GetGPUTemperature();
 #endif
   }
@@ -85,7 +85,7 @@ std::string CSystemGUIInfo::GetSystemHeatInfo(int info) const
       break;
     case SYSTEM_CPU_USAGE:
 #if defined(TARGET_DARWIN) || defined(TARGET_WINDOWS)
-      text = StringUtils::Format("%d%%", g_cpuInfo.getUsedPercentage());
+      text = StringUtils::Format("%d%%", g_cpuInfo.GetCPUUsedPercentage());
 #else
       text = StringUtils::Format("%s", g_cpuInfo.GetCoresUsageString().c_str());
 #endif
@@ -413,7 +413,7 @@ bool CSystemGUIInfo::GetInt(int& value, const CGUIListItem *gitem, int contextWi
       return true;
     }
     case SYSTEM_CPU_USAGE:
-      value = g_cpuInfo.getUsedPercentage();
+      value = g_cpuInfo.GetCPUUsedPercentage();
       return true;
     case SYSTEM_BATTERY_LEVEL:
       value = CServiceBroker::GetPowerManager().BatteryLevel();

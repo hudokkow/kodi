@@ -470,11 +470,11 @@ bool CApplication::Create(const CAppParamParser &params)
 
   CLog::Log(LOGNOTICE, "FFmpeg version/source: %s", av_version_info());
 
-  std::string cpuModel(g_cpuInfo.getCPUModel());
+  std::string cpuModel(g_cpuInfo.GetCPUModel());
   if (!cpuModel.empty())
-    CLog::Log(LOGNOTICE, "Host CPU: %s, %d core%s available", cpuModel.c_str(), g_cpuInfo.getCPUCount(), (g_cpuInfo.getCPUCount() == 1) ? "" : "s");
+    CLog::Log(LOGNOTICE, "Host CPU: %s, %d core%s available", cpuModel.c_str(), g_cpuInfo.GetCPUCount(), (g_cpuInfo.GetCPUCount() == 1) ? "" : "s");
   else
-    CLog::Log(LOGNOTICE, "%d CPU core%s available", g_cpuInfo.getCPUCount(), (g_cpuInfo.getCPUCount() == 1) ? "" : "s");
+    CLog::Log(LOGNOTICE, "%d CPU core%s available", g_cpuInfo.GetCPUCount(), (g_cpuInfo.GetCPUCount() == 1) ? "" : "s");
 
   //! @todo - move to CPlatformXXX ???
 #if defined(TARGET_WINDOWS)
@@ -4285,7 +4285,7 @@ void CApplication::Process()
     ProcessSlow();
   }
 #if !defined(TARGET_DARWIN)
-  g_cpuInfo.getUsedPercentage(); // must call it to recalculate pct values
+  g_cpuInfo.GetCPUUsedPercentage(); // must call it to recalculate pct values
 #endif
 }
 

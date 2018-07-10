@@ -73,7 +73,7 @@ void CGUIWindowDebugInfo::Process(unsigned int currentTime, CDirtyRegionList &di
 {
   CServiceBroker::GetWinSystem()->GetGfxContext().SetRenderingResolution(CServiceBroker::GetWinSystem()->GetGfxContext().GetResInfo(), false);
 
-  g_cpuInfo.getUsedPercentage(); // must call it to recalculate pct values
+  g_cpuInfo.GetCPUUsedPercentage(); // must call it to recalculate pct values
 
   static int yShift = 20;
   static int xShift = 40;

@@ -78,15 +78,15 @@ public:
   CCPUInfo(void);
   ~CCPUInfo();
 
-  int getUsedPercentage();
-  int getCPUCount() const { return m_cpuCount; }
-  float getCPUFrequency();
-  bool getTemperature(CTemperature& temperature);
-  std::string& getCPUModel() { return m_cpuModel; }
-  std::string& getCPUBogoMips() { return m_cpuBogoMips; }
-  std::string& getCPUHardware() { return m_cpuHardware; }
-  std::string& getCPURevision() { return m_cpuRevision; }
-  std::string& getCPUSerial() { return m_cpuSerial; }
+  int GetCPUUsedPercentage();
+  int GetCPUCount() const { return m_cpuCount; }
+  float GetCPUFrequency();
+  bool GetCPUTemperature(CTemperature& temperature);
+  std::string& GetCPUModel() { return m_cpuModel; }
+  std::string& GetCPUBogoMips() { return m_cpuBogoMips; }
+  std::string& GetCPUHardware() { return m_cpuHardware; }
+  std::string& GetCPURevision() { return m_cpuRevision; }
+  std::string& GetCPUSerial() { return m_cpuSerial; }
 
   const CoreInfo &GetCoreInfo(int nCoreId);
   bool HasCoreId(int nCoreId) const;
@@ -98,7 +98,7 @@ public:
 private:
   CCPUInfo(const CCPUInfo&) = delete;
   CCPUInfo& operator=(const CCPUInfo&) = delete;
-  bool readProcStat(unsigned long long& user, unsigned long long& nice, unsigned long long& system,
+  bool ReadProcStat(unsigned long long& user, unsigned long long& nice, unsigned long long& system,
                     unsigned long long& idle, unsigned long long& io);
   void ReadCPUFeatures();
   static bool HasNeon();

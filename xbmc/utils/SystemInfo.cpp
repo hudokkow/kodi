@@ -315,7 +315,7 @@ std::string CSysInfoJob::GetBatteryLevel()
 double CSysInfoJob::GetCPUFrequency()
 {
 #if defined (TARGET_POSIX) || defined(TARGET_WINDOWS)
-  return double (g_cpuInfo.getCPUFrequency());
+  return double (g_cpuInfo.GetCPUFrequency());
 #else
   return 0;
 #endif
@@ -502,27 +502,27 @@ bool CSysInfo::GetDiskSpace(std::string drive,int& iTotal, int& iTotalFree, int&
 
 std::string CSysInfo::GetCPUModel()
 {
-  return "CPU: " + g_cpuInfo.getCPUModel();
+  return "CPU: " + g_cpuInfo.GetCPUModel();
 }
 
 std::string CSysInfo::GetCPUBogoMips()
 {
-  return "BogoMips: " + g_cpuInfo.getCPUBogoMips();
+  return "BogoMips: " + g_cpuInfo.GetCPUBogoMips();
 }
 
 std::string CSysInfo::GetCPUHardware()
 {
-  return "Hardware: " + g_cpuInfo.getCPUHardware();
+  return "Hardware: " + g_cpuInfo.GetCPUHardware();
 }
 
 std::string CSysInfo::GetCPURevision()
 {
-  return "Revision: " + g_cpuInfo.getCPURevision();
+  return "Revision: " + g_cpuInfo.GetCPURevision();
 }
 
 std::string CSysInfo::GetCPUSerial()
 {
-  return "Serial: " + g_cpuInfo.getCPUSerial();
+  return "Serial: " + g_cpuInfo.GetCPUSerial();
 }
 
 std::string CSysInfo::GetKernelName(bool emptyIfUnknown /*= false*/)
