@@ -50,7 +50,7 @@ class CLinuxResourceCounter;
 
 struct CoreInfo
 {
-  int    m_id = 0;
+  int m_id = 0;
   double m_fSpeed = .0;
   double m_fPct = .0;
 #ifdef TARGET_POSIX
@@ -59,7 +59,7 @@ struct CoreInfo
   unsigned long long m_system = 0LL;
   unsigned long long m_io = 0LL;
 #elif defined(TARGET_WINDOWS)
-  PDH_HCOUNTER m_coreCounter = NULL;
+  PDH_HCOUNTER m_coreCounter = nullptr;
   unsigned long long m_total = 0;
 #endif
   unsigned long long m_idle = 0LL;
@@ -123,14 +123,14 @@ private:
   unsigned long long m_idleTicks;
   unsigned long long m_ioTicks;
 
-  int          m_lastUsedPercentage;
+  int m_lastUsedPercentage;
   XbmcThreads::EndTime m_nextUsedReadTime;
-  std::string  m_cpuModel;
-  std::string  m_cpuBogoMips;
-  std::string  m_cpuHardware;
-  std::string  m_cpuRevision;
-  std::string  m_cpuSerial;
-  int          m_cpuCount;
+  std::string m_cpuModel;
+  std::string m_cpuBogoMips;
+  std::string m_cpuHardware;
+  std::string m_cpuRevision;
+  std::string m_cpuSerial;
+  int m_cpuCount;
   unsigned int m_cpuFeatures;
 
   std::map<int, CoreInfo> m_cores;
@@ -138,4 +138,3 @@ private:
 };
 
 extern CCPUInfo g_cpuInfo;
-
