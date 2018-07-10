@@ -37,7 +37,7 @@
 #include "settings/MediaSettings.h"
 #include "settings/Settings.h"
 #include "FileItem.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "guilib/LocalizeStrings.h"
 #include "threads/SingleLock.h"
 #include "utils/StringUtils.h"

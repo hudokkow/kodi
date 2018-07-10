@@ -43,7 +43,7 @@
 #include "settings/Settings.h"
 #include "storage/MediaManager.h"
 #include "utils/AlarmClock.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "utils/StringUtils.h"
 #include "utils/SystemInfo.h"
 #include "utils/TimeUtils.h"

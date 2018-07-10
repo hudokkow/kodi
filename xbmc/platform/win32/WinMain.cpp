@@ -25,7 +25,7 @@
 #include "platform/win32/CharsetConverter.h"
 #include "platform/xbmc.h"
 #include "settings/AdvancedSettings.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "platform/Environment.h"
 #include "utils/CharsetConverter.h" // Required to initialize converters before usage
 

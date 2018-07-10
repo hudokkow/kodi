@@ -27,7 +27,7 @@
 #include "DVDCodecs/DVDCodecUtils.h"
 #include "DVDCodecs/DVDFactoryCodec.h"
 #include "ServiceBroker.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "settings/AdvancedSettings.h"
 #include "settings/Settings.h"
 #include "cores/VideoSettings.h"

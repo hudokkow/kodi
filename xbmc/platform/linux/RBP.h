@@ -32,7 +32,7 @@
 
 #include "DllBCM.h"
 #include "OMXCore.h"
-#include "xbmc/utils/CPUInfo.h"
+#include "xbmc/platform/CPUInfo.h"
 #include "threads/CriticalSection.h"
 #include "threads/Event.h"
 

@@ -22,7 +22,7 @@
 #  include <windows.h>
 #endif
 
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "utils/Temperature.h"
 #include "settings/AdvancedSettings.h"
 

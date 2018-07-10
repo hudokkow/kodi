@@ -34,7 +34,7 @@
 #include "ServiceBroker.h"
 #include "rendering/RenderSystem.h"
 #include "guilib/LocalizeStrings.h"
-#include "CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "CompileInfo.h"
 #include "settings/Settings.h"
 #include "platform/Filesystem.h"

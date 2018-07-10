@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 
 extern "C" {
 #include "libavcodec/avcodec.h"

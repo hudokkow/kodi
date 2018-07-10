@@ -31,7 +31,7 @@
 #include "platform/win32/utils/gpu_memcpy_sse4.h"
 #endif
 #include "platform/win32/utils/memcpy_sse2.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 
 #define PLANE_Y 0
 #define PLANE_U 1

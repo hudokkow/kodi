@@ -22,7 +22,7 @@
 #include "utils/TransformMatrix.h"
 
 #if defined(HAS_NEON)
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #endif
 
 #include <cmath>

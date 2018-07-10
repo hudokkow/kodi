@@ -94,7 +94,7 @@
 #include "settings/MediaSettings.h"
 #include "settings/SkinSettings.h"
 #include "guilib/LocalizeStrings.h"
-#include "utils/CPUInfo.h"
+#include "platform/CPUInfo.h"
 #include "utils/FileExtensionProvider.h"
 #include "utils/log.h"
 #include "SeekHandler.h"
