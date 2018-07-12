@@ -1,5 +1,5 @@
 /*
- *      Copyright (C) 2005-2013 Team XBMC
+ *      Copyright (C) 2005-2018 Team XBMC
  *      http://kodi.tv
  *
  *  This Program is free software; you can redistribute it and/or modify
@@ -53,6 +53,39 @@ class CLinuxResourceCounter;
 #define CPU_FEATURE_ALTIVEC  1 << 10
 #define CPU_FEATURE_NEON     1 << 11
 
+#ifdef TARGET_WINDOWS
+// Defines to help with calls to CPUID
+#define CPUID_INFOTYPE_STANDARD 0x00000001
+#define CPUID_INFOTYPE_EXTENDED 0x80000001
+
+// Standard Features
+// Bitmasks for the values returned by a call to cpuid with eax=0x00000001
+#define CPUID_00000001_ECX_SSE3  (1<<0)
+#define CPUID_00000001_ECX_SSSE3 (1<<9)
+#define CPUID_00000001_ECX_SSE4  (1<<19)
+#define CPUID_00000001_ECX_SSE42 (1<<20)
+
+#define CPUID_00000001_EDX_MMX   (1<<23)
+#define CPUID_00000001_EDX_SSE   (1<<25)
+#define CPUID_00000001_EDX_SSE2  (1<<26)
+
+// Extended Features
+// Bitmasks for the values returned by a call to cpuid with eax=0x80000001
+#define CPUID_80000001_EDX_MMX2     (1<<22)
+#define CPUID_80000001_EDX_MMX      (1<<23)
+#define CPUID_80000001_EDX_3DNOWEXT (1<<30)
+#define CPUID_80000001_EDX_3DNOW    (1<<31)
+
+// Help with the __cpuid intrinsic of MSVC
+#define CPUINFO_EAX 0
+#define CPUINFO_EBX 1
+#define CPUINFO_ECX 2
+#define CPUINFO_EDX 3
+#endif
+
+// In milliseconds
+#define MINIMUM_TIME_BETWEEN_READS 500
+
 struct CoreInfo
 {
   int m_id = 0;
@@ -63,7 +96,7 @@ struct CoreInfo
   unsigned long long m_nice = 0LL;
   unsigned long long m_system = 0LL;
   unsigned long long m_io = 0LL;
-#elif defined(TARGET_WINDOWS)
+#elif TARGET_WINDOWS
   PDH_HCOUNTER m_coreCounter = nullptr;
   unsigned long long m_total = 0;
 #endif
@@ -113,10 +146,10 @@ private:
   FILE* m_fProcTemperature = nullptr;
   FILE* m_fCPUFreq = nullptr;
   bool m_cpuInfoForFreq = false;
-#if defined(TARGET_DARWIN)
+#ifdef TARGET_DARWIN
   CLinuxResourceCounter *m_pResourceCounter = new CLinuxResourceCounter();
 #endif
-#elif defined(TARGET_WINDOWS)
+#elif TARGET_WINDOWS
   PDH_HQUERY m_cpuQueryFreq = nullptr;
   PDH_HQUERY m_cpuQueryLoad = nullptr;
   PDH_HCOUNTER m_cpuFreqCounter = nullptr;

@@ -1,4 +1,5 @@
 set(SOURCES input/RemoteControlXbox.cpp
+            CPUInfo.cpp
             Environment.cpp
             Win10App.cpp
             MessagePrinter.cpp
