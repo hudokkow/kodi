@@ -17,47 +17,52 @@
  *  <http://www.gnu.org/licenses/>.
  *
  */
-
-#include <cstdlib>
-
 #include "CPUInfo.h"
 #include "utils/log.h"
+#include "utils/StringUtils.h"
 #include "utils/Temperature.h"
+
+#include <cstdlib>
 #include <string>
 #include <string.h>
 
 #if defined(TARGET_DARWIN)
-#include <sys/types.h>
+#include "platform/linux/LinuxResourceCounter.h"
 #include <sys/sysctl.h>
+#include <sys/types.h>
 #if defined(__ppc__) || defined (TARGET_DARWIN_IOS)
 #include <mach-o/arch.h>
 #endif // defined(__ppc__) || defined (TARGET_DARWIN_IOS)
 #ifdef TARGET_DARWIN_OSX
 #include "platform/darwin/osx/smc.h"
 #endif
-#include "platform/linux/LinuxResourceCounter.h"
 #endif
 
 #if defined(TARGET_FREEBSD)
-#include <sys/types.h>
-#include <sys/sysctl.h>
 #include <sys/resource.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
 #endif
 
 #if defined(TARGET_LINUX) && defined(HAS_NEON) && !defined(TARGET_ANDROID)
+#include <elf.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <elf.h>
-#include <linux/auxvec.h>
 #include <asm/hwcap.h>
+#include <linux/auxvec.h>
 #endif
 
 #if defined(TARGET_ANDROID)
 #include "platform/android/activity/AndroidFeatures.h"
 #endif
 
+#ifdef TARGET_POSIX
+#include "settings/AdvancedSettings.h"
+#endif
+
 #ifdef TARGET_WINDOWS
 #include "platform/win32/CharsetConverter.h"
+
 #include <algorithm>
 #include <intrin.h>
 #include <Pdh.h>
@@ -100,33 +105,14 @@
 #define CPUINFO_EBX 1
 #define CPUINFO_ECX 2
 #define CPUINFO_EDX 3
-
 #endif
-
-#ifdef TARGET_POSIX
-#include "settings/AdvancedSettings.h"
-#endif
-
-#include "utils/StringUtils.h"
 
 // In milliseconds
 #define MINIMUM_TIME_BETWEEN_READS 500
 
-CCPUInfo::CCPUInfo(void)
+CCPUInfo::CCPUInfo()
 {
-#ifdef TARGET_POSIX
-  m_fProcStat = m_fProcTemperature = m_fCPUFreq = nullptr;
-  m_cpuInfoForFreq = false;
-#elif defined(TARGET_WINDOWS)
-  m_cpuQueryFreq = nullptr;
-  m_cpuQueryLoad = nullptr;
-#endif
-  m_lastUsedPercentage = 0;
-  m_cpuFeatures = 0;
-
 #if defined(TARGET_DARWIN)
-  m_pResourceCounter = new CLinuxResourceCounter();
-
   size_t len = 4;
   std::string cpuVendor;
 
@@ -695,7 +681,7 @@ const CoreInfo &CCPUInfo::GetCoreInfo(int nCoreId)
 }
 
 bool CCPUInfo::ReadProcStat(unsigned long long& user, unsigned long long& nice,
-    unsigned long long& system, unsigned long long& idle, unsigned long long& io)
+                            unsigned long long& system, unsigned long long& idle, unsigned long long& io)
 {
 #if defined(TARGET_WINDOWS)
   nice = 0;
@@ -901,7 +887,7 @@ std::string CCPUInfo::GetCoresUsageString() const
 void CCPUInfo::ReadCPUFeatures()
 {
 #ifdef TARGET_WINDOWS
-#ifndef _M_ARM
+  #ifndef _M_ARM
   int CPUInfo[4]; // receives EAX, EBX, ECD and EDX in that order
 
   __cpuid(CPUInfo, 0);
@@ -979,7 +965,7 @@ void CCPUInfo::ReadCPUFeatures()
       m_cpuFeatures |= CPU_FEATURE_MMX;
   #endif
 #elif defined(LINUX)
-// empty on purpose, the implementation is in the constructor
+  // empty on purpose, the implementation is in the constructor
 #elif !defined(__powerpc__) && !defined(__ppc__) && !defined(__arm__) && !defined(__aarch64__)
   m_cpuFeatures |= CPU_FEATURE_MMX;
 #elif defined(__powerpc__) || defined(__ppc__)
@@ -998,7 +984,7 @@ bool CCPUInfo::HasNeon()
   has_neon = 1;
 
 #elif defined(TARGET_LINUX) && defined(HAS_NEON)
-#if defined(__LP64__)
+  #if defined(__LP64__)
   has_neon = 1;
 #else
   if (has_neon == -1)

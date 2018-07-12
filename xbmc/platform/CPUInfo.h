@@ -20,11 +20,13 @@
 
 #pragma once
 
+#include "threads/SystemClock.h"
+
+#include <map>
+#include <string>
 #include <stdio.h>
 #include <time.h>
-#include <string>
-#include <map>
-#include "threads/SystemClock.h"
+
 
 #ifdef TARGET_WINDOWS
 // avoid inclusion of <windows.h> and others
@@ -32,8 +34,11 @@ typedef void* HANDLE;
 typedef HANDLE PDH_HQUERY;
 typedef HANDLE PDH_HCOUNTER;
 #endif
+
 class CTemperature;
+#if defined(TARGET_DARWIN)
 class CLinuxResourceCounter;
+#endif
 
 #define CPU_FEATURE_MMX      1 << 0
 #define CPU_FEATURE_MMX2     1 << 1
@@ -75,7 +80,7 @@ struct CoreInfo
 class CCPUInfo
 {
 public:
-  CCPUInfo(void);
+  CCPUInfo();
   ~CCPUInfo();
 
   int GetCPUUsedPercentage();
@@ -104,17 +109,17 @@ private:
   static bool HasNeon();
 
 #ifdef TARGET_POSIX
-  FILE* m_fProcStat;
-  FILE* m_fProcTemperature;
-  FILE* m_fCPUFreq;
-  bool m_cpuInfoForFreq;
+  FILE* m_fProcStat = nullptr;
+  FILE* m_fProcTemperature = nullptr;
+  FILE* m_fCPUFreq = nullptr;
+  bool m_cpuInfoForFreq = false;
 #if defined(TARGET_DARWIN)
-  CLinuxResourceCounter *m_pResourceCounter;
+  CLinuxResourceCounter *m_pResourceCounter = new CLinuxResourceCounter();
 #endif
 #elif defined(TARGET_WINDOWS)
-  PDH_HQUERY m_cpuQueryFreq;
-  PDH_HQUERY m_cpuQueryLoad;
-  PDH_HCOUNTER m_cpuFreqCounter;
+  PDH_HQUERY m_cpuQueryFreq = nullptr;
+  PDH_HQUERY m_cpuQueryLoad = nullptr;
+  PDH_HCOUNTER m_cpuFreqCounter = nullptr;
 #endif
 
   unsigned long long m_userTicks;
@@ -123,7 +128,7 @@ private:
   unsigned long long m_idleTicks;
   unsigned long long m_ioTicks;
 
-  int m_lastUsedPercentage;
+  int m_lastUsedPercentage = 0;
   XbmcThreads::EndTime m_nextUsedReadTime;
   std::string m_cpuModel;
   std::string m_cpuBogoMips;
@@ -131,7 +136,7 @@ private:
   std::string m_cpuRevision;
   std::string m_cpuSerial;
   int m_cpuCount;
-  unsigned int m_cpuFeatures;
+  unsigned int m_cpuFeatures = 0;
 
   std::map<int, CoreInfo> m_cores;
 
