@@ -89,14 +89,16 @@ class CLinuxResourceCounter;
 struct CoreInfo
 {
   int m_id = 0;
+#ifdef TARGET_WINDOWS_DESKTOP
   double m_fSpeed = .0;
+#endif
   double m_fPct = .0;
 #ifdef TARGET_POSIX
   unsigned long long m_user = 0LL;
   unsigned long long m_nice = 0LL;
   unsigned long long m_system = 0LL;
   unsigned long long m_io = 0LL;
-#elif TARGET_WINDOWS
+#elif TARGET_WINDOWS_DESKTOP
   PDH_HCOUNTER m_coreCounter = nullptr;
   unsigned long long m_total = 0;
 #endif

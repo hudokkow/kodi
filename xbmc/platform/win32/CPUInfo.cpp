@@ -21,6 +21,7 @@
 #include "platform/CPUInfo.h"
 
 #include "platform/win32/CharsetConverter.h"
+#include "utils/log.h"
 #include "utils/StringUtils.h"
 #include "utils/Temperature.h"
 
@@ -177,38 +178,10 @@ float CCPUInfo::GetCPUFrequency()
     return 0.f;
 }
 
-bool CCPUInfo::GetTemperature(CTemperature& temperature)
+bool CCPUInfo::GetCPUTemperature(CTemperature& temperature)
 {
-  int value = 0;
-  char scale = 0;
-
-  int ret = 0;
-  FILE *p = nullptr;
-  std::string cmd = g_advancedSettings.m_cpuTempCmd;
-
-  temperature.SetValid(false);
-
-  if (cmd.empty() && m_fProcTemperature == nullptr)
-    return false;
-
-  if (!cmd.empty())
-  {
-    p = popen (cmd.c_str(), "r");
-    if (p)
-    {
-      ret = fscanf(p, "%d %c", &value, &scale);
-      pclose(p);
-    }
-  }
-
-  if (scale == 'C' || scale == 'c')
-    temperature = CTemperature::CreateFromCelsius(value);
-  else if (scale == 'F' || scale == 'f')
-    temperature = CTemperature::CreateFromFahrenheit(value);
-  else
-    return false;
-
-  return true;
+  CLog::Log(LOGDEBUG, "%s is not implemented", __FUNCTION__);
+  return false;
 }
 
 bool CCPUInfo::ReadProcStat(unsigned long long& user, unsigned long long& nice,

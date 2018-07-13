@@ -33,6 +33,46 @@
 #include <linux/auxvec.h>
 #endif
 
+int CCPUInfo::GetCPUUsedPercentage()
+{
+  int result = 0;
+
+  if (!m_nextUsedReadTime.IsTimePast())
+    return m_lastUsedPercentage;
+
+#if defined(TARGET_DARWIN)
+  result = m_pResourceCounter->GetCPUUsage();
+#else
+  unsigned long long userTicks;
+  unsigned long long niceTicks;
+  unsigned long long systemTicks;
+  unsigned long long idleTicks;
+  unsigned long long ioTicks;
+
+  if (!ReadProcStat(userTicks, niceTicks, systemTicks, idleTicks, ioTicks))
+    return m_lastUsedPercentage;
+
+  userTicks -= m_userTicks;
+  niceTicks -= m_niceTicks;
+  systemTicks -= m_systemTicks;
+  idleTicks -= m_idleTicks;
+  ioTicks -= m_ioTicks;
+
+  if (userTicks + niceTicks + systemTicks + idleTicks + ioTicks == 0)
+    return m_lastUsedPercentage;
+  result = static_cast<int>(double(userTicks + niceTicks + systemTicks) * 100.0 / double(userTicks + niceTicks + systemTicks + idleTicks + ioTicks) + 0.5);
+
+  m_userTicks += userTicks;
+  m_niceTicks += niceTicks;
+  m_systemTicks += systemTicks;
+  m_idleTicks += idleTicks;
+  m_ioTicks += ioTicks;
+#endif
+  m_lastUsedPercentage = result;
+  m_nextUsedReadTime.Set(MINIMUM_TIME_BETWEEN_READS);
+
+  return result;
+}
 
 bool CCPUInfo::HasCoreId(int nCoreId) const
 {
