@@ -30,6 +30,7 @@ class CStereoscopicsManager;
 class CGUIInfoManager;
 class CGUIColorManager;
 class CGUIAudioManager;
+class CLocalizeStrings;
 
 class CGUIComponent
 {
@@ -46,6 +47,7 @@ public:
   CGUIInfoManager &GetInfoManager();
   CGUIColorManager &GetColorManager();
   CGUIAudioManager &GetAudioManager();
+  CLocalizeStrings &GetLocalizeStrings();
 
   bool ConfirmDelete(std::string path);
 
@@ -58,4 +60,5 @@ protected:
   std::unique_ptr<CGUIInfoManager> m_guiInfoManager;
   std::unique_ptr<CGUIColorManager> m_guiColorManager;
   std::unique_ptr<CGUIAudioManager> m_guiAudioManager;
+  std::unique_ptr<CLocalizeStrings> m_localizeStrings;
 };

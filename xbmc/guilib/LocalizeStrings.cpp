@@ -19,17 +19,23 @@
  */
 
 #include "LocalizeStrings.h"
+
 #include "addons/LanguageResource.h"
-#include "utils/CharsetConverter.h"
-#include "utils/log.h"
-#include "filesystem/SpecialProtocol.h"
-#include "utils/URIUtils.h"
-#include "utils/POUtils.h"
 #include "filesystem/Directory.h"
+#include "filesystem/SpecialProtocol.h"
+#include "messaging/ApplicationMessenger.h"
 #include "threads/SharedSection.h"
 #include "threads/SingleLock.h"
+#include "utils/CharsetConverter.h"
+#include "utils/log.h"
+#include "utils/POUtils.h"
 #include "utils/StringUtils.h"
+#include "utils/URIUtils.h"
+#include "utils/XBMCTinyXML.h"
 
+#include <map>
+#include <string>
+#include <stdint.h>
 
 /*! \brief Tries to load ids and strings from a strings.xml file to the `strings` map..
  * It should only be called from the LoadStr2Mem function to try a PO file first.
@@ -39,8 +45,9 @@
  \param offset An offset value to place strings from the id value.
  \return false if no strings.xml file was loaded.
  */
+
 static bool LoadXML(const std::string &filename, std::map<uint32_t, LocStr>& strings,
-    std::string &encoding, uint32_t offset = 0)
+                    std::string &encoding, uint32_t offset = 0)
 {
   CXBMCTinyXML xmlDoc;
   if (!xmlDoc.LoadFile(filename))
@@ -85,7 +92,7 @@ static bool LoadXML(const std::string &filename, std::map<uint32_t, LocStr>& str
  \return false if no strings.po file was loaded.
  */
 static bool LoadPO(const std::string &filename, std::map<uint32_t, LocStr>& strings,
-    std::string &encoding, uint32_t offset = 0 , bool bSourceLanguage = false)
+                   std::string &encoding, uint32_t offset = 0 , bool bSourceLanguage = false)
 {
   CPODocument PODoc;
   if (!PODoc.LoadFile(filename))
@@ -108,8 +115,8 @@ static bool LoadPO(const std::string &filename, std::map<uint32_t, LocStr>& stri
           continue;
         else if (bStrInMem)
           CLog::Log(LOGDEBUG,
-              "POParser: id:%i was recently re-used in the English string file, which is not yet "
-                  "changed in the translated file. Using the English string instead", id);
+                    "POParser: id:%i was recently re-used in the English string file, which is not yet "
+                    "changed in the translated file. Using the English string instead", id);
         strings[id + offset].strTranslated = PODoc.GetMsgid();
         counter++;
       }
@@ -149,7 +156,7 @@ static bool LoadPO(const std::string &filename, std::map<uint32_t, LocStr>& stri
  \return false if no strings.po or strings.xml file was loaded.
  */
 static bool LoadStr2Mem(const std::string &pathname_in, const std::string &language,
-    std::map<uint32_t, LocStr>& strings,  std::string &encoding, uint32_t offset = 0 )
+                        std::map<uint32_t, LocStr>& strings,  std::string &encoding, uint32_t offset = 0 )
 {
   std::string pathname = CSpecialProtocol::TranslatePathConvertCase(pathname_in + language);
   if (!XFILE::CDirectory::Exists(pathname))

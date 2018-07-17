@@ -25,14 +25,16 @@
 \brief
 */
 
+#include "GUIComponent.h"
+#include "ServiceBroker.h"
+
 #include "threads/CriticalSection.h"
 #include "threads/SharedSection.h"
+#include "utils/ILocalizer.h"
 
 #include <map>
 #include <string>
 #include <stdint.h>
-
-#include "utils/ILocalizer.h"
 
 /*!
  \ingroup strings
@@ -54,6 +56,7 @@ class CLocalizeStrings : public ILocalizer
 public:
   CLocalizeStrings(void);
   ~CLocalizeStrings(void) override;
+
   bool Load(const std::string& strPathName, const std::string& strLanguage);
   bool LoadSkinStrings(const std::string& path, const std::string& language);
   bool LoadAddonStrings(const std::string& path, const std::string& language, const std::string& addonId);
@@ -76,10 +79,3 @@ protected:
   mutable CSharedSection m_stringsMutex;
   CSharedSection m_addonStringsMutex;
 };
-
-/*!
- \ingroup strings
- \brief
- */
-extern CLocalizeStrings g_localizeStrings;
-

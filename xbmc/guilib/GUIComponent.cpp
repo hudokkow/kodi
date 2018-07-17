@@ -18,12 +18,14 @@
  *
  */
 
-#include "GUIAudioManager.h"
 #include "GUIComponent.h"
+
+#include "GUIAudioManager.h"
 #include "GUIColorManager.h"
 #include "GUIInfoManager.h"
 #include "GUILargeTextureManager.h"
 #include "GUIWindowManager.h"
+#include "LocalizeStrings.h"
 #include "ServiceBroker.h"
 #include "StereoscopicsManager.h"
 #include "TextureManager.h"
@@ -39,6 +41,7 @@ CGUIComponent::CGUIComponent()
   m_guiInfoManager.reset(new CGUIInfoManager());
   m_guiColorManager.reset(new CGUIColorManager());
   m_guiAudioManager.reset(new CGUIAudioManager());
+  m_localizeStrings.reset(new CLocalizeStrings());
 }
 
 CGUIComponent::~CGUIComponent()
@@ -98,6 +101,11 @@ CGUIColorManager &CGUIComponent::GetColorManager()
 CGUIAudioManager &CGUIComponent::GetAudioManager()
 {
   return *m_guiAudioManager;
+}
+
+CLocalizeStrings &CGUIComponent::GetLocalizeStrings()
+{
+  return *m_localizeStrings;
 }
 
 bool CGUIComponent::ConfirmDelete(std::string path)

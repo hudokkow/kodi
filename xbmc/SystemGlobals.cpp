@@ -25,7 +25,6 @@
 #include "GUIPassword.h"
 #include "utils/LangCodeExpander.h"
 #include "PartyModeManager.h"
-#include "guilib/LocalizeStrings.h"
 #ifdef HAS_PYTHON
 #include "interfaces/python/XBPython.h"
 #endif
@@ -41,7 +40,6 @@ std::map<std::string, std::string> CSpecialProtocol::m_pathMap;
 #endif
 
   CLangCodeExpander  g_LangCodeExpander;
-  CLocalizeStrings   g_localizeStrings;
 
   XFILE::CDirectoryCache g_directoryCache;
 
