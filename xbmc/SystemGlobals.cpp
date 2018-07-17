@@ -42,7 +42,6 @@ std::map<std::string, std::string> CSpecialProtocol::m_pathMap;
 
   CLangCodeExpander  g_LangCodeExpander;
   CLocalizeStrings   g_localizeStrings;
-  CLocalizeStrings   g_localizeStringsTemp;
 
   XFILE::CDirectoryCache g_directoryCache;
 
