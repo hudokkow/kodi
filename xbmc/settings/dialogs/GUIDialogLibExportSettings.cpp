@@ -143,7 +143,7 @@ void CGUIDialogLibExportSettings::OnSettingAction(std::shared_ptr<const CSetting
       if (CUtil::GetMatchingSource(strDirectory, shares, bIsSource) < 0) // path is outside shares - add it as a separate one
       {
         CMediaSource share;
-        share.strName = g_localizeStrings.Get(13278);
+        share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13278);
         share.strPath = strDirectory;
         shares.push_back(share);
       }
@@ -151,7 +151,7 @@ void CGUIDialogLibExportSettings::OnSettingAction(std::shared_ptr<const CSetting
     else
       strDirectory = "default location";
 
-    if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, g_localizeStrings.Get(661), strDirectory, true))
+    if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(661), strDirectory, true))
     {
       if (!strDirectory.empty())
       {

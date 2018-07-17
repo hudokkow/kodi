@@ -421,7 +421,7 @@ void CPVRManager::Process(void)
 
   /* load the pvr data from the db and clients if it's not already loaded */
   XbmcThreads::EndTime progressTimeout(30000); // 30 secs
-  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(g_localizeStrings.Get(19235)); // PVR manager is starting up
+  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19235)); // PVR manager is starting up
   while (!LoadComponents(progressHandler) && IsInitialising())
   {
     CLog::Log(LOGWARNING, "PVR Manager failed to load data, retrying");
@@ -554,7 +554,7 @@ bool CPVRManager::LoadComponents(CPVRGUIProgressHandler* progressHandler)
 
   /* load all channels and groups */
   if (progressHandler)
-    progressHandler->UpdateProgress(g_localizeStrings.Get(19236), 0); // Loading channels from clients
+    progressHandler->UpdateProgress(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19236), 0); // Loading channels from clients
 
   if (!m_channelGroups->Load() || !IsInitialising())
     return false;
@@ -564,13 +564,13 @@ bool CPVRManager::LoadComponents(CPVRGUIProgressHandler* progressHandler)
 
   /* get timers from the backends */
   if (progressHandler)
-    progressHandler->UpdateProgress(g_localizeStrings.Get(19237), 50); // Loading timers from clients
+    progressHandler->UpdateProgress(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19237), 50); // Loading timers from clients
 
   m_timers->Load();
 
   /* get recordings from the backend */
   if (progressHandler)
-    progressHandler->UpdateProgress(g_localizeStrings.Get(19238), 75); // Loading recordings from clients
+    progressHandler->UpdateProgress(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19238), 75); // Loading recordings from clients
 
   m_recordings->Load();
 
@@ -579,7 +579,7 @@ bool CPVRManager::LoadComponents(CPVRGUIProgressHandler* progressHandler)
 
   /* start the other pvr related update threads */
   if (progressHandler)
-    progressHandler->UpdateProgress(g_localizeStrings.Get(19239), 85); // Starting background threads
+    progressHandler->UpdateProgress(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19239), 85); // Starting background threads
 
   return true;
 }

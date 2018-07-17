@@ -582,9 +582,9 @@ bool CGUIControlFactory::GetInfoLabelFromElement(const TiXmlElement *element, GU
 
   std::string fallback = XMLUtils::GetAttribute(element, "fallback");
   if (StringUtils::IsNaturalNumber(label))
-    label = g_localizeStrings.Get(atoi(label.c_str()));
+    label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(label.c_str()));
   if (StringUtils::IsNaturalNumber(fallback))
-    fallback = g_localizeStrings.Get(atoi(fallback.c_str()));
+    fallback = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(fallback.c_str()));
   else
     g_charsetConverter.unknownToUTF8(fallback);
   infoLabel.SetLabel(label, fallback, parentID);
@@ -637,7 +637,7 @@ std::string CGUIControlFactory::FilterLabel(const std::string &label)
 {
   std::string viewLabel = label;
   if (StringUtils::IsNaturalNumber(viewLabel))
-    viewLabel = g_localizeStrings.Get(atoi(label.c_str()));
+    viewLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(label.c_str()));
   else
     g_charsetConverter.unknownToUTF8(viewLabel);
   return viewLabel;
@@ -648,7 +648,7 @@ bool CGUIControlFactory::GetString(const TiXmlNode* pRootNode, const char *strTa
   if (!XMLUtils::GetString(pRootNode, strTag, text))
     return false;
   if (StringUtils::IsNaturalNumber(text))
-    text = g_localizeStrings.Get(atoi(text.c_str()));
+    text = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(text.c_str()));
   return true;
 }
 
@@ -1014,17 +1014,17 @@ CGUIControl* CGUIControlFactory::Create(int parentID, const CRect &rect, TiXmlEl
   if (type == CGUIControl::GUICONTAINER_PANEL)
   {
     viewType = VIEW_TYPE_ICON;
-    viewLabel = g_localizeStrings.Get(536);
+    viewLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(536);
   }
   else if (type == CGUIControl::GUICONTAINER_LIST)
   {
     viewType = VIEW_TYPE_LIST;
-    viewLabel = g_localizeStrings.Get(535);
+    viewLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(535);
   }
   else
   {
     viewType = VIEW_TYPE_WRAP;
-    viewLabel = g_localizeStrings.Get(541);
+    viewLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(541);
   }
   TiXmlElement *itemElement = pControlNode->FirstChildElement("viewtype");
   if (itemElement && itemElement->FirstChild())

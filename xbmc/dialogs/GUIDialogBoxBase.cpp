@@ -181,14 +181,14 @@ std::string CGUIDialogBoxBase::GetLocalized(const CVariant &var) const
   if (var.isString())
     return var.asString();
   else if (var.isInteger() && var.asInteger())
-    return g_localizeStrings.Get((uint32_t)var.asInteger());
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get((uint32_t)var.asInteger());
   return "";
 }
 
 std::string CGUIDialogBoxBase::GetDefaultLabel(int controlId) const
 {
   int labelId = GetDefaultLabelID(controlId);
-  return labelId != -1 ? g_localizeStrings.Get(labelId) : "";
+  return labelId != -1 ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(labelId) : "";
 }
 
 int CGUIDialogBoxBase::GetDefaultLabelID(int controlId) const

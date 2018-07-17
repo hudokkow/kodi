@@ -2061,9 +2061,9 @@ bool CVideoDatabase::GetSeasonInfo(int idSeason, CVideoInfoTag& details, bool al
     if (name.empty())
     {
       if (season == 0)
-        name = g_localizeStrings.Get(20381);
+        name = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20381);
       else
-        name = StringUtils::Format(g_localizeStrings.Get(20358).c_str(), season);
+        name = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20358).c_str(), season);
     }
 
     details.m_strTitle = name;
@@ -6573,9 +6573,9 @@ bool CVideoDatabase::GetSeasonsByWhere(const std::string& strBaseDir, const Filt
         if (strLabel.empty())
         {
           if (iSeason == 0)
-            strLabel = g_localizeStrings.Get(20381);
+            strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20381);
           else
-            strLabel = StringUtils::Format(g_localizeStrings.Get(20358).c_str(), iSeason);
+            strLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20358).c_str(), iSeason);
         }
         CFileItemPtr pItem(new CFileItem(strLabel));
 
@@ -8487,7 +8487,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle, const st
 
     if (handle)
     {
-      handle->SetTitle(g_localizeStrings.Get(700));
+      handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(700));
       handle->SetText("");
     }
     else if (showProgress)
@@ -8771,7 +8771,7 @@ void CVideoDatabase::CleanDatabase(CGUIDialogProgressBarHandle* handle, const st
     CommitTransaction();
 
     if (handle)
-      handle->SetTitle(g_localizeStrings.Get(331));
+      handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(331));
 
     Compress(false);
 
@@ -8892,7 +8892,7 @@ std::vector<int> CVideoDatabase::CleanMediaType(const std::string &mediaType, co
             {
               CURL sourceUrl(sourcePath);
               pDialog->SetHeading(CVariant{15012});
-              pDialog->SetText(CVariant{StringUtils::Format(g_localizeStrings.Get(15013).c_str(), sourceUrl.GetWithoutUserDetails().c_str())});
+              pDialog->SetText(CVariant{StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15013).c_str(), sourceUrl.GetWithoutUserDetails().c_str())});
               pDialog->SetChoice(0, CVariant{15015});
               pDialog->SetChoice(1, CVariant{15014});
               pDialog->Open();
@@ -9102,7 +9102,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
             if(!xmlDoc.SaveFile(nfoFile))
             {
               CLog::Log(LOGERROR, "%s: Movie nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(20302), nfoFile);
+              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
               iFailCount++;
             }
           }
@@ -9192,7 +9192,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
             if(!xmlDoc.SaveFile(nfoFile))
             {
               CLog::Log(LOGERROR, "%s: Musicvideo nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(20302), nfoFile);
+              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
               iFailCount++;
             }
           }
@@ -9291,7 +9291,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
             if(!xmlDoc.SaveFile(nfoFile))
             {
               CLog::Log(LOGERROR, "%s: TVShow nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(20302), nfoFile);
+              CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
               iFailCount++;
             }
           }
@@ -9386,7 +9386,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
               if(!xmlDoc.SaveFile(nfoFile))
               {
                 CLog::Log(LOGERROR, "%s: Episode nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-                CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(20302), nfoFile);
+                CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
                 iFailCount++;
               }
             }
@@ -9472,7 +9472,7 @@ void CVideoDatabase::ExportToXML(const std::string &path, bool singleFile /* = t
     progress->Close();
 
   if (iFailCount > 0)
-    HELPERS::ShowOKDialogText(CVariant{647}, CVariant{StringUtils::Format(g_localizeStrings.Get(15011).c_str(), iFailCount)});
+    HELPERS::ShowOKDialogText(CVariant{647}, CVariant{StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15011).c_str(), iFailCount)});
 }
 
 void CVideoDatabase::ExportActorThumbs(const std::string &strDir, const CVideoInfoTag &tag, bool singleFiles, bool overwrite /*=false*/)

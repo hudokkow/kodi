@@ -157,7 +157,7 @@ void CGUIDialogAddonSettings::SetupView()
 
 std::string CGUIDialogAddonSettings::GetLocalizedString(uint32_t labelId) const
 {
-  std::string label = g_localizeStrings.GetAddonString(m_addon->ID(), labelId);
+  std::string label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(m_addon->ID(), labelId);
   if (!label.empty())
     return label;
 

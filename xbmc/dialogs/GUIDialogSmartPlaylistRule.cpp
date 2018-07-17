@@ -324,7 +324,7 @@ void CGUIDialogSmartPlaylistRule::OnBrowse()
     g_mediaManager.GetLocalDrives(sources);
 
     std::string path = m_rule.GetParameter();
-    CGUIDialogFileBrowser::ShowAndGetDirectory(sources, g_localizeStrings.Get(657), path, false);
+    CGUIDialogFileBrowser::ShowAndGetDirectory(sources, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(657), path, false);
     if (!m_rule.m_parameter.empty())
       m_rule.m_parameter.clear();
     if (!path.empty())
@@ -363,7 +363,7 @@ void CGUIDialogSmartPlaylistRule::OnBrowse()
   CGUIDialogSelect* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
   pDialog->Reset();
   pDialog->SetItems(items);
-  std::string strHeading = StringUtils::Format(g_localizeStrings.Get(13401).c_str(), g_localizeStrings.Get(iLabel).c_str());
+  std::string strHeading = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13401).c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iLabel).c_str());
   pDialog->SetHeading(CVariant{std::move(strHeading)});
   pDialog->SetMultiSelection(m_rule.m_field != FieldPlaylist && m_rule.m_field != FieldVirtualFolder);
 

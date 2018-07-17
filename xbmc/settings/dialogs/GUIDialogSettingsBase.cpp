@@ -507,7 +507,7 @@ void CGUIDialogSettingsBase::OnSettingPropertyChanged(std::shared_ptr<const CSet
 
 std::string CGUIDialogSettingsBase::GetLocalizedString(uint32_t labelId) const
 {
-  return g_localizeStrings.Get(labelId);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(labelId);
 }
 
 void CGUIDialogSettingsBase::SetupView()
@@ -638,7 +638,7 @@ CGUIControl* CGUIDialogSettingsBase::AddSetting(std::shared_ptr<CSetting> pSetti
     std::string indentation;
     for (int index = 1; index < parentLevels; index++)
       indentation.append("  ");
-    label = StringUtils::Format(g_localizeStrings.Get(168).c_str(), indentation.c_str(), label.c_str());
+    label = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(168).c_str(), indentation.c_str(), label.c_str());
   }
 
   // create the proper controls

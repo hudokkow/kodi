@@ -140,20 +140,20 @@ bool CGUIWindowMusicPlaylistEditor::GetDirectory(const std::string &strDirectory
   if (strDirectory.empty())
   { // root listing - list files:// and musicdb://
     CFileItemPtr files(new CFileItem("files://", true));
-    files->SetLabel(g_localizeStrings.Get(744));
+    files->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(744));
     files->SetLabelPreformatted(true);
     files->m_bIsShareOrDrive = true;
     items.Add(files);
 
     CFileItemPtr mdb(new CFileItem("musicdb://", true));
-    mdb->SetLabel(g_localizeStrings.Get(14022));
+    mdb->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14022));
     mdb->SetLabelPreformatted(true);
     mdb->m_bIsShareOrDrive = true;
     items.SetPath("");
     items.Add(mdb);
 
     CFileItemPtr vdb(new CFileItem("videodb://musicvideos/", true));
-    vdb->SetLabel(g_localizeStrings.Get(20389));
+    vdb->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20389));
     vdb->SetLabelPreformatted(true);
     vdb->m_bIsShareOrDrive = true;
     items.SetPath("");
@@ -183,7 +183,7 @@ void CGUIWindowMusicPlaylistEditor::UpdateButtons()
   CGUIWindowMusicBase::UpdateButtons();
 
   // Update object count label
-  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), g_localizeStrings.Get(127).c_str()); // " 14 Objects"
+  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str()); // " 14 Objects"
   SET_CONTROL_LABEL(CONTROL_LABELFILES, items);
 }
 
@@ -261,7 +261,7 @@ void CGUIWindowMusicPlaylistEditor::UpdatePlaylist()
   OnMessage(msg);
 
   // indicate how many songs we have
-  std::string items = StringUtils::Format("%i %s", m_playlist->Size(), g_localizeStrings.Get(134).c_str()); // "123 Songs"
+  std::string items = StringUtils::Format("%i %s", m_playlist->Size(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(134).c_str()); // "123 Songs"
   SET_CONTROL_LABEL(CONTROL_LABEL_PLAYLIST, items);
 
   m_playlistThumbLoader.Load(*m_playlist);
@@ -347,11 +347,11 @@ void CGUIWindowMusicPlaylistEditor::OnLoadPlaylist()
   m_rootDir.GetSources(shares);
   // add the playlist share
   CMediaSource share;
-  share.strName = g_localizeStrings.Get(20011);
+  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20011);
   share.strPath = "special://musicplaylists/";
   if (find(shares.begin(), shares.end(), share) == shares.end())
     shares.push_back(share);
-  if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".m3u|.pls|.b4s|.wpl", g_localizeStrings.Get(656), playlist))
+  if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".m3u|.pls|.b4s|.wpl", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(656), playlist))
     LoadPlaylist(playlist);
 }
 
@@ -381,7 +381,7 @@ void CGUIWindowMusicPlaylistEditor::OnSavePlaylist()
   std::string name = URIUtils::GetFileName(m_strLoadedPlaylist);
   URIUtils::RemoveExtension(name);
 
-  if (CGUIKeyboardFactory::ShowAndGetInput(name, CVariant{g_localizeStrings.Get(16012)}, false))
+  if (CGUIKeyboardFactory::ShowAndGetInput(name, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16012)}, false))
   { // save playlist as an .m3u
     PLAYLIST::CPlayListM3U playlist;
     playlist.Add(*m_playlist);

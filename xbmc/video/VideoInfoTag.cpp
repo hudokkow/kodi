@@ -675,7 +675,7 @@ void CVideoInfoTag::ToSortable(SortItem& sortable, Field field) const
   {
     // seasons with a custom name/title need special handling as they should be sorted by season number
     if (m_type == MediaTypeSeason && !m_strSortTitle.empty())
-      sortable[FieldSortTitle] = StringUtils::Format(g_localizeStrings.Get(20358).c_str(), m_iSeason);
+      sortable[FieldSortTitle] = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20358).c_str(), m_iSeason);
     else
       sortable[FieldSortTitle] = m_strSortTitle;
     break;
@@ -803,7 +803,7 @@ const std::string CVideoInfoTag::GetCast(bool bIncludeRole /*= false*/) const
     if (it->strRole.empty() || !bIncludeRole)
       character = StringUtils::Format("%s\n", it->strName.c_str());
     else
-      character = StringUtils::Format("%s %s %s\n", it->strName.c_str(), g_localizeStrings.Get(20347).c_str(), it->strRole.c_str());
+      character = StringUtils::Format("%s %s %s\n", it->strName.c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20347).c_str(), it->strRole.c_str());
     strLabel += character;
   }
   return StringUtils::TrimRight(strLabel, "\n");

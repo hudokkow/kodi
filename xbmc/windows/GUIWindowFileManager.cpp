@@ -405,7 +405,7 @@ void CGUIWindowFileManager::UpdateButtons()
   std::string strDir = CURL(m_Directory[0]->GetPath()).GetWithoutUserDetails();
   if (strDir.empty())
   {
-    SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_LEFT,g_localizeStrings.Get(20108));
+    SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_LEFT,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20108));
   }
   else
   {
@@ -414,7 +414,7 @@ void CGUIWindowFileManager::UpdateButtons()
   strDir = CURL(m_Directory[1]->GetPath()).GetWithoutUserDetails();
   if (strDir.empty())
   {
-    SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_RIGHT,g_localizeStrings.Get(20108));
+    SET_CONTROL_LABEL(CONTROL_CURRENTDIRLABEL_RIGHT,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20108));
   }
   else
   {
@@ -447,9 +447,9 @@ void CGUIWindowFileManager::UpdateItemCounts()
     }
     std::string items;
     if (selectedCount > 0)
-      items = StringUtils::Format("%i/%i %s (%s)", selectedCount, totalCount, g_localizeStrings.Get(127).c_str(), StringUtils::SizeToString(selectedSize).c_str());
+      items = StringUtils::Format("%i/%i %s (%s)", selectedCount, totalCount, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str(), StringUtils::SizeToString(selectedSize).c_str());
     else
-      items = StringUtils::Format("%i %s", totalCount, g_localizeStrings.Get(127).c_str());
+      items = StringUtils::Format("%i %s", totalCount, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str());
     SET_CONTROL_LABEL(CONTROL_NUMFILES_LEFT + i, items);
   }
 }
@@ -495,7 +495,7 @@ bool CGUIWindowFileManager::Update(int iList, const std::string &strDirectory)
   URIUtils::GetParentPath(strDirectory, strParentPath);
   if (strDirectory.empty() && (m_vecItems[iList]->Size() == 0 || CServiceBroker::GetSettings().GetBool(CSettings::SETTING_FILELISTS_SHOWADDSOURCEBUTTONS)))
   { // add 'add source button'
-    std::string strLabel = g_localizeStrings.Get(1026);
+    std::string strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1026);
     CFileItemPtr pItem(new CFileItem(strLabel));
     pItem->SetPath("add");
     pItem->SetIconImage("DefaultAddSource.png");
@@ -519,7 +519,7 @@ bool CGUIWindowFileManager::Update(int iList, const std::string &strDirectory)
   if (strDirectory.empty())
   {
     CFileItemPtr pItem(new CFileItem("special://profile/", true));
-    pItem->SetLabel(g_localizeStrings.Get(20070));
+    pItem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20070));
     pItem->SetArt("thumb", "DefaultFolder.png");
     pItem->SetLabelPreformatted(true);
     m_vecItems[iList]->Add(pItem);
@@ -572,7 +572,7 @@ void CGUIWindowFileManager::OnClick(int iList, int iItem)
   if ( iItem < 0 || iItem >= m_vecItems[iList]->Size() ) return ;
 
   CFileItemPtr pItem = m_vecItems[iList]->Get(iItem);
-  if (pItem->GetPath() == "add" && pItem->GetLabel() == g_localizeStrings.Get(1026)) // 'add source button' in empty root
+  if (pItem->GetPath() == "add" && pItem->GetLabel() == CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1026)) // 'add source button' in empty root
   {
     if (CGUIDialogMediaSource::ShowAndAddMediaSource("files"))
     {
@@ -804,7 +804,7 @@ void CGUIWindowFileManager::OnSelectAll(int iList)
 void CGUIWindowFileManager::OnNewFolder(int iList)
 {
   std::string strNewFolder = "";
-  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFolder, CVariant{g_localizeStrings.Get(16014)}, false))
+  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFolder, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16014)}, false))
   {
     std::string strNewPath = m_Directory[iList]->GetPath();
     URIUtils::AddSlashAtEnd(strNewPath);

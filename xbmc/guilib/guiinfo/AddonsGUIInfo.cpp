@@ -95,7 +95,7 @@ bool CAddonsGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
       {
         if (item->GetAddonInfo()->Origin() == ADDON::ORIGIN_SYSTEM)
         {
-          value = g_localizeStrings.Get(24992);
+          value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24992);
           return true;
         }
         ADDON::AddonPtr origin;
@@ -104,7 +104,7 @@ bool CAddonsGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
           value = origin->Name();
           return true;
         }
-        value = g_localizeStrings.Get(13205);
+        value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205);
         return true;
       }
       case LISTITEM_ADDON_SIZE:

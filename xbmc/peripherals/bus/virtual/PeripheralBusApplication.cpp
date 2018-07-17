@@ -44,7 +44,7 @@ bool CPeripheralBusApplication::PerformDeviceScan(PeripheralScanResults& results
   {
     PeripheralScanResult result(Type());
     result.m_type          = PERIPHERAL_KEYBOARD;
-    result.m_strDeviceName = g_localizeStrings.Get(35150); // "Keyboard"
+    result.m_strDeviceName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35150); // "Keyboard"
     result.m_strLocation   = PeripheralTypeTranslator::TypeToString(PERIPHERAL_KEYBOARD);
     result.m_iVendorId     = 0;
     result.m_iProductId    = 0;
@@ -66,7 +66,7 @@ bool CPeripheralBusApplication::PerformDeviceScan(PeripheralScanResults& results
   {
     PeripheralScanResult result(Type());
     result.m_type          = PERIPHERAL_MOUSE;
-    result.m_strDeviceName = g_localizeStrings.Get(35171); // "Mouse"
+    result.m_strDeviceName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35171); // "Mouse"
     result.m_strLocation   = PeripheralTypeTranslator::TypeToString(PERIPHERAL_MOUSE);
     result.m_iVendorId     = 0;
     result.m_iProductId    = 0;

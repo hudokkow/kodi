@@ -228,20 +228,20 @@ std::string CFileOperationJob::GetActionString(FileAction action)
   {
     case ActionCopy:
     case ActionReplace:
-      result = g_localizeStrings.Get(115);
+      result = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(115);
       break;
 
     case ActionMove:
-      result = g_localizeStrings.Get(116);
+      result = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(116);
       break;
 
     case ActionDelete:
     case ActionDeleteFolder:
-      result = g_localizeStrings.Get(117);
+      result = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(117);
       break;
 
     case ActionCreateFolder:
-      result = g_localizeStrings.Get(119);
+      result = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(119);
       break;
 
     default:

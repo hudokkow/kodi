@@ -65,7 +65,7 @@ void CGUIEditControl::DefaultConstructor()
   m_textWidth = GetWidth();
   m_cursorPos = 0;
   m_cursorBlink = 0;
-  m_inputHeading = g_localizeStrings.Get(16028);
+  m_inputHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16028);
   m_inputType = INPUT_TYPE_TEXT;
   m_smsLastKey = 0;
   m_smsKeyIndex = 0;
@@ -305,7 +305,7 @@ void CGUIEditControl::OnClick()
       textChanged = CGUIDialogNumeric::ShowAndGetNumber(utf8, m_inputHeading);
       break;
     case INPUT_TYPE_SECONDS:
-      textChanged = CGUIDialogNumeric::ShowAndGetSeconds(utf8, g_localizeStrings.Get(21420));
+      textChanged = CGUIDialogNumeric::ShowAndGetSeconds(utf8, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21420));
       break;
     case INPUT_TYPE_TIME:
     {
@@ -313,7 +313,7 @@ void CGUIEditControl::OnClick()
       dateTime.SetFromDBTime(utf8);
       SYSTEMTIME time;
       dateTime.GetAsSystemTime(time);
-      if (CGUIDialogNumeric::ShowAndGetTime(time, !m_inputHeading.empty() ? m_inputHeading : g_localizeStrings.Get(21420)))
+      if (CGUIDialogNumeric::ShowAndGetTime(time, !m_inputHeading.empty() ? m_inputHeading : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21420)))
       {
         dateTime = CDateTime(time);
         utf8 = dateTime.GetAsLocalizedTime("", false);
@@ -329,7 +329,7 @@ void CGUIEditControl::OnClick()
         dateTime = CDateTime(2000, 1, 1, 0, 0, 0);
       SYSTEMTIME date;
       dateTime.GetAsSystemTime(date);
-      if (CGUIDialogNumeric::ShowAndGetDate(date, !m_inputHeading.empty() ? m_inputHeading : g_localizeStrings.Get(21420)))
+      if (CGUIDialogNumeric::ShowAndGetDate(date, !m_inputHeading.empty() ? m_inputHeading : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21420)))
       {
         dateTime = CDateTime(date);
         utf8 = dateTime.GetAsDBDate();
@@ -388,7 +388,7 @@ void CGUIEditControl::SetInputType(CGUIEditControl::INPUT_TYPE type, CVariant he
   if (heading.isString())
     m_inputHeading = heading.asString();
   else if (heading.isInteger() && heading.asInteger())
-    m_inputHeading = g_localizeStrings.Get(static_cast<uint32_t>(heading.asInteger()));
+    m_inputHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(static_cast<uint32_t>(heading.asInteger()));
   //! @todo Verify the current input string?
 }
 

@@ -317,7 +317,7 @@ void CGUIWindowVideoPlaylist::UpdateButtons()
 
   // update repeat button
   int iRepeat = 595 + CServiceBroker::GetPlaylistPlayer().GetRepeat(PLAYLIST_VIDEO);
-  SET_CONTROL_LABEL(CONTROL_BTNREPEAT, g_localizeStrings.Get(iRepeat));
+  SET_CONTROL_LABEL(CONTROL_BTNREPEAT, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iRepeat));
 
   MarkPlaying();
 }
@@ -373,7 +373,7 @@ void CGUIWindowVideoPlaylist::RemovePlayListItem(int iItem)
 void CGUIWindowVideoPlaylist::SavePlayList()
 {
   std::string strNewFileName;
-  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFileName, CVariant{g_localizeStrings.Get(16012)}, false))
+  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFileName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16012)}, false))
   {
     // need 2 rename it
     strNewFileName = CUtil::MakeLegalFileName(strNewFileName);

@@ -1402,7 +1402,7 @@ std::string CDateTime::GetAsLocalizedDate(const std::string &strFormat) const
       {
         int wday = dateTime.wDayOfWeek;
         if (wday < 1 || wday > 7) wday = 7;
-        str = g_localizeStrings.Get((c =='d' ? 40 : 10) + wday);
+        str = CServiceBroker::GetGUI()->GetLocalizeStrings().Get((c =='d' ? 40 : 10) + wday);
       }
       strOut+=str;
     }
@@ -1434,7 +1434,7 @@ std::string CDateTime::GetAsLocalizedDate(const std::string &strFormat) const
       {
         int wmonth = dateTime.wMonth;
         if (wmonth < 1 || wmonth > 12) wmonth = 12;
-        str = g_localizeStrings.Get((c =='m' ? 50 : 20) + wmonth);
+        str = CServiceBroker::GetGUI()->GetLocalizeStrings().Get((c =='m' ? 50 : 20) + wmonth);
       }
       strOut+=str;
     }

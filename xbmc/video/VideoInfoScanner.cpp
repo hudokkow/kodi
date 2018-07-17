@@ -91,7 +91,7 @@ namespace VIDEO
         CGUIDialogExtendedProgressBar* dialog =
           CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
         if (dialog)
-           m_handle = dialog->GetHandle(g_localizeStrings.Get(314));
+           m_handle = dialog->GetHandle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(314));
       }
 
       // check if we only need to perform a cleaning
@@ -158,7 +158,7 @@ namespace VIDEO
         else
         {
           if (m_handle)
-            m_handle->SetTitle(g_localizeStrings.Get(331));
+            m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(331));
           m_database.Compress(false);
         }
       }
@@ -238,7 +238,7 @@ namespace VIDEO
   {
     if (m_handle)
     {
-      m_handle->SetText(g_localizeStrings.Get(20415));
+      m_handle->SetText(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20415));
     }
 
     /*
@@ -285,7 +285,7 @@ namespace VIDEO
       if (m_handle)
       {
         int str = content == CONTENT_MOVIES ? 20317:20318;
-        m_handle->SetTitle(StringUtils::Format(g_localizeStrings.Get(str).c_str(), info->Name().c_str()));
+        m_handle->SetTitle(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(str).c_str(), info->Name().c_str()));
       }
 
       std::string fastHash;
@@ -333,7 +333,7 @@ namespace VIDEO
     else if (content == CONTENT_TVSHOWS)
     {
       if (m_handle)
-        m_handle->SetTitle(StringUtils::Format(g_localizeStrings.Get(20319).c_str(), info->Name().c_str()));
+        m_handle->SetTitle(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20319).c_str(), info->Name().c_str()));
 
       if (foundDirectly && !settings.parent_name_root)
       {
@@ -485,7 +485,7 @@ namespace VIDEO
           mediaType = MediaTypeMusicVideo;
         CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
           mediaType, pItem->GetPath(), 24145,
-          StringUtils::Format(g_localizeStrings.Get(24147).c_str(), mediaType.c_str(), URIUtils::GetFileName(pItem->GetPath()).c_str()),
+          StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24147).c_str(), mediaType.c_str(), URIUtils::GetFileName(pItem->GetPath()).c_str()),
           pItem->GetArt("thumb"), CURL::GetRedacted(pItem->GetPath()), EventLevel::Warning)));
       }
 
@@ -1601,7 +1601,7 @@ namespace VIDEO
       if (m_database.GetEpisodeId(file->strPath, file->iEpisode, file->iSeason) > -1)
       {
         if (m_handle)
-          m_handle->SetText(g_localizeStrings.Get(20415));
+          m_handle->SetText(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20415));
         continue;
       }
 

@@ -49,7 +49,7 @@ std::string CDirectoryNodeTop100::GetLocalizedName() const
 {
   for (unsigned int i = 0; i < sizeof(Top100Children) / sizeof(Node); ++i)
     if (GetName() == Top100Children[i].id)
-      return g_localizeStrings.Get(Top100Children[i].label);
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(Top100Children[i].label);
   return "";
 }
 
@@ -57,7 +57,7 @@ bool CDirectoryNodeTop100::GetContent(CFileItemList& items) const
 {
   for (unsigned int i = 0; i < sizeof(Top100Children) / sizeof(Node); ++i)
   {
-    CFileItemPtr pItem(new CFileItem(g_localizeStrings.Get(Top100Children[i].label)));
+    CFileItemPtr pItem(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(Top100Children[i].label)));
     std::string strDir = StringUtils::Format("%s/", Top100Children[i].id.c_str());
     pItem->SetPath(BuildPath() + strDir);
     pItem->m_bIsFolder = true;

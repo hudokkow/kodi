@@ -97,7 +97,7 @@ void CGUIDialogCache::SetHeader(const std::string& strHeader)
 
 void CGUIDialogCache::SetHeader(int nHeader)
 {
-  SetHeader(g_localizeStrings.Get(nHeader));
+  SetHeader(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(nHeader));
 }
 
 void CGUIDialogCache::SetMessage(const std::string& strMessage)

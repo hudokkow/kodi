@@ -965,14 +965,14 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
       const CProfilesManager &profileManager = CServiceBroker::GetProfileManager();
 
       CFileItemPtr newPlaylist(new CFileItem(profileManager.GetUserDataItem("PartyMode.xsp"),false));
-      newPlaylist->SetLabel(g_localizeStrings.Get(16035));
+      newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16035));
       newPlaylist->SetLabelPreformatted(true);
       newPlaylist->SetIconImage("DefaultPartyMode.png");
       newPlaylist->m_bIsFolder = true;
       items.Add(newPlaylist);
 
       newPlaylist.reset(new CFileItem("newplaylist://", false));
-      newPlaylist->SetLabel(g_localizeStrings.Get(525));
+      newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(525));
       newPlaylist->SetIconImage("DefaultAddSource.png");
       newPlaylist->SetLabelPreformatted(true);
       newPlaylist->SetSpecialSort(SortSpecialOnBottom);
@@ -980,7 +980,7 @@ bool CGUIWindowMusicBase::GetDirectory(const std::string &strDirectory, CFileIte
       items.Add(newPlaylist);
 
       newPlaylist.reset(new CFileItem("newsmartplaylist://music", false));
-      newPlaylist->SetLabel(g_localizeStrings.Get(21437));
+      newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21437));
       newPlaylist->SetIconImage("DefaultAddSource.png");
       newPlaylist->SetLabelPreformatted(true);
       newPlaylist->SetSpecialSort(SortSpecialOnBottom);

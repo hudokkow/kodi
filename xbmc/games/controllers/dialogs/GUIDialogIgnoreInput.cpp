@@ -36,7 +36,7 @@ std::string CGUIDialogIgnoreInput::GetDialogText()
 {
   // "Some controllers have buttons and axes that interfere with mapping. Press
   // these now to disable them:[CR]%s"
-  std::string dialogText = g_localizeStrings.Get(35014);
+  std::string dialogText = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35014);
 
   std::vector<std::string> primitives;
 
@@ -52,7 +52,7 @@ std::string CGUIDialogIgnoreInput::GetDialogText()
 std::string CGUIDialogIgnoreInput::GetDialogHeader()
 {
 
-  return g_localizeStrings.Get(35019); // "Ignore input"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35019); // "Ignore input"
 }
 
 bool CGUIDialogIgnoreInput::MapPrimitiveInternal(JOYSTICK::IButtonMap* buttonMap,

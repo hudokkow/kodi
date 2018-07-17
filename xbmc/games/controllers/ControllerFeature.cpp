@@ -64,10 +64,10 @@ std::string CControllerFeature::CategoryLabel() const
   std::string categoryLabel;
 
   if (m_categoryLabelId >= 0 && m_controller != nullptr)
-    categoryLabel = g_localizeStrings.GetAddonString(m_controller->ID(), m_categoryLabelId);
+    categoryLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(m_controller->ID(), m_categoryLabelId);
 
   if (categoryLabel.empty())
-    categoryLabel = g_localizeStrings.Get(m_categoryLabelId);
+    categoryLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_categoryLabelId);
 
   return categoryLabel;
 }
@@ -77,10 +77,10 @@ std::string CControllerFeature::Label() const
   std::string label;
 
   if (m_labelId >= 0 && m_controller != nullptr)
-    label = g_localizeStrings.GetAddonString(m_controller->ID(), m_labelId);
+    label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(m_controller->ID(), m_labelId);
 
   if (label.empty())
-    label = g_localizeStrings.Get(m_labelId);
+    label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_labelId);
 
   return label;
 }

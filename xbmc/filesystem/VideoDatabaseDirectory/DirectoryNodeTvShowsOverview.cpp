@@ -57,7 +57,7 @@ std::string CDirectoryNodeTvShowsOverview::GetLocalizedName() const
 {
   for (unsigned int i = 0; i < sizeof(TvShowChildren) / sizeof(Node); ++i)
     if (GetName() == TvShowChildren[i].id)
-      return g_localizeStrings.Get(TvShowChildren[i].label);
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(TvShowChildren[i].label);
   return "";
 }
 
@@ -69,7 +69,7 @@ bool CDirectoryNodeTvShowsOverview::GetContent(CFileItemList& items) const
 
   for (unsigned int i = 0; i < sizeof(TvShowChildren) / sizeof(Node); ++i)
   {
-    CFileItemPtr pItem(new CFileItem(g_localizeStrings.Get(TvShowChildren[i].label)));
+    CFileItemPtr pItem(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(TvShowChildren[i].label)));
 
     CVideoDbUrl itemUrl = videoUrl;
     std::string strDir = StringUtils::Format("%s/", TvShowChildren[i].id.c_str());

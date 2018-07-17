@@ -105,7 +105,7 @@ void CGUIWindowPVRChannelsBase::UpdateButtons(void)
   }
 
   CGUIWindowPVRBase::UpdateButtons();
-  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, m_bShowHiddenChannels ? g_localizeStrings.Get(19022) : GetChannelGroup()->GroupName());
+  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, m_bShowHiddenChannels ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19022) : GetChannelGroup()->GroupName());
 }
 
 bool CGUIWindowPVRChannelsBase::OnAction(const CAction &action)
@@ -283,19 +283,19 @@ void CGUIWindowPVRChannelsBase::UpdateEpg(const CFileItemPtr &item)
     epg->ForceUpdate();
 
     const std::string strMessage = StringUtils::Format("%s: '%s'",
-                                                       g_localizeStrings.Get(19253).c_str(), // "Guide update scheduled for channel"
+                                                       CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19253).c_str(), // "Guide update scheduled for channel"
                                                        channel->ChannelName().c_str());
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-                                          g_localizeStrings.Get(19166), // "PVR information"
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19166), // "PVR information"
                                           strMessage);
   }
   else
   {
     const std::string strMessage = StringUtils::Format("%s: '%s'",
-                                                       g_localizeStrings.Get(19254).c_str(), // "Guide update failed for channel"
+                                                       CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19254).c_str(), // "Guide update failed for channel"
                                                        channel->ChannelName().c_str());
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error,
-                                          g_localizeStrings.Get(19166), // "PVR information"
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19166), // "PVR information"
                                           strMessage);
   }
 }

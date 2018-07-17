@@ -550,7 +550,7 @@ bool CGUIWindowVideoNav::GetDirectory(const std::string &strDirectory, CFileItem
        !items.Contains("newtag://" + videoUrl.GetType()))
     {
       CFileItemPtr newTag(new CFileItem("newtag://" + videoUrl.GetType(), false));
-      newTag->SetLabel(g_localizeStrings.Get(20462));
+      newTag->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20462));
       newTag->SetLabelPreformatted(true);
       newTag->SetSpecialSort(SortSpecialOnTop);
       items.Add(newTag);
@@ -679,7 +679,7 @@ void CGUIWindowVideoNav::UpdateButtons()
       StringUtils::StartsWith(m_vecItems->Get(m_vecItems->Size()-1)->GetPath(), "/-1/"))
       iItems--;
   }
-  std::string items = StringUtils::Format("%i %s", iItems, g_localizeStrings.Get(127).c_str());
+  std::string items = StringUtils::Format("%i %s", iItems, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str());
   SET_CONTROL_LABEL(CONTROL_LABELFILES, items);
 
   // set the filter label
@@ -687,7 +687,7 @@ void CGUIWindowVideoNav::UpdateButtons()
 
   // "Playlists"
   if (m_vecItems->IsPath("special://videoplaylists/"))
-    strLabel = g_localizeStrings.Get(136);
+    strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(136);
   // "{Playlist Name}"
   else if (m_vecItems->IsPlayList())
   {
@@ -696,7 +696,7 @@ void CGUIWindowVideoNav::UpdateButtons()
     URIUtils::Split(m_vecItems->GetPath(), strDummy, strLabel);
   }
   else if (m_vecItems->IsPath("sources://video/"))
-    strLabel = g_localizeStrings.Get(744);
+    strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(744);
   // everything else is from a videodb:// path
   else if (m_vecItems->IsVideoDb())
   {
@@ -709,7 +709,7 @@ void CGUIWindowVideoNav::UpdateButtons()
   SET_CONTROL_LABEL(CONTROL_FILTER, strLabel);
 
   int watchMode = CMediaSettings::GetInstance().GetWatchedMode(m_vecItems->GetContent());
-  SET_CONTROL_LABEL(CONTROL_BTNSHOWMODE, g_localizeStrings.Get(16100 + watchMode));
+  SET_CONTROL_LABEL(CONTROL_BTNSHOWMODE, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16100 + watchMode));
 
   SET_CONTROL_SELECTED(GetID(), CONTROL_BTNSHOWALL, watchMode != WatchedModeAll);
 
@@ -733,62 +733,62 @@ bool CGUIWindowVideoNav::GetFilteredItems(const std::string &filter, CFileItemLi
 void CGUIWindowVideoNav::DoSearch(const std::string& strSearch, CFileItemList& items)
 {
   CFileItemList tempItems;
-  std::string strGenre = g_localizeStrings.Get(515); // Genre
-  std::string strActor = g_localizeStrings.Get(20337); // Actor
-  std::string strDirector = g_localizeStrings.Get(20339); // Director
+  std::string strGenre = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(515); // Genre
+  std::string strActor = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20337); // Actor
+  std::string strDirector = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20339); // Director
 
   //get matching names
   m_database.GetMoviesByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20338) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20338) + "] ", items);
 
   m_database.GetEpisodesByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20359) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20359) + "] ", items);
 
   m_database.GetTvShowsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20364) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20364) + "] ", items);
 
   m_database.GetMusicVideosByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20391) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20391) + "] ", items);
 
   m_database.GetMusicVideosByAlbum(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(558) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(558) + "] ", items);
 
   // get matching genres
   m_database.GetMovieGenresByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + g_localizeStrings.Get(20342) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20342) + "] ", items);
 
   m_database.GetTvShowGenresByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + g_localizeStrings.Get(20343) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20343) + "] ", items);
 
   m_database.GetMusicVideoGenresByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + g_localizeStrings.Get(20389) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strGenre + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20389) + "] ", items);
 
   //get actors/artists
   m_database.GetMovieActorsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + g_localizeStrings.Get(20342) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20342) + "] ", items);
 
   m_database.GetTvShowsActorsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + g_localizeStrings.Get(20343) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20343) + "] ", items);
 
   m_database.GetMusicVideoArtistsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + g_localizeStrings.Get(20389) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strActor + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20389) + "] ", items);
 
   //directors
   m_database.GetMovieDirectorsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + g_localizeStrings.Get(20342) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20342) + "] ", items);
 
   m_database.GetTvShowsDirectorsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + g_localizeStrings.Get(20343) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20343) + "] ", items);
 
   m_database.GetMusicVideoDirectorsByName(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + g_localizeStrings.Get(20389) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + strDirector + " - " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20389) + "] ", items);
 
   //plot
   m_database.GetEpisodesByPlot(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20365) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20365) + "] ", items);
 
   m_database.GetMoviesByPlot(strSearch, tempItems);
-  AppendAndClearSearchItems(tempItems, "[" + g_localizeStrings.Get(20323) + "] ", items);
+  AppendAndClearSearchItems(tempItems, "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20323) + "] ", items);
 }
 
 void CGUIWindowVideoNav::PlayItem(int iItem)
@@ -840,7 +840,7 @@ void CGUIWindowVideoNav::OnDeleteItem(CFileItemPtr pItem)
   {
     CGUIDialogYesNo* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
     pDialog->SetHeading(CVariant{432});
-    std::string strLabel = StringUtils::Format(g_localizeStrings.Get(433).c_str(),pItem->GetLabel().c_str());
+    std::string strLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(433).c_str(),pItem->GetLabel().c_str());
     pDialog->SetLine(1, CVariant{std::move(strLabel)});
     pDialog->SetLine(2, CVariant{""});
     pDialog->Open();
@@ -861,7 +861,7 @@ void CGUIWindowVideoNav::OnDeleteItem(CFileItemPtr pItem)
   {
     CGUIDialogYesNo* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogYesNo>(WINDOW_DIALOG_YES_NO);
     pDialog->SetHeading(CVariant{432});
-    pDialog->SetLine(1, CVariant{ StringUtils::Format(g_localizeStrings.Get(433).c_str(), pItem->GetLabel().c_str()) });
+    pDialog->SetLine(1, CVariant{ StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(433).c_str(), pItem->GetLabel().c_str()) });
     pDialog->SetLine(2, CVariant{""});
     pDialog->Open();
     if (pDialog->IsConfirmed())
@@ -1163,7 +1163,7 @@ bool CGUIWindowVideoNav::OnClick(int iItem, const std::string &player)
 
     //Get the new title
     std::string strTag;
-    if (!CGUIKeyboardFactory::ShowAndGetInput(strTag, CVariant{g_localizeStrings.Get(20462)}, false))
+    if (!CGUIKeyboardFactory::ShowAndGetInput(strTag, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20462)}, false))
       return true;
 
     CVideoDatabase videodb;
@@ -1179,14 +1179,14 @@ bool CGUIWindowVideoNav::OnClick(int iItem, const std::string &player)
 
     if (!videodb.GetSingleValue("tag", "tag.tag_id", videodb.PrepareSQL("tag.name = '%s' AND tag.tag_id IN (SELECT tag_link.tag_id FROM tag_link WHERE tag_link.media_type = '%s')", strTag.c_str(), mediaType.c_str())).empty())
     {
-      std::string strError = StringUtils::Format(g_localizeStrings.Get(20463).c_str(), strTag.c_str());
+      std::string strError = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20463).c_str(), strTag.c_str());
       HELPERS::ShowOKDialogText(CVariant{20462}, CVariant{std::move(strError)});
       return true;
     }
 
     int idTag = videodb.AddTag(strTag);
     CFileItemList items;
-    std::string strLabel = StringUtils::Format(g_localizeStrings.Get(20464).c_str(), localizedType.c_str());
+    std::string strLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20464).c_str(), localizedType.c_str());
     if (CGUIDialogVideoInfo::GetItemsForTag(strLabel, mediaType, items, idTag))
     {
       for (int index = 0; index < items.Size(); index++)

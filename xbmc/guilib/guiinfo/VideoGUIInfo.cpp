@@ -158,7 +158,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
           if (rating.votes == 0)
             value = StringUtils::FormatNumber(rating.rating);
           else
-            value = StringUtils::Format(g_localizeStrings.Get(20350).c_str(),
+            value = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20350).c_str(),
                                         StringUtils::FormatNumber(rating.rating).c_str(),
                                         StringUtils::FormatNumber(rating.votes).c_str());
           return true;
@@ -334,7 +334,7 @@ bool CVideoGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
             tag->GetPlayCount() == 0 &&
             !CServiceBroker::GetSettings().GetBool(CSettings::SETTING_VIDEOLIBRARY_SHOWUNWATCHEDPLOTS))
         {
-          value = g_localizeStrings.Get(20370);
+          value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20370);
         }
         else
         {

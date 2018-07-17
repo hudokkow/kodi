@@ -294,7 +294,7 @@ bool CGUIWindowMusicPlayList::MoveCurrentPlayListItem(int iItem, int iAction, bo
 void CGUIWindowMusicPlayList::SavePlayList()
 {
   std::string strNewFileName;
-  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFileName, CVariant{g_localizeStrings.Get(16012)}, false))
+  if (CGUIKeyboardFactory::ShowAndGetInput(strNewFileName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16012)}, false))
   {
     // need 2 rename it
     strNewFileName = CUtil::MakeLegalFileName(strNewFileName);
@@ -418,10 +418,10 @@ void CGUIWindowMusicPlayList::UpdateButtons()
 
   // update repeat button
   int iRepeat = 595 + CServiceBroker::GetPlaylistPlayer().GetRepeat(PLAYLIST_MUSIC);
-  SET_CONTROL_LABEL(CONTROL_BTNREPEAT, g_localizeStrings.Get(iRepeat));
+  SET_CONTROL_LABEL(CONTROL_BTNREPEAT, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iRepeat));
 
   // Update object count label
-  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), g_localizeStrings.Get(127).c_str());
+  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str());
   SET_CONTROL_LABEL(CONTROL_LABELFILES, items);
 
   MarkPlaying();

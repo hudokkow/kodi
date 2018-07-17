@@ -600,12 +600,12 @@ void CGUIMediaWindow::UpdateButtons()
     else
       CONTROL_ENABLE(CONTROL_BTNSORTBY);
 
-    std::string sortLabel = StringUtils::Format(g_localizeStrings.Get(550).c_str(),
-                                                g_localizeStrings.Get(m_guiState->GetSortMethodLabel()).c_str());
+    std::string sortLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(550).c_str(),
+                                                CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_guiState->GetSortMethodLabel()).c_str());
     SET_CONTROL_LABEL(CONTROL_BTNSORTBY, sortLabel);
   }
 
-  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), g_localizeStrings.Get(127).c_str());
+  std::string items = StringUtils::Format("%i %s", m_vecItems->GetObjectCount(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str());
   SET_CONTROL_LABEL(CONTROL_LABELFILES, items);
 
   SET_CONTROL_LABEL2(CONTROL_BTN_FILTER, GetProperty("filter").asString());
@@ -886,7 +886,7 @@ bool CGUIMediaWindow::Update(const std::string &strDirectory, bool updateFilterP
     showLabel = 35250; // "Add games..."
   if (showLabel && (m_vecItems->Size() == 0 || !m_guiState->DisableAddSourceButtons())) // add 'add source button'
   {
-    std::string strLabel = g_localizeStrings.Get(showLabel);
+    std::string strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(showLabel);
     CFileItemPtr pItem(new CFileItem(strLabel));
     pItem->SetPath("add");
     pItem->SetIconImage("DefaultAddSource.png");
@@ -1271,7 +1271,7 @@ bool CGUIMediaWindow::GoParentFolder()
   // No items to show so go another level up
   if (!m_vecItems->GetPath().empty() && (m_filter.IsEmpty() ? m_vecItems->Size() : m_unfilteredItems->Size()) <= 0)
   {
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, g_localizeStrings.Get(2080), g_localizeStrings.Get(2081));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2080), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2081));
     return GoParentFolder();
   }
   return true;

@@ -359,7 +359,7 @@ void CGUIDialogSongInfo::OnGetArt()
     CFileItemPtr item(new CFileItem("thumb://Current", false));
     item->SetArt("thumb", m_song->GetArt(type));
     item->SetIconImage("DefaultPicture.png");
-    item->SetLabel(g_localizeStrings.Get(13512));  //! @todo: label fallback art so user knows?
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13512));  //! @todo: label fallback art so user knows?
     items.Add(item);
   }
   else if (m_song->HasArt("thumb"))
@@ -370,7 +370,7 @@ void CGUIDialogSongInfo::OnGetArt()
       CFileItemPtr item(new CFileItem("thumb://Thumb", false));
       item->SetArt("thumb", m_song->GetArt("thumb"));
       item->SetIconImage("DefaultAlbumCover.png");
-      item->SetLabel(g_localizeStrings.Get(21371));
+      item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21371));
       items.Add(item);
     }
   }
@@ -388,7 +388,7 @@ void CGUIDialogSongInfo::OnGetArt()
     {
       CFileItemPtr item(new CFileItem("thumb://Local", false));
       item->SetArt("thumb", localThumb);
-      item->SetLabel(g_localizeStrings.Get(20017));
+      item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20017));
       items.Add(item);
     }
   }
@@ -411,7 +411,7 @@ void CGUIDialogSongInfo::OnGetArt()
     // allow the user to delete it by selecting "no art".
     CFileItemPtr item(new CFileItem("thumb://None", false));
     item->SetArt("thumb", "DefaultAlbumCover.png");
-    item->SetLabel(g_localizeStrings.Get(13515));
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13515));
     items.Add(item);
   }
 
@@ -430,7 +430,7 @@ void CGUIDialogSongInfo::OnGetArt()
   else  // Add parent folder of song
     CGUIDialogMusicInfo::AddItemPathToFileBrowserSources(sources, *m_song);
   g_mediaManager.GetLocalDrives(sources);
-  if (CGUIDialogFileBrowser::ShowAndGetImage(items, sources, g_localizeStrings.Get(13511), result) &&
+  if (CGUIDialogFileBrowser::ShowAndGetImage(items, sources, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13511), result) &&
     result != "thumb://Current")
   {
     // User didn't choose the one they have, or the fallback image.

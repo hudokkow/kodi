@@ -270,7 +270,7 @@ std::string CPlayerCoreFactory::SelectPlayerDialog(const std::vector<std::string
     //Add default player
     std::string strCaption = players[0];
     strCaption += " (";
-    strCaption += g_localizeStrings.Get(13278);
+    strCaption += CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13278);
     strCaption += ")";
     choices.Add(0, strCaption);
 

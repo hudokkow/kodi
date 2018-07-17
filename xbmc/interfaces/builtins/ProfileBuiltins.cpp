@@ -77,13 +77,13 @@ static int MasterMode(const std::vector<std::string>& params)
   {
     g_passwordManager.bMasterUser = false;
     g_passwordManager.LockSources(true);
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(20052),g_localizeStrings.Get(20053));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20052),CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20053));
   }
   else if (g_passwordManager.IsMasterLockUnlocked(true))
   {
     g_passwordManager.LockSources(false);
     g_passwordManager.bMasterUser = true;
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(20052),g_localizeStrings.Get(20054));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20052),CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20054));
   }
 
   CUtil::DeleteVideoDatabaseDirectoryCache();

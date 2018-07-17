@@ -230,7 +230,7 @@ void CPowerManager::OnLowBattery()
 {
   CLog::Log(LOGNOTICE, "%s: Running low battery jobs", __FUNCTION__);
 
-  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(13050), "");
+  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13050), "");
 
   CAnnouncementManager::GetInstance().Announce(System, "xbmc", "OnLowBattery");
 }
@@ -272,16 +272,16 @@ void CPowerManager::RestorePlayerState()
 void CPowerManager::SettingOptionsShutdownStatesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
   if (CServiceBroker::GetPowerManager().CanPowerdown())
-    list.push_back(make_pair(g_localizeStrings.Get(13005), POWERSTATE_SHUTDOWN));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13005), POWERSTATE_SHUTDOWN));
   if (CServiceBroker::GetPowerManager().CanHibernate())
-    list.push_back(make_pair(g_localizeStrings.Get(13010), POWERSTATE_HIBERNATE));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13010), POWERSTATE_HIBERNATE));
   if (CServiceBroker::GetPowerManager().CanSuspend())
-    list.push_back(make_pair(g_localizeStrings.Get(13011), POWERSTATE_SUSPEND));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13011), POWERSTATE_SUSPEND));
   if (!g_application.IsStandAlone())
   {
-    list.push_back(make_pair(g_localizeStrings.Get(13009), POWERSTATE_QUIT));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13009), POWERSTATE_QUIT));
 #if !defined(TARGET_DARWIN_IOS)
-    list.push_back(make_pair(g_localizeStrings.Get(13014), POWERSTATE_MINIMIZE));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13014), POWERSTATE_MINIMIZE));
 #endif
   }
 }

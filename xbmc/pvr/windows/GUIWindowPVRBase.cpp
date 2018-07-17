@@ -255,7 +255,7 @@ void CGUIWindowPVRBase::OnInitWindow(void)
   else
   {
     CGUIWindow::OnInitWindow(); // do not call CGUIMediaWindow as it will do a Refresh which in no case works in this state (no channelgroup!)
-    ShowProgressDialog(g_localizeStrings.Get(19235), 0); // PVR manager is starting up
+    ShowProgressDialog(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19235), 0); // PVR manager is starting up
   }
 }
 
@@ -375,7 +375,7 @@ bool CGUIWindowPVRBase::OpenChannelGroupSelectionDialog(void)
   CServiceBroker::GetPVRManager().ChannelGroups()->Get(m_bRadio)->GetGroupList(&options, true);
 
   dialog->Reset();
-  dialog->SetHeading(CVariant{g_localizeStrings.Get(19146)});
+  dialog->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19146)});
   dialog->SetItems(options);
   dialog->SetMultiSelection(false);
   if (const CPVRChannelGroupPtr channelGroup = GetChannelGroup())
@@ -486,7 +486,7 @@ void CGUIWindowPVRBase::UpdateButtons(void)
   const CPVRChannelGroupPtr channelGroup = GetChannelGroup();
   if (channelGroup)
   {
-    SET_CONTROL_LABEL(CONTROL_BTNCHANNELGROUPS, g_localizeStrings.Get(19141) + ": " + channelGroup->GroupName());
+    SET_CONTROL_LABEL(CONTROL_BTNCHANNELGROUPS, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19141) + ": " + channelGroup->GroupName());
   }
 
   m_channelGroupsSelector->SelectChannelGroup(channelGroup);
@@ -502,7 +502,7 @@ void CGUIWindowPVRBase::ShowProgressDialog(const std::string &strText, int iProg
       CLog::LogF(LOGERROR, "Unable to get WINDOW_DIALOG_EXT_PROGRESS!");
       return;
     }
-    m_progressHandle = loadingProgressDialog->GetHandle(g_localizeStrings.Get(19235)); // PVR manager is starting up
+    m_progressHandle = loadingProgressDialog->GetHandle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19235)); // PVR manager is starting up
   }
 
   m_progressHandle->SetPercentage(static_cast<float>(iProgress));

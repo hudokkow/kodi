@@ -78,7 +78,7 @@ static unsigned long HostToIP(const std::string& host)
   return inet_addr(ip.c_str());
 }
 
-#define LOCALIZED(id) g_localizeStrings.Get(id)
+#define LOCALIZED(id) CServiceBroker::GetGUI()->GetLocalizeStrings().Get(id)
 
 static void ShowDiscoveryMessage(const char* function, const char* server_name, bool new_entry)
 {

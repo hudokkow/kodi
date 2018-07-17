@@ -157,7 +157,7 @@ void CGUIWindowEventLog::GetContextButtons(int itemNumber, CContextButtons &butt
   if (eventPtr == nullptr)
     return;
 
-  buttons.Add(CONTEXT_BUTTON_DELETE, g_localizeStrings.Get(1210));
+  buttons.Add(CONTEXT_BUTTON_DELETE, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1210));
 }
 
 bool CGUIWindowEventLog::OnContextButton(int itemNumber, CONTEXT_BUTTON button)
@@ -188,7 +188,7 @@ void CGUIWindowEventLog::UpdateButtons()
 
   EventLevel eventLevel = CViewStateSettings::GetInstance().GetEventLevel();
   // set the label of the "level" button
-  SET_CONTROL_LABEL(CONTROL_BUTTON_LEVEL, StringUtils::Format(g_localizeStrings.Get(14119).c_str(), g_localizeStrings.Get(14115 + (int)eventLevel).c_str()));
+  SET_CONTROL_LABEL(CONTROL_BUTTON_LEVEL, StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14119).c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14115 + (int)eventLevel).c_str()));
 
   // set the label, value and enabled state of the "level only" button
   SET_CONTROL_LABEL(CONTROL_BUTTON_LEVEL_ONLY, 14120);

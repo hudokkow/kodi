@@ -566,7 +566,7 @@ bool CGUIDialogNumeric::ShowAndVerifyNewPassword(std::string& strNewPassword)
 {
   // Prompt user for password input
   std::string strUserInput;
-  InputVerificationResult ret = ShowAndVerifyInput(strUserInput, g_localizeStrings.Get(12340), false);
+  InputVerificationResult ret = ShowAndVerifyInput(strUserInput, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12340), false);
   if (ret != InputVerificationResult::SUCCESS)
   {
     if (ret == InputVerificationResult::FAILED)
@@ -582,7 +582,7 @@ bool CGUIDialogNumeric::ShowAndVerifyNewPassword(std::string& strNewPassword)
     return false;
 
   // Prompt again for password input, this time sending previous input as the password to verify
-  ret = ShowAndVerifyInput(strUserInput, g_localizeStrings.Get(12341), true);
+  ret = ShowAndVerifyInput(strUserInput, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12341), true);
   if (ret != InputVerificationResult::SUCCESS)
   {
     if (ret == InputVerificationResult::FAILED)
@@ -609,7 +609,7 @@ int CGUIDialogNumeric::ShowAndVerifyPassword(std::string& strPassword, const std
   if (iRetries > 0)
   {
     // Show a string telling user they have iRetries retries left
-    strTempHeading = StringUtils::Format("%s. %s %i %s", strHeading.c_str(), g_localizeStrings.Get(12342).c_str(), iRetries, g_localizeStrings.Get(12343).c_str());
+    strTempHeading = StringUtils::Format("%s. %s %i %s", strHeading.c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12342).c_str(), iRetries, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12343).c_str());
   }
 
   // make a copy of strPassword to prevent from overwriting it later

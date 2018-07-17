@@ -42,7 +42,7 @@ void CContextMenuAddon::ParseMenu(
   auto menuId = CServiceBroker::GetAddonMgr().GetExtValue(elem, "@id");
   auto menuLabel = CServiceBroker::GetAddonMgr().GetExtValue(elem, "label");
   if (StringUtils::IsNaturalNumber(menuLabel))
-    menuLabel = g_localizeStrings.GetAddonString(addonInfo.ID(), std::stoi(menuLabel));
+    menuLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(addonInfo.ID(), std::stoi(menuLabel));
 
   if (menuId.empty())
   {
@@ -67,7 +67,7 @@ void CContextMenuAddon::ParseMenu(
       const auto library = CServiceBroker::GetAddonMgr().GetExtValue(&subElem, "@library");
       auto label = CServiceBroker::GetAddonMgr().GetExtValue(&subElem, "label");
       if (StringUtils::IsNaturalNumber(label))
-        label = g_localizeStrings.GetAddonString(addonInfo.ID(), std::stoi(label));
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(addonInfo.ID(), std::stoi(label));
 
       if (!label.empty() && !library.empty() && !visCondition.empty())
       {
@@ -107,7 +107,7 @@ std::unique_ptr<CContextMenuAddon> CContextMenuAddon::FromExtension(CAddonInfo a
 
       auto label = CServiceBroker::GetAddonMgr().GetExtValue(elem, "label");
       if (StringUtils::IsNaturalNumber(label))
-        label = g_localizeStrings.GetAddonString(addonInfo.ID(), atoi(label.c_str()));
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(addonInfo.ID(), atoi(label.c_str()));
 
       CContextMenuItem menuItem = CContextMenuItem::CreateItem(label, parent,
           URIUtils::AddFileToFolder(addonInfo.Path(), addonInfo.LibName()), visCondition, addonInfo.ID());

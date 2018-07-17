@@ -162,7 +162,7 @@ void CGUIWindowLoginScreen::FrameMove()
 
   const CProfilesManager &profileManager = CServiceBroker::GetProfileManager();
 
-  std::string strLabel = StringUtils::Format(g_localizeStrings.Get(20114).c_str(), m_iSelectedItem+1, profileManager.GetNumberOfProfiles());
+  std::string strLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20114).c_str(), m_iSelectedItem+1, profileManager.GetNumberOfProfiles());
   SET_CONTROL_LABEL(CONTROL_LABEL_SELECTED_PROFILE,strLabel);
   CGUIWindow::FrameMove();
 }
@@ -177,7 +177,7 @@ void CGUIWindowLoginScreen::OnInitWindow()
   m_viewControl.SetCurrentView(DEFAULT_VIEW_LIST);
   Update();
   m_viewControl.SetFocused();
-  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER,g_localizeStrings.Get(20115));
+  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20115));
   SET_CONTROL_VISIBLE(CONTROL_BIG_LIST);
 
   CGUIWindow::OnInitWindow();
@@ -211,9 +211,9 @@ void CGUIWindowLoginScreen::Update()
 
     std::string strLabel;
     if (profile->getDate().empty())
-      strLabel = g_localizeStrings.Get(20113);
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20113);
     else
-      strLabel = StringUtils::Format(g_localizeStrings.Get(20112).c_str(), profile->getDate().c_str());
+      strLabel = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20112).c_str(), profile->getDate().c_str());
 
     item->SetLabel2(strLabel);
     item->SetArt("thumb", profile->getThumb());

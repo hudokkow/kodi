@@ -269,7 +269,7 @@ std::string CLabelFormatter::GetMaskContent(const CMaskString &mask, const CFile
     if (movie && movie->m_iEpisode > 0)
       value = StringUtils::Format("%i %s",
                                   movie->m_iEpisode,
-                                  g_localizeStrings.Get(movie->m_iEpisode == 1 ? 20452 : 20453).c_str());
+                                  CServiceBroker::GetGUI()->GetLocalizeStrings().Get(movie->m_iEpisode == 1 ? 20452 : 20453).c_str());
     break;
   case 'E':
     if (movie && movie->m_iEpisode > 0)
@@ -319,7 +319,7 @@ std::string CLabelFormatter::GetMaskContent(const CMaskString &mask, const CFile
     if( !item->m_bIsFolder && music && music->GetListeners() != 0 )
      value = StringUtils::Format("%i %s",
                                  music->GetListeners(),
-                                 g_localizeStrings.Get(music->GetListeners() == 1 ? 20454 : 20455).c_str());
+                                 CServiceBroker::GetGUI()->GetLocalizeStrings().Get(music->GetListeners() == 1 ? 20454 : 20455).c_str());
     break;
   case 'a': // Date Added
     if (movie && movie->m_dateAdded.IsValid())

@@ -349,21 +349,21 @@ bool CGUIDialogPVRChannelManager::OnClickButtonChannelLogo(CGUIMessage &message)
   {
     CFileItemPtr current(new CFileItem("thumb://Current", false));
     current->SetArt("thumb", pItem->GetPVRChannelInfoTag()->IconPath());
-    current->SetLabel(g_localizeStrings.Get(19282));
+    current->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19282));
     items.Add(current);
   }
   else if (pItem->HasArt("thumb"))
   { // already have a thumb that the share doesn't know about - must be a local one, so we mayaswell reuse it.
     CFileItemPtr current(new CFileItem("thumb://Current", false));
     current->SetArt("thumb", pItem->GetArt("thumb"));
-    current->SetLabel(g_localizeStrings.Get(19282));
+    current->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19282));
     items.Add(current);
   }
 
   // and add a "no thumb" entry as well
   CFileItemPtr nothumb(new CFileItem("thumb://None", false));
   nothumb->SetIconImage(pItem->GetIconImage());
-  nothumb->SetLabel(g_localizeStrings.Get(19283));
+  nothumb->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19283));
   items.Add(nothumb);
 
   std::string strThumb;
@@ -372,11 +372,11 @@ bool CGUIDialogPVRChannelManager::OnClickButtonChannelLogo(CGUIMessage &message)
   {
     CMediaSource share1;
     share1.strPath = CServiceBroker::GetSettings().GetString(CSettings::SETTING_PVRMENU_ICONPATH);
-    share1.strName = g_localizeStrings.Get(19066);
+    share1.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19066);
     shares.push_back(share1);
   }
   g_mediaManager.GetLocalDrives(shares);
-  if (!CGUIDialogFileBrowser::ShowAndGetImage(items, shares, g_localizeStrings.Get(19285), strThumb, NULL, 19285))
+  if (!CGUIDialogFileBrowser::ShowAndGetImage(items, shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19285), strThumb, NULL, 19285))
     return false;
 
   if (strThumb == "thumb://Current")
@@ -469,7 +469,7 @@ bool CGUIDialogPVRChannelManager::OnClickButtonNewChannel()
     int iClientID = m_clientsWithSettingsList[iSelection]->GetID();
 
     CPVRChannelPtr channel(new CPVRChannel(m_bIsRadio));
-    channel->SetChannelName(g_localizeStrings.Get(19204)); // New channel
+    channel->SetChannelName(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19204)); // New channel
     channel->SetClientID(iClientID);
 
     PVR_ERROR ret = PVR_ERROR_UNKNOWN;
@@ -715,7 +715,7 @@ void CGUIDialogPVRChannelManager::Update()
 
   {
     std::vector< std::pair<std::string, int> > labels;
-    labels.push_back(std::make_pair(g_localizeStrings.Get(19210), 0));
+    labels.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19210), 0));
     //! @todo Add Labels for EPG scrapers here
     SET_CONTROL_LABELS(SPIN_EPGSOURCE_SELECTION, 0, &labels);
   }

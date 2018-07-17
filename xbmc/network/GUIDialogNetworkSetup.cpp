@@ -239,7 +239,7 @@ void CGUIDialogNetworkSetup::OnServerBrowse()
   CURL url(share.strPath);
   share.strName = url.GetWithoutUserDetails();
   shares.push_back(share);
-  if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, g_localizeStrings.Get(1015), path))
+  if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1015), path))
   {
     SetPath(path);
     UpdateButtons();

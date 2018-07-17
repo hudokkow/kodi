@@ -55,7 +55,7 @@ CDialogGameVideoFilter::CDialogGameVideoFilter() :
 
 std::string CDialogGameVideoFilter::GetHeading()
 {
-  return g_localizeStrings.Get(35225); // "Video filter"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35225); // "Video filter"
 }
 
 void CDialogGameVideoFilter::PreInit()
@@ -66,7 +66,7 @@ void CDialogGameVideoFilter::PreInit()
 
   if (m_items.Size() == 0)
   {
-    CFileItemPtr item = std::make_shared<CFileItem>(g_localizeStrings.Get(231)); // "None"
+    CFileItemPtr item = std::make_shared<CFileItem>(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(231)); // "None"
     m_items.Add(std::move(item));
   }
 
@@ -84,10 +84,10 @@ void CDialogGameVideoFilter::InitVideoFilters()
         RETRO::CRenderVideoSettings videoSettings;
         videoSettings.SetScalingMethod(scalingMethodProps.scalingMethod);
 
-        CFileItemPtr item = std::make_shared<CFileItem>(g_localizeStrings.Get(scalingMethodProps.nameIndex));
-        item->SetLabel2(g_localizeStrings.Get(scalingMethodProps.categoryIndex));
+        CFileItemPtr item = std::make_shared<CFileItem>(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(scalingMethodProps.nameIndex));
+        item->SetLabel2(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(scalingMethodProps.categoryIndex));
         item->SetProperty("game.videofilter", CVariant{ videoSettings.GetVideoFilter() });
-        item->SetProperty("game.videofilterdescription", CVariant{ g_localizeStrings.Get(scalingMethodProps.descriptionIndex) });
+        item->SetProperty("game.videofilterdescription", CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(scalingMethodProps.descriptionIndex) });
         m_items.Add(std::move(item));
       }
     }

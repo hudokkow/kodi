@@ -670,7 +670,7 @@ std::shared_ptr<CSettingCategory> CAddonSettings::ParseOldCategoryElement(uint32
 
   // try to get the category's label and fall back to "General"
   int categoryLabel = 128;
-  ParseOldLabel(categoryElement, g_localizeStrings.Get(categoryLabel), categoryLabel);
+  ParseOldLabel(categoryElement, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(categoryLabel), categoryLabel);
   category->SetLabel(categoryLabel);
 
   // prepare a setting group
@@ -1147,7 +1147,7 @@ SettingPtr CAddonSettings::InitializeFromOldSettingEnums(const std::string& sett
       for (uint32_t i = 0; i < values.size(); ++i)
       {
         int label = static_cast<int>(strtol(values[i].c_str(), nullptr, 0));
-        std::string value = g_localizeStrings.GetAddonString(m_addonId, label);
+        std::string value = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(m_addonId, label);
         if (settingEntries.size() > i)
           value = settingEntries[i];
 

@@ -67,19 +67,19 @@ std::string GetPlaylistLabel(int item, int playlistid /* = PLAYLIST_NONE */)
     case PLAYLIST_RANDOM:
     {
       if (player.IsShuffled(iPlaylist))
-        return g_localizeStrings.Get(16041); // 16041: On
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16041); // 16041: On
       else
-        return g_localizeStrings.Get(591); // 591: Off
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(591); // 591: Off
     }
     case PLAYLIST_REPEAT:
     {
       PLAYLIST::REPEAT_STATE state = player.GetRepeat(iPlaylist);
       if (state == PLAYLIST::REPEAT_ONE)
-        return g_localizeStrings.Get(592); // 592: One
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(592); // 592: One
       else if (state == PLAYLIST::REPEAT_ALL)
-        return g_localizeStrings.Get(593); // 593: All
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(593); // 593: All
       else
-        return g_localizeStrings.Get(594); // 594: Off
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(594); // 594: Off
     }
   }
   return std::string();

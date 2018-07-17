@@ -139,7 +139,7 @@ std::string CKeyboardLayout::GetIdentifier() const
 
 std::string CKeyboardLayout::GetName() const
 {
-  return StringUtils::Format(g_localizeStrings.Get(311).c_str(), m_language.c_str(), m_layout.c_str());
+  return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(311).c_str(), m_language.c_str(), m_layout.c_str());
 }
 
 std::string CKeyboardLayout::GetCharAt(unsigned int row, unsigned int column, unsigned int modifiers) const

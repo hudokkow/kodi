@@ -512,7 +512,7 @@ void CGUIDialogPVRTimerSettings::OnSettingAction(std::shared_ptr<const CSetting>
   {
     SYSTEMTIME timerStartTime;
     m_startLocalTime.GetAsSystemTime(timerStartTime);
-    if (CGUIDialogNumeric::ShowAndGetTime(timerStartTime, g_localizeStrings.Get(14066)))
+    if (CGUIDialogNumeric::ShowAndGetTime(timerStartTime, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14066)))
     {
       SetTimeFromSystemTime(m_startLocalTime, timerStartTime);
       m_timerStartTimeStr = m_startLocalTime.GetAsLocalizedTime("", false);
@@ -523,7 +523,7 @@ void CGUIDialogPVRTimerSettings::OnSettingAction(std::shared_ptr<const CSetting>
   {
     SYSTEMTIME timerEndTime;
     m_endLocalTime.GetAsSystemTime(timerEndTime);
-    if (CGUIDialogNumeric::ShowAndGetTime(timerEndTime, g_localizeStrings.Get(14066)))
+    if (CGUIDialogNumeric::ShowAndGetTime(timerEndTime, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14066)))
     {
       SetTimeFromSystemTime(m_endLocalTime, timerEndTime);
       m_timerEndTimeStr = m_endLocalTime.GetAsLocalizedTime("", false);
@@ -648,7 +648,7 @@ void CGUIDialogPVRTimerSettings::Save()
   m_timerInfoTag->m_iRecordingGroup = m_iRecordingGroup;
 
   // Set the timer's title to the channel name if it's empty or 'New Timer'
-  if (channel && (m_strTitle.empty() || m_strTitle == g_localizeStrings.Get(19056)))
+  if (channel && (m_strTitle.empty() || m_strTitle == CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19056)))
     m_timerInfoTag->m_strTitle = channel->ChannelName();
 
   // Update summary
@@ -798,7 +798,7 @@ void CGUIDialogPVRTimerSettings::InitializeChannelsList()
   // Add special "any channel" entry (used for epg-based timer rules).
   m_channelEntries.insert(
     std::make_pair(
-      ENTRY_ANY_CHANNEL, ChannelDescriptor(PVR_CHANNEL_INVALID_UID, 0, g_localizeStrings.Get(809))));
+      ENTRY_ANY_CHANNEL, ChannelDescriptor(PVR_CHANNEL_INVALID_UID, 0, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(809))));
 }
 
 void CGUIDialogPVRTimerSettings::TypesFiller(
@@ -929,13 +929,13 @@ void CGUIDialogPVRTimerSettings::WeekdaysFiller(
   if (pThis)
   {
     list.clear();
-    list.push_back(std::make_pair(g_localizeStrings.Get(831), PVR_WEEKDAY_MONDAY));    // "Mondays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(832), PVR_WEEKDAY_TUESDAY));   // "Tuesdays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(833), PVR_WEEKDAY_WEDNESDAY)); // "Wednesdays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(834), PVR_WEEKDAY_THURSDAY));  // "Thursdays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(835), PVR_WEEKDAY_FRIDAY));    // "Fridays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(836), PVR_WEEKDAY_SATURDAY));  // "Saturdays"
-    list.push_back(std::make_pair(g_localizeStrings.Get(837), PVR_WEEKDAY_SUNDAY));    // "Sundays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(831), PVR_WEEKDAY_MONDAY));    // "Mondays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(832), PVR_WEEKDAY_TUESDAY));   // "Tuesdays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(833), PVR_WEEKDAY_WEDNESDAY)); // "Wednesdays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(834), PVR_WEEKDAY_THURSDAY));  // "Thursdays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(835), PVR_WEEKDAY_FRIDAY));    // "Fridays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(836), PVR_WEEKDAY_SATURDAY));  // "Saturdays"
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(837), PVR_WEEKDAY_SUNDAY));    // "Sundays"
 
     current = pThis->m_iWeekdays;
   }
@@ -994,7 +994,7 @@ void CGUIDialogPVRTimerSettings::LifetimesFiller(
     if (it == list.end())
     {
       // PVR backend supplied value is not in the list of predefined values. Insert it.
-      list.insert(it, std::make_pair(StringUtils::Format(g_localizeStrings.Get(17999).c_str(), current) /* %i days */, current));
+      list.insert(it, std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(17999).c_str(), current) /* %i days */, current));
     }
   }
   else
@@ -1079,7 +1079,7 @@ void CGUIDialogPVRTimerSettings::MarginTimeFiller(
     if (bInsertValue)
     {
       // PVR backend supplied value is not in the list of predefined values. Insert it.
-      list.insert(it, std::make_pair(StringUtils::Format(g_localizeStrings.Get(14044).c_str(), current) /* %i min */, current));
+      list.insert(it, std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14044).c_str(), current) /* %i min */, current));
     }
   }
   else

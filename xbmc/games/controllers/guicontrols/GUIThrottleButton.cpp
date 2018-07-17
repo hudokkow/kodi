@@ -48,12 +48,12 @@ bool CGUIThrottleButton::PromptForInput(CEvent& waitEvent)
   switch (m_state)
   {
     case STATE::THROTTLE_UP:
-      strPrompt = g_localizeStrings.Get(35092); // "Move %s up"
-      strWarn   = g_localizeStrings.Get(35093); // "Move %s up (%d)"
+      strPrompt = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35092); // "Move %s up"
+      strWarn   = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35093); // "Move %s up (%d)"
       break;
     case STATE::THROTTLE_DOWN:
-      strPrompt = g_localizeStrings.Get(35094); // "Move %s down"
-      strWarn   = g_localizeStrings.Get(35095); // "Move %s down (%d)"
+      strPrompt = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35094); // "Move %s down"
+      strWarn   = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35095); // "Move %s down (%d)"
       break;
     default:
       break;

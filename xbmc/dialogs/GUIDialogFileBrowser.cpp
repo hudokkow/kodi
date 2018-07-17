@@ -252,7 +252,7 @@ bool CGUIDialogFileBrowser::OnMessage(CGUIMessage& message)
       else if (message.GetSenderId() == CONTROL_NEWFOLDER)
       {
         std::string strInput;
-        if (CGUIKeyboardFactory::ShowAndGetInput(strInput, CVariant{g_localizeStrings.Get(119)}, false))
+        if (CGUIKeyboardFactory::ShowAndGetInput(strInput, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(119)}, false))
         {
           std::string strPath = URIUtils::AddFileToFolder(m_vecItems->GetPath(), strInput);
           if (CDirectory::Create(strPath))
@@ -433,14 +433,14 @@ void CGUIDialogFileBrowser::Update(const std::string &strDirectory)
      (CServiceBroker::GetProfileManager().GetMasterProfile().getLockMode() == LOCK_MODE_EVERYONE ||
       CServiceBroker::GetProfileManager().IsMasterProfile() || g_passwordManager.bMasterUser))
   { // we are in the virtual directory - add the "Add Network Location" item
-    CFileItemPtr pItem(new CFileItem(g_localizeStrings.Get(1032)));
+    CFileItemPtr pItem(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1032)));
     pItem->SetPath("net://");
     pItem->m_bIsFolder = true;
     m_vecItems->Add(pItem);
   }
   if (m_Directory->GetPath().empty() && !m_addSourceType.empty())
   {
-    CFileItemPtr pItem(new CFileItem(g_localizeStrings.Get(21359)));
+    CFileItemPtr pItem(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21359)));
     pItem->SetPath("source://");
     pItem->m_bIsFolder = true;
     m_vecItems->Add(pItem);
@@ -490,7 +490,7 @@ void CGUIDialogFileBrowser::FrameMove()
       m_selectedPath = (*m_vecItems)[item]->GetPath();
     if (m_selectedPath == "net://")
     {
-      SET_CONTROL_LABEL(CONTROL_LABEL_PATH, g_localizeStrings.Get(1032)); // "Add Network Location..."
+      SET_CONTROL_LABEL(CONTROL_LABEL_PATH, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1032)); // "Add Network Location..."
     }
     else
     {
@@ -626,7 +626,7 @@ bool CGUIDialogFileBrowser::ShowAndGetImage(const CFileItemList &items, const VE
   if (true)
   {
     CFileItemPtr item(new CFileItem("image://Browse", false));
-    item->SetLabel(g_localizeStrings.Get(20153));
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20153));
     item->SetIconImage("DefaultFolder.png");
     browser->m_vecItems->Add(item);
   }
@@ -641,7 +641,7 @@ bool CGUIDialogFileBrowser::ShowAndGetImage(const CFileItemList &items, const VE
     { // "Browse for thumb"
       CServiceBroker::GetGUI()->GetWindowManager().Remove(browser->GetID());
       delete browser;
-      return ShowAndGetImage(shares, g_localizeStrings.Get(label), result);
+      return ShowAndGetImage(shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(label), result);
     }
   }
 
@@ -745,7 +745,7 @@ bool CGUIDialogFileBrowser::ShowAndGetFile(const std::string &directory, const s
     browser->m_vecItems->Clear();
     CDirectory::GetDirectory(directory,*browser->m_vecItems, "", DIR_FLAG_DEFAULTS);
     CFileItemPtr item(new CFileItem("file://Browse", false));
-    item->SetLabel(g_localizeStrings.Get(20153));
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20153));
     item->SetIconImage("DefaultFolder.png");
     browser->m_vecItems->Add(item);
     browser->m_singleList = true;
@@ -850,7 +850,7 @@ bool CGUIDialogFileBrowser::ShowAndGetSource(std::string &path, bool allowNetwor
   }
   else
   {
-    browser->SetHeading(g_localizeStrings.Get(1023));
+    browser->SetHeading(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1023));
 
     g_mediaManager.GetLocalDrives(shares);
 

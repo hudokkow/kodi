@@ -196,7 +196,7 @@ void CPVRTimerType::InitLifetimeValues(const PVR_TIMER_TYPE &type)
     // No values given by addon, but lifetime supported. Use default values 1..365
     for (int i = 1; i < 366; ++i)
     {
-      m_lifetimeValues.push_back(std::make_pair(StringUtils::Format(g_localizeStrings.Get(17999).c_str(), i), i)); // "%s days"
+      m_lifetimeValues.push_back(std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(17999).c_str(), i), i)); // "%s days"
     }
     m_iLifetimeDefault = DEFAULT_RECORDING_LIFETIME;
   }
@@ -258,8 +258,8 @@ void CPVRTimerType::InitPreventDuplicateEpisodesValues(const PVR_TIMER_TYPE &typ
   else if (SupportsRecordOnlyNewEpisodes())
   {
     // No values given by addon, but prevent duplicate episodes supported. Use default values 0..1
-    m_preventDupEpisodesValues.push_back(std::make_pair(g_localizeStrings.Get(815), 0)); // "Record all episodes"
-    m_preventDupEpisodesValues.push_back(std::make_pair(g_localizeStrings.Get(816), 1)); // "Record only new episodes"
+    m_preventDupEpisodesValues.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(815), 0)); // "Record all episodes"
+    m_preventDupEpisodesValues.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(816), 1)); // "Record only new episodes"
     m_iPreventDupEpisodesDefault = DEFAULT_RECORDING_DUPLICATEHANDLING;
   }
   else
@@ -286,7 +286,7 @@ void CPVRTimerType::InitRecordingGroupValues(const PVR_TIMER_TYPE &type)
       {
         // No description given by addon. Create one from value.
         strDescr = StringUtils::Format("%s %d",
-                                       g_localizeStrings.Get(811).c_str(), // Recording group
+                                       CServiceBroker::GetGUI()->GetLocalizeStrings().Get(811).c_str(), // Recording group
                                        type.recordingGroup[i].iValue);
       }
       m_recordingGroupValues.push_back(std::make_pair(strDescr, type.recordingGroup[i].iValue));

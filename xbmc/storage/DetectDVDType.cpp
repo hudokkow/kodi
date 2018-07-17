@@ -127,7 +127,7 @@ void CDetectDVDMedia::UpdateDvdrom()
       case DRIVE_OPEN:
         {
           // Send Message to GUI that disc been ejected
-          SetNewDVDShareUrl("D:\\", false, g_localizeStrings.Get(502));
+          SetNewDVDShareUrl("D:\\", false, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(502));
           m_isoReader.Reset();
           CGUIMessage msg(GUI_MSG_NOTIFY_ALL, 0, 0, GUI_MSG_REMOVED_MEDIA);
           CServiceBroker::GetGUI()->GetWindowManager().SendThreadMessage( msg );
@@ -141,7 +141,7 @@ void CDetectDVDMedia::UpdateDvdrom()
         {
           // Drive is not ready (closing, opening)
           m_isoReader.Reset();
-          SetNewDVDShareUrl("D:\\", false, g_localizeStrings.Get(503));
+          SetNewDVDShareUrl("D:\\", false, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(503));
           m_DriveState = DRIVE_NOT_READY;
           // DVD-ROM in undefined state
           // Better delete old CD Information
@@ -163,7 +163,7 @@ void CDetectDVDMedia::UpdateDvdrom()
         {
           // Nothing in there...
           m_isoReader.Reset();
-          SetNewDVDShareUrl("D:\\", false, g_localizeStrings.Get(504));
+          SetNewDVDShareUrl("D:\\", false, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(504));
           m_DriveState = DRIVE_CLOSED_NO_MEDIA;
           // Send Message to GUI that disc has changed
           CGUIMessage msg(GUI_MSG_NOTIFY_ALL, 0, 0, GUI_MSG_UPDATE_SOURCES);

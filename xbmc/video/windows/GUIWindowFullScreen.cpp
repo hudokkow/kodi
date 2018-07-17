@@ -320,10 +320,10 @@ void CGUIWindowFullScreen::FrameMove()
 
     {
       // get the "View Mode" string
-      std::string strTitle = g_localizeStrings.Get(629);
+      std::string strTitle = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(629);
       const auto& vs = g_application.GetAppPlayer().GetVideoSettings();
       int sId = CViewModeSettings::GetViewModeStringIndex(vs.m_ViewMode);
-      std::string strMode = g_localizeStrings.Get(sId);
+      std::string strMode = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(sId);
       std::string strInfo = StringUtils::Format("%s : %s", strTitle.c_str(), strMode.c_str());
       CGUIMessage msg(GUI_MSG_LABEL_SET, GetID(), LABEL_ROW1);
       msg.SetLabel(strInfo);
@@ -337,7 +337,7 @@ void CGUIWindowFullScreen::FrameMove()
       float xscale = (float)res.iScreenWidth  / (float)res.iWidth;
       float yscale = (float)res.iScreenHeight / (float)res.iHeight;
 
-      std::string strSizing = StringUtils::Format(g_localizeStrings.Get(245).c_str(),
+      std::string strSizing = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(245).c_str(),
                                                  (int)info.SrcRect.Width(),
                                                  (int)info.SrcRect.Height(),
                                                  (int)(info.DestRect.Width() * xscale),
@@ -355,17 +355,17 @@ void CGUIWindowFullScreen::FrameMove()
       std::string strStatus;
       if (CServiceBroker::GetWinSystem()->IsFullScreen())
         strStatus = StringUtils::Format("%s %ix%i@%.2fHz - %s",
-                                        g_localizeStrings.Get(13287).c_str(),
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13287).c_str(),
                                         res.iScreenWidth,
                                         res.iScreenHeight,
                                         res.fRefreshRate,
-                                        g_localizeStrings.Get(244).c_str());
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(244).c_str());
       else
         strStatus = StringUtils::Format("%s %ix%i - %s",
-                                        g_localizeStrings.Get(13287).c_str(),
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13287).c_str(),
                                         res.iScreenWidth,
                                         res.iScreenHeight,
-                                        g_localizeStrings.Get(242).c_str());
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(242).c_str());
 
       CGUIMessage msg(GUI_MSG_LABEL_SET, GetID(), LABEL_ROW3);
       msg.SetLabel(strStatus);

@@ -56,7 +56,7 @@ bool CGUIDialogAccessPoints::OnAction(const CAction &action)
     if (iItem == (int) m_aps.size())
     {
        m_selectedAPEssId = "";
-       if (CGUIKeyboardFactory::ShowAndGetInput(m_selectedAPEssId, CVariant{g_localizeStrings.Get(789)}, false))
+       if (CGUIKeyboardFactory::ShowAndGetInput(m_selectedAPEssId, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(789)}, false))
        {
          m_selectedAPEncMode = m_aps[iItem].getEncryptionMode();
          m_wasItemSelected = true;
@@ -109,7 +109,7 @@ void CGUIDialogAccessPoints::OnInitWindow()
       m_accessPoints->Add(item);
   }
 
-  CFileItemPtr item(new CFileItem(g_localizeStrings.Get(1047)));
+  CFileItemPtr item(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1047)));
   m_accessPoints->Add(item);
 
   CGUIMessage msg(GUI_MSG_LABEL_BIND, GetID(), CONTROL_ACCESS_POINTS, 0, 0, m_accessPoints);

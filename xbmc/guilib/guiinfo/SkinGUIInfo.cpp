@@ -50,7 +50,7 @@ bool CSkinGUIInfo::GetLabel(std::string& value, const CFileItem *item, int conte
       bool bInfo = CSkinSettings::GetInstance().GetBool(info.GetData1());
       if (bInfo)
       {
-        value = g_localizeStrings.Get(20122); // True
+        value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20122); // True
         return true;
       }
       break;

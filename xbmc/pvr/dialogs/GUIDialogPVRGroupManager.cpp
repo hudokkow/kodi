@@ -113,7 +113,7 @@ bool CGUIDialogPVRGroupManager::ActionButtonNewGroup(CGUIMessage &message)
   {
     std::string strGroupName = "";
     /* prompt for a group name */
-    if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{g_localizeStrings.Get(19139)}, false))
+    if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19139)}, false))
     {
       if (strGroupName != "")
       {
@@ -176,7 +176,7 @@ bool CGUIDialogPVRGroupManager::ActionButtonRenameGroup(CGUIMessage &message)
       return bReturn;
 
     std::string strGroupName(m_selectedGroup->GroupName());
-    if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{g_localizeStrings.Get(19139)}, false))
+    if (CGUIKeyboardFactory::ShowAndGetInput(strGroupName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19139)}, false))
     {
       if (strGroupName != "")
       {
@@ -394,21 +394,21 @@ void CGUIDialogPVRGroupManager::Update()
     if (m_selectedGroup->IsInternalGroup())
     {
       std::string strNewLabel = StringUtils::Format("%s %s",
-                                        g_localizeStrings.Get(19022).c_str(),
-                                        m_bIsRadio ? g_localizeStrings.Get(19024).c_str() : g_localizeStrings.Get(19023).c_str());
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19022).c_str(),
+                                        m_bIsRadio ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19024).c_str() : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19023).c_str());
       SET_CONTROL_LABEL(CONTROL_UNGROUPED_LABEL, strNewLabel);
 
       strNewLabel = StringUtils::Format("%s %s",
-                                        g_localizeStrings.Get(19218).c_str(),
-                                        m_bIsRadio ? g_localizeStrings.Get(19024).c_str() : g_localizeStrings.Get(19023).c_str());
+                                        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19218).c_str(),
+                                        m_bIsRadio ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19024).c_str() : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19023).c_str());
       SET_CONTROL_LABEL(CONTROL_IN_GROUP_LABEL, strNewLabel);
     }
     else
     {
-      std::string strNewLabel = StringUtils::Format("%s", g_localizeStrings.Get(19219).c_str());
+      std::string strNewLabel = StringUtils::Format("%s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19219).c_str());
       SET_CONTROL_LABEL(CONTROL_UNGROUPED_LABEL, strNewLabel);
 
-      strNewLabel = StringUtils::Format("%s %s", g_localizeStrings.Get(19220).c_str(), m_selectedGroup->GroupName().c_str());
+      strNewLabel = StringUtils::Format("%s %s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19220).c_str(), m_selectedGroup->GroupName().c_str());
       SET_CONTROL_LABEL(CONTROL_IN_GROUP_LABEL, strNewLabel);
     }
 

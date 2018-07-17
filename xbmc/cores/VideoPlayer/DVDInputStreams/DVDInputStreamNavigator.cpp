@@ -952,7 +952,7 @@ void CDVDInputStreamNavigator::SetSubtitleStreamName(SubtitleStreamInfo &info, c
     case DVD_SUBPICTURE_LANG_EXT_NormalDirectorsComments:
     case DVD_SUBPICTURE_LANG_EXT_BigDirectorsComments:
     case DVD_SUBPICTURE_LANG_EXT_ChildrensDirectorsComments:
-      info.name = g_localizeStrings.Get(37001);
+      info.name = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(37001);
       break;
     default:
       break;
@@ -1020,14 +1020,14 @@ void CDVDInputStreamNavigator::SetAudioStreamName(AudioStreamInfo &info, const a
   switch( audio_attributes.code_extension )
   {
   case DVD_AUDIO_LANG_EXT_VisuallyImpaired:
-    info.name = g_localizeStrings.Get(37000);
+    info.name = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(37000);
     info.flags = StreamFlags::FLAG_VISUAL_IMPAIRED;
     break;
   case DVD_AUDIO_LANG_EXT_DirectorsComments1:
-    info.name = g_localizeStrings.Get(37001);
+    info.name = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(37001);
     break;
   case DVD_AUDIO_LANG_EXT_DirectorsComments2:
-    info.name = g_localizeStrings.Get(37002);
+    info.name = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(37002);
     break;
   case DVD_AUDIO_LANG_EXT_NotSpecified:
   case DVD_AUDIO_LANG_EXT_NormalCaptions:

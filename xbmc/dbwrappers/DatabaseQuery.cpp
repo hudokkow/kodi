@@ -211,8 +211,8 @@ std::string CDatabaseQueryRule::TranslateOperator(SEARCH_OPERATOR oper)
 std::string CDatabaseQueryRule::GetLocalizedOperator(SEARCH_OPERATOR oper)
 {
   for (unsigned int i = 0; i < NUM_OPERATORS; i++)
-    if (oper == operators[i].op) return g_localizeStrings.Get(operators[i].localizedString);
-  return g_localizeStrings.Get(16018);
+    if (oper == operators[i].op) return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(operators[i].localizedString);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16018);
 }
 
 void CDatabaseQueryRule::GetAvailableOperators(std::vector<std::string> &operatorList)

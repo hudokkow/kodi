@@ -224,7 +224,7 @@ void CPVRChannelGroup::SearchAndSetChannelIcons(bool bUpdateDb /* = false */)
     fileItemMap.insert(std::make_pair(baseName, (*it)->GetPath()));
   }
 
-  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(g_localizeStrings.Get(19286)); // Searching for channel icons
+  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19286)); // Searching for channel icons
 
   int channelIndex = 0;
   CPVRChannelPtr channel;

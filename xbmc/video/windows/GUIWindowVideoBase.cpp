@@ -754,11 +754,11 @@ std::string CGUIWindowVideoBase::GetResumeString(const CFileItem &item)
   GetResumeItemOffset(&item, startOffset, startPart);
   if (startOffset > 0)
   {
-    resumeString = StringUtils::Format(g_localizeStrings.Get(12022).c_str(),
+    resumeString = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12022).c_str(),
         StringUtils::SecondsToTimeString(static_cast<long>(CUtil::ConvertMilliSecsToSecsInt(startOffset)), TIME_FORMAT_HH_MM_SS).c_str());
     if (startPart > 0)
     {
-      std::string partString = StringUtils::Format(g_localizeStrings.Get(23051).c_str(), startPart);
+      std::string partString = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(23051).c_str(), startPart);
       resumeString += " (" + partString + ")";
     }
   }
@@ -908,7 +908,7 @@ bool CGUIWindowVideoBase::OnPlayStackPart(int iItem)
   CDirectory::GetDirectory(path, parts, "", DIR_FLAG_DEFAULTS);
 
   for (int i = 0; i < parts.Size(); i++)
-    parts[i]->SetLabel(StringUtils::Format(g_localizeStrings.Get(23051).c_str(), i+1));
+    parts[i]->SetLabel(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(23051).c_str(), i+1));
 
   CGUIDialogSelect* pDialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
 
@@ -1264,19 +1264,19 @@ bool CGUIWindowVideoBase::GetDirectory(const std::string &strDirectory, CFileIte
     const CProfilesManager &profileManager = CServiceBroker::GetProfileManager();
 
     CFileItemPtr newPlaylist(new CFileItem(profileManager.GetUserDataItem("PartyMode-Video.xsp"),false));
-    newPlaylist->SetLabel(g_localizeStrings.Get(16035));
+    newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16035));
     newPlaylist->SetLabelPreformatted(true);
     newPlaylist->SetIconImage("DefaultPartyMode.png");
     newPlaylist->m_bIsFolder = true;
     items.Add(newPlaylist);
 
 /*    newPlaylist.reset(new CFileItem("newplaylist://", false));
-    newPlaylist->SetLabel(g_localizeStrings.Get(525));
+    newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(525));
     newPlaylist->SetLabelPreformatted(true);
     items.Add(newPlaylist);
 */
     newPlaylist.reset(new CFileItem("newsmartplaylist://video", false));
-    newPlaylist->SetLabel(g_localizeStrings.Get(21437));  // "new smart playlist..."
+    newPlaylist->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21437));  // "new smart playlist..."
     newPlaylist->SetIconImage("DefaultAddSource.png");
     newPlaylist->SetLabelPreformatted(true);
     items.Add(newPlaylist);
@@ -1376,7 +1376,7 @@ void CGUIWindowVideoBase::AddToDatabase(int iItem)
   // prompt for data
   // enter a new title
   std::string strTitle = pItem->GetLabel();
-  if (!CGUIKeyboardFactory::ShowAndGetInput(strTitle, CVariant{g_localizeStrings.Get(528)}, false)) // Enter Title
+  if (!CGUIKeyboardFactory::ShowAndGetInput(strTitle, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(528)}, false)) // Enter Title
     return;
 
   // pick genre
@@ -1402,8 +1402,8 @@ void CGUIWindowVideoBase::AddToDatabase(int iItem)
   // enter new genre string
   if (strGenre.empty())
   {
-    strGenre = g_localizeStrings.Get(532); // Manual Addition
-    if (!CGUIKeyboardFactory::ShowAndGetInput(strGenre, CVariant{g_localizeStrings.Get(533)}, false)) // Enter Genre
+    strGenre = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(532); // Manual Addition
+    if (!CGUIKeyboardFactory::ShowAndGetInput(strGenre, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(533)}, false)) // Enter Genre
       return; // user backed out
     if (strGenre.empty())
       return; // no genre string
@@ -1433,7 +1433,7 @@ void CGUIWindowVideoBase::AddToDatabase(int iItem)
 void CGUIWindowVideoBase::OnSearch()
 {
   std::string strSearch;
-  if (!CGUIKeyboardFactory::ShowAndGetInput(strSearch, CVariant{g_localizeStrings.Get(16017)}, false))
+  if (!CGUIKeyboardFactory::ShowAndGetInput(strSearch, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16017)}, false))
     return ;
 
   StringUtils::ToLower(strSearch);

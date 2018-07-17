@@ -644,12 +644,12 @@ void CPythonInvoker::onError(const std::string &exceptionType /* = "" */, const 
   {
     std::string message;
     if (m_addon && !m_addon->Name().empty())
-      message = StringUtils::Format(g_localizeStrings.Get(2102).c_str(), m_addon->Name().c_str());
+      message = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2102).c_str(), m_addon->Name().c_str());
     else if (m_sourceFile == CSpecialProtocol::TranslatePath("special://profile/autoexec.py"))
-      message = StringUtils::Format(g_localizeStrings.Get(2102).c_str(), "autoexec.py");
+      message = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2102).c_str(), "autoexec.py");
     else
-       message = g_localizeStrings.Get(2103);
-    pDlgToast->QueueNotification(CGUIDialogKaiToast::Error, message, g_localizeStrings.Get(2104));
+       message = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2103);
+    pDlgToast->QueueNotification(CGUIDialogKaiToast::Error, message, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2104));
   }
 }
 

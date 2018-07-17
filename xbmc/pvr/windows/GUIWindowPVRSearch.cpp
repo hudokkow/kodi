@@ -139,7 +139,7 @@ void CGUIWindowPVRSearchBase::OnPrepareFileItems(CFileItemList &items)
   if (bAddSpecialSearchItem)
   {
     CFileItemPtr item(new CFileItem("pvr://guide/searchresults/search/", false));
-    item->SetLabel(g_localizeStrings.Get(19140)); // "Search..."
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19140)); // "Search..."
     item->SetLabelPreformatted(true);
     item->SetSpecialSort(SortSpecialOnTop);
     item->SetIconImage("DefaultTVShows.png");

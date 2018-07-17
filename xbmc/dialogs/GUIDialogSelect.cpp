@@ -323,20 +323,20 @@ void CGUIDialogSelect::OnInitWindow()
   m_viewControl.SetCurrentView(m_useDetails ? CONTROL_DETAILED_LIST : CONTROL_SIMPLE_LIST);
 
   SET_CONTROL_LABEL(CONTROL_NUMBER_OF_ITEMS, StringUtils::Format("%i %s",
-      m_vecList->Size(), g_localizeStrings.Get(127).c_str()));
+      m_vecList->Size(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str()));
 
   if (m_multiSelection)
     EnableButton(true, 186);
 
   if (m_bButtonEnabled)
   {
-    SET_CONTROL_LABEL(CONTROL_EXTRA_BUTTON, g_localizeStrings.Get(m_buttonLabel));
+    SET_CONTROL_LABEL(CONTROL_EXTRA_BUTTON, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_buttonLabel));
     SET_CONTROL_VISIBLE(CONTROL_EXTRA_BUTTON);
   }
   else
     SET_CONTROL_HIDDEN(CONTROL_EXTRA_BUTTON);
 
-  SET_CONTROL_LABEL(CONTROL_CANCEL_BUTTON, g_localizeStrings.Get(222));
+  SET_CONTROL_LABEL(CONTROL_CANCEL_BUTTON, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(222));
 
   CGUIDialogBoxBase::OnInitWindow();
 

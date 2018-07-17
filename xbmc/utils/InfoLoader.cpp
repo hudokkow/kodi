@@ -55,7 +55,7 @@ std::string CInfoLoader::GetInfo(int info)
 
 std::string CInfoLoader::BusyInfo(int info) const
 {
-  return g_localizeStrings.Get(503);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(503);
 }
 
 std::string CInfoLoader::TranslateInfo(int info) const

@@ -346,7 +346,7 @@ void CPeripherals::CreatePeripheral(CPeripheralBus &bus, const PeripheralScanRes
     {
       m_bMissingLibCecWarningDisplayed = true;
       CLog::Log(LOGWARNING, "%s - libCEC support has not been compiled in, so the CEC adapter cannot be used.", __FUNCTION__);
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(36000), g_localizeStrings.Get(36017));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36000), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36017));
     }
 #endif
     break;
@@ -397,7 +397,7 @@ void CPeripherals::OnDeviceAdded(const CPeripheralBus &bus, const CPeripheral &p
     bNotify = false;
 
   if (bNotify)
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, g_localizeStrings.Get(35005), peripheral.DeviceName());
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35005), peripheral.DeviceName());
 #endif
 }
 
@@ -410,7 +410,7 @@ void CPeripherals::OnDeviceDeleted(const CPeripheralBus &bus, const CPeripheral 
   bool bNotify = true;
 
   if (bNotify)
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, g_localizeStrings.Get(35006), peripheral.DeviceName());
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35006), peripheral.DeviceName());
 #endif
 }
 

@@ -102,7 +102,7 @@ void CGUIWindowSystemInfo::FrameMove()
   int i = 2;
   if (m_section == CONTROL_BT_DEFAULT)
   {
-    SET_CONTROL_LABEL(40, g_localizeStrings.Get(20154));
+    SET_CONTROL_LABEL(40, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20154));
     SetControlLabel(i++, "%s: %s", 158, SYSTEM_FREE_MEMORY);
     SetControlLabel(i++, "%s: %s", 150, NETWORK_IP_ADDRESS);
     SetControlLabel(i++, "%s %s", 13287, SYSTEM_SCREEN_RESOLUTION);
@@ -114,7 +114,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_STORAGE)
   {
-    SET_CONTROL_LABEL(40, g_localizeStrings.Get(20155));
+    SET_CONTROL_LABEL(40, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20155));
     if (m_diskUsage.empty())
       m_diskUsage = g_mediaManager.GetDiskUsage();
 
@@ -126,7 +126,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_NETWORK)
   {
-    SET_CONTROL_LABEL(40,g_localizeStrings.Get(20158));
+    SET_CONTROL_LABEL(40,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20158));
     SET_CONTROL_LABEL(i++, CServiceBroker::GetGUI()->GetInfoManager().GetLabel(NETWORK_LINK_STATE));
     SetControlLabel(i++, "%s: %s", 149, NETWORK_MAC_ADDRESS);
     SetControlLabel(i++, "%s: %s", 150, NETWORK_IP_ADDRESS);
@@ -139,7 +139,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_VIDEO)
   {
-    SET_CONTROL_LABEL(40,g_localizeStrings.Get(20159));
+    SET_CONTROL_LABEL(40,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20159));
     SET_CONTROL_LABEL(i++,CServiceBroker::GetGUI()->GetInfoManager().GetLabel(SYSTEM_VIDEO_ENCODER_INFO));
     SetControlLabel(i++, "%s %s", 13287, SYSTEM_SCREEN_RESOLUTION);
 #ifndef HAS_DX
@@ -155,7 +155,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_HARDWARE)
   {
-    SET_CONTROL_LABEL(40,g_localizeStrings.Get(20160));
+    SET_CONTROL_LABEL(40,CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20160));
     SET_CONTROL_LABEL(i++, g_sysinfo.GetCPUModel());
 #if defined(__arm__) && defined(TARGET_LINUX)
     SET_CONTROL_LABEL(i++, g_sysinfo.GetCPUBogoMips());
@@ -177,7 +177,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_PVR)
   {
-    SET_CONTROL_LABEL(40, g_localizeStrings.Get(19166));
+    SET_CONTROL_LABEL(40, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19166));
     int i = 2;
 
     SetControlLabel(i++, "%s: %s", 19120, PVR_BACKEND_NUMBER);
@@ -194,7 +194,7 @@ void CGUIWindowSystemInfo::FrameMove()
 
   else if (m_section == CONTROL_BT_POLICY)
   {
-    SET_CONTROL_LABEL(40, g_localizeStrings.Get(12389));
+    SET_CONTROL_LABEL(40, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12389));
   }
   CGUIWindow::FrameMove();
 }
@@ -210,7 +210,7 @@ void CGUIWindowSystemInfo::ResetLabels()
 
 void CGUIWindowSystemInfo::SetControlLabel(int id, const char *format, int label, int info)
 {
-  std::string tmpStr = StringUtils::Format(format, g_localizeStrings.Get(label).c_str(),
+  std::string tmpStr = StringUtils::Format(format, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(label).c_str(),
       CServiceBroker::GetGUI()->GetInfoManager().GetLabel(info).c_str());
   SET_CONTROL_LABEL(id, tmpStr);
 }

@@ -36,7 +36,7 @@ CDialogGameVideoRotation::CDialogGameVideoRotation() :
 
 std::string CDialogGameVideoRotation::GetHeading()
 {
-  return g_localizeStrings.Get(35227); // "Rotation"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35227); // "Rotation"
 }
 
 void CDialogGameVideoRotation::PreInit()
@@ -99,13 +99,13 @@ std::string CDialogGameVideoRotation::GetRotationLabel(unsigned int rotationDegC
   switch (rotationDegCCW)
   {
   case 0:
-    return g_localizeStrings.Get(35228); // 0
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35228); // 0
   case 90:
-    return g_localizeStrings.Get(35231); // 270
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35231); // 270
   case 180:
-    return g_localizeStrings.Get(35230); // 180
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35230); // 180
   case 270:
-    return g_localizeStrings.Get(35229); // 90
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35229); // 90
   default:
     break;
   }

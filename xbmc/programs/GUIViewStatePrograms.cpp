@@ -62,12 +62,12 @@ std::string CGUIViewStateWindowPrograms::GetExtensions()
 
 VECSOURCES& CGUIViewStateWindowPrograms::GetSources()
 {
-  AddAddonsSource("executable", g_localizeStrings.Get(1043), "DefaultAddonProgram.png");
+  AddAddonsSource("executable", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1043), "DefaultAddonProgram.png");
 #if defined(TARGET_ANDROID)
   {
     CMediaSource source;
     source.strPath = "androidapp://sources/apps/";
-    source.strName = g_localizeStrings.Get(20244);
+    source.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20244);
     if (CServiceBroker::GetGUI()->GetTextureManager().HasTexture("DefaultProgram.png"))
       source.m_strThumbnailImage = "DefaultProgram.png";
     source.m_iDriveType = CMediaSource::SOURCE_TYPE_LOCAL;

@@ -431,22 +431,22 @@ namespace PVR
         switch (eAction)
         {
           case RECORD_INSTANTRECORDTIME:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19090).c_str(), m_iInstantRecordTime)); // Record next <default duration> minutes
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19090).c_str(), m_iInstantRecordTime)); // Record next <default duration> minutes
             break;
           case RECORD_30_MINUTES:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19090).c_str(), 30));  // Record next 30 minutes
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19090).c_str(), 30));  // Record next 30 minutes
             break;
           case RECORD_60_MINUTES:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19090).c_str(), 60));  // Record next 60 minutes
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19090).c_str(), 60));  // Record next 60 minutes
             break;
           case RECORD_120_MINUTES:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19090).c_str(), 120)); // Record next 120 minutes
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19090).c_str(), 120)); // Record next 120 minutes
             break;
           case RECORD_CURRENT_SHOW:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19091).c_str(), title.c_str())); // Record current show (<title>)
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19091).c_str(), title.c_str())); // Record current show (<title>)
             break;
           case RECORD_NEXT_SHOW:
-            m_pDlgSelect->Add(StringUtils::Format(g_localizeStrings.Get(19092).c_str(), title.c_str())); // Record next show (<title>)
+            m_pDlgSelect->Add(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19092).c_str(), title.c_str())); // Record next show (<title>)
             break;
           case NONE:
           case ASK:
@@ -727,7 +727,7 @@ namespace PVR
 
     std::string strNewName(timer->m_strTitle);
     if (CGUIKeyboardFactory::ShowAndGetInput(strNewName,
-                                             CVariant{g_localizeStrings.Get(19042)}, // "Are you sure you want to rename this timer?"
+                                             CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19042)}, // "Are you sure you want to rename this timer?"
                                              false))
     {
       if (CServiceBroker::GetPVRManager().Timers()->RenameTimer(timer, strNewName))
@@ -932,7 +932,7 @@ namespace PVR
       return false;
 
     std::string strNewName(recording->m_strTitle);
-    if (!CGUIKeyboardFactory::ShowAndGetInput(strNewName, CVariant{g_localizeStrings.Get(19041)}, false))
+    if (!CGUIKeyboardFactory::ShowAndGetInput(strNewName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19041)}, false))
       return false;
 
     if (!AsyncRenameRecording(strNewName).Execute(item))
@@ -1028,7 +1028,7 @@ namespace PVR
     {
       int positionInSeconds = lrint(recording->GetResumePoint().timeInSeconds);
       if (positionInSeconds > 0)
-        resumeString = StringUtils::Format(g_localizeStrings.Get(12022).c_str(),
+        resumeString = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12022).c_str(),
                                            StringUtils::SecondsToTimeString(positionInSeconds, TIME_FORMAT_HH_MM_SS).c_str());
     }
     return resumeString;
@@ -1174,10 +1174,10 @@ namespace PVR
     }
     else if (result == ParentalCheckResult::FAILED)
     {
-      const std::string channelName = channel ? channel->ChannelName() : g_localizeStrings.Get(19029); // Channel
-      const std::string msg = StringUtils::Format(g_localizeStrings.Get(19035).c_str(), channelName.c_str()); // CHANNELNAME could not be played. Check the log for details.
+      const std::string channelName = channel ? channel->ChannelName() : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19029); // Channel
+      const std::string msg = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19035).c_str(), channelName.c_str()); // CHANNELNAME could not be played. Check the log for details.
 
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(19166), msg); // PVR information
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19166), msg); // PVR information
     }
 
     return false;
@@ -1238,9 +1238,9 @@ namespace PVR
     CLog::LogF(LOGERROR, "Could not determine %s channel to playback. No last played channel found, and first channel of active group could also not be determined.", bIsRadio ? "Radio": "TV");
 
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error,
-                                          g_localizeStrings.Get(19166), // PVR information
-                                          StringUtils::Format(g_localizeStrings.Get(19035).c_str(),
-                                                              g_localizeStrings.Get(bIsRadio ? 19021 : 19020).c_str())); // Radio/TV could not be played. Check the log for details.
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19166), // PVR information
+                                          StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19035).c_str(),
+                                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(bIsRadio ? 19021 : 19020).c_str())); // Radio/TV could not be played. Check the log for details.
     return false;
   }
 
@@ -1493,7 +1493,7 @@ namespace PVR
       {
         if (hook.category == menuCategory || hook.category == PVR_MENUHOOK_ALL)
         {
-          pDialog->Add(g_localizeStrings.GetAddonString(client->ID(), hook.iLocalizedStringId));
+          pDialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(client->ID(), hook.iLocalizedStringId));
           hookIDs.emplace_back(i);
         }
         ++i;
@@ -1543,7 +1543,7 @@ namespace PVR
     CLog::LogFC(LOGDEBUG, LOGPVR, "PVR clearing %s database", bResetEPGOnly ? "EPG" : "PVR and EPG");
 
     pDlgProgress->SetHeading(CVariant{313}); // "Cleaning database"
-    pDlgProgress->SetLine(0, CVariant{g_localizeStrings.Get(19187)}); // "Clearing all related data."
+    pDlgProgress->SetLine(0, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19187)}); // "Clearing all related data."
     pDlgProgress->SetLine(1, CVariant{""});
     pDlgProgress->SetLine(2, CVariant{""});
 
@@ -1641,7 +1641,7 @@ namespace PVR
     if (pinCode.empty())
       return ParentalCheckResult::SUCCESS;
 
-    InputVerificationResult ret = CGUIDialogNumeric::ShowAndVerifyInput(pinCode, g_localizeStrings.Get(19262), true); // "Parental control. Enter PIN:"
+    InputVerificationResult ret = CGUIDialogNumeric::ShowAndVerifyInput(pinCode, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19262), true); // "Parental control. Enter PIN:"
 
     if (ret == InputVerificationResult::SUCCESS)
     {
@@ -1675,7 +1675,7 @@ namespace PVR
           {
             if (cause->IsRecording())
             {
-              text = StringUtils::Format(g_localizeStrings.Get(19691).c_str(), // "PVR is currently recording...."
+              text = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19691).c_str(), // "PVR is currently recording...."
                                          cause->Title().c_str(),
                                          cause->ChannelName().c_str());
             }
@@ -1695,15 +1695,15 @@ namespace PVR
               if (mins > 1)
               {
                 // "%d minutes"
-                dueStr = StringUtils::Format(g_localizeStrings.Get(19694).c_str(), mins);
+                dueStr = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19694).c_str(), mins);
               }
               else
               {
                 // "about a minute"
-                dueStr = g_localizeStrings.Get(19695);
+                dueStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19695);
               }
 
-              text = StringUtils::Format(g_localizeStrings.Get(19692).c_str(), // "PVR will start recording...."
+              text = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19692).c_str(), // "PVR will start recording...."
                                          cause->Title().c_str(),
                                          cause->ChannelName().c_str(),
                                          dueStr.c_str());
@@ -1725,15 +1725,15 @@ namespace PVR
             if (mins > 1)
             {
               // "%d minutes"
-              dueStr = StringUtils::Format(g_localizeStrings.Get(19694).c_str(), mins);
+              dueStr = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19694).c_str(), mins);
             }
             else
             {
               // "about a minute"
-              dueStr = g_localizeStrings.Get(19695);
+              dueStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19695);
             }
 
-            text = StringUtils::Format(g_localizeStrings.Get(19693).c_str(), // "Daily wakeup is due in...."
+            text = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19693).c_str(), // "Daily wakeup is due in...."
                                        dueStr.c_str());
           }
 

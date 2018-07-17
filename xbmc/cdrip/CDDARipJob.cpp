@@ -90,7 +90,7 @@ bool CCDDARipJob::DoWork()
   // setup the progress dialog
   CGUIDialogExtendedProgressBar* pDlgProgress =
       CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
-  CGUIDialogProgressBarHandle* handle = pDlgProgress->GetHandle(g_localizeStrings.Get(605));
+  CGUIDialogProgressBarHandle* handle = pDlgProgress->GetHandle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(605));
 
   int iTrack = atoi(m_input.substr(13, m_input.size() - 13 - 5).c_str());
   std::string strLine0 = StringUtils::Format("%02i. %s - %s", iTrack,

@@ -490,14 +490,14 @@ void CNetworkServices::Start()
   StartZeroconf();
 #ifdef HAS_WEB_SERVER
   if (m_settings.GetBool(CSettings::SETTING_SERVICES_WEBSERVER) && !StartWebserver())
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(33101), g_localizeStrings.Get(33100));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33101), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33100));
 #endif // HAS_WEB_SERVER
   if (m_settings.GetBool(CSettings::SETTING_SERVICES_UPNP))
     StartUPnP();
   if (m_settings.GetBool(CSettings::SETTING_SERVICES_ESENABLED) && !StartEventServer())
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(33102), g_localizeStrings.Get(33100));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33102), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33100));
   if (m_settings.GetBool(CSettings::SETTING_SERVICES_ESENABLED) && !StartJSONRPCServer())
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, g_localizeStrings.Get(33103), g_localizeStrings.Get(33100));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33103), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33100));
 
   // note - airtunesserver has to start before airplay server (ios7 client detection bug)
   StartAirTunesServer();

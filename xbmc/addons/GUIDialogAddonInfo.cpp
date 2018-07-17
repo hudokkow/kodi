@@ -234,7 +234,7 @@ int CGUIDialogAddonInfo::AskForVersion(std::vector<std::pair<AddonVersion, std::
 
   for (const auto& versionInfo : versions)
   {
-    CFileItem item(StringUtils::Format(g_localizeStrings.Get(21339).c_str(), versionInfo.first.asString().c_str()));
+    CFileItem item(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21339).c_str(), versionInfo.first.asString().c_str()));
     if (m_localAddon && m_localAddon->Version() == versionInfo.first
         && m_item->GetAddonInfo()->Origin() == versionInfo.second)
       item.Select(true);
@@ -242,7 +242,7 @@ int CGUIDialogAddonInfo::AskForVersion(std::vector<std::pair<AddonVersion, std::
     AddonPtr repo;
     if (versionInfo.second == LOCAL_CACHE)
     {
-      item.SetLabel2(g_localizeStrings.Get(24095));
+      item.SetLabel2(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24095));
       item.SetIconImage("DefaultAddonRepository.png");
       dialog->Add(item);
     }
@@ -420,7 +420,7 @@ bool CGUIDialogAddonInfo::PromptIfDependency(int heading, int line2)
 
   if (!deps.empty())
   {
-    std::string line0 = StringUtils::Format(g_localizeStrings.Get(24046).c_str(), m_localAddon->Name().c_str());
+    std::string line0 = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24046).c_str(), m_localAddon->Name().c_str());
     std::string line1 = StringUtils::Join(deps, ", ");
     HELPERS::ShowOKDialogLines(CVariant{heading}, CVariant{std::move(line0)}, CVariant{std::move(line1)}, CVariant{line2});
     return true;
@@ -494,13 +494,13 @@ bool CGUIDialogAddonInfo::ShowDependencyList(const std::vector<ADDON::Dependency
       std::stringstream str;
       str << it.id << " " << it.requiredVersion.asString();
       if ((it.optional && !local_addon) || (!it.optional && local_addon))
-        str << " " << StringUtils::Format(g_localizeStrings.Get(39022).c_str(),
-                                          local_addon ? g_localizeStrings.Get(39019).c_str()
-                                                      : g_localizeStrings.Get(39018).c_str());
+        str << " " << StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39022).c_str(),
+                                          local_addon ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39019).c_str()
+                                                      : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39018).c_str());
       else if (it.optional && local_addon)
-        str << " " << StringUtils::Format(g_localizeStrings.Get(39023).c_str(),
-                                          g_localizeStrings.Get(39019).c_str(),
-                                          g_localizeStrings.Get(39018).c_str());
+        str << " " << StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39023).c_str(),
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39019).c_str(),
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39018).c_str());
 
       item->SetLabel2(str.str());
       item->SetIconImage(dep_addon->Icon());
@@ -510,7 +510,7 @@ bool CGUIDialogAddonInfo::ShowDependencyList(const std::vector<ADDON::Dependency
     else
     {
       CFileItemPtr item(new CFileItem(it.id));
-      item->SetLabel2(g_localizeStrings.Get(10005)); // Not available
+      item->SetLabel2(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10005)); // Not available
       items.Add(item);
     }
   }

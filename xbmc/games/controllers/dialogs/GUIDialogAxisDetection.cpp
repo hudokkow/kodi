@@ -33,7 +33,7 @@ using namespace GAME;
 std::string CGUIDialogAxisDetection::GetDialogText()
 {
   // "Press all analog buttons now to detect them:[CR][CR]%s"
-  std::string dialogText = g_localizeStrings.Get(35020);
+  std::string dialogText = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35020);
 
   std::vector<std::string> primitives;
 
@@ -48,7 +48,7 @@ std::string CGUIDialogAxisDetection::GetDialogText()
 
 std::string CGUIDialogAxisDetection::GetDialogHeader()
 {
-  return g_localizeStrings.Get(35058); // "Controller Configuration"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35058); // "Controller Configuration"
 }
 
 bool CGUIDialogAxisDetection::MapPrimitiveInternal(JOYSTICK::IButtonMap* buttonMap,

@@ -705,14 +705,14 @@ CUPnPServer::OnBrowseDirectChildren(PLT_ActionReference&          action,
     // video nodes
     if (items.GetPath() == "musicdb://") {
       CFileItemPtr playlists(new CFileItem("special://musicplaylists/", true));
-      playlists->SetLabel(g_localizeStrings.Get(136));
+      playlists->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(136));
       items.Add(playlists);
 
       CVideoDatabase database;
       database.Open();
       if (database.HasContent(VIDEODB_CONTENT_MUSICVIDEOS)) {
           CFileItemPtr mvideos(new CFileItem("library://video/musicvideos/", true));
-          mvideos->SetLabel(g_localizeStrings.Get(20389));
+          mvideos->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20389));
           items.Add(mvideos);
       }
     }

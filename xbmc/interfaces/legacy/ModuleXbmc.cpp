@@ -178,11 +178,11 @@ namespace XBMCAddon
       XBMC_TRACE;
       String label;
       if (id >= 30000 && id <= 30999)
-        label = g_localizeStrings.Get(id);
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(id);
       else if (id >= 32000 && id <= 32999)
-        label = g_localizeStrings.Get(id);
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(id);
       else
-        label = g_localizeStrings.Get(id);
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(id);
 
       return label;
     }

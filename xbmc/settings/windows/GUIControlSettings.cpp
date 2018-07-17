@@ -739,7 +739,7 @@ void CGUIControlButtonSetting::Update(bool updateDisplayOnly /* = false */)
           if (CServiceBroker::GetAddonMgr().GetAddon(strValue, addon))
             strText = addon->Name();
           if (strText.empty())
-            strText = g_localizeStrings.Get(231); // None
+            strText = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(231); // None
         }
         else if (controlFormat == "path" || controlFormat == "file" || controlFormat == "image")
         {
@@ -751,7 +751,7 @@ void CGUIControlButtonSetting::Update(bool updateDisplayOnly /* = false */)
         {
           strText = strValue;
           if (strText.empty())
-            strText = g_localizeStrings.Get(231); // None
+            strText = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(231); // None
         }
         else
           strText = strValue;

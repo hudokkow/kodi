@@ -257,7 +257,7 @@ void CScreenShot::TakeScreenshot()
     strDir = screenshotSetting->GetValue();
     if (strDir.empty())
     {
-      if (CGUIControlButtonSetting::GetPath(screenshotSetting, &g_localizeStrings))
+      if (CGUIControlButtonSetting::GetPath(screenshotSetting, &CServiceBroker::GetGUI()->GetLocalizeStrings()))
         strDir = screenshotSetting->GetValue();
     }
   }
@@ -291,7 +291,7 @@ void CScreenShot::TakeScreenshot()
           newDir = screenshotSetting->GetValue();
           if (newDir.empty())
           {
-            if (CGUIControlButtonSetting::GetPath(screenshotSetting, &g_localizeStrings))
+            if (CGUIControlButtonSetting::GetPath(screenshotSetting, &CServiceBroker::GetGUI()->GetLocalizeStrings()))
               newDir = screenshotSetting->GetValue();
           }
         }

@@ -93,7 +93,7 @@ void CMusicInfoScanner::Process()
       CGUIDialogExtendedProgressBar* dialog =
         CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
       if (dialog)
-        m_handle = dialog->GetHandle(g_localizeStrings.Get(314));
+        m_handle = dialog->GetHandle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(314));
     }
 
     // check if we only need to perform a cleaning
@@ -115,7 +115,7 @@ void CMusicInfoScanner::Process()
       CLog::Log(LOGDEBUG, "%s - Starting scan", __FUNCTION__);
 
       if (m_handle)
-        m_handle->SetTitle(g_localizeStrings.Get(505));
+        m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(505));
 
       // Reset progress vars
       m_currentItem=0;
@@ -179,14 +179,14 @@ void CMusicInfoScanner::Process()
         {
           if (m_handle)
           {
-            m_handle->SetTitle(g_localizeStrings.Get(700));
+            m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(700));
             m_handle->SetText("");
           }
 
           m_musicDatabase.CleanupOrphanedItems();
 
           if (m_handle)
-            m_handle->SetTitle(g_localizeStrings.Get(331));
+            m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(331));
 
           m_musicDatabase.Compress(false);
         }
@@ -468,7 +468,7 @@ bool CMusicInfoScanner::DoScan(const std::string& strDirectory)
 {
   if (m_handle)
   {
-    m_handle->SetTitle(g_localizeStrings.Get(506)); //"Checking media files..."
+    m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(506)); //"Checking media files..."
     m_handle->SetText(Prettify(strDirectory));
   }
 
@@ -508,7 +508,7 @@ bool CMusicInfoScanner::DoScan(const std::string& strDirectory)
       CLog::Log(LOGDEBUG, "%s Rescanning dir '%s' due to change", __FUNCTION__, CURL::GetRedacted(strDirectory).c_str());
 
     if (m_handle)
-      m_handle->SetTitle(g_localizeStrings.Get(505)); //"Loading media information from files..."
+      m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(505)); //"Loading media information from files..."
 
     // filter items in the sub dir (for .cue sheet support)
     items.FilterCueItems();
@@ -709,7 +709,7 @@ void CMusicInfoScanner::FileItemsToAlbums(CFileItemList& items, VECALBUMS& album
     OR
     3b. we have at least two primary artists and no album artist specified.
     */
-    std::string various = g_localizeStrings.Get(340); // Various Artists
+    std::string various = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(340); // Various Artists
     bool compilation = !songsByAlbumName->first.empty() && (isCompilation || !tracksOverlap); // 1+2b+2a
     if (artists.size() == 1)
     {
@@ -1118,7 +1118,7 @@ void MUSIC_INFO::CMusicInfoScanner::RetrieveLocalArt()
 {
   if (m_handle)
   {
-    m_handle->SetTitle(g_localizeStrings.Get(506)); //"Checking media files..."
+    m_handle->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(506)); //"Checking media files..."
    //!@todo: title = Checking for local art
   }
 
@@ -1277,12 +1277,12 @@ CMusicInfoScanner::UpdateDatabaseAlbumInfo(CAlbum& album,
       if (pDialog && bAllowSelection)
       {
         std::string strTempAlbum(album.strAlbum);
-        if (!CGUIKeyboardFactory::ShowAndGetInput(strTempAlbum, CVariant{ g_localizeStrings.Get(16011) }, false))
+        if (!CGUIKeyboardFactory::ShowAndGetInput(strTempAlbum, CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16011) }, false))
           albumDownloadStatus = INFO_CANCELLED;
         else
         {
           std::string strTempArtist(album.GetAlbumArtistString());
-          if (!CGUIKeyboardFactory::ShowAndGetInput(strTempArtist, CVariant{ g_localizeStrings.Get(16025) }, false))
+          if (!CGUIKeyboardFactory::ShowAndGetInput(strTempArtist, CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16025) }, false))
             albumDownloadStatus = INFO_CANCELLED;
           else
           {
@@ -1296,7 +1296,7 @@ CMusicInfoScanner::UpdateDatabaseAlbumInfo(CAlbum& album,
       {
         CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
           MediaTypeAlbum, album.strPath, 24146,
-          StringUtils::Format(g_localizeStrings.Get(24147).c_str(), MediaTypeAlbum, album.strAlbum.c_str()),
+          StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24147).c_str(), MediaTypeAlbum, album.strAlbum.c_str()),
           CScraperUrl::GetThumbURL(album.thumbURL.GetFirstThumb()), CURL::GetRedacted(album.strPath), EventLevel::Warning)));
       }
     }
@@ -1355,7 +1355,7 @@ CMusicInfoScanner::UpdateDatabaseArtistInfo(CArtist& artist,
     {
       if (pDialog && bAllowSelection)
       {
-        if (!CGUIKeyboardFactory::ShowAndGetInput(artist.strArtist, CVariant{ g_localizeStrings.Get(16025) }, false))
+        if (!CGUIKeyboardFactory::ShowAndGetInput(artist.strArtist, CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16025) }, false))
           artistDownloadStatus = INFO_CANCELLED;
         else
           stop = false;
@@ -1364,7 +1364,7 @@ CMusicInfoScanner::UpdateDatabaseArtistInfo(CArtist& artist,
       {
         CServiceBroker::GetEventLog().Add(EventPtr(new CMediaLibraryEvent(
           MediaTypeArtist, artist.strPath, 24146,
-          StringUtils::Format(g_localizeStrings.Get(24147).c_str(), MediaTypeArtist, artist.strArtist.c_str()),
+          StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24147).c_str(), MediaTypeArtist, artist.strArtist.c_str()),
           CScraperUrl::GetThumbURL(artist.thumbURL.GetFirstThumb()), CURL::GetRedacted(artist.strPath), EventLevel::Warning)));
       }
     }
@@ -1421,7 +1421,7 @@ CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album,
 {
   if (m_handle)
   {
-    m_handle->SetTitle(StringUtils::Format(g_localizeStrings.Get(20321).c_str(), info->Name().c_str()));
+    m_handle->SetTitle(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20321).c_str(), info->Name().c_str()));
     m_handle->SetText(album.GetAlbumArtistString() + " - " + album.strAlbum);
   }
 
@@ -1528,7 +1528,7 @@ CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album,
         if (pDialog)
         {
           pDlg = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
-          pDlg->SetHeading(CVariant{g_localizeStrings.Get(181)});
+          pDlg->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(181)});
           pDlg->Reset();
           pDlg->EnableButton(true, 413); // manual
         }
@@ -1574,13 +1574,13 @@ CMusicInfoScanner::DownloadAlbumInfo(const CAlbum& album,
 
             // manual button pressed
             std::string strNewAlbum = album.strAlbum;
-            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewAlbum, CVariant{g_localizeStrings.Get(16011)}, false))
+            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewAlbum, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16011)}, false))
               return INFO_CANCELLED;
             if (strNewAlbum == "")
               return INFO_CANCELLED;
 
             std::string strNewArtist = album.GetAlbumArtistString();
-            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewArtist, CVariant{g_localizeStrings.Get(16025)}, false))
+            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewArtist, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16025)}, false))
               return INFO_CANCELLED;
 
             pDialog->SetLine(0, CVariant{strNewAlbum});
@@ -1679,7 +1679,7 @@ CMusicInfoScanner::DownloadArtistInfo(const CArtist& artist,
 {
   if (m_handle)
   {
-    m_handle->SetTitle(StringUtils::Format(g_localizeStrings.Get(20320).c_str(), info->Name().c_str()));
+    m_handle->SetTitle(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20320).c_str(), info->Name().c_str()));
     m_handle->SetText(artist.strArtist);
   }
 
@@ -1797,7 +1797,7 @@ CMusicInfoScanner::DownloadArtistInfo(const CArtist& artist,
         CGUIDialogSelect *pDlg = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
         if (pDlg)
         {
-          pDlg->SetHeading(CVariant{g_localizeStrings.Get(21890)});
+          pDlg->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21890)});
           pDlg->Reset();
           pDlg->EnableButton(true, 413); // manual
 
@@ -1828,7 +1828,7 @@ CMusicInfoScanner::DownloadArtistInfo(const CArtist& artist,
 
             // manual button pressed
             std::string strNewArtist = artist.strArtist;
-            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewArtist, CVariant{g_localizeStrings.Get(16025)}, false))
+            if (!CGUIKeyboardFactory::ShowAndGetInput(strNewArtist, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16025)}, false))
               return INFO_CANCELLED;
 
             if (pDialog)

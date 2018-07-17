@@ -59,7 +59,7 @@ CPeripheral::CPeripheral(CPeripherals& manager, const PeripheralScanResult& scan
   m_strDeviceName(scanResult.m_strDeviceName),
   m_iVendorId(scanResult.m_iVendorId),
   m_iProductId(scanResult.m_iProductId),
-  m_strVersionInfo(g_localizeStrings.Get(13205)), // "unknown"
+  m_strVersionInfo(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205)), // "unknown"
   m_bInitialised(false),
   m_bHidden(false),
   m_bError(false),

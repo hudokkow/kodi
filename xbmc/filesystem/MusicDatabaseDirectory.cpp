@@ -170,52 +170,52 @@ bool CMusicDatabaseDirectory::GetLabel(const std::string& strDirectory, std::str
     switch (pNode->GetChildType())
     {
     case NODE_TYPE_TOP100:
-      strLabel = g_localizeStrings.Get(271); // Top 100
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(271); // Top 100
       break;
     case NODE_TYPE_GENRE:
-      strLabel = g_localizeStrings.Get(135); // Genres
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(135); // Genres
       break;
     case NODE_TYPE_SOURCE:
-      strLabel = g_localizeStrings.Get(39030); // Sources
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39030); // Sources
       break;
     case NODE_TYPE_ROLE:
-      strLabel = g_localizeStrings.Get(38033); // Roles
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(38033); // Roles
       break;
     case NODE_TYPE_ARTIST:
-      strLabel = g_localizeStrings.Get(133); // Artists
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(133); // Artists
       break;
     case NODE_TYPE_ALBUM:
-      strLabel = g_localizeStrings.Get(132); // Albums
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(132); // Albums
       break;
     case NODE_TYPE_ALBUM_RECENTLY_ADDED:
     case NODE_TYPE_ALBUM_RECENTLY_ADDED_SONGS:
-      strLabel = g_localizeStrings.Get(359); // Recently Added Albums
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(359); // Recently Added Albums
       break;
     case NODE_TYPE_ALBUM_RECENTLY_PLAYED:
     case NODE_TYPE_ALBUM_RECENTLY_PLAYED_SONGS:
-      strLabel = g_localizeStrings.Get(517); // Recently Played Albums
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(517); // Recently Played Albums
       break;
     case NODE_TYPE_ALBUM_TOP100:
     case NODE_TYPE_ALBUM_TOP100_SONGS:
-      strLabel = g_localizeStrings.Get(10505); // Top 100 Albums
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10505); // Top 100 Albums
       break;
     case NODE_TYPE_SINGLES:
-      strLabel = g_localizeStrings.Get(1050); // Singles
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1050); // Singles
       break;
     case NODE_TYPE_SONG:
-      strLabel = g_localizeStrings.Get(134); // Songs
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(134); // Songs
       break;
     case NODE_TYPE_SONG_TOP100:
-      strLabel = g_localizeStrings.Get(10504); // Top 100 Songs
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10504); // Top 100 Songs
       break;
     case NODE_TYPE_YEAR:
     case NODE_TYPE_YEAR_ALBUM:
     case NODE_TYPE_YEAR_SONG:
-      strLabel = g_localizeStrings.Get(652);  // Years
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(652);  // Years
       break;
     case NODE_TYPE_ALBUM_COMPILATIONS:
     case NODE_TYPE_ALBUM_COMPILATIONS_SONGS:
-      strLabel = g_localizeStrings.Get(521);
+      strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(521);
       break;
     case NODE_TYPE_OVERVIEW:
       strLabel = "";

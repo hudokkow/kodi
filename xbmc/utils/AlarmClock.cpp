@@ -71,7 +71,7 @@ void CAlarmClock::Start(const std::string& strName, float n_secs, const std::str
   }
 
   EventPtr alarmClockActivity(new CNotificationEvent(labelAlarmClock,
-    StringUtils::Format(g_localizeStrings.Get(labelStarted).c_str(), static_cast<int>(event.m_fSecs) / 60, static_cast<int>(event.m_fSecs) % 60)));
+    StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(labelStarted).c_str(), static_cast<int>(event.m_fSecs) / 60, static_cast<int>(event.m_fSecs) % 60)));
   if (bSilent)
     CServiceBroker::GetEventLog().Add(alarmClockActivity);
   else
@@ -107,11 +107,11 @@ void CAlarmClock::Stop(const std::string& strName, bool bSilent /* false */)
     elapsed = iter->second.watch.GetElapsedSeconds();
 
   if (elapsed > iter->second.m_fSecs)
-    strMessage = g_localizeStrings.Get(13211);
+    strMessage = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13211);
   else
   {
     float remaining = static_cast<float>(iter->second.m_fSecs - elapsed);
-    strMessage = StringUtils::Format(g_localizeStrings.Get(13212).c_str(), static_cast<int>(remaining) / 60, static_cast<int>(remaining) % 60);
+    strMessage = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13212).c_str(), static_cast<int>(remaining) / 60, static_cast<int>(remaining) % 60);
   }
 
   if (iter->second.m_strCommand.empty() || iter->second.m_fSecs > elapsed)

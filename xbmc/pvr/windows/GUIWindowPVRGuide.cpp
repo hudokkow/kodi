@@ -186,7 +186,7 @@ void CGUIWindowPVRGuideBase::UpdateButtons(void)
 {
   CGUIWindowPVRBase::UpdateButtons();
 
-  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, g_localizeStrings.Get(19032));
+  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19032));
   SET_CONTROL_LABEL(CONTROL_LABEL_HEADER2, GetChannelGroup()->GroupName());
 }
 
@@ -651,7 +651,7 @@ bool CGUIWindowPVRGuideBase::OnContextButtonDate()
   CGUIEPGGridContainer* epgGridContainer = GetGridControl();
   epgGridContainer->GetSelectedDate().GetAsSystemTime(date);
 
-  if (CGUIDialogNumeric::ShowAndGetDate(date, g_localizeStrings.Get(19288))) /* Go to date */
+  if (CGUIDialogNumeric::ShowAndGetDate(date, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19288))) /* Go to date */
   {
     epgGridContainer->GoToDate(CDateTime(date));
     bReturn = true;

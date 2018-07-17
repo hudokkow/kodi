@@ -162,7 +162,7 @@ bool CGUIDialogGamepad::OnMessage(CGUIMessage& message)
     {
       m_bConfirmed = false;
       m_bCanceled = false;
-      m_cHideInputChar = g_localizeStrings.Get(12322).c_str()[0];
+      m_cHideInputChar = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12322).c_str()[0];
       CGUIDialog::OnMessage(message);
       return true;
     }
@@ -245,12 +245,12 @@ int CGUIDialogGamepad::ShowAndVerifyPassword(std::string& strPassword, const std
   if (0 < iRetries)
   {
     // Show a string telling user they have iRetries retries left
-    strLine2 = StringUtils::Format("%s %i %s", g_localizeStrings.Get(12342).c_str(), iRetries, g_localizeStrings.Get(12343).c_str());
+    strLine2 = StringUtils::Format("%s %i %s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12342).c_str(), iRetries, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12343).c_str());
   }
 
   // make a copy of strPassword to prevent from overwriting it later
   std::string strPassTemp = strPassword;
-  if (ShowAndVerifyInput(strPassTemp, dlgHeading, g_localizeStrings.Get(12330), g_localizeStrings.Get(12331), strLine2, true, true))
+  if (ShowAndVerifyInput(strPassTemp, dlgHeading, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12330), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12331), strLine2, true, true))
   {
     // user entered correct password
     return 0;

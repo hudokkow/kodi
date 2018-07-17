@@ -124,7 +124,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoNewsPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29916), INFO_NEWS);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29916), INFO_NEWS);
           m_LabelInfoNewsPresent = true;
           m_InfoPresent = true;
         }
@@ -140,7 +140,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoNewsLocalPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29917), INFO_NEWS_LOCAL);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29917), INFO_NEWS_LOCAL);
           m_LabelInfoNewsLocalPresent = true;
           m_InfoPresent = true;
         }
@@ -156,7 +156,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoSportPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29918), INFO_SPORT);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29918), INFO_SPORT);
           m_LabelInfoSportPresent = true;
           m_InfoPresent = true;
         }
@@ -172,7 +172,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoWeatherPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(400), INFO_WEATHER);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(400), INFO_WEATHER);
           m_LabelInfoWeatherPresent = true;
           m_InfoPresent = true;
         }
@@ -188,7 +188,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoLotteryPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29919), INFO_LOTTERY);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29919), INFO_LOTTERY);
           m_LabelInfoLotteryPresent = true;
           m_InfoPresent = true;
         }
@@ -204,7 +204,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoStockPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29920), INFO_STOCK);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29920), INFO_STOCK);
           m_LabelInfoStockPresent = true;
           m_InfoPresent = true;
         }
@@ -220,7 +220,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoOtherPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29921), INFO_OTHER);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29921), INFO_OTHER);
           m_LabelInfoOtherPresent = true;
           m_InfoPresent = true;
         }
@@ -236,7 +236,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoCinemaPresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(19602), INFO_CINEMA);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19602), INFO_CINEMA);
           m_LabelInfoCinemaPresent = true;
           m_InfoPresent = true;
         }
@@ -252,7 +252,7 @@ bool CGUIDialogPVRRadioRDSInfo::OnMessage(CGUIMessage& message)
       {
         if (!m_LabelInfoHoroscopePresent)
         {
-          spin->AddLabel(g_localizeStrings.Get(29922), INFO_HOROSCOPE);
+          spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29922), INFO_HOROSCOPE);
           m_LabelInfoHoroscopePresent = true;
           m_InfoPresent = true;
         }
@@ -301,7 +301,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
 
   if (currentRDS->GetInfoNews().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29916), INFO_NEWS);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29916), INFO_NEWS);
     textbox->SetInfo(currentRDS->GetInfoNews());
     spin->SetValue(INFO_NEWS);
     m_LabelInfoNewsPresent = true;
@@ -309,7 +309,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoNewsLocal().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29917), INFO_NEWS_LOCAL);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29917), INFO_NEWS_LOCAL);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoNewsLocal());
@@ -320,7 +320,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoSport().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29918), INFO_SPORT);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29918), INFO_SPORT);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoSport());
@@ -331,7 +331,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoWeather().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(400), INFO_WEATHER);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(400), INFO_WEATHER);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoWeather());
@@ -342,7 +342,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoLottery().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29919), INFO_LOTTERY);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29919), INFO_LOTTERY);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoLottery());
@@ -353,7 +353,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoStock().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29920), INFO_STOCK);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29920), INFO_STOCK);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoStock());
@@ -364,7 +364,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoOther().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29921), INFO_OTHER);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29921), INFO_OTHER);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoOther());
@@ -375,7 +375,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoCinema().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(19602), INFO_CINEMA);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19602), INFO_CINEMA);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoCinema());
@@ -386,7 +386,7 @@ void CGUIDialogPVRRadioRDSInfo::OnInitWindow()
   }
   if (currentRDS->GetInfoHoroscope().size())
   {
-    spin->AddLabel(g_localizeStrings.Get(29922), INFO_HOROSCOPE);
+    spin->AddLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29922), INFO_HOROSCOPE);
     if (!m_InfoPresent)
     {
       textbox->SetInfo(currentRDS->GetInfoHoroscope());

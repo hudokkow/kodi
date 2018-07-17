@@ -261,7 +261,7 @@ int CSMBDirectory::OpenDir(const CURL& url, std::string& strAuth)
     }
 
     if (errno == ENODEV || errno == ENOENT)
-      cError = StringUtils::Format(g_localizeStrings.Get(770).c_str(),errno);
+      cError = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(770).c_str(),errno);
     else
       cError = strerror(errno);
 

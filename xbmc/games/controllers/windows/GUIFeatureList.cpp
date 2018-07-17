@@ -228,7 +228,7 @@ std::vector<CGUIFeatureList::FeatureGroup> CGUIFeatureList::GetFeatureGroups(con
       if (feature.Category() == JOYSTICK::FEATURE_CATEGORY::KEY)
       {
         FeatureGroup virtualGroup;
-        virtualGroup.groupName = g_localizeStrings.Get(35166); // "All keys"
+        virtualGroup.groupName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35166); // "All keys"
         virtualGroup.bIsVirtualKey = true;
         virtualGroup.features.emplace_back(feature);
         groups.emplace_back(std::move(virtualGroup));

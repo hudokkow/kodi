@@ -248,7 +248,7 @@ void CDisplaySettings::OnSettingAction(std::shared_ptr<const CSetting> setting)
     std::string path = std::static_pointer_cast<const CSettingString>(setting)->GetValue();
     VECSOURCES shares;
     g_mediaManager.GetLocalDrives(shares);
-    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".3dlut", g_localizeStrings.Get(36580), path))
+    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".3dlut", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36580), path))
     {
       std::static_pointer_cast<CSettingString>(std::const_pointer_cast<CSetting>(setting))->SetValue(path);
     }
@@ -258,7 +258,7 @@ void CDisplaySettings::OnSettingAction(std::shared_ptr<const CSetting> setting)
     std::string path = std::static_pointer_cast<const CSettingString>(setting)->GetValue();
     VECSOURCES shares;
     g_mediaManager.GetLocalDrives(shares);
-    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".icc|.icm", g_localizeStrings.Get(36581), path))
+    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, ".icc|.icm", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36581), path))
     {
       std::static_pointer_cast<CSettingString>(std::const_pointer_cast<CSetting>(setting))->SetValue(path);
     }
@@ -696,10 +696,10 @@ void CDisplaySettings::SettingOptionsModesFiller(std::shared_ptr<const CSetting>
 
 void CDisplaySettings::SettingOptionsRefreshChangeDelaysFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(g_localizeStrings.Get(13551), 0));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13551), 0));
 
   for (int i = 1; i <= MAX_REFRESH_CHANGE_DELAY; i++)
-    list.push_back(std::make_pair(StringUtils::Format(g_localizeStrings.Get(13553).c_str(), (double)i / 10.0), i));
+    list.push_back(std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13553).c_str(), (double)i / 10.0), i));
 }
 
 void CDisplaySettings::SettingOptionsRefreshRatesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, std::string> > &list, std::string &current, void *data)
@@ -713,7 +713,7 @@ void CDisplaySettings::SettingOptionsRefreshRatesFiller(SettingConstPtr setting,
   if (res == RES_WINDOW)
   {
     current = "WINDOW";
-    list.push_back(std::make_pair(g_localizeStrings.Get(242), current));
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(242), current));
     return;
   }
 
@@ -741,7 +741,7 @@ void CDisplaySettings::SettingOptionsResolutionsFiller(SettingConstPtr setting, 
   if (res == RES_WINDOW)
   {
     current = res;
-    list.push_back(std::make_pair(g_localizeStrings.Get(242), res));
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(242), res));
   }
   else
   {
@@ -770,9 +770,9 @@ void CDisplaySettings::SettingOptionsDispModeFiller(SettingConstPtr setting, std
   // does not support windowed modes, we would just shoot ourselves in the foot
   // by offering the option.
   if (g_advancedSettings.m_canWindowed && CServiceBroker::GetWinSystem()->CanDoWindowed())
-    list.push_back(std::make_pair(g_localizeStrings.Get(242), DM_WINDOWED));
+    list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(242), DM_WINDOWED));
 
-  list.push_back(std::make_pair(g_localizeStrings.Get(244), DM_FULLSCREEN));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(244), DM_FULLSCREEN));
 }
 
 void CDisplaySettings::SettingOptionsStereoscopicModesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
@@ -868,34 +868,34 @@ void CDisplaySettings::ClearCustomResolutions()
 
 void CDisplaySettings::SettingOptionsCmsModesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(g_localizeStrings.Get(36580), CMS_MODE_3DLUT));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36580), CMS_MODE_3DLUT));
 #ifdef HAVE_LCMS2
-  list.push_back(std::make_pair(g_localizeStrings.Get(36581), CMS_MODE_PROFILE));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36581), CMS_MODE_PROFILE));
 #endif
 }
 
 void CDisplaySettings::SettingOptionsCmsWhitepointsFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(g_localizeStrings.Get(36586), CMS_WHITEPOINT_D65));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36587), CMS_WHITEPOINT_D93));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36586), CMS_WHITEPOINT_D65));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36587), CMS_WHITEPOINT_D93));
 }
 
 void CDisplaySettings::SettingOptionsCmsPrimariesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(g_localizeStrings.Get(36588), CMS_PRIMARIES_AUTO));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36589), CMS_PRIMARIES_BT709));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36579), CMS_PRIMARIES_BT2020));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36590), CMS_PRIMARIES_170M));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36591), CMS_PRIMARIES_BT470M));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36592), CMS_PRIMARIES_BT470BG));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36593), CMS_PRIMARIES_240M));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36588), CMS_PRIMARIES_AUTO));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36589), CMS_PRIMARIES_BT709));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36579), CMS_PRIMARIES_BT2020));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36590), CMS_PRIMARIES_170M));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36591), CMS_PRIMARIES_BT470M));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36592), CMS_PRIMARIES_BT470BG));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36593), CMS_PRIMARIES_240M));
 }
 
 void CDisplaySettings::SettingOptionsCmsGammaModesFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(g_localizeStrings.Get(36582), CMS_TRC_BT1886));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36583), CMS_TRC_INPUT_OFFSET));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36584), CMS_TRC_OUTPUT_OFFSET));
-  list.push_back(std::make_pair(g_localizeStrings.Get(36585), CMS_TRC_ABSOLUTE));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36582), CMS_TRC_BT1886));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36583), CMS_TRC_INPUT_OFFSET));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36584), CMS_TRC_OUTPUT_OFFSET));
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(36585), CMS_TRC_ABSOLUTE));
 }
 

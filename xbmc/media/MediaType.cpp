@@ -112,7 +112,7 @@ std::string CMediaTypes::GetLocalization(const MediaType &mediaType)
     mediaTypeIt->second.localizationSingular <= 0)
     return "";
 
-  return g_localizeStrings.Get(mediaTypeIt->second.localizationSingular);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(mediaTypeIt->second.localizationSingular);
 }
 
 std::string CMediaTypes::GetPluralLocalization(const MediaType &mediaType)
@@ -122,7 +122,7 @@ std::string CMediaTypes::GetPluralLocalization(const MediaType &mediaType)
     mediaTypeIt->second.localizationPlural <= 0)
     return "";
 
-  return g_localizeStrings.Get(mediaTypeIt->second.localizationPlural);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(mediaTypeIt->second.localizationPlural);
 }
 
 std::string CMediaTypes::GetCapitalLocalization(const MediaType &mediaType)
@@ -132,7 +132,7 @@ std::string CMediaTypes::GetCapitalLocalization(const MediaType &mediaType)
     mediaTypeIt->second.localizationSingular <= 0)
     return "";
 
-  return g_localizeStrings.Get(mediaTypeIt->second.localizationSingularCapital);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(mediaTypeIt->second.localizationSingularCapital);
 }
 
 std::string CMediaTypes::GetCapitalPluralLocalization(const MediaType &mediaType)
@@ -142,5 +142,5 @@ std::string CMediaTypes::GetCapitalPluralLocalization(const MediaType &mediaType
     mediaTypeIt->second.localizationPlural <= 0)
     return "";
 
-  return g_localizeStrings.Get(mediaTypeIt->second.localizationPluralCapital);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(mediaTypeIt->second.localizationPluralCapital);
 }

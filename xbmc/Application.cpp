@@ -994,8 +994,8 @@ bool CApplication::Initialize()
     return false;
 
   m_ServiceManager->GetEventLog().Add(EventPtr(new CNotificationEvent(
-    StringUtils::Format(g_localizeStrings.Get(177).c_str(), g_sysinfo.GetAppName().c_str()),
-    StringUtils::Format(g_localizeStrings.Get(178).c_str(), g_sysinfo.GetAppName().c_str()),
+    StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(177).c_str(), g_sysinfo.GetAppName().c_str()),
+    StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(178).c_str(), g_sysinfo.GetAppName().c_str()),
     "special://xbmc/media/icon256x256.png", EventLevel::Basic)));
 
   m_ServiceManager->GetNetwork().WaitForNet();
@@ -1009,7 +1009,7 @@ bool CApplication::Initialize()
     event.Set();
   });
 
-  std::string localizedStr = g_localizeStrings.Get(24150);
+  std::string localizedStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24150);
   int iDots = 1;
   while (!event.WaitMSec(1000))
   {
@@ -1048,7 +1048,7 @@ bool CApplication::Initialize()
         });
         event.Set();
       }, CJob::PRIORITY_DEDICATED);
-    localizedStr = g_localizeStrings.Get(24151);
+    localizedStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24151);
     iDots = 1;
     while (!event.WaitMSec(1000))
     {
@@ -1440,7 +1440,7 @@ void CApplication::ReloadSkin(bool confirm/*=false*/)
     {
       m_confirmSkinChange = false;
       m_ServiceManager->GetSettings().GetSetting(CSettings::SETTING_LOOKANDFEEL_SKIN)->Reset();
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(24102), g_localizeStrings.Get(24103));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24102), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24103));
     }
   }
   m_confirmSkinChange = true;
@@ -1560,7 +1560,7 @@ bool CApplication::LoadSkin(const std::string& skinID)
   std::string langPath = URIUtils::AddFileToFolder(skin->Path(), "language");
   URIUtils::AddSlashAtEnd(langPath);
 
-  g_localizeStrings.LoadSkinStrings(langPath, m_ServiceManager->GetSettings().GetString(CSettings::SETTING_LOCALE_LANGUAGE));
+  CServiceBroker::GetGUI()->GetLocalizeStrings().LoadSkinStrings(langPath, m_ServiceManager->GetSettings().GetString(CSettings::SETTING_LOCALE_LANGUAGE));
 
 
   int64_t start;
@@ -2720,7 +2720,7 @@ bool CApplication::Cleanup()
     //  shown are no real leaks, as parts of the app
     //  are still allocated.
 
-    g_localizeStrings.Clear();
+    CServiceBroker::GetGUI()->GetLocalizeStrings().Clear();
     g_LangCodeExpander.Clear();
     g_charsetConverter.clear();
     g_directoryCache.Clear();
@@ -2922,7 +2922,7 @@ bool CApplication::PlayMedia(CFileItem& item, const std::string &player, int iPl
   }
   else if (item.IsPlayList() || item.IsInternetStream())
   {
-    CGUIDialogCache* dlgCache = new CGUIDialogCache(5000, g_localizeStrings.Get(10214), item.GetLabel());
+    CGUIDialogCache* dlgCache = new CGUIDialogCache(5000, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10214), item.GetLabel());
 
     //is or could be a playlist
     std::unique_ptr<CPlayList> pPlayList (CPlayListFactory::Create(item));
@@ -3960,7 +3960,7 @@ bool CApplication::OnMessage(CGUIMessage& message)
         if (!m_incompatibleAddons.empty())
         {
           auto addonList = StringUtils::Join(m_incompatibleAddons, ", ");
-          auto msg = StringUtils::Format(g_localizeStrings.Get(24149).c_str(), addonList.c_str());
+          auto msg = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24149).c_str(), addonList.c_str());
           HELPERS::ShowOKDialogText(CVariant{24148}, CVariant{std::move(msg)});
           m_incompatibleAddons.clear();
         }

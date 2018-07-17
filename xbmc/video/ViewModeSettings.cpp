@@ -106,6 +106,6 @@ void CViewModeSettings::ViewModesFiller(std::shared_ptr<const CSetting> setting,
   for (const auto &item : viewModes)
   {
     if (!item.hideFromList)
-      list.push_back(make_pair(g_localizeStrings.Get(item.stringIndex), item.viewMode));
+      list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(item.stringIndex), item.viewMode));
   }
 }

@@ -441,7 +441,7 @@ void CSkinInfo::SettingOptionsSkinColorsFiller(SettingConstPtr setting, std::vec
   // any other *.xml files are additional color themes on top of this one.
 
   // add the default label
-  list.push_back(std::make_pair(g_localizeStrings.Get(15109), "SKINDEFAULT")); // the standard defaults.xml will be used!
+  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15109), "SKINDEFAULT")); // the standard defaults.xml will be used!
 
   // Search for colors in the Current skin!
   std::vector<std::string> vecColors;
@@ -501,7 +501,7 @@ void CSkinInfo::SettingOptionsSkinFontsFiller(SettingConstPtr setting, std::vect
     if (idAttr != NULL)
     {
       if (idLocAttr)
-        list.push_back(std::make_pair(g_localizeStrings.Get(atoi(idLocAttr)), idAttr));
+        list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(idLocAttr)), idAttr));
       else
         list.push_back(std::make_pair(idAttr, idAttr));
 
@@ -513,7 +513,7 @@ void CSkinInfo::SettingOptionsSkinFontsFiller(SettingConstPtr setting, std::vect
 
   if (list.empty())
   { // Since no fontset is defined, there is no selection of a fontset, so disable the component
-    list.push_back(make_pair(g_localizeStrings.Get(13278), ""));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13278), ""));
     current = "";
     currentValueSet = true;
   }
@@ -533,7 +533,7 @@ void CSkinInfo::SettingOptionsSkinThemesFiller(SettingConstPtr setting, std::vec
   // any other *.xbt files are additional themes on top of this one.
 
   // add the default Label
-  list.push_back(make_pair(g_localizeStrings.Get(15109), "SKINDEFAULT")); // the standard Textures.xbt will be used
+  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15109), "SKINDEFAULT")); // the standard Textures.xbt will be used
 
   // search for themes in the current skin!
   std::vector<std::string> vecTheme;
@@ -565,7 +565,7 @@ void CSkinInfo::SettingOptionsStartupWindowsFiller(SettingConstPtr setting, std:
   {
     std::string windowName = it->m_name;
     if (StringUtils::IsNaturalNumber(windowName))
-      windowName = g_localizeStrings.Get(atoi(windowName.c_str()));
+      windowName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(windowName.c_str()));
     int windowID = it->m_id;
 
     list.push_back(make_pair(windowName, windowID));

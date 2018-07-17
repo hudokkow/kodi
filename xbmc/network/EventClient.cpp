@@ -331,13 +331,13 @@ bool CEventClient::OnPacketHELO(CEventPacket *packet)
   m_bGreeted = true;
   if (m_eLogoType == LT_NONE)
   {
-    CGUIDialogKaiToast::QueueNotification(g_localizeStrings.Get(33200),
+    CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33200),
                                           m_deviceName.c_str());
   }
   else
   {
     CGUIDialogKaiToast::QueueNotification(iconfile.c_str(),
-                                          g_localizeStrings.Get(33200),
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33200),
                                           m_deviceName.c_str());
   }
   return true;

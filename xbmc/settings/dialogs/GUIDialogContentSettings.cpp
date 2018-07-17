@@ -99,7 +99,7 @@ bool CGUIDialogContentSettings::Show(ADDON::ScraperPtr& scraper, VIDEO::SScanSet
     dialog->SetScraper(scraper);
     // toast selected but disabled scrapers
     if (CServiceBroker::GetAddonMgr().IsAddonDisabled(scraper->ID()))
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(24024), scraper->Name(), 2000, true);
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24024), scraper->Name(), 2000, true);
   }
 
   dialog->SetScanSettings(settings);
@@ -301,7 +301,7 @@ void CGUIDialogContentSettings::SetupView()
     }
     else
     {
-      SetLabel2(SETTING_SCRAPER_LIST, g_localizeStrings.Get(231)); //Set label2 to "None"
+      SetLabel2(SETTING_SCRAPER_LIST, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(231)); //Set label2 to "None"
       ToggleState(SETTING_SCRAPER_SETTINGS, false);
     }
   }

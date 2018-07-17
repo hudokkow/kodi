@@ -161,9 +161,9 @@ char* Interface_General::get_localized_string(void* kodiBase, long label_id)
   if (g_application.m_bStop)
     return nullptr;
 
-  std::string label = g_localizeStrings.GetAddonString(addon->ID(), label_id);
+  std::string label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(addon->ID(), label_id);
   if (label.empty())
-    label = g_localizeStrings.Get(label_id);
+    label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(label_id);
   char* buffer = strdup(label.c_str());
   return buffer;
 }

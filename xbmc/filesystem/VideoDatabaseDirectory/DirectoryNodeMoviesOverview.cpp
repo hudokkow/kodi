@@ -58,7 +58,7 @@ std::string CDirectoryNodeMoviesOverview::GetLocalizedName() const
 {
   for (unsigned int i = 0; i < sizeof(MovieChildren) / sizeof(Node); ++i)
     if (GetName() == MovieChildren[i].id)
-      return g_localizeStrings.Get(MovieChildren[i].label);
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(MovieChildren[i].label);
   return "";
 }
 
@@ -82,7 +82,7 @@ bool CDirectoryNodeMoviesOverview::GetContent(CFileItemList& items) const
     itemUrl.AppendPath(strDir);
 
     CFileItemPtr pItem(new CFileItem(itemUrl.ToString(), true));
-    pItem->SetLabel(g_localizeStrings.Get(MovieChildren[i].label));
+    pItem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(MovieChildren[i].label));
     pItem->SetCanQueue(false);
     items.Add(pItem);
   }

@@ -256,11 +256,11 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
   {
     std::string bookmarkTime;
     if (m_bookmarks[i].type == CBookmark::EPISODE)
-      bookmarkTime = StringUtils::Format("%s %li %s %li", g_localizeStrings.Get(20373).c_str(), m_bookmarks[i].seasonNumber, g_localizeStrings.Get(20359).c_str(), m_bookmarks[i].episodeNumber);
+      bookmarkTime = StringUtils::Format("%s %li %s %li", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20373).c_str(), m_bookmarks[i].seasonNumber, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20359).c_str(), m_bookmarks[i].episodeNumber);
     else
       bookmarkTime = StringUtils::SecondsToTimeString((long)m_bookmarks[i].timeInSeconds, TIME_FORMAT_HH_MM_SS);
 
-    CFileItemPtr item(new CFileItem(StringUtils::Format(g_localizeStrings.Get(299).c_str(), i+1)));
+    CFileItemPtr item(new CFileItem(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(299).c_str(), i+1)));
     item->SetLabel2(bookmarkTime);
     item->SetArt("thumb", m_bookmarks[i].thumbNailImage);
     item->SetProperty("resumepoint", m_bookmarks[i].timeInSeconds);
@@ -281,7 +281,7 @@ void CGUIDialogVideoBookmarks::OnRefreshList()
     if (chapterName.empty() ||
         StringUtils::StartsWithNoCase(chapterName, time) ||
         StringUtils::IsNaturalNumber(chapterName))
-      chapterName = StringUtils::Format(g_localizeStrings.Get(25010).c_str(), i);
+      chapterName = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25010).c_str(), i);
 
     CFileItemPtr item(new CFileItem(chapterName));
     item->SetLabel2(time);
@@ -507,8 +507,8 @@ bool CGUIDialogVideoBookmarks::AddEpisodeBookmark()
     for (unsigned int i=0; i < episodes.size(); ++i)
     {
       std::string strButton = StringUtils::Format("%s %i, %s %i",
-                                                 g_localizeStrings.Get(20373).c_str(), episodes[i].m_iSeason,
-                                                 g_localizeStrings.Get(20359).c_str(), episodes[i].m_iEpisode);
+                                                 CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20373).c_str(), episodes[i].m_iSeason,
+                                                 CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20359).c_str(), episodes[i].m_iEpisode);
       choices.Add(i, strButton);
     }
 
@@ -533,8 +533,8 @@ bool CGUIDialogVideoBookmarks::OnAddBookmark()
   {
     CServiceBroker::GetGUI()->GetWindowManager().SendMessage(GUI_MSG_REFRESH_LIST, 0, WINDOW_DIALOG_VIDEO_BOOKMARKS);
     CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-                                          g_localizeStrings.Get(298),   // "Bookmarks"
-                                          g_localizeStrings.Get(21362));// "Bookmark created"
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(298),   // "Bookmarks"
+                                          CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21362));// "Bookmark created"
     return true;
   }
   return false;
@@ -556,8 +556,8 @@ bool CGUIDialogVideoBookmarks::OnAddEpisodeBookmark()
       {
         CServiceBroker::GetGUI()->GetWindowManager().SendMessage(GUI_MSG_REFRESH_LIST, 0, WINDOW_DIALOG_VIDEO_BOOKMARKS);
         CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-                                              g_localizeStrings.Get(298),   // "Bookmarks"
-                                              g_localizeStrings.Get(21363));// "Episode Bookmark created"
+                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(298),   // "Bookmarks"
+                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21363));// "Episode Bookmark created"
 
       }
     }

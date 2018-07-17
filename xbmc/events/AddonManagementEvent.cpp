@@ -54,7 +54,7 @@ std::string CAddonManagementEvent::GetExecutionLabel() const
   if (!executionLabel.empty())
     return executionLabel;
 
-  return g_localizeStrings.Get(24139);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24139);
 }
 
 bool CAddonManagementEvent::Execute() const

@@ -92,7 +92,7 @@ bool CGUIKeyboardFactory::ShowAndGetInput(std::string& aTextString, CVariant hea
   if (heading.isString())
     headingStr = heading.asString();
   else if (heading.isInteger() && heading.asInteger())
-    headingStr = g_localizeStrings.Get((uint32_t)heading.asInteger());
+    headingStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get((uint32_t)heading.asInteger());
 
 #if defined(TARGET_DARWIN_IOS)
   kb = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogKeyboardTouch>(WINDOW_DIALOG_KEYBOARD_TOUCH);
@@ -179,7 +179,7 @@ bool CGUIKeyboardFactory::ShowAndVerifyNewPassword(std::string& newPassword, CVa
 // \return true if successful display and user input entry/re-entry. false if unsuccessful display, no user input, or canceled editing.
 bool CGUIKeyboardFactory::ShowAndVerifyNewPassword(std::string& newPassword, unsigned int autoCloseMs /* = 0 */)
 {
-  std::string heading = g_localizeStrings.Get(12340);
+  std::string heading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12340);
   return ShowAndVerifyNewPassword(newPassword, heading, false, autoCloseMs);
 }
 
@@ -195,9 +195,9 @@ int CGUIKeyboardFactory::ShowAndVerifyPassword(std::string& strPassword, const s
     strHeadingTemp = strHeading;
   else
     strHeadingTemp = StringUtils::Format("%s - %i %s",
-                                         g_localizeStrings.Get(12326).c_str(),
+                                         CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12326).c_str(),
                                          CServiceBroker::GetSettings().GetInt(CSettings::SETTING_MASTERLOCK_MAXRETRIES) - iRetries,
-                                         g_localizeStrings.Get(12343).c_str());
+                                         CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12343).c_str());
 
   std::string strUserInput;
   //! @todo GUI Setting to enable disable this feature y/n?

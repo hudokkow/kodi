@@ -87,21 +87,21 @@ void CGUIDialogAudioSettings::FrameMove()
 std::string CGUIDialogAudioSettings::FormatDelay(float value, float interval)
 {
   if (fabs(value) < 0.5f * interval)
-    return StringUtils::Format(g_localizeStrings.Get(22003).c_str(), 0.0);
+    return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22003).c_str(), 0.0);
   if (value < 0)
-    return StringUtils::Format(g_localizeStrings.Get(22004).c_str(), fabs(value));
+    return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22004).c_str(), fabs(value));
 
-  return StringUtils::Format(g_localizeStrings.Get(22005).c_str(), value);
+  return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22005).c_str(), value);
 }
 
 std::string CGUIDialogAudioSettings::FormatDecibel(float value)
 {
-  return StringUtils::Format(g_localizeStrings.Get(14054).c_str(), value);
+  return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14054).c_str(), value);
 }
 
 std::string CGUIDialogAudioSettings::FormatPercentAsDecibel(float value)
 {
-  return StringUtils::Format(g_localizeStrings.Get(14054).c_str(), CAEUtil::PercentToGain(value));
+  return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14054).c_str(), CAEUtil::PercentToGain(value));
 }
 
 void CGUIDialogAudioSettings::OnSettingChanged(std::shared_ptr<const CSetting> setting)
@@ -308,8 +308,8 @@ void CGUIDialogAudioSettings::AudioStreamsOptionFiller(SettingConstPtr setting, 
 {
   int audioStreamCount = g_application.GetAppPlayer().GetAudioStreamCount();
 
-  std::string strFormat = "%s - %s - %d " + g_localizeStrings.Get(10127);
-  std::string strUnknown = "[" + g_localizeStrings.Get(13205) + "]";
+  std::string strFormat = "%s - %s - %d " + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10127);
+  std::string strUnknown = "[" + CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205) + "]";
 
   // cycle through each audio stream and add it to our list control
   for (int i = 0; i < audioStreamCount; ++i)
@@ -335,7 +335,7 @@ void CGUIDialogAudioSettings::AudioStreamsOptionFiller(SettingConstPtr setting, 
 
   if (list.empty())
   {
-    list.push_back(make_pair(g_localizeStrings.Get(231), -1));
+    list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(231), -1));
     current = -1;
   }
 }
@@ -349,11 +349,11 @@ std::string CGUIDialogAudioSettings::SettingFormatterDelay(std::shared_ptr<const
   float fStep = step.asFloat();
 
   if (fabs(fValue) < 0.5f * fStep)
-    return StringUtils::Format(g_localizeStrings.Get(22003).c_str(), 0.0);
+    return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22003).c_str(), 0.0);
   if (fValue < 0)
-    return StringUtils::Format(g_localizeStrings.Get(22004).c_str(), fabs(fValue));
+    return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22004).c_str(), fabs(fValue));
 
-  return StringUtils::Format(g_localizeStrings.Get(22005).c_str(), fValue);
+  return StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(22005).c_str(), fValue);
 }
 
 std::string CGUIDialogAudioSettings::SettingFormatterPercentAsDecibel(std::shared_ptr<const CSettingControlSlider> control, const CVariant &value, const CVariant &minimum, const CVariant &step, const CVariant &maximum)
@@ -363,7 +363,7 @@ std::string CGUIDialogAudioSettings::SettingFormatterPercentAsDecibel(std::share
 
   std::string formatString = control->GetFormatString();
   if (control->GetFormatLabel() > -1)
-    formatString = g_localizeStrings.Get(control->GetFormatLabel());
+    formatString = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(control->GetFormatLabel());
 
   return StringUtils::Format(formatString.c_str(), CAEUtil::PercentToGain(value.asFloat()));
 }
@@ -372,15 +372,15 @@ std::string CGUIDialogAudioSettings::FormatFlags(StreamFlags flags)
 {
   std::vector<std::string> localizedFlags;
   if (flags & StreamFlags::FLAG_DEFAULT)
-    localizedFlags.emplace_back(g_localizeStrings.Get(39105));
+    localizedFlags.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39105));
   if (flags & StreamFlags::FLAG_FORCED)
-    localizedFlags.emplace_back(g_localizeStrings.Get(39106));
+    localizedFlags.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39106));
   if (flags & StreamFlags::FLAG_HEARING_IMPAIRED)
-    localizedFlags.emplace_back(g_localizeStrings.Get(39107));
+    localizedFlags.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39107));
   if (flags &  StreamFlags::FLAG_VISUAL_IMPAIRED)
-    localizedFlags.emplace_back(g_localizeStrings.Get(39108));
+    localizedFlags.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39108));
   if (flags & StreamFlags::FLAG_ORIGINAL)
-    localizedFlags.emplace_back(g_localizeStrings.Get(39111));
+    localizedFlags.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39111));
 
   std::string formated = StringUtils::Join(localizedFlags, ", ");
 

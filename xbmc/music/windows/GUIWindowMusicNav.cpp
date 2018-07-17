@@ -517,7 +517,7 @@ void CGUIWindowMusicNav::UpdateButtons()
       StringUtils::StartsWith(m_vecItems->Get(m_vecItems->Size()-1)->GetPath(), "/-1/"))
       iItems--;
   }
-  std::string items = StringUtils::Format("%i %s", iItems, g_localizeStrings.Get(127).c_str());
+  std::string items = StringUtils::Format("%i %s", iItems, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(127).c_str());
   SET_CONTROL_LABEL(CONTROL_LABELFILES, items);
 
   // set the filter label
@@ -525,7 +525,7 @@ void CGUIWindowMusicNav::UpdateButtons()
 
   // "Playlists"
   if (m_vecItems->IsPath("special://musicplaylists/"))
-    strLabel = g_localizeStrings.Get(136);
+    strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(136);
   // "{Playlist Name}"
   else if (m_vecItems->IsPlayList())
   {
@@ -914,7 +914,7 @@ void CGUIWindowMusicNav::AddSearchFolder()
     {
       // add earch share
       CMediaSource share;
-      share.strName=g_localizeStrings.Get(137); // Search
+      share.strName=CServiceBroker::GetGUI()->GetLocalizeStrings().Get(137); // Search
       share.strPath = "musicsearch://";
       share.m_iDriveType = CMediaSource::SOURCE_TYPE_LOCAL;
       sources.push_back(share);

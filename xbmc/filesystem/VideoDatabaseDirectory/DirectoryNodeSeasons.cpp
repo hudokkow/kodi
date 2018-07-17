@@ -43,9 +43,9 @@ std::string CDirectoryNodeSeasons::GetLocalizedName() const
   switch (GetID())
   {
   case 0:
-    return g_localizeStrings.Get(20381); // Specials
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20381); // Specials
   case -1:
-    return g_localizeStrings.Get(20366); // All Seasons
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20366); // All Seasons
   case -2:
   {
     CDirectoryNode *pParent = GetParent();
@@ -54,7 +54,7 @@ std::string CDirectoryNodeSeasons::GetLocalizedName() const
     return "";
   }
   default:
-    std::string season = StringUtils::Format(g_localizeStrings.Get(20358).c_str(), GetID()); // Season <season>
+    std::string season = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20358).c_str(), GetID()); // Season <season>
     return season;
   }
 }

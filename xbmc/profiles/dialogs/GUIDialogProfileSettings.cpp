@@ -90,7 +90,7 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
 
     // prompt for a name
     std::string profileName;
-    if (!CGUIKeyboardFactory::ShowAndGetInput(profileName, CVariant{g_localizeStrings.Get(20093)}, false) || profileName.empty())
+    if (!CGUIKeyboardFactory::ShowAndGetInput(profileName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20093)}, false) || profileName.empty())
       return false;
     dialog->m_name = profileName;
 
@@ -133,7 +133,7 @@ bool CGUIDialogProfileSettings::ShowForProfile(unsigned int iProfile, bool first
         return false;
 
       /*std::string strLabel;
-      strLabel.Format(g_localizeStrings.Get(20047),dialog->m_strName);
+      strLabel.Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20047),dialog->m_strName);
       if (!CGUIDialogYesNo::ShowAndGetInput(20058, strLabel, dialog->m_strDirectory, ""))
       {
         CDirectory::Remove(URIUtils::AddFileToFolder(profileManager.GetUserDataFolder(), dialog->m_strDirectory));
@@ -242,17 +242,17 @@ void CGUIDialogProfileSettings::OnSettingAction(std::shared_ptr<const CSetting> 
     {
       CFileItemPtr item(new CFileItem("thumb://Current", false));
       item->SetArt("thumb", m_thumb);
-      item->SetLabel(g_localizeStrings.Get(20016));
+      item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20016));
       items.Add(item);
     }
 
     CFileItemPtr item(new CFileItem("thumb://None", false));
     item->SetArt("thumb", "DefaultUser.png");
-    item->SetLabel(g_localizeStrings.Get(20018));
+    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20018));
     items.Add(item);
 
     std::string thumb;
-    if (CGUIDialogFileBrowser::ShowAndGetImage(items, shares, g_localizeStrings.Get(1030), thumb) &&
+    if (CGUIDialogFileBrowser::ShowAndGetImage(items, shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1030), thumb) &&
         !StringUtils::EqualsNoCase(thumb, "thumb://Current"))
     {
       m_needsSaving = true;
@@ -372,7 +372,7 @@ bool CGUIDialogProfileSettings::GetProfilePath(std::string &directory, bool isDe
 {
   VECSOURCES shares;
   CMediaSource share;
-  share.strName = g_localizeStrings.Get(13200);
+  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13200);
   share.strPath = "special://masterprofile/profiles/";
   shares.push_back(share);
 
@@ -382,7 +382,7 @@ bool CGUIDialogProfileSettings::GetProfilePath(std::string &directory, bool isDe
   else
     strDirectory = URIUtils::AddFileToFolder("special://masterprofile/", directory);
 
-  if (!CGUIDialogFileBrowser::ShowAndGetDirectory(shares, g_localizeStrings.Get(657), strDirectory, true))
+  if (!CGUIDialogFileBrowser::ShowAndGetDirectory(shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(657), strDirectory, true))
     return false;
 
   directory = strDirectory;

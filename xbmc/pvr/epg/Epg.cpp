@@ -773,7 +773,7 @@ const std::string &CPVREpg::ConvertGenreIdToString(int iID, int iSubID)
       break;
   }
 
-  return g_localizeStrings.Get(iLabelId);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iLabelId);
 }
 
 bool CPVREpg::LoadFromClients(time_t start, time_t end)

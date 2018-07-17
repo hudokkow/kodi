@@ -172,7 +172,7 @@ void CGUIWindowPVRRecordingsBase::UpdateButtons()
   else if (iWatchMode == WatchedModeWatched)
     iStringId = 16102; // "Watched"
 
-  SET_CONTROL_LABEL(CONTROL_BTNSHOWMODE, g_localizeStrings.Get(iStringId));
+  SET_CONTROL_LABEL(CONTROL_BTNSHOWMODE, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iStringId));
 
   bool bGroupRecordings = m_settings.GetBoolValue(CSettings::SETTING_PVRRECORD_GROUPRECORDINGS);
   SET_CONTROL_SELECTED(GetID(), CONTROL_BTNGROUPITEMS, bGroupRecordings);
@@ -185,7 +185,7 @@ void CGUIWindowPVRRecordingsBase::UpdateButtons()
   }
 
   CGUIWindowPVRBase::UpdateButtons();
-  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, m_bShowDeletedRecordings ? g_localizeStrings.Get(19179) : ""); /* Deleted recordings trash */
+  SET_CONTROL_LABEL(CONTROL_LABEL_HEADER1, m_bShowDeletedRecordings ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19179) : ""); /* Deleted recordings trash */
 
   const CPVRRecordingsPath path(m_vecItems->GetPath());
   SET_CONTROL_LABEL(CONTROL_LABEL_HEADER2, bGroupRecordings && path.IsValid() ? path.GetUnescapedDirectoryPath() : "");

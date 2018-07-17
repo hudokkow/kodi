@@ -46,7 +46,7 @@ CDialogGameStretchMode::CDialogGameStretchMode() :
 
 std::string CDialogGameStretchMode::GetHeading()
 {
-  return g_localizeStrings.Get(35233); // "Stretch mode"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35233); // "Stretch mode"
 }
 
 void CDialogGameStretchMode::PreInit()
@@ -86,7 +86,7 @@ void CDialogGameStretchMode::GetItems(CFileItemList &items)
 {
   for (const auto &viewMode : m_viewModes)
   {
-    CFileItemPtr item = std::make_shared<CFileItem>(g_localizeStrings.Get(viewMode.stringIndex));
+    CFileItemPtr item = std::make_shared<CFileItem>(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(viewMode.stringIndex));
     item->SetProperty("game.viewmode", CVariant{ static_cast<int>(viewMode.viewMode) });
     items.Add(std::move(item));
   }

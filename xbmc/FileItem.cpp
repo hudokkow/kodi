@@ -138,7 +138,7 @@ void CFileItem::FillMusicInfoTag(const CPVRChannelPtr& channel, const CPVREpgInf
     }
     else if (CServiceBroker::GetSettings().GetBool(CSettings::SETTING_EPG_HIDENOINFOAVAILABLE))
     {
-      musictag->SetTitle(g_localizeStrings.Get(19055)); // no information available
+      musictag->SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19055)); // no information available
     }
     musictag->SetURL(channel->Path());
     musictag->SetArtist(channel->ChannelName());
@@ -181,7 +181,7 @@ CFileItem::CFileItem(const CPVRChannelPtr& channel)
   SetLabel(channel->ChannelName());
   m_strLabel2 = epgNow ? epgNow->Title() :
       CServiceBroker::GetSettings().GetBool(CSettings::SETTING_EPG_HIDENOINFOAVAILABLE) ?
-                            "" : g_localizeStrings.Get(19055); // no information available
+                            "" : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19055); // no information available
 
   if (!channel->IconPath().empty())
     SetIconImage(channel->IconPath());
@@ -3354,7 +3354,7 @@ bool CFileItem::LoadMusicTag()
     int iTrack = GetMusicInfoTag()->GetTrackNumber();
     if (iTrack >= 1)
     {
-      std::string strText = g_localizeStrings.Get(554); // "Track"
+      std::string strText = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(554); // "Track"
       if (!strText.empty() && strText[strText.size() - 1] != ' ')
         strText += " ";
       std::string strTrack = StringUtils::Format((strText + "%i").c_str(), iTrack);

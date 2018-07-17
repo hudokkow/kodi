@@ -154,7 +154,7 @@ bool CCDDARipper::CreateAlbumDir(const MUSIC_INFO::CMusicInfoTag& infoTag, std::
     strDirectory = recordingpathSetting->GetValue();
     if (strDirectory.empty())
     {
-      if (CGUIControlButtonSetting::GetPath(recordingpathSetting, &g_localizeStrings))
+      if (CGUIControlButtonSetting::GetPath(recordingpathSetting, &CServiceBroker::GetGUI()->GetLocalizeStrings()))
         strDirectory = recordingpathSetting->GetValue();
     }
   }

@@ -135,12 +135,12 @@ bool CGUIControlsGUIInfo::GetLabel(std::string& value, const CFileItem *item, in
         {
           if (info.m_info == CONTAINER_SORT_METHOD)
           {
-            value = g_localizeStrings.Get(viewState->GetSortMethodLabel());
+            value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(viewState->GetSortMethodLabel());
             return true;
           }
           else if (info.m_info == CONTAINER_SORT_ORDER)
           {
-            value = g_localizeStrings.Get(viewState->GetSortOrderLabel());
+            value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(viewState->GetSortOrderLabel());
             return true;
           }
         }
@@ -324,7 +324,7 @@ bool CGUIControlsGUIInfo::GetLabel(std::string& value, const CFileItem *item, in
     // SYSTEM_*
     ///////////////////////////////////////////////////////////////////////////////////////////////
     case SYSTEM_CURRENT_WINDOW:
-      value = g_localizeStrings.Get(CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindowOrDialog());
+      value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(CServiceBroker::GetGUI()->GetWindowManager().GetActiveWindowOrDialog());
       return true;
     case SYSTEM_STARTUP_WINDOW:
       value = StringUtils::Format("%i", CServiceBroker::GetSettings().GetInt(CSettings::SETTING_LOOKANDFEEL_STARTUPWINDOW));

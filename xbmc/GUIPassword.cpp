@@ -82,9 +82,9 @@ bool CGUIPassword::IsItemUnlocked(CFileItem* pItem, const std::string &strType)
       // show the appropriate lock dialog
       std::string strHeading = "";
       if (pItem->m_bIsFolder)
-        strHeading = g_localizeStrings.Get(12325);
+        strHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12325);
       else
-        strHeading = g_localizeStrings.Get(12348);
+        strHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12348);
 
       iResult = VerifyPassword(pItem->m_iLockMode, strLockCode, strHeading);
     }
@@ -132,7 +132,7 @@ bool CGUIPassword::CheckStartUpLock()
   // prompt user for mastercode if the mastercode was set b4 or by xml
   int iVerifyPasswordResult = -1;
 
-  std::string strHeader = g_localizeStrings.Get(20075);
+  std::string strHeader = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20075);
 
   if (iMasterLockRetriesLeft == -1)
     iMasterLockRetriesLeft = CServiceBroker::GetSettings().GetInt(CSettings::SETTING_MASTERLOCK_MAXRETRIES);
@@ -154,7 +154,7 @@ bool CGUIPassword::CheckStartUpLock()
       if (iVerifyPasswordResult != 0 )
       {
         std::string strLabel1;
-        strLabel1 = g_localizeStrings.Get(12343);
+        strLabel1 = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12343);
         int iLeft = g_passwordManager.iMasterLockRetriesLeft-i;
         std::string strLabel = StringUtils::Format("%i %s", iLeft, strLabel1.c_str());
 
@@ -273,7 +273,7 @@ bool CGUIPassword::IsMasterLockUnlocked(bool bPromptUser, bool& bCanceled)
   }
 
   // no, unlock since we are allowed to prompt
-  std::string strHeading = g_localizeStrings.Get(20075);
+  std::string strHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20075);
   std::string strPassword = profileManager.GetMasterProfile().getLockCode();
 
   int iVerifyPasswordResult = VerifyPassword(profileManager.GetMasterProfile().getLockMode(), strPassword, strHeading);
@@ -319,7 +319,7 @@ void CGUIPassword::UpdateMasterLockRetryCount(bool bResetCount)
     if (0 < g_passwordManager.iMasterLockRetriesLeft)
       dlgLine1 = StringUtils::Format("%d %s",
                                      g_passwordManager.iMasterLockRetriesLeft,
-                                     g_localizeStrings.Get(12343).c_str());
+                                     CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12343).c_str());
     HELPERS::ShowOKDialogLines(CVariant{20075}, CVariant{12345}, CVariant{std::move(dlgLine1)}, CVariant{0});
   }
   else
@@ -346,7 +346,7 @@ bool CGUIPassword::CheckLock(LockType btnType, const std::string& strPassword, i
     return true;
   }
 
-  std::string strHeading = g_localizeStrings.Get(iHeading);
+  std::string strHeading = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iHeading);
   int iVerifyPasswordResult = VerifyPassword(btnType, strPassword, strHeading);
 
   if (iVerifyPasswordResult == -1)

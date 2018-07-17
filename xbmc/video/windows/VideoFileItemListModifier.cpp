@@ -74,7 +74,7 @@ void CVideoFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   {
   case NODE_TYPE_SEASONS:
   {
-    std::string strLabel = g_localizeStrings.Get(20366);
+    std::string strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20366);
     pItem.reset(new CFileItem(strLabel));  // "All Seasons"
     videoUrl.AppendPath("-1/");
     pItem->SetPath(videoUrl.ToString());
@@ -109,7 +109,7 @@ void CVideoFileItemListModifier::AddQueuingFolder(CFileItemList& items)
   }
   break;
   case NODE_TYPE_MUSICVIDEOS_ALBUM:
-    pItem.reset(new CFileItem(g_localizeStrings.Get(15102)));  // "All Albums"
+    pItem.reset(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15102)));  // "All Albums"
     videoUrl.AppendPath("-1/");
     pItem->SetPath(videoUrl.ToString());
     break;

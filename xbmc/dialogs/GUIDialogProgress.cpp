@@ -102,7 +102,7 @@ bool CGUIDialogProgress::OnMessage(CGUIMessage& message)
       {
         std::string strHeading = m_strHeading;
         strHeading.append(" : ");
-        strHeading.append(g_localizeStrings.Get(16024));
+        strHeading.append(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16024));
         CGUIDialogBoxBase::SetHeading(CVariant{strHeading});
         m_bCanceled = true;
         return true;

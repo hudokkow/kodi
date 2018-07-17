@@ -174,9 +174,9 @@ bool CGUIInfoLabel::ReplaceSpecialKeywordReferences(std::string &work, const std
 
 std::string LocalizeReplacer(const std::string &str)
 {
-  std::string replace = g_localizeStrings.Get(atoi(str.c_str()));
+  std::string replace = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(str.c_str()));
   if (replace.empty())
-    replace = g_localizeStrings.Get(atoi(str.c_str()));
+    replace = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(atoi(str.c_str()));
   return replace;
 }
 
@@ -186,7 +186,7 @@ std::string AddonReplacer(const std::string &str)
   size_t length = str.find(" ");
   const std::string addonid = str.substr(0, length);
   int stringid = atoi(str.substr(length + 1).c_str());
-  return g_localizeStrings.GetAddonString(addonid, stringid);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(addonid, stringid);
 }
 
 std::string NumberReplacer(const std::string &str)

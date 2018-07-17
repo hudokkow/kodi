@@ -159,10 +159,10 @@ void CGUIDialogLockSettings::OnSettingAction(std::shared_ptr<const CSetting> set
 
     dialog->Reset();
     dialog->SetHeading(CVariant{12360});
-    dialog->Add(g_localizeStrings.Get(1223));
-    dialog->Add(g_localizeStrings.Get(12337));
-    dialog->Add(g_localizeStrings.Get(12338));
-    dialog->Add(g_localizeStrings.Get(12339));
+    dialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1223));
+    dialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12337));
+    dialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12338));
+    dialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12339));
     dialog->SetSelected(GetLockModeLabel());
     dialog->Open();
 
@@ -224,7 +224,7 @@ void CGUIDialogLockSettings::SetupView()
 
   // set the title
   if (m_getUser)
-    SetHeading(StringUtils::Format(g_localizeStrings.Get(20152).c_str(), CURL::Decode(m_url).c_str()));
+    SetHeading(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20152).c_str(), CURL::Decode(m_url).c_str()));
   else
   {
     SetHeading(20066);
@@ -297,7 +297,7 @@ void CGUIDialogLockSettings::InitializeSettings()
 
 std::string CGUIDialogLockSettings::GetLockModeLabel()
 {
-  return g_localizeStrings.Get(m_locks.mode == LOCK_MODE_EVERYONE ? 1223 : 12336 + m_locks.mode);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_locks.mode == LOCK_MODE_EVERYONE ? 1223 : 12336 + m_locks.mode);
 }
 
 void CGUIDialogLockSettings::SetDetailSettingsEnabled(bool enabled)

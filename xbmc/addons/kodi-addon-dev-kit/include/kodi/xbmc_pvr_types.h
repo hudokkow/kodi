@@ -391,7 +391,7 @@ extern "C" {
   typedef struct PVR_MENUHOOK
   {
     unsigned int     iHookId;              /*!< @brief (required) this hook's identifier */
-    unsigned int     iLocalizedStringId;   /*!< @brief (required) the id of the label for this hook in g_localizeStrings */
+    unsigned int     iLocalizedStringId;   /*!< @brief (required) the id of the label for this hook in CServiceBroker::GetGUI()->GetLocalizeStrings() */
     PVR_MENUHOOK_CAT category;             /*!< @brief (required) category of menu hook */
   } ATTRIBUTE_PACKED PVR_MENUHOOK;
 

@@ -123,7 +123,7 @@ const std::string& CGUIMessage::GetLabel() const
 
 void CGUIMessage::SetLabel(int iString)
 {
-  m_strLabel = g_localizeStrings.Get(iString);
+  m_strLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iString);
 }
 
 void CGUIMessage::SetStringParam(const std::string& strParam)

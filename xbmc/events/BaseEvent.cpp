@@ -103,9 +103,9 @@ std::string CBaseEvent::VariantToLocalizedString(const CVariant& variant)
     return variant.asString();
 
   if (variant.isInteger() && variant.asInteger() > 0)
-    return g_localizeStrings.Get(static_cast<uint32_t>(variant.asInteger()));
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(static_cast<uint32_t>(variant.asInteger()));
   if (variant.isUnsignedInteger() && variant.asUnsignedInteger() > 0)
-    return g_localizeStrings.Get(static_cast<uint32_t>(variant.asUnsignedInteger()));
+    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(static_cast<uint32_t>(variant.asUnsignedInteger()));
 
   return "";
 }

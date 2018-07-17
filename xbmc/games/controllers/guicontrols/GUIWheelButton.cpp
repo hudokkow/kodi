@@ -48,12 +48,12 @@ bool CGUIWheelButton::PromptForInput(CEvent& waitEvent)
   switch (m_state)
   {
     case STATE::WHEEL_LEFT:
-      strPrompt = g_localizeStrings.Get(35098); // "Move %s left"
-      strWarn   = g_localizeStrings.Get(35099); // "Move %s left (%d)"
+      strPrompt = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35098); // "Move %s left"
+      strWarn   = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35099); // "Move %s left (%d)"
       break;
     case STATE::WHEEL_RIGHT:
-      strPrompt = g_localizeStrings.Get(35096); // "Move %s right"
-      strWarn   = g_localizeStrings.Get(35097); // "Move %s right (%d)"
+      strPrompt = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35096); // "Move %s right"
+      strWarn   = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35097); // "Move %s right (%d)"
       break;
     default:
       break;

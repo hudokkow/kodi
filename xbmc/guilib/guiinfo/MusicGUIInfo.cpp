@@ -204,7 +204,7 @@ bool CMusicGUIInfo::GetLabel(std::string& value, const CFileItem *item, int cont
           if (votes <= 0)
             value = StringUtils::FormatNumber(rating);
           else
-            value = StringUtils::Format(g_localizeStrings.Get(20350).c_str(),
+            value = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20350).c_str(),
                                         StringUtils::FormatNumber(rating).c_str(),
                                         StringUtils::FormatNumber(votes).c_str());
           return true;

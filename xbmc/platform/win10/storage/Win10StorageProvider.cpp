@@ -81,7 +81,7 @@ void CStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
 {
   CMediaSource share;
   share.strPath = CSpecialProtocol::TranslatePath("special://home");
-  share.strName = g_localizeStrings.Get(21440);
+  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21440);
   share.m_ignore = true;
   share.m_iDriveType = CMediaSource::SOURCE_TYPE_LOCAL;
   localDrives.push_back(share);
@@ -160,7 +160,7 @@ std::vector<std::string> CStorageProvider::GetDiskUsage()
 
   auto localfolder = ApplicationData::Current().LocalFolder().Path();
   GetDiskFreeSpaceExW(localfolder.c_str(), nullptr, &ULTotal, &ULTotalFree);
-  strRet = FromW(StringUtils::Format(L"%s: %d MB %s", g_localizeStrings.Get(21440), (ULTotalFree.QuadPart / (1024 * 1024)), g_localizeStrings.Get(160).c_str()));
+  strRet = FromW(StringUtils::Format(L"%s: %d MB %s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21440), (ULTotalFree.QuadPart / (1024 * 1024)), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(160).c_str()));
   result.push_back(strRet);
 
   DWORD drivesBits = GetLogicalDrives();
@@ -180,7 +180,7 @@ std::vector<std::string> CStorageProvider::GetDiskUsage()
     if (DRIVE_FIXED == GetDriveTypeA(strDrive.c_str())
       && GetDiskFreeSpaceExA((strDrive.c_str()), nullptr, &ULTotal, &ULTotalFree))
     {
-      strRet = StringUtils::Format("%s %d MB %s", strDrive.c_str(), int(ULTotalFree.QuadPart / (1024 * 1024)), g_localizeStrings.Get(160).c_str());
+      strRet = StringUtils::Format("%s %d MB %s", strDrive.c_str(), int(ULTotalFree.QuadPart / (1024 * 1024)), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(160).c_str());
       result.push_back(strRet);
     }
   }
@@ -249,11 +249,11 @@ void CStorageProvider::GetDrivesByType(VECSOURCES & localDrives, Drive_Types eDr
       switch (uDriveType)
       {
       case DRIVE_CDROM:
-        share.strName = StringUtils::Format("%s (%s)", share.strPath.c_str(), g_localizeStrings.Get(218).c_str());
+        share.strName = StringUtils::Format("%s (%s)", share.strPath.c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(218).c_str());
         break;
       case DRIVE_REMOVABLE:
         if (share.strName.empty())
-          share.strName = StringUtils::Format("%s (%s)", g_localizeStrings.Get(437).c_str(), share.strPath.c_str());
+          share.strName = StringUtils::Format("%s (%s)", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(437).c_str(), share.strPath.c_str());
         break;
       default:
         if (share.strName.empty())

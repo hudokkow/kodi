@@ -97,7 +97,7 @@ void CGUIRadioButtonControl::Process(unsigned int currentTime, CDirtyRegionList 
   m_imgRadioOffDisabled.Process(currentTime);
 
   if (m_useLabel2)
-    SetLabel2(g_localizeStrings.Get(m_bSelected ? 16041 : 351));
+    SetLabel2(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_bSelected ? 16041 : 351));
 
   CGUIButtonControl::Process(currentTime, dirtyregions);
 }

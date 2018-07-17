@@ -309,7 +309,7 @@ void CPVREpgContainer::LoadFromDB(void)
   bool bLoaded(true);
   unsigned int iCounter(0);
 
-  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(g_localizeStrings.Get(19250)); // Loading guide from database
+  CPVRGUIProgressHandler* progressHandler = new CPVRGUIProgressHandler(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19250)); // Loading guide from database
   const CDateTime cleanupTime(CDateTime::GetUTCDateTime() - CDateTimeSpan(GetPastDaysToDisplay(), 0, 0, 0));
 
   m_database->Lock();
@@ -681,7 +681,7 @@ bool CPVREpgContainer::UpdateEPG(bool bOnlyPending /* = false */)
 
   CPVRGUIProgressHandler* progressHandler = nullptr;
   if (bShowProgress && !bOnlyPending)
-    progressHandler = new CPVRGUIProgressHandler(g_localizeStrings.Get(19004)); // Importing guide from clients
+    progressHandler = new CPVRGUIProgressHandler(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19004)); // Importing guide from clients
 
   /* load or update all EPG tables */
   unsigned int iCounter(0);

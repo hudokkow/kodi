@@ -211,8 +211,8 @@ std::string CSmartPlaylistRule::TranslateGroup(Field group)
 std::string CSmartPlaylistRule::GetLocalizedField(int field)
 {
   for (unsigned int i = 0; i < NUM_FIELDS; i++)
-    if (field == fields[i].field) return g_localizeStrings.Get(fields[i].localizedString);
-  return g_localizeStrings.Get(16018);
+    if (field == fields[i].field) return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(fields[i].localizedString);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16018);
 }
 
 CDatabaseQueryRule::FIELD_TYPE CSmartPlaylistRule::GetFieldType(int field) const
@@ -666,10 +666,10 @@ std::string CSmartPlaylistRule::GetLocalizedGroup(Field group)
   for (unsigned int i = 0; i < NUM_GROUPS; i++)
   {
     if (group == groups[i].field)
-      return g_localizeStrings.Get(groups[i].localizedString);
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(groups[i].localizedString);
   }
 
-  return g_localizeStrings.Get(groups[0].localizedString);
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(groups[0].localizedString);
 }
 
 bool CSmartPlaylistRule::CanGroupMix(Field group)

@@ -77,7 +77,7 @@ bool CZeroconfMDNS::IsZCdaemonRunning()
   if(err != kDNSServiceErr_NoError)
   {
     CLog::Log(LOGERROR, "ZeroconfMDNS: Zeroconf can't be started probably because Apple's Bonjour Service isn't installed. You can get it by either installing Itunes or Apple's Bonjour Print Service for Windows (http://support.apple.com/kb/DL999)");
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, g_localizeStrings.Get(34300), g_localizeStrings.Get(34301), 10000, true);
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34300), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34301), 10000, true);
     return false;
   }
   CLog::Log(LOGDEBUG, "ZeroconfMDNS:Bonjour version is %d.%d", version / 10000, version / 100 % 100);

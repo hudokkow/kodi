@@ -148,5 +148,5 @@ float CDialogGameVolume::GetVolumePercent() const
 
 std::string CDialogGameVolume::GetLabel()
 {
-  return g_localizeStrings.Get(13376); // "Volume"
+  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13376); // "Volume"
 }

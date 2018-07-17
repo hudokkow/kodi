@@ -578,7 +578,7 @@ void CGUIDialogKeyboardGeneric::OnIPAddress()
   }
   else
     start = text.size();
-  if (CGUIDialogNumeric::ShowAndGetIPAddress(ip, g_localizeStrings.Get(14068)))
+  if (CGUIDialogNumeric::ShowAndGetIPAddress(ip, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14068)))
     SetEditText(text.substr(0, start) + ip.c_str() + text.substr(start + length));
 }
 

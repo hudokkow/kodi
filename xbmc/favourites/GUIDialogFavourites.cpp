@@ -233,7 +233,7 @@ CFileItemPtr CGUIDialogFavourites::GetCurrentListItem(int offset)
 bool CGUIDialogFavourites::ChooseAndSetNewName(const CFileItemPtr &item)
 {
   std::string label(item->GetLabel());
-  if (CGUIKeyboardFactory::ShowAndGetInput(label, CVariant{g_localizeStrings.Get(16008)}, false)) // Enter new title
+  if (CGUIKeyboardFactory::ShowAndGetInput(label, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16008)}, false)) // Enter new title
   {
     item->SetLabel(label);
     return true;
@@ -248,19 +248,19 @@ bool CGUIDialogFavourites::ChooseAndSetNewThumbnail(const CFileItemPtr &item)
   {
     const CFileItemPtr current(std::make_shared<CFileItem>("thumb://Current", false));
     current->SetArt("thumb", item->GetArt("thumb"));
-    current->SetLabel(g_localizeStrings.Get(20016)); // Current thumb
+    current->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20016)); // Current thumb
     prefilledItems.Add(current);
   }
 
   const CFileItemPtr none(std::make_shared<CFileItem>("thumb://None", false));
   none->SetIconImage(item->GetIconImage());
-  none->SetLabel(g_localizeStrings.Get(20018)); // No thumb
+  none->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20018)); // No thumb
   prefilledItems.Add(none);
 
   std::string thumb;
   VECSOURCES sources;
   g_mediaManager.GetLocalDrives(sources);
-  if (CGUIDialogFileBrowser::ShowAndGetImage(prefilledItems, sources, g_localizeStrings.Get(1030), thumb)) // Browse for image
+  if (CGUIDialogFileBrowser::ShowAndGetImage(prefilledItems, sources, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1030), thumb)) // Browse for image
   {
     item->SetArt("thumb", thumb);
     return true;

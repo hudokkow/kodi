@@ -106,7 +106,7 @@ void CGUIDialogPictureInfo::UpdatePictureInfo()
     std::string picInfo = CServiceBroker::GetGUI()->GetInfoManager().GetLabel(info);
     if (!picInfo.empty())
     {
-      CFileItemPtr item(new CFileItem(g_localizeStrings.Get(SLIDESHOW_STRING_BASE + info)));
+      CFileItemPtr item(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(SLIDESHOW_STRING_BASE + info)));
       item->SetLabel2(picInfo);
       m_pictureInfo->Add(item);
     }

@@ -77,9 +77,9 @@ std::string CSystemGUIInfo::GetSystemHeatInfo(int info) const
   switch(info)
   {
     case SYSTEM_CPU_TEMPERATURE:
-      return m_cpuTemp.IsValid() ? g_langInfo.GetTemperatureAsString(m_cpuTemp) : g_localizeStrings.Get(10005); // Not available
+      return m_cpuTemp.IsValid() ? g_langInfo.GetTemperatureAsString(m_cpuTemp) : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10005); // Not available
     case SYSTEM_GPU_TEMPERATURE:
-      return m_gpuTemp.IsValid() ? g_langInfo.GetTemperatureAsString(m_gpuTemp) : g_localizeStrings.Get(10005);
+      return m_gpuTemp.IsValid() ? g_langInfo.GetTemperatureAsString(m_gpuTemp) : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10005);
     case SYSTEM_FAN_SPEED:
       text = StringUtils::Format("%i%%", m_fanSpeed * 2);
       break;
@@ -193,10 +193,10 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
       RESOLUTION_INFO& resInfo = CDisplaySettings::GetInstance().GetCurrentResolutionInfo();
       if (CServiceBroker::GetWinSystem()->IsFullScreen())
         value = StringUtils::Format("%ix%i@%.2fHz - %s", resInfo.iScreenWidth, resInfo.iScreenHeight, resInfo.fRefreshRate,
-                                    g_localizeStrings.Get(244).c_str());
+                                    CServiceBroker::GetGUI()->GetLocalizeStrings().Get(244).c_str());
       else
         value = StringUtils::Format("%ix%i - %s", resInfo.iScreenWidth, resInfo.iScreenHeight,
-                                    g_localizeStrings.Get(242).c_str());
+                                    CServiceBroker::GetGUI()->GetLocalizeStrings().Get(242).c_str());
       return true;
     }
     case SYSTEM_BUILD_VERSION_SHORT:
@@ -256,9 +256,9 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
       {
         double fTime = g_alarmClock.GetRemaining("shutdowntimer");
         if (fTime > 60.f)
-          value = StringUtils::Format(g_localizeStrings.Get(13213).c_str(), g_alarmClock.GetRemaining("shutdowntimer")/60.f);
+          value = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13213).c_str(), g_alarmClock.GetRemaining("shutdowntimer")/60.f);
         else
-          value = StringUtils::Format(g_localizeStrings.Get(13214).c_str(), g_alarmClock.GetRemaining("shutdowntimer"));
+          value = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13214).c_str(), g_alarmClock.GetRemaining("shutdowntimer"));
       }
       return true;
     case SYSTEM_PROFILENAME:
@@ -272,7 +272,7 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
       CProfilesManager& profilesMgr = CServiceBroker::GetProfileManager();
       int iProfileId = profilesMgr.GetAutoLoginProfileId();
       if ((iProfileId < 0) || !profilesMgr.GetProfileName(iProfileId, value))
-        value = g_localizeStrings.Get(37014); // Last used profile
+        value = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(37014); // Last used profile
       return true;
     }
     case SYSTEM_PROFILETHUMB:
@@ -371,13 +371,13 @@ bool CSystemGUIInfo::GetLabel(std::string& value, const CFileItem *item, int con
     }
     case NETWORK_LINK_STATE:
     {
-      std::string linkStatus = g_localizeStrings.Get(151);
+      std::string linkStatus = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(151);
       linkStatus += " ";
       CNetworkInterface* iface = CServiceBroker::GetNetwork().GetFirstConnectedInterface();
       if (iface && iface->IsConnected())
-        linkStatus += g_localizeStrings.Get(15207);
+        linkStatus += CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15207);
       else
-        linkStatus += g_localizeStrings.Get(15208);
+        linkStatus += CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15208);
       value = linkStatus;
       return true;
     }

@@ -135,9 +135,9 @@ namespace PVR
     std::string ShowInformation::GetLabel(const CFileItem &item) const
     {
       if (item.GetPVRRecordingInfoTag())
-        return g_localizeStrings.Get(19053); /* Recording Information */
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19053); /* Recording Information */
 
-      return g_localizeStrings.Get(19047); /* Programme information */
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19047); /* Programme information */
     }
 
     bool ShowInformation::IsVisible(const CFileItem &item) const
@@ -301,9 +301,9 @@ namespace PVR
     {
       const CPVRRecordingPtr recording(item.GetPVRRecordingInfoTag());
       if (recording && recording->IsDeleted())
-        return g_localizeStrings.Get(19291); /* Delete permanently */
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19291); /* Delete permanently */
 
-      return g_localizeStrings.Get(117); /* Delete */
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(117); /* Delete */
     }
 
     bool DeleteRecording::IsVisible(const CFileItem &item) const
@@ -351,9 +351,9 @@ namespace PVR
     {
       const CPVRTimerInfoTagPtr timer(item.GetPVRTimerInfoTag());
       if (timer && timer->m_state != PVR_TIMER_STATE_DISABLED)
-        return g_localizeStrings.Get(844); /* Deactivate */
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(844); /* Deactivate */
 
-      return g_localizeStrings.Get(843); /* Activate */
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(843); /* Activate */
     }
 
     bool ToggleTimerState::IsVisible(const CFileItem &item) const
@@ -441,13 +441,13 @@ namespace PVR
         {
           const CPVREpgInfoTagPtr epg(item.GetEPGInfoTag());
           if (epg)
-            return g_localizeStrings.Get(19242); /* Edit timer */
+            return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19242); /* Edit timer */
           else
-            return g_localizeStrings.Get(21450); /* Edit */
+            return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21450); /* Edit */
         }
       }
 
-      return g_localizeStrings.Get(19241); /* View timer information */
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19241); /* View timer information */
     }
 
     bool EditTimer::IsVisible(const CFileItem &item) const
@@ -498,9 +498,9 @@ namespace PVR
     std::string DeleteTimer::GetLabel(const CFileItem &item) const
     {
       if (item.GetPVRTimerInfoTag())
-        return g_localizeStrings.Get(117); /* Delete */
+        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(117); /* Delete */
 
-      return g_localizeStrings.Get(19060); /* Delete timer */
+      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19060); /* Delete timer */
     }
 
     bool DeleteTimer::IsVisible(const CFileItem &item) const

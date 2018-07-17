@@ -148,7 +148,7 @@ bool CGUIDialogSubtitles::OnMessage(CGUIMessage& message)
     else if (iControl == CONTROL_MANUALSEARCH)
     {
       //manual search
-      if (CGUIKeyboardFactory::ShowAndGetInput(m_strManualSearch, CVariant{g_localizeStrings.Get(24121)}, true))
+      if (CGUIKeyboardFactory::ShowAndGetInput(m_strManualSearch, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24121)}, true))
       {
         Search(m_strManualSearch);
         return true;
@@ -397,19 +397,19 @@ void CGUIDialogSubtitles::UpdateStatus(STATUS status)
   switch (status)
   {
     case NO_SERVICES:
-      label = g_localizeStrings.Get(24114);
+      label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24114);
       break;
     case SEARCHING:
-      label = g_localizeStrings.Get(24107);
+      label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24107);
       break;
     case SEARCH_COMPLETE:
       if (!m_subtitles->IsEmpty())
-        label = StringUtils::Format(g_localizeStrings.Get(24108).c_str(), m_subtitles->Size());
+        label = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24108).c_str(), m_subtitles->Size());
       else
-        label = g_localizeStrings.Get(24109);
+        label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24109);
       break;
     case DOWNLOADING:
-      label = g_localizeStrings.Get(24110);
+      label = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24110);
       break;
     default:
       break;
@@ -440,7 +440,7 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
   {
     CFileItemPtr service = GetService();
     if (service)
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, service->GetLabel(), g_localizeStrings.Get(24113));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, service->GetLabel(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24113));
     UpdateStatus(SEARCH_COMPLETE);
     return;
   }
@@ -523,7 +523,7 @@ void CGUIDialogSubtitles::OnDownloadComplete(const CFileItemList *items, const s
 
     if (!CFile::Copy(strUrl, strDownloadFile))
     {
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, strSubName, g_localizeStrings.Get(24113));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, strSubName, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24113));
       CLog::Log(LOGERROR, "%s - Saving of subtitle %s to %s failed", __FUNCTION__, strUrl.c_str(), strDownloadFile.c_str());
     }
     else
