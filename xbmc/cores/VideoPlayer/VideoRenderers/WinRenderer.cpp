@@ -206,7 +206,7 @@ void CWinRenderer::SelectRenderMethod()
       }
       // this is something out of the ordinary
       CLog::Log(LOGNOTICE, "%s: unable to load test shader - D3D installation is most likely incomplete, falling back to SW mode.", __FUNCTION__);
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "DirectX", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(2101));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, "DirectX", guih->GetLocalizeStrings().Get(2101));
     }
     // drop through to software
     case RENDER_METHOD_SOFTWARE:
@@ -576,7 +576,7 @@ void CWinRenderer::UpdatePSVideoFilter()
       if (!m_scalerShader->Create(m_scalingMethod, m_outputShader.get()))
       {
         m_scalerShader.reset();
-        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34400), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34401));
+        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, guih->GetLocalizeStrings().Get(34400), guih->GetLocalizeStrings().Get(34401));
         m_bUseHQScaler = false;
       }
     }

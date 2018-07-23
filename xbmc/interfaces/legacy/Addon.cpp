@@ -86,7 +86,7 @@ namespace XBMCAddon
 
     String Addon::getLocalizedString(int id)
     {
-      return CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(pAddon->ID(), id);
+      return guih->GetLocalizeStrings().GetAddonString(pAddon->ID(), id);
     }
 
     String Addon::getSetting(const char* id)

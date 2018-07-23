@@ -944,7 +944,7 @@ unsigned int CDVDRadioRDSData::DecodeTA_TP(uint8_t *msgElement)
 
   if (traffic_announcement && !m_TA_TP_TrafficAdvisory && traffic_programme && dsn == 0 && CServiceBroker::GetSettings().GetBool("pvrplayback.trafficadvisory"))
   {
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19021), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29930));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, guih->GetLocalizeStrings().Get(19021), guih->GetLocalizeStrings().Get(29930));
     m_TA_TP_TrafficAdvisory = true;
     m_TA_TP_TrafficVolume = g_application.GetVolume();
     float trafAdvVol = (float)CServiceBroker::GetSettings().GetInt("pvrplayback.trafficadvisoryvolume");
@@ -1034,14 +1034,14 @@ unsigned int CDVDRadioRDSData::DecodePTY(uint8_t *msgElement)
     // save info
     m_currentInfoTag->SetRadioStyle(pty_skin_info_table[m_PTY][m_RDS_IsRBDS].style_name);
     if (!m_RTPlus_GenrePresent && !m_PTYN_Present)
-      SetRadioStyle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(pty_skin_info_table[m_PTY][m_RDS_IsRBDS].name));
+      SetRadioStyle(guih->GetLocalizeStrings().Get(pty_skin_info_table[m_PTY][m_RDS_IsRBDS].name));
 
     if (m_PTY == RDS_PTY_ALARM_TEST)
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29931), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29970), TOAST_DISPLAY_TIME, false);
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(29931), guih->GetLocalizeStrings().Get(29970), TOAST_DISPLAY_TIME, false);
 
     if (m_PTY == RDS_PTY_ALARM)
     {
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29931), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29971), TOAST_DISPLAY_TIME*2, true);
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, guih->GetLocalizeStrings().Get(29931), guih->GetLocalizeStrings().Get(29971), TOAST_DISPLAY_TIME*2, true);
     }
   }
 
@@ -1063,7 +1063,7 @@ unsigned int CDVDRadioRDSData::DecodePTYN(uint8_t *msgElement)
 
   if (!m_RTPlus_GenrePresent)
   {
-    std::string progTypeName = StringUtils::Format("%s: %s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(pty_skin_info_table[m_PTY][m_RDS_IsRBDS].name).c_str(), m_PTYN);
+    std::string progTypeName = StringUtils::Format("%s: %s", guih->GetLocalizeStrings().Get(pty_skin_info_table[m_PTY][m_RDS_IsRBDS].name).c_str(), m_PTYN);
     SetRadioStyle(progTypeName);
   }
 

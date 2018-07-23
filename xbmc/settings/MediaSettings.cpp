@@ -318,7 +318,7 @@ void CMediaSettings::OnSettingAction(std::shared_ptr<const CSetting> setting)
     g_mediaManager.GetNetworkLocations(shares);
     g_mediaManager.GetRemovableDrives(shares);
 
-    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, "musicdb.xml", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(651) , path))
+    if (CGUIDialogFileBrowser::ShowAndGetFile(shares, "musicdb.xml", guih->GetLocalizeStrings().Get(651) , path))
     {
       CMusicDatabase musicdatabase;
       musicdatabase.Open();
@@ -341,7 +341,7 @@ void CMediaSettings::OnSettingAction(std::shared_ptr<const CSetting> setting)
     g_mediaManager.GetNetworkLocations(shares);
     g_mediaManager.GetRemovableDrives(shares);
 
-    if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(651) , path))
+    if (CGUIDialogFileBrowser::ShowAndGetDirectory(shares, guih->GetLocalizeStrings().Get(651) , path))
     {
       CVideoDatabase videodatabase;
       videodatabase.Open();

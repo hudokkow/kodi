@@ -56,7 +56,7 @@ std::string CMediaLibraryEvent::GetExecutionLabel() const
   if (!executionLabel.empty())
     return executionLabel;
 
-  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24140);
+  return guih->GetLocalizeStrings().Get(24140);
 }
 
 bool CMediaLibraryEvent::Execute() const

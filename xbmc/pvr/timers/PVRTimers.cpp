@@ -554,7 +554,7 @@ bool CPVRTimers::HasActiveTimers(void) const
 bool CPVRTimers::GetRootDirectory(const CPVRTimersPath &path, CFileItemList &items) const
 {
   CFileItemPtr item(new CFileItem(CPVRTimersPath::PATH_ADDTIMER, false));
-  item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19026)); // "Add timer..."
+  item->SetLabel(guih->GetLocalizeStrings().Get(19026)); // "Add timer..."
   item->SetLabelPreformatted(true);
   item->SetSpecialSort(SortSpecialOnTop);
   item->SetIconImage("DefaultTVShows.png");

@@ -167,7 +167,7 @@ bool CVideoLibraryRefreshingJob::Work(CVideoDatabase &db)
     // if we don't have an url or need to refresh anyway do the web search
     if (!hasDetails && (needsRefresh || scraperUrl.m_url.empty()))
     {
-      SetTitle(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(197).c_str(), scraper->Name().c_str()));
+      SetTitle(StringUtils::Format(guih->GetLocalizeStrings().Get(197).c_str(), scraper->Name().c_str()));
       SetText(itemTitle);
       SetProgress(0);
 
@@ -211,7 +211,7 @@ bool CVideoLibraryRefreshingJob::Work(CVideoDatabase &db)
             else if (selectDialog->IsButtonPressed())
             {
               // ask the user to input a title to use
-              if (!CGUIKeyboardFactory::ShowAndGetInput(itemTitle, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(scraper->Content() == CONTENT_TVSHOWS ? 20357 : 16009), false))
+              if (!CGUIKeyboardFactory::ShowAndGetInput(itemTitle, guih->GetLocalizeStrings().Get(scraper->Content() == CONTENT_TVSHOWS ? 20357 : 16009), false))
                 return false;
 
               // go through the whole process again
@@ -240,7 +240,7 @@ bool CVideoLibraryRefreshingJob::Work(CVideoDatabase &db)
       if (IsModal())
       {
         // ask the user to input a title to use
-        if (!CGUIKeyboardFactory::ShowAndGetInput(itemTitle, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(scraper->Content() == CONTENT_TVSHOWS ? 20357 : 16009), false))
+        if (!CGUIKeyboardFactory::ShowAndGetInput(itemTitle, guih->GetLocalizeStrings().Get(scraper->Content() == CONTENT_TVSHOWS ? 20357 : 16009), false))
           return false;
 
         // go through the whole process again
@@ -306,7 +306,7 @@ bool CVideoLibraryRefreshingJob::Work(CVideoDatabase &db)
       headingLabel = 20394;
 
     // prepare the progress dialog for downloading all the necessary information
-    SetTitle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(headingLabel));
+    SetTitle(guih->GetLocalizeStrings().Get(headingLabel));
     SetText(scraperUrl.strTitle);
     SetProgress(0);
 

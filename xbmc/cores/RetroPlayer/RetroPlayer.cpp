@@ -166,7 +166,7 @@ bool CRetroPlayer::OpenFile(const CFileItem& file, const CPlayerOptions& options
           // Warn the user that continuing with a different game client will
           // overwrite the save
           bool dummy;
-          if (!CGUIDialogYesNo::ShowAndGetInput(438, StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35217), addon->Name()), dummy, 222, 35218, 0))
+          if (!CGUIDialogYesNo::ShowAndGetInput(438, StringUtils::Format(guih->GetLocalizeStrings().Get(35217), addon->Name()), dummy, 222, 35218, 0))
             bSuccess = false;
         }
       }

@@ -53,7 +53,7 @@ void COSScreenSaverFreedesktop::Inhibit()
   }
 
   CDBusMessage inhibitMessage(SCREENSAVER_INTERFACE, SCREENSAVER_OBJECT, SCREENSAVER_INTERFACE, "Inhibit");
-  inhibitMessage.AppendArguments(KODI::LINUX::DESKTOP_FILE_NAME, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14086));
+  inhibitMessage.AppendArguments(KODI::LINUX::DESKTOP_FILE_NAME, guih->GetLocalizeStrings().Get(14086));
   if (!inhibitMessage.SendSession())
   {
     // DBus call failed

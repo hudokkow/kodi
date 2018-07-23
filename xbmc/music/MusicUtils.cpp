@@ -234,13 +234,13 @@ namespace MUSIC_UTILS
       CFileItemPtr artitem(new CFileItem(type, false));
       // Localise the names of common types of art
       if (type == "banner")
-        artitem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20020));
+        artitem->SetLabel(guih->GetLocalizeStrings().Get(20020));
       else if (type == "fanart")
-        artitem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20445));
+        artitem->SetLabel(guih->GetLocalizeStrings().Get(20445));
       else if (type == "poster")
-        artitem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20021));
+        artitem->SetLabel(guih->GetLocalizeStrings().Get(20021));
       else if (type == "thumb")
-        artitem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21371));
+        artitem->SetLabel(guih->GetLocalizeStrings().Get(21371));
       else
         artitem->SetLabel(type);
       // Set art type as art item property
@@ -273,7 +273,7 @@ namespace MUSIC_UTILS
     {
       // Get the new art type name
       std::string strArtTypeName;
-      if (!CGUIKeyboardFactory::ShowAndGetInput(strArtTypeName, CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13516) }, false))
+      if (!CGUIKeyboardFactory::ShowAndGetInput(strArtTypeName, CVariant{ guih->GetLocalizeStrings().Get(13516) }, false))
         return "";
       // Add new type to the list of art types
       CFileItemPtr artitem(new CFileItem(strArtTypeName, false));
@@ -293,9 +293,9 @@ namespace MUSIC_UTILS
     if (dialog)
     {
       dialog->SetHeading(CVariant{ 38023 });
-      dialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(38022));
+      dialog->Add(guih->GetLocalizeStrings().Get(38022));
       for (int i = 1; i <= 10; i++)
-        dialog->Add(StringUtils::Format("%s: %i", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(563).c_str(), i));
+        dialog->Add(StringUtils::Format("%s: %i", guih->GetLocalizeStrings().Get(563).c_str(), i));
       dialog->SetSelected(iSelected);
       dialog->Open();
 

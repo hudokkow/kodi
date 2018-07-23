@@ -55,7 +55,7 @@ void CDarwinStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
   #else
     share.strPath = getenv("HOME");
   #endif
-  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21440);
+  share.strName = guih->GetLocalizeStrings().Get(21440);
   share.m_ignore = true;
   localDrives.push_back(share);
 

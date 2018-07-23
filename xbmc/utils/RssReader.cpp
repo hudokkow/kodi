@@ -149,7 +149,7 @@ void CRssReader::Process()
         !CServiceBroker::GetNetwork().IsAvailable())
     {
       CLog::Log(LOGWARNING, "RSS: No network connection");
-      strXML = "<rss><item><title>"+CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15301)+"</title></item></rss>";
+      strXML = "<rss><item><title>"+guih->GetLocalizeStrings().Get(15301)+"</title></item></rss>";
     }
     else
     {

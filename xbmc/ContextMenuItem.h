@@ -52,7 +52,7 @@ public:
   explicit CStaticContextMenuAction(uint32_t label) : m_label(label) {}
   std::string GetLabel(const CFileItem& item) const final
   {
-    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_label);
+    return guih->GetLocalizeStrings().Get(m_label);
   }
   bool IsGroup() const final { return false; }
 private:

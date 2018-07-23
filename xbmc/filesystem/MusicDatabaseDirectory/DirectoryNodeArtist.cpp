@@ -41,7 +41,7 @@ NODE_TYPE CDirectoryNodeArtist::GetChildType() const
 std::string CDirectoryNodeArtist::GetLocalizedName() const
 {
   if (GetID() == -1)
-    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15103); // All Artists
+    return guih->GetLocalizeStrings().Get(15103); // All Artists
   CMusicDatabase db;
   if (db.Open())
     return db.GetArtistById(GetID());

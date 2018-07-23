@@ -193,7 +193,7 @@ bool CPlayListPlayer::PlayNext(int offset, bool bAutoPlay)
   if ((iSong < 0) || (iSong >= playlist.size()) || (playlist.GetPlayable() <= 0))
   {
     if(!bAutoPlay)
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(559), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34201));
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(559), guih->GetLocalizeStrings().Get(34201));
 
     CGUIMessage msg(GUI_MSG_PLAYLISTPLAYER_STOPPED, 0, 0, m_iCurrentPlayList, m_iCurrentSong);
     CServiceBroker::GetGUI()->GetWindowManager().SendThreadMessage(msg);
@@ -221,7 +221,7 @@ bool CPlayListPlayer::PlayPrevious()
 
   if (iSong < 0 || playlist.size() <= 0)
   {
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(559), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(34202));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(559), guih->GetLocalizeStrings().Get(34202));
     return false;
   }
 
@@ -517,8 +517,8 @@ void CPlayListPlayer::SetShuffle(int iPlaylist, bool bYesNo, bool bNotify /* = f
 
     if (bNotify)
     {
-      std::string shuffleStr = StringUtils::Format("%s: %s", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(191).c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(bYesNo ? 593 : 591).c_str()); // Shuffle: All/Off
-      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(559),  shuffleStr);
+      std::string shuffleStr = StringUtils::Format("%s: %s", guih->GetLocalizeStrings().Get(191).c_str(), guih->GetLocalizeStrings().Get(bYesNo ? 593 : 591).c_str()); // Shuffle: All/Off
+      CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(559),  shuffleStr);
     }
 
     // find the previous order value and fix the current song marker
@@ -566,7 +566,7 @@ void CPlayListPlayer::SetRepeat(int iPlaylist, REPEAT_STATE state, bool bNotify 
       iLocalizedString = 596; // Repeat: One
     else
       iLocalizedString = 597; // Repeat: All
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(559), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iLocalizedString));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(559), guih->GetLocalizeStrings().Get(iLocalizedString));
   }
 
   m_repeatState[iPlaylist] = state;

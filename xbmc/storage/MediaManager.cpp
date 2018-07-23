@@ -193,20 +193,20 @@ void CMediaManager::GetNetworkLocations(VECSOURCES &locations, bool autolocation
     share.m_ignore = true;
 #ifdef HAS_FILESYSTEM_SMB
     share.strPath = "smb://";
-    share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20171);
+    share.strName = guih->GetLocalizeStrings().Get(20171);
     locations.push_back(share);
 #endif
 
 #ifdef HAS_FILESYSTEM_NFS
     share.strPath = "nfs://";
-    share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20259);
+    share.strName = guih->GetLocalizeStrings().Get(20259);
     locations.push_back(share);
 #endif// HAS_FILESYSTEM_NFS
 
 #ifdef HAS_UPNP
     if (CServiceBroker::GetSettings().GetBool(CSettings::SETTING_SERVICES_UPNP))
     {
-      std::string strDevices = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33040); //"% Devices"
+      std::string strDevices = guih->GetLocalizeStrings().Get(33040); //"% Devices"
       share.strPath = "upnp://";
       share.strName = StringUtils::Format(strDevices.c_str(), "UPnP"); //"UPnP Devices"
       locations.push_back(share);
@@ -215,7 +215,7 @@ void CMediaManager::GetNetworkLocations(VECSOURCES &locations, bool autolocation
 
 #ifdef HAS_ZEROCONF
     share.strPath = "zeroconf://";
-    share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20262);
+    share.strName = guih->GetLocalizeStrings().Get(20262);
     locations.push_back(share);
 #endif
 
@@ -227,7 +227,7 @@ void CMediaManager::GetNetworkLocations(VECSOURCES &locations, bool autolocation
         if (!info.type.empty() && info.supportBrowsing)
         {
           share.strPath = info.type + "://";
-          share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(info.label);
+          share.strName = guih->GetLocalizeStrings().Get(info.label);
           locations.push_back(share);
         }
       }
@@ -705,18 +705,18 @@ void CMediaManager::OnStorageAdded(const std::string &label, const std::string &
     else
       CJobManager::GetInstance().AddJob(new CAutorunMediaJob(label, path), this, CJob::PRIORITY_HIGH);
   else
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13021), label, TOAST_DISPLAY_TIME, false);
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(13021), label, TOAST_DISPLAY_TIME, false);
 #endif
 }
 
 void CMediaManager::OnStorageSafelyRemoved(const std::string &label)
 {
-  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13023), label, TOAST_DISPLAY_TIME, false);
+  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(13023), label, TOAST_DISPLAY_TIME, false);
 }
 
 void CMediaManager::OnStorageUnsafelyRemoved(const std::string &label)
 {
-  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13022), label);
+  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, guih->GetLocalizeStrings().Get(13022), label);
 }
 
 CMediaManager::DiscInfo CMediaManager::GetDiscInfo(const std::string& mediaPath)

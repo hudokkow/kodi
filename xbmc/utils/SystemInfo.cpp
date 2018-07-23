@@ -358,20 +358,20 @@ std::string CSysInfoJob::GetSystemUpTime(bool bTotalUptime)
   if (iDays > 0)
   {
     strSystemUptime = StringUtils::Format("%i %s, %i %s, %i %s",
-                                          iDays, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12393).c_str(),
-                                          iHours, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12392).c_str(),
-                                          iMinutes, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12391).c_str());
+                                          iDays, guih->GetLocalizeStrings().Get(12393).c_str(),
+                                          iHours, guih->GetLocalizeStrings().Get(12392).c_str(),
+                                          iMinutes, guih->GetLocalizeStrings().Get(12391).c_str());
   }
   else if (iDays == 0 && iHours >= 1 )
   {
     strSystemUptime = StringUtils::Format("%i %s, %i %s",
-                                          iHours, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12392).c_str(),
-                                          iMinutes, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12391).c_str());
+                                          iHours, guih->GetLocalizeStrings().Get(12392).c_str(),
+                                          iMinutes, guih->GetLocalizeStrings().Get(12391).c_str());
   }
   else if (iDays == 0 && iHours == 0 &&  iMinutes >= 0)
   {
     strSystemUptime = StringUtils::Format("%i %s",
-                                          iMinutes, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12391).c_str());
+                                          iMinutes, guih->GetLocalizeStrings().Get(12391).c_str());
   }
   return strSystemUptime;
 }
@@ -394,9 +394,9 @@ std::string CSysInfo::TranslateInfo(int info) const
     return m_info.systemTotalUptime;
   case SYSTEM_INTERNET_STATE:
     if (m_info.internetState == CSysData::CONNECTED)
-      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13296);
+      return guih->GetLocalizeStrings().Get(13296);
     else
-      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13297);
+      return guih->GetLocalizeStrings().Get(13297);
   case SYSTEM_BATTERY_LEVEL:
     return m_info.batteryLevel;
   default:
@@ -1031,19 +1031,19 @@ std::string CSysInfo::GetHddSpaceInfo(int& percent, int drive, bool shortText)
       switch(drive)
       {
       case SYSTEM_FREE_SPACE:
-        strRet = StringUtils::Format("%i MB %s", totalFree, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(160).c_str());
+        strRet = StringUtils::Format("%i MB %s", totalFree, guih->GetLocalizeStrings().Get(160).c_str());
         break;
       case SYSTEM_USED_SPACE:
-        strRet = StringUtils::Format("%i MB %s", totalUsed, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20162).c_str());
+        strRet = StringUtils::Format("%i MB %s", totalUsed, guih->GetLocalizeStrings().Get(20162).c_str());
         break;
       case SYSTEM_TOTAL_SPACE:
-        strRet = StringUtils::Format("%i MB %s", total, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20161).c_str());
+        strRet = StringUtils::Format("%i MB %s", total, guih->GetLocalizeStrings().Get(20161).c_str());
         break;
       case SYSTEM_FREE_SPACE_PERCENT:
-        strRet = StringUtils::Format("%i %% %s", percentFree, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(160).c_str());
+        strRet = StringUtils::Format("%i %% %s", percentFree, guih->GetLocalizeStrings().Get(160).c_str());
         break;
       case SYSTEM_USED_SPACE_PERCENT:
-        strRet = StringUtils::Format("%i %% %s", percentused, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20162).c_str());
+        strRet = StringUtils::Format("%i %% %s", percentused, guih->GetLocalizeStrings().Get(20162).c_str());
         break;
       }
     }
@@ -1051,9 +1051,9 @@ std::string CSysInfo::GetHddSpaceInfo(int& percent, int drive, bool shortText)
   else
   {
     if (shortText)
-      strRet = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10006); // N/A
+      strRet = guih->GetLocalizeStrings().Get(10006); // N/A
     else
-      strRet = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10005); // Not available
+      strRet = guih->GetLocalizeStrings().Get(10005); // Not available
   }
   return strRet;
 }
@@ -1394,7 +1394,7 @@ std::string CSysInfo::GetPrivacyPolicy()
       m_privacyPolicy = strBuf;
     }
     else
-      m_privacyPolicy = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19055);
+      m_privacyPolicy = guih->GetLocalizeStrings().Get(19055);
   }
   return m_privacyPolicy;
 }

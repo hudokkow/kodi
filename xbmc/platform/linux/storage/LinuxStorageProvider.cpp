@@ -71,12 +71,12 @@ void CLinuxStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
   // Home directory
   CMediaSource share;
   share.strPath = getenv("HOME");
-  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21440);
+  share.strName = guih->GetLocalizeStrings().Get(21440);
   share.m_ignore = true;
   share.m_iDriveType = CMediaSource::SOURCE_TYPE_LOCAL;
   localDrives.push_back(share);
   share.strPath = "/";
-  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21453);
+  share.strName = guih->GetLocalizeStrings().Get(21453);
   localDrives.push_back(share);
 
   m_instance->GetLocalDrives(localDrives);

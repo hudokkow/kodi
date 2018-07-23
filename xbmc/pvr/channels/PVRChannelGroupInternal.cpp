@@ -45,7 +45,7 @@ CPVRChannelGroupInternal::CPVRChannelGroupInternal(bool bRadio) :
 {
   m_iGroupType = PVR_GROUP_TYPE_INTERNAL;
   m_bRadio = bRadio;
-  m_strGroupName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19287);
+  m_strGroupName = guih->GetLocalizeStrings().Get(19287);
 }
 
 CPVRChannelGroupInternal::CPVRChannelGroupInternal(const CPVRChannelGroup &group) :
@@ -78,7 +78,7 @@ void CPVRChannelGroupInternal::CheckGroupName(void)
   CSingleLock lock(m_critSection);
 
   /* check whether the group name is still correct, or channels will fail to load after the language setting changed */
-  std::string strNewGroupName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19287);
+  std::string strNewGroupName = guih->GetLocalizeStrings().Get(19287);
   if (m_strGroupName != strNewGroupName)
   {
     SetGroupName(strNewGroupName, true);

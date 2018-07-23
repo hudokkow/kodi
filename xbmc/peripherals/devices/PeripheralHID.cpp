@@ -29,7 +29,7 @@ using namespace PERIPHERALS;
 CPeripheralHID::CPeripheralHID(CPeripherals& manager, const PeripheralScanResult& scanResult, CPeripheralBus* bus) :
   CPeripheral(manager, scanResult, bus)
 {
-  m_strDeviceName = scanResult.m_strDeviceName.empty() ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35001) : scanResult.m_strDeviceName;
+  m_strDeviceName = scanResult.m_strDeviceName.empty() ? guih->GetLocalizeStrings().Get(35001) : scanResult.m_strDeviceName;
   m_features.push_back(FEATURE_HID);
 }
 

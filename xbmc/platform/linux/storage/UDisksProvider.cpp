@@ -138,7 +138,7 @@ CMediaSource CUDiskDevice::ToMediaShare()
   if (m_Label.empty())
   {
     std::string strSize = StringUtils::SizeToString(m_PartitionSize);
-    source.strName = StringUtils::Format("%s %s", strSize.c_str(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(155).c_str());
+    source.strName = StringUtils::Format("%s %s", strSize.c_str(), guih->GetLocalizeStrings().Get(155).c_str());
   }
   else
     source.strName = m_Label;

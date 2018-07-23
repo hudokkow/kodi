@@ -42,7 +42,7 @@ NODE_TYPE CDirectoryNodeYearAlbum::GetChildType() const
 std::string CDirectoryNodeYearAlbum::GetLocalizedName() const
 {
   if (GetID() == -1)
-    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15102); // All Albums
+    return guih->GetLocalizeStrings().Get(15102); // All Albums
   CMusicDatabase db;
   if (db.Open())
     return db.GetAlbumById(GetID());

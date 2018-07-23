@@ -340,9 +340,9 @@ std::string CPVREpgInfoTag::Title(bool bOverrideParental /* = false */) const
   std::string strTitle;
 
   if (!bOverrideParental && IsParentalLocked())
-    strTitle = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19266); // parental locked
+    strTitle = guih->GetLocalizeStrings().Get(19266); // parental locked
   else if (m_strTitle.empty() && !CServiceBroker::GetSettings().GetBool(CSettings::SETTING_EPG_HIDENOINFOAVAILABLE))
-    strTitle = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19055); // no information available
+    strTitle = guih->GetLocalizeStrings().Get(19055); // no information available
   else
     strTitle = m_strTitle;
 

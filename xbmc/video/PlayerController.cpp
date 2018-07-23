@@ -70,7 +70,7 @@ bool CPlayerController::OnAction(const CAction &action)
           SubtitleStreamInfo info;
           g_application.GetAppPlayer().GetSubtitleStreamInfo(g_application.GetAppPlayer().GetSubtitle(), info);
           if (!g_LangCodeExpander.Lookup(info.language, lang))
-            lang = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205); // Unknown
+            lang = guih->GetLocalizeStrings().Get(13205); // Unknown
 
           if (info.name.length() == 0)
             sub = lang;
@@ -78,9 +78,9 @@ bool CPlayerController::OnAction(const CAction &action)
             sub = StringUtils::Format("%s - %s", lang.c_str(), info.name.c_str());
         }
         else
-          sub = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1223);
+          sub = guih->GetLocalizeStrings().Get(1223);
         CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(287), sub, DisplTime, false, MsgTime);
+                                              guih->GetLocalizeStrings().Get(287), sub, DisplTime, false, MsgTime);
         return true;
       }
 
@@ -117,7 +117,7 @@ bool CPlayerController::OnAction(const CAction &action)
           SubtitleStreamInfo info;
           g_application.GetAppPlayer().GetSubtitleStreamInfo(currentSub, info);
           if (!g_LangCodeExpander.Lookup(info.language, lang))
-            lang = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205); // Unknown
+            lang = guih->GetLocalizeStrings().Get(13205); // Unknown
 
           if (info.name.length() == 0)
             sub = lang;
@@ -125,8 +125,8 @@ bool CPlayerController::OnAction(const CAction &action)
             sub = StringUtils::Format("%s - %s", lang.c_str(), info.name.c_str());
         }
         else
-          sub = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1223);
-        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(287), sub, DisplTime, false, MsgTime);
+          sub = guih->GetLocalizeStrings().Get(1223);
+        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(287), sub, DisplTime, false, MsgTime);
         return true;
       }
 
@@ -217,12 +217,12 @@ bool CPlayerController::OnAction(const CAction &action)
         AudioStreamInfo info;
         g_application.GetAppPlayer().GetAudioStreamInfo(currentAudio, info);
         if (!g_LangCodeExpander.Lookup(info.language, lan))
-          lan = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205); // Unknown
+          lan = guih->GetLocalizeStrings().Get(13205); // Unknown
         if (info.name.empty())
           aud = lan;
         else
           aud = StringUtils::Format("%s - %s", lan.c_str(), info.name.c_str());
-        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(460), aud, DisplTime, false, MsgTime);
+        CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info, guih->GetLocalizeStrings().Get(460), aud, DisplTime, false, MsgTime);
         return true;
       }
 
@@ -377,8 +377,8 @@ bool CPlayerController::OnAction(const CAction &action)
 
         CServiceBroker::GetSettings().SetInt(CSettings::SETTING_SUBTITLES_ALIGN, subalign);
         CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Info,
-                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21460),
-                                              CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21461 + subalign),
+                                              guih->GetLocalizeStrings().Get(21460),
+                                              guih->GetLocalizeStrings().Get(21461 + subalign),
                                               TOAST_DISPLAY_TIME, false);
         CServiceBroker::GetWinSystem()->GetGfxContext().SetResInfo(CServiceBroker::GetWinSystem()->GetGfxContext().GetVideoResolution(), res_info);
         return true;
@@ -391,8 +391,8 @@ bool CPlayerController::OnAction(const CAction &action)
         if (g_application.GetAppPlayer().IsPassthrough())
         {
           CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning,
-                                                CServiceBroker::GetGUI()->GetLocalizeStrings().Get(660),
-                                                CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29802),
+                                                guih->GetLocalizeStrings().Get(660),
+                                                guih->GetLocalizeStrings().Get(29802),
                                                 TOAST_DISPLAY_TIME, false);
           return false;
         }
@@ -441,7 +441,7 @@ bool CPlayerController::OnAction(const CAction &action)
               playing = idx;
             idx++;
           }
-          dialog->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39109)});
+          dialog->SetHeading(CVariant{guih->GetLocalizeStrings().Get(39109)});
           dialog->SetSelected(playing);
           dialog->Open();
           idx = dialog->GetSelectedItem();
@@ -470,7 +470,7 @@ bool CPlayerController::OnAction(const CAction &action)
               current = idx;
             idx++;
           }
-          dialog->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(39110)});
+          dialog->SetHeading(CVariant{guih->GetLocalizeStrings().Get(39110)});
           dialog->SetSelected(current);
           dialog->Open();
           idx = dialog->GetSelectedItem();
@@ -494,7 +494,7 @@ void CPlayerController::ShowSlider(int action, int label, float value, float min
 {
   m_sliderAction = action;
   if (modal)
-    CGUIDialogSlider::ShowAndGetInput(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(label), value, min, delta, max, this);
+    CGUIDialogSlider::ShowAndGetInput(guih->GetLocalizeStrings().Get(label), value, min, delta, max, this);
   else
     CGUIDialogSlider::Display(label, value, min, delta, max, this);
 }

@@ -585,11 +585,11 @@ void CBaseRenderer::SetVideoSettings(const CVideoSettings &settings)
 
 void CBaseRenderer::SettingOptionsRenderMethodsFiller(std::shared_ptr<const CSetting> setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13416), RENDER_METHOD_AUTO));
+  list.push_back(make_pair(guih->GetLocalizeStrings().Get(13416), RENDER_METHOD_AUTO));
 
 #ifdef HAS_DX
-  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16319), RENDER_METHOD_DXVA));
-  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13431), RENDER_METHOD_D3D_PS));
-  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13419), RENDER_METHOD_SOFTWARE));
+  list.push_back(make_pair(guih->GetLocalizeStrings().Get(16319), RENDER_METHOD_DXVA));
+  list.push_back(make_pair(guih->GetLocalizeStrings().Get(13431), RENDER_METHOD_D3D_PS));
+  list.push_back(make_pair(guih->GetLocalizeStrings().Get(13419), RENDER_METHOD_SOFTWARE));
 #endif
 }

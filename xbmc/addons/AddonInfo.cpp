@@ -90,7 +90,7 @@ std::string CAddonInfo::TranslateType(ADDON::TYPE type, bool pretty/*=false*/)
     if (type == map.type)
     {
       if (pretty && map.pretty)
-        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(map.pretty);
+        return guih->GetLocalizeStrings().Get(map.pretty);
       else
         return map.name;
     }

@@ -95,7 +95,7 @@ CPVRChannel::CPVRChannel(const PVR_CHANNEL &channel, unsigned int iClientId)
   m_bChanged                = false;
 
   if (m_strChannelName.empty())
-    m_strChannelName = StringUtils::Format("%s %d", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19029).c_str(), m_iUniqueId);
+    m_strChannelName = StringUtils::Format("%s %d", guih->GetLocalizeStrings().Get(19029).c_str(), m_iUniqueId);
 
   UpdateEncryptionName();
 }
@@ -335,7 +335,7 @@ bool CPVRChannel::SetChannelName(const std::string &strChannelName, bool bIsUser
   std::string strName(strChannelName);
 
   if (strName.empty())
-    strName = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19085).c_str(), m_clientChannelNumber.FormattedChannelNumber().c_str());
+    strName = StringUtils::Format(guih->GetLocalizeStrings().Get(19085).c_str(), m_clientChannelNumber.FormattedChannelNumber().c_str());
 
   CSingleLock lock(m_critSection);
   if (m_strChannelName != strName)
@@ -426,19 +426,19 @@ std::string CPVRChannel::GetEncryptionName(int iCaid)
 {
   // http://www.dvb.org/index.php?id=174
   // http://en.wikipedia.org/wiki/Conditional_access_system
-  std::string strName(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205)); /* Unknown */
+  std::string strName(guih->GetLocalizeStrings().Get(13205)); /* Unknown */
 
   if (     iCaid == 0x0000)
-    strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19013); /* Free To Air */
+    strName = guih->GetLocalizeStrings().Get(19013); /* Free To Air */
   else if (iCaid >= 0x0001 &&
            iCaid <= 0x009F)
-    strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19014); /* Fixed */
+    strName = guih->GetLocalizeStrings().Get(19014); /* Fixed */
   else if (iCaid >= 0x00A0 &&
            iCaid<= 0x00A1)
-    strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(338); /* Analog */
+    strName = guih->GetLocalizeStrings().Get(338); /* Analog */
   else if (iCaid >= 0x00A2 &&
            iCaid <= 0x00FF)
-    strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19014); /* Fixed */
+    strName = guih->GetLocalizeStrings().Get(19014); /* Fixed */
   else if (iCaid >= 0x0100 &&
            iCaid <= 0x01FF)
     strName = "SECA Mediaguard";

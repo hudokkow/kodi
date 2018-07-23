@@ -82,7 +82,7 @@ std::string CControllerLayout::Label(void) const
   std::string label;
 
   if (m_labelId >= 0 && m_controller != nullptr)
-    label = CServiceBroker::GetGUI()->GetLocalizeStrings().GetAddonString(m_controller->ID(), m_labelId);
+    label = guih->GetLocalizeStrings().GetAddonString(m_controller->ID(), m_labelId);
 
   return label;
 }

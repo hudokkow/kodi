@@ -498,7 +498,7 @@ void CSelectionStreams::Update(std::shared_ptr<CDVDInputStream> input, CDVDDemux
       s.width = info.width;
       s.height = info.height;
       s.codec = info.codecName;
-      s.name = StringUtils::Format("%s %i", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(38032).c_str(), i);
+      s.name = StringUtils::Format("%s %i", guih->GetLocalizeStrings().Get(38032).c_str(), i);
       Update(s);
     }
   }
@@ -1341,7 +1341,7 @@ void CVideoPlayer::Prepare()
       }
 
       std::string strTimeString = StringUtils::SecondsToTimeString(cut.end / 1000, TIME_FORMAT_MM_SS);
-      CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25011), strTimeString);
+      CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(25011), strTimeString);
     }
   }
 
@@ -1883,7 +1883,7 @@ void CVideoPlayer::HandlePlaySpeed()
     {
       if (level < 0.0)
       {
-        CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21454), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21455));
+        CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(21454), guih->GetLocalizeStrings().Get(21455));
         SetCaching(CACHESTATE_INIT);
       }
       if (level >= 1.0)
@@ -2429,7 +2429,7 @@ void CVideoPlayer::CheckAutoSceneSkip()
     if (m_playSpeed >= 0 && m_Edl.GetLastCutTime() != cut.start && clock < cut.end - 1000)
     {
       std::string strTimeString = StringUtils::SecondsToTimeString((cut.end - cut.start) / 1000, TIME_FORMAT_MM_SS);
-      CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25011), strTimeString);
+      CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(25011), strTimeString);
 
       m_Edl.SetLastCutTime(cut.start);
 
@@ -4029,14 +4029,14 @@ int CVideoPlayer::OnDiscNavResult(void* pData, int iMessage)
     {
       m_dvd.state = DVDSTATE_NORMAL;
       CLog::Log(LOGDEBUG, "CVideoPlayer::OnDiscNavResult - libbluray menu not supported (DVDSTATE_NORMAL)");
-      CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25008), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25009));
+      CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(25008), guih->GetLocalizeStrings().Get(25009));
     }
     break;
     case BD_EVENT_ENC_ERROR:
     {
       m_dvd.state = DVDSTATE_NORMAL;
       CLog::Log(LOGDEBUG, "CVideoPlayer::OnDiscNavResult - libbluray the disc/file is encrypted and can't be played (DVDSTATE_NORMAL)");
-      CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16026), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(29805));
+      CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(16026), guih->GetLocalizeStrings().Get(29805));
     }
     break;
     default:
@@ -4199,7 +4199,7 @@ int CVideoPlayer::OnDiscNavResult(void* pData, int iMessage)
       {
         CLog::Log(LOGDEBUG, "DVDNAV_STOP");
         m_dvd.state = DVDSTATE_NORMAL;
-        CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16026), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16029));
+        CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(16026), guih->GetLocalizeStrings().Get(16029));
       }
       break;
     default:
@@ -4434,8 +4434,8 @@ bool CVideoPlayer::OnAction(const CAction &action)
         break;
     case ACTION_TOGGLE_COMMSKIP:
       m_SkipCommercials = !m_SkipCommercials;
-      CGUIDialogKaiToast::QueueNotification(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25011),
-                                            CServiceBroker::GetGUI()->GetLocalizeStrings().Get(m_SkipCommercials ? 25013 : 25012));
+      CGUIDialogKaiToast::QueueNotification(guih->GetLocalizeStrings().Get(25011),
+                                            guih->GetLocalizeStrings().Get(m_SkipCommercials ? 25013 : 25012));
       break;
     case ACTION_PLAYER_DEBUG:
       m_renderManager.ToggleDebug();

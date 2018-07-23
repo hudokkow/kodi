@@ -365,9 +365,9 @@ bool CSettingsOperations::SerializeSettingSection(std::shared_ptr<const CSetting
   if (!SerializeISetting(setting, obj))
     return false;
 
-  obj["label"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetLabel());
+  obj["label"] = guih->GetLocalizeStrings().Get(setting->GetLabel());
   if (setting->GetHelp() >= 0)
-    obj["help"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetHelp());
+    obj["help"] = guih->GetLocalizeStrings().Get(setting->GetHelp());
 
   return true;
 }
@@ -377,9 +377,9 @@ bool CSettingsOperations::SerializeSettingCategory(std::shared_ptr<const CSettin
   if (!SerializeISetting(setting, obj))
     return false;
 
-  obj["label"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetLabel());
+  obj["label"] = guih->GetLocalizeStrings().Get(setting->GetLabel());
   if (setting->GetHelp() >= 0)
-    obj["help"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetHelp());
+    obj["help"] = guih->GetLocalizeStrings().Get(setting->GetHelp());
 
   return true;
 }
@@ -394,9 +394,9 @@ bool CSettingsOperations::SerializeSetting(std::shared_ptr<const CSetting> setti
   if (!SerializeISetting(setting, obj))
     return false;
 
-  obj["label"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetLabel());
+  obj["label"] = guih->GetLocalizeStrings().Get(setting->GetLabel());
   if (setting->GetHelp() >= 0)
-    obj["help"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(setting->GetHelp());
+    obj["help"] = guih->GetLocalizeStrings().Get(setting->GetHelp());
 
   switch (setting->GetLevel())
   {
@@ -500,7 +500,7 @@ bool CSettingsOperations::SerializeSettingInt(std::shared_ptr<const CSettingInt>
       for (TranslatableIntegerSettingOptions::const_iterator itOption = options.begin(); itOption != options.end(); ++itOption)
       {
         CVariant varOption(CVariant::VariantTypeObject);
-        varOption["label"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(itOption->first);
+        varOption["label"] = guih->GetLocalizeStrings().Get(itOption->first);
         varOption["value"] = itOption->second;
         obj["options"].push_back(varOption);
       }
@@ -580,7 +580,7 @@ bool CSettingsOperations::SerializeSettingString(std::shared_ptr<const CSettingS
       for (TranslatableStringSettingOptions::const_iterator itOption = options.begin(); itOption != options.end(); ++itOption)
       {
         CVariant varOption(CVariant::VariantTypeObject);
-        varOption["label"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(itOption->first);
+        varOption["label"] = guih->GetLocalizeStrings().Get(itOption->first);
         varOption["value"] = itOption->second;
         obj["options"].push_back(varOption);
       }
@@ -729,11 +729,11 @@ bool CSettingsOperations::SerializeSettingControl(std::shared_ptr<const ISetting
   {
     std::shared_ptr<const CSettingControlSpinner> spinner = std::static_pointer_cast<const CSettingControlSpinner>(control);
     if (spinner->GetFormatLabel() >= 0)
-      obj["formatlabel"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(spinner->GetFormatLabel());
+      obj["formatlabel"] = guih->GetLocalizeStrings().Get(spinner->GetFormatLabel());
     else if (!spinner->GetFormatString().empty() && spinner->GetFormatString() != "%i")
       obj["formatlabel"] = spinner->GetFormatString();
     if (spinner->GetMinimumLabel() >= 0)
-      obj["minimumlabel"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(spinner->GetMinimumLabel());
+      obj["minimumlabel"] = guih->GetLocalizeStrings().Get(spinner->GetMinimumLabel());
   }
   else if (type == "edit")
   {
@@ -741,29 +741,29 @@ bool CSettingsOperations::SerializeSettingControl(std::shared_ptr<const ISetting
     obj["hidden"] = edit->IsHidden();
     obj["verifynewvalue"] = edit->VerifyNewValue();
     if (edit->GetHeading() >= 0)
-      obj["heading"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(edit->GetHeading());
+      obj["heading"] = guih->GetLocalizeStrings().Get(edit->GetHeading());
   }
   else if (type == "button")
   {
     std::shared_ptr<const CSettingControlButton> button = std::static_pointer_cast<const CSettingControlButton>(control);
     if (button->GetHeading() >= 0)
-      obj["heading"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(button->GetHeading());
+      obj["heading"] = guih->GetLocalizeStrings().Get(button->GetHeading());
   }
   else if (type == "list")
   {
     std::shared_ptr<const CSettingControlList> list = std::static_pointer_cast<const CSettingControlList>(control);
     if (list->GetHeading() >= 0)
-      obj["heading"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(list->GetHeading());
+      obj["heading"] = guih->GetLocalizeStrings().Get(list->GetHeading());
     obj["multiselect"] = list->CanMultiSelect();
   }
   else if (type == "slider")
   {
     std::shared_ptr<const CSettingControlSlider> slider = std::static_pointer_cast<const CSettingControlSlider>(control);
     if (slider->GetHeading() >= 0)
-      obj["heading"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(slider->GetHeading());
+      obj["heading"] = guih->GetLocalizeStrings().Get(slider->GetHeading());
     obj["popup"] = slider->UsePopup();
     if (slider->GetFormatLabel() >= 0)
-      obj["formatlabel"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(slider->GetFormatLabel());
+      obj["formatlabel"] = guih->GetLocalizeStrings().Get(slider->GetFormatLabel());
     else
       obj["formatlabel"] = slider->GetFormatString();
   }
@@ -771,11 +771,11 @@ bool CSettingsOperations::SerializeSettingControl(std::shared_ptr<const ISetting
   {
     std::shared_ptr<const CSettingControlRange> range = std::static_pointer_cast<const CSettingControlRange>(control);
     if (range->GetFormatLabel() >= 0)
-      obj["formatlabel"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(range->GetFormatLabel());
+      obj["formatlabel"] = guih->GetLocalizeStrings().Get(range->GetFormatLabel());
     else
       obj["formatlabel"] = "";
     if (range->GetValueFormatLabel() >= 0)
-      obj["formatvalue"] = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(range->GetValueFormatLabel());
+      obj["formatvalue"] = guih->GetLocalizeStrings().Get(range->GetValueFormatLabel());
     else
       obj["formatvalue"] = range->GetValueFormat();
   }

@@ -113,7 +113,7 @@ void CWeatherJob::LocalizeOverviewToken(std::string &token)
     i = m_localizedTokens.find(token);
     if (i != m_localizedTokens.end())
     {
-      strLocStr = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(i->second);
+      strLocStr = guih->GetLocalizeStrings().Get(i->second);
     }
   }
   if (strLocStr == "")
@@ -251,11 +251,11 @@ void CWeatherJob::SetFromProperties()
     CSpeed speed = CSpeed::CreateFromKilometresPerHour(strtol(window->GetProperty("Current.Wind").asString().c_str(),0,10));
     std::string direction = window->GetProperty("Current.WindDirection").asString();
     if (direction == "CALM")
-      m_info.currentWind = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1410);
+      m_info.currentWind = guih->GetLocalizeStrings().Get(1410);
     else
     {
       LocalizeOverviewToken(direction);
-      m_info.currentWind = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(434).c_str(),
+      m_info.currentWind = StringUtils::Format(guih->GetLocalizeStrings().Get(434).c_str(),
                                                direction.c_str(), (int)speed.To(g_langInfo.GetSpeedUnit()), g_langInfo.GetSpeedUnitString().c_str());
     }
     std::string windspeed = StringUtils::Format("%i %s", (int)speed.To(g_langInfo.GetSpeedUnit()), g_langInfo.GetSpeedUnitString().c_str());

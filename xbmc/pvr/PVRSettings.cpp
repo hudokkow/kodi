@@ -145,7 +145,7 @@ void CPVRSettings::MarginTimeFiller(
   {
     int iValue = marginTimeValues[i];
     list.push_back(
-      std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(14044).c_str(), iValue) /* %i min */, iValue));
+      std::make_pair(StringUtils::Format(guih->GetLocalizeStrings().Get(14044).c_str(), iValue) /* %i min */, iValue));
   }
 }
 

@@ -168,7 +168,7 @@ void CPVRClients::UpdateAddons(const std::string &changedAddonId /*= ""*/)
         if (status == ADDON_STATUS_PERMANENT_FAILURE)
         {
           CServiceBroker::GetAddonMgr().DisableAddon(addon.first->ID());
-          CJobManager::GetInstance().AddJob(new CPVREventlogJob(true, true, addon.first->Name(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24070), addon.first->Icon()), nullptr);
+          CJobManager::GetInstance().AddJob(new CPVREventlogJob(true, true, addon.first->Name(), guih->GetLocalizeStrings().Get(24070), addon.first->Icon()), nullptr);
         }
       }
     }
@@ -639,7 +639,7 @@ void CPVRClients::ConnectionStateChange(
   if (!strMessage.empty())
     strMsg = strMessage;
   else
-    strMsg = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(iMsg);
+    strMsg = guih->GetLocalizeStrings().Get(iMsg);
 
   // Notify user.
   CJobManager::GetInstance().AddJob(new CPVREventlogJob(bNotify, bError, client->Name(), strMsg, client->Icon()), nullptr);

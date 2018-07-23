@@ -245,7 +245,7 @@ bool CGameClient::OpenFile(const CFileItem& file, RETRO::IStreamManager& streamM
 
     // Failed to play game
     // The required files can't be found.
-    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35219) });
+    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ guih->GetLocalizeStrings().Get(35219) });
     return false;
   }
 
@@ -393,13 +393,13 @@ void CGameClient::NotifyError(GAME_ERROR error)
   {
     // Failed to play game
     // This game requires the following add-on: %s
-    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35211).c_str(), missingResource.c_str()) });
+    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ StringUtils::Format(guih->GetLocalizeStrings().Get(35211).c_str(), missingResource.c_str()) });
   }
   else
   {
     // Failed to play game
     // The emulator "%s" had an internal error.
-    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35213).c_str(), Name().c_str()) });
+    HELPERS::ShowOKDialogText(CVariant{ 35210 }, CVariant{ StringUtils::Format(guih->GetLocalizeStrings().Get(35213).c_str(), Name().c_str()) });
   }
 }
 

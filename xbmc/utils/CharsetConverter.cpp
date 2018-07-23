@@ -883,7 +883,7 @@ void CCharsetConverter::SettingOptionsCharsetsFiller(SettingConstPtr setting, st
   std::vector<std::string> vecCharsets = g_charsetConverter.getCharsetLabels();
   sort(vecCharsets.begin(), vecCharsets.end(), sortstringbyname());
 
-  list.push_back(make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13278), "DEFAULT")); // "Default"
+  list.push_back(make_pair(guih->GetLocalizeStrings().Get(13278), "DEFAULT")); // "Default"
   for (int i = 0; i < (int) vecCharsets.size(); ++i)
     list.push_back(make_pair(vecCharsets[i], g_charsetConverter.getCharsetNameByLabel(vecCharsets[i])));
 }

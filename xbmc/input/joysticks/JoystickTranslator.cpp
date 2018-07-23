@@ -144,10 +144,10 @@ std::string CJoystickTranslator::GetPrimitiveName(const CDriverPrimitive& primit
   switch (primitive.Type())
   {
     case PRIMITIVE_TYPE::BUTTON:
-      primitiveTemplate = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35015); // "Button %d"
+      primitiveTemplate = guih->GetLocalizeStrings().Get(35015); // "Button %d"
       break;
     case PRIMITIVE_TYPE::SEMIAXIS:
-      primitiveTemplate = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(35016); // "Axis %d"
+      primitiveTemplate = guih->GetLocalizeStrings().Get(35016); // "Axis %d"
       break;
     default: break;
   }

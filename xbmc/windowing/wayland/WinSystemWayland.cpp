@@ -1046,7 +1046,7 @@ std::string CWinSystemWayland::UserFriendlyOutputName(std::shared_ptr<COutput> c
   if (parts.empty())
   {
     // Fallback to "unknown" if no name received from compositor
-    parts.emplace_back(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205));
+    parts.emplace_back(guih->GetLocalizeStrings().Get(13205));
   }
 
   // Add position

@@ -1403,32 +1403,32 @@ bool CAdvancedSettings::CanLogComponent(int component) const
 
 void CAdvancedSettings::SettingOptionsLoggingComponentsFiller(SettingConstPtr setting, std::vector< std::pair<std::string, int> > &list, int &current, void *data)
 {
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(669), LOGSAMBA));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(670), LOGCURL));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(672), LOGFFMPEG));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(675), LOGJSONRPC));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(676), LOGAUDIO));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(680), LOGVIDEO));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(683), LOGAVTIMING));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(684), LOGWINDOWING));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(685), LOGPVR));
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(686), LOGEPG));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(669), LOGSAMBA));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(670), LOGCURL));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(672), LOGFFMPEG));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(675), LOGJSONRPC));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(676), LOGAUDIO));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(680), LOGVIDEO));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(683), LOGAVTIMING));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(684), LOGWINDOWING));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(685), LOGPVR));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(686), LOGEPG));
 #ifdef HAS_DBUS
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(674), LOGDBUS));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(674), LOGDBUS));
 #endif
 #ifdef HAS_WEB_SERVER
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(681), LOGWEBSERVER));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(681), LOGWEBSERVER));
 #endif
 #ifdef HAS_AIRTUNES
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(677), LOGAIRTUNES));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(677), LOGAIRTUNES));
 #endif
 #ifdef HAS_UPNP
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(678), LOGUPNP));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(678), LOGUPNP));
 #endif
 #ifdef HAVE_LIBCEC
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(679), LOGCEC));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(679), LOGCEC));
 #endif
-  list.push_back(std::make_pair(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(682), LOGDATABASE));
+  list.push_back(std::make_pair(guih->GetLocalizeStrings().Get(682), LOGDATABASE));
 }
 
 void CAdvancedSettings::setExtraLogLevel(const std::vector<CVariant> &components)

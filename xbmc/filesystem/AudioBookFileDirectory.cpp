@@ -83,7 +83,7 @@ bool CAudioBookFileDirectory::GetDirectory(const CURL& url,
   for (size_t i=0;i<m_fctx->nb_chapters;++i)
   {
     tag=nullptr;
-    std::string chaptitle = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25010).c_str(), i+1);
+    std::string chaptitle = StringUtils::Format(guih->GetLocalizeStrings().Get(25010).c_str(), i+1);
     std::string chapauthor;
     std::string chapalbum;
     while ((tag=av_dict_get(m_fctx->chapters[i]->metadata, "", tag, AV_DICT_IGNORE_SUFFIX)))

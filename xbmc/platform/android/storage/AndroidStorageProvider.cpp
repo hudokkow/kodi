@@ -116,14 +116,14 @@ void CAndroidStorageProvider::GetLocalDrives(VECSOURCES &localDrives)
   if (CXBMCApp::GetExternalStorage(path) && !path.empty()  && XFILE::CDirectory::Exists(path))
   {
     share.strPath = path;
-    share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21456);
+    share.strName = guih->GetLocalizeStrings().Get(21456);
     share.m_ignore = true;
     localDrives.push_back(share);
   }
 
   // root directory
   share.strPath = "/";
-  share.strName = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21453);
+  share.strName = guih->GetLocalizeStrings().Get(21453);
   localDrives.push_back(share);
 }
 

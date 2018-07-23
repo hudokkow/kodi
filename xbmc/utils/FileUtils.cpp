@@ -70,7 +70,7 @@ bool CFileUtils::RenameFile(const std::string &strFile)
   URIUtils::RemoveSlashAtEnd(strFileAndPath);
   std::string strFileName = URIUtils::GetFileName(strFileAndPath);
   std::string strPath = URIUtils::GetDirectory(strFileAndPath);
-  if (CGUIKeyboardFactory::ShowAndGetInput(strFileName, CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(16013)}, false))
+  if (CGUIKeyboardFactory::ShowAndGetInput(strFileName, CVariant{guih->GetLocalizeStrings().Get(16013)}, false))
   {
     strPath = URIUtils::AddFileToFolder(strPath, strFileName);
     CLog::Log(LOGINFO,"FileUtils: rename %s->%s\n", strFileAndPath.c_str(), strPath.c_str());

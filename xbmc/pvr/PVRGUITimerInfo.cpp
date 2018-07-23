@@ -144,9 +144,9 @@ void CPVRGUITimerInfo::UpdateNextTimer()
     strNextRecordingTime = StringUtils::Format("%s", timer->StartAsLocalTime().GetAsLocalizedDateTime(false, false).c_str());
 
     strNextTimerInfo = StringUtils::Format("%s %s %s %s",
-        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19106).c_str(),
+        guih->GetLocalizeStrings().Get(19106).c_str(),
         timer->StartAsLocalTime().GetAsLocalizedDate(true).c_str(),
-        CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19107).c_str(),
+        guih->GetLocalizeStrings().Get(19107).c_str(),
         timer->StartAsLocalTime().GetAsLocalizedTime("HH:mm", false).c_str());
   }
 

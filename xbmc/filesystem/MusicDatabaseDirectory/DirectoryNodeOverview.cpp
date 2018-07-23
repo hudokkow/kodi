@@ -65,7 +65,7 @@ std::string CDirectoryNodeOverview::GetLocalizedName() const
 {
   for (unsigned int i = 0; i < sizeof(OverviewChildren) / sizeof(Node); ++i)
     if (GetName() == OverviewChildren[i].id)
-      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(OverviewChildren[i].label);
+      return guih->GetLocalizeStrings().Get(OverviewChildren[i].label);
   return "";
 }
 
@@ -84,7 +84,7 @@ bool CDirectoryNodeOverview::GetContent(CFileItemList& items) const
     if (i == 9 && !hasCompilations)
       continue;
 
-    CFileItemPtr pItem(new CFileItem(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(OverviewChildren[i].label)));
+    CFileItemPtr pItem(new CFileItem(guih->GetLocalizeStrings().Get(OverviewChildren[i].label)));
     std::string strDir = StringUtils::Format("%s/", OverviewChildren[i].id.c_str());
     pItem->SetPath(BuildPath() + strDir);
     pItem->m_bIsFolder = true;

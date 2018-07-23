@@ -78,7 +78,7 @@ std::string TranslateContent(const CONTENT_TYPE &type, bool pretty /*=false*/)
     if (type == map.type)
     {
       if (pretty && map.pretty)
-        return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(map.pretty);
+        return guih->GetLocalizeStrings().Get(map.pretty);
       else
         return map.name;
     }
@@ -1243,7 +1243,7 @@ EPISODELIST CScraper::GetEpisodeList(XFILE::CCurlFile &fcurl, const CScraperUrl 
         ep.iEpisode = atoi(strEpNum.c_str());
         ep.iSubepisode = (dot != std::string::npos) ? atoi(strEpNum.substr(dot + 1).c_str()) : 0;
         if (!XMLUtils::GetString(pxeMovie, "title", scurlEp.strTitle) || scurlEp.strTitle.empty())
-          scurlEp.strTitle = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(10005); // Not available
+          scurlEp.strTitle = guih->GetLocalizeStrings().Get(10005); // Not available
         XMLUtils::GetString(pxeMovie, "id", scurlEp.strId);
 
         for (; pxeLink && pxeLink->FirstChild(); pxeLink = pxeLink->NextSiblingElement("url"))

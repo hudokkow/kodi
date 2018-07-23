@@ -94,11 +94,11 @@ void CRepositoryUpdater::OnJobComplete(unsigned int jobID, bool success, CJob* j
       {
         if (updates.size() == 1)
           CGUIDialogKaiToast::QueueNotification(
-              updates[0]->Icon(), updates[0]->Name(), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24068),
+              updates[0]->Icon(), updates[0]->Name(), guih->GetLocalizeStrings().Get(24068),
               TOAST_DISPLAY_TIME, false, TOAST_DISPLAY_TIME);
         else
           CGUIDialogKaiToast::QueueNotification(
-              "", CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24001), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24061),
+              "", guih->GetLocalizeStrings().Get(24001), guih->GetLocalizeStrings().Get(24061),
               TOAST_DISPLAY_TIME, false, TOAST_DISPLAY_TIME);
 
         for (const auto &addon : updates)
@@ -136,7 +136,7 @@ static void SetProgressIndicator(CRepositoryUpdateJob* job)
 {
   auto dialog = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogExtendedProgressBar>(WINDOW_DIALOG_EXT_PROGRESS);
   if (dialog)
-    job->SetProgressIndicators(dialog->GetHandle(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(24092)), nullptr);
+    job->SetProgressIndicators(dialog->GetHandle(guih->GetLocalizeStrings().Get(24092)), nullptr);
 }
 
 void CRepositoryUpdater::CheckForUpdates(const ADDON::RepositoryPtr& repo, bool showProgress)

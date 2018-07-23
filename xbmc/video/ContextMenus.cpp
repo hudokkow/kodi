@@ -162,10 +162,10 @@ std::string CPlay::GetLabel(const CFileItem& itemIn) const
 {
   CFileItem item(itemIn.GetItemToPlay());
   if (item.IsLiveTV())
-    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(19000); // Switch to channel
+    return guih->GetLocalizeStrings().Get(19000); // Switch to channel
   if (CGUIWindowVideoBase::HasResumeItemOffset(&item))
-    return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(12021); // Play from beginning
-  return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(208); // Play
+    return guih->GetLocalizeStrings().Get(12021); // Play from beginning
+  return guih->GetLocalizeStrings().Get(208); // Play
 }
 
 bool CPlay::IsVisible(const CFileItem& itemIn) const

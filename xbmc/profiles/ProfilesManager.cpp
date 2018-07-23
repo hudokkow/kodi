@@ -460,7 +460,7 @@ void CProfilesManager::LogOff()
   CServiceBroker::GetGUI()->GetWindowManager().ActivateWindow(WINDOW_LOGIN_SCREEN, {}, false);
 
   if (!CServiceBroker::GetNetwork().GetServices().StartEventServer()) // event server could be needed in some situations
-    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33102), CServiceBroker::GetGUI()->GetLocalizeStrings().Get(33100));
+    CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Warning, guih->GetLocalizeStrings().Get(33102), guih->GetLocalizeStrings().Get(33100));
 }
 
 bool CProfilesManager::DeleteProfile(unsigned int index)
@@ -474,7 +474,7 @@ bool CProfilesManager::DeleteProfile(unsigned int index)
   if (dlgYesNo == NULL)
     return false;
 
-  std::string str = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13201);
+  std::string str = guih->GetLocalizeStrings().Get(13201);
   dlgYesNo->SetHeading(CVariant{13200});
   dlgYesNo->SetLine(0, CVariant{StringUtils::Format(str.c_str(), profile->getName().c_str())});
   dlgYesNo->SetLine(1, CVariant{""});

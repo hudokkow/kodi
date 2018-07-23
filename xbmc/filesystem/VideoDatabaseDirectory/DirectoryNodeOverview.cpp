@@ -59,7 +59,7 @@ std::string CDirectoryNodeOverview::GetLocalizedName() const
 {
   for (unsigned int i = 0; i < sizeof(OverviewChildren) / sizeof(Node); ++i)
     if (GetName() == OverviewChildren[i].id)
-      return CServiceBroker::GetGUI()->GetLocalizeStrings().Get(OverviewChildren[i].label);
+      return guih->GetLocalizeStrings().Get(OverviewChildren[i].label);
   return "";
 }
 
@@ -107,7 +107,7 @@ bool CDirectoryNodeOverview::GetContent(CFileItemList& items) const
   for (unsigned int i = 0; i < vec.size(); ++i)
   {
     CFileItemPtr pItem(new CFileItem(path + vec[i].first + "/", true));
-    pItem->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(vec[i].second));
+    pItem->SetLabel(guih->GetLocalizeStrings().Get(vec[i].second));
     pItem->SetLabelPreformatted(true);
     pItem->SetCanQueue(false);
     items.Add(pItem);

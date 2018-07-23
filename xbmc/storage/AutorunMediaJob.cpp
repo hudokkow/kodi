@@ -45,12 +45,12 @@ bool CAutorunMediaJob::DoWork()
   if (!m_label.empty())
     pDialog->SetHeading(CVariant{m_label});
   else
-    pDialog->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21331)});
+    pDialog->SetHeading(CVariant{guih->GetLocalizeStrings().Get(21331)});
 
-  pDialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21332));
-  pDialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21333));
-  pDialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21334));
-  pDialog->Add(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(21335));
+  pDialog->Add(guih->GetLocalizeStrings().Get(21332));
+  pDialog->Add(guih->GetLocalizeStrings().Get(21333));
+  pDialog->Add(guih->GetLocalizeStrings().Get(21334));
+  pDialog->Add(guih->GetLocalizeStrings().Get(21335));
 
   pDialog->Open();
 

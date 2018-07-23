@@ -1082,7 +1082,7 @@ int CMusicDatabase::AddGenre(std::string& strGenre)
     StringUtils::Trim(strGenre);
 
     if (strGenre.empty())
-      strGenre=CServiceBroker::GetGUI()->GetLocalizeStrings().Get(13205); // Unknown
+      strGenre=guih->GetLocalizeStrings().Get(13205); // Unknown
 
     if (NULL == m_pDB.get()) return -1;
     if (NULL == m_pDS.get()) return -1;
@@ -2239,7 +2239,7 @@ CAlbum CMusicDatabase::GetAlbumFromDataset(const dbiplus::sql_record* const reco
   album.idAlbum = record->at(offset + album_idAlbum).get_asInt();
   album.strAlbum = record->at(offset + album_strAlbum).get_asString();
   if (album.strAlbum.empty())
-    album.strAlbum = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(1050);
+    album.strAlbum = guih->GetLocalizeStrings().Get(1050);
   album.strMusicBrainzAlbumID = record->at(offset + album_strMusicBrainzAlbumID).get_asString();
   album.strReleaseGroupMBID = record->at(offset + album_strReleaseGroupMBID).get_asString();
   album.strArtistDesc = record->at(offset + album_strArtists).get_asString();
@@ -2301,7 +2301,7 @@ CArtist CMusicDatabase::GetArtistFromDataset(const dbiplus::sql_record* const re
   CArtist artist;
   artist.idArtist = record->at(offset + artist_idArtist).get_asInt();
   if (artist.idArtist == BLANKARTIST_ID && m_translateBlankArtist)
-    artist.strArtist = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(38042);  //Missing artist tag in current language
+    artist.strArtist = guih->GetLocalizeStrings().Get(38042);  //Missing artist tag in current language
   else
     artist.strArtist = record->at(offset + artist_strArtist).get_asString();
   artist.strSortName = record->at(offset + artist_strSortName).get_asString();
@@ -2427,7 +2427,7 @@ bool CMusicDatabase::SearchArtists(const std::string& search, CFileItemList &art
     if (NULL == m_pDB.get()) return false;
     if (NULL == m_pDS.get()) return false;
 
-    std::string strVariousArtists = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(340).c_str();
+    std::string strVariousArtists = guih->GetLocalizeStrings().Get(340).c_str();
     std::string strSQL;
     if (search.size() >= MIN_FULL_SEARCH_LENGTH)
       strSQL=PrepareSQL("select * from artist "
@@ -2445,7 +2445,7 @@ bool CMusicDatabase::SearchArtists(const std::string& search, CFileItemList &art
       return false;
     }
 
-    std::string artistLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(557)); // Artist
+    std::string artistLabel(guih->GetLocalizeStrings().Get(557)); // Artist
     while (!m_pDS->eof())
     {
       std::string path = StringUtils::Format("musicdb://artists/%i/", m_pDS->fv(0).get_asInt());
@@ -2982,7 +2982,7 @@ bool CMusicDatabase::SearchSongs(const std::string& search, CFileItemList &items
     if (!m_pDS->query(strSQL)) return false;
     if (m_pDS->num_rows() == 0) return false;
 
-    std::string songLabel = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(179); // Song
+    std::string songLabel = guih->GetLocalizeStrings().Get(179); // Song
     while (!m_pDS->eof())
     {
       CFileItemPtr item(new CFileItem);
@@ -3017,7 +3017,7 @@ bool CMusicDatabase::SearchAlbums(const std::string& search, CFileItemList &albu
 
     if (!m_pDS->query(strSQL)) return false;
 
-    std::string albumLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(558)); // Album
+    std::string albumLabel(guih->GetLocalizeStrings().Get(558)); // Album
     while (!m_pDS->eof())
     {
       CAlbum album = GetAlbumFromDataset(m_pDS.get());
@@ -3609,7 +3609,7 @@ void CMusicDatabase::DeleteCDDBInfo()
   CGUIDialogSelect *pDlg = CServiceBroker::GetGUI()->GetWindowManager().GetWindow<CGUIDialogSelect>(WINDOW_DIALOG_SELECT);
   if (pDlg)
   {
-    pDlg->SetHeading(CVariant{CServiceBroker::GetGUI()->GetLocalizeStrings().Get(181)});
+    pDlg->SetHeading(CVariant{guih->GetLocalizeStrings().Get(181)});
     pDlg->Reset();
 
     std::map<uint32_t, std::string> mapCDDBIds;
@@ -9486,7 +9486,7 @@ void CMusicDatabase::ExportToXML(const CLibExportSettings& settings,  CGUIDialog
                 if (!xmlDoc.SaveFile(nfoFile))
                 {
                   CLog::Log(LOGERROR, "CMusicDatabase::%s: Album nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-                  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
+                  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, guih->GetLocalizeStrings().Get(20302), nfoFile);
                   iFailCount++;
                 }
               }
@@ -9601,7 +9601,7 @@ void CMusicDatabase::ExportToXML(const CLibExportSettings& settings,  CGUIDialog
                 if (!xmlDoc.SaveFile(nfoFile))
                 {
                   CLog::Log(LOGERROR, "CMusicDatabase::%s: Artist nfo export failed! ('%s')", __FUNCTION__, nfoFile.c_str());
-                  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(20302), nfoFile);
+                  CGUIDialogKaiToast::QueueNotification(CGUIDialogKaiToast::Error, guih->GetLocalizeStrings().Get(20302), nfoFile);
                   iFailCount++;
                 }
               }
@@ -9661,7 +9661,7 @@ void CMusicDatabase::ExportToXML(const CLibExportSettings& settings,  CGUIDialog
     progressDialog->Close();
 
   if (iFailCount > 0)
-    HELPERS::ShowOKDialogLines(CVariant{20196}, CVariant{StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(15011).c_str(), iFailCount)});
+    HELPERS::ShowOKDialogLines(CVariant{20196}, CVariant{StringUtils::Format(guih->GetLocalizeStrings().Get(15011).c_str(), iFailCount)});
 }
 
 void CMusicDatabase::ImportFromXML(const std::string &xmlFile)
@@ -10326,7 +10326,7 @@ bool CMusicDatabase::GetFilter(CDbUrl &musicUrl, Filter &filter, SortDescription
     // and the various artist entry if applicable
     if (!albumArtistsOnly)
     {
-      std::string strVariousArtists = CServiceBroker::GetGUI()->GetLocalizeStrings().Get(340);
+      std::string strVariousArtists = guih->GetLocalizeStrings().Get(340);
       filter.AppendWhere(PrepareSQL("artistview.strArtist <> '%s'", strVariousArtists.c_str()));
     }
   }

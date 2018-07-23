@@ -141,7 +141,7 @@ CFileItemPtr CBlurayDirectory::GetTitle(const BLURAY_TITLE_INFO* title, const st
   buf = StringUtils::Format(label.c_str(), title->playlist);
   item->m_strTitle = buf;
   item->SetLabel(buf);
-  chap = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25007).c_str(), title->chapter_count, StringUtils::SecondsToTimeString(duration).c_str());
+  chap = StringUtils::Format(guih->GetLocalizeStrings().Get(25007).c_str(), title->chapter_count, StringUtils::SecondsToTimeString(duration).c_str());
   item->SetLabel2(chap);
   item->m_dwSize = 0;
   item->SetIconImage("DefaultVideo.png");
@@ -188,7 +188,7 @@ void CBlurayDirectory::GetTitles(bool main, CFileItemList &items)
     if (title->duration < minDuration)
       continue;
 
-    items.Add(GetTitle(title, main ? CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25004) /* Main Title */ : CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25005) /* Title */));
+    items.Add(GetTitle(title, main ? guih->GetLocalizeStrings().Get(25004) /* Main Title */ : guih->GetLocalizeStrings().Get(25005) /* Title */));
     bd_free_title_info(title);
   }
 }
@@ -204,7 +204,7 @@ void CBlurayDirectory::GetRoot(CFileItemList &items)
     item.reset(new CFileItem());
     item->SetPath(path.Get());
     item->m_bIsFolder = true;
-    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25002) /* All titles */);
+    item->SetLabel(guih->GetLocalizeStrings().Get(25002) /* All titles */);
     item->SetIconImage("DefaultVideoPlaylists.png");
     items.Add(item);
 
@@ -212,7 +212,7 @@ void CBlurayDirectory::GetRoot(CFileItemList &items)
     item.reset(new CFileItem());
     item->SetPath(path.Get());
     item->m_bIsFolder = false;
-    item->SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(25003) /* Menus */);
+    item->SetLabel(guih->GetLocalizeStrings().Get(25003) /* Menus */);
     item->SetIconImage("DefaultProgram.png");
     items.Add(item);
 }

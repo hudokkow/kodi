@@ -492,7 +492,7 @@ bool CPVRClient::GetAddonProperties(void)
                 ? 820  // "One time"
                 : 821; // "One time (guide-based)
           }
-          std::string descr(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(id));
+          std::string descr(guih->GetLocalizeStrings().Get(id));
           strncpy(types_array[i].strDescription, descr.c_str(), descr.size());
         }
         timerTypes.emplace_back(CPVRTimerTypePtr(new CPVRTimerType(types_array[i], m_iClientId)));
@@ -1602,7 +1602,7 @@ void CPVRClient::cb_recording(void *kodiInstance, const char *strName, const cha
     return;
   }
 
-  std::string strLine1 = StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(bOnOff ? 19197 : 19198).c_str(), client->Name().c_str());
+  std::string strLine1 = StringUtils::Format(guih->GetLocalizeStrings().Get(bOnOff ? 19197 : 19198).c_str(), client->Name().c_str());
   std::string strLine2;
   if (strName)
     strLine2 = strName;
@@ -1817,7 +1817,7 @@ void CPVRClientCapabilities::InitRecordingsLifetimeValues()
     // No values given by addon, but lifetime supported. Use default values 1..365
     for (int i = 1; i < 366; ++i)
     {
-      m_recordingsLifetimeValues.push_back(std::make_pair(StringUtils::Format(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(17999).c_str(), i), i)); // "%s days"
+      m_recordingsLifetimeValues.push_back(std::make_pair(StringUtils::Format(guih->GetLocalizeStrings().Get(17999).c_str(), i), i)); // "%s days"
     }
   }
   else

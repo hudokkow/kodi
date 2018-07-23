@@ -50,7 +50,7 @@ bool CMusicSearchDirectory::GetDirectory(const CURL& url, CFileItemList &items)
   db.Close();
   CLog::Log(LOGDEBUG, "%s (%s) took %u ms",
             __FUNCTION__, url.GetRedacted().c_str(), XbmcThreads::SystemClockMillis() - time);
-  items.SetLabel(CServiceBroker::GetGUI()->GetLocalizeStrings().Get(137)); // Search
+  items.SetLabel(guih->GetLocalizeStrings().Get(137)); // Search
   return true;
 }
 

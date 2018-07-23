@@ -146,7 +146,7 @@ std::string CUDisks2Provider::Filesystem::GetDisplayName()
   if (m_block->m_label.empty())
   {
     std::string strSize = StringUtils::SizeToString(m_block->m_size);
-    return StringUtils::Format("%s %s", strSize, CServiceBroker::GetGUI()->GetLocalizeStrings().Get(155));
+    return StringUtils::Format("%s %s", strSize, guih->GetLocalizeStrings().Get(155));
   }
   else
     return m_block->m_label;
