@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 rem batch file to compile mingw libs via BuildSetup
 PUSHD %~dp0\..\..\..

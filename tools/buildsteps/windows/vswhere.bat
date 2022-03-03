@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 IF "%1"=="" (
   ECHO ERROR! vswhere.bat: architecture not specified

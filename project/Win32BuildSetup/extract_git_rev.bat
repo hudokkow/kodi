@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 
 REM Batch file output: %GIT_REV% variable, containing the git revision
 

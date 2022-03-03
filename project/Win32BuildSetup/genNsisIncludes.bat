@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 rem Application for Windows install script
 rem Copyright (C) 2005-2015 Team XBMC
 rem http://kodi.tv

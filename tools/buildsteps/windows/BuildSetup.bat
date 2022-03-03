@@ -1,4 +1,4 @@
-@ECHO OFF
+REM @ECHO OFF
 REM setup all paths
 PUSHD %~dp0\..\..\..
 SET base_dir=%CD%
